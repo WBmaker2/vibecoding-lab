@@ -8,6 +8,10 @@ interface AdminShellProps {
 }
 
 export function AdminShell({ apps }: AdminShellProps) {
+  const suggestedTags = [...new Set(apps.flatMap((app) => app.tags))].sort(
+    (left, right) => left.localeCompare(right, "ko")
+  );
+
   return (
     <main className="page-shell admin-page">
       <header className="admin-page-header">
@@ -32,7 +36,11 @@ export function AdminShell({ apps }: AdminShellProps) {
           <h2>새 앱 등록</h2>
           <p>기본 정보는 단순하게, 추가 정보는 필요할 때만 입력합니다.</p>
         </div>
-        <AppForm action={createAppAction} submitLabel="앱 등록" />
+        <AppForm
+          action={createAppAction}
+          submitLabel="앱 등록"
+          suggestedTags={suggestedTags}
+        />
       </section>
 
       <section className="admin-panel">
@@ -40,7 +48,7 @@ export function AdminShell({ apps }: AdminShellProps) {
           <h2>등록된 앱</h2>
           <p>{apps.length}개의 앱이 등록되어 있습니다.</p>
         </div>
-        <AppList apps={apps} />
+        <AppList apps={apps} suggestedTags={suggestedTags} />
       </section>
     </main>
   );

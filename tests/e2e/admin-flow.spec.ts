@@ -19,14 +19,7 @@ test("admin can log in and create an app", async ({ page }) => {
     .locator('input[placeholder="엔터 또는 쉼표로 태그 추가"]')
     .first()
     .press("Enter");
-  await page
-    .locator('input[placeholder="엔터 또는 쉼표로 태그 추가"]')
-    .first()
-    .fill("국어");
-  await page
-    .locator('input[placeholder="엔터 또는 쉼표로 태그 추가"]')
-    .first()
-    .press("Enter");
+  await page.getByRole("button", { name: "#영어 추가" }).first().click();
   await page.getByRole("button", { name: "앱 등록" }).click();
 
   await expect(page.getByText("Reading Timer")).toBeVisible();

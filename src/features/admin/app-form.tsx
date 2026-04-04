@@ -5,10 +5,16 @@ import { ThumbnailControls } from "./thumbnail-controls";
 interface AppFormProps {
   action: (formData: FormData) => void | Promise<void>;
   initialApp?: AppRecord;
+  suggestedTags?: string[];
   submitLabel: string;
 }
 
-export function AppForm({ action, initialApp, submitLabel }: AppFormProps) {
+export function AppForm({
+  action,
+  initialApp,
+  submitLabel,
+  suggestedTags
+}: AppFormProps) {
   return (
     <form action={action} className="admin-app-form">
       {initialApp && <input name="id" type="hidden" value={initialApp.id} />}
@@ -41,7 +47,11 @@ export function AppForm({ action, initialApp, submitLabel }: AppFormProps) {
 
       <label className="admin-field">
         <span>태그</span>
-        <TagInput initialTags={initialApp?.tags} name="tagsJson" />
+        <TagInput
+          initialTags={initialApp?.tags}
+          name="tagsJson"
+          suggestedTags={suggestedTags}
+        />
       </label>
 
       <ThumbnailControls

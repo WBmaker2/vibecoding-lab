@@ -5,9 +5,14 @@ import { useState } from "react";
 interface TagInputProps {
   initialTags?: string[];
   name: string;
+  suggestedTags?: string[];
 }
 
-export function TagInput({ initialTags = [], name }: TagInputProps) {
+export function TagInput({
+  initialTags = [],
+  name,
+  suggestedTags = []
+}: TagInputProps) {
   const [tags, setTags] = useState(initialTags);
   const [draft, setDraft] = useState("");
 
@@ -21,6 +26,10 @@ export function TagInput({ initialTags = [], name }: TagInputProps) {
     setTags((current) => [...current, next]);
   }
 
+  const uniqueSuggestedTags = suggestedTags.filter(
+    (tag, index) => suggestedTags.indexOf(tag) === index
+  );
+
   return (
     <div className="tag-input-shell">
       <input name={name} type="hidden" value={JSON.stringify(tags)} />
@@ -28,6 +37,7 @@ export function TagInput({ initialTags = [], name }: TagInputProps) {
       <div className="tag-input-list">
         {tags.map((tag) => (
           <button
+            aria-label={`#${tag} 제거`}
             className="tag-pill"
             key={tag}
             onClick={() =>
@@ -59,6 +69,36 @@ export function TagInput({ initialTags = [], name }: TagInputProps) {
         type="text"
         value={draft}
       />
+
+      {uniqueSuggestedTags.length > 0 && (
+        <div className="tag-suggestion-shell">
+          <p className="tag-suggestion-label">기존 태그</p>
+          <div className="tag-suggestion-list">
+            {uniqueSuggestedTags.map((tag) => {
+              const isSelected = tags.includes(tag);
+
+              return (
+                <button
+                  aria-label={
+                    isSelected ? `#${tag} 이미 선택됨` : `#${tag} 추가`
+                  }
+                  className={
+                    isSelected
+                      ? "tag-pill tag-suggestion-pill is-disabled"
+                      : "tag-pill tag-suggestion-pill"
+                  }
+                  disabled={isSelected}
+                  key={tag}
+                  onClick={() => commitTag(tag)}
+                  type="button"
+                >
+                  #{tag}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

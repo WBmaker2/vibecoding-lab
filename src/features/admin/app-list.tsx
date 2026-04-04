@@ -5,9 +5,10 @@ import { AppForm } from "./app-form";
 
 interface AppListProps {
   apps: AppRecord[];
+  suggestedTags: string[];
 }
 
-export function AppList({ apps }: AppListProps) {
+export function AppList({ apps, suggestedTags }: AppListProps) {
   return (
     <div className="admin-app-list">
       {apps.map((app) => (
@@ -34,7 +35,12 @@ export function AppList({ apps }: AppListProps) {
 
           <details className="admin-edit-panel">
             <summary>이 앱 수정</summary>
-            <AppForm action={updateAppAction} initialApp={app} submitLabel="수정 저장" />
+            <AppForm
+              action={updateAppAction}
+              initialApp={app}
+              submitLabel="수정 저장"
+              suggestedTags={suggestedTags}
+            />
           </details>
         </article>
       ))}
