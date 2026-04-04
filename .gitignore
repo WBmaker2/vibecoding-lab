@@ -1,3 +1,11 @@
 .worktrees/
 .superpowers/
+.next/
+node_modules/
+.env
+.env.local
+.env.*.local
+.vercel/
+playwright-report/
+test-results/
 .DS_Store
