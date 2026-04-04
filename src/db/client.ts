@@ -1,12 +1,31 @@
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
-import { getEnv } from "@/lib/env";
+import { hasPostgresUrl } from "@/lib/env";
+
+const globalForDb = globalThis as typeof globalThis & {
+  hvcSqlClient?: ReturnType<typeof postgres>;
+  hvcDb?: ReturnType<typeof drizzle>;
+};
+
+export function isDatabaseConfigured() {
+  return hasPostgresUrl();
+}
 
 export function getDb() {
-  const env = getEnv();
-  const client = postgres(env.POSTGRES_URL, {
-    prepare: false
-  });
+  const databaseUrl = process.env.POSTGRES_URL;
 
-  return drizzle(client);
+  if (!databaseUrl) {
+    throw new Error("POSTGRES_URL is not configured.");
+  }
+
+  if (!globalForDb.hvcSqlClient || !globalForDb.hvcDb) {
+    const client = postgres(databaseUrl, {
+      prepare: false
+    });
+
+    globalForDb.hvcSqlClient = client;
+    globalForDb.hvcDb = drizzle(client);
+  }
+
+  return globalForDb.hvcDb;
 }
