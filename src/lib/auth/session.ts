@@ -1,10 +1,11 @@
-import { createHash, timingSafeEqual } from "node:crypto";
+import { createHash } from "node:crypto";
 import { cookies } from "next/headers";
+import { verifyPasswordHash } from "./password";
 
 export const ADMIN_SESSION_COOKIE = "hvc_admin_session";
 
-function getAdminPassword() {
-  return process.env.ADMIN_PASSWORD ?? "very-secret-password";
+function getAdminPasswordHash() {
+  return process.env.ADMIN_PASSWORD_HASH ?? "";
 }
 
 function getSessionSecret() {
@@ -16,14 +17,13 @@ function hashValue(value: string) {
 }
 
 export async function verifyAdminPassword(input: string) {
-  const expected = Buffer.from(getAdminPassword());
-  const provided = Buffer.from(input);
+  const storedHash = getAdminPasswordHash();
 
-  if (expected.length !== provided.length) {
+  if (!storedHash) {
     return false;
   }
 
-  return timingSafeEqual(expected, provided);
+  return verifyPasswordHash(input, storedHash);
 }
 
 export function createAdminSessionToken() {

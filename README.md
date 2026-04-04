@@ -30,12 +30,12 @@ npm run dev
 ```bash
 POSTGRES_URL=
 BLOB_READ_WRITE_TOKEN=
-ADMIN_PASSWORD=
+ADMIN_PASSWORD_HASH=
 SESSION_SECRET=
 APP_BASE_URL=http://localhost:3000
 ```
 
-현재 구현은 로컬 개발 편의를 위해 일부 기능에 메모리 저장 fallback이 포함되어 있습니다. 운영 환경에서는 `POSTGRES_URL`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_PASSWORD`, `SESSION_SECRET`를 반드시 설정하는 것이 좋습니다.
+현재 구현은 로컬 개발 편의를 위해 일부 기능에 메모리 저장 fallback이 포함되어 있습니다. 운영 환경에서는 `POSTGRES_URL`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`를 반드시 설정하는 것이 좋습니다.
 
 ## 테스트
 
@@ -69,5 +69,5 @@ npx drizzle-kit generate
 ## Vercel 배포
 
 1. 저장소를 Vercel 프로젝트에 연결합니다.
-2. `POSTGRES_URL`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_PASSWORD`, `SESSION_SECRET`, `APP_BASE_URL`를 등록합니다.
+2. `POSTGRES_URL`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`, `APP_BASE_URL`를 등록합니다.
 3. `main` 또는 원하는 배포 브랜치에서 배포합니다.
