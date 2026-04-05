@@ -1,0 +1,51 @@
+import { fireEvent, render, screen } from "@testing-library/react";
+import type { AppRecord } from "@/lib/apps/types";
+import { ArchivePage } from "./archive-page";
+
+const sampleApps: AppRecord[] = [
+  {
+    id: "talking-vocab-quiz",
+    title: "Talking Vocab Quiz",
+    summary: "영어 단어 퀴즈",
+    url: "https://example.com/talking-vocab-quiz",
+    tags: ["영어", "게임형", "형성평가"],
+    thumbnailMode: "auto",
+    thumbnailUrl: "",
+    subject: "영어",
+    grade: "초등 4학년",
+    memo: "짧은 형성평가에 적합",
+    createdAt: new Date("2026-04-05T00:00:00.000Z"),
+    updatedAt: new Date("2026-04-05T00:00:00.000Z")
+  },
+  {
+    id: "class-random-seat",
+    title: "Class Random Seat",
+    summary: "자리 배치 도구",
+    url: "https://example.com/class-random-seat",
+    tags: ["학급경영", "업무경감", "랜덤"],
+    thumbnailMode: "auto",
+    thumbnailUrl: "",
+    subject: "창체",
+    grade: "전학년",
+    memo: "",
+    createdAt: new Date("2026-04-05T00:00:00.000Z"),
+    updatedAt: new Date("2026-04-05T00:00:00.000Z")
+  }
+];
+
+describe("ArchivePage", () => {
+  it("shows active filter state and clears it from the results bar", () => {
+    render(<ArchivePage initialApps={sampleApps} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "#영어" }));
+
+    expect(screen.getByText(/#영어 필터 적용/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /필터 초기화/i })
+    ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: /필터 초기화/i }));
+
+    expect(screen.queryByText(/#영어 필터 적용/i)).not.toBeInTheDocument();
+  });
+});

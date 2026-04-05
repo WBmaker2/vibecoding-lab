@@ -9,11 +9,11 @@ export function EmptyState({ query }: EmptyStateProps) {
     <section className="empty-state" aria-live="polite">
       <div className="empty-state-copy">
         <p className="eyebrow">No Matches</p>
-        <h2>조건에 맞는 앱을 찾지 못했습니다</h2>
+        <h2>조건을 조금 바꾸면 더 잘 찾을 수 있습니다</h2>
         <p>
           {query
-            ? `"${query}" 대신 더 짧은 키워드나 다른 태그를 시도해 보세요.`
-            : "검색어를 입력하거나 태그를 바꿔서 다시 살펴보세요."}
+            ? `"${query}" 대신 더 짧은 검색어를 시도해 보세요.`
+            : "대표 태그를 먼저 누르거나 검색어를 입력해 보세요."}
         </p>
       </div>
       <Image

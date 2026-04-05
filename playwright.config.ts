@@ -4,11 +4,11 @@ import { createPasswordHash } from "./src/lib/auth/password";
 export default defineConfig({
   testDir: "./tests/e2e",
   use: {
-    baseURL: "http://localhost:3100"
+    baseURL: "http://127.0.0.1:3100"
   },
   webServer: {
-    command: "npx next dev --hostname localhost --port 3100",
-    url: "http://localhost:3100",
+    command: "npx next dev --hostname 127.0.0.1 --port 3100",
+    url: "http://127.0.0.1:3100",
     reuseExistingServer: false,
     timeout: 120_000,
     env: {

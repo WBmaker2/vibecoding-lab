@@ -6,6 +6,11 @@ interface AppCardProps {
 }
 
 export function AppCard({ app }: AppCardProps) {
+  const submeta = [app.subject, app.grade].filter(Boolean).join(" · ");
+  const note = app.memo ?? "";
+  const notePreview =
+    note.length > 42 ? `${note.slice(0, 42).trimEnd()}…` : note;
+
   return (
     <article className="app-card">
       <div className="app-card-media">
@@ -43,27 +48,15 @@ export function AppCard({ app }: AppCardProps) {
           ))}
         </div>
 
-        {(app.subject || app.grade) && (
-          <dl className="app-card-meta">
-            {app.subject && (
-              <div>
-                <dt>과목</dt>
-                <dd>{app.subject}</dd>
-              </div>
-            )}
-            {app.grade && (
-              <div>
-                <dt>학년</dt>
-                <dd>{app.grade}</dd>
-              </div>
-            )}
-          </dl>
-        )}
+        {submeta ? <p className="app-card-submeta">{submeta}</p> : null}
 
-        {app.memo && (
+        {note && (
           <details className="app-card-note">
-            <summary>메이커 노트 보기</summary>
-            <p>{app.memo}</p>
+            <summary>
+              <span>메이커 노트</span>
+              <span className="app-card-note-preview">{notePreview}</span>
+            </summary>
+            <p>{note}</p>
           </details>
         )}
 
