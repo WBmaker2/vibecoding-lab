@@ -1,3 +1,5 @@
+"use client";
+
 import type { AppRecord } from "@/lib/apps/types";
 import { TagInput } from "./tag-input";
 import { ThumbnailControls } from "./thumbnail-controls";
@@ -5,6 +7,7 @@ import { ThumbnailControls } from "./thumbnail-controls";
 interface AppFormProps {
   action: (formData: FormData) => void | Promise<void>;
   initialApp?: AppRecord;
+  onCancelEdit?: () => void;
   suggestedTags?: string[];
   submitLabel: string;
 }
@@ -12,6 +15,7 @@ interface AppFormProps {
 export function AppForm({
   action,
   initialApp,
+  onCancelEdit,
   submitLabel,
   suggestedTags
 }: AppFormProps) {
@@ -19,50 +23,85 @@ export function AppForm({
     <form action={action} className="admin-app-form">
       {initialApp && <input name="id" type="hidden" value={initialApp.id} />}
 
-      <label className="admin-field">
-        <span>제목</span>
-        <input defaultValue={initialApp?.title} name="title" required />
-      </label>
+      <section className="admin-form-section">
+        <div className="admin-form-section-copy">
+          <h3>1. 기본 정보</h3>
+          <p>제목, 한 줄 설명, 링크만 먼저 채워도 등록하실 수 있습니다.</p>
+        </div>
 
-      <label className="admin-field">
-        <span>한 줄 설명</span>
-        <textarea
-          defaultValue={initialApp?.summary}
-          name="summary"
-          required
-          rows={3}
+        <div className="admin-form-grid">
+          <label className="admin-field">
+            <span>제목</span>
+            <input defaultValue={initialApp?.title} name="title" required />
+          </label>
+
+          <label className="admin-field admin-field-full">
+            <span>한 줄 설명</span>
+            <textarea
+              defaultValue={initialApp?.summary}
+              name="summary"
+              required
+              rows={3}
+            />
+          </label>
+
+          <label className="admin-field admin-field-full">
+            <span>앱 링크</span>
+            <input
+              defaultValue={initialApp?.url}
+              name="url"
+              placeholder="https://..."
+              required
+              type="url"
+            />
+          </label>
+        </div>
+      </section>
+
+      <section className="admin-form-section">
+        <div className="admin-form-section-copy">
+          <h3>2. 태그 선택</h3>
+          <p>
+            직접 입력해도 되고, 아래에 쌓인 기존 태그를 눌러 빠르게 재사용하실
+            수 있습니다.
+          </p>
+        </div>
+
+        <label className="admin-field">
+          <span>태그</span>
+          <TagInput
+            initialTags={initialApp?.tags}
+            name="tagsJson"
+            suggestedTags={suggestedTags}
+          />
+        </label>
+      </section>
+
+      <section className="admin-form-section">
+        <div className="admin-form-section-copy">
+          <h3>3. 썸네일</h3>
+          <p>
+            링크에서 자동 수집하거나, 직접 업로드하거나, 기본 이미지를 고르실
+            수 있습니다.
+          </p>
+        </div>
+
+        <ThumbnailControls
+          initialMode={initialApp?.thumbnailMode}
+          initialUrl={initialApp?.thumbnailUrl}
         />
-      </label>
+      </section>
 
-      <label className="admin-field">
-        <span>앱 링크</span>
-        <input
-          defaultValue={initialApp?.url}
-          name="url"
-          placeholder="https://..."
-          required
-          type="url"
-        />
-      </label>
+      <section className="admin-form-section">
+        <div className="admin-form-section-copy">
+          <h3>4. 추가 정보</h3>
+          <p>
+            과목, 학년, 메이커 노트는 선택 입력이며, 입력하시면 공개 화면에도
+            함께 노출됩니다.
+          </p>
+        </div>
 
-      <label className="admin-field">
-        <span>태그</span>
-        <TagInput
-          initialTags={initialApp?.tags}
-          name="tagsJson"
-          suggestedTags={suggestedTags}
-        />
-      </label>
-
-      <ThumbnailControls
-        initialMode={initialApp?.thumbnailMode}
-        initialUrl={initialApp?.thumbnailUrl}
-      />
-
-      <details className="admin-extra-fields">
-        <summary>추가 정보</summary>
-
-        <div className="admin-extra-grid">
+        <div className="admin-form-grid">
           <label className="admin-field">
             <span>과목</span>
             <input defaultValue={initialApp?.subject} name="subject" />
@@ -74,15 +113,27 @@ export function AppForm({
           </label>
 
           <label className="admin-field admin-field-full">
-            <span>메모</span>
+            <span>메이커 노트</span>
             <textarea defaultValue={initialApp?.memo} name="memo" rows={4} />
           </label>
         </div>
-      </details>
+      </section>
 
-      <button className="admin-primary-button" type="submit">
-        {submitLabel}
-      </button>
+      <div className="admin-form-actions">
+        {onCancelEdit && (
+          <button
+            className="admin-secondary-button"
+            onClick={onCancelEdit}
+            type="button"
+          >
+            새 앱 등록으로 전환
+          </button>
+        )}
+
+        <button className="admin-primary-button" type="submit">
+          {submitLabel}
+        </button>
+      </div>
     </form>
   );
 }
