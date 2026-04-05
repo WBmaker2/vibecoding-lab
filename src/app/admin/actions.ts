@@ -16,7 +16,7 @@ function normalizeTags(formData: FormData) {
 
 async function getAppInput(formData: FormData) {
   const sourceUrl = String(formData.get("url") ?? "");
-  const mode = String(formData.get("thumbnailMode") ?? "placeholder") as
+  const mode = String(formData.get("thumbnailMode") ?? "auto") as
     | "auto"
     | "upload"
     | "placeholder";

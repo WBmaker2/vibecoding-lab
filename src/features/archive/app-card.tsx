@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { AppRecord } from "@/lib/apps/types";
 
 interface AppCardProps {
@@ -7,9 +8,24 @@ interface AppCardProps {
 export function AppCard({ app }: AppCardProps) {
   return (
     <article className="app-card">
-      <div className="app-card-media" aria-hidden="true">
+      <div className="app-card-media">
         <div className="app-card-media-inner">
-          <span>{app.subject ?? "교사용 앱"}</span>
+          {app.thumbnailUrl && (
+            <>
+              <Image
+                alt={`${app.title} 썸네일`}
+                className="app-card-thumbnail"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                src={app.thumbnailUrl}
+              />
+              <div className="app-card-media-scrim" />
+            </>
+          )}
+
+          <span className="app-card-media-label">
+            {app.subject ?? "교사용 앱"}
+          </span>
         </div>
       </div>
 

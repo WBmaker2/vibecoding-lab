@@ -262,15 +262,43 @@ input {
 .app-card-media-inner {
   display: flex;
   align-items: flex-end;
+  position: relative;
   height: 100%;
+  overflow: hidden;
   padding: 20px;
   border-radius: 20px;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(239, 242, 248, 0.92)),
     linear-gradient(180deg, rgba(62, 95, 146, 0.14), rgba(62, 95, 146, 0.02));
+  isolation: isolate;
   color: var(--accent);
   font-size: 0.9rem;
   font-weight: 700;
+}
+
+.app-card-thumbnail {
+  object-fit: cover;
+}
+
+.app-card-media-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.04), rgba(15, 23, 42, 0.28)),
+    linear-gradient(0deg, rgba(15, 23, 42, 0.42), transparent 40%);
+  z-index: 0;
+}
+
+.app-card-media-label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(10px);
 }
 
 .app-card-body {

@@ -12,11 +12,13 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@sparticuz/chromium": "^143.0.4",
     "@vercel/blob": "^1.1.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.44.2",
     "iron-session": "^8.0.4",
     "next": "^16.0.0",
+    "playwright-core": "^1.59.1",
     "postgres": "^3.4.7",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

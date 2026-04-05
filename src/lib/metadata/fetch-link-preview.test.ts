@@ -18,6 +18,38 @@ describe("extractPreviewFromHtml", () => {
     expect(preview.imageUrl).toBe("https://example.com/thumb.png");
   });
 
+  it("resolves relative image metadata against the source url", () => {
+    const preview = extractPreviewFromHtml(
+      `
+        <html>
+          <head>
+            <title>PAPS Tracker</title>
+            <meta property="og:image" content="/og/paps.png" />
+          </head>
+        </html>
+      `,
+      "https://paps-tracker.vercel.app/session/demo"
+    );
+
+    expect(preview.imageUrl).toBe("https://paps-tracker.vercel.app/og/paps.png");
+  });
+
+  it("falls back to icon links when social image metadata is missing", () => {
+    const preview = extractPreviewFromHtml(
+      `
+        <html>
+          <head>
+            <title>No Social Image</title>
+            <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          </head>
+        </html>
+      `,
+      "https://example.com/apps/paps"
+    );
+
+    expect(preview.imageUrl).toBe("https://example.com/apple-touch-icon.png");
+  });
+
   it("returns null imageUrl when image metadata is missing", () => {
     const preview = extractPreviewFromHtml(
       "<html><head><title>No Image</title></head></html>"

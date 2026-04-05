@@ -9,7 +9,7 @@ interface ThumbnailControlsProps {
 }
 
 export function ThumbnailControls({
-  initialMode = "placeholder",
+  initialMode = "auto",
   initialUrl = null
 }: ThumbnailControlsProps) {
   const [mode, setMode] = useState<ThumbnailMode>(initialMode);

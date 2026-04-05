@@ -3,7 +3,47 @@ function extractTagContent(html: string, pattern: RegExp) {
   return match?.[1]?.trim() ?? null;
 }
 
-export function extractPreviewFromHtml(html: string) {
+function extractAttribute(tag: string, attribute: string) {
+  const pattern = new RegExp(`${attribute}=["']([^"']+)["']`, "i");
+  return tag.match(pattern)?.[1]?.trim() ?? null;
+}
+
+function extractLinkHref(html: string, matcher: (rel: string) => boolean) {
+  const linkTags = html.match(/<link\b[^>]*>/gi) ?? [];
+
+  for (const tag of linkTags) {
+    const rel = extractAttribute(tag, "rel");
+    const href = extractAttribute(tag, "href");
+
+    if (!rel || !href) {
+      continue;
+    }
+
+    if (matcher(rel.toLowerCase())) {
+      return href;
+    }
+  }
+
+  return null;
+}
+
+function toAbsoluteUrl(url: string | null, sourceUrl?: string) {
+  if (!url) {
+    return null;
+  }
+
+  if (!sourceUrl) {
+    return url;
+  }
+
+  try {
+    return new URL(url, sourceUrl).toString();
+  } catch {
+    return url;
+  }
+}
+
+export function extractPreviewFromHtml(html: string, sourceUrl?: string) {
   const title =
     extractTagContent(html, /<title[^>]*>([^<]+)<\/title>/i) ?? "Untitled";
   const description =
@@ -23,12 +63,14 @@ export function extractPreviewFromHtml(html: string) {
     extractTagContent(
       html,
       /<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["'][^>]*>/i
-    );
+    ) ??
+    extractLinkHref(html, (rel) => rel.includes("apple-touch-icon")) ??
+    extractLinkHref(html, (rel) => rel.split(/\s+/).includes("icon"));
 
   return {
     title,
     description,
-    imageUrl
+    imageUrl: toAbsoluteUrl(imageUrl, sourceUrl)
   };
 }
 
@@ -45,5 +87,5 @@ export async function fetchLinkPreview(url: string) {
   }
 
   const html = await response.text();
-  return extractPreviewFromHtml(html);
+  return extractPreviewFromHtml(html, url);
 }
