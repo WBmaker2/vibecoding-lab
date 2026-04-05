@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { siteMetadata } from "./site-metadata";
 
-export const metadata: Metadata = {
-  title: "Hong's Vibe Coding Lab",
-  description: "교사용 웹앱을 소개하는 미니멀 아카이브"
-};
+export const metadata: Metadata = siteMetadata;
 
 export default function RootLayout({
   children

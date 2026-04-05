@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import type { AppRecord } from "@/lib/apps/types";
 import { ArchivePage } from "./archive-page";
 
@@ -38,14 +38,22 @@ describe("ArchivePage", () => {
     render(<ArchivePage initialApps={sampleApps} />);
 
     fireEvent.click(screen.getByRole("button", { name: "#영어" }));
+    fireEvent.change(screen.getByRole("searchbox", { name: "앱 검색" }), {
+      target: { value: "형성평가" }
+    });
 
-    expect(screen.getByText(/#영어 필터 적용/i)).toBeInTheDocument();
+    const activeFilters = screen.getByLabelText("활성 필터");
+
+    expect(within(activeFilters).getByText("#영어")).toBeInTheDocument();
+    expect(
+      within(activeFilters).getByText('검색어 "형성평가"')
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /필터 초기화/i })
     ).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: /필터 초기화/i }));
 
-    expect(screen.queryByText(/#영어 필터 적용/i)).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("활성 필터")).not.toBeInTheDocument();
   });
 });

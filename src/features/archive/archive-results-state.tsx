@@ -5,18 +5,25 @@ interface ArchiveResultsStateProps {
   resultCount: number;
 }
 
-function buildStateDetail(query: string, activeTags: string[]) {
-  const states: string[] = [];
+function buildActiveFilters(query: string, activeTags: string[]) {
+  const trimmedQuery = query.trim();
 
-  if (activeTags.length > 0) {
-    states.push(`${activeTags.map((tag) => `#${tag}`).join(", ")} 필터 적용`);
-  }
-
-  if (query.trim().length > 0) {
-    states.push(`"${query.trim()}" 검색 적용`);
-  }
-
-  return states.join(" · ");
+  return [
+    ...activeTags.map((tag) => ({
+      id: `tag:${tag}`,
+      label: `#${tag}`,
+      type: "tag" as const
+    })),
+    ...(trimmedQuery.length > 0
+      ? [
+          {
+            id: `query:${trimmedQuery}`,
+            label: `검색어 "${trimmedQuery}"`,
+            type: "query" as const
+          }
+        ]
+      : [])
+  ];
 }
 
 export function ArchiveResultsState({
@@ -25,8 +32,8 @@ export function ArchiveResultsState({
   query,
   resultCount
 }: ArchiveResultsStateProps) {
-  const detail = buildStateDetail(query, activeTags);
-  const hasFilters = detail.length > 0;
+  const activeFilters = buildActiveFilters(query, activeTags);
+  const hasFilters = activeFilters.length > 0;
 
   return (
     <section aria-live="polite" className="archive-results-state">
@@ -36,19 +43,41 @@ export function ArchiveResultsState({
         </p>
         <p className="archive-results-state-detail">
           {hasFilters
-            ? detail
+            ? "현재 적용된 필터를 한눈에 확인하고, 필요하면 한 번에 초기화할 수 있습니다."
             : "대표 태그를 누르거나 검색어를 입력해 원하는 앱을 빠르게 좁혀보세요."}
         </p>
       </div>
 
       {hasFilters ? (
-        <button
-          className="reset-filters-button"
-          onClick={onReset}
-          type="button"
-        >
-          필터 초기화
-        </button>
+        <div className="archive-results-active">
+          <div
+            aria-label="활성 필터"
+            className="archive-results-filter-list"
+            role="list"
+          >
+            {activeFilters.map((filter) => (
+              <span
+                className={
+                  filter.type === "query"
+                    ? "archive-state-chip is-query"
+                    : "archive-state-chip"
+                }
+                key={filter.id}
+                role="listitem"
+              >
+                {filter.label}
+              </span>
+            ))}
+          </div>
+
+          <button
+            className="reset-filters-button"
+            onClick={onReset}
+            type="button"
+          >
+            필터 초기화
+          </button>
+        </div>
       ) : null}
     </section>
   );

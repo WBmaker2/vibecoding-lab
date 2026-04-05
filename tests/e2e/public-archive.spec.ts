@@ -10,14 +10,16 @@ test("public archive supports search and tag filtering", async ({ page }) => {
   await expect(page.getByText(/^대표 태그$/)).toBeVisible();
 
   await page.getByRole("button", { name: "#영어" }).click();
-  await expect(page.getByText(/#영어 필터 적용/i)).toBeVisible();
+  await expect(page.getByLabel("활성 필터").getByText("#영어")).toBeVisible();
   await expect(page.getByRole("button", { name: "필터 초기화" })).toBeVisible();
   await expect(page.getByText("Talking Vocab Quiz")).toBeVisible();
   await expect(page.getByText("Class Random Seat")).toHaveCount(0);
 
   await page.getByRole("button", { name: "필터 초기화" }).click();
   await page.getByRole("searchbox", { name: "앱 검색" }).fill("형성평가");
-  await expect(page.getByText(/"형성평가" 검색 적용/i)).toBeVisible();
+  await expect(
+    page.getByLabel("활성 필터").getByText('검색어 "형성평가"')
+  ).toBeVisible();
   await expect(page.getByText("Talking Vocab Quiz")).toBeVisible();
 
   await page.getByRole("searchbox", { name: "앱 검색" }).fill("없는앱");
