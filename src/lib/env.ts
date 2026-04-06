@@ -14,6 +14,11 @@ const optionalEnvSchema = envSchema.partial();
 
 export type OptionalAppEnv = z.infer<typeof optionalEnvSchema>;
 
+function normalizeOptionalValue(value: string | undefined) {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : undefined;
+}
+
 export function getEnv(): AppEnv {
   return envSchema.parse({
     POSTGRES_URL: process.env.POSTGRES_URL,
@@ -26,11 +31,13 @@ export function getEnv(): AppEnv {
 
 export function getOptionalEnv(): OptionalAppEnv {
   return optionalEnvSchema.parse({
-    POSTGRES_URL: process.env.POSTGRES_URL,
-    BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
-    ADMIN_PASSWORD_HASH: process.env.ADMIN_PASSWORD_HASH,
-    SESSION_SECRET: process.env.SESSION_SECRET,
-    APP_BASE_URL: process.env.APP_BASE_URL
+    POSTGRES_URL: normalizeOptionalValue(process.env.POSTGRES_URL),
+    BLOB_READ_WRITE_TOKEN: normalizeOptionalValue(
+      process.env.BLOB_READ_WRITE_TOKEN
+    ),
+    ADMIN_PASSWORD_HASH: normalizeOptionalValue(process.env.ADMIN_PASSWORD_HASH),
+    SESSION_SECRET: normalizeOptionalValue(process.env.SESSION_SECRET),
+    APP_BASE_URL: normalizeOptionalValue(process.env.APP_BASE_URL)
   });
 }
 

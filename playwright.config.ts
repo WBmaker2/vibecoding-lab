@@ -16,7 +16,10 @@ export default defineConfig({
         "very-secret-password",
         "playwright-fixed-salt"
       ),
-      SESSION_SECRET: "0123456789abcdef0123456789abcdef"
+      SESSION_SECRET: "0123456789abcdef0123456789abcdef",
+      POSTGRES_URL: "",
+      APP_BASE_URL: "http://127.0.0.1:3100",
+      BLOB_READ_WRITE_TOKEN: ""
     }
   },
   projects: [
