@@ -158,6 +158,10 @@ select {
   padding: 14px 16px;
 }
 
+.mascot-note-header {
+  display: block;
+}
+
 .mascot-note-label {
   margin: 0;
   color: var(--accent);
@@ -175,6 +179,10 @@ select {
 
 .archive-hero-mascot-image {
   filter: drop-shadow(0 18px 24px rgba(62, 95, 146, 0.14));
+}
+
+.archive-hero-mascot-image-inline {
+  display: none;
 }
 
 .archive-search-shell {
@@ -1041,6 +1049,31 @@ select {
 
   .archive-hero-mascot {
     justify-items: start;
+    width: 100%;
+    gap: 0;
+  }
+
+  .mascot-note-shell {
+    width: min(100%, 24rem);
+    max-width: none;
+  }
+
+  .mascot-note-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .archive-hero-mascot-image-floating {
+    display: none;
+  }
+
+  .archive-hero-mascot-image-inline {
+    display: block;
+    flex: none;
+    width: 82px;
+    height: 82px;
   }
 
   .hero-frame {
@@ -1078,6 +1111,15 @@ select {
 
   .archive-hero {
     gap: 20px;
+  }
+
+  .mascot-note-shell {
+    width: 100%;
+  }
+
+  .archive-hero-mascot-image-inline {
+    width: 72px;
+    height: 72px;
   }
 
   .archive-search-input {
