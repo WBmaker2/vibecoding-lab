@@ -9,7 +9,10 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "db:migrate": "node scripts/db-migrate.mjs",
+    "apps:backup:live": "node scripts/apps-backup-live.mjs",
+    "apps:import:backup": "node scripts/apps-import-backup.mjs"
   },
   "dependencies": {
     "@sparticuz/chromium": "^143.0.4",

@@ -82,4 +82,21 @@ describe("AdminWorkspace", () => {
     expect(screen.getByText("태그 2개")).toBeInTheDocument();
     expect(screen.getByText("기본 이미지")).toBeInTheDocument();
   });
+
+  it("shows a JSON backup action in the workspace header", () => {
+    render(
+      <AdminWorkspace
+        apps={apps}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    expect(
+      screen.getByRole("link", { name: "JSON 백업" })
+    ).toHaveAttribute("href", "/api/admin/backup");
+  });
 });

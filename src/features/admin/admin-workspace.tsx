@@ -52,11 +52,17 @@ export function AdminWorkspace({
             <span className="admin-stat-pill">{totalTags}개 태그</span>
           </div>
 
-          <form action={logoutAction}>
-            <button className="admin-secondary-button" type="submit">
-              로그아웃
-            </button>
-          </form>
+          <div className="admin-header-actions">
+            <a className="admin-secondary-button" href="/api/admin/backup">
+              JSON 백업
+            </a>
+
+            <form action={logoutAction}>
+              <button className="admin-secondary-button" type="submit">
+                로그아웃
+              </button>
+            </form>
+          </div>
         </div>
       </header>
 
