@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { ArchiveHero } from "./archive-hero";
 
 describe("ArchiveHero", () => {
-  it("shows the updated Hong's Note label inside a dedicated header row", () => {
+  it("keeps the mascot image outside the Hong's Note card", () => {
     const { container } = render(
       <ArchiveHero
         activeTags={[]}
@@ -15,8 +15,13 @@ describe("ArchiveHero", () => {
 
     expect(screen.getByText("Hong's Note")).toBeInTheDocument();
     expect(screen.queryByText("Hong Note")).not.toBeInTheDocument();
-    expect(container.querySelector(".mascot-note-header")).toContainElement(
-      screen.getByText("Hong's Note")
-    );
+
+    const mascotGroup = container.querySelector(".archive-hero-mascot");
+    const noteShell = container.querySelector(".mascot-note-shell");
+    const mascotImage = container.querySelector(".archive-hero-mascot-image");
+
+    expect(mascotGroup).toContainElement(noteShell);
+    expect(mascotGroup).toContainElement(mascotImage);
+    expect(noteShell).not.toContainElement(mascotImage);
   });
 });

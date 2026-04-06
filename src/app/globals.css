@@ -181,10 +181,6 @@ select {
   filter: drop-shadow(0 18px 24px rgba(62, 95, 146, 0.14));
 }
 
-.archive-hero-mascot-image-inline {
-  display: none;
-}
-
 .archive-search-shell {
   display: grid;
   gap: 8px;
@@ -1048,32 +1044,20 @@ select {
   }
 
   .archive-hero-mascot {
-    justify-items: start;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    justify-items: stretch;
     width: 100%;
-    gap: 0;
+    gap: 12px;
   }
 
   .mascot-note-shell {
-    width: min(100%, 24rem);
+    width: 100%;
     max-width: none;
   }
 
   .mascot-note-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .archive-hero-mascot-image-floating {
-    display: none;
-  }
-
-  .archive-hero-mascot-image-inline {
     display: block;
-    flex: none;
-    width: 82px;
-    height: 82px;
   }
 
   .hero-frame {
@@ -1117,7 +1101,7 @@ select {
     width: 100%;
   }
 
-  .archive-hero-mascot-image-inline {
+  .archive-hero-mascot-image {
     width: 72px;
     height: 72px;
   }
