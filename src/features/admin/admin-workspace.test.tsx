@@ -1,4 +1,10 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within
+} from "@testing-library/react";
 import type { AdminAppRecord } from "@/lib/apps/types";
 import { AdminWorkspace } from "./admin-workspace";
 
@@ -85,10 +91,12 @@ describe("AdminWorkspace", () => {
     );
 
     expect(screen.getByText("태그 3개")).toBeInTheDocument();
-    expect(screen.getByText("메모 있음")).toBeInTheDocument();
     expect(screen.getByText("썸네일 자동")).toBeInTheDocument();
     expect(screen.getByText("태그 2개")).toBeInTheDocument();
     expect(screen.getByText("기본 이미지")).toBeInTheDocument();
+    expect(
+      screen.getByText(/게임 전 설명용 슬라이드와 함께 쓰면 좋습니다/)
+    ).toBeInTheDocument();
   });
 
   it("shows a JSON backup action in the workspace header", () => {
@@ -127,5 +135,64 @@ describe("AdminWorkspace", () => {
       "href",
       "https://github.com/WBmaker2/word-game"
     );
+  });
+
+  it("updates the library card immediately after saving and highlights changed fields", async () => {
+    const updateAction = async () => {};
+
+    render(
+      <AdminWorkspace
+        apps={apps}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={updateAction}
+      />
+    );
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "영어 단어 게임 편집" })
+    );
+
+    fireEvent.change(screen.getByLabelText("학년"), {
+      target: { value: "초등 3~6학년" }
+    });
+    fireEvent.change(screen.getByLabelText("메이커 노트"), {
+      target: {
+        value:
+          "교사가 단어 세트를 저장·공개하면 학생은 학교·선생님·학년·단원을 선택해 여러 활동으로 이어서 사용할 수 있습니다."
+      }
+    });
+    fireEvent.click(screen.getByRole("button", { name: "수정 저장" }));
+
+    await waitFor(() => {
+      expect(
+        screen.getByLabelText("영어 단어 게임 최근 수정 필드")
+      ).toBeInTheDocument();
+    });
+
+    const updatedCardHeading = screen.getByRole("heading", {
+      name: "영어 단어 게임"
+    });
+    const updatedCard = updatedCardHeading.closest("article");
+
+    expect(updatedCard).not.toBeNull();
+
+    const cardScope = within(updatedCard as HTMLElement);
+    const recentChangeSummary = screen.getByLabelText(
+      "영어 단어 게임 최근 수정 필드"
+    );
+
+    expect(within(recentChangeSummary).getByText("학년")).toBeInTheDocument();
+    expect(
+      within(recentChangeSummary).getByText("메이커 노트")
+    ).toBeInTheDocument();
+    expect(cardScope.getByText("학년 초등 3~6학년")).toBeInTheDocument();
+    expect(
+      cardScope.getByText(
+        /교사가 단어 세트를 저장·공개하면 학생은 학교·선생님/
+      )
+    ).toBeInTheDocument();
   });
 });

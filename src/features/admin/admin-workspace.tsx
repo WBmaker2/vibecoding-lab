@@ -1,7 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { AdminAppRecord } from "@/lib/apps/types";
+import {
+  buildAdminAppPreviewFromFormData,
+  getChangedAdminFieldLabels,
+  type RecentAdminChange
+} from "./change-highlights";
 import { AppForm } from "./app-form";
 import { AppList } from "./app-list";
 
@@ -22,17 +27,51 @@ export function AdminWorkspace({
   suggestedTags,
   updateAction
 }: AdminWorkspaceProps) {
+  const [localApps, setLocalApps] = useState(apps);
   const [selectedAppId, setSelectedAppId] = useState<string | null>(null);
+  const [recentChange, setRecentChange] = useState<RecentAdminChange | null>(
+    null
+  );
+
+  useEffect(() => {
+    setLocalApps(apps);
+  }, [apps]);
 
   const selectedApp = useMemo(
-    () => apps.find((app) => app.id === selectedAppId) ?? null,
-    [apps, selectedAppId]
+    () => localApps.find((app) => app.id === selectedAppId) ?? null,
+    [localApps, selectedAppId]
   );
 
   const totalTags = useMemo(
-    () => new Set(apps.flatMap((app) => app.tags)).size,
-    [apps]
+    () => new Set(localApps.flatMap((app) => app.tags)).size,
+    [localApps]
   );
+
+  async function handleCreateAction(formData: FormData) {
+    setRecentChange(null);
+    await createAction(formData);
+  }
+
+  async function handleUpdateAction(formData: FormData) {
+    const previous = selectedApp;
+
+    await updateAction(formData);
+
+    if (!previous) {
+      return;
+    }
+
+    const next = buildAdminAppPreviewFromFormData(previous, formData);
+    const changedFields = getChangedAdminFieldLabels(previous, next);
+
+    setLocalApps((currentApps) =>
+      currentApps.map((app) => (app.id === next.id ? next : app))
+    );
+    setRecentChange({
+      appId: next.id,
+      fields: changedFields
+    });
+  }
 
   return (
     <main className="page-shell admin-page">
@@ -89,9 +128,13 @@ export function AdminWorkspace({
           </div>
 
           <AppForm
-            action={selectedApp ? updateAction : createAction}
+            action={selectedApp ? handleUpdateAction : handleCreateAction}
             initialApp={selectedApp ?? undefined}
-            key={selectedApp?.id ?? "create-mode"}
+            key={
+              selectedApp
+                ? `${selectedApp.id}-${selectedApp.updatedAt.toISOString()}`
+                : "create-mode"
+            }
             onCancelEdit={
               selectedApp ? () => setSelectedAppId(null) : undefined
             }
@@ -110,9 +153,10 @@ export function AdminWorkspace({
           </div>
 
           <AppList
-            apps={apps}
+            apps={localApps}
             deleteAction={deleteAction}
             onSelectApp={setSelectedAppId}
+            recentChange={recentChange}
             selectedAppId={selectedAppId}
           />
         </section>
