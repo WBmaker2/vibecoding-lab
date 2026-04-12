@@ -1,17 +1,17 @@
 import { desc, eq } from "drizzle-orm";
 import { getDb, isDatabaseConfigured } from "@/db/client";
 import { apps } from "@/db/schema";
-import type { AppInput, AppRecord } from "./types";
+import type { AdminAppRecord, AppInput, PublicAppRecord } from "./types";
 
 export interface AppRepository {
-  listPublicApps(): Promise<AppRecord[]>;
-  listAdminApps(): Promise<AppRecord[]>;
-  createApp(input: AppInput): Promise<AppRecord>;
-  updateApp(id: string, input: AppInput): Promise<AppRecord>;
+  listPublicApps(): Promise<PublicAppRecord[]>;
+  listAdminApps(): Promise<AdminAppRecord[]>;
+  createApp(input: AppInput): Promise<AdminAppRecord>;
+  updateApp(id: string, input: AppInput): Promise<AdminAppRecord>;
   deleteApp(id: string): Promise<void>;
 }
 
-function createSeedApps(): AppRecord[] {
+function createSeedApps(): AdminAppRecord[] {
   const now = new Date("2026-04-05T00:00:00.000Z");
 
   return [
@@ -20,6 +20,7 @@ function createSeedApps(): AppRecord[] {
       title: "Talking Vocab Quiz",
       summary: "음성과 퀴즈 흐름으로 단어를 빠르게 복습하는 영어 수업 도구",
       url: "https://example.com/talking-vocab-quiz",
+      githubUrl: undefined,
       tags: ["영어", "게임형", "형성평가"],
       thumbnailMode: "placeholder",
       thumbnailUrl: null,
@@ -34,6 +35,7 @@ function createSeedApps(): AppRecord[] {
       title: "Class Random Seat",
       summary: "교실 자리 배치를 빠르게 정하고 즉시 화면 공유할 수 있는 운영 도구",
       url: "https://example.com/class-random-seat",
+      githubUrl: undefined,
       tags: ["학급경영", "업무경감", "랜덤"],
       thumbnailMode: "placeholder",
       thumbnailUrl: null,
@@ -48,6 +50,7 @@ function createSeedApps(): AppRecord[] {
       title: "Worksheet Toolkit",
       summary: "활동지 제작 부담을 줄여주는 교사용 수업 준비 보조 도구",
       url: "https://example.com/worksheet-toolkit",
+      githubUrl: undefined,
       tags: ["업무경감", "수업준비"],
       thumbnailMode: "placeholder",
       thumbnailUrl: null,
@@ -64,14 +67,27 @@ const memoryStore = {
   apps: createSeedApps()
 };
 
-function toAppRecord(record: typeof apps.$inferSelect): AppRecord {
+function toPublicAppRecord(record: {
+  id: string;
+  title: string;
+  summary: string;
+  url: string;
+  tags: string[];
+  thumbnailMode: string;
+  thumbnailUrl: string | null;
+  subject?: string | null;
+  grade?: string | null;
+  memo?: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}): PublicAppRecord {
   return {
     id: record.id,
     title: record.title,
     summary: record.summary,
     url: record.url,
     tags: record.tags,
-    thumbnailMode: record.thumbnailMode as AppRecord["thumbnailMode"],
+    thumbnailMode: record.thumbnailMode as PublicAppRecord["thumbnailMode"],
     thumbnailUrl: record.thumbnailUrl,
     subject: record.subject ?? undefined,
     grade: record.grade ?? undefined,
@@ -81,22 +97,34 @@ function toAppRecord(record: typeof apps.$inferSelect): AppRecord {
   };
 }
 
+function toAdminAppRecord(record: typeof apps.$inferSelect): AdminAppRecord;
+function toAdminAppRecord(record: AdminAppRecord): AdminAppRecord;
+function toAdminAppRecord(
+  record: typeof apps.$inferSelect | AdminAppRecord
+): AdminAppRecord {
+  return {
+    ...toPublicAppRecord(record),
+    githubUrl: record.githubUrl ?? undefined
+  };
+}
+
 class InMemoryAppRepository implements AppRepository {
-  async listPublicApps(): Promise<AppRecord[]> {
-    return [...memoryStore.apps];
+  async listPublicApps(): Promise<PublicAppRecord[]> {
+    return memoryStore.apps.map(toPublicAppRecord);
   }
 
-  async listAdminApps(): Promise<AppRecord[]> {
-    return [...memoryStore.apps];
+  async listAdminApps(): Promise<AdminAppRecord[]> {
+    return memoryStore.apps.map(toAdminAppRecord);
   }
 
-  async createApp(input: AppInput): Promise<AppRecord> {
+  async createApp(input: AppInput): Promise<AdminAppRecord> {
     const now = new Date();
-    const record: AppRecord = {
+    const record: AdminAppRecord = {
       id: crypto.randomUUID(),
       title: input.title,
       summary: input.summary,
       url: input.url,
+      githubUrl: input.githubUrl || undefined,
       tags: input.tags,
       thumbnailMode: input.thumbnailMode,
       thumbnailUrl: input.thumbnailUrl ?? null,
@@ -111,18 +139,19 @@ class InMemoryAppRepository implements AppRepository {
     return record;
   }
 
-  async updateApp(id: string, input: AppInput): Promise<AppRecord> {
+  async updateApp(id: string, input: AppInput): Promise<AdminAppRecord> {
     const existing = memoryStore.apps.find((app) => app.id === id);
 
     if (!existing) {
       throw new Error("App not found.");
     }
 
-    const updated: AppRecord = {
+    const updated: AdminAppRecord = {
       ...existing,
       title: input.title,
       summary: input.summary,
       url: input.url,
+      githubUrl: input.githubUrl || undefined,
       tags: input.tags,
       thumbnailMode: input.thumbnailMode,
       thumbnailUrl: input.thumbnailUrl ?? null,
@@ -145,21 +174,27 @@ class InMemoryAppRepository implements AppRepository {
 }
 
 class PostgresAppRepository implements AppRepository {
-  async listPublicApps(): Promise<AppRecord[]> {
+  async listPublicApps(): Promise<PublicAppRecord[]> {
     const db = getDb();
     const records = await db
       .select()
       .from(apps)
       .orderBy(desc(apps.updatedAt), desc(apps.createdAt));
 
-    return records.map(toAppRecord);
+    return records.map(toPublicAppRecord);
   }
 
-  async listAdminApps(): Promise<AppRecord[]> {
-    return this.listPublicApps();
+  async listAdminApps(): Promise<AdminAppRecord[]> {
+    const db = getDb();
+    const records = await db
+      .select()
+      .from(apps)
+      .orderBy(desc(apps.updatedAt), desc(apps.createdAt));
+
+    return records.map(toAdminAppRecord);
   }
 
-  async createApp(input: AppInput): Promise<AppRecord> {
+  async createApp(input: AppInput): Promise<AdminAppRecord> {
     const db = getDb();
     const [record] = await db
       .insert(apps)
@@ -167,6 +202,7 @@ class PostgresAppRepository implements AppRepository {
         title: input.title,
         summary: input.summary,
         url: input.url,
+        githubUrl: input.githubUrl ?? null,
         tags: input.tags,
         thumbnailMode: input.thumbnailMode,
         thumbnailUrl: input.thumbnailUrl ?? null,
@@ -176,10 +212,10 @@ class PostgresAppRepository implements AppRepository {
       })
       .returning();
 
-    return toAppRecord(record);
+    return toAdminAppRecord(record);
   }
 
-  async updateApp(id: string, input: AppInput): Promise<AppRecord> {
+  async updateApp(id: string, input: AppInput): Promise<AdminAppRecord> {
     const db = getDb();
     const [record] = await db
       .update(apps)
@@ -187,6 +223,7 @@ class PostgresAppRepository implements AppRepository {
         title: input.title,
         summary: input.summary,
         url: input.url,
+        githubUrl: input.githubUrl ?? null,
         tags: input.tags,
         thumbnailMode: input.thumbnailMode,
         thumbnailUrl: input.thumbnailUrl ?? null,
@@ -202,7 +239,7 @@ class PostgresAppRepository implements AppRepository {
       throw new Error("App not found.");
     }
 
-    return toAppRecord(record);
+    return toAdminAppRecord(record);
   }
 
   async deleteApp(id: string): Promise<void> {

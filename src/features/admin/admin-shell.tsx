@@ -4,11 +4,11 @@ import {
   logoutAction,
   updateAppAction
 } from "@/app/admin/actions";
-import type { AppRecord } from "@/lib/apps/types";
+import type { AdminAppRecord } from "@/lib/apps/types";
 import { AdminWorkspace } from "./admin-workspace";
 
 interface AdminShellProps {
-  apps: AppRecord[];
+  apps: AdminAppRecord[];
 }
 
 export function AdminShell({ apps }: AdminShellProps) {

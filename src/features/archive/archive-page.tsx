@@ -1,7 +1,7 @@
 "use client";
 
 import { startTransition, useMemo, useState } from "react";
-import type { AppRecord } from "@/lib/apps/types";
+import type { PublicAppRecord } from "@/lib/apps/types";
 import { filterApps } from "@/lib/search/filter-apps";
 import { AppCard } from "./app-card";
 import { ArchiveHero } from "./archive-hero";
@@ -9,7 +9,7 @@ import { ArchiveResultsState } from "./archive-results-state";
 import { EmptyState } from "./empty-state";
 
 interface ArchivePageProps {
-  initialApps: AppRecord[];
+  initialApps: PublicAppRecord[];
 }
 
 export function ArchivePage({ initialApps }: ArchivePageProps) {

@@ -5,6 +5,7 @@ export const apps = pgTable("apps", {
   title: text("title").notNull(),
   summary: text("summary").notNull(),
   url: text("url").notNull(),
+  githubUrl: text("github_url"),
   tags: text("tags").array().notNull(),
   thumbnailMode: text("thumbnail_mode").notNull(),
   thumbnailUrl: text("thumbnail_url"),

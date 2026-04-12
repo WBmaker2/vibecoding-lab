@@ -1,16 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import type { AppRecord } from "@/lib/apps/types";
+import type { AdminAppRecord } from "@/lib/apps/types";
 
 interface AppListProps {
-  apps: AppRecord[];
+  apps: AdminAppRecord[];
   deleteAction: (formData: FormData) => void | Promise<void>;
   onSelectApp: (appId: string) => void;
   selectedAppId: string | null;
 }
 
-function getThumbnailModeLabel(app: AppRecord) {
+function getThumbnailModeLabel(app: AdminAppRecord) {
   switch (app.thumbnailMode) {
     case "auto":
       return "썸네일 자동";
@@ -73,6 +73,16 @@ export function AppList({
               <Link href={app.url} rel="noreferrer" target="_blank">
                 앱 열기
               </Link>
+              {app.githubUrl ? (
+                <Link
+                  className="admin-secondary-button admin-github-button"
+                  href={app.githubUrl}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Github
+                </Link>
+              ) : null}
               <form action={deleteAction}>
                 <input name="id" type="hidden" value={app.id} />
                 <button className="admin-danger-button" type="submit">

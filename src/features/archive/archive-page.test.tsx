@@ -1,8 +1,8 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import type { AppRecord } from "@/lib/apps/types";
+import type { PublicAppRecord } from "@/lib/apps/types";
 import { ArchivePage } from "./archive-page";
 
-const sampleApps: AppRecord[] = [
+const sampleApps: PublicAppRecord[] = [
   {
     id: "talking-vocab-quiz",
     title: "Talking Vocab Quiz",

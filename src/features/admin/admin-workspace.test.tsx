@@ -1,15 +1,16 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import type { AppRecord } from "@/lib/apps/types";
+import type { AdminAppRecord } from "@/lib/apps/types";
 import { AdminWorkspace } from "./admin-workspace";
 
 const noopAction = async () => {};
 
-const apps: AppRecord[] = [
+const apps: AdminAppRecord[] = [
   {
     id: "app-1",
     title: "영어 단어 게임",
     summary: "수업 몰입을 돕는 영어 단어 복습 게임",
     url: "https://example.com/word-game",
+    githubUrl: "https://github.com/WBmaker2/word-game",
     tags: ["영어", "게임형", "형성평가"],
     thumbnailMode: "auto",
     thumbnailUrl: "https://example.com/thumb-1.png",
@@ -24,6 +25,7 @@ const apps: AppRecord[] = [
     title: "자리 배치 도우미",
     summary: "교실 자리 배치를 빠르게 바꿔보는 도구",
     url: "https://example.com/seating",
+    githubUrl: undefined,
     tags: ["업무경감", "학급운영"],
     thumbnailMode: "placeholder",
     thumbnailUrl: null,
@@ -52,6 +54,9 @@ describe("AdminWorkspace", () => {
       screen.getByRole("heading", { name: "등록 / 수정 워크벤치" })
     ).toBeInTheDocument();
     expect(screen.getByText("신규 등록 모드")).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText("https://github.com/...")
+    ).toHaveValue("");
 
     fireEvent.click(
       screen.getByRole("button", { name: "영어 단어 게임 편집" })
@@ -61,6 +66,9 @@ describe("AdminWorkspace", () => {
       screen.getByRole("heading", { name: "영어 단어 게임 수정" })
     ).toBeInTheDocument();
     expect(screen.getByDisplayValue("영어 단어 게임")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("https://github.com/WBmaker2/word-game")).toHaveValue(
+      "https://github.com/WBmaker2/word-game"
+    );
     expect(screen.getByText("수정 모드")).toBeInTheDocument();
   });
 
@@ -98,5 +106,26 @@ describe("AdminWorkspace", () => {
     expect(
       screen.getByRole("link", { name: "JSON 백업" })
     ).toHaveAttribute("href", "/api/admin/backup");
+  });
+
+  it("shows a Github action only for apps with a github link", () => {
+    render(
+      <AdminWorkspace
+        apps={apps}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    const githubLinks = screen.getAllByRole("link", { name: "Github" });
+
+    expect(githubLinks).toHaveLength(1);
+    expect(githubLinks[0]).toHaveAttribute(
+      "href",
+      "https://github.com/WBmaker2/word-game"
+    );
   });
 });

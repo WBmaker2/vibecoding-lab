@@ -1,12 +1,12 @@
 "use client";
 
-import type { AppRecord } from "@/lib/apps/types";
+import type { AdminAppRecord } from "@/lib/apps/types";
 import { TagInput } from "./tag-input";
 import { ThumbnailControls } from "./thumbnail-controls";
 
 interface AppFormProps {
   action: (formData: FormData) => void | Promise<void>;
-  initialApp?: AppRecord;
+  initialApp?: AdminAppRecord;
   onCancelEdit?: () => void;
   suggestedTags?: string[];
   submitLabel: string;
@@ -26,7 +26,10 @@ export function AppForm({
       <section className="admin-form-section">
         <div className="admin-form-section-copy">
           <h3>1. 기본 정보</h3>
-          <p>제목, 한 줄 설명, 링크만 먼저 채워도 등록하실 수 있습니다.</p>
+          <p>
+            제목, 한 줄 설명, 링크만 먼저 채워도 등록하실 수 있고, GitHub
+            링크는 선택 입력으로 남겨 두실 수 있습니다.
+          </p>
         </div>
 
         <div className="admin-form-grid">
@@ -54,6 +57,20 @@ export function AppForm({
               required
               type="url"
             />
+          </label>
+
+          <label className="admin-field admin-field-full" htmlFor="github-url">
+            <span>GitHub 링크</span>
+            <input
+              defaultValue={initialApp?.githubUrl}
+              id="github-url"
+              name="githubUrl"
+              placeholder="https://github.com/..."
+              type="url"
+            />
+            <small className="admin-field-hint">
+              선택 입력이며, 관리자 작업실에서만 참고 자료로 활용됩니다.
+            </small>
           </label>
         </div>
       </section>

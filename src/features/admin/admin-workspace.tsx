@@ -1,12 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { AppRecord } from "@/lib/apps/types";
+import type { AdminAppRecord } from "@/lib/apps/types";
 import { AppForm } from "./app-form";
 import { AppList } from "./app-list";
 
 interface AdminWorkspaceProps {
-  apps: AppRecord[];
+  apps: AdminAppRecord[];
   createAction: (formData: FormData) => void | Promise<void>;
   deleteAction: (formData: FormData) => void | Promise<void>;
   logoutAction: (formData: FormData) => void | Promise<void>;

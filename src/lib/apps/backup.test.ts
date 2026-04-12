@@ -1,12 +1,13 @@
-import type { AppRecord } from "@/lib/apps/types";
+import type { AdminAppRecord } from "@/lib/apps/types";
 import { createAppsBackupPayload } from "./backup";
 
-const sampleApps: AppRecord[] = [
+const sampleApps: AdminAppRecord[] = [
   {
     id: "app-1",
     title: "영어 단어 게임",
     summary: "영어 단어를 빠르게 복습하는 수업용 앱",
     url: "https://example.com/word-game",
+    githubUrl: "https://github.com/WBmaker2/word-game",
     tags: ["영어", "게임형"],
     thumbnailMode: "auto",
     thumbnailUrl: "https://example.com/thumb.png",
@@ -34,6 +35,7 @@ describe("createAppsBackupPayload", () => {
         title: "영어 단어 게임",
         summary: "영어 단어를 빠르게 복습하는 수업용 앱",
         url: "https://example.com/word-game",
+        githubUrl: "https://github.com/WBmaker2/word-game",
         tags: ["영어", "게임형"],
         thumbnailMode: "auto",
         thumbnailUrl: "https://example.com/thumb.png",

@@ -32,6 +32,7 @@ async function getAppInput(formData: FormData) {
     title: String(formData.get("title") ?? ""),
     summary: String(formData.get("summary") ?? ""),
     url: sourceUrl,
+    githubUrl: String(formData.get("githubUrl") ?? "") || undefined,
     tags: normalizeTags(formData),
     thumbnailMode: resolvedThumbnail.thumbnailMode,
     thumbnailUrl: resolvedThumbnail.thumbnailUrl ?? undefined,

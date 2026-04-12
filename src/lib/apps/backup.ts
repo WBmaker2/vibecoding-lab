@@ -1,10 +1,11 @@
-import type { AppRecord, ThumbnailMode } from "./types";
+import type { AdminAppRecord, ThumbnailMode } from "./types";
 
 export interface SerializedAppRecord {
   id: string;
   title: string;
   summary: string;
   url: string;
+  githubUrl?: string | null;
   tags: string[];
   thumbnailMode: ThumbnailMode;
   thumbnailUrl: string | null;
@@ -22,12 +23,13 @@ export interface AppsBackupPayload {
   apps: SerializedAppRecord[];
 }
 
-export function serializeAppRecord(app: AppRecord): SerializedAppRecord {
+export function serializeAppRecord(app: AdminAppRecord): SerializedAppRecord {
   return {
     id: app.id,
     title: app.title,
     summary: app.summary,
     url: app.url,
+    githubUrl: app.githubUrl ?? null,
     tags: [...app.tags],
     thumbnailMode: app.thumbnailMode,
     thumbnailUrl: app.thumbnailUrl,
@@ -40,7 +42,7 @@ export function serializeAppRecord(app: AppRecord): SerializedAppRecord {
 }
 
 export function createAppsBackupPayload(
-  apps: AppRecord[],
+  apps: AdminAppRecord[],
   generatedAt = new Date()
 ): AppsBackupPayload {
   return {

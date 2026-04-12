@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import type { AppRecord } from "@/lib/apps/types";
+import type { PublicAppRecord } from "@/lib/apps/types";
 import { AppCard } from "./app-card";
 
 vi.mock("next/image", () => ({
@@ -22,7 +22,7 @@ vi.mock("next/image", () => ({
   }
 }));
 
-const sampleApp: AppRecord = {
+const sampleApp: PublicAppRecord = {
   id: "reading-timer",
   title: "Reading Timer",
   summary: "읽기 활동 시간을 관리하는 타이머",

@@ -1,8 +1,8 @@
 import Image from "next/image";
-import type { AppRecord } from "@/lib/apps/types";
+import type { PublicAppRecord } from "@/lib/apps/types";
 
 interface AppCardProps {
-  app: AppRecord;
+  app: PublicAppRecord;
 }
 
 export function AppCard({ app }: AppCardProps) {
