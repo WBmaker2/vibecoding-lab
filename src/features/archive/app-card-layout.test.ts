@@ -20,5 +20,13 @@ describe("archive app card layout styles", () => {
     );
 
     expect(mediaInnerStyles).toContain("aspect-ratio: 16 / 9");
+    expect(mediaInnerStyles).toContain("width: min(100%, 560px)");
+    expect(mediaInnerStyles).not.toContain("max-height");
+  });
+
+  it("clips thumbnail media so wide filtered cards cannot cover card titles", () => {
+    const mediaStyles = getCssBlock(readGlobalStyles(), "\\.app-card-media");
+
+    expect(mediaStyles).toContain("overflow: hidden");
   });
 });
