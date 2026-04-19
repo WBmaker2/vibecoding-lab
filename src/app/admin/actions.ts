@@ -6,6 +6,7 @@ import { clearAdminSession } from "@/lib/auth/session";
 import { getAppRepository } from "@/lib/apps/repository";
 import { appInputSchema } from "@/lib/apps/schema";
 import { normalizeTags as normalizeAppTags } from "@/lib/apps/tags";
+import type { AdminAppRecord } from "@/lib/apps/types";
 import { resolveThumbnailInput } from "@/lib/storage/thumbnails";
 
 function normalizeTags(formData: FormData) {
@@ -15,7 +16,10 @@ function normalizeTags(formData: FormData) {
   return normalizeAppTags(parsed);
 }
 
-async function getAppInput(formData: FormData) {
+async function getAppInput(
+  formData: FormData,
+  existingApp?: Pick<AdminAppRecord, "thumbnailMode" | "thumbnailUrl">
+) {
   const sourceUrl = String(formData.get("url") ?? "");
   const mode = String(formData.get("thumbnailMode") ?? "auto") as
     | "auto"
@@ -23,6 +27,9 @@ async function getAppInput(formData: FormData) {
     | "placeholder";
   const thumbnailFile = formData.get("thumbnailFile");
   const resolvedThumbnail = await resolveThumbnailInput({
+    allowPlaceholderReset: formData.get("allowPlaceholderReset") === "on",
+    existingThumbnailMode: existingApp?.thumbnailMode,
+    existingThumbnailUrl: existingApp?.thumbnailUrl,
     mode,
     file: thumbnailFile instanceof File ? thumbnailFile : null,
     sourceUrl,
@@ -59,7 +66,8 @@ export async function createAppAction(formData: FormData) {
 export async function updateAppAction(formData: FormData) {
   const id = String(formData.get("id") ?? "");
   const repo = getAppRepository();
-  const input = await getAppInput(formData);
+  const existingApp = (await repo.listAdminApps()).find((app) => app.id === id);
+  const input = await getAppInput(formData, existingApp);
 
   await repo.updateApp(id, input);
   revalidateArchive();

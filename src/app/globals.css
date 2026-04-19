@@ -881,6 +881,30 @@ select {
   color: var(--text-soft);
 }
 
+.thumbnail-reset-guard {
+  display: grid;
+  gap: 8px;
+  border: 1px solid rgba(183, 67, 67, 0.18);
+  border-radius: 18px;
+  background: rgba(183, 67, 67, 0.06);
+  padding: 14px 16px;
+}
+
+.thumbnail-reset-guard label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-strong);
+  font-weight: 700;
+}
+
+.thumbnail-reset-guard p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
 .admin-empty-library {
   padding: 24px;
   border: 1px dashed var(--panel-border);

@@ -5,6 +5,9 @@ import { buildGeneratedThumbnailUrl } from "./generated-thumbnail";
 import { capturePageThumbnail } from "./page-capture";
 
 interface ResolveThumbnailOptions {
+  allowPlaceholderReset?: boolean;
+  existingThumbnailMode?: ThumbnailMode;
+  existingThumbnailUrl?: string | null;
   mode: ThumbnailMode;
   file: File | null;
   sourceUrl: string;
@@ -61,12 +64,27 @@ async function resolveAutoThumbnail(sourceUrl: string) {
 }
 
 export async function resolveThumbnailInput({
+  allowPlaceholderReset = false,
+  existingThumbnailMode,
+  existingThumbnailUrl,
   mode,
   file,
   sourceUrl,
   thumbnailUrl
 }: ResolveThumbnailOptions) {
+  const preservedThumbnail =
+    existingThumbnailUrl && !allowPlaceholderReset
+      ? {
+          thumbnailMode: existingThumbnailMode ?? ("auto" as const),
+          thumbnailUrl: existingThumbnailUrl
+        }
+      : null;
+
   if (mode === "placeholder") {
+    if (preservedThumbnail) {
+      return preservedThumbnail;
+    }
+
     return {
       thumbnailMode: "placeholder" as const,
       thumbnailUrl: null
@@ -82,8 +100,11 @@ export async function resolveThumbnailInput({
     }
 
     return {
-      thumbnailMode: "placeholder" as const,
-      thumbnailUrl: thumbnailUrl || null
+      thumbnailMode:
+        thumbnailUrl || preservedThumbnail?.thumbnailUrl
+          ? existingThumbnailMode ?? ("upload" as const)
+          : ("placeholder" as const),
+      thumbnailUrl: thumbnailUrl || preservedThumbnail?.thumbnailUrl || null
     };
   }
 

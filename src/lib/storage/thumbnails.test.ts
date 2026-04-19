@@ -105,4 +105,35 @@ describe("resolveThumbnailInput", () => {
       "https://lab.example.com/api/thumbnail?host=paps-tracker.vercel.app"
     );
   });
+
+  it("preserves an existing thumbnail when placeholder mode is not confirmed", async () => {
+    const result = await resolveThumbnailInput({
+      mode: "placeholder",
+      file: null,
+      sourceUrl: "https://paps-tracker.vercel.app",
+      existingThumbnailMode: "auto",
+      existingThumbnailUrl: "data:image/png;base64,existing"
+    });
+
+    expect(result).toEqual({
+      thumbnailMode: "auto",
+      thumbnailUrl: "data:image/png;base64,existing"
+    });
+  });
+
+  it("clears an existing thumbnail only when placeholder reset is confirmed", async () => {
+    const result = await resolveThumbnailInput({
+      mode: "placeholder",
+      file: null,
+      sourceUrl: "https://paps-tracker.vercel.app",
+      existingThumbnailMode: "auto",
+      existingThumbnailUrl: "data:image/png;base64,existing",
+      allowPlaceholderReset: true
+    });
+
+    expect(result).toEqual({
+      thumbnailMode: "placeholder",
+      thumbnailUrl: null
+    });
+  });
 });

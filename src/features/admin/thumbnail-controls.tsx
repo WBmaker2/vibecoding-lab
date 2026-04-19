@@ -14,6 +14,7 @@ export function ThumbnailControls({
 }: ThumbnailControlsProps) {
   const [mode, setMode] = useState<ThumbnailMode>(initialMode);
   const [url, setUrl] = useState(initialUrl ?? "");
+  const hasExistingThumbnail = Boolean(initialUrl);
 
   return (
     <div className="thumbnail-controls">
@@ -70,6 +71,23 @@ export function ThumbnailControls({
             value={url}
           />
         </label>
+      )}
+
+      {mode === "placeholder" && hasExistingThumbnail && (
+        <div className="thumbnail-reset-guard">
+          <label>
+            <input
+              name="allowPlaceholderReset"
+              type="checkbox"
+              value="on"
+            />
+            기존 썸네일을 기본 이미지로 바꾸겠습니다.
+          </label>
+          <p>
+            체크하지 않고 저장하면 현재 썸네일을 유지합니다. 실수로 이미지가
+            사라지는 것을 막기 위한 안전장치입니다.
+          </p>
+        </div>
       )}
     </div>
   );
