@@ -22,6 +22,18 @@ describe("appInputSchema", () => {
     expect(parsed.memo).toBe("교실 화면 공유에 적합");
   });
 
+  it("stores tags without leading hashtag markers", () => {
+    const parsed = appInputSchema.parse({
+      title: "Teacher Helper",
+      summary: "업무를 줄여주는 교사용 도구",
+      url: "https://example.com/helper",
+      tags: ["#업무경감", "##수업준비", "  #영어  "],
+      thumbnailMode: "placeholder"
+    });
+
+    expect(parsed.tags).toEqual(["업무경감", "수업준비", "영어"]);
+  });
+
   it("keeps optional public fields empty when not provided", () => {
     const parsed = appInputSchema.parse({
       title: "Worksheet Toolkit",

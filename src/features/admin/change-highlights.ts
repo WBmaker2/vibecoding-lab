@@ -1,4 +1,5 @@
 import type { AdminAppRecord } from "@/lib/apps/types";
+import { normalizeTags as normalizeAppTags } from "@/lib/apps/tags";
 
 export interface RecentAdminChange {
   appId: string;
@@ -10,7 +11,7 @@ function normalizeText(value?: string) {
 }
 
 function normalizeTags(tags: string[]) {
-  return [...tags].map((tag) => tag.trim()).filter(Boolean).sort();
+  return normalizeAppTags(tags).sort();
 }
 
 function parseTags(formData: FormData, fallback: string[]) {
@@ -18,7 +19,7 @@ function parseTags(formData: FormData, fallback: string[]) {
 
   try {
     const parsed = JSON.parse(raw) as string[];
-    return parsed.map((tag) => tag.trim()).filter(Boolean);
+    return normalizeAppTags(parsed);
   } catch {
     return fallback;
   }

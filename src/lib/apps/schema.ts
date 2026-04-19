@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { normalizeTags } from "./tags";
 
 const optionalText = z.string().trim().min(1).optional().or(z.literal("").transform(() => undefined));
 const githubHosts = new Set(["github.com", "www.github.com"]);
@@ -23,7 +24,10 @@ export const appInputSchema = z.object({
   summary: z.string().trim().min(1).max(160),
   url: z.string().url(),
   githubUrl: optionalGithubUrl,
-  tags: z.array(z.string().trim().min(1)).min(1),
+  tags: z
+    .array(z.string())
+    .transform(normalizeTags)
+    .pipe(z.array(z.string().min(1)).min(1)),
   thumbnailMode: z.enum(["auto", "upload", "placeholder"]),
   thumbnailUrl: z.string().url().optional(),
   subject: optionalText,

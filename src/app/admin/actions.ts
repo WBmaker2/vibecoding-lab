@@ -5,13 +5,14 @@ import { redirect } from "next/navigation";
 import { clearAdminSession } from "@/lib/auth/session";
 import { getAppRepository } from "@/lib/apps/repository";
 import { appInputSchema } from "@/lib/apps/schema";
+import { normalizeTags as normalizeAppTags } from "@/lib/apps/tags";
 import { resolveThumbnailInput } from "@/lib/storage/thumbnails";
 
 function normalizeTags(formData: FormData) {
   const raw = String(formData.get("tagsJson") ?? "[]");
   const parsed = JSON.parse(raw) as string[];
 
-  return parsed.map((tag) => tag.trim()).filter(Boolean);
+  return normalizeAppTags(parsed);
 }
 
 async function getAppInput(formData: FormData) {

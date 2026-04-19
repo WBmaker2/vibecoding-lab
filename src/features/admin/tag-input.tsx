@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { normalizeTag, normalizeTags } from "@/lib/apps/tags";
 
 interface TagInputProps {
   initialTags?: string[];
@@ -13,11 +14,11 @@ export function TagInput({
   name,
   suggestedTags = []
 }: TagInputProps) {
-  const [tags, setTags] = useState(initialTags);
+  const [tags, setTags] = useState(() => normalizeTags(initialTags));
   const [draft, setDraft] = useState("");
 
   function commitTag(raw: string) {
-    const next = raw.trim();
+    const next = normalizeTag(raw);
 
     if (!next || tags.includes(next)) {
       return;
@@ -26,9 +27,7 @@ export function TagInput({
     setTags((current) => [...current, next]);
   }
 
-  const uniqueSuggestedTags = suggestedTags.filter(
-    (tag, index) => suggestedTags.indexOf(tag) === index
-  );
+  const uniqueSuggestedTags = normalizeTags(suggestedTags);
 
   return (
     <div className="tag-input-shell">

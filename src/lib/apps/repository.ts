@@ -1,6 +1,7 @@
 import { desc, eq } from "drizzle-orm";
 import { getDb, isDatabaseConfigured } from "@/db/client";
 import { apps } from "@/db/schema";
+import { normalizeTags } from "./tags";
 import type { AdminAppRecord, AppInput, PublicAppRecord } from "./types";
 
 export interface AppRepository {
@@ -86,7 +87,7 @@ function toPublicAppRecord(record: {
     title: record.title,
     summary: record.summary,
     url: record.url,
-    tags: record.tags,
+    tags: normalizeTags(record.tags),
     thumbnailMode: record.thumbnailMode as PublicAppRecord["thumbnailMode"],
     thumbnailUrl: record.thumbnailUrl,
     subject: record.subject ?? undefined,

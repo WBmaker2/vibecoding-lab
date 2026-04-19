@@ -2,6 +2,39 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { TagInput } from "./tag-input";
 
 describe("TagInput", () => {
+  it("stores a manually entered hashtag without the display prefix", () => {
+    render(<TagInput initialTags={[]} name="tagsJson" suggestedTags={[]} />);
+
+    const input = screen.getByPlaceholderText("엔터 또는 쉼표로 태그 추가");
+
+    fireEvent.change(input, { target: { value: "#업무경감" } });
+    fireEvent.keyDown(input, { key: "Enter" });
+
+    expect(screen.getByDisplayValue('["업무경감"]')).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "#업무경감 제거" })
+    ).toBeInTheDocument();
+    expect(screen.queryByText("##업무경감")).not.toBeInTheDocument();
+  });
+
+  it("normalizes initial and suggested tags that already include hashtags", () => {
+    render(
+      <TagInput
+        initialTags={["#업무경감"]}
+        name="tagsJson"
+        suggestedTags={["#업무경감", "##수업준비"]}
+      />
+    );
+
+    expect(screen.getByDisplayValue('["업무경감"]')).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "#업무경감 제거" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "#수업준비 추가" })
+    ).toBeInTheDocument();
+  });
+
   it("adds a suggested tag when the suggestion button is clicked", () => {
     render(
       <TagInput
