@@ -20,11 +20,19 @@ export function TagInput({
   function commitTag(raw: string) {
     const next = normalizeTag(raw);
 
-    if (!next || tags.includes(next)) {
+    if (!next) {
       return;
     }
 
-    setTags((current) => [...current, next]);
+    setTags((current) =>
+      current.includes(next) ? current : [...current, next]
+    );
+  }
+
+  function removeTagAt(indexToRemove: number) {
+    setTags((current) =>
+      current.filter((_, index) => index !== indexToRemove)
+    );
   }
 
   const uniqueSuggestedTags = normalizeTags(suggestedTags);
@@ -34,14 +42,12 @@ export function TagInput({
       <input name={name} type="hidden" value={JSON.stringify(tags)} />
 
       <div className="tag-input-list">
-        {tags.map((tag) => (
+        {tags.map((tag, index) => (
           <button
             aria-label={`#${tag} 제거`}
             className="tag-pill"
-            key={tag}
-            onClick={() =>
-              setTags((current) => current.filter((item) => item !== tag))
-            }
+            key={`${tag}-${index}`}
+            onClick={() => removeTagAt(index)}
             type="button"
           >
             #{tag}

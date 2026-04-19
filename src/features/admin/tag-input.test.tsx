@@ -52,6 +52,47 @@ describe("TagInput", () => {
     ).toBeDisabled();
   });
 
+  it("removes only the clicked selected tag", () => {
+    render(
+      <TagInput
+        initialTags={["학생기록", "교사도구", "시트연동"]}
+        name="tagsJson"
+        suggestedTags={[]}
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "#교사도구 제거" }));
+
+    expect(
+      screen.getByDisplayValue('["학생기록","시트연동"]')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "#학생기록 제거" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "#시트연동 제거" })
+    ).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "#교사도구 제거" })).toBeNull();
+  });
+
+  it("does not add duplicate tags from rapid repeated selection", () => {
+    render(
+      <TagInput
+        initialTags={[]}
+        name="tagsJson"
+        suggestedTags={["학생기록"]}
+      />
+    );
+
+    const suggestion = screen.getByRole("button", { name: "#학생기록 추가" });
+
+    fireEvent.click(suggestion);
+    fireEvent.click(suggestion);
+
+    expect(screen.getByDisplayValue('["학생기록"]')).toBeInTheDocument();
+    expect(screen.getAllByText("#학생기록")).toHaveLength(2);
+  });
+
   it("shows existing tag suggestions under the input", () => {
     render(
       <TagInput
