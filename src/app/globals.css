@@ -1160,6 +1160,11 @@ select {
     max-width: none;
   }
 
+  .archive-search-shell {
+    width: 100%;
+    max-width: none;
+  }
+
   .mascot-note-header {
     display: block;
   }
