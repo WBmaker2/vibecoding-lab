@@ -84,14 +84,19 @@ export function AppForm({
           </p>
         </div>
 
-        <label className="admin-field">
-          <span>태그</span>
+        <div
+          aria-labelledby="admin-tags-field-label"
+          className="admin-field"
+          role="group"
+        >
+          <span id="admin-tags-field-label">태그</span>
           <TagInput
+            inputLabelledBy="admin-tags-field-label"
             initialTags={initialApp?.tags}
             name="tagsJson"
             suggestedTags={suggestedTags}
           />
-        </label>
+        </div>
       </section>
 
       <section className="admin-form-section">

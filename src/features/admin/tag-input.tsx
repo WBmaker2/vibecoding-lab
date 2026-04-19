@@ -4,12 +4,14 @@ import { useState } from "react";
 import { normalizeTag, normalizeTags } from "@/lib/apps/tags";
 
 interface TagInputProps {
+  inputLabelledBy?: string;
   initialTags?: string[];
   name: string;
   suggestedTags?: string[];
 }
 
 export function TagInput({
+  inputLabelledBy,
   initialTags = [],
   name,
   suggestedTags = []
@@ -56,6 +58,8 @@ export function TagInput({
       </div>
 
       <input
+        aria-label={inputLabelledBy ? undefined : "태그 입력"}
+        aria-labelledby={inputLabelledBy}
         className="admin-tag-input"
         onChange={(event) => setDraft(event.target.value)}
         onKeyDown={(event) => {
