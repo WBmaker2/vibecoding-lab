@@ -23,4 +23,21 @@ describe("ArchiveHero", () => {
     expect(heroTop).toContainElement(mascotImage);
     expect(noteShell).not.toContainElement(mascotImage);
   });
+
+  it("shows a subtle helper copy beside the representative tag heading", () => {
+    render(
+      <ArchiveHero
+        activeTags={[]}
+        onQueryChange={() => {}}
+        onToggleTag={() => {}}
+        query=""
+        tags={["영어", "업무경감"]}
+      />
+    );
+
+    expect(screen.getByText("대표 태그")).toBeInTheDocument();
+    expect(
+      screen.getByText("태그를 하나씩 클릭해 원하는 앱을 찾아보세요.")
+    ).toBeInTheDocument();
+  });
 });

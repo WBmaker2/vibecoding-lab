@@ -121,6 +121,21 @@ select {
   font-weight: 700;
 }
 
+.tag-copy-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+.tag-copy-hint {
+  margin: 0;
+  color: #8c94a3;
+  font-size: 0.84rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
 .archive-page {
   display: grid;
   gap: 24px;

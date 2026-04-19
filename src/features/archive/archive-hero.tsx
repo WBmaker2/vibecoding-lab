@@ -60,7 +60,12 @@ export function ArchiveHero({
       />
 
       <div className="archive-tag-group">
-        <p className="tag-copy">대표 태그</p>
+        <div className="tag-copy-row">
+          <p className="tag-copy">대표 태그</p>
+          <p className="tag-copy-hint">
+            태그를 하나씩 클릭해 원하는 앱을 찾아보세요.
+          </p>
+        </div>
         <TagFilterBar
           activeTags={activeTags}
           onToggleTag={onToggleTag}
