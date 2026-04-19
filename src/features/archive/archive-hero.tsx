@@ -29,24 +29,26 @@ export function ArchiveHero({
           </p>
         </div>
 
-        <div className="archive-hero-mascot">
-          <div className="mascot-note-shell">
-            <div className="mascot-note-header">
-              <p className="mascot-note-label">Hong&apos;s Note</p>
-            </div>
-            <p className="mascot-note">
-              설명은 짧게, 검색과 대표 태그는 바로 보이게 두어 필요한 도구를
-              곧장 찾을 수 있게 합니다.
-            </p>
+        <Image
+          alt="태그 탐색을 안내하는 Hong 캐릭터"
+          className="archive-hero-mascot-image"
+          height={168}
+          priority
+          sizes="(max-width: 720px) 82px, 148px"
+          src="/images/mascots/hong-default.png"
+          width={132}
+        />
+      </div>
+
+      <div className="archive-hero-mascot">
+        <div className="mascot-note-shell">
+          <div className="mascot-note-header">
+            <p className="mascot-note-label">Hong&apos;s Note</p>
           </div>
-          <Image
-            alt="태그 탐색을 안내하는 Hong 캐릭터"
-            className="archive-hero-mascot-image"
-            height={132}
-            priority
-            src="/images/mascots/hong-default.png"
-            width={132}
-          />
+          <p className="mascot-note">
+            설명은 짧게, 검색과 대표 태그는 바로 보이게 두어 필요한 도구를
+            곧장 찾을 수 있게 합니다.
+          </p>
         </div>
       </div>
 
