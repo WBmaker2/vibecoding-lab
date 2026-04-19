@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import type { AdminAppRecord } from "@/lib/apps/types";
 import { AppList } from "./app-list";
 
@@ -47,5 +47,28 @@ describe("AppList", () => {
     expect(
       screen.getByText(/교사가 단어 세트를 저장·공개하면 학생은 학교·선생님/)
     ).toBeInTheDocument();
+  });
+
+  it("expands the registered tags when the tag count button is clicked", () => {
+    render(
+      <AppList
+        apps={apps}
+        deleteAction={async () => {}}
+        onSelectApp={() => {}}
+        selectedAppId={null}
+      />
+    );
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "Talking Vocab Quiz 태그 3개 보기"
+      })
+    );
+
+    const tagDetails = screen.getByLabelText("Talking Vocab Quiz 등록 태그");
+
+    expect(within(tagDetails).getByText("#영어")).toBeInTheDocument();
+    expect(within(tagDetails).getByText("#게임형")).toBeInTheDocument();
+    expect(within(tagDetails).getByText("#형성평가")).toBeInTheDocument();
   });
 });

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import type { AdminAppRecord } from "@/lib/apps/types";
 import {
@@ -35,6 +36,24 @@ export function AppList({
   recentChange,
   selectedAppId
 }: AppListProps) {
+  const [expandedTagAppIds, setExpandedTagAppIds] = useState<Set<string>>(
+    () => new Set()
+  );
+
+  function toggleTagDetails(appId: string) {
+    setExpandedTagAppIds((current) => {
+      const next = new Set(current);
+
+      if (next.has(appId)) {
+        next.delete(appId);
+      } else {
+        next.add(appId);
+      }
+
+      return next;
+    });
+  }
+
   if (apps.length === 0) {
     return (
       <div className="admin-empty-library">
@@ -51,6 +70,8 @@ export function AppList({
         const recentFields =
           recentChange?.appId === app.id ? recentChange.fields : [];
         const notePreview = getAdminNotePreview(app.memo);
+        const isTagDetailsExpanded = expandedTagAppIds.has(app.id);
+        const tagDetailsId = `admin-app-tags-${app.id}`;
 
         return (
           <article
@@ -132,7 +153,23 @@ export function AppList({
             ) : null}
 
             <div className="admin-app-meta">
-              <span className="admin-meta-pill">태그 {app.tags.length}개</span>
+              <button
+                aria-controls={tagDetailsId}
+                aria-expanded={isTagDetailsExpanded}
+                aria-label={
+                  isTagDetailsExpanded
+                    ? `${app.title} 태그 접기`
+                    : `${app.title} 태그 ${app.tags.length}개 보기`
+                }
+                className="admin-meta-pill admin-tag-count-button"
+                onClick={() => toggleTagDetails(app.id)}
+                type="button"
+              >
+                태그 {app.tags.length}개
+                <span aria-hidden="true" className="admin-tag-count-icon">
+                  {isTagDetailsExpanded ? "접기" : "보기"}
+                </span>
+              </button>
               <span className="admin-meta-pill">{getThumbnailModeLabel(app)}</span>
               {app.subject ? (
                 <span className="admin-meta-pill">과목 {app.subject}</span>
@@ -141,6 +178,20 @@ export function AppList({
                 <span className="admin-meta-pill">학년 {app.grade}</span>
               ) : null}
             </div>
+
+            {isTagDetailsExpanded ? (
+              <div
+                aria-label={`${app.title} 등록 태그`}
+                className="admin-app-tag-details"
+                id={tagDetailsId}
+              >
+                {app.tags.map((tag) => (
+                  <span className="admin-tag-detail-pill" key={tag}>
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            ) : null}
           </article>
         );
       })}

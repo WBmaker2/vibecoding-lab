@@ -1002,6 +1002,45 @@ select {
   border: 1px solid rgba(217, 223, 234, 0.95);
 }
 
+.admin-tag-count-button {
+  cursor: pointer;
+  font: inherit;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.admin-tag-count-icon {
+  margin-left: 8px;
+  color: var(--accent);
+  font-size: 0.76rem;
+}
+
+.admin-app-tag-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid rgba(217, 223, 234, 0.85);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.admin-tag-detail-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(84, 112, 163, 0.1);
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
 .admin-meta-pill-highlight {
   background: rgba(78, 122, 64, 0.12);
   border-color: rgba(78, 122, 64, 0.2);
@@ -1038,6 +1077,7 @@ select {
 .admin-primary-button:focus-visible,
 .admin-secondary-button:focus-visible,
 .admin-danger-button:focus-visible,
+.admin-tag-count-button:focus-visible,
 .admin-text-link:focus-visible,
 .admin-app-actions a:focus-visible {
   outline: none;
@@ -1050,6 +1090,7 @@ select {
   .app-card-link:hover,
   .admin-primary-button:hover,
   .admin-secondary-button:hover,
+  .admin-tag-count-button:hover,
   .admin-danger-button:hover {
     transform: translateY(-1px);
   }
@@ -1069,7 +1110,8 @@ select {
   }
 
   .reset-filters-button:hover,
-  .admin-secondary-button:hover {
+  .admin-secondary-button:hover,
+  .admin-tag-count-button:hover {
     background: rgba(62, 95, 146, 0.18);
   }
 
