@@ -81,6 +81,15 @@ export async function deleteAppAction(formData: FormData) {
   revalidateArchive();
 }
 
+export async function removeAppTagAction(formData: FormData) {
+  const id = String(formData.get("id") ?? "");
+  const tag = String(formData.get("tag") ?? "");
+  const repo = getAppRepository();
+
+  await repo.removeTag(id, tag);
+  revalidateArchive();
+}
+
 export async function logoutAction() {
   await clearAdminSession();
   redirect("/admin/login");

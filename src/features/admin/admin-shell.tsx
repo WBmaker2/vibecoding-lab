@@ -2,6 +2,7 @@ import {
   createAppAction,
   deleteAppAction,
   logoutAction,
+  removeAppTagAction,
   updateAppAction
 } from "@/app/admin/actions";
 import type { AdminAppRecord } from "@/lib/apps/types";
@@ -22,6 +23,7 @@ export function AdminShell({ apps }: AdminShellProps) {
       createAction={createAppAction}
       deleteAction={deleteAppAction}
       logoutAction={logoutAction}
+      removeTagAction={removeAppTagAction}
       suggestedTags={suggestedTags}
       updateAction={updateAppAction}
     />

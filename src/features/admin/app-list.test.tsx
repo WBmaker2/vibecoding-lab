@@ -1,4 +1,11 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within
+} from "@testing-library/react";
+import { vi } from "vitest";
 import type { AdminAppRecord } from "@/lib/apps/types";
 import { AppList } from "./app-list";
 
@@ -27,6 +34,7 @@ describe("AppList", () => {
         apps={apps}
         deleteAction={async () => {}}
         onSelectApp={() => {}}
+        onRemoveTag={async () => {}}
         recentChange={{
           appId: "app-1",
           fields: ["학년", "메이커 노트"]
@@ -55,6 +63,7 @@ describe("AppList", () => {
         apps={apps}
         deleteAction={async () => {}}
         onSelectApp={() => {}}
+        onRemoveTag={async () => {}}
         selectedAppId={null}
       />
     );
@@ -70,5 +79,62 @@ describe("AppList", () => {
     expect(within(tagDetails).getByText("#영어")).toBeInTheDocument();
     expect(within(tagDetails).getByText("#게임형")).toBeInTheDocument();
     expect(within(tagDetails).getByText("#형성평가")).toBeInTheDocument();
+  });
+
+  it("asks for confirmation before removing a tag from the library card", async () => {
+    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(true);
+    const onRemoveTag = vi.fn().mockResolvedValue(undefined);
+
+    render(
+      <AppList
+        apps={apps}
+        deleteAction={async () => {}}
+        onRemoveTag={onRemoveTag}
+        onSelectApp={() => {}}
+        selectedAppId={null}
+      />
+    );
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "Talking Vocab Quiz 태그 3개 보기"
+      })
+    );
+    fireEvent.click(screen.getByRole("button", { name: "#영어 태그 삭제" }));
+
+    expect(confirmSpy).toHaveBeenCalledWith(
+      "Talking Vocab Quiz 앱에서 '#영어' 태그를 삭제할까요?"
+    );
+
+    await waitFor(() => {
+      expect(onRemoveTag).toHaveBeenCalledWith("app-1", "영어");
+    });
+
+    confirmSpy.mockRestore();
+  });
+
+  it("keeps tags unchanged when the removal confirmation is cancelled", () => {
+    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(false);
+    const onRemoveTag = vi.fn();
+
+    render(
+      <AppList
+        apps={apps}
+        deleteAction={async () => {}}
+        onRemoveTag={onRemoveTag}
+        onSelectApp={() => {}}
+        selectedAppId={null}
+      />
+    );
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "Talking Vocab Quiz 태그 3개 보기"
+      })
+    );
+    fireEvent.click(screen.getByRole("button", { name: "#영어 태그 삭제" }));
+
+    expect(onRemoveTag).not.toHaveBeenCalled();
+    confirmSpy.mockRestore();
   });
 });

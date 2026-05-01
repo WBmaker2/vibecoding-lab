@@ -743,7 +743,7 @@ select {
 
 .admin-workspace-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.9fr);
+  grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
 }
@@ -1087,6 +1087,38 @@ select {
   font-weight: 800;
 }
 
+.admin-tag-detail-button {
+  border: 1px solid rgba(84, 112, 163, 0.16);
+  cursor: pointer;
+  font: inherit;
+  gap: 8px;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.admin-tag-detail-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.admin-tag-detail-remove {
+  color: #7f8fb0;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.admin-tag-detail-note {
+  width: 100%;
+  margin: 4px 0 0;
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
 .admin-meta-pill-highlight {
   background: rgba(78, 122, 64, 0.12);
   border-color: rgba(78, 122, 64, 0.2);
@@ -1124,6 +1156,7 @@ select {
 .admin-secondary-button:focus-visible,
 .admin-danger-button:focus-visible,
 .admin-tag-count-button:focus-visible,
+.admin-tag-detail-button:focus-visible,
 .admin-text-link:focus-visible,
 .admin-app-actions a:focus-visible {
   outline: none;
@@ -1159,6 +1192,11 @@ select {
   .admin-secondary-button:hover,
   .admin-tag-count-button:hover {
     background: rgba(62, 95, 146, 0.18);
+  }
+
+  .admin-tag-detail-button:hover:not(:disabled) {
+    border-color: rgba(62, 95, 146, 0.28);
+    background: rgba(84, 112, 163, 0.14);
   }
 
   .app-card-link:hover,

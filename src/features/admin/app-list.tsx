@@ -11,6 +11,7 @@ import {
 interface AppListProps {
   apps: AdminAppRecord[];
   deleteAction: (formData: FormData) => void | Promise<void>;
+  onRemoveTag: (appId: string, tag: string) => void | Promise<void>;
   onSelectApp: (appId: string) => void;
   recentChange?: RecentAdminChange | null;
   selectedAppId: string | null;
@@ -32,6 +33,7 @@ function getThumbnailModeLabel(app: AdminAppRecord) {
 export function AppList({
   apps,
   deleteAction,
+  onRemoveTag,
   onSelectApp,
   recentChange,
   selectedAppId
@@ -39,6 +41,7 @@ export function AppList({
   const [expandedTagAppIds, setExpandedTagAppIds] = useState<Set<string>>(
     () => new Set()
   );
+  const [removingTagKey, setRemovingTagKey] = useState<string | null>(null);
 
   function toggleTagDetails(appId: string) {
     setExpandedTagAppIds((current) => {
@@ -52,6 +55,32 @@ export function AppList({
 
       return next;
     });
+  }
+
+  async function handleRemoveTag(app: AdminAppRecord, tag: string) {
+    if (app.tags.length <= 1 || removingTagKey !== null) {
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `${app.title} 앱에서 '#${tag}' 태그를 삭제할까요?`
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    const tagKey = `${app.id}:${tag}`;
+
+    setRemovingTagKey(tagKey);
+
+    try {
+      await onRemoveTag(app.id, tag);
+    } catch {
+      window.alert("태그를 삭제하지 못했습니다. 다시 시도해 주세요.");
+    } finally {
+      setRemovingTagKey(null);
+    }
   }
 
   if (apps.length === 0) {
@@ -186,10 +215,27 @@ export function AppList({
                 id={tagDetailsId}
               >
                 {app.tags.map((tag) => (
-                  <span className="admin-tag-detail-pill" key={tag}>
-                    #{tag}
-                  </span>
+                  <button
+                    aria-label={`#${tag} 태그 삭제`}
+                    className="admin-tag-detail-pill admin-tag-detail-button"
+                    disabled={app.tags.length <= 1 || removingTagKey !== null}
+                    key={tag}
+                    onClick={() => handleRemoveTag(app, tag)}
+                    type="button"
+                  >
+                    <span>#{tag}</span>
+                    <span aria-hidden="true" className="admin-tag-detail-remove">
+                      삭제
+                    </span>
+                  </button>
                 ))}
+
+                {app.tags.length <= 1 ? (
+                  <p className="admin-tag-detail-note">
+                    앱에는 태그가 최소 1개 필요합니다. 마지막 태그는 워크벤치에서
+                    다른 태그를 추가한 뒤 정리해 주세요.
+                  </p>
+                ) : null}
               </div>
             ) : null}
           </article>

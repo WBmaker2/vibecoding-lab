@@ -9,6 +9,7 @@ export interface AppRepository {
   listAdminApps(): Promise<AdminAppRecord[]>;
   createApp(input: AppInput): Promise<AdminAppRecord>;
   updateApp(id: string, input: AppInput): Promise<AdminAppRecord>;
+  removeTag(id: string, tag: string): Promise<AdminAppRecord>;
   deleteApp(id: string): Promise<void>;
 }
 
@@ -172,6 +173,36 @@ class InMemoryAppRepository implements AppRepository {
   async deleteApp(id: string): Promise<void> {
     memoryStore.apps = memoryStore.apps.filter((app) => app.id !== id);
   }
+
+  async removeTag(id: string, tag: string): Promise<AdminAppRecord> {
+    const existing = memoryStore.apps.find((app) => app.id === id);
+
+    if (!existing) {
+      throw new Error("App not found.");
+    }
+
+    if (existing.tags.length <= 1) {
+      throw new Error("앱에는 태그가 최소 1개 필요합니다.");
+    }
+
+    const nextTags = existing.tags.filter((item) => item !== tag);
+
+    if (nextTags.length === existing.tags.length) {
+      return existing;
+    }
+
+    const updated: AdminAppRecord = {
+      ...existing,
+      tags: nextTags,
+      updatedAt: new Date()
+    };
+
+    memoryStore.apps = memoryStore.apps.map((app) =>
+      app.id === id ? updated : app
+    );
+
+    return updated;
+  }
 }
 
 class PostgresAppRepository implements AppRepository {
@@ -246,6 +277,40 @@ class PostgresAppRepository implements AppRepository {
   async deleteApp(id: string): Promise<void> {
     const db = getDb();
     await db.delete(apps).where(eq(apps.id, id));
+  }
+
+  async removeTag(id: string, tag: string): Promise<AdminAppRecord> {
+    const db = getDb();
+    const [existing] = await db.select().from(apps).where(eq(apps.id, id));
+
+    if (!existing) {
+      throw new Error("App not found.");
+    }
+
+    if (existing.tags.length <= 1) {
+      throw new Error("앱에는 태그가 최소 1개 필요합니다.");
+    }
+
+    const nextTags = existing.tags.filter((item) => item !== tag);
+
+    if (nextTags.length === existing.tags.length) {
+      return toAdminAppRecord(existing);
+    }
+
+    const [record] = await db
+      .update(apps)
+      .set({
+        tags: nextTags,
+        updatedAt: new Date()
+      })
+      .where(eq(apps.id, id))
+      .returning();
+
+    if (!record) {
+      throw new Error("App not found.");
+    }
+
+    return toAdminAppRecord(record);
   }
 }
 

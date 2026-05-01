@@ -15,6 +15,7 @@ interface AdminWorkspaceProps {
   createAction: (formData: FormData) => void | Promise<void>;
   deleteAction: (formData: FormData) => void | Promise<void>;
   logoutAction: (formData: FormData) => void | Promise<void>;
+  removeTagAction: (formData: FormData) => void | Promise<void>;
   suggestedTags: string[];
   updateAction: (formData: FormData) => void | Promise<void>;
 }
@@ -24,6 +25,7 @@ export function AdminWorkspace({
   createAction,
   deleteAction,
   logoutAction,
+  removeTagAction,
   suggestedTags,
   updateAction
 }: AdminWorkspaceProps) {
@@ -46,6 +48,14 @@ export function AdminWorkspace({
     () => new Set(localApps.flatMap((app) => app.tags)).size,
     [localApps]
   );
+
+  const currentSuggestedTags = useMemo(() => {
+    const tags = [...new Set(localApps.flatMap((app) => app.tags))].sort(
+      (left, right) => left.localeCompare(right, "ko")
+    );
+
+    return tags.length > 0 ? tags : suggestedTags;
+  }, [localApps, suggestedTags]);
 
   async function handleCreateAction(formData: FormData) {
     setRecentChange(null);
@@ -73,6 +83,37 @@ export function AdminWorkspace({
     });
   }
 
+  async function handleRemoveTag(appId: string, tag: string) {
+    const targetApp = localApps.find((app) => app.id === appId);
+
+    if (!targetApp || targetApp.tags.length <= 1) {
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.set("id", appId);
+    formData.set("tag", tag);
+
+    await removeTagAction(formData);
+
+    setLocalApps((currentApps) =>
+      currentApps.map((app) =>
+        app.id === appId
+          ? {
+              ...app,
+              tags: app.tags.filter((item) => item !== tag),
+              updatedAt: new Date()
+            }
+          : app
+      )
+    );
+    setRecentChange({
+      appId,
+      fields: ["태그"]
+    });
+  }
+
   return (
     <main className="page-shell admin-page">
       <header className="admin-page-header">
@@ -80,14 +121,14 @@ export function AdminWorkspace({
           <p className="eyebrow">Private Admin</p>
           <h1>관리자 작업실</h1>
           <p className="admin-header-copy">
-            새 앱 등록과 기존 앱 수정 흐름을 한 작업실로 정리했습니다. 오른쪽
-            라이브러리에서 앱을 고르면 왼쪽 워크벤치에 바로 불러옵니다.
+            새 앱 등록과 기존 앱 수정 흐름을 한 작업실로 정리했습니다. 아래
+            라이브러리에서 앱을 고르면 위 워크벤치에 바로 불러옵니다.
           </p>
         </div>
 
         <div className="admin-utility-actions">
           <div className="admin-header-stats" aria-label="관리자 현황">
-            <span className="admin-stat-pill">{apps.length}개 앱</span>
+            <span className="admin-stat-pill">{localApps.length}개 앱</span>
             <span className="admin-stat-pill">{totalTags}개 태그</span>
           </div>
 
@@ -139,28 +180,29 @@ export function AdminWorkspace({
               selectedApp ? () => setSelectedAppId(null) : undefined
             }
             submitLabel={selectedApp ? "수정 저장" : "앱 등록"}
-            suggestedTags={suggestedTags}
-          />
-        </section>
-
-        <section className="admin-panel admin-library-panel">
-          <div className="admin-panel-header">
-            <h2>등록된 앱 라이브러리</h2>
-            <p>
-              compact 카드에서 핵심 정보만 먼저 보고, 편집할 앱을 고르면
-              왼쪽 워크벤치가 해당 앱 기준으로 전환됩니다.
-            </p>
-          </div>
-
-          <AppList
-            apps={localApps}
-            deleteAction={deleteAction}
-            onSelectApp={setSelectedAppId}
-            recentChange={recentChange}
-            selectedAppId={selectedAppId}
+            suggestedTags={currentSuggestedTags}
           />
         </section>
       </div>
+
+      <section className="admin-panel admin-library-panel">
+        <div className="admin-panel-header">
+          <h2>등록된 앱 라이브러리</h2>
+          <p>
+            compact 카드에서 핵심 정보만 먼저 보고, 편집할 앱을 고르면 위
+            워크벤치가 해당 앱 기준으로 전환됩니다.
+          </p>
+        </div>
+
+        <AppList
+          apps={localApps}
+          deleteAction={deleteAction}
+          onRemoveTag={handleRemoveTag}
+          onSelectApp={setSelectedAppId}
+          recentChange={recentChange}
+          selectedAppId={selectedAppId}
+        />
+      </section>
     </main>
   );
 }

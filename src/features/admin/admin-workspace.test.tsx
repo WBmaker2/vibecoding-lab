@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import {
   fireEvent,
   render,
@@ -9,6 +11,16 @@ import type { AdminAppRecord } from "@/lib/apps/types";
 import { AdminWorkspace } from "./admin-workspace";
 
 const noopAction = async () => {};
+
+function readGlobalStyles() {
+  return readFileSync(join(process.cwd(), "src/app/globals.css"), "utf8");
+}
+
+function getCssBlock(css: string, selector: string) {
+  const match = css.match(new RegExp(`${selector} \\{([\\s\\S]*?)\\n\\}`));
+
+  return match?.[1] ?? "";
+}
 
 const apps: AdminAppRecord[] = [
   {
@@ -51,6 +63,7 @@ describe("AdminWorkspace", () => {
         createAction={noopAction}
         deleteAction={noopAction}
         logoutAction={noopAction}
+        removeTagAction={noopAction}
         suggestedTags={["영어", "게임형", "업무경감"]}
         updateAction={noopAction}
       />
@@ -85,6 +98,7 @@ describe("AdminWorkspace", () => {
         createAction={noopAction}
         deleteAction={noopAction}
         logoutAction={noopAction}
+        removeTagAction={noopAction}
         suggestedTags={["영어", "게임형", "업무경감"]}
         updateAction={noopAction}
       />
@@ -106,6 +120,7 @@ describe("AdminWorkspace", () => {
         createAction={noopAction}
         deleteAction={noopAction}
         logoutAction={noopAction}
+        removeTagAction={noopAction}
         suggestedTags={["영어", "게임형", "업무경감"]}
         updateAction={noopAction}
       />
@@ -123,6 +138,7 @@ describe("AdminWorkspace", () => {
         createAction={noopAction}
         deleteAction={noopAction}
         logoutAction={noopAction}
+        removeTagAction={noopAction}
         suggestedTags={["영어", "게임형", "업무경감"]}
         updateAction={noopAction}
       />
@@ -146,6 +162,7 @@ describe("AdminWorkspace", () => {
         createAction={noopAction}
         deleteAction={noopAction}
         logoutAction={noopAction}
+        removeTagAction={noopAction}
         suggestedTags={["영어", "게임형", "업무경감"]}
         updateAction={updateAction}
       />
@@ -194,5 +211,53 @@ describe("AdminWorkspace", () => {
         /교사가 단어 세트를 저장·공개하면 학생은 학교·선생님/
       )
     ).toBeInTheDocument();
+  });
+
+  it("stacks the registered app library below the workbench in the admin layout", () => {
+    const gridStyles = getCssBlock(
+      readGlobalStyles(),
+      "\\.admin-workspace-grid"
+    );
+
+    expect(gridStyles).toContain("grid-template-columns: 1fr");
+  });
+
+  it("removes a registered tag from the library card after confirmation", async () => {
+    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(true);
+    const removeTagAction = async () => {};
+
+    render(
+      <AdminWorkspace
+        apps={apps}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={removeTagAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "영어 단어 게임 태그 3개 보기"
+      })
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "#영어 태그 삭제" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("태그 2개")).toBeInTheDocument();
+    });
+
+    expect(confirmSpy).toHaveBeenCalledWith(
+      "영어 단어 게임 앱에서 '#영어' 태그를 삭제할까요?"
+    );
+    expect(screen.queryByText("#영어")).not.toBeInTheDocument();
+    expect(
+      screen.getByLabelText("영어 단어 게임 최근 수정 필드")
+    ).toBeInTheDocument();
+
+    confirmSpy.mockRestore();
   });
 });
