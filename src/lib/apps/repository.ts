@@ -1,12 +1,14 @@
 import { desc, eq } from "drizzle-orm";
 import { getDb, isDatabaseConfigured } from "@/db/client";
 import { apps } from "@/db/schema";
+import { toPublicThumbnailUrl } from "@/lib/storage/public-thumbnail";
 import { normalizeTags } from "./tags";
 import type { AdminAppRecord, AppInput, PublicAppRecord } from "./types";
 
 export interface AppRepository {
   listPublicApps(): Promise<PublicAppRecord[]>;
   listAdminApps(): Promise<AdminAppRecord[]>;
+  getApp(id: string): Promise<AdminAppRecord | null>;
   createApp(input: AppInput): Promise<AdminAppRecord>;
   updateApp(id: string, input: AppInput): Promise<AdminAppRecord>;
   removeTag(id: string, tag: string): Promise<AdminAppRecord>;
@@ -90,7 +92,11 @@ function toPublicAppRecord(record: {
     url: record.url,
     tags: normalizeTags(record.tags),
     thumbnailMode: record.thumbnailMode as PublicAppRecord["thumbnailMode"],
-    thumbnailUrl: record.thumbnailUrl,
+    thumbnailUrl: toPublicThumbnailUrl({
+      id: record.id,
+      thumbnailUrl: record.thumbnailUrl,
+      updatedAt: record.updatedAt
+    }),
     subject: record.subject ?? undefined,
     grade: record.grade ?? undefined,
     memo: record.memo ?? undefined,
@@ -117,6 +123,11 @@ class InMemoryAppRepository implements AppRepository {
 
   async listAdminApps(): Promise<AdminAppRecord[]> {
     return memoryStore.apps.map(toAdminAppRecord);
+  }
+
+  async getApp(id: string): Promise<AdminAppRecord | null> {
+    const record = memoryStore.apps.find((app) => app.id === id);
+    return record ? toAdminAppRecord(record) : null;
   }
 
   async createApp(input: AppInput): Promise<AdminAppRecord> {
@@ -224,6 +235,13 @@ class PostgresAppRepository implements AppRepository {
       .orderBy(desc(apps.updatedAt), desc(apps.createdAt));
 
     return records.map(toAdminAppRecord);
+  }
+
+  async getApp(id: string): Promise<AdminAppRecord | null> {
+    const db = getDb();
+    const [record] = await db.select().from(apps).where(eq(apps.id, id));
+
+    return record ? toAdminAppRecord(record) : null;
   }
 
   async createApp(input: AppInput): Promise<AdminAppRecord> {
