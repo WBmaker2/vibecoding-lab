@@ -10,6 +10,8 @@ export function AppCard({ app }: AppCardProps) {
   const note = app.memo ?? "";
   const notePreview =
     note.length > 42 ? `${note.slice(0, 42).trimEnd()}…` : note;
+  const isDirectThumbnailRoute =
+    app.thumbnailUrl?.startsWith("/api/app-thumbnail/") ?? false;
 
   return (
     <article className="app-card">
@@ -23,6 +25,7 @@ export function AppCard({ app }: AppCardProps) {
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
                 src={app.thumbnailUrl}
+                unoptimized={isDirectThumbnailRoute}
               />
               <div className="app-card-media-scrim" />
             </>
