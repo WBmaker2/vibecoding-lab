@@ -105,13 +105,24 @@ function toPublicAppRecord(record: {
   };
 }
 
-function toAdminAppRecord(record: typeof apps.$inferSelect): AdminAppRecord;
-function toAdminAppRecord(record: AdminAppRecord): AdminAppRecord;
-function toAdminAppRecord(
+export function toAdminAppRecord(record: typeof apps.$inferSelect): AdminAppRecord;
+export function toAdminAppRecord(record: AdminAppRecord): AdminAppRecord;
+export function toAdminAppRecord(
   record: typeof apps.$inferSelect | AdminAppRecord
 ): AdminAppRecord {
   return {
-    ...toPublicAppRecord(record),
+    id: record.id,
+    title: record.title,
+    summary: record.summary,
+    url: record.url,
+    tags: normalizeTags(record.tags),
+    thumbnailMode: record.thumbnailMode as AdminAppRecord["thumbnailMode"],
+    thumbnailUrl: record.thumbnailUrl ?? null,
+    subject: record.subject ?? undefined,
+    grade: record.grade ?? undefined,
+    memo: record.memo ?? undefined,
+    createdAt: record.createdAt,
+    updatedAt: record.updatedAt,
     githubUrl: record.githubUrl ?? undefined
   };
 }
