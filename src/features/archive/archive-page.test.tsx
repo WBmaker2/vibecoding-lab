@@ -57,4 +57,24 @@ describe("ArchivePage", () => {
 
     expect(screen.queryByLabelText("활성 필터")).not.toBeInTheDocument();
   });
+
+  it("keeps only one representative tag selected at a time", () => {
+    render(<ArchivePage initialApps={sampleApps} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "대표 태그 펼치기" }));
+
+    const englishTag = screen.getByRole("button", { name: "#영어" });
+    const adminTag = screen.getByRole("button", { name: "#업무경감" });
+
+    fireEvent.click(englishTag);
+    fireEvent.click(adminTag);
+
+    expect(englishTag).toHaveAttribute("aria-pressed", "false");
+    expect(adminTag).toHaveAttribute("aria-pressed", "true");
+
+    const activeFilters = screen.getByLabelText("활성 필터");
+
+    expect(within(activeFilters).queryByText("#영어")).not.toBeInTheDocument();
+    expect(within(activeFilters).getByText("#업무경감")).toBeInTheDocument();
+  });
 });

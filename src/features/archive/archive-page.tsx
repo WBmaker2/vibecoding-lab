@@ -32,9 +32,7 @@ export function ArchivePage({ initialApps }: ArchivePageProps) {
   function toggleTag(tag: string) {
     startTransition(() => {
       setActiveTags((current) =>
-        current.includes(tag)
-          ? current.filter((item) => item !== tag)
-          : [...current, tag]
+        current.includes(tag) ? [] : [tag]
       );
     });
   }
