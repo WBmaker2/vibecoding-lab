@@ -32,14 +32,19 @@ function toAbsoluteUrl(url: string | null, sourceUrl?: string) {
     return null;
   }
 
-  if (!sourceUrl) {
-    return url;
-  }
-
   try {
-    return new URL(url, sourceUrl).toString();
+    const absoluteUrl = sourceUrl ? new URL(url, sourceUrl) : new URL(url);
+
+    if (
+      absoluteUrl.protocol !== "http:" &&
+      absoluteUrl.protocol !== "https:"
+    ) {
+      return null;
+    }
+
+    return absoluteUrl.toString();
   } catch {
-    return url;
+    return null;
   }
 }
 

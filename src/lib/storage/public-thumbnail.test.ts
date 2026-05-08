@@ -28,6 +28,16 @@ describe("public thumbnail helpers", () => {
     ).toBe(buildPublicThumbnailUrl("app-1", updatedAt));
   });
 
+  it("hides unsupported data URLs instead of rendering broken image icons", () => {
+    expect(
+      toPublicThumbnailUrl({
+        id: "app-1",
+        thumbnailUrl: "data:,",
+        updatedAt
+      })
+    ).toBeNull();
+  });
+
   it("detects and decodes embedded image payloads", () => {
     const decoded = decodeEmbeddedThumbnailUrl(
       "data:image/png;base64,aGVsbG8="

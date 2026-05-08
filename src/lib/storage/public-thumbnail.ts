@@ -4,6 +4,25 @@ export function isEmbeddedThumbnailUrl(thumbnailUrl: string | null | undefined) 
   return Boolean(thumbnailUrl && EMBEDDED_IMAGE_URL_PATTERN.test(thumbnailUrl));
 }
 
+export function isSupportedThumbnailUrl(
+  thumbnailUrl: string | null | undefined
+) {
+  if (!thumbnailUrl) {
+    return false;
+  }
+
+  if (isEmbeddedThumbnailUrl(thumbnailUrl)) {
+    return true;
+  }
+
+  try {
+    const parsedUrl = new URL(thumbnailUrl);
+    return parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 export function buildPublicThumbnailUrl(id: string, updatedAt: Date) {
   return `/api/app-thumbnail/${encodeURIComponent(id)}/${updatedAt.getTime()}`;
 }
@@ -18,6 +37,10 @@ export function toPublicThumbnailUrl({
   updatedAt: Date;
 }) {
   if (!thumbnailUrl) {
+    return null;
+  }
+
+  if (!isSupportedThumbnailUrl(thumbnailUrl)) {
     return null;
   }
 

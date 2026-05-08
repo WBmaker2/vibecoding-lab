@@ -50,6 +50,22 @@ describe("extractPreviewFromHtml", () => {
     expect(preview.imageUrl).toBe("https://example.com/apple-touch-icon.png");
   });
 
+  it("ignores empty data-url icons so auto capture can continue", () => {
+    const preview = extractPreviewFromHtml(
+      `
+        <html>
+          <head>
+            <title>PDF to PNG 1080p</title>
+            <link rel="icon" href="data:," />
+          </head>
+        </html>
+      `,
+      "https://wbmaker2.github.io/pdf-to-png/"
+    );
+
+    expect(preview.imageUrl).toBeNull();
+  });
+
   it("returns null imageUrl when image metadata is missing", () => {
     const preview = extractPreviewFromHtml(
       "<html><head><title>No Image</title></head></html>"

@@ -3,6 +3,7 @@ import type { ThumbnailMode } from "@/lib/apps/types";
 import { fetchLinkPreview } from "@/lib/metadata/fetch-link-preview";
 import { buildGeneratedThumbnailUrl } from "./generated-thumbnail";
 import { capturePageThumbnail } from "./page-capture";
+import { isSupportedThumbnailUrl } from "./public-thumbnail";
 
 interface ResolveThumbnailOptions {
   allowPlaceholderReset?: boolean;
@@ -72,11 +73,16 @@ export async function resolveThumbnailInput({
   sourceUrl,
   thumbnailUrl
 }: ResolveThumbnailOptions) {
+  const validExistingThumbnailUrl = isSupportedThumbnailUrl(
+    existingThumbnailUrl
+  )
+    ? existingThumbnailUrl
+    : null;
   const preservedThumbnail =
-    existingThumbnailUrl && !allowPlaceholderReset
+    validExistingThumbnailUrl && !allowPlaceholderReset
       ? {
           thumbnailMode: existingThumbnailMode ?? ("auto" as const),
-          thumbnailUrl: existingThumbnailUrl
+          thumbnailUrl: validExistingThumbnailUrl
         }
       : null;
 

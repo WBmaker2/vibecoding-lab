@@ -73,4 +73,17 @@ describe("appInputSchema", () => {
       })
     ).toThrow();
   });
+
+  it("rejects empty data-url thumbnails that would render as broken images", () => {
+    expect(() =>
+      appInputSchema.parse({
+        title: "PDF to PNG 1080p",
+        summary: "PDF를 PNG로 변환하는 도구",
+        url: "https://wbmaker2.github.io/pdf-to-png/",
+        tags: ["PDF", "업무"],
+        thumbnailMode: "auto",
+        thumbnailUrl: "data:,"
+      })
+    ).toThrow();
+  });
 });

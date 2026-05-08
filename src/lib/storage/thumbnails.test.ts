@@ -121,6 +121,21 @@ describe("resolveThumbnailInput", () => {
     });
   });
 
+  it("does not preserve an invalid existing data-url thumbnail", async () => {
+    const result = await resolveThumbnailInput({
+      mode: "placeholder",
+      file: null,
+      sourceUrl: "https://wbmaker2.github.io/pdf-to-png/",
+      existingThumbnailMode: "auto",
+      existingThumbnailUrl: "data:,"
+    });
+
+    expect(result).toEqual({
+      thumbnailMode: "placeholder",
+      thumbnailUrl: null
+    });
+  });
+
   it("clears an existing thumbnail only when placeholder reset is confirmed", async () => {
     const result = await resolveThumbnailInput({
       mode: "placeholder",
