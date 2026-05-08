@@ -123,6 +123,13 @@ select {
 
 .tag-copy-row {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+.tag-copy-text {
+  display: flex;
   align-items: baseline;
   flex-wrap: wrap;
   gap: 8px 12px;
@@ -134,6 +141,36 @@ select {
   font-size: 0.84rem;
   font-weight: 500;
   line-height: 1.5;
+}
+
+.tag-panel-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--panel-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--accent);
+  box-shadow: 0 10px 22px rgba(62, 95, 146, 0.08);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.tag-panel-toggle-icon {
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 160ms ease;
+}
+
+.tag-panel-toggle[aria-expanded="true"] .tag-panel-toggle-icon {
+  transform: translateY(2px) rotate(225deg);
 }
 
 .archive-page {
@@ -1152,6 +1189,7 @@ select {
 
 .reset-filters-button:focus-visible,
 .app-card-link:focus-visible,
+.tag-panel-toggle:focus-visible,
 .admin-primary-button:focus-visible,
 .admin-secondary-button:focus-visible,
 .admin-danger-button:focus-visible,
@@ -1165,6 +1203,7 @@ select {
 
 @media (hover: hover) {
   .tag-chip:hover,
+  .tag-panel-toggle:hover,
   .reset-filters-button:hover,
   .app-card-link:hover,
   .admin-primary-button:hover,

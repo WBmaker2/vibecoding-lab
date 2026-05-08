@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { ArchiveHero } from "./archive-hero";
 
 describe("ArchiveHero", () => {
@@ -37,7 +37,40 @@ describe("ArchiveHero", () => {
 
     expect(screen.getByText("대표 태그")).toBeInTheDocument();
     expect(
-      screen.getByText("태그를 하나씩 클릭해 원하는 앱을 찾아보세요.")
+      screen.getByText("태그를 하나씩 클릭해 원하는 앱을 알아보세요.")
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "대표 태그 펼치기" })
+    ).toHaveAttribute("aria-expanded", "false");
+    expect(
+      screen.queryByRole("toolbar", { name: "태그 필터" })
+    ).not.toBeInTheDocument();
+  });
+
+  it("toggles representative tags with the arrow button", () => {
+    render(
+      <ArchiveHero
+        activeTags={[]}
+        onQueryChange={() => {}}
+        onToggleTag={() => {}}
+        query=""
+        tags={["영어", "업무경감"]}
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "대표 태그 펼치기" }));
+
+    expect(
+      screen.getByRole("toolbar", { name: "태그 필터" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "대표 태그 접기" })
+    ).toHaveAttribute("aria-expanded", "true");
+
+    fireEvent.click(screen.getByRole("button", { name: "대표 태그 접기" }));
+
+    expect(
+      screen.queryByRole("toolbar", { name: "태그 필터" })
+    ).not.toBeInTheDocument();
   });
 });

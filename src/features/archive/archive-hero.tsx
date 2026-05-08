@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { SearchBar } from "./search-bar";
 import { TagFilterBar } from "./tag-filter-bar";
 
@@ -17,6 +20,9 @@ export function ArchiveHero({
   query,
   tags
 }: ArchiveHeroProps) {
+  const [isTagPanelOpen, setIsTagPanelOpen] = useState(false);
+  const tagPanelId = "representative-tag-panel";
+
   return (
     <section className="hero-frame archive-hero">
       <div className="archive-hero-top">
@@ -61,16 +67,32 @@ export function ArchiveHero({
 
       <div className="archive-tag-group">
         <div className="tag-copy-row">
-          <p className="tag-copy">대표 태그</p>
-          <p className="tag-copy-hint">
-            태그를 하나씩 클릭해 원하는 앱을 찾아보세요.
-          </p>
+          <div className="tag-copy-text">
+            <p className="tag-copy">대표 태그</p>
+            <p className="tag-copy-hint">
+              태그를 하나씩 클릭해 원하는 앱을 알아보세요.
+            </p>
+          </div>
+          <button
+            aria-controls={tagPanelId}
+            aria-expanded={isTagPanelOpen}
+            aria-label={isTagPanelOpen ? "대표 태그 접기" : "대표 태그 펼치기"}
+            className="tag-panel-toggle"
+            onClick={() => setIsTagPanelOpen((current) => !current)}
+            type="button"
+          >
+            <span className="tag-panel-toggle-icon" aria-hidden="true" />
+          </button>
         </div>
-        <TagFilterBar
-          activeTags={activeTags}
-          onToggleTag={onToggleTag}
-          tags={tags}
-        />
+        {isTagPanelOpen ? (
+          <div id={tagPanelId}>
+            <TagFilterBar
+              activeTags={activeTags}
+              onToggleTag={onToggleTag}
+              tags={tags}
+            />
+          </div>
+        ) : null}
       </div>
     </section>
   );
