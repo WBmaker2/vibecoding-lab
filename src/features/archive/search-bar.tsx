@@ -11,7 +11,7 @@ export function SearchBar({
   label = "앱 검색",
   query,
   onQueryChange,
-  placeholder = "예: 학급경영, 영어, 형성평가, 수업준비…"
+  placeholder = "예: 영어, 체육, 과학, 담임, 수업, 업무 등"
 }: SearchBarProps) {
   return (
     <div className="archive-search-shell">

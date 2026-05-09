@@ -61,7 +61,7 @@ export function ArchiveHero({
       <SearchBar
         label="앱 검색"
         onQueryChange={onQueryChange}
-        placeholder="예: 영어, 학급경영, 형성평가, 수업준비…"
+        placeholder="예: 영어, 체육, 과학, 담임, 수업, 업무 등"
         query={query}
       />
 
