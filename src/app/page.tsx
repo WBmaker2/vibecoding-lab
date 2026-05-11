@@ -1,9 +1,10 @@
 import { ArchivePage } from "@/features/archive/archive-page";
-import { getAppRepository } from "@/lib/apps/repository";
+import { listStaticPublicApps } from "@/lib/apps/static-public-apps";
 
-export default async function HomePage() {
-  const repo = getAppRepository();
-  const apps = await repo.listPublicApps();
+export const dynamic = "force-static";
+
+export default function HomePage() {
+  const apps = listStaticPublicApps();
 
   return <ArchivePage initialApps={apps} />;
 }

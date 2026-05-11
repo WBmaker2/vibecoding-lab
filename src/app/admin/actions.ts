@@ -50,8 +50,7 @@ async function getAppInput(
   });
 }
 
-function revalidateArchive() {
-  revalidatePath("/");
+function revalidateAdmin() {
   revalidatePath("/admin");
 }
 
@@ -60,7 +59,7 @@ export async function createAppAction(formData: FormData) {
   const input = await getAppInput(formData);
 
   await repo.createApp(input);
-  revalidateArchive();
+  revalidateAdmin();
 }
 
 export async function updateAppAction(formData: FormData) {
@@ -70,7 +69,7 @@ export async function updateAppAction(formData: FormData) {
   const input = await getAppInput(formData, existingApp);
 
   await repo.updateApp(id, input);
-  revalidateArchive();
+  revalidateAdmin();
 }
 
 export async function deleteAppAction(formData: FormData) {
@@ -78,7 +77,7 @@ export async function deleteAppAction(formData: FormData) {
   const repo = getAppRepository();
 
   await repo.deleteApp(id);
-  revalidateArchive();
+  revalidateAdmin();
 }
 
 export async function removeAppTagAction(formData: FormData) {
@@ -87,7 +86,7 @@ export async function removeAppTagAction(formData: FormData) {
   const repo = getAppRepository();
 
   await repo.removeTag(id, tag);
-  revalidateArchive();
+  revalidateAdmin();
 }
 
 export async function logoutAction() {

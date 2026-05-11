@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { PublicAppRecord } from "@/lib/apps/types";
 
 interface AppCardProps {
@@ -10,8 +9,6 @@ export function AppCard({ app }: AppCardProps) {
   const note = app.memo ?? "";
   const notePreview =
     note.length > 42 ? `${note.slice(0, 42).trimEnd()}…` : note;
-  const isDirectThumbnailRoute =
-    app.thumbnailUrl?.startsWith("/api/app-thumbnail/") ?? false;
 
   return (
     <article className="app-card">
@@ -19,13 +16,14 @@ export function AppCard({ app }: AppCardProps) {
         <div className="app-card-media-inner">
           {app.thumbnailUrl && (
             <>
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 alt={`${app.title} 썸네일`}
                 className="app-card-thumbnail"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
+                decoding="async"
+                loading="lazy"
+                referrerPolicy="no-referrer"
                 src={app.thumbnailUrl}
-                unoptimized={isDirectThumbnailRoute}
               />
               <div className="app-card-media-scrim" />
             </>
