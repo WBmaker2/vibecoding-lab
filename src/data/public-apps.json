@@ -1,8 +1,29 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-12T09:23:28.860Z",
-  "appCount": 37,
+  "generatedAt": "2026-05-12T10:24:39.348Z",
+  "appCount": 38,
   "apps": [
+    {
+      "id": "890a0ba1-6e4c-4bf8-a9d9-2009802a94fb",
+      "title": "우리 반 통계청: 뚝딱 실시간 투표 & 그래프",
+      "summary": "학급 투표 결과를 Firebase 실시간 방으로 모으고 막대그래프, 원그래프, 띠그래프로 비교하는 5~6학년 통계 수업 앱입니다.",
+      "url": "https://wbmaker2.github.io/live-class-poll-graph-maker/",
+      "githubUrl": "https://github.com/WBmaker2/live-class-poll-graph-maker",
+      "tags": [
+        "통계",
+        "그래프",
+        "학급회의",
+        "실시간투표",
+        "Firebase"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/890a0ba1-6e4c-4bf8-a9d9-2009802a94fb.png",
+      "subject": "수학 · 창체",
+      "grade": "초등 5~6학년",
+      "memo": "자료와 가능성 단원에서 실제 학급 의사결정을 투표로 수집하고, 결과를 세 가지 그래프로 비교하며 그래프 선택과 해석을 토론할 수 있습니다.",
+      "createdAt": "2026-05-12T10:24:23.220Z",
+      "updatedAt": "2026-05-12T10:24:23.220Z"
+    },
     {
       "id": "2c47b201-4941-4d74-a5b0-bb84d696e01c",
       "title": "왁자지껄 우리 반 알뜰 시장",
