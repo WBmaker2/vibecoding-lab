@@ -1,8 +1,29 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-11T11:15:44.022Z",
-  "appCount": 36,
+  "generatedAt": "2026-05-12T09:23:28.860Z",
+  "appCount": 37,
   "apps": [
+    {
+      "id": "2c47b201-4941-4d74-a5b0-bb84d696e01c",
+      "title": "왁자지껄 우리 반 알뜰 시장",
+      "summary": "한정된 예산 안에서 물건을 고르고 장바구니 합계를 계산하며 합리적 소비를 연습하는 교실용 알뜰 시장 시뮬레이터입니다.",
+      "url": "https://wbmaker2.github.io/smart-flea-market-simulator/",
+      "githubUrl": "https://github.com/WBmaker2/smart-flea-market-simulator",
+      "tags": [
+        "사회",
+        "수학",
+        "경제교육",
+        "화폐계산",
+        "합리적소비"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/2c47b201-4941-4d74-a5b0-bb84d696e01c.png",
+      "subject": "사회/수학 융합",
+      "grade": "3-4학년군",
+      "memo": "3-4학년 사회의 합리적 소비 개념과 수학의 실생활 화폐 계산을 연결해, 학생이 예산 안에서 필수/선택 소비를 비교하고 선택 이유를 말할 수 있도록 돕습니다.",
+      "createdAt": "2026-05-12T09:21:45.938Z",
+      "updatedAt": "2026-05-12T09:21:45.938Z"
+    },
     {
       "id": "4013316e-7506-46aa-9f24-7175b379ea27",
       "title": "마법의 데칼코마니: 대칭 아트 스튜디오",
