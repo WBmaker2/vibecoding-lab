@@ -1,8 +1,71 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-12T10:24:39.348Z",
-  "appCount": 38,
+  "generatedAt": "2026-05-12T12:39:18.735Z",
+  "appCount": 40,
   "apps": [
+    {
+      "id": "422f88e0-ac58-42c6-afa4-9d557979eaf8",
+      "title": "찰랑찰랑 디지털 물컵 실로폰",
+      "summary": "물 높이를 조절해 소리의 높낮이를 비교하고 도레미 연주 미션까지 수행하는 과학/음악 융합 앱",
+      "url": "https://wbmaker2.github.io/water-glass-xylophone/",
+      "githubUrl": "https://github.com/WBmaker2/water-glass-xylophone",
+      "tags": [
+        "과학",
+        "음악",
+        "소리",
+        "시뮬레이션",
+        "융합수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/422f88e0-ac58-42c6-afa4-9d557979eaf8.png",
+      "subject": "과학/음악",
+      "grade": "초등 3~4학년",
+      "memo": "3~4학년 소리 단원에서 물의 양과 소리 높낮이를 안전하게 비교하고, 도레미 튜닝과 짧은 연주로 음악 활동까지 이어갈 수 있습니다.",
+      "createdAt": "2026-05-12T10:34:08.273Z",
+      "updatedAt": "2026-05-12T12:35:58.624Z"
+    },
+    {
+      "id": "2c47b201-4941-4d74-a5b0-bb84d696e01c",
+      "title": "왁자지껄 우리 반 알뜰 시장",
+      "summary": "3~4학년 학생이 예산 안에서 물건을 고르고 활동지·발표 카드로 합리적 소비 이유를 정리하는 사회·수학 융합 시뮬레이터입니다.",
+      "url": "https://wbmaker2.github.io/smart-flea-market-simulator/",
+      "githubUrl": "https://github.com/WBmaker2/smart-flea-market-simulator",
+      "tags": [
+        "사회",
+        "수학",
+        "합리적소비",
+        "화폐계산",
+        "활동지"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/2c47b201-4941-4d74-a5b0-bb84d696e01c.png",
+      "subject": "사회/수학 융합",
+      "grade": "3-4학년군",
+      "memo": "10,000원 예산 안에서 필수/선택 소비를 비교하고, 학생 활동지·발표 카드·교사용 수업안을 함께 활용해 계산 과정과 소비 이유를 말할 수 있도록 돕습니다.",
+      "createdAt": "2026-05-12T09:21:45.938Z",
+      "updatedAt": "2026-05-12T12:33:53.318Z"
+    },
+    {
+      "id": "5543c36a-42d8-49ba-b2e2-85a2c4f193ea",
+      "title": "덩기덕 쿵더러러! 디지털 장구 마스터",
+      "summary": "3~6학년이 키보드 `F`, `J`와 터치 버튼으로 장단을 맞춰 정간보 기반 장구 리듬 연습을 할 수 있는 국악 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/digital-janggu-simulator/",
+      "githubUrl": "https://github.com/WBmaker2/digital-janggu-simulator",
+      "tags": [
+        "국악",
+        "장구",
+        "리듬",
+        "판정",
+        "음악"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/5543c36a-42d8-49ba-b2e2-85a2c4f193ea.png",
+      "subject": "음악 / 국악",
+      "grade": "3-6학년",
+      "memo": "정간보 연습판의 현재 박과 장단 시각 힌트를 보며 좌우 타격을 연습하고, 교실 수업에서 바로 사용할 수 있도록 교사용 가이드·학생 안내 문서와 리셋/상태 점검 안내를 함께 제공하는 앱입니다.",
+      "createdAt": "2026-05-12T12:32:46.714Z",
+      "updatedAt": "2026-05-12T12:32:46.714Z"
+    },
     {
       "id": "890a0ba1-6e4c-4bf8-a9d9-2009802a94fb",
       "title": "우리 반 통계청: 뚝딱 실시간 투표 & 그래프",
@@ -23,27 +86,6 @@
       "memo": "자료와 가능성 단원에서 실제 학급 의사결정을 투표로 수집하고, 결과를 세 가지 그래프로 비교하며 그래프 선택과 해석을 토론할 수 있습니다.",
       "createdAt": "2026-05-12T10:24:23.220Z",
       "updatedAt": "2026-05-12T10:24:23.220Z"
-    },
-    {
-      "id": "2c47b201-4941-4d74-a5b0-bb84d696e01c",
-      "title": "왁자지껄 우리 반 알뜰 시장",
-      "summary": "한정된 예산 안에서 물건을 고르고 장바구니 합계를 계산하며 합리적 소비를 연습하는 교실용 알뜰 시장 시뮬레이터입니다.",
-      "url": "https://wbmaker2.github.io/smart-flea-market-simulator/",
-      "githubUrl": "https://github.com/WBmaker2/smart-flea-market-simulator",
-      "tags": [
-        "사회",
-        "수학",
-        "경제교육",
-        "화폐계산",
-        "합리적소비"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/2c47b201-4941-4d74-a5b0-bb84d696e01c.png",
-      "subject": "사회/수학 융합",
-      "grade": "3-4학년군",
-      "memo": "3-4학년 사회의 합리적 소비 개념과 수학의 실생활 화폐 계산을 연결해, 학생이 예산 안에서 필수/선택 소비를 비교하고 선택 이유를 말할 수 있도록 돕습니다.",
-      "createdAt": "2026-05-12T09:21:45.938Z",
-      "updatedAt": "2026-05-12T09:21:45.938Z"
     },
     {
       "id": "4013316e-7506-46aa-9f24-7175b379ea27",
