@@ -1,8 +1,29 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-17T00:33:38.212Z",
-  "appCount": 41,
+  "generatedAt": "2026-05-21T08:41:34.729Z",
+  "appCount": 42,
   "apps": [
+    {
+      "id": "1c13b710-5da9-4f8d-be49-c7b6af20fedb",
+      "title": "선생님 채점해 주세요!",
+      "summary": "학생이 수업 코드와 번호만으로 답안지 사진을 제출하고 교사가 실시간으로 확인해 첨삭하는 수학교육용 웹앱입니다.",
+      "url": "https://paperlink-math.web.app",
+      "githubUrl": "https://github.com/WBmaker2/paper-link-math",
+      "tags": [
+        "수학교육",
+        "사진제출",
+        "실시간첨삭",
+        "교사용도구",
+        "초등수학"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/1c13b710-5da9-4f8d-be49-c7b6af20fedb.png",
+      "subject": "수학",
+      "grade": "초등",
+      "memo": "종이 학습지 풀이를 사진으로 제출하고 교사가 태블릿에서 바로 확인해 첨삭하는 수업 흐름에 맞춘 도구입니다. 학생은 로그인 없이 수업 코드와 번호로 입장하고, 교사는 제출 현황과 수업 기록을 관리할 수 있습니다.",
+      "createdAt": "2026-05-21T08:39:43.196Z",
+      "updatedAt": "2026-05-21T08:39:43.196Z"
+    },
     {
       "id": "42b8f202-db48-42f6-a8aa-e35192687889",
       "title": "H Memo",
@@ -10,11 +31,9 @@
       "url": "https://wbmaker2.github.io/h-memo-releases/",
       "githubUrl": "https://github.com/WBmaker2/h-memo-releases",
       "tags": [
-        "교사도구",
         "메모",
-        "업무관리",
-        "백업",
-        "Windows"
+        "담임",
+        "업무"
       ],
       "thumbnailMode": "upload",
       "thumbnailUrl": "/app-thumbnails/42b8f202-db48-42f6-a8aa-e35192687889.png",
@@ -22,7 +41,7 @@
       "grade": "교사용",
       "memo": "학교 행정 메모, 점검 체크리스트, 수업 운영 아이디어를 빠르게 기록하고 로컬 및 서버 백업으로 보관하는 H Memo의 공개 다운로드 안내 페이지입니다.",
       "createdAt": "2026-05-17T00:33:08.028Z",
-      "updatedAt": "2026-05-17T00:33:08.028Z"
+      "updatedAt": "2026-05-21T08:35:17.357Z"
     },
     {
       "id": "d13ba3a7-be1e-4aab-bc7a-de1df66bd8f3",
