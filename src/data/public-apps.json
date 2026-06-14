@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-21T08:41:34.729Z",
-  "appCount": 42,
+  "generatedAt": "2026-06-14T07:40:16.210Z",
+  "appCount": 46,
   "apps": [
     {
       "id": "1c13b710-5da9-4f8d-be49-c7b6af20fedb",
@@ -10,11 +10,11 @@
       "url": "https://paperlink-math.web.app",
       "githubUrl": "https://github.com/WBmaker2/paper-link-math",
       "tags": [
-        "수학교육",
-        "사진제출",
-        "실시간첨삭",
-        "교사용도구",
-        "초등수학"
+        "공유",
+        "실시간",
+        "수학",
+        "수업",
+        "협동"
       ],
       "thumbnailMode": "upload",
       "thumbnailUrl": "/app-thumbnails/1c13b710-5da9-4f8d-be49-c7b6af20fedb.png",
@@ -22,7 +22,105 @@
       "grade": "초등",
       "memo": "종이 학습지 풀이를 사진으로 제출하고 교사가 태블릿에서 바로 확인해 첨삭하는 수업 흐름에 맞춘 도구입니다. 학생은 로그인 없이 수업 코드와 번호로 입장하고, 교사는 제출 현황과 수업 기록을 관리할 수 있습니다.",
       "createdAt": "2026-05-21T08:39:43.196Z",
-      "updatedAt": "2026-05-21T08:39:43.196Z"
+      "updatedAt": "2026-06-14T07:38:57.556Z"
+    },
+    {
+      "id": "8dcda375-afc0-4a15-9235-e8df7cad85a6",
+      "title": "마이크로비트 AI 선풍기",
+      "summary": "초등학생이 마이크로비트와 티처블 머신 음성 모델을 연결해 AI 선풍기를 제어해 보는 피지컬 컴퓨팅 웹앱입니다.",
+      "url": "https://wbmaker2.github.io/microbit-ai-project1/",
+      "githubUrl": "https://github.com/WBmaker2/microbit-ai-project1",
+      "tags": [
+        "인공지능",
+        "피지컬컴퓨팅",
+        "코딩"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/8dcda375-afc0-4a15-9235-e8df7cad85a6.png",
+      "subject": "실과",
+      "grade": "초등",
+      "memo": "학생이 USB로 micro:bit를 연결하고 티처블 머신 음성 모델의 on/off class name을 시리얼 통신으로 보내 AI 선풍기 활동을 실습할 수 있습니다.",
+      "createdAt": "2026-06-10T10:33:26.216Z",
+      "updatedAt": "2026-06-14T07:37:56.296Z"
+    },
+    {
+      "id": "5543c36a-42d8-49ba-b2e2-85a2c4f193ea",
+      "title": "덩기덕 쿵더러러! 디지털 장구 마스터",
+      "summary": "3~6학년이 키보드와 터치로 실제 장구 샘플을 들으며 정간보 장단을 연습하는 국악 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/digital-janggu-simulator/",
+      "githubUrl": "https://github.com/WBmaker2/digital-janggu-simulator",
+      "tags": [
+        "리듬",
+        "음악"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/5543c36a-42d8-49ba-b2e2-85a2c4f193ea.png",
+      "subject": "음악 / 국악",
+      "grade": "3-6학년",
+      "memo": "키보드 F/J와 터치 버튼으로 궁편·채편·양편을 연주하고, 정간보 패턴을 따라 교실에서 개인 장단 연습을 할 수 있습니다. 실제 장구 녹음 샘플과 교사용 운영 자료를 함께 제공합니다.",
+      "createdAt": "2026-05-12T12:32:46.714Z",
+      "updatedAt": "2026-06-14T07:37:42.782Z"
+    },
+    {
+      "id": "9925ecdd-4483-4f9b-bb96-8aed89662621",
+      "title": "초록 지구 구출 대작전: 우리 반 환경 리포터",
+      "summary": "초등 5~6학년 학생들이 환경 피해 사례를 조사해 디지털 뉴스레터로 작성하고 학급 게시판에 공유하는 웹 앱입니다.",
+      "url": "https://wbmaker2.github.io/digital-eco-newletter/",
+      "githubUrl": "https://github.com/WBmaker2/digital-eco-newletter",
+      "tags": [
+        "과학",
+        "공유",
+        "협동",
+        "환경"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/9925ecdd-4483-4f9b-bb96-8aed89662621.png",
+      "subject": "과학·사회·국어",
+      "grade": "초등 5~6학년",
+      "memo": "산성비, 바다 산성화, 기후변화와 폭우 등 환경 주제를 골라 피해 사례와 기후 행동 다짐을 기사로 쓰고, localStorage 기반 학급 게시판에 공유할 수 있는 융합 수업용 웹 앱입니다.",
+      "createdAt": "2026-06-14T03:07:22.313Z",
+      "updatedAt": "2026-06-14T07:37:23.242Z"
+    },
+    {
+      "id": "511d5334-1e2c-40ac-8f9b-bc7bc22a1a21",
+      "title": "도형 거북이의 코딩 미술관",
+      "summary": "초등 3~4학년 학생들이 거북이 명령으로 사각형을 그리고 색칠해 우리 반 갤러리에 전시하는 수학·미술 융합 앱입니다.",
+      "url": "https://wbmaker2.github.io/turtle-art-studio/",
+      "githubUrl": "https://github.com/WBmaker2/turtle-art-studio",
+      "tags": [
+        "수학",
+        "도형",
+        "코딩",
+        "미술"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/511d5334-1e2c-40ac-8f9b-bc7bc22a1a21.png",
+      "subject": "수학·미술·정보",
+      "grade": "초등 3~4학년",
+      "memo": "정사각형과 직사각형의 변과 각도 성질을 거북이 명령으로 직접 그려보고, 완성한 도형을 색칠해 학급 갤러리에 전시할 수 있는 수업용 활동 앱입니다.",
+      "createdAt": "2026-06-14T06:30:26.183Z",
+      "updatedAt": "2026-06-14T07:35:48.876Z"
+    },
+    {
+      "id": "3f602cb9-e07f-422c-9f40-127145020bc2",
+      "title": "말놀이 퐁당! 감정 라디오",
+      "summary": "초등 1-2학년 학생이 감정을 고르고 말놀이 동시를 낭송·녹음해 우리 반 라디오 게시판에 공유하는 국어·즐거운 생활 융합 앱입니다.",
+      "url": "https://wbmaker2.github.io/emotion-radio/",
+      "githubUrl": "https://github.com/WBmaker2/emotion-radio",
+      "tags": [
+        "국어",
+        "저학년",
+        "감정",
+        "녹음",
+        "소리"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/3f602cb9-e07f-422c-9f40-127145020bc2.png",
+      "subject": "국어·즐거운 생활",
+      "grade": "초등 1-2학년",
+      "memo": "감정 단추를 선택하면 감정에 맞는 짧은 말놀이 동시와 고운 말 표현이 나타나고, 학생은 자기 목소리로 낭송을 녹음해 우리 반 방송국 게시판에 올릴 수 있습니다. 서버 없이 브라우저에 저장되는 구조라 수업 중 감정 나눔과 바르고 고운 말 표현 연습에 바로 활용하기 좋습니다.",
+      "createdAt": "2026-06-14T06:23:46.487Z",
+      "updatedAt": "2026-06-14T07:35:13.144Z"
     },
     {
       "id": "42b8f202-db48-42f6-a8aa-e35192687889",
@@ -292,26 +390,6 @@
       "memo": "교사는 Google 로그인으로 수업 세션을 만들고 학생은 코드와 이름으로 입장해 캐릭터를 움직이며 행성별 음악을 감상하고 채팅으로 생각을 나눌 수 있습니다.",
       "createdAt": "2026-04-23T13:51:58.655Z",
       "updatedAt": "2026-05-13T00:48:06.336Z"
-    },
-    {
-      "id": "5543c36a-42d8-49ba-b2e2-85a2c4f193ea",
-      "title": "덩기덕 쿵더러러! 디지털 장구 마스터",
-      "summary": "3~6학년이 키보드 `F`, `J`와 터치 버튼으로 장단을 맞춰 정간보 기반 장구 리듬 연습을 할 수 있는 국악 학습 앱입니다.",
-      "url": "https://wbmaker2.github.io/digital-janggu-simulator/",
-      "githubUrl": "https://github.com/WBmaker2/digital-janggu-simulator",
-      "tags": [
-        "국악",
-        "음악",
-        "수업",
-        "소리"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/5543c36a-42d8-49ba-b2e2-85a2c4f193ea.png",
-      "subject": "음악 / 국악",
-      "grade": "3-6학년",
-      "memo": "정간보 연습판의 현재 박과 장단 시각 힌트를 보며 좌우 타격을 연습하고, 교실 수업에서 바로 사용할 수 있도록 교사용 가이드·학생 안내 문서와 리셋/상태 점검 안내를 함께 제공하는 앱입니다.",
-      "createdAt": "2026-05-12T12:32:46.714Z",
-      "updatedAt": "2026-05-13T00:47:15.161Z"
     },
     {
       "id": "13db4453-420a-447c-a4e9-67d330852ee5",
