@@ -1,49 +1,302 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-21T06:10:23.123Z",
-  "appCount": 54,
+  "generatedAt": "2026-06-29T09:11:58.908Z",
+  "appCount": 55,
   "apps": [
     {
-      "id": "9a61427f-7760-48ff-8e95-52e7264dd838",
-      "title": "탐험가 민수의 철새 관찰 일지",
-      "summary": "철새 관찰 자료를 수집하고 막대그래프와 제출용 일지로 정리하는 초등 과학·수학 융합 활동 앱입니다.",
-      "url": "https://wbmaker2.github.io/bird-finder/",
-      "githubUrl": "https://github.com/WBmaker2/bird-finder",
+      "id": "86c0c19a-c4bf-4ef1-822b-75162b385271",
+      "title": "HEIC -> JPG 변환기",
+      "summary": "여러 HEIC/HEIF 사진을 브라우저에서 JPG로 변환하고 ZIP으로 내려받을 수 있는 로컬 변환 도구입니다.",
+      "url": "https://wbmaker2.github.io/heic-to-jpg/",
+      "githubUrl": "https://github.com/WBmaker2/heic-to-jpg",
       "tags": [
-        "철새관찰",
-        "과학수학융합",
-        "막대그래프",
-        "초등수업",
-        "제출일지"
+        "이미지 변환",
+        "HEIC",
+        "JPG",
+        "파일 도구",
+        "브라우저"
       ],
       "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/9a61427f-7760-48ff-8e95-52e7264dd838.png",
-      "subject": "과학·수학",
-      "grade": "초등 3~4학년",
-      "memo": "학생이 새 관찰 횟수와 관찰 문장을 기록하고, 교사는 복사·파일·QR 제출 기능으로 결과를 모아 확인할 수 있습니다.",
-      "createdAt": "2026-06-21T04:33:44.749Z",
-      "updatedAt": "2026-06-21T04:35:13.477Z"
+      "thumbnailUrl": "/app-thumbnails/86c0c19a-c4bf-4ef1-822b-75162b385271.png",
+      "subject": "공통",
+      "grade": null,
+      "memo": "수업 자료 준비나 기기별 사진 형식 변환이 필요할 때 서버 업로드 없이 브라우저에서 안전하게 처리할 수 있습니다.",
+      "createdAt": "2026-06-29T09:05:14.815Z",
+      "updatedAt": "2026-06-29T09:05:14.815Z"
     },
     {
-      "id": "596fc43f-8908-492f-b328-d43aae7e984d",
-      "title": "에코 머니 다이어리",
-      "summary": "초등 5~6학년 학생이 용돈 기록과 그래프 분석으로 필요와 욕구를 구분하며 합리적 소비를 연습하는 수업용 앱",
-      "url": "https://wbmaker2.github.io/eco-money-diary/",
-      "githubUrl": "https://github.com/WBmaker2/eco-money-diary",
+      "id": "fbdbaf4e-1c6d-4644-8de7-cde51f5e9c9d",
+      "title": "꼬마 거북이의 도형 여행",
+      "summary": "초등 5~6학년 학생이 거북이 블록 명령으로 정다각형의 외각과 반복 구조를 직접 실험하는 수학·실과 융합 캔버스입니다.",
+      "url": "https://wbmaker2.github.io/turtle-geometry-canvas/",
+      "githubUrl": "https://github.com/WBmaker2/turtle-geometry-canvas",
       "tags": [
-        "경제교육",
-        "데이터그래프",
-        "합리적소비",
-        "용돈관리",
-        "수학사회융합"
+        "수학",
+        "실과",
+        "코딩",
+        "수업",
+        "도형",
+        "융합"
       ],
       "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/596fc43f-8908-492f-b328-d43aae7e984d.png",
-      "subject": "사회·수학",
+      "thumbnailUrl": "/app-thumbnails/fbdbaf4e-1c6d-4644-8de7-cde51f5e9c9d.png",
+      "subject": "수학/실과",
       "grade": "초등 5~6학년",
-      "memo": "사회 시간에는 선택과 소비 기준을, 수학 시간에는 실생활 자료를 표와 그래프로 해석하는 활동으로 연결할 수 있습니다.",
-      "createdAt": "2026-06-21T04:22:30.643Z",
-      "updatedAt": "2026-06-21T04:22:30.643Z"
+      "memo": "정삼각형, 정사각형, 정오각형부터 별, 나선, 꽃 모양까지 거북이 명령을 실행하며 다각형의 외각과 반복 구조를 관찰할 수 있습니다. 자유 도형 그리기에서는 이동거리, 회전각, 반복 횟수를 직접 조합해 순차와 반복 프로그래밍 구조를 함께 실험할 수 있습니다.",
+      "createdAt": "2026-05-09T12:35:29.044Z",
+      "updatedAt": "2026-06-21T06:37:19.895Z"
+    },
+    {
+      "id": "422f88e0-ac58-42c6-afa4-9d557979eaf8",
+      "title": "찰랑찰랑 디지털 물컵 실로폰",
+      "summary": "물 높이를 조절해 소리의 높낮이를 비교하고 도레미 연주 미션까지 수행하는 과학/음악 융합 앱",
+      "url": "https://wbmaker2.github.io/water-glass-xylophone/",
+      "githubUrl": "https://github.com/WBmaker2/water-glass-xylophone",
+      "tags": [
+        "과학",
+        "음악",
+        "시뮬레이션",
+        "수업",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/422f88e0-ac58-42c6-afa4-9d557979eaf8.png",
+      "subject": "과학/음악",
+      "grade": "초등 3~4학년",
+      "memo": "3~4학년 소리 단원에서 물의 양과 소리 높낮이를 안전하게 비교하고, 도레미 튜닝과 짧은 연주로 음악 활동까지 이어갈 수 있습니다.",
+      "createdAt": "2026-05-12T10:34:08.273Z",
+      "updatedAt": "2026-06-21T06:36:53.981Z"
+    },
+    {
+      "id": "2c47b201-4941-4d74-a5b0-bb84d696e01c",
+      "title": "왁자지껄 우리 반 알뜰 시장",
+      "summary": "3~4학년 학생이 예산 안에서 물건을 고르고 활동지·발표 카드로 합리적 소비 이유를 정리하는 사회·수학 융합 시뮬레이터입니다.",
+      "url": "https://wbmaker2.github.io/smart-flea-market-simulator/",
+      "githubUrl": "https://github.com/WBmaker2/smart-flea-market-simulator",
+      "tags": [
+        "사회",
+        "수학",
+        "경제",
+        "수업",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/2c47b201-4941-4d74-a5b0-bb84d696e01c.png",
+      "subject": "사회/수학 융합",
+      "grade": "3-4학년군",
+      "memo": "10,000원 예산 안에서 필수/선택 소비를 비교하고, 학생 활동지·발표 카드·교사용 수업안을 함께 활용해 계산 과정과 소비 이유를 말할 수 있도록 돕습니다.",
+      "createdAt": "2026-05-12T09:21:45.938Z",
+      "updatedAt": "2026-06-21T06:36:33.974Z"
+    },
+    {
+      "id": "4013316e-7506-46aa-9f24-7175b379ea27",
+      "title": "마법의 데칼코마니: 대칭 아트 스튜디오",
+      "summary": "5~6학년 학생이 선대칭 축 반사와 점 탐구를 직접 그리며 수학과 미술을 함께 탐구하는 대칭 아트 앱입니다.",
+      "url": "https://wbmaker2.github.io/symmetry-art-studio/",
+      "githubUrl": "https://github.com/WBmaker2/symmetry-art-studio",
+      "tags": [
+        "대칭",
+        "수업",
+        "수학",
+        "미술",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/4013316e-7506-46aa-9f24-7175b379ea27.png",
+      "subject": "수학 / 미술",
+      "grade": "5~6학년",
+      "memo": "세로·가로·대각선 대칭축, 격자 보기, 점 탐구, 거리 힌트, 작품 카드 저장과 공유 문구 복사를 활용해 선대칭 성질을 시각적으로 설명하고 미술 작품으로 확장할 수 있습니다.",
+      "createdAt": "2026-05-08T14:55:08.027Z",
+      "updatedAt": "2026-06-21T06:36:17.147Z"
+    },
+    {
+      "id": "b52fd0e4-768b-4cc1-806c-53deef04f003",
+      "title": "디지털 팔레트: 색깔 혼합 실험실",
+      "summary": "초등학생이 물감과 빛의 색 혼합을 방울 버튼으로 실험하고 결과 색과 비율을 관찰하는 시각적 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/digital-color-mixing-lab/",
+      "githubUrl": "https://github.com/WBmaker2/digital-color-mixing-lab",
+      "tags": [
+        "미술",
+        "과학",
+        "수업",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/b52fd0e4-768b-4cc1-806c-53deef04f003.png",
+      "subject": "미술/과학",
+      "grade": "초3-6",
+      "memo": "3~4학년 미술의 조형 요소와 5~6학년 과학의 빛 단원에서 색의 비율과 결과를 비교하며 관찰 기록을 남기는 활동에 활용할 수 있습니다.",
+      "createdAt": "2026-04-24T13:23:35.648Z",
+      "updatedAt": "2026-06-21T06:35:40.457Z"
+    },
+    {
+      "id": "373e131a-54eb-41a6-852f-aa54431b29c8",
+      "title": "으쓱으쓱 튼튼 스트레칭 룰렛",
+      "summary": "교실에서 룰렛으로 스트레칭 미션을 뽑고 타이머에 맞춰 함께 몸을 풀 수 있는 수업용 활동 앱",
+      "url": "https://wbmaker2.github.io/healthy-streching-roulette/",
+      "githubUrl": "https://github.com/WBmaker2/healthy-streching-roulette",
+      "tags": [
+        "체육",
+        "집중",
+        "수업",
+        "도덕",
+        "통합교과"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/373e131a-54eb-41a6-852f-aa54431b29c8.png",
+      "subject": "체육/바른생활",
+      "grade": "초등 1~6학년",
+      "memo": "아침 활동, 중간놀이, 수업 중 집중 전환 시간에 전자칠판으로 룰렛을 돌려 전체 학생이 짧게 몸을 풀도록 활용할 수 있습니다. 교사 관리화면에서 미션 문구를 저장하거나 기본값으로 초기화할 수 있습니다.",
+      "createdAt": "2026-04-26T13:16:36.556Z",
+      "updatedAt": "2026-06-21T06:35:15.099Z"
+    },
+    {
+      "id": "7507c704-bd01-497e-aeb5-1578209b0d6e",
+      "title": "신호등 토론방",
+      "summary": "초등 토론 수업에서 학생 의견을 실시간 포스트잇과 찬반 비율로 모아 보는 디지털 토론 보드입니다.",
+      "url": "https://traffic-light-debate.web.app",
+      "githubUrl": "https://github.com/WBmaker2/traffic-light-debate",
+      "tags": [
+        "토론",
+        "사회",
+        "실시간",
+        "수업",
+        "국어",
+        "도덕",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/7507c704-bd01-497e-aeb5-1578209b0d6e.png",
+      "subject": "국어·사회·도덕",
+      "grade": "초5-6",
+      "memo": "교사가 토론 세션을 만들고 학생은 QR 또는 세션 코드로 들어와 찬성·반대·중립 의견과 근거를 제출합니다. 전자칠판에서는 학급 의견 비율과 색상 포스트잇을 함께 보며 토의·토론을 진행할 수 있습니다.",
+      "createdAt": "2026-04-26T13:21:14.825Z",
+      "updatedAt": "2026-06-21T06:34:21.695Z"
+    },
+    {
+      "id": "0a1a350d-2f4d-4676-ba63-f33ad2147328",
+      "title": "스마트 올바름 챌린지: AI-Detox 다이어리",
+      "summary": "초등 5~6학년 학생이 스마트 기기와 AI 사용 습관을 기록하고 디지털 디톡스 달성도를 확인하는 자기 점검 앱입니다.",
+      "url": "https://wbmaker2.github.io/ai-detox-diary/",
+      "githubUrl": "https://github.com/WBmaker2/ai-detox-diary",
+      "tags": [
+        "실과",
+        "도덕",
+        "디지털윤리",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/0a1a350d-2f4d-4676-ba63-f33ad2147328.png",
+      "subject": "실과/도덕",
+      "grade": "초등 5~6학년",
+      "memo": "실과의 데이터 유형과 AI 활용 이해, 도덕의 정보통신 윤리 성찰을 함께 다루는 수업용 앱입니다. 학생은 하루 목표 사용 시간과 실제 사용량, AI 질문 횟수, 윤리 체크와 성찰 메모를 기록하며 절제 습관을 돌아볼 수 있습니다.",
+      "createdAt": "2026-04-30T13:47:20.926Z",
+      "updatedAt": "2026-06-21T06:33:50.884Z"
+    },
+    {
+      "id": "9c98f5c3-758a-47ba-bf90-59799f820e4f",
+      "title": "우리 반 꼬마 CEO: 스마트 용돈 기입장",
+      "summary": "학생이 용돈 수입과 지출을 기록하고 원그래프, 목표 금액, 잔액을 확인하며 소비 습관을 돌아보는 금융 교육 앱입니다.",
+      "url": "https://wbmaker2.github.io/smart-allowance-manager/",
+      "githubUrl": "https://github.com/WBmaker2/smart-allowance-manager.git",
+      "tags": [
+        "경제",
+        "실과",
+        "수학",
+        "수업",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/9c98f5c3-758a-47ba-bf90-59799f820e4f.png",
+      "subject": "실과 / 수학",
+      "grade": "5~6학년",
+      "memo": "5~6학년 실과의 용돈 관리와 수학의 원그래프 활동을 연결해, 학생이 받은 돈과 사용한 돈, 남은 돈을 확인하고 주간 목표와 소비 비율을 바탕으로 자신의 경제 습관을 성찰하도록 돕는 수업용 앱입니다.",
+      "createdAt": "2026-04-26T01:17:26.605Z",
+      "updatedAt": "2026-06-21T06:33:17.612Z"
+    },
+    {
+      "id": "77669d34-e66c-4f01-a74c-f703447fa17d",
+      "title": "우리 몸의 비밀: 인터랙티브 기관 탐험대",
+      "summary": "초등 6학년 학생이 실제 해부도 위에서 소화·순환·호흡·배설 기관의 위치와 연결 관계를 탐험하는 과학 웹앱입니다.",
+      "url": "https://wbmaker2.github.io/interactive-body-map/",
+      "githubUrl": "https://github.com/WBmaker2/interactive-body-map",
+      "tags": [
+        "과학",
+        "인터랙티브",
+        "퀴즈"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/77669d34-e66c-4f01-a74c-f703447fa17d.png",
+      "subject": "과학",
+      "grade": "초등 6학년",
+      "memo": "기관 버튼, 흐름 애니메이션, 수준별 설명, 몸속 소리, 퀴즈를 활용해 우리 몸 기관의 위치와 상호 관련성을 수업 중 바로 확인할 수 있습니다.",
+      "createdAt": "2026-06-17T14:02:52.777Z",
+      "updatedAt": "2026-06-21T06:32:09.940Z"
+    },
+    {
+      "id": "d093f79b-8672-4498-8f39-b65397fff216",
+      "title": "Eco-Saver: 갯벌을 구하라!",
+      "summary": "초등학생이 개발·보전 선택과 수위 조절로 갯벌 오염도, 정화 능력, 생태계 건강 점수를 탐구하는 환경 시뮬레이터입니다.",
+      "url": "https://wbmaker2.github.io/eco-saver-tidal-flat/",
+      "githubUrl": "https://github.com/WBmaker2/eco-saver-tidal-flat",
+      "tags": [
+        "갯벌",
+        "시뮬레이션",
+        "환경",
+        "과학",
+        "사회",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/d093f79b-8672-4498-8f39-b65397fff216.png",
+      "subject": "과학·사회",
+      "grade": "초등",
+      "memo": "수위 조절과 개발·보전 카드 조합을 바꾸며 갯벌의 자연 정화 작용과 지속가능한 선택을 토론할 수 있는 수업용 탐구 앱입니다.",
+      "createdAt": "2026-06-18T13:34:49.004Z",
+      "updatedAt": "2026-06-21T06:31:46.441Z"
+    },
+    {
+      "id": "ac622468-2710-4183-9a67-f2489ae000c5",
+      "title": "LinkEffect: 인과관계 이어달리기",
+      "summary": "초등학생이 원인과 결과 카드를 연결하며 과학·국어·사회 속 인과관계를 연습하는 수업용 활동 앱",
+      "url": "https://wbmaker2.github.io/link-effect/",
+      "githubUrl": "https://github.com/WBmaker2/link-effect",
+      "tags": [
+        "수업",
+        "국어",
+        "사회",
+        "과학",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/ac622468-2710-4183-9a67-f2489ae000c5.png",
+      "subject": "공통",
+      "grade": "초등 3~6학년",
+      "memo": "기본 문제 세트와 교사용 세트 만들기를 함께 제공해 학생 활동, 개별 연습, 수업 후 리포트 확인에 활용할 수 있습니다.",
+      "createdAt": "2026-06-18T13:35:04.780Z",
+      "updatedAt": "2026-06-21T06:31:25.193Z"
+    },
+    {
+      "id": "a569fbf0-1e50-4286-aef8-b0e38ea6aa8d",
+      "title": "GreenStep: 나의 탄소 발자국 다이어리",
+      "summary": "초등학생이 하루 친환경 실천을 체크하고 환경 점수와 그래프 추세로 돌아보는 탄소 발자국 일지 앱",
+      "url": "https://wbmaker2.github.io/eco-green-step/",
+      "githubUrl": "https://github.com/WBmaker2/eco-green-step",
+      "tags": [
+        "수업",
+        "환경",
+        "데이터",
+        "수학",
+        "도덕",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a569fbf0-1e50-4286-aef8-b0e38ea6aa8d.png",
+      "subject": "수학·도덕·환경",
+      "grade": "초등",
+      "memo": "수학의 표와 그래프 해석 활동과 도덕·환경교육의 기후 행동 실천을 연결해, 학생이 자신의 하루 실천을 점수와 추세로 돌아볼 수 있습니다.",
+      "createdAt": "2026-06-21T01:34:32.771Z",
+      "updatedAt": "2026-06-21T06:31:00.563Z"
     },
     {
       "id": "6b801106-2602-42d8-8cd2-d26716433860",
@@ -54,9 +307,8 @@
       "tags": [
         "국어",
         "사회",
-        "어휘탐구",
-        "역사탐구",
-        "초등융합"
+        "역사",
+        "융합"
       ],
       "thumbnailMode": "upload",
       "thumbnailUrl": "/app-thumbnails/6b801106-2602-42d8-8cd2-d26716433860.png",
@@ -64,91 +316,52 @@
       "grade": "초등 5~6학년",
       "memo": "고유어·한자어·외래어·신조어 등 낱말의 확장 현상을 조선 후기와 개항기 문물 도입 맥락에 연결해 살펴보는 시각 탐구 활동에 활용할 수 있습니다.",
       "createdAt": "2026-06-21T02:59:59.788Z",
-      "updatedAt": "2026-06-21T02:59:59.788Z"
+      "updatedAt": "2026-06-21T06:30:25.548Z"
     },
     {
-      "id": "a569fbf0-1e50-4286-aef8-b0e38ea6aa8d",
-      "title": "GreenStep: 나의 탄소 발자국 다이어리",
-      "summary": "초등학생이 하루 친환경 실천을 체크하고 환경 점수와 그래프 추세로 돌아보는 탄소 발자국 일지 앱",
-      "url": "https://wbmaker2.github.io/eco-green-step/",
-      "githubUrl": "https://github.com/WBmaker2/eco-green-step",
+      "id": "596fc43f-8908-492f-b328-d43aae7e984d",
+      "title": "에코 머니 다이어리",
+      "summary": "초등 5~6학년 학생이 용돈 기록과 그래프 분석으로 필요와 욕구를 구분하며 합리적 소비를 연습하는 수업용 앱",
+      "url": "https://wbmaker2.github.io/eco-money-diary/",
+      "githubUrl": "https://github.com/WBmaker2/eco-money-diary",
       "tags": [
-        "탄소발자국",
-        "환경교육",
-        "표와그래프",
-        "실천일지",
-        "초등수업"
+        "합리적소비",
+        "경제",
+        "데이터",
+        "수학",
+        "실과",
+        "사회",
+        "융합"
       ],
       "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/a569fbf0-1e50-4286-aef8-b0e38ea6aa8d.png",
-      "subject": "수학·도덕·환경",
-      "grade": "초등",
-      "memo": "수학의 표와 그래프 해석 활동과 도덕·환경교육의 기후 행동 실천을 연결해, 학생이 자신의 하루 실천을 점수와 추세로 돌아볼 수 있습니다.",
-      "createdAt": "2026-06-21T01:34:32.771Z",
-      "updatedAt": "2026-06-21T01:34:32.771Z"
+      "thumbnailUrl": "/app-thumbnails/596fc43f-8908-492f-b328-d43aae7e984d.png",
+      "subject": "사회·수학",
+      "grade": "초등 5~6학년",
+      "memo": "사회 시간에는 선택과 소비 기준을, 수학 시간에는 실생활 자료를 표와 그래프로 해석하는 활동으로 연결할 수 있습니다.",
+      "createdAt": "2026-06-21T04:22:30.643Z",
+      "updatedAt": "2026-06-21T06:30:11.892Z"
     },
     {
-      "id": "ac622468-2710-4183-9a67-f2489ae000c5",
-      "title": "LinkEffect: 인과관계 이어달리기",
-      "summary": "초등학생이 원인과 결과 카드를 연결하며 과학·국어·사회 속 인과관계를 연습하는 수업용 활동 앱",
-      "url": "https://wbmaker2.github.io/link-effect/",
-      "githubUrl": "https://github.com/WBmaker2/link-effect",
-      "tags": [
-        "인과관계",
-        "카드연결",
-        "초등수업",
-        "교사용세트",
-        "형성평가"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/ac622468-2710-4183-9a67-f2489ae000c5.png",
-      "subject": "공통",
-      "grade": "초등 3~6학년",
-      "memo": "기본 문제 세트와 교사용 세트 만들기를 함께 제공해 학생 활동, 개별 연습, 수업 후 리포트 확인에 활용할 수 있습니다.",
-      "createdAt": "2026-06-18T13:35:04.780Z",
-      "updatedAt": "2026-06-18T13:52:11.948Z"
-    },
-    {
-      "id": "d093f79b-8672-4498-8f39-b65397fff216",
-      "title": "Eco-Saver: 갯벌을 구하라!",
-      "summary": "초등학생이 개발·보전 선택과 수위 조절로 갯벌 오염도, 정화 능력, 생태계 건강 점수를 탐구하는 환경 시뮬레이터입니다.",
-      "url": "https://wbmaker2.github.io/eco-saver-tidal-flat/",
-      "githubUrl": "https://github.com/WBmaker2/eco-saver-tidal-flat",
-      "tags": [
-        "환경교육",
-        "갯벌",
-        "지속가능발전",
-        "시뮬레이션",
-        "초등과학"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/d093f79b-8672-4498-8f39-b65397fff216.png",
-      "subject": "과학·사회",
-      "grade": "초등",
-      "memo": "수위 조절과 개발·보전 카드 조합을 바꾸며 갯벌의 자연 정화 작용과 지속가능한 선택을 토론할 수 있는 수업용 탐구 앱입니다.",
-      "createdAt": "2026-06-18T13:34:49.004Z",
-      "updatedAt": "2026-06-18T13:34:49.004Z"
-    },
-    {
-      "id": "77669d34-e66c-4f01-a74c-f703447fa17d",
-      "title": "우리 몸의 비밀: 인터랙티브 기관 탐험대",
-      "summary": "초등 6학년 학생이 실제 해부도 위에서 소화·순환·호흡·배설 기관의 위치와 연결 관계를 탐험하는 과학 웹앱입니다.",
-      "url": "https://wbmaker2.github.io/interactive-body-map/",
-      "githubUrl": "https://github.com/WBmaker2/interactive-body-map",
+      "id": "9a61427f-7760-48ff-8e95-52e7264dd838",
+      "title": "탐험가 민수의 철새 관찰 일지",
+      "summary": "철새 관찰 자료를 수집하고 막대그래프와 제출용 일지로 정리하는 초등 과학·수학 융합 활동 앱입니다.",
+      "url": "https://wbmaker2.github.io/bird-finder/",
+      "githubUrl": "https://github.com/WBmaker2/bird-finder",
       "tags": [
         "과학",
-        "인체",
-        "소화기관",
-        "인터랙티브",
-        "퀴즈"
+        "데이터",
+        "환경",
+        "그래프",
+        "수학",
+        "융합"
       ],
       "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/77669d34-e66c-4f01-a74c-f703447fa17d.png",
-      "subject": "과학",
-      "grade": "초등 6학년",
-      "memo": "기관 버튼, 흐름 애니메이션, 수준별 설명, 몸속 소리, 퀴즈를 활용해 우리 몸 기관의 위치와 상호 관련성을 수업 중 바로 확인할 수 있습니다.",
-      "createdAt": "2026-06-17T14:02:52.777Z",
-      "updatedAt": "2026-06-17T14:02:52.777Z"
+      "thumbnailUrl": "/app-thumbnails/9a61427f-7760-48ff-8e95-52e7264dd838.png",
+      "subject": "과학·수학",
+      "grade": "초등 3~4학년",
+      "memo": "학생이 새 관찰 횟수와 관찰 문장을 기록하고, 교사는 복사·파일·QR 제출 기능으로 결과를 모아 확인할 수 있습니다.",
+      "createdAt": "2026-06-21T04:33:44.749Z",
+      "updatedAt": "2026-06-21T06:29:49.490Z"
     },
     {
       "id": "31d29c7a-8ce6-4ba0-a5aa-e4bb984848b5",
@@ -160,8 +373,7 @@
         "수학",
         "각도",
         "도형",
-        "초등",
-        "접근성"
+        "초등"
       ],
       "thumbnailMode": "upload",
       "thumbnailUrl": "/app-thumbnails/31d29c7a-8ce6-4ba0-a5aa-e4bb984848b5.png",
@@ -169,7 +381,7 @@
       "grade": "초등 4학년",
       "memo": "각도 어림 게임과 삼각형 꼭짓점 조작 활동을 한 화면에서 진행할 수 있어 도형 단원의 각도 감각과 내각의 합 개념을 탐구하는 수업에 활용하기 좋습니다. 드래그와 키보드 방향키 조작을 모두 지원합니다.",
       "createdAt": "2026-06-17T13:06:29.937Z",
-      "updatedAt": "2026-06-17T13:06:29.937Z"
+      "updatedAt": "2026-06-21T06:21:25.750Z"
     },
     {
       "id": "1c13b710-5da9-4f8d-be49-c7b6af20fedb",
@@ -599,27 +811,6 @@
       "updatedAt": "2026-05-13T00:44:12.159Z"
     },
     {
-      "id": "fbdbaf4e-1c6d-4644-8de7-cde51f5e9c9d",
-      "title": "꼬마 거북이의 도형 여행",
-      "summary": "초등 5~6학년 학생이 거북이 블록 명령으로 정다각형의 외각과 반복 구조를 직접 실험하는 수학·실과 융합 캔버스입니다.",
-      "url": "https://wbmaker2.github.io/turtle-geometry-canvas/",
-      "githubUrl": "https://github.com/WBmaker2/turtle-geometry-canvas",
-      "tags": [
-        "수학",
-        "실과",
-        "코딩",
-        "수업",
-        "도형"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/fbdbaf4e-1c6d-4644-8de7-cde51f5e9c9d.png",
-      "subject": "수학/실과",
-      "grade": "초등 5~6학년",
-      "memo": "정삼각형, 정사각형, 정오각형부터 별, 나선, 꽃 모양까지 거북이 명령을 실행하며 다각형의 외각과 반복 구조를 관찰할 수 있습니다. 자유 도형 그리기에서는 이동거리, 회전각, 반복 횟수를 직접 조합해 순차와 반복 프로그래밍 구조를 함께 실험할 수 있습니다.",
-      "createdAt": "2026-05-09T12:35:29.044Z",
-      "updatedAt": "2026-05-13T00:43:10.521Z"
-    },
-    {
       "id": "837829ee-abd3-46a7-9554-ec83055bbdf0",
       "title": "우리 반 학급일지",
       "summary": "교사가 출결, 수업 내용, 학급 일지, 학생별 누가기록을 한 화면에서 정리하고 백업할 수 있는 학급 운영 기록 도구입니다.",
@@ -659,66 +850,6 @@
       "memo": "교사가 학교·학급·학생 명단을 준비하고 단일 반 또는 2반 분할 세션을 열면, 학생은 이름을 선택해 기록을 제출합니다. 교사는 대표 기록, 요약표, 동기화 상태를 확인하며 Google Sheets 기반으로 운영 데이터를 관리할 수 있습니다.",
       "createdAt": "2026-04-19T01:51:40.541Z",
       "updatedAt": "2026-05-13T00:39:20.557Z"
-    },
-    {
-      "id": "422f88e0-ac58-42c6-afa4-9d557979eaf8",
-      "title": "찰랑찰랑 디지털 물컵 실로폰",
-      "summary": "물 높이를 조절해 소리의 높낮이를 비교하고 도레미 연주 미션까지 수행하는 과학/음악 융합 앱",
-      "url": "https://wbmaker2.github.io/water-glass-xylophone/",
-      "githubUrl": "https://github.com/WBmaker2/water-glass-xylophone",
-      "tags": [
-        "과학",
-        "음악",
-        "시뮬레이션",
-        "수업"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/422f88e0-ac58-42c6-afa4-9d557979eaf8.png",
-      "subject": "과학/음악",
-      "grade": "초등 3~4학년",
-      "memo": "3~4학년 소리 단원에서 물의 양과 소리 높낮이를 안전하게 비교하고, 도레미 튜닝과 짧은 연주로 음악 활동까지 이어갈 수 있습니다.",
-      "createdAt": "2026-05-12T10:34:08.273Z",
-      "updatedAt": "2026-05-13T00:37:53.143Z"
-    },
-    {
-      "id": "2c47b201-4941-4d74-a5b0-bb84d696e01c",
-      "title": "왁자지껄 우리 반 알뜰 시장",
-      "summary": "3~4학년 학생이 예산 안에서 물건을 고르고 활동지·발표 카드로 합리적 소비 이유를 정리하는 사회·수학 융합 시뮬레이터입니다.",
-      "url": "https://wbmaker2.github.io/smart-flea-market-simulator/",
-      "githubUrl": "https://github.com/WBmaker2/smart-flea-market-simulator",
-      "tags": [
-        "사회",
-        "수학",
-        "경제",
-        "수업"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/2c47b201-4941-4d74-a5b0-bb84d696e01c.png",
-      "subject": "사회/수학 융합",
-      "grade": "3-4학년군",
-      "memo": "10,000원 예산 안에서 필수/선택 소비를 비교하고, 학생 활동지·발표 카드·교사용 수업안을 함께 활용해 계산 과정과 소비 이유를 말할 수 있도록 돕습니다.",
-      "createdAt": "2026-05-12T09:21:45.938Z",
-      "updatedAt": "2026-05-13T00:36:43.302Z"
-    },
-    {
-      "id": "4013316e-7506-46aa-9f24-7175b379ea27",
-      "title": "마법의 데칼코마니: 대칭 아트 스튜디오",
-      "summary": "5~6학년 학생이 선대칭 축 반사와 점 탐구를 직접 그리며 수학과 미술을 함께 탐구하는 대칭 아트 앱입니다.",
-      "url": "https://wbmaker2.github.io/symmetry-art-studio/",
-      "githubUrl": "https://github.com/WBmaker2/symmetry-art-studio",
-      "tags": [
-        "대칭",
-        "수업",
-        "수학",
-        "미술"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/4013316e-7506-46aa-9f24-7175b379ea27.png",
-      "subject": "수학 / 미술",
-      "grade": "5~6학년",
-      "memo": "세로·가로·대각선 대칭축, 격자 보기, 점 탐구, 거리 힌트, 작품 카드 저장과 공유 문구 복사를 활용해 선대칭 성질을 시각적으로 설명하고 미술 작품으로 확장할 수 있습니다.",
-      "createdAt": "2026-05-08T14:55:08.027Z",
-      "updatedAt": "2026-05-13T00:32:53.958Z"
     },
     {
       "id": "b5c444ba-0d76-4bc5-b787-3132985da0d3",
@@ -911,25 +1042,6 @@
       "updatedAt": "2026-05-08T12:48:43.572Z"
     },
     {
-      "id": "b52fd0e4-768b-4cc1-806c-53deef04f003",
-      "title": "디지털 팔레트: 색깔 혼합 실험실",
-      "summary": "초등학생이 물감과 빛의 색 혼합을 방울 버튼으로 실험하고 결과 색과 비율을 관찰하는 시각적 학습 앱입니다.",
-      "url": "https://wbmaker2.github.io/digital-color-mixing-lab/",
-      "githubUrl": "https://github.com/WBmaker2/digital-color-mixing-lab",
-      "tags": [
-        "미술",
-        "과학",
-        "수업"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/b52fd0e4-768b-4cc1-806c-53deef04f003.png",
-      "subject": "미술/과학",
-      "grade": "초3-6",
-      "memo": "3~4학년 미술의 조형 요소와 5~6학년 과학의 빛 단원에서 색의 비율과 결과를 비교하며 관찰 기록을 남기는 활동에 활용할 수 있습니다.",
-      "createdAt": "2026-04-24T13:23:35.648Z",
-      "updatedAt": "2026-05-08T12:47:51.595Z"
-    },
-    {
       "id": "40acf4df-03d2-4802-a334-b56401956299",
       "title": "째깍째깍 시간 탐험대",
       "summary": "초등 저학년 학생이 아날로그 시계 바늘을 직접 돌리며 시각 읽기 미션을 반복 연습하는 수학 학습 앱입니다.",
@@ -948,45 +1060,6 @@
       "memo": "분침을 드래그하면 시침이 함께 움직이고, 미션·탐험 지도·보상함으로 시각 읽기를 반복 연습할 수 있습니다.",
       "createdAt": "2026-04-26T01:30:47.796Z",
       "updatedAt": "2026-05-08T12:47:12.648Z"
-    },
-    {
-      "id": "373e131a-54eb-41a6-852f-aa54431b29c8",
-      "title": "으쓱으쓱 튼튼 스트레칭 룰렛",
-      "summary": "교실에서 룰렛으로 스트레칭 미션을 뽑고 타이머에 맞춰 함께 몸을 풀 수 있는 수업용 활동 앱",
-      "url": "https://wbmaker2.github.io/healthy-streching-roulette/",
-      "githubUrl": "https://github.com/WBmaker2/healthy-streching-roulette",
-      "tags": [
-        "체육",
-        "집중",
-        "수업"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/373e131a-54eb-41a6-852f-aa54431b29c8.png",
-      "subject": "체육/바른생활",
-      "grade": "초등 1~6학년",
-      "memo": "아침 활동, 중간놀이, 수업 중 집중 전환 시간에 전자칠판으로 룰렛을 돌려 전체 학생이 짧게 몸을 풀도록 활용할 수 있습니다. 교사 관리화면에서 미션 문구를 저장하거나 기본값으로 초기화할 수 있습니다.",
-      "createdAt": "2026-04-26T13:16:36.556Z",
-      "updatedAt": "2026-05-08T12:44:21.429Z"
-    },
-    {
-      "id": "7507c704-bd01-497e-aeb5-1578209b0d6e",
-      "title": "신호등 토론방",
-      "summary": "초등 토론 수업에서 학생 의견을 실시간 포스트잇과 찬반 비율로 모아 보는 디지털 토론 보드입니다.",
-      "url": "https://traffic-light-debate.web.app",
-      "githubUrl": "https://github.com/WBmaker2/traffic-light-debate",
-      "tags": [
-        "토론",
-        "사회",
-        "실시간",
-        "수업"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/7507c704-bd01-497e-aeb5-1578209b0d6e.png",
-      "subject": "국어·사회·도덕",
-      "grade": "초5-6",
-      "memo": "교사가 토론 세션을 만들고 학생은 QR 또는 세션 코드로 들어와 찬성·반대·중립 의견과 근거를 제출합니다. 전자칠판에서는 학급 의견 비율과 색상 포스트잇을 함께 보며 토의·토론을 진행할 수 있습니다.",
-      "createdAt": "2026-04-26T13:21:14.825Z",
-      "updatedAt": "2026-05-08T12:43:47.195Z"
     },
     {
       "id": "29a0ce2f-bbeb-45bd-8306-54880dd3a6cc",
@@ -1028,25 +1101,6 @@
       "updatedAt": "2026-05-08T12:42:29.004Z"
     },
     {
-      "id": "0a1a350d-2f4d-4676-ba63-f33ad2147328",
-      "title": "스마트 올바름 챌린지: AI-Detox 다이어리",
-      "summary": "초등 5~6학년 학생이 스마트 기기와 AI 사용 습관을 기록하고 디지털 디톡스 달성도를 확인하는 자기 점검 앱입니다.",
-      "url": "https://wbmaker2.github.io/ai-detox-diary/",
-      "githubUrl": "https://github.com/WBmaker2/ai-detox-diary",
-      "tags": [
-        "실과",
-        "도덕",
-        "디지털윤리"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/0a1a350d-2f4d-4676-ba63-f33ad2147328.png",
-      "subject": "실과/도덕",
-      "grade": "초등 5~6학년",
-      "memo": "실과의 데이터 유형과 AI 활용 이해, 도덕의 정보통신 윤리 성찰을 함께 다루는 수업용 앱입니다. 학생은 하루 목표 사용 시간과 실제 사용량, AI 질문 횟수, 윤리 체크와 성찰 메모를 기록하며 절제 습관을 돌아볼 수 있습니다.",
-      "createdAt": "2026-04-30T13:47:20.926Z",
-      "updatedAt": "2026-05-08T12:41:42.623Z"
-    },
-    {
       "id": "56f95ab1-4ad1-45b6-8eac-e5ba6cf543b8",
       "title": "도전! 디지털 수평잡기 실험실",
       "summary": "초등 3~4학년 학생이 물체의 무게와 받침점 거리에 따른 시소 균형을 탐구하는 과학 시뮬레이션입니다.",
@@ -1064,26 +1118,6 @@
       "memo": "물체 팔레트에서 무게가 표시된 물체를 골라 시소 양쪽 거리 칸에 올리며 무게 효과와 균형 변화를 관찰할 수 있어 [4과01-02] 수평잡기 활동 도입과 탐구에 활용하기 좋습니다.",
       "createdAt": "2026-05-01T02:51:37.425Z",
       "updatedAt": "2026-05-08T12:40:54.204Z"
-    },
-    {
-      "id": "9c98f5c3-758a-47ba-bf90-59799f820e4f",
-      "title": "우리 반 꼬마 CEO: 스마트 용돈 기입장",
-      "summary": "학생이 용돈 수입과 지출을 기록하고 원그래프, 목표 금액, 잔액을 확인하며 소비 습관을 돌아보는 금융 교육 앱입니다.",
-      "url": "https://wbmaker2.github.io/smart-allowance-manager/",
-      "githubUrl": "https://github.com/WBmaker2/smart-allowance-manager.git",
-      "tags": [
-        "경제",
-        "실과",
-        "수학",
-        "수업"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/9c98f5c3-758a-47ba-bf90-59799f820e4f.png",
-      "subject": "실과 / 수학",
-      "grade": "5~6학년",
-      "memo": "5~6학년 실과의 용돈 관리와 수학의 원그래프 활동을 연결해, 학생이 받은 돈과 사용한 돈, 남은 돈을 확인하고 주간 목표와 소비 비율을 바탕으로 자신의 경제 습관을 성찰하도록 돕는 수업용 앱입니다.",
-      "createdAt": "2026-04-26T01:17:26.605Z",
-      "updatedAt": "2026-05-08T12:34:50.484Z"
     }
   ]
 }
