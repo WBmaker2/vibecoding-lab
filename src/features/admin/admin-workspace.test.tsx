@@ -131,6 +131,44 @@ describe("AdminWorkspace", () => {
     ).toHaveAttribute("href", "/api/admin/backup");
   });
 
+  it("starts the static gallery sync workflow from the workspace header", async () => {
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ ok: true }), {
+        headers: { "content-type": "application/json" },
+        status: 200
+      })
+    );
+
+    render(
+      <AdminWorkspace
+        apps={apps}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "수정 사항 동기화" }));
+
+    await waitFor(() => {
+      expect(fetchSpy).toHaveBeenCalledWith(
+        "/api/admin/sync-static-gallery",
+        expect.objectContaining({
+          method: "POST",
+          body: JSON.stringify({ reason: "admin-sync-button" })
+        })
+      );
+    });
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "동기화 작업을 시작했습니다"
+    );
+
+    fetchSpy.mockRestore();
+  });
+
   it("shows a Github action only for apps with a github link", () => {
     render(
       <AdminWorkspace

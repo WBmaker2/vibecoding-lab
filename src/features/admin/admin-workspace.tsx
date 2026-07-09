@@ -34,6 +34,11 @@ export function AdminWorkspace({
   const [recentChange, setRecentChange] = useState<RecentAdminChange | null>(
     null
   );
+  const [syncPending, setSyncPending] = useState(false);
+  const [syncStatus, setSyncStatus] = useState<{
+    kind: "error" | "success";
+    message: string;
+  } | null>(null);
 
   useEffect(() => {
     setLocalApps(apps);
@@ -114,6 +119,48 @@ export function AdminWorkspace({
     });
   }
 
+  async function handleStaticGallerySync() {
+    setSyncPending(true);
+    setSyncStatus(null);
+
+    try {
+      const response = await fetch("/api/admin/sync-static-gallery", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          reason: "admin-sync-button"
+        })
+      });
+      const payload = (await response.json().catch(() => ({}))) as {
+        error?: string;
+      };
+
+      if (!response.ok) {
+        throw new Error(
+          payload.error || "동기화 작업을 시작하지 못했습니다."
+        );
+      }
+
+      setSyncStatus({
+        kind: "success",
+        message:
+          "동기화 작업을 시작했습니다. GitHub Actions와 Vercel 배포가 완료되면 공개 페이지에 반영됩니다."
+      });
+    } catch (error) {
+      setSyncStatus({
+        kind: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "동기화 작업을 시작하지 못했습니다."
+      });
+    } finally {
+      setSyncPending(false);
+    }
+  }
+
   return (
     <main className="page-shell admin-page">
       <header className="admin-page-header">
@@ -133,6 +180,15 @@ export function AdminWorkspace({
           </div>
 
           <div className="admin-header-actions">
+            <button
+              className="admin-secondary-button"
+              disabled={syncPending}
+              onClick={handleStaticGallerySync}
+              type="button"
+            >
+              {syncPending ? "동기화 시작 중..." : "수정 사항 동기화"}
+            </button>
+
             <a className="admin-secondary-button" href="/api/admin/backup">
               JSON 백업
             </a>
@@ -143,6 +199,15 @@ export function AdminWorkspace({
               </button>
             </form>
           </div>
+
+          {syncStatus ? (
+            <p
+              className={`admin-sync-status admin-sync-status-${syncStatus.kind}`}
+              role="status"
+            >
+              {syncStatus.message}
+            </p>
+          ) : null}
         </div>
       </header>
 
