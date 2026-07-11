@@ -1,7 +1,7 @@
 import { put } from "@vercel/blob";
 import {
-  assertSafeRemoteHttpUrl,
-  fetchSafeHtml
+  fetchSafeHtml,
+  fetchSafeResource
 } from "@/lib/security/remote-url";
 import { getThumbnailHostLabel } from "./generated-thumbnail";
 
@@ -10,6 +10,25 @@ const CAPTURE_HEIGHT = 630;
 const CAPTURE_DELAY_MS = 1500;
 const CAPTURE_TIMEOUT_MS = 15000;
 const MAX_CAPTURE_REQUESTS = 80;
+// Browser subresources are bounded to 512 KiB each before Chromium sees them.
+const MAX_CAPTURE_RESOURCE_BYTES = 512 * 1024;
+
+const SAFE_REQUEST_HEADERS = new Set([
+  "accept",
+  "accept-language",
+  "referer",
+  "user-agent"
+]);
+
+const SAFE_RESPONSE_HEADERS = new Set([
+  "cache-control",
+  "content-language",
+  "content-type",
+  "etag",
+  "expires",
+  "last-modified",
+  "vary"
+]);
 
 function toPngDataUrl(buffer: Buffer) {
   return `data:image/png;base64,${buffer.toString("base64")}`;
@@ -71,16 +90,47 @@ function withBaseHref(html: string, baseUrl: string) {
   return `<head>${baseTag}</head>${html}`;
 }
 
+function getCaptureTarget(sourceUrl: string) {
+  try {
+    const target = new URL(sourceUrl);
+
+    if (!["http:", "https:"].includes(target.protocol)) {
+      return null;
+    }
+
+    target.hash = "";
+    return target.toString();
+  } catch {
+    return null;
+  }
+}
+
+function sanitizeRequestHeaders(headers: Record<string, string>) {
+  return Object.fromEntries(
+    Object.entries(headers).filter(([name]) =>
+      SAFE_REQUEST_HEADERS.has(name.toLowerCase())
+    )
+  );
+}
+
+function sanitizeResponseHeaders(headers: Record<string, string>) {
+  return Object.fromEntries(
+    Object.entries(headers).filter(([name]) =>
+      SAFE_RESPONSE_HEADERS.has(name.toLowerCase())
+    )
+  );
+}
+
 export async function capturePageThumbnail(sourceUrl: string) {
-  const target = await assertSafeRemoteHttpUrl(sourceUrl)
-    .then((url) => url.toString())
-    .catch(() => null);
+  const target = getCaptureTarget(sourceUrl);
 
   if (!target) {
     return null;
   }
 
+  const captureDeadline = Date.now() + CAPTURE_TIMEOUT_MS;
   const safeDocument = await fetchSafeHtml(target, {
+    deadline: captureDeadline,
     timeoutMs: CAPTURE_TIMEOUT_MS
   }).catch(() => null);
 
@@ -103,7 +153,6 @@ export async function capturePageThumbnail(sourceUrl: string) {
       },
       serviceWorkers: "block"
     });
-    const page = await context.newPage();
     let requestCount = 0;
     let mainDocumentFulfilled = false;
 
@@ -122,31 +171,47 @@ export async function capturePageThumbnail(sourceUrl: string) {
 
       requestCount += 1;
 
-      if (requestCount >= MAX_CAPTURE_REQUESTS) {
+      if (
+        requestCount > MAX_CAPTURE_REQUESTS ||
+        !/^https?:/i.test(requestUrl) ||
+        !["GET", "HEAD"].includes(route.request().method())
+      ) {
         await route.abort("blockedbyclient");
         return;
       }
 
-      if (/^https?:/i.test(requestUrl)) {
-        try {
-          await assertSafeRemoteHttpUrl(requestUrl);
-        } catch {
-          // Every HTTP(S) subresource is blocked; the policy check records why.
-        }
+      try {
+        const resource = await fetchSafeResource(requestUrl, {
+          deadline: captureDeadline,
+          headers: sanitizeRequestHeaders(
+            await route.request().headers()
+          ),
+          maxBytes: MAX_CAPTURE_RESOURCE_BYTES,
+          method: route.request().method() as "GET" | "HEAD"
+        });
 
+        await route.fulfill({
+          body: resource.body,
+          headers: sanitizeResponseHeaders(resource.headers),
+          status: resource.statusCode
+        });
+      } catch {
         await route.abort("blockedbyclient");
-      } else {
-        await route.continue();
       }
     });
 
+    const page = await context.newPage();
+
     await page.goto(target, {
-      timeout: CAPTURE_TIMEOUT_MS,
+      timeout: Math.max(1, captureDeadline - Date.now()),
       waitUntil: "domcontentloaded"
     });
-    await page.waitForTimeout(CAPTURE_DELAY_MS);
+    await page.waitForTimeout(
+      Math.max(0, Math.min(CAPTURE_DELAY_MS, captureDeadline - Date.now()))
+    );
 
     const screenshot = await page.screenshot({
+      timeout: Math.max(1, captureDeadline - Date.now()),
       type: "png"
     });
 

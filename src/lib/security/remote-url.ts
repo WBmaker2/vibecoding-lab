@@ -25,6 +25,21 @@ export interface FetchSafeHtmlOptions extends RemoteUrlOptions {
   timeoutMs?: number;
 }
 
+export interface FetchSafeResourceOptions extends RemoteUrlOptions {
+  headers?: HeadersInit;
+  maxBytes?: number;
+  maxRedirects?: number;
+  method: "GET" | "HEAD";
+  timeoutMs?: number;
+}
+
+export interface SafeResourceResponse {
+  body: Buffer;
+  finalUrl: string;
+  headers: Record<string, string>;
+  statusCode: number;
+}
+
 interface ValidatedRemoteUrl {
   address: string;
   family: 4 | 6;
@@ -64,6 +79,10 @@ function isPrivateIpv4(address: string) {
     (first === 172 && isInRange(second, 16, 31)) ||
     (first === 192 && second === 0 && third === 0) ||
     (first === 192 && second === 0 && third === 2) ||
+    (first === 192 && second === 31 && third === 196) ||
+    (first === 192 && second === 52 && third === 193) ||
+    (first === 192 && second === 88 && third === 99) ||
+    (first === 192 && second === 175 && third === 48) ||
     (first === 192 && second === 168) ||
     (first === 198 && second === 18) ||
     (first === 198 && second === 19) ||
@@ -378,11 +397,28 @@ function combineAbortSignals(signal: AbortSignal | undefined, timeoutMs: number)
 }
 
 function toRequestHeaders(headers: HeadersInit | undefined) {
-  if (!headers) {
-    return {};
-  }
+  const blockedHeaders = new Set([
+    "connection",
+    "host",
+    "keep-alive",
+    "proxy-authenticate",
+    "proxy-authorization",
+    "set-cookie",
+    "te",
+    "trailer",
+    "transfer-encoding",
+    "upgrade"
+  ]);
+  const values = headers
+    ? Object.fromEntries(new Headers(headers).entries())
+    : {};
 
-  return Object.fromEntries(new Headers(headers).entries());
+  return {
+    ...Object.fromEntries(
+      Object.entries(values).filter(([name]) => !blockedHeaders.has(name))
+    ),
+    "accept-encoding": "identity"
+  };
 }
 
 function getHeader(headers: IncomingHttpHeaders, name: string) {
@@ -396,6 +432,7 @@ function requestPinnedResponse(
     deadline: number;
     headers?: HeadersInit;
     maxBytes: number;
+    method: "GET" | "HEAD";
     signal: AbortSignal;
   }
 ) {
@@ -423,7 +460,7 @@ function requestPinnedResponse(
           _lookupOptions: object,
           callback: (error: Error | null, address: string, family: 4 | 6) => void
         ) => callback(null, address, family),
-        method: "GET",
+        method: options.method,
         path: `${url.pathname}${url.search}`,
         port: url.port || undefined,
         protocol: url.protocol,
@@ -483,6 +520,29 @@ function exactContentType(headers: IncomingHttpHeaders) {
   return getHeader(headers, "content-type")?.split(";", 1)[0]?.trim().toLowerCase();
 }
 
+function safeResponseHeaders(headers: IncomingHttpHeaders) {
+  const allowedHeaders = new Set([
+    "cache-control",
+    "content-language",
+    "content-type",
+    "etag",
+    "expires",
+    "last-modified",
+    "vary"
+  ]);
+  const result: Record<string, string> = {};
+
+  for (const name of allowedHeaders) {
+    const value = getHeader(headers, name);
+
+    if (value) {
+      result[name] = value;
+    }
+  }
+
+  return result;
+}
+
 export async function fetchSafeHtml(
   input: string | URL,
   options: FetchSafeHtmlOptions = {}
@@ -490,8 +550,11 @@ export async function fetchSafeHtml(
   const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
   const maxBytes = options.maxBytes ?? DEFAULT_MAX_BYTES;
   const maxRedirects = options.maxRedirects ?? DEFAULT_MAX_REDIRECTS;
-  const deadline = Date.now() + timeoutMs;
-  const abort = combineAbortSignals(options.signal, timeoutMs);
+  const deadline = options.deadline ?? Date.now() + timeoutMs;
+  const abort = combineAbortSignals(
+    options.signal,
+    Math.max(0, deadline - Date.now())
+  );
 
   try {
     let current = await validateRemoteUrl(input, {
@@ -505,6 +568,7 @@ export async function fetchSafeHtml(
         deadline,
         headers: options.headers,
         maxBytes,
+        method: "GET",
         signal: abort.signal
       });
 
@@ -540,6 +604,66 @@ export async function fetchSafeHtml(
       return {
         finalUrl: current.url.toString(),
         html: new TextDecoder().decode(response.body)
+      };
+    }
+  } finally {
+    abort.cleanup();
+  }
+}
+
+export async function fetchSafeResource(
+  input: string | URL,
+  options: FetchSafeResourceOptions
+): Promise<SafeResourceResponse> {
+  const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+  const maxBytes = options.maxBytes ?? 512 * 1024;
+  const maxRedirects = options.maxRedirects ?? DEFAULT_MAX_REDIRECTS;
+  const deadline = options.deadline ?? Date.now() + timeoutMs;
+  const abort = combineAbortSignals(
+    options.signal,
+    Math.max(0, deadline - Date.now())
+  );
+
+  try {
+    let current = await validateRemoteUrl(input, {
+      ...options,
+      deadline,
+      signal: abort.signal
+    });
+
+    for (let redirectCount = 0; ; redirectCount += 1) {
+      const response = await requestPinnedResponse(current, {
+        deadline,
+        headers: options.headers,
+        maxBytes,
+        method: options.method,
+        signal: abort.signal
+      });
+
+      if (isRedirectStatus(response.statusCode)) {
+        if (redirectCount >= maxRedirects) {
+          throw new Error("Remote URL redirect limit exceeded.");
+        }
+
+        const location = getHeader(response.headers, "location");
+
+        if (!location) {
+          throw new Error("Remote URL redirect is missing a location.");
+        }
+
+        current = await validateRemoteUrl(new URL(location, current.url), {
+          ...options,
+          deadline,
+          signal: abort.signal
+        });
+        continue;
+      }
+
+      return {
+        body: response.body,
+        finalUrl: current.url.toString(),
+        headers: safeResponseHeaders(response.headers),
+        statusCode: response.statusCode
       };
     }
   } finally {

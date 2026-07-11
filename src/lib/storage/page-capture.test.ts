@@ -2,8 +2,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { capturePageThumbnail } from "./page-capture";
 
 const mocks = vi.hoisted(() => ({
-  assertSafeRemoteHttpUrl: vi.fn(),
   fetchSafeHtml: vi.fn(),
+  fetchSafeResource: vi.fn(),
+  assertSafeRemoteHttpUrl: vi.fn(),
   browser: {
     close: vi.fn(),
     newContext: vi.fn(),
@@ -24,7 +25,8 @@ const mocks = vi.hoisted(() => ({
 
 vi.mock("@/lib/security/remote-url", () => ({
   assertSafeRemoteHttpUrl: mocks.assertSafeRemoteHttpUrl,
-  fetchSafeHtml: mocks.fetchSafeHtml
+  fetchSafeHtml: mocks.fetchSafeHtml,
+  fetchSafeResource: mocks.fetchSafeResource
 }));
 
 vi.mock("playwright-core", () => ({
@@ -37,12 +39,20 @@ vi.mock("@vercel/blob", () => ({
   put: vi.fn()
 }));
 
-function createRoute(url: string) {
+function createRoute(url: string, method = "GET") {
   return {
     abort: vi.fn(),
     continue: vi.fn(),
     fulfill: vi.fn(),
-    request: () => ({ url: () => url })
+    request: () => ({
+      headers: async () => ({
+        accept: "*/*",
+        "accept-encoding": "gzip",
+        cookie: "secret=1"
+      }),
+      method: () => method,
+      url: () => url
+    })
   };
 }
 
@@ -62,20 +72,28 @@ describe("capturePageThumbnail", () => {
       finalUrl: "https://public.example/app",
       html: "<html><head></head><body>safe</body></html>"
     });
+    mocks.fetchSafeResource.mockResolvedValue({
+      body: Buffer.from("resource"),
+      headers: {
+        "content-type": "application/javascript",
+        "set-cookie": "secret=1"
+      },
+      statusCode: 200
+    });
   });
 
   it("rejects the initial URL before launching Chromium", async () => {
-    mocks.assertSafeRemoteHttpUrl.mockRejectedValue(
-      new Error("private address")
-    );
+    mocks.fetchSafeHtml.mockRejectedValue(new Error("private address"));
 
     await expect(
       capturePageThumbnail("http://169.254.169.254/latest/meta-data")
     ).resolves.toBeNull();
 
-    expect(mocks.assertSafeRemoteHttpUrl).toHaveBeenCalledWith(
-      "http://169.254.169.254/latest/meta-data"
+    expect(mocks.fetchSafeHtml).toHaveBeenCalledWith(
+      "http://169.254.169.254/latest/meta-data",
+      expect.objectContaining({ deadline: expect.any(Number) })
     );
+    expect(mocks.assertSafeRemoteHttpUrl).not.toHaveBeenCalled();
     expect(mocks.launch).not.toHaveBeenCalled();
   });
 
@@ -100,6 +118,20 @@ describe("capturePageThumbnail", () => {
         return url;
       }
     );
+    mocks.fetchSafeResource.mockImplementation(async (input: string) => {
+      if (input.includes("10.0.0.1")) {
+        throw new Error("private address");
+      }
+
+      return {
+        body: Buffer.from("resource"),
+        headers: {
+          "content-type": "application/javascript",
+          "set-cookie": "secret=1"
+        },
+        statusCode: 200
+      };
+    });
 
     await routeHandler(mainRoute);
     await routeHandler(privateRoute);
@@ -110,13 +142,21 @@ describe("capturePageThumbnail", () => {
     );
     expect(privateRoute.abort).toHaveBeenCalledWith("blockedbyclient");
     expect(privateRoute.continue).not.toHaveBeenCalled();
-    expect(publicRoute.abort).toHaveBeenCalledWith("blockedbyclient");
-    expect(publicRoute.continue).not.toHaveBeenCalled();
-    expect(mocks.assertSafeRemoteHttpUrl).toHaveBeenCalledWith(
-      "http://10.0.0.1/private"
+    expect(publicRoute.fulfill).toHaveBeenCalledWith(
+      expect.objectContaining({
+        body: Buffer.from("resource"),
+        headers: { "content-type": "application/javascript" },
+        status: 200
+      })
     );
-    expect(mocks.assertSafeRemoteHttpUrl).toHaveBeenCalledWith(
-      "https://cdn.example/app.js"
+    expect(publicRoute.abort).not.toHaveBeenCalled();
+    expect(publicRoute.continue).not.toHaveBeenCalled();
+    expect(mocks.fetchSafeResource).toHaveBeenCalledWith(
+      "https://cdn.example/app.js",
+      expect.objectContaining({
+        maxBytes: 512 * 1024,
+        method: "GET"
+      })
     );
   });
 
@@ -136,6 +176,26 @@ describe("capturePageThumbnail", () => {
 
     expect(overflowRoute.abort).toHaveBeenCalledWith("blockedbyclient");
     expect(overflowRoute.continue).not.toHaveBeenCalled();
+  });
+
+  it("aborts non-HTTP(S) and unsupported-method resources", async () => {
+    await capturePageThumbnail("https://public.example/app");
+
+    const routeHandler = mocks.context.route.mock.calls[0]?.[1] as (
+      route: ReturnType<typeof createRoute>
+    ) => Promise<void>;
+    const dataRoute = createRoute("data:text/plain,hello");
+    const postRoute = createRoute("https://cdn.example/form", "POST");
+
+    await routeHandler(dataRoute);
+    await routeHandler(postRoute);
+
+    expect(dataRoute.abort).toHaveBeenCalledWith("blockedbyclient");
+    expect(postRoute.abort).toHaveBeenCalledWith("blockedbyclient");
+    expect(mocks.fetchSafeResource).not.toHaveBeenCalledWith(
+      "https://cdn.example/form",
+      expect.anything()
+    );
   });
 
   it("always closes Chromium when capture fails", async () => {

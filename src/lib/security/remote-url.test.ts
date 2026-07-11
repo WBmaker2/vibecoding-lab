@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   assertSafeRemoteHttpUrl,
   fetchSafeHtml,
+  fetchSafeResource,
   isPublicIpAddress
 } from "./remote-url";
 
@@ -103,7 +104,12 @@ describe("isPublicIpAddress", () => {
     "10.0.0.1",
     "100.64.0.1",
     "169.254.169.254",
+    "192.0.0.1",
     "192.0.2.1",
+    "192.31.196.1",
+    "192.52.193.1",
+    "192.88.99.1",
+    "192.175.48.1",
     "224.0.0.1",
     "::1",
     "fc00::1",
@@ -123,6 +129,7 @@ describe("isPublicIpAddress", () => {
 
   it("accepts a public IPv4 address", () => {
     expect(isPublicIpAddress("93.184.216.34")).toBe(true);
+    expect(isPublicIpAddress("8.8.8.8")).toBe(true);
   });
 
   it("accepts a globally routable IPv6 address", () => {
@@ -373,5 +380,29 @@ describe("fetchSafeHtml", () => {
     );
 
     expect(address).toEqual({ address: "93.184.216.34", family: 4 });
+  });
+
+  it("fetches a bounded resource through the pinned transport", async () => {
+    mockTransportResponse({
+      body: "image-bytes",
+      headers: {
+        "content-type": "image/png",
+        "x-internal": "must-not-be-forwarded"
+      }
+    });
+
+    const result = await fetchSafeResource("https://example.com/icon.png", {
+      lookup: publicLookup,
+      maxBytes: 128,
+      method: "GET"
+    });
+
+    expect(result.body.toString()).toBe("image-bytes");
+    expect(result.headers["content-type"]).toBe("image/png");
+    expect(transportMocks.httpsRequest.mock.calls[0]?.[0]).toMatchObject({
+      method: "GET",
+      headers: expect.objectContaining({ "accept-encoding": "identity" }),
+      lookup: expect.any(Function)
+    });
   });
 });
