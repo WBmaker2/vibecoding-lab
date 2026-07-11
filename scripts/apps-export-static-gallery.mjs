@@ -1,18 +1,16 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import postgres from "postgres";
+import { getReusableSnapshotDecision } from "./lib/static-gallery-export-state.mjs";
 
 const DEFAULT_BASE_URL = "https://www.vivehong.shop";
-const OUTPUT_JSON_PATH = path.join(
-  process.cwd(),
-  "src",
-  "data",
-  "public-apps.json"
+const OUTPUT_JSON_PATH = path.resolve(
+  process.env.STATIC_GALLERY_OUTPUT_JSON_PATH ||
+    path.join(process.cwd(), "src", "data", "public-apps.json")
 );
-const OUTPUT_THUMBNAIL_DIR = path.join(
-  process.cwd(),
-  "public",
-  "app-thumbnails"
+const OUTPUT_THUMBNAIL_DIR = path.resolve(
+  process.env.STATIC_GALLERY_OUTPUT_THUMBNAIL_DIR ||
+    path.join(process.cwd(), "public", "app-thumbnails")
 );
 
 const CLI_FLAGS = {
@@ -637,9 +635,68 @@ async function writeSnapshotAtomically(payload) {
   }
 }
 
+async function readExistingSnapshot() {
+  try {
+    const raw = await fs.readFile(OUTPUT_JSON_PATH, "utf8");
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+async function readThumbnailFiles() {
+  try {
+    const entries = await fs.readdir(OUTPUT_THUMBNAIL_DIR, {
+      withFileTypes: true
+    });
+    return entries.filter((entry) => entry.isFile()).map((entry) => entry.name);
+  } catch {
+    return [];
+  }
+}
+
+async function removeOrphanedThumbnailFiles(snapshot) {
+  const referencedFiles = new Set(
+    snapshot.apps
+      .map((app) => app.thumbnailUrl)
+      .filter(
+        (thumbnailUrl) =>
+          typeof thumbnailUrl === "string" &&
+          thumbnailUrl.startsWith("/app-thumbnails/")
+      )
+      .map((thumbnailUrl) => thumbnailUrl.slice("/app-thumbnails/".length))
+  );
+  const entries = await fs.readdir(OUTPUT_THUMBNAIL_DIR, {
+    withFileTypes: true
+  });
+
+  await Promise.all(
+    entries
+      .filter(
+        (entry) => entry.isFile() && !referencedFiles.has(entry.name)
+      )
+      .map((entry) => fs.unlink(path.join(OUTPUT_THUMBNAIL_DIR, entry.name)))
+  );
+}
+
 async function run() {
-  await fs.mkdir(OUTPUT_THUMBNAIL_DIR, { recursive: true });
   const apps = await fetchApps();
+  const existingSnapshot = await readExistingSnapshot();
+  const existingThumbnailFiles = await readThumbnailFiles();
+  const reuseDecision = getReusableSnapshotDecision({
+    sourceApps: apps,
+    snapshot: existingSnapshot,
+    thumbnailFiles: existingThumbnailFiles
+  });
+
+  if (reuseDecision.reusable) {
+    console.log(
+      `gallery-export changed=false reason=${reuseDecision.reason}`
+    );
+    return;
+  }
+
+  await fs.mkdir(OUTPUT_THUMBNAIL_DIR, { recursive: true });
   const failedRelativeThumbnails = [];
 
   const usedSlugs = new Set();
@@ -697,6 +754,8 @@ async function run() {
   };
 
   await writeSnapshotAtomically(payload);
+  await removeOrphanedThumbnailFiles(payload);
+  console.log(`gallery-export changed=true reason=${reuseDecision.reason}`);
   console.log(OUTPUT_JSON_PATH);
 }
 
