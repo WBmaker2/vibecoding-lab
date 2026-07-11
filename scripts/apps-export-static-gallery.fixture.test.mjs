@@ -1,5 +1,6 @@
 // @vitest-environment node
 
+import { createHash } from "node:crypto";
 import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
 import os from "node:os";
@@ -58,6 +59,19 @@ function runExporter({ backup, outputJson, outputThumbnailDir }) {
   });
 }
 
+async function readFixtureState(outputJson, outputThumbnailDir) {
+  const json = await fs.readFile(outputJson);
+  const thumbnail = await fs.readFile(
+    path.join(outputThumbnailDir, "alpha.png")
+  );
+
+  return {
+    generatedAt: JSON.parse(json.toString("utf8")).generatedAt,
+    json,
+    thumbnailChecksum: createHash("sha256").update(thumbnail).digest("hex")
+  };
+}
+
 describe("static gallery exporter thumbnail entry safety", () => {
   it("treats symlinks and directories as changes and removes them without following links", async () => {
     const fixture = await fs.mkdtemp(
@@ -113,6 +127,79 @@ describe("static gallery exporter thumbnail entry safety", () => {
       await expect(fs.readFile(path.join(outputThumbnailDir, "alpha.png"), "utf8")).resolves.toBe(
         "alpha"
       );
+    } finally {
+      await fs.rm(fixture, { recursive: true, force: true });
+    }
+  });
+
+  it("preserves unchanged fixture bytes across two runs and exports changed DB fields", async () => {
+    const fixture = await fs.mkdtemp(
+      path.join(os.tmpdir(), "hvc-gallery-export-noop-test-")
+    );
+    const outputJson = path.join(fixture, "src", "data", "public-apps.json");
+    const outputThumbnailDir = path.join(fixture, "public", "app-thumbnails");
+    const backup = path.join(fixture, "backup.json");
+
+    try {
+      await fs.mkdir(path.dirname(outputJson), { recursive: true });
+      await fs.mkdir(outputThumbnailDir, { recursive: true });
+      await fs.writeFile(
+        outputJson,
+        JSON.stringify(
+          {
+            version: 1,
+            generatedAt: "2026-07-10T00:00:00.000Z",
+            appCount: 1,
+            apps: [app]
+          },
+          null,
+          2
+        )
+      );
+      await fs.writeFile(backup, JSON.stringify({ apps: [app] }, null, 2));
+      await fs.writeFile(path.join(outputThumbnailDir, "alpha.png"), "alpha");
+
+      const initial = await readFixtureState(outputJson, outputThumbnailDir);
+      const first = await runExporter({
+        backup,
+        outputJson,
+        outputThumbnailDir
+      });
+      const afterFirst = await readFixtureState(outputJson, outputThumbnailDir);
+
+      expect(first.code).toBe(0);
+      expect(first.stdout).toContain("gallery-export changed=false");
+      expect(afterFirst.json.equals(initial.json)).toBe(true);
+      expect(afterFirst.generatedAt).toBe(initial.generatedAt);
+      expect(afterFirst.thumbnailChecksum).toBe(initial.thumbnailChecksum);
+
+      const second = await runExporter({
+        backup,
+        outputJson,
+        outputThumbnailDir
+      });
+      const afterSecond = await readFixtureState(outputJson, outputThumbnailDir);
+
+      expect(second.code).toBe(0);
+      expect(second.stdout).toContain("gallery-export changed=false");
+      expect(afterSecond.json.equals(initial.json)).toBe(true);
+      expect(afterSecond.generatedAt).toBe(initial.generatedAt);
+      expect(afterSecond.thumbnailChecksum).toBe(initial.thumbnailChecksum);
+
+      const changedBackup = JSON.parse(await fs.readFile(backup, "utf8"));
+      changedBackup.apps[0].title = "Changed from DB";
+      await fs.writeFile(backup, JSON.stringify(changedBackup, null, 2));
+
+      const changed = await runExporter({
+        backup,
+        outputJson,
+        outputThumbnailDir
+      });
+      const changedSnapshot = JSON.parse(await fs.readFile(outputJson, "utf8"));
+
+      expect(changed.code).toBe(0);
+      expect(changed.stdout).toContain("gallery-export changed=true");
+      expect(changedSnapshot.apps[0].title).toBe("Changed from DB");
     } finally {
       await fs.rm(fixture, { recursive: true, force: true });
     }

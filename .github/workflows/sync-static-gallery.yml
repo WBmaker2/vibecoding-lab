@@ -70,7 +70,7 @@ jobs:
 
       - name: Run focused tests
         if: steps.changes.outputs.changed == 'true'
-        run: npm test -- scripts/lib/static-gallery-export-state.test.mjs src/lib/apps/static-public-apps.test.ts src/app/__tests__/home-shell.test.tsx src/app/api/admin/sync-static-gallery/route.test.ts src/features/admin/admin-workspace.test.tsx
+        run: npm test -- scripts/lib/static-gallery-export-state.test.mjs scripts/apps-export-static-gallery.fixture.test.mjs src/lib/apps/static-public-apps.test.ts src/app/__tests__/home-shell.test.tsx src/app/api/admin/sync-static-gallery/route.test.ts src/features/admin/admin-workspace.test.tsx
 
       - name: Lint
         if: steps.changes.outputs.changed == 'true'

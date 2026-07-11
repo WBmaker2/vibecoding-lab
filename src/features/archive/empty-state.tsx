@@ -22,6 +22,7 @@ export function EmptyState({ query }: EmptyStateProps) {
         height={240}
         priority
         src="/images/mascots/hong-default.png"
+        unoptimized
         width={240}
       />
     </section>
