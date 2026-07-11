@@ -43,17 +43,30 @@ function getReferencedThumbnailFiles(apps) {
 }
 
 function normalizeThumbnailFiles(thumbnailFiles) {
-  return new Set(
-    [...(thumbnailFiles ?? [])].map((file) => {
-      if (typeof file !== "string") {
-        return String(file);
-      }
+  const files = new Set();
 
-      return file.startsWith(LOCAL_THUMBNAIL_PREFIX)
-        ? file.slice(LOCAL_THUMBNAIL_PREFIX.length)
-        : file;
-    })
-  );
+  for (const entry of thumbnailFiles ?? []) {
+    if (typeof entry === "string") {
+      files.add(
+        entry.startsWith(LOCAL_THUMBNAIL_PREFIX)
+          ? entry.slice(LOCAL_THUMBNAIL_PREFIX.length)
+          : entry
+      );
+      continue;
+    }
+
+    if (
+      !entry ||
+      entry.type !== "file" ||
+      typeof entry.name !== "string"
+    ) {
+      return { files: null, reason: "unexpected-thumbnail-entry" };
+    }
+
+    files.add(entry.name);
+  }
+
+  return { files, reason: null };
 }
 
 export function getReusableSnapshotDecision({
@@ -95,9 +108,13 @@ export function getReusableSnapshotDecision({
   }
 
   const materialized = normalizeThumbnailFiles(thumbnailFiles);
+  if (!materialized.files) {
+    return { reusable: false, reason: materialized.reason };
+  }
+
   if (
-    referenced.files.size !== materialized.size ||
-    [...referenced.files].some((file) => !materialized.has(file))
+    referenced.files.size !== materialized.files.size ||
+    [...referenced.files].some((file) => !materialized.files.has(file))
   ) {
     return { reusable: false, reason: "thumbnail-set-changed" };
   }

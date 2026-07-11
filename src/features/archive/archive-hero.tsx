@@ -42,6 +42,7 @@ export function ArchiveHero({
           priority
           sizes="(max-width: 720px) 82px, 148px"
           src="/images/mascots/hong-default.png"
+          unoptimized
           width={132}
         />
       </div>

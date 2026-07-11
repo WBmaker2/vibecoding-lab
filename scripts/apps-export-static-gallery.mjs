@@ -649,7 +649,16 @@ async function readThumbnailFiles() {
     const entries = await fs.readdir(OUTPUT_THUMBNAIL_DIR, {
       withFileTypes: true
     });
-    return entries.filter((entry) => entry.isFile()).map((entry) => entry.name);
+    return entries.map((entry) => ({
+      name: entry.name,
+      type: entry.isFile()
+        ? "file"
+        : entry.isSymbolicLink()
+          ? "symlink"
+          : entry.isDirectory()
+            ? "directory"
+            : "other"
+    }));
   } catch {
     return [];
   }
@@ -672,10 +681,13 @@ async function removeOrphanedThumbnailFiles(snapshot) {
 
   await Promise.all(
     entries
-      .filter(
-        (entry) => entry.isFile() && !referencedFiles.has(entry.name)
+      .filter((entry) => !referencedFiles.has(entry.name))
+      .map((entry) =>
+        fs.rm(path.join(OUTPUT_THUMBNAIL_DIR, entry.name), {
+          force: true,
+          recursive: true
+        })
       )
-      .map((entry) => fs.unlink(path.join(OUTPUT_THUMBNAIL_DIR, entry.name)))
   );
 }
 

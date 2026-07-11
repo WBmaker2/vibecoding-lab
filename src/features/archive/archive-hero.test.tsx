@@ -24,6 +24,26 @@ describe("ArchiveHero", () => {
     expect(noteShell).not.toContainElement(mascotImage);
   });
 
+  it("renders the mascot from its direct static asset path", () => {
+    render(
+      <ArchiveHero
+        activeTags={[]}
+        onQueryChange={() => {}}
+        onToggleTag={() => {}}
+        query=""
+        tags={[]}
+      />
+    );
+
+    const mascotImage = screen.getByAltText("태그 탐색을 안내하는 Hong 캐릭터");
+
+    expect(mascotImage).toHaveAttribute(
+      "src",
+      "/images/mascots/hong-default.png"
+    );
+    expect(mascotImage).not.toHaveAttribute("src", expect.stringContaining("/_next/image"));
+  });
+
   it("shows a subtle helper copy beside the representative tag heading", () => {
     render(
       <ArchiveHero

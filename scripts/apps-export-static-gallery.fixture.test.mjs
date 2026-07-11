@@ -1,0 +1,120 @@
+// @vitest-environment node
+
+import { spawn } from "node:child_process";
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+import { describe, expect, it } from "vitest";
+
+const repoRoot = process.cwd();
+
+const app = {
+  id: "alpha",
+  title: "Alpha",
+  summary: "First app",
+  url: "https://example.com/alpha",
+  githubUrl: null,
+  tags: ["math"],
+  thumbnailMode: "upload",
+  thumbnailUrl: "/app-thumbnails/alpha.png",
+  subject: "Math",
+  grade: "Grade 3",
+  memo: null,
+  createdAt: "2026-07-01T00:00:00.000Z",
+  updatedAt: "2026-07-02T00:00:00.000Z"
+};
+
+function runExporter({ backup, outputJson, outputThumbnailDir }) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(
+      process.execPath,
+      [
+        "scripts/apps-export-static-gallery.mjs",
+        "--backup",
+        backup,
+        "--base-url",
+        "https://static.example.test"
+      ],
+      {
+        cwd: repoRoot,
+        env: {
+          ...process.env,
+          STATIC_GALLERY_OUTPUT_JSON_PATH: outputJson,
+          STATIC_GALLERY_OUTPUT_THUMBNAIL_DIR: outputThumbnailDir
+        },
+        stdio: ["ignore", "pipe", "pipe"]
+      }
+    );
+    let stdout = "";
+    let stderr = "";
+    child.stdout.on("data", (chunk) => {
+      stdout += chunk;
+    });
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk;
+    });
+    child.on("error", reject);
+    child.on("close", (code) => resolve({ code, stdout, stderr }));
+  });
+}
+
+describe("static gallery exporter thumbnail entry safety", () => {
+  it("treats symlinks and directories as changes and removes them without following links", async () => {
+    const fixture = await fs.mkdtemp(
+      path.join(os.tmpdir(), "hvc-gallery-export-test-")
+    );
+    const outputJson = path.join(fixture, "src", "data", "public-apps.json");
+    const outputThumbnailDir = path.join(fixture, "public", "app-thumbnails");
+    const backup = path.join(fixture, "backup.json");
+    const symlinkTarget = path.join(fixture, "symlink-target.txt");
+    const orphanSymlink = path.join(outputThumbnailDir, "orphan-link");
+    const orphanDirectory = path.join(outputThumbnailDir, "orphan-directory");
+
+    try {
+      await fs.mkdir(path.dirname(outputJson), { recursive: true });
+      await fs.mkdir(outputThumbnailDir, { recursive: true });
+      await fs.writeFile(
+        outputJson,
+        JSON.stringify(
+          {
+            version: 1,
+            generatedAt: "2026-07-10T00:00:00.000Z",
+            appCount: 1,
+            apps: [app]
+          },
+          null,
+          2
+        )
+      );
+      await fs.writeFile(backup, JSON.stringify({ apps: [app] }, null, 2));
+      await fs.writeFile(path.join(outputThumbnailDir, "alpha.png"), "alpha");
+      await fs.writeFile(symlinkTarget, "target remains");
+      await fs.symlink(symlinkTarget, orphanSymlink);
+      await fs.mkdir(path.join(orphanDirectory, "nested"), { recursive: true });
+      await fs.writeFile(path.join(orphanDirectory, "nested", "entry"), "nested");
+
+      const result = await runExporter({
+        backup,
+        outputJson,
+        outputThumbnailDir
+      });
+
+      expect(result.code).toBe(0);
+      expect(result.stdout).toContain("gallery-export changed=true");
+      await expect(fs.lstat(orphanSymlink)).rejects.toMatchObject({
+        code: "ENOENT"
+      });
+      await expect(fs.lstat(orphanDirectory)).rejects.toMatchObject({
+        code: "ENOENT"
+      });
+      await expect(fs.readFile(symlinkTarget, "utf8")).resolves.toBe(
+        "target remains"
+      );
+      await expect(fs.readFile(path.join(outputThumbnailDir, "alpha.png"), "utf8")).resolves.toBe(
+        "alpha"
+      );
+    } finally {
+      await fs.rm(fixture, { recursive: true, force: true });
+    }
+  });
+});
