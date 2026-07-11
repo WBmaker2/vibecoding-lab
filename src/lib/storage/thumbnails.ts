@@ -1,7 +1,6 @@
 import { put } from "@vercel/blob";
 import type { ThumbnailMode } from "@/lib/apps/types";
 import { fetchLinkPreview } from "@/lib/metadata/fetch-link-preview";
-import { buildGeneratedThumbnailUrl } from "./generated-thumbnail";
 import { capturePageThumbnail } from "./page-capture";
 import { isSupportedThumbnailUrl } from "./public-thumbnail";
 
@@ -106,9 +105,15 @@ async function uploadFileToBlob(file: File, buffer: ArrayBuffer) {
   return blob.url;
 }
 
-async function resolveAutoThumbnail(sourceUrl: string) {
-  const generatedThumbnailUrl = buildGeneratedThumbnailUrl({ sourceUrl });
+async function captureThumbnailOrNull(sourceUrl: string) {
+  try {
+    return await capturePageThumbnail(sourceUrl);
+  } catch {
+    return null;
+  }
+}
 
+async function resolveAutoThumbnail(sourceUrl: string) {
   try {
     const preview = await fetchLinkPreview(sourceUrl);
 
@@ -116,20 +121,13 @@ async function resolveAutoThumbnail(sourceUrl: string) {
       return preview.imageUrl;
     }
 
-    const capturedImageUrl = await capturePageThumbnail(sourceUrl);
+    const capturedImageUrl = await captureThumbnailOrNull(sourceUrl);
 
-    return (
-      capturedImageUrl ??
-      buildGeneratedThumbnailUrl({
-        sourceUrl,
-        title: preview.title
-      }) ??
-      generatedThumbnailUrl
-    );
+    return capturedImageUrl;
   } catch {
-    const capturedImageUrl = await capturePageThumbnail(sourceUrl);
+    const capturedImageUrl = await captureThumbnailOrNull(sourceUrl);
 
-    return capturedImageUrl ?? generatedThumbnailUrl;
+    return capturedImageUrl;
   }
 }
 

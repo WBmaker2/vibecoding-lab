@@ -3,6 +3,7 @@
 import { createHash } from "node:crypto";
 import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
+import { createServer } from "node:http";
 import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
@@ -25,7 +26,12 @@ const app = {
   updatedAt: "2026-07-02T00:00:00.000Z"
 };
 
-function runExporter({ backup, outputJson, outputThumbnailDir }) {
+function runExporter({
+  backup,
+  outputJson,
+  outputThumbnailDir,
+  baseUrl = "https://static.example.test"
+}) {
   return new Promise((resolve, reject) => {
     const child = spawn(
       process.execPath,
@@ -34,7 +40,7 @@ function runExporter({ backup, outputJson, outputThumbnailDir }) {
         "--backup",
         backup,
         "--base-url",
-        "https://static.example.test"
+        baseUrl
       ],
       {
         cwd: repoRoot,
@@ -73,6 +79,123 @@ async function readFixtureState(outputJson, outputThumbnailDir) {
 }
 
 describe("static gallery exporter thumbnail entry safety", () => {
+  it("reuses an existing local snapshot asset for a legacy internal URL without fetching it", async () => {
+    const fixture = await fs.mkdtemp(
+      path.join(os.tmpdir(), "hvc-gallery-export-legacy-reuse-test-")
+    );
+    const outputJson = path.join(fixture, "src", "data", "public-apps.json");
+    const outputThumbnailDir = path.join(fixture, "public", "app-thumbnails");
+    const backup = path.join(fixture, "backup.json");
+    const legacyApp = {
+      ...app,
+      title: "Legacy Alpha",
+      thumbnailUrl: "/api/thumbnail?host=example.com"
+    };
+    let requests = 0;
+    const server = createServer((_request, response) => {
+      requests += 1;
+      response.writeHead(200, { "content-type": "image/png" });
+      response.end("unexpected network fetch");
+    });
+
+    try {
+      await fs.mkdir(path.dirname(outputJson), { recursive: true });
+      await fs.mkdir(outputThumbnailDir, { recursive: true });
+      await fs.writeFile(
+        outputJson,
+        JSON.stringify(
+          {
+            version: 1,
+            generatedAt: "2026-07-10T00:00:00.000Z",
+            appCount: 1,
+            apps: [app]
+          },
+          null,
+          2
+        )
+      );
+      await fs.writeFile(backup, JSON.stringify({ apps: [legacyApp] }, null, 2));
+      await fs.writeFile(path.join(outputThumbnailDir, "alpha.png"), "alpha");
+      await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+      const address = server.address();
+      const baseUrl = `http://127.0.0.1:${address.port}`;
+
+      const result = await runExporter({
+        backup,
+        outputJson,
+        outputThumbnailDir,
+        baseUrl
+      });
+      const snapshot = JSON.parse(await fs.readFile(outputJson, "utf8"));
+
+      expect(result.code).toBe(0);
+      expect(requests).toBe(0);
+      expect(snapshot.apps[0].thumbnailUrl).toBe(
+        "/app-thumbnails/alpha.png"
+      );
+    } finally {
+      await new Promise((resolve) => server.close(resolve));
+      await fs.rm(fixture, { recursive: true, force: true });
+    }
+  });
+
+  it("clears a legacy internal URL when no prior local asset exists without fetching it", async () => {
+    const fixture = await fs.mkdtemp(
+      path.join(os.tmpdir(), "hvc-gallery-export-legacy-clear-test-")
+    );
+    const outputJson = path.join(fixture, "src", "data", "public-apps.json");
+    const outputThumbnailDir = path.join(fixture, "public", "app-thumbnails");
+    const backup = path.join(fixture, "backup.json");
+    const legacyApp = {
+      ...app,
+      title: "Legacy Alpha",
+      thumbnailUrl: "/api/app-thumbnail/alpha/1777800000000"
+    };
+    let requests = 0;
+    const server = createServer((_request, response) => {
+      requests += 1;
+      response.writeHead(200, { "content-type": "image/png" });
+      response.end("unexpected network fetch");
+    });
+
+    try {
+      await fs.mkdir(path.dirname(outputJson), { recursive: true });
+      await fs.mkdir(outputThumbnailDir, { recursive: true });
+      await fs.writeFile(
+        outputJson,
+        JSON.stringify(
+          {
+            version: 1,
+            generatedAt: "2026-07-10T00:00:00.000Z",
+            appCount: 1,
+            apps: [{ ...app, thumbnailUrl: null }]
+          },
+          null,
+          2
+        )
+      );
+      await fs.writeFile(backup, JSON.stringify({ apps: [legacyApp] }, null, 2));
+      await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+      const address = server.address();
+      const baseUrl = `http://127.0.0.1:${address.port}`;
+
+      const result = await runExporter({
+        backup,
+        outputJson,
+        outputThumbnailDir,
+        baseUrl
+      });
+      const snapshot = JSON.parse(await fs.readFile(outputJson, "utf8"));
+
+      expect(result.code).toBe(0);
+      expect(requests).toBe(0);
+      expect(snapshot.apps[0].thumbnailUrl).toBeNull();
+    } finally {
+      await new Promise((resolve) => server.close(resolve));
+      await fs.rm(fixture, { recursive: true, force: true });
+    }
+  });
+
   it("treats symlinks and directories as changes and removes them without following links", async () => {
     const fixture = await fs.mkdtemp(
       path.join(os.tmpdir(), "hvc-gallery-export-test-")

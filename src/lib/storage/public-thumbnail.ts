@@ -23,18 +23,10 @@ export function isSupportedThumbnailUrl(
   }
 }
 
-export function buildPublicThumbnailUrl(id: string, updatedAt: Date) {
-  return `/api/app-thumbnail/${encodeURIComponent(id)}/${updatedAt.getTime()}`;
-}
-
 export function toPublicThumbnailUrl({
-  id,
-  thumbnailUrl,
-  updatedAt
+  thumbnailUrl
 }: {
-  id: string;
   thumbnailUrl: string | null;
-  updatedAt: Date;
 }) {
   if (!thumbnailUrl) {
     return null;
@@ -44,11 +36,7 @@ export function toPublicThumbnailUrl({
     return null;
   }
 
-  if (!isEmbeddedThumbnailUrl(thumbnailUrl)) {
-    return thumbnailUrl;
-  }
-
-  return buildPublicThumbnailUrl(id, updatedAt);
+  return isEmbeddedThumbnailUrl(thumbnailUrl) ? null : thumbnailUrl;
 }
 
 export function decodeEmbeddedThumbnailUrl(thumbnailUrl: string) {

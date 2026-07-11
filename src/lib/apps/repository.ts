@@ -71,7 +71,7 @@ const memoryStore = {
   apps: createSeedApps()
 };
 
-function toPublicAppRecord(record: {
+export function toPublicAppRecord(record: {
   id: string;
   title: string;
   summary: string;
@@ -92,11 +92,7 @@ function toPublicAppRecord(record: {
     url: record.url,
     tags: normalizeTags(record.tags),
     thumbnailMode: record.thumbnailMode as PublicAppRecord["thumbnailMode"],
-    thumbnailUrl: toPublicThumbnailUrl({
-      id: record.id,
-      thumbnailUrl: record.thumbnailUrl,
-      updatedAt: record.updatedAt
-    }),
+    thumbnailUrl: toPublicThumbnailUrl({ thumbnailUrl: record.thumbnailUrl }),
     subject: record.subject ?? undefined,
     grade: record.grade ?? undefined,
     memo: record.memo ?? undefined,

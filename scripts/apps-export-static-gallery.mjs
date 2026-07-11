@@ -223,6 +223,30 @@ function isDirectInternalThumbnailRoute(value) {
   );
 }
 
+function isLegacyInternalThumbnailUrl(value) {
+  if (value.startsWith("/") && !value.startsWith("//")) {
+    return isDirectInternalThumbnailRoute(value);
+  }
+
+  if (!isSafeSameOriginThumbnailUrl(value)) {
+    return false;
+  }
+
+  try {
+    const pathname = decodeURIComponent(new URL(value, BASE_URL).pathname);
+
+    if (hasDotTraversalSegments(pathname)) {
+      return false;
+    }
+
+    return DIRECT_INTERNAL_THUMBNAIL_PREFIXES.some((prefix) =>
+      pathname.startsWith(prefix)
+    );
+  } catch {
+    return false;
+  }
+}
+
 async function writeBufferAtomically(filePath, buffer) {
   await fs.mkdir(path.dirname(filePath), { recursive: true });
   const temporaryPath = `${filePath}.tmp.${Date.now()}.${Math.random()
@@ -360,6 +384,59 @@ function resolveContentTypeExtension(urlValue, headers) {
   return "png";
 }
 
+function normalizeExistingLocalThumbnailPath(value) {
+  if (typeof value !== "string" || !isSafeStaticThumbnailPath(value)) {
+    return null;
+  }
+
+  try {
+    const parsed = new URL(value, STATIC_ASSET_BASE_URL);
+    if (parsed.search || parsed.hash) {
+      return null;
+    }
+
+    const pathname = decodeURIComponent(parsed.pathname);
+    const basename = pathname.slice("/app-thumbnails/".length);
+
+    if (
+      !pathname.startsWith("/app-thumbnails/") ||
+      !basename ||
+      basename.includes("/") ||
+      basename.includes("\\") ||
+      path.posix.normalize(pathname) !== pathname
+    ) {
+      return null;
+    }
+
+    return `/app-thumbnails/${basename}`;
+  } catch {
+    return null;
+  }
+}
+
+function findReusableLegacyThumbnail(appId, previousSnapshot, thumbnailFiles) {
+  const previousApp = (Array.isArray(previousSnapshot?.apps)
+    ? previousSnapshot.apps
+    : []
+  ).find(
+    (candidate) => String(candidate?.id) === String(appId)
+  );
+  const localPath = normalizeExistingLocalThumbnailPath(
+    previousApp?.thumbnailUrl
+  );
+
+  if (!localPath) {
+    return null;
+  }
+
+  const filename = localPath.slice("/app-thumbnails/".length);
+  const hasMaterializedFile = thumbnailFiles.some(
+    (entry) => entry?.type === "file" && entry.name === filename
+  );
+
+  return hasMaterializedFile ? localPath : null;
+}
+
 async function downloadAndWriteImage(urlValue, baseUrl, filename) {
   const targetUrl = new URL(urlValue, baseUrl).toString();
   const response = await fetch(targetUrl, {
@@ -489,7 +566,12 @@ async function fetchApps() {
   return fetchAppsFromPostgres();
 }
 
-async function materializeThumbnail(app, slug) {
+async function materializeThumbnail(
+  app,
+  slug,
+  previousSnapshot,
+  existingThumbnailFiles
+) {
   const rawUrl = app?.thumbnailUrl;
   if (!rawUrl) {
     return null;
@@ -504,17 +586,16 @@ async function materializeThumbnail(app, slug) {
       throw new Error(`Unsafe relative thumbnail path: ${rawUrl}`);
     }
 
-    if (isSafeStaticThumbnailPath(rawUrl)) {
-      return rawUrl;
+    if (isLegacyInternalThumbnailUrl(rawUrl)) {
+      return findReusableLegacyThumbnail(
+        app?.id,
+        previousSnapshot,
+        existingThumbnailFiles
+      );
     }
 
-    if (isDirectInternalThumbnailRoute(rawUrl)) {
-      const downloaded = await downloadOrNull(rawUrl, slug);
-      if (downloaded == null) {
-        return null;
-      }
-
-      return downloaded;
+    if (isSafeStaticThumbnailPath(rawUrl)) {
+      return rawUrl;
     }
 
     throw new Error(`Unsafe relative thumbnail path: ${rawUrl}`);
@@ -534,6 +615,14 @@ async function materializeThumbnail(app, slug) {
 
   const resolvedAbsoluteUrl = resolveHttpOrProtocolRelativeUrl(rawUrl);
   if (resolvedAbsoluteUrl) {
+    if (isLegacyInternalThumbnailUrl(rawUrl)) {
+      return findReusableLegacyThumbnail(
+        app?.id,
+        previousSnapshot,
+        existingThumbnailFiles
+      );
+    }
+
     const sameOrigin = isSafeSameOriginThumbnailUrl(rawUrl);
 
     if (sameOrigin && hasUnsafeRawUrlPath(rawUrl)) {
@@ -557,19 +646,6 @@ async function materializeThumbnail(app, slug) {
   }
 
   return null;
-}
-
-async function downloadOrNull(urlValue, slug) {
-  try {
-    const downloaded = await downloadAndWriteImage(urlValue, BASE_URL, slug);
-    if (downloaded.failed) {
-      return null;
-    }
-
-    return `/app-thumbnails/${downloaded.filename}`;
-  } catch {
-    return null;
-  }
 }
 
 function validateSnapshotPayload(payload) {
@@ -709,15 +785,11 @@ async function run() {
   }
 
   await fs.mkdir(OUTPUT_THUMBNAIL_DIR, { recursive: true });
-  const failedRelativeThumbnails = [];
-
   const usedSlugs = new Set();
   const normalizedApps = [];
 
   for (const [index, rawApp] of apps.entries()) {
     const slug = makeSafeSlug(rawApp, index, usedSlugs);
-    const originalThumbnailUrl = rawApp?.thumbnailUrl;
-
     const appPayload = {
       id: String(rawApp.id),
       title: String(rawApp.title),
@@ -726,7 +798,12 @@ async function run() {
       githubUrl: rawApp.githubUrl ?? null,
       tags: Array.isArray(rawApp.tags) ? rawApp.tags : [],
       thumbnailMode: normalizeThumbnailMode(rawApp.thumbnailMode),
-      thumbnailUrl: await materializeThumbnail(rawApp, slug),
+      thumbnailUrl: await materializeThumbnail(
+        rawApp,
+        slug,
+        existingSnapshot,
+        existingThumbnailFiles
+      ),
       subject: rawApp.subject ?? null,
       grade: rawApp.grade ?? null,
       memo: rawApp.memo ?? null,
@@ -734,28 +811,7 @@ async function run() {
       updatedAt: normalizeDateValue(rawApp.updatedAt)
     };
 
-    const shouldTrackInternalFailure =
-      typeof originalThumbnailUrl === "string" &&
-      originalThumbnailUrl.startsWith("/") &&
-      !originalThumbnailUrl.startsWith("//") &&
-      !isAbsoluteHttpUrl(originalThumbnailUrl) &&
-      appPayload.thumbnailUrl == null;
-
-    if (shouldTrackInternalFailure) {
-      failedRelativeThumbnails.push({
-        id: String(rawApp.id),
-        thumbnailUrl: originalThumbnailUrl
-      });
-    }
-
     normalizedApps.push(appPayload);
-  }
-
-  if (failedRelativeThumbnails.length > 0) {
-    const firstFailure = failedRelativeThumbnails[0];
-    throw new Error(
-      `Unable to materialize internal thumbnail: ${firstFailure.thumbnailUrl} (app ${firstFailure.id})`
-    );
   }
 
   const payload = {

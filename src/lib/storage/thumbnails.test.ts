@@ -112,7 +112,7 @@ describe("resolveThumbnailInput", () => {
     });
   });
 
-  it("falls back to an internal generated thumbnail when page capture also fails", async () => {
+  it("uses a placeholder when metadata and page capture both fail", async () => {
     mockedFetchLinkPreview.mockRejectedValue(new Error("network failure"));
     mockedCapturePageThumbnail.mockResolvedValue(null);
 
@@ -122,10 +122,26 @@ describe("resolveThumbnailInput", () => {
       sourceUrl: "https://paps-tracker.vercel.app"
     });
 
-    expect(result.thumbnailMode).toBe("auto");
-    expect(result.thumbnailUrl).toBe(
-      "https://lab.example.com/api/thumbnail?host=paps-tracker.vercel.app"
-    );
+    expect(result).toEqual({
+      thumbnailMode: "placeholder",
+      thumbnailUrl: null
+    });
+  });
+
+  it("uses a placeholder when page capture rejects", async () => {
+    mockedFetchLinkPreview.mockRejectedValue(new Error("network failure"));
+    mockedCapturePageThumbnail.mockRejectedValue(new Error("capture failure"));
+
+    const result = await resolveThumbnailInput({
+      mode: "auto",
+      file: null,
+      sourceUrl: "https://paps-tracker.vercel.app"
+    });
+
+    expect(result).toEqual({
+      thumbnailMode: "placeholder",
+      thumbnailUrl: null
+    });
   });
 
   it("preserves an existing thumbnail when placeholder mode is not confirmed", async () => {

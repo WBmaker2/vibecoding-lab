@@ -1,39 +1,30 @@
 import {
-  buildPublicThumbnailUrl,
   decodeEmbeddedThumbnailUrl,
   isEmbeddedThumbnailUrl,
   toPublicThumbnailUrl
 } from "./public-thumbnail";
 
 describe("public thumbnail helpers", () => {
-  const updatedAt = new Date("2026-05-01T03:00:00.000Z");
-
   it("keeps external thumbnail URLs unchanged for the public payload", () => {
     expect(
       toPublicThumbnailUrl({
-        id: "app-1",
-        thumbnailUrl: "https://example.com/thumb.png",
-        updatedAt
+        thumbnailUrl: "https://example.com/thumb.png"
       })
     ).toBe("https://example.com/thumb.png");
   });
 
-  it("replaces embedded thumbnails with a lightweight app route", () => {
+  it("does not expose embedded thumbnails through a runtime route", () => {
     expect(
       toPublicThumbnailUrl({
-        id: "app-1",
-        thumbnailUrl: "data:image/png;base64,aGVsbG8=",
-        updatedAt
+        thumbnailUrl: "data:image/png;base64,aGVsbG8="
       })
-    ).toBe(buildPublicThumbnailUrl("app-1", updatedAt));
+    ).toBeNull();
   });
 
   it("hides unsupported data URLs instead of rendering broken image icons", () => {
     expect(
       toPublicThumbnailUrl({
-        id: "app-1",
-        thumbnailUrl: "data:,",
-        updatedAt
+        thumbnailUrl: "data:,"
       })
     ).toBeNull();
   });

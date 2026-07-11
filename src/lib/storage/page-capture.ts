@@ -4,7 +4,6 @@ import {
   fetchSafeResource,
   type RemoteNetworkBudget
 } from "@/lib/security/remote-url";
-import { getThumbnailHostLabel } from "./generated-thumbnail";
 
 const CAPTURE_WIDTH = 1200;
 const CAPTURE_HEIGHT = 630;
@@ -13,6 +12,14 @@ const CAPTURE_TIMEOUT_MS = 15000;
 const MAX_CAPTURE_REQUESTS = 80;
 // Browser subresources are bounded to 512 KiB each before Chromium sees them.
 const MAX_CAPTURE_RESOURCE_BYTES = 512 * 1024;
+
+function getThumbnailHostLabel(sourceUrl: string) {
+  try {
+    return new URL(sourceUrl).hostname.replace(/^www\./, "");
+  } catch {
+    return null;
+  }
+}
 
 const SAFE_REQUEST_HEADERS = new Set([
   "accept",
