@@ -122,6 +122,32 @@ function sanitizeResponseHeaders(headers: Record<string, string>) {
   );
 }
 
+function disableBrowserEgress() {
+  const blockedGlobals = [
+    "WebTransport",
+    "RTCPeerConnection",
+    "webkitRTCPeerConnection",
+    "Worker",
+    "SharedWorker"
+  ];
+
+  for (const name of blockedGlobals) {
+    try {
+      Object.defineProperty(globalThis, name, {
+        configurable: false,
+        value: undefined,
+        writable: false
+      });
+    } catch {
+      try {
+        (globalThis as unknown as Record<string, unknown>)[name] = undefined;
+      } catch {
+        // A non-configurable browser global is already outside this control path.
+      }
+    }
+  }
+}
+
 export async function capturePageThumbnail(sourceUrl: string) {
   const target = getCaptureTarget(sourceUrl);
 
@@ -156,11 +182,15 @@ export async function capturePageThumbnail(sourceUrl: string) {
         width: CAPTURE_WIDTH,
         height: CAPTURE_HEIGHT
       },
-      javaScriptEnabled: false,
+      javaScriptEnabled: true,
       serviceWorkers: "block"
     });
     let mainDocumentFulfilled = false;
 
+    await context.routeWebSocket("**/*", (webSocket) => {
+      webSocket.close();
+    });
+    await context.addInitScript(disableBrowserEgress);
     await context.route("**/*", async (route) => {
       const requestUrl = route.request().url();
 

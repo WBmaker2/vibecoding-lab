@@ -18,8 +18,10 @@ const mocks = vi.hoisted(() => ({
     waitForTimeout: vi.fn()
   },
   context: {
+    addInitScript: vi.fn(),
     newPage: vi.fn(),
-    route: vi.fn()
+    route: vi.fn(),
+    routeWebSocket: vi.fn()
   }
 }));
 
@@ -58,7 +60,7 @@ function createRoute(url: string, method = "GET") {
 
 describe("capturePageThumbnail", () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    vi.resetAllMocks();
     delete process.env.BLOB_READ_WRITE_TOKEN;
     mocks.assertSafeRemoteHttpUrl.mockImplementation(async (input: string) =>
       new URL(input)
@@ -220,7 +222,7 @@ describe("capturePageThumbnail", () => {
 
     expect(mocks.browser.newContext).toHaveBeenCalledWith(
       expect.objectContaining({
-        javaScriptEnabled: false,
+        javaScriptEnabled: true,
         serviceWorkers: "block"
       })
     );
@@ -234,6 +236,53 @@ describe("capturePageThumbnail", () => {
     expect(mocks.fetchSafeHtml).toHaveBeenCalledWith(
       "https://public.example/app",
       expect.any(Object)
+    );
+    expect(mocks.context.addInitScript).toHaveBeenCalledWith(
+      expect.any(Function)
+    );
+    const initScript = mocks.context.addInitScript.mock.calls[0]?.[0] as () =>
+      void;
+    expect(initScript.toString()).toContain("WebTransport");
+    expect(initScript.toString()).toContain("RTCPeerConnection");
+    expect(initScript.toString()).toContain("webkitRTCPeerConnection");
+    expect(initScript.toString()).toContain("Worker");
+    expect(initScript.toString()).toContain("SharedWorker");
+    expect(mocks.page.waitForTimeout).toHaveBeenCalledWith(expect.any(Number));
+    expect(mocks.page.waitForTimeout.mock.calls[0]?.[0]).toBeGreaterThan(0);
+    expect(mocks.page.waitForTimeout.mock.calls[0]?.[0]).toBeLessThanOrEqual(
+      1500
+    );
+  });
+
+  it("closes every WebSocket route without connecting to a server", async () => {
+    await capturePageThumbnail("https://public.example/app");
+
+    expect(mocks.context.routeWebSocket).toHaveBeenCalledWith(
+      "**/*",
+      expect.any(Function)
+    );
+    const routeHandler = mocks.context.routeWebSocket.mock.calls[0]?.[1] as (
+      webSocket: { close: () => void; connectToServer: () => void }
+    ) => void;
+    const webSocket = {
+      close: vi.fn(),
+      connectToServer: vi.fn()
+    };
+
+    routeHandler(webSocket);
+
+    expect(webSocket.close).toHaveBeenCalledTimes(1);
+    expect(webSocket.connectToServer).not.toHaveBeenCalled();
+  });
+
+  it("installs egress controls before navigation", async () => {
+    await capturePageThumbnail("https://public.example/app");
+
+    expect(mocks.context.addInitScript.mock.invocationCallOrder[0]).toBeLessThan(
+      mocks.page.goto.mock.invocationCallOrder[0]
+    );
+    expect(mocks.context.routeWebSocket.mock.invocationCallOrder[0]).toBeLessThan(
+      mocks.page.goto.mock.invocationCallOrder[0]
     );
   });
 
