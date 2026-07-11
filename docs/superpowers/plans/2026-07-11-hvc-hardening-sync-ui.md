@@ -372,6 +372,8 @@ Commit: `feat: surface admin gallery sync state`
 - Modify: `src/features/archive/archive-page.test.tsx`
 - Modify: `src/features/archive/archive-hero.tsx`
 - Modify: `src/features/archive/archive-hero.test.tsx`
+- Create: `src/features/archive/update-history.tsx`
+- Create: `src/features/archive/update-history.test.tsx`
 - Modify: `src/features/archive/tag-filter-bar.tsx`
 - Modify: `src/features/archive/app-card.tsx`
 - Modify: `src/features/archive/app-card.test.tsx`
@@ -384,6 +386,7 @@ Commit: `feat: surface admin gallery sync state`
 - Produces: `getRepresentativeTags(apps, limit = 10): string[]`, sorted by descending app frequency then Korean locale label for ties.
 - `ArchiveHero` consumes `representativeTags` and `allTags`; representative tags are always visible and `모든 태그 보기` expands the remainder.
 - `AppCard` renders the first 4 tags and one `+N` count when more exist.
+- `UpdateHistory` exposes a small `업데이트 내역` button and an accessible dialog backed by dated development/improvement entries. The initial entries are `2026-04-04 개발`, `2026-05-11 개선`, and `2026-07-12 개선`.
 
 - [ ] **Step 1: Write failing ranking and compact-card tests**
 
@@ -397,7 +400,23 @@ Expected RED: ranking helper and tag cap do not exist.
 
 Derive counts once with `useMemo`, keep one active tag at a time, show the top 10 immediately, and expand all tags with a text button. Add a visually hidden new-window label to the CTA; keep the visible command `앱 열기`.
 
-- [ ] **Step 3: Write failing hero/layout tests**
+- [ ] **Step 3: Write the failing update-history interaction test**
+
+Create `src/features/archive/update-history.test.tsx`. Assert the small `업데이트 내역` button opens a dialog titled `Hong's Vibe Coding Lab 업데이트 내역`, the dialog renders the three exact dated entries, the `닫기` button closes it, Escape closes it, and focus returns to the trigger.
+
+Run: `npm test -- src/features/archive/update-history.test.tsx`
+
+Expected RED: component missing.
+
+- [ ] **Step 4: Implement the update-history button and dialog**
+
+Create `UpdateHistory` with static exported history data and mount its trigger beside the archive eyebrow/header utilities. Use a compact text button, a real modal dialog with scroll-safe content, explicit close control, Escape handling, body-scroll restoration, and focus return. Record these exact entries:
+
+- `2026-04-04` / `개발` / `교실용 웹앱을 모아 찾고 열 수 있는 공개 아카이브를 시작했습니다.`
+- `2026-05-11` / `개선` / `공개 목록과 썸네일을 정적 자산으로 전환해 Vercel 사용량을 줄였습니다.`
+- `2026-07-12` / `개선` / `관리자 보안, 무변경 동기화, 상태 표시, 테스트와 모바일 탐색 화면을 개선했습니다.`
+
+- [ ] **Step 5: Write failing hero/layout tests**
 
 Update hero tests to require representative toolbar visibility before interaction, `모든 태그 보기`/`모든 태그 접기`, and no separate floating Hong Note card. Extend CSS tests for `.archive-hero` unframed styling, `.app-card` radius at most 8px plus `content-visibility: auto`, and mobile non-wrapping representative tag row.
 
@@ -405,23 +424,23 @@ Run: `npm test -- src/features/archive/archive-hero.test.tsx src/features/archiv
 
 Expected RED: old hero is a large floating panel with hidden tags.
 
-- [ ] **Step 4: Compress the visual hierarchy**
+- [ ] **Step 6: Compress the visual hierarchy**
 
 Override the archive hero to an unframed max-width layout with no border, panel background, blur, or shadow. Remove the separate note card, reduce mascot to at most 96px desktop/64px mobile, use compact search and filter spacing, make the mobile representative row horizontally scrollable without wrapping, flatten the results-state section, set repeated cards to 8px radius, and keep stable media aspect ratio. Use `#6b7280` or darker for helper/placeholder text. Add `content-visibility: auto` and `contain-intrinsic-size: 440px` to cards.
 
-- [ ] **Step 5: Make mobile first-viewport visibility an E2E assertion**
+- [ ] **Step 7: Make mobile first-viewport visibility an E2E assertion**
 
-At 390x844, load `/`, assert search and representative tags are visible, then assert the first `.app-card` top is less than `window.innerHeight` without scrolling. Test tag filter, reset, search, empty state, and full-tag expansion with their current accessible labels.
+At 390x844, load `/`, assert search, representative tags, and the compact `업데이트 내역` button are visible, then assert the first `.app-card` top is less than `window.innerHeight` without scrolling. Test tag filter, reset, search, empty state, full-tag expansion, and update-history open/close with their current accessible labels.
 
-- [ ] **Step 6: Verify visual behavior**
+- [ ] **Step 8: Verify visual behavior**
 
 Run `npm run test:e2e`, then capture desktop 1440x1000 and mobile 390x844 screenshots from the local production build. Inspect that text does not overlap, card tags do not resize cards unexpectedly, the first mobile card is visible, all thumbnails render, and no request targets `/_next/image`, `/api/thumbnail`, or `/api/app-thumbnail`.
 
-- [ ] **Step 7: Write the implementation report**
+- [ ] **Step 9: Write the implementation report**
 
-Document the six delivered priorities, preserved 56-app count, removed routes, no-op behavior, dependency/audit result, unit/E2E/build evidence, and desktop/mobile screenshot paths in `docs/reports/2026-07-11-hvc-hardening-sync-ui-report.md`.
+Document the six delivered priorities, preserved 56-app count, removed routes, no-op behavior, dependency/audit result, update-history entries, unit/E2E/build evidence, and desktop/mobile screenshot paths in `docs/reports/2026-07-11-hvc-hardening-sync-ui-report.md`.
 
-- [ ] **Step 8: Verify and commit Task 6**
+- [ ] **Step 10: Verify and commit Task 6**
 
 Run:
 
