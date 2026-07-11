@@ -12,7 +12,12 @@ type LookupFn = (
   options: { all: true; verbatim: true }
 ) => Promise<LookupAddress[]>;
 
+export interface RemoteNetworkBudget {
+  remaining: number;
+}
+
 interface RemoteUrlOptions {
+  budget?: RemoteNetworkBudget;
   deadline?: number;
   lookup?: LookupFn;
   signal?: AbortSignal;
@@ -430,6 +435,7 @@ function requestPinnedResponse(
   validated: ValidatedRemoteUrl,
   options: {
     deadline: number;
+    budget?: RemoteNetworkBudget;
     headers?: HeadersInit;
     maxBytes: number;
     method: "GET" | "HEAD";
@@ -467,6 +473,18 @@ function requestPinnedResponse(
         servername: url.protocol === "https:" ? hostname : undefined,
         signal: options.signal
       };
+
+      if (options.budget) {
+        if (
+          !Number.isSafeInteger(options.budget.remaining) ||
+          options.budget.remaining <= 0
+        ) {
+          reject(new Error("Remote network budget exhausted."));
+          return;
+        }
+
+        options.budget.remaining -= 1;
+      }
 
       const request = transport(requestOptions, (response) => {
         const chunks: Buffer[] = [];
@@ -565,6 +583,7 @@ export async function fetchSafeHtml(
 
     for (let redirectCount = 0; ; redirectCount += 1) {
       const response = await requestPinnedResponse(current, {
+        budget: options.budget,
         deadline,
         headers: options.headers,
         maxBytes,
@@ -633,6 +652,7 @@ export async function fetchSafeResource(
 
     for (let redirectCount = 0; ; redirectCount += 1) {
       const response = await requestPinnedResponse(current, {
+        budget: options.budget,
         deadline,
         headers: options.headers,
         maxBytes,

@@ -1,7 +1,8 @@
 import { put } from "@vercel/blob";
 import {
   fetchSafeHtml,
-  fetchSafeResource
+  fetchSafeResource,
+  type RemoteNetworkBudget
 } from "@/lib/security/remote-url";
 import { getThumbnailHostLabel } from "./generated-thumbnail";
 
@@ -129,7 +130,11 @@ export async function capturePageThumbnail(sourceUrl: string) {
   }
 
   const captureDeadline = Date.now() + CAPTURE_TIMEOUT_MS;
+  const networkBudget: RemoteNetworkBudget = {
+    remaining: MAX_CAPTURE_REQUESTS
+  };
   const safeDocument = await fetchSafeHtml(target, {
+    budget: networkBudget,
     deadline: captureDeadline,
     timeoutMs: CAPTURE_TIMEOUT_MS
   }).catch(() => null);
@@ -151,9 +156,9 @@ export async function capturePageThumbnail(sourceUrl: string) {
         width: CAPTURE_WIDTH,
         height: CAPTURE_HEIGHT
       },
+      javaScriptEnabled: false,
       serviceWorkers: "block"
     });
-    let requestCount = 0;
     let mainDocumentFulfilled = false;
 
     await context.route("**/*", async (route) => {
@@ -169,10 +174,8 @@ export async function capturePageThumbnail(sourceUrl: string) {
         return;
       }
 
-      requestCount += 1;
-
       if (
-        requestCount > MAX_CAPTURE_REQUESTS ||
+        networkBudget.remaining <= 0 ||
         !/^https?:/i.test(requestUrl) ||
         !["GET", "HEAD"].includes(route.request().method())
       ) {
@@ -182,6 +185,7 @@ export async function capturePageThumbnail(sourceUrl: string) {
 
       try {
         const resource = await fetchSafeResource(requestUrl, {
+          budget: networkBudget,
           deadline: captureDeadline,
           headers: sanitizeRequestHeaders(
             await route.request().headers()

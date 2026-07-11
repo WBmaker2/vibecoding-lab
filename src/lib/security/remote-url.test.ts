@@ -308,6 +308,47 @@ describe("fetchSafeHtml", () => {
     expect(transportMocks.httpsRequest).toHaveBeenCalledTimes(2);
   });
 
+  it("spends one shared budget unit on every redirect hop", async () => {
+    mockTransportResponse({
+      headers: { location: "https://example.com/next" },
+      statusCode: 302
+    });
+    mockTransportResponse({
+      body: "<html>ok</html>",
+      headers: { "content-type": "text/html" }
+    });
+    const budget = { remaining: 2 };
+
+    await expect(
+      fetchSafeHtml("https://example.com/start", {
+        budget,
+        lookup: publicLookup
+      })
+    ).resolves.toEqual({
+      finalUrl: "https://example.com/next",
+      html: "<html>ok</html>"
+    });
+    expect(transportMocks.httpsRequest).toHaveBeenCalledTimes(2);
+    expect(budget.remaining).toBe(0);
+  });
+
+  it("fails closed before transport when the shared budget is exhausted", async () => {
+    mockTransportResponse({
+      headers: { location: "https://example.com/next" },
+      statusCode: 302
+    });
+    const budget = { remaining: 1 };
+
+    await expect(
+      fetchSafeHtml("https://example.com/start", {
+        budget,
+        lookup: publicLookup
+      })
+    ).rejects.toThrow(/budget/i);
+    expect(transportMocks.httpsRequest).toHaveBeenCalledTimes(1);
+    expect(budget.remaining).toBe(0);
+  });
+
   it("cancels the response reader when the byte limit is exceeded", async () => {
     mockTransportResponse({
       body: "123456",

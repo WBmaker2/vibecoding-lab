@@ -68,17 +68,23 @@ describe("capturePageThumbnail", () => {
     mocks.context.newPage.mockResolvedValue(mocks.page);
     mocks.launch.mockResolvedValue(mocks.browser);
     mocks.page.screenshot.mockResolvedValue(new Uint8Array([1, 2, 3]));
-    mocks.fetchSafeHtml.mockResolvedValue({
-      finalUrl: "https://public.example/app",
-      html: "<html><head></head><body>safe</body></html>"
+    mocks.fetchSafeHtml.mockImplementation(async (_input, options) => {
+      options.budget.remaining -= 1;
+      return {
+        finalUrl: "https://public.example/app",
+        html: "<html><head></head><body>safe</body></html>"
+      };
     });
-    mocks.fetchSafeResource.mockResolvedValue({
-      body: Buffer.from("resource"),
-      headers: {
-        "content-type": "application/javascript",
-        "set-cookie": "secret=1"
-      },
-      statusCode: 200
+    mocks.fetchSafeResource.mockImplementation(async (_input, options) => {
+      options.budget.remaining -= 1;
+      return {
+        body: Buffer.from("resource"),
+        headers: {
+          "content-type": "application/javascript",
+          "set-cookie": "secret=1"
+        },
+        statusCode: 200
+      };
     });
   });
 
@@ -118,11 +124,12 @@ describe("capturePageThumbnail", () => {
         return url;
       }
     );
-    mocks.fetchSafeResource.mockImplementation(async (input: string) => {
+    mocks.fetchSafeResource.mockImplementation(async (input: string, options) => {
       if (input.includes("10.0.0.1")) {
         throw new Error("private address");
       }
 
+      options.budget.remaining -= 1;
       return {
         body: Buffer.from("resource"),
         headers: {
@@ -213,6 +220,7 @@ describe("capturePageThumbnail", () => {
 
     expect(mocks.browser.newContext).toHaveBeenCalledWith(
       expect.objectContaining({
+        javaScriptEnabled: false,
         serviceWorkers: "block"
       })
     );
@@ -227,5 +235,37 @@ describe("capturePageThumbnail", () => {
       "https://public.example/app",
       expect.any(Object)
     );
+  });
+
+  it("shares one actual-network budget between document and resources", async () => {
+    let documentBudget: unknown;
+    let resourceBudget: unknown;
+    mocks.fetchSafeHtml.mockImplementation(async (_input, options) => {
+      documentBudget = options.budget;
+      options.budget.remaining -= 1;
+      return {
+        finalUrl: "https://public.example/app",
+        html: "<html><head></head><body>safe</body></html>"
+      };
+    });
+    mocks.fetchSafeResource.mockImplementation(async (_input, options) => {
+      resourceBudget = options.budget;
+      options.budget.remaining -= 1;
+      return {
+        body: Buffer.from("resource"),
+        headers: { "content-type": "application/javascript" },
+        statusCode: 200
+      };
+    });
+
+    await capturePageThumbnail("https://public.example/app");
+    const routeHandler = mocks.context.route.mock.calls[0]?.[1] as (
+      route: ReturnType<typeof createRoute>
+    ) => Promise<void>;
+
+    await routeHandler(createRoute("https://cdn.example/app.js"));
+
+    expect(documentBudget).toBe(resourceBudget);
+    expect(documentBudget).toEqual({ remaining: 78 });
   });
 });
