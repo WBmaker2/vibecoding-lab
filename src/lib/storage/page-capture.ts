@@ -1,5 +1,8 @@
 import { put } from "@vercel/blob";
-import { assertSafeRemoteHttpUrl } from "@/lib/security/remote-url";
+import {
+  assertSafeRemoteHttpUrl,
+  fetchSafeHtml
+} from "@/lib/security/remote-url";
 import { getThumbnailHostLabel } from "./generated-thumbnail";
 
 const CAPTURE_WIDTH = 1200;
@@ -55,12 +58,33 @@ async function launchChromium() {
   });
 }
 
+function withBaseHref(html: string, baseUrl: string) {
+  const escapedUrl = baseUrl
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;");
+  const baseTag = `<base href="${escapedUrl}">`;
+
+  if (/<head\b[^>]*>/i.test(html)) {
+    return html.replace(/(<head\b[^>]*>)/i, `$1${baseTag}`);
+  }
+
+  return `<head>${baseTag}</head>${html}`;
+}
+
 export async function capturePageThumbnail(sourceUrl: string) {
   const target = await assertSafeRemoteHttpUrl(sourceUrl)
     .then((url) => url.toString())
     .catch(() => null);
 
   if (!target) {
+    return null;
+  }
+
+  const safeDocument = await fetchSafeHtml(target, {
+    timeoutMs: CAPTURE_TIMEOUT_MS
+  }).catch(() => null);
+
+  if (!safeDocument) {
     return null;
   }
 
@@ -71,28 +95,48 @@ export async function capturePageThumbnail(sourceUrl: string) {
   }
 
   try {
-    const page = await browser.newPage({
+    const context = await browser.newContext({
       deviceScaleFactor: 1,
       viewport: {
         width: CAPTURE_WIDTH,
         height: CAPTURE_HEIGHT
-      }
+      },
+      serviceWorkers: "block"
     });
+    const page = await context.newPage();
     let requestCount = 0;
+    let mainDocumentFulfilled = false;
 
-    await page.route("**/*", async (route) => {
-      if (requestCount >= MAX_CAPTURE_REQUESTS) {
-        await route.abort("blockedbyclient");
+    await context.route("**/*", async (route) => {
+      const requestUrl = route.request().url();
+
+      if (!mainDocumentFulfilled && requestUrl === target) {
+        mainDocumentFulfilled = true;
+        await route.fulfill({
+          body: withBaseHref(safeDocument.html, safeDocument.finalUrl),
+          contentType: "text/html; charset=utf-8",
+          status: 200
+        });
         return;
       }
 
       requestCount += 1;
 
-      try {
-        await assertSafeRemoteHttpUrl(route.request().url());
-        await route.continue();
-      } catch {
+      if (requestCount >= MAX_CAPTURE_REQUESTS) {
         await route.abort("blockedbyclient");
+        return;
+      }
+
+      if (/^https?:/i.test(requestUrl)) {
+        try {
+          await assertSafeRemoteHttpUrl(requestUrl);
+        } catch {
+          // Every HTTP(S) subresource is blocked; the policy check records why.
+        }
+
+        await route.abort("blockedbyclient");
+      } else {
+        await route.continue();
       }
     });
 

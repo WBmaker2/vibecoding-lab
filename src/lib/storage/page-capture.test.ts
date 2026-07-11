@@ -3,8 +3,10 @@ import { capturePageThumbnail } from "./page-capture";
 
 const mocks = vi.hoisted(() => ({
   assertSafeRemoteHttpUrl: vi.fn(),
+  fetchSafeHtml: vi.fn(),
   browser: {
     close: vi.fn(),
+    newContext: vi.fn(),
     newPage: vi.fn()
   },
   launch: vi.fn(),
@@ -13,11 +15,16 @@ const mocks = vi.hoisted(() => ({
     route: vi.fn(),
     screenshot: vi.fn(),
     waitForTimeout: vi.fn()
+  },
+  context: {
+    newPage: vi.fn(),
+    route: vi.fn()
   }
 }));
 
 vi.mock("@/lib/security/remote-url", () => ({
-  assertSafeRemoteHttpUrl: mocks.assertSafeRemoteHttpUrl
+  assertSafeRemoteHttpUrl: mocks.assertSafeRemoteHttpUrl,
+  fetchSafeHtml: mocks.fetchSafeHtml
 }));
 
 vi.mock("playwright-core", () => ({
@@ -34,6 +41,7 @@ function createRoute(url: string) {
   return {
     abort: vi.fn(),
     continue: vi.fn(),
+    fulfill: vi.fn(),
     request: () => ({ url: () => url })
   };
 }
@@ -46,8 +54,14 @@ describe("capturePageThumbnail", () => {
       new URL(input)
     );
     mocks.browser.newPage.mockResolvedValue(mocks.page);
+    mocks.browser.newContext.mockResolvedValue(mocks.context);
+    mocks.context.newPage.mockResolvedValue(mocks.page);
     mocks.launch.mockResolvedValue(mocks.browser);
     mocks.page.screenshot.mockResolvedValue(new Uint8Array([1, 2, 3]));
+    mocks.fetchSafeHtml.mockResolvedValue({
+      finalUrl: "https://public.example/app",
+      html: "<html><head></head><body>safe</body></html>"
+    });
   });
 
   it("rejects the initial URL before launching Chromium", async () => {
@@ -68,11 +82,12 @@ describe("capturePageThumbnail", () => {
   it("validates every subresource and aborts private requests", async () => {
     await capturePageThumbnail("https://public.example/app");
 
-    const routeHandler = mocks.page.route.mock.calls[0]?.[1] as (
+    const routeHandler = mocks.context.route.mock.calls[0]?.[1] as (
       route: ReturnType<typeof createRoute>
     ) => Promise<void>;
     const privateRoute = createRoute("http://10.0.0.1/private");
     const publicRoute = createRoute("https://cdn.example/app.js");
+    const mainRoute = createRoute("https://public.example/app");
 
     mocks.assertSafeRemoteHttpUrl.mockImplementation(
       async (input: string) => {
@@ -86,12 +101,17 @@ describe("capturePageThumbnail", () => {
       }
     );
 
+    await routeHandler(mainRoute);
     await routeHandler(privateRoute);
     await routeHandler(publicRoute);
 
+    expect(mainRoute.fulfill).toHaveBeenCalledWith(
+      expect.objectContaining({ body: expect.stringContaining("safe") })
+    );
     expect(privateRoute.abort).toHaveBeenCalledWith("blockedbyclient");
     expect(privateRoute.continue).not.toHaveBeenCalled();
-    expect(publicRoute.continue).toHaveBeenCalledTimes(1);
+    expect(publicRoute.abort).toHaveBeenCalledWith("blockedbyclient");
+    expect(publicRoute.continue).not.toHaveBeenCalled();
     expect(mocks.assertSafeRemoteHttpUrl).toHaveBeenCalledWith(
       "http://10.0.0.1/private"
     );
@@ -103,7 +123,7 @@ describe("capturePageThumbnail", () => {
   it("aborts requests after the eighty-request capture budget", async () => {
     await capturePageThumbnail("https://public.example/app");
 
-    const routeHandler = mocks.page.route.mock.calls[0]?.[1] as (
+    const routeHandler = mocks.context.route.mock.calls[0]?.[1] as (
       route: ReturnType<typeof createRoute>
     ) => Promise<void>;
 
@@ -126,5 +146,26 @@ describe("capturePageThumbnail", () => {
     ).resolves.toBeNull();
 
     expect(mocks.browser.close).toHaveBeenCalledTimes(1);
+  });
+
+  it("blocks service workers and routes at context level before navigation", async () => {
+    await capturePageThumbnail("https://public.example/app");
+
+    expect(mocks.browser.newContext).toHaveBeenCalledWith(
+      expect.objectContaining({
+        serviceWorkers: "block"
+      })
+    );
+    expect(mocks.context.route).toHaveBeenCalledWith(
+      "**/*",
+      expect.any(Function)
+    );
+    expect(mocks.context.route.mock.invocationCallOrder[0]).toBeLessThan(
+      mocks.page.goto.mock.invocationCallOrder[0]
+    );
+    expect(mocks.fetchSafeHtml).toHaveBeenCalledWith(
+      "https://public.example/app",
+      expect.any(Object)
+    );
   });
 });

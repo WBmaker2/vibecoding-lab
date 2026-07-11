@@ -1,9 +1,25 @@
+import { EventEmitter } from "node:events";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   assertSafeRemoteHttpUrl,
   fetchSafeHtml,
   isPublicIpAddress
 } from "./remote-url";
+
+const transportMocks = vi.hoisted(() => ({
+  httpRequest: vi.fn(),
+  httpsRequest: vi.fn()
+}));
+
+vi.mock("node:http", () => ({
+  default: { request: transportMocks.httpRequest },
+  request: transportMocks.httpRequest
+}));
+
+vi.mock("node:https", () => ({
+  default: { request: transportMocks.httpsRequest },
+  request: transportMocks.httpsRequest
+}));
 
 const publicLookup = async () => [
   { address: "93.184.216.34", family: 4 as const }
@@ -16,8 +32,65 @@ const privateLookup = async (hostname: string) => [
   }
 ];
 
+function mockTransportResponse({
+  body = "",
+  delayMs = 0,
+  headers = {},
+  statusCode = 200
+}: {
+  body?: string;
+  delayMs?: number;
+  headers?: Record<string, string>;
+  statusCode?: number;
+}) {
+  transportMocks.httpsRequest.mockImplementationOnce(
+    (
+      _options: object,
+      callback: (response: EventEmitter) => void
+    ) => {
+      const request = new EventEmitter() as EventEmitter & {
+        destroy: () => void;
+        end: () => void;
+        setTimeout: (timeout: number, callback: () => void) => void;
+      };
+      const response = new EventEmitter() as EventEmitter & {
+        destroy: () => void;
+        headers: Record<string, string>;
+        statusCode: number;
+      };
+
+      response.headers = headers;
+      response.statusCode = statusCode;
+      response.destroy = () => undefined;
+      request.destroy = () => undefined;
+      request.setTimeout = (timeout, callback) => {
+        if (delayMs > 0) {
+          setTimeout(callback, timeout);
+        }
+      };
+      request.end = () => {
+        const emitResponse = () => {
+          callback(response);
+          response.emit("data", Buffer.from(body));
+          response.emit("end");
+        };
+
+        if (delayMs > 0) {
+          setTimeout(emitResponse, delayMs);
+        } else {
+          queueMicrotask(emitResponse);
+        }
+      };
+
+      return request;
+    }
+  );
+}
+
 beforeEach(() => {
   vi.stubGlobal("fetch", vi.fn());
+  transportMocks.httpRequest.mockReset();
+  transportMocks.httpsRequest.mockReset();
 });
 
 afterEach(() => {
@@ -35,13 +108,25 @@ describe("isPublicIpAddress", () => {
     "::1",
     "fc00::1",
     "fe80::1",
-    "::ffff:10.0.0.1"
+    "::ffff:10.0.0.1",
+    "2001:2::1",
+    "2001:10::1",
+    "2001:20::1",
+    "2001:db8::1",
+    "2001:0000::1",
+    "2002:c000:0204::1",
+    "3fff::1",
+    "64:ff9b::192.0.2.1"
   ])("rejects non-public address %s", (address) => {
     expect(isPublicIpAddress(address)).toBe(false);
   });
 
   it("accepts a public IPv4 address", () => {
     expect(isPublicIpAddress("93.184.216.34")).toBe(true);
+  });
+
+  it("accepts a globally routable IPv6 address", () => {
+    expect(isPublicIpAddress("2001:4860:4860::8888")).toBe(true);
   });
 });
 
@@ -92,20 +177,14 @@ describe("assertSafeRemoteHttpUrl", () => {
 
 describe("fetchSafeHtml", () => {
   it("validates redirects and returns the fragment-free final URL", async () => {
-    const fetchMock = vi.mocked(fetch);
-    fetchMock
-      .mockResolvedValueOnce(
-        new Response(null, {
-          status: 302,
-          headers: { location: "https://example.com/next#section" }
-        })
-      )
-      .mockResolvedValueOnce(
-        new Response("<html>ok</html>", {
-          status: 200,
-          headers: { "content-type": "text/html; charset=utf-8" }
-        })
-      );
+    mockTransportResponse({
+      statusCode: 302,
+      headers: { location: "https://example.com/next#section" }
+    });
+    mockTransportResponse({
+      body: "<html>ok</html>",
+      headers: { "content-type": "text/html; charset=utf-8" }
+    });
 
     const result = await fetchSafeHtml("https://example.com/start", {
       lookup: publicLookup
@@ -115,36 +194,31 @@ describe("fetchSafeHtml", () => {
       html: "<html>ok</html>",
       finalUrl: "https://example.com/next"
     });
-    expect(fetchMock.mock.calls[0]?.[1]).toMatchObject({
-      redirect: "manual"
+    expect(transportMocks.httpsRequest.mock.calls[0]?.[0]).toMatchObject({
+      hostname: "example.com",
+      lookup: expect.any(Function)
     });
   });
 
   it("rejects a redirect to a private address", async () => {
-    const fetchMock = vi.mocked(fetch);
-    fetchMock.mockResolvedValueOnce(
-      new Response(null, {
-        status: 302,
-        headers: { location: "https://private.example/metadata" }
-      })
-    );
+    mockTransportResponse({
+      statusCode: 302,
+      headers: { location: "https://private.example/metadata" }
+    });
 
     await expect(
       fetchSafeHtml("https://example.com/start", {
         lookup: privateLookup
       })
     ).rejects.toThrow();
-    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(transportMocks.httpsRequest).toHaveBeenCalledTimes(1);
   });
 
   it("rejects non-HTML content", async () => {
-    const fetchMock = vi.mocked(fetch);
-    fetchMock.mockResolvedValueOnce(
-      new Response("image", {
-        status: 200,
-        headers: { "content-type": "image/png" }
-      })
-    );
+    mockTransportResponse({
+      body: "image",
+      headers: { "content-type": "image/png" }
+    });
 
     await expect(
       fetchSafeHtml("https://example.com/image.png", {
@@ -153,16 +227,33 @@ describe("fetchSafeHtml", () => {
     ).rejects.toThrow(/HTML/);
   });
 
+  it("requires an exact HTML media type before parameters", async () => {
+    mockTransportResponse({
+      body: "<html>spoofed</html>",
+      headers: { "content-type": "text/html-malicious; charset=utf-8" }
+    });
+
+    await expect(
+      fetchSafeHtml("https://example.com/spoofed", {
+        lookup: publicLookup
+      })
+    ).rejects.toThrow(/HTML/);
+  });
+
   it("aborts when the timeout expires", async () => {
-    const fetchMock = vi.mocked(fetch);
-    fetchMock.mockImplementationOnce(
-      (_input, init) =>
-        new Promise((_resolve, reject) => {
-          init?.signal?.addEventListener("abort", () => {
-            reject(new DOMException("The operation was aborted", "AbortError"));
-          });
-        })
-    );
+    transportMocks.httpsRequest.mockImplementationOnce(() => {
+      const request = new EventEmitter() as EventEmitter & {
+        destroy: () => void;
+        end: () => void;
+        setTimeout: (timeout: number, callback: () => void) => void;
+      };
+      request.destroy = () => undefined;
+      request.end = () => undefined;
+      request.setTimeout = (timeout, callback) => {
+        setTimeout(callback, timeout);
+      };
+      return request;
+    });
 
     await expect(
       fetchSafeHtml("https://example.com/slow", {
@@ -172,23 +263,49 @@ describe("fetchSafeHtml", () => {
     ).rejects.toThrow();
   });
 
-  it("cancels the response reader when the byte limit is exceeded", async () => {
-    const fetchMock = vi.mocked(fetch);
-    let cancelled = false;
-    const stream = new ReadableStream<Uint8Array>({
-      start(controller) {
-        controller.enqueue(new Uint8Array(6));
-      },
-      cancel() {
-        cancelled = true;
-      }
+  it("includes DNS lookup in the single timeout deadline", async () => {
+    const pendingLookup = async () =>
+      new Promise<{ address: string; family: 4 }[]>(() => undefined);
+    const result = await Promise.race([
+      fetchSafeHtml("https://example.com/slow-dns", {
+        lookup: pendingLookup,
+        timeoutMs: 5
+      }).then(
+        () => "resolved",
+        () => "rejected"
+      ),
+      new Promise((resolve) => setTimeout(() => resolve("deadline"), 100))
+    ]);
+
+    expect(result).toBe("rejected");
+  });
+
+  it("does not reset the deadline across redirects", async () => {
+    mockTransportResponse({
+      delayMs: 1,
+      headers: { location: "https://example.com/next" },
+      statusCode: 302
     });
-    fetchMock.mockResolvedValueOnce(
-      new Response(stream, {
-        status: 200,
-        headers: { "content-type": "text/html" }
+    mockTransportResponse({
+      body: "<html>late</html>",
+      delayMs: 80,
+      headers: { "content-type": "text/html" }
+    });
+
+    await expect(
+      fetchSafeHtml("https://example.com/start", {
+        lookup: publicLookup,
+        timeoutMs: 30
       })
-    );
+    ).rejects.toThrow(/timed out/i);
+    expect(transportMocks.httpsRequest).toHaveBeenCalledTimes(2);
+  });
+
+  it("cancels the response reader when the byte limit is exceeded", async () => {
+    mockTransportResponse({
+      body: "123456",
+      headers: { "content-type": "text/html" }
+    });
 
     await expect(
       fetchSafeHtml("https://example.com/large", {
@@ -196,6 +313,65 @@ describe("fetchSafeHtml", () => {
         maxBytes: 5
       })
     ).rejects.toThrow(/size limit/i);
-    expect(cancelled).toBe(true);
+  });
+
+  it("pins the validated address in the actual HTTPS request lookup", async () => {
+    const requestOptions: {
+      lookup?: (
+        hostname: string,
+        options: object,
+        callback: (error: Error | null, address: string, family: number) => void
+      ) => void;
+    } = {};
+    transportMocks.httpsRequest.mockImplementationOnce(
+      (
+        options: typeof requestOptions,
+        callback: (response: EventEmitter) => void
+      ) => {
+        Object.assign(requestOptions, options);
+        const request = new EventEmitter() as EventEmitter & {
+          end: () => void;
+          setTimeout: (timeout: number) => void;
+        };
+        const response = new EventEmitter() as EventEmitter & {
+          headers: Record<string, string>;
+          statusCode: number;
+        };
+
+        response.headers = { "content-type": "text/html" };
+        response.statusCode = 200;
+        request.end = () => {
+          queueMicrotask(() => {
+            callback(response);
+            response.emit("data", Buffer.from("<html>pinned</html>"));
+            response.emit("end");
+          });
+        };
+        request.setTimeout = () => undefined;
+        return request;
+      }
+    );
+
+    const result = await fetchSafeHtml("https://example.com/pinned", {
+      lookup: publicLookup
+    });
+
+    expect(result.html).toBe("<html>pinned</html>");
+    expect(requestOptions.lookup).toEqual(expect.any(Function));
+
+    const address = await new Promise<{ address: string; family: number }>(
+      (resolve, reject) => {
+        requestOptions.lookup?.("example.com", {}, (error, value, family) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          resolve({ address: value, family });
+        });
+      }
+    );
+
+    expect(address).toEqual({ address: "93.184.216.34", family: 4 });
   });
 });

@@ -240,4 +240,44 @@ describe("resolveThumbnailInput", () => {
       thumbnailUrl: expect.stringMatching(/^data:image\/png;base64,/)
     });
   });
+
+  it("accepts a valid AVIF upload with an ftyp avif signature", async () => {
+    const file = createUploadFile(
+      new Uint8Array([
+        0x00, 0x00, 0x00, 0x10,
+        0x66, 0x74, 0x79, 0x70,
+        0x61, 0x76, 0x69, 0x66,
+        0x00, 0x00, 0x00, 0x00
+      ]),
+      "image/avif",
+      "tiny.avif"
+    );
+
+    await expect(
+      resolveThumbnailInput({
+        mode: "upload",
+        file,
+        sourceUrl: "https://example.com"
+      })
+    ).resolves.toMatchObject({
+      thumbnailMode: "upload",
+      thumbnailUrl: expect.stringMatching(/^data:image\/avif;base64,/)
+    });
+  });
+
+  it("rejects an AVIF MIME type without an ftyp signature", async () => {
+    const file = createUploadFile(
+      new TextEncoder().encode("not an avif"),
+      "image/avif",
+      "spoofed.avif"
+    );
+
+    await expect(
+      resolveThumbnailInput({
+        mode: "upload",
+        file,
+        sourceUrl: "https://example.com"
+      })
+    ).rejects.toThrow(/signature|image/i);
+  });
 });

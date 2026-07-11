@@ -26,6 +26,10 @@ function toDataUrl(file: File, buffer: ArrayBuffer) {
 function hasImageSignature(type: string, bytes: Uint8Array) {
   const startsWith = (signature: number[]) =>
     signature.every((byte, index) => bytes[index] === byte);
+  const hasAsciiAt = (offset: number, value: string) =>
+    [...value].every(
+      (character, index) => bytes[offset + index] === character.charCodeAt(0)
+    );
 
   switch (type) {
     case "image/png":
@@ -44,6 +48,18 @@ function hasImageSignature(type: string, bytes: Uint8Array) {
         bytes[10] === 0x42 &&
         bytes[11] === 0x50
       );
+    case "image/avif":
+      if (!hasAsciiAt(4, "ftyp")) {
+        return false;
+      }
+
+      for (let offset = 8; offset + 4 <= bytes.length; offset += 4) {
+        if (hasAsciiAt(offset, "avif") || hasAsciiAt(offset, "avis")) {
+          return true;
+        }
+      }
+
+      return false;
     default:
       return false;
   }
@@ -58,6 +74,7 @@ async function validateImageFile(file: File) {
 
   if (![
     "image/gif",
+    "image/avif",
     "image/jpeg",
     "image/png",
     "image/webp"
