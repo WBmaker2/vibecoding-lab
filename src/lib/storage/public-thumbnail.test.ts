@@ -65,4 +65,12 @@ describe("public thumbnail helpers", () => {
   ])("hides legacy compute URLs from public conversion: %s", (thumbnailUrl) => {
     expect(toPublicThumbnailUrl({ thumbnailUrl })).toBeNull();
   });
+
+  it.each([
+    "https://cdn.example.com/api/app-thumbnail/logo.png",
+    "https://cdn.example.com/api/thumbnail/logo.png"
+  ])("preserves external images with non-route thumbnail paths: %s", (thumbnailUrl) => {
+    expect(isLegacyThumbnailComputeUrl(thumbnailUrl)).toBe(false);
+    expect(toPublicThumbnailUrl({ thumbnailUrl })).toBe(thumbnailUrl);
+  });
 });

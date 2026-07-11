@@ -204,19 +204,32 @@ function resolveSafePath(value) {
   return decodeURIComponent(parsed.pathname);
 }
 
+function getRawThumbnailPath(value) {
+  const match =
+    value.match(/^[a-z][a-z0-9+.-]*:\/\/[^/?#]*(\/[^?#]*)?/i) ??
+    value.match(/^\/\/[^/?#]*(\/[^?#]*)?/);
+
+  return match?.[1] ?? value.split(/[?#]/)[0];
+}
+
 function normalizeThumbnailPath(value) {
   try {
-    const pathname = decodeURIComponent(
-      new URL(value, STATIC_ASSET_BASE_URL).pathname
-    );
+    const pathname = decodeURIComponent(getRawThumbnailPath(value));
     const segments = [];
+    let hasUnsafeTraversal = false;
 
     for (const segment of pathname.split("/")) {
-      if (!segment || segment === ".") {
+      if (!segment) {
+        continue;
+      }
+
+      if (segment === ".") {
+        hasUnsafeTraversal = true;
         continue;
       }
 
       if (segment === "..") {
+        hasUnsafeTraversal = true;
         segments.pop();
         continue;
       }
@@ -225,9 +238,13 @@ function normalizeThumbnailPath(value) {
     }
 
     const normalized = `/${segments.join("/")}`;
-    return normalized.length > 1
-      ? normalized.replace(/\/+$/, "")
-      : normalized;
+    return {
+      hasUnsafeTraversal,
+      pathname:
+        normalized.length > 1
+          ? normalized.replace(/\/+$/, "")
+          : normalized
+    };
   } catch {
     return null;
   }
@@ -238,14 +255,32 @@ function isLegacyInternalThumbnailUrl(value) {
     return false;
   }
 
-  const pathname = normalizeThumbnailPath(value.trim());
+  const normalizedPath = normalizeThumbnailPath(value.trim());
 
-  return Boolean(
-    pathname &&
-      DIRECT_INTERNAL_THUMBNAIL_PREFIXES.some(
-        (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
-      )
-  );
+  if (!normalizedPath || normalizedPath.hasUnsafeTraversal) {
+    return Boolean(normalizedPath?.hasUnsafeTraversal);
+  }
+
+  return DIRECT_INTERNAL_THUMBNAIL_PREFIXES.some((prefix) => {
+    if (normalizedPath.pathname === prefix) {
+      return prefix === "/api/thumbnail";
+    }
+
+    if (prefix !== "/api/app-thumbnail") {
+      return false;
+    }
+
+    if (!normalizedPath.pathname.startsWith(`${prefix}/`)) {
+      return false;
+    }
+
+    return (
+      normalizedPath.pathname
+        .slice(`${prefix}/`.length)
+        .split("/")
+        .filter(Boolean).length === 2
+    );
+  });
 }
 
 async function writeBufferAtomically(filePath, buffer) {

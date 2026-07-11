@@ -200,6 +200,24 @@ describe("resolveThumbnailInput", () => {
     });
   });
 
+  it.each([
+    "https://cdn.example.com/api/app-thumbnail/logo.png",
+    "https://cdn.example.com/api/thumbnail/logo.png"
+  ])("preserves a legitimate external image with a route-like path: %s", async (thumbnailUrl) => {
+    const result = await resolveThumbnailInput({
+      mode: "placeholder",
+      file: null,
+      sourceUrl: "https://paps-tracker.vercel.app",
+      existingThumbnailMode: "auto",
+      existingThumbnailUrl: thumbnailUrl
+    });
+
+    expect(result).toEqual({
+      thumbnailMode: "auto",
+      thumbnailUrl
+    });
+  });
+
   it("preserves an existing thumbnail when placeholder mode is not confirmed", async () => {
     const result = await resolveThumbnailInput({
       mode: "placeholder",
