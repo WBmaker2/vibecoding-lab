@@ -1,5 +1,13 @@
-import { describe, expect, it } from "vitest";
-import { extractPreviewFromHtml } from "./fetch-link-preview";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { fetchSafeHtml } from "@/lib/security/remote-url";
+import {
+  extractPreviewFromHtml,
+  fetchLinkPreview
+} from "./fetch-link-preview";
+
+vi.mock("@/lib/security/remote-url", () => ({
+  fetchSafeHtml: vi.fn()
+}));
 
 describe("extractPreviewFromHtml", () => {
   it("extracts title, description, and og:image", () => {
@@ -72,5 +80,37 @@ describe("extractPreviewFromHtml", () => {
     );
 
     expect(preview.imageUrl).toBeNull();
+  });
+});
+
+describe("fetchLinkPreview", () => {
+  const mockedFetchSafeHtml = vi.mocked(fetchSafeHtml);
+
+  beforeEach(() => {
+    mockedFetchSafeHtml.mockReset();
+  });
+
+  it("uses the bounded HTML fetch and resolves metadata against the final URL", async () => {
+    mockedFetchSafeHtml.mockResolvedValue({
+      html: `
+        <html>
+          <head>
+            <title>Redirected app</title>
+            <meta property="og:image" content="/assets/preview.png" />
+          </head>
+        </html>
+      `,
+      finalUrl: "https://final.example/app"
+    });
+
+    const preview = await fetchLinkPreview("https://source.example/app");
+
+    expect(mockedFetchSafeHtml).toHaveBeenCalledWith(
+      "https://source.example/app",
+      expect.objectContaining({
+        headers: expect.any(Object)
+      })
+    );
+    expect(preview.imageUrl).toBe("https://final.example/assets/preview.png");
   });
 });

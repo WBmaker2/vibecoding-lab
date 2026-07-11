@@ -5,6 +5,8 @@ import { buildGeneratedThumbnailUrl } from "./generated-thumbnail";
 import { capturePageThumbnail } from "./page-capture";
 import { isSupportedThumbnailUrl } from "./public-thumbnail";
 
+export const MAX_THUMBNAIL_UPLOAD_BYTES = 5 * 1024 * 1024;
+
 interface ResolveThumbnailOptions {
   allowPlaceholderReset?: boolean;
   existingThumbnailMode?: ThumbnailMode;
@@ -21,11 +23,61 @@ function toDataUrl(file: File, buffer: ArrayBuffer) {
   ).toString("base64")}`;
 }
 
-async function uploadFileToBlob(file: File) {
+function hasImageSignature(type: string, bytes: Uint8Array) {
+  const startsWith = (signature: number[]) =>
+    signature.every((byte, index) => bytes[index] === byte);
+
+  switch (type) {
+    case "image/png":
+      return startsWith([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+    case "image/jpeg":
+      return startsWith([0xff, 0xd8, 0xff]);
+    case "image/gif":
+      return startsWith([0x47, 0x49, 0x46, 0x38]) &&
+        (bytes[4] === 0x37 || bytes[4] === 0x39) &&
+        bytes[5] === 0x61;
+    case "image/webp":
+      return (
+        startsWith([0x52, 0x49, 0x46, 0x46]) &&
+        bytes[8] === 0x57 &&
+        bytes[9] === 0x45 &&
+        bytes[10] === 0x42 &&
+        bytes[11] === 0x50
+      );
+    default:
+      return false;
+  }
+}
+
+async function validateImageFile(file: File) {
+  if (file.size > MAX_THUMBNAIL_UPLOAD_BYTES) {
+    throw new Error("Thumbnail upload must be 5 MiB or smaller.");
+  }
+
+  const type = file.type.toLowerCase();
+
+  if (![
+    "image/gif",
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+  ].includes(type)) {
+    throw new Error("Thumbnail upload must be a supported image format.");
+  }
+
+  const buffer = new Uint8Array(await file.arrayBuffer());
+
+  if (!hasImageSignature(type, buffer)) {
+    throw new Error("Thumbnail upload has an invalid image signature.");
+  }
+
+  return buffer.buffer;
+}
+
+async function uploadFileToBlob(file: File, buffer: ArrayBuffer) {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
 
   if (!token) {
-    const buffer = await file.arrayBuffer();
     return toDataUrl(file, buffer);
   }
 
@@ -99,9 +151,11 @@ export async function resolveThumbnailInput({
 
   if (mode === "upload") {
     if (file && file.size > 0) {
+      const buffer = await validateImageFile(file);
+
       return {
         thumbnailMode: "upload" as const,
-        thumbnailUrl: await uploadFileToBlob(file)
+        thumbnailUrl: await uploadFileToBlob(file, buffer)
       };
     }
 

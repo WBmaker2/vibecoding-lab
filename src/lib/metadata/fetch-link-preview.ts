@@ -1,3 +1,5 @@
+import { fetchSafeHtml } from "@/lib/security/remote-url";
+
 function extractTagContent(html: string, pattern: RegExp) {
   const match = html.match(pattern);
   return match?.[1]?.trim() ?? null;
@@ -80,17 +82,12 @@ export function extractPreviewFromHtml(html: string, sourceUrl?: string) {
 }
 
 export async function fetchLinkPreview(url: string) {
-  const response = await fetch(url, {
+  const response = await fetchSafeHtml(url, {
     headers: {
       "user-agent":
         "Mozilla/5.0 (compatible; HongsVibeCodingLabBot/1.0; +https://example.com)"
     }
   });
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch preview: ${response.status}`);
-  }
-
-  const html = await response.text();
-  return extractPreviewFromHtml(html, url);
+  return extractPreviewFromHtml(response.html, response.finalUrl);
 }

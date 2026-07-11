@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { createHash, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { verifyPasswordHash } from "./password";
 
@@ -9,7 +9,8 @@ function getAdminPasswordHash() {
 }
 
 function getSessionSecret() {
-  return process.env.SESSION_SECRET ?? "0123456789abcdef0123456789abcdef";
+  const secret = process.env.SESSION_SECRET ?? "";
+  return secret.length >= 32 ? secret : null;
 }
 
 function hashValue(value: string) {
@@ -27,14 +28,36 @@ export async function verifyAdminPassword(input: string) {
 }
 
 export function createAdminSessionToken() {
-  return hashValue(`admin:${getSessionSecret()}`);
+  const secret = getSessionSecret();
+
+  if (!secret) {
+    throw new Error("SESSION_SECRET must be at least 32 characters.");
+  }
+
+  return hashValue(`admin:${secret}`);
 }
 
 export async function hasAdminSession() {
   const cookieStore = await cookies();
   const token = cookieStore.get(ADMIN_SESSION_COOKIE)?.value;
+  const expectedToken = (() => {
+    try {
+      return createAdminSessionToken();
+    } catch {
+      return null;
+    }
+  })();
 
-  return token === createAdminSessionToken();
+  if (!token || !expectedToken) {
+    return false;
+  }
+
+  const actual = Buffer.from(token);
+  const expected = Buffer.from(expectedToken);
+
+  return (
+    actual.length === expected.length && timingSafeEqual(actual, expected)
+  );
 }
 
 export async function setAdminSession() {

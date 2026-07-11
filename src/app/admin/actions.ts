@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { clearAdminSession } from "@/lib/auth/session";
+import { clearAdminSession, hasAdminSession } from "@/lib/auth/session";
 import { getAppRepository } from "@/lib/apps/repository";
 import { appInputSchema } from "@/lib/apps/schema";
 import { normalizeTags as normalizeAppTags } from "@/lib/apps/tags";
@@ -54,7 +54,14 @@ function revalidateAdmin() {
   revalidatePath("/admin");
 }
 
+async function requireAdminSession() {
+  if (!(await hasAdminSession())) {
+    redirect("/admin/login");
+  }
+}
+
 export async function createAppAction(formData: FormData) {
+  await requireAdminSession();
   const repo = getAppRepository();
   const input = await getAppInput(formData);
 
@@ -63,6 +70,7 @@ export async function createAppAction(formData: FormData) {
 }
 
 export async function updateAppAction(formData: FormData) {
+  await requireAdminSession();
   const id = String(formData.get("id") ?? "");
   const repo = getAppRepository();
   const existingApp = (await repo.listAdminApps()).find((app) => app.id === id);
@@ -73,6 +81,7 @@ export async function updateAppAction(formData: FormData) {
 }
 
 export async function deleteAppAction(formData: FormData) {
+  await requireAdminSession();
   const id = String(formData.get("id") ?? "");
   const repo = getAppRepository();
 
@@ -81,6 +90,7 @@ export async function deleteAppAction(formData: FormData) {
 }
 
 export async function removeAppTagAction(formData: FormData) {
+  await requireAdminSession();
   const id = String(formData.get("id") ?? "");
   const tag = String(formData.get("tag") ?? "");
   const repo = getAppRepository();

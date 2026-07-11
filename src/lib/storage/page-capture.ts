@@ -1,24 +1,12 @@
 import { put } from "@vercel/blob";
+import { assertSafeRemoteHttpUrl } from "@/lib/security/remote-url";
 import { getThumbnailHostLabel } from "./generated-thumbnail";
 
 const CAPTURE_WIDTH = 1200;
 const CAPTURE_HEIGHT = 630;
 const CAPTURE_DELAY_MS = 1500;
 const CAPTURE_TIMEOUT_MS = 15000;
-
-function getCaptureTarget(sourceUrl: string) {
-  try {
-    const target = new URL(sourceUrl);
-
-    if (!["http:", "https:"].includes(target.protocol)) {
-      return null;
-    }
-
-    return target.toString();
-  } catch {
-    return null;
-  }
-}
+const MAX_CAPTURE_REQUESTS = 80;
 
 function toPngDataUrl(buffer: Buffer) {
   return `data:image/png;base64,${buffer.toString("base64")}`;
@@ -68,7 +56,9 @@ async function launchChromium() {
 }
 
 export async function capturePageThumbnail(sourceUrl: string) {
-  const target = getCaptureTarget(sourceUrl);
+  const target = await assertSafeRemoteHttpUrl(sourceUrl)
+    .then((url) => url.toString())
+    .catch(() => null);
 
   if (!target) {
     return null;
@@ -86,6 +76,23 @@ export async function capturePageThumbnail(sourceUrl: string) {
       viewport: {
         width: CAPTURE_WIDTH,
         height: CAPTURE_HEIGHT
+      }
+    });
+    let requestCount = 0;
+
+    await page.route("**/*", async (route) => {
+      if (requestCount >= MAX_CAPTURE_REQUESTS) {
+        await route.abort("blockedbyclient");
+        return;
+      }
+
+      requestCount += 1;
+
+      try {
+        await assertSafeRemoteHttpUrl(route.request().url());
+        await route.continue();
+      } catch {
+        await route.abort("blockedbyclient");
       }
     });
 

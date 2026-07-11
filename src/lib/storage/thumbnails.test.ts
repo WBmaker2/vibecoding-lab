@@ -1,7 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fetchLinkPreview } from "@/lib/metadata/fetch-link-preview";
 import { capturePageThumbnail } from "./page-capture";
-import { resolveThumbnailInput } from "./thumbnails";
+import {
+  MAX_THUMBNAIL_UPLOAD_BYTES,
+  resolveThumbnailInput
+} from "./thumbnails";
 
 vi.mock("@/lib/metadata/fetch-link-preview", () => ({
   fetchLinkPreview: vi.fn()
@@ -19,10 +22,29 @@ describe("resolveThumbnailInput", () => {
   const mockedFetchLinkPreview = vi.mocked(fetchLinkPreview);
   const mockedCapturePageThumbnail = vi.mocked(capturePageThumbnail);
 
+  function createUploadFile(
+    bytes: Uint8Array,
+    type: string,
+    name: string
+  ): File {
+    return {
+      arrayBuffer: async () =>
+        bytes.buffer.slice(
+          bytes.byteOffset,
+          bytes.byteOffset + bytes.byteLength
+        ),
+      lastModified: 0,
+      name,
+      size: bytes.byteLength,
+      type
+    } as File;
+  }
+
   beforeEach(() => {
     mockedFetchLinkPreview.mockReset();
     mockedCapturePageThumbnail.mockReset();
     process.env.APP_BASE_URL = "https://lab.example.com";
+    delete process.env.BLOB_READ_WRITE_TOKEN;
     delete process.env.VERCEL_PROJECT_PRODUCTION_URL;
     delete process.env.VERCEL_URL;
   });
@@ -149,6 +171,73 @@ describe("resolveThumbnailInput", () => {
     expect(result).toEqual({
       thumbnailMode: "placeholder",
       thumbnailUrl: null
+    });
+  });
+
+  it("rejects uploads larger than the server-side limit", async () => {
+    const file = createUploadFile(
+      new Uint8Array(MAX_THUMBNAIL_UPLOAD_BYTES + 1),
+      "image/png",
+      "large.png"
+    );
+
+    await expect(
+      resolveThumbnailInput({
+        mode: "upload",
+        file,
+        sourceUrl: "https://example.com"
+      })
+    ).rejects.toThrow(/5 MiB|size/i);
+  });
+
+  it("rejects SVG uploads", async () => {
+    const file = createUploadFile(
+      new TextEncoder().encode("<svg></svg>"),
+      "image/svg+xml",
+      "icon.svg"
+    );
+
+    await expect(
+      resolveThumbnailInput({
+        mode: "upload",
+        file,
+        sourceUrl: "https://example.com"
+      })
+    ).rejects.toThrow(/image/i);
+  });
+
+  it("rejects a PNG MIME type with invalid signature bytes", async () => {
+    const file = createUploadFile(
+      new TextEncoder().encode("not a png"),
+      "image/png",
+      "spoofed.png"
+    );
+
+    await expect(
+      resolveThumbnailInput({
+        mode: "upload",
+        file,
+        sourceUrl: "https://example.com"
+      })
+    ).rejects.toThrow(/signature|image/i);
+  });
+
+  it("accepts a valid small PNG upload", async () => {
+    const file = createUploadFile(
+      new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+      "image/png",
+      "tiny.png"
+    );
+
+    await expect(
+      resolveThumbnailInput({
+        mode: "upload",
+        file,
+        sourceUrl: "https://example.com"
+      })
+    ).resolves.toMatchObject({
+      thumbnailMode: "upload",
+      thumbnailUrl: expect.stringMatching(/^data:image\/png;base64,/)
     });
   });
 });
