@@ -1,4 +1,5 @@
 import snapshot from "@/data/public-apps.json";
+import { isLegacyThumbnailComputeUrl } from "@/lib/storage/public-thumbnail";
 import type { PublicAppRecord, ThumbnailMode } from "./types";
 import path from "node:path";
 
@@ -24,7 +25,6 @@ interface PublicAppsSnapshot {
   apps: SerializedPublicAppRecord[];
 }
 
-const INTERNAL_COMPUTE_PREFIXES = ["/api/app-thumbnail/", "/api/thumbnail"];
 const THUMBNAIL_MODES = new Set<ThumbnailMode>([
   "auto",
   "upload",
@@ -98,16 +98,12 @@ function isAllowedStaticPath(value: string): boolean {
   return false;
 }
 
-function isInternalComputeAbsolutePath(pathname: string) {
-  if (hasDotTraversalSegments(pathname)) {
-    return false;
-  }
-
-  return INTERNAL_COMPUTE_PREFIXES.some((prefix) => pathname.startsWith(prefix));
-}
-
 function normalizeStaticThumbnailUrl(value: string | null): string | null {
   if (!value) {
+    return null;
+  }
+
+  if (isLegacyThumbnailComputeUrl(value)) {
     return null;
   }
 
@@ -119,24 +115,12 @@ function normalizeStaticThumbnailUrl(value: string | null): string | null {
     return value;
   }
 
-  if (INTERNAL_COMPUTE_PREFIXES.some((prefix) => value.startsWith(prefix))) {
-    return null;
-  }
-
   try {
     if (hasUnsafeAbsoluteUrlPath(value)) {
       return null;
     }
 
     const parsedUrl = new URL(value);
-    if (
-      (parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:") &&
-      isInternalComputeAbsolutePath(
-        decodeURIComponent(parsedUrl.pathname || "")
-      )
-    ) {
-      return null;
-    }
 
     if (parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:") {
       return parsedUrl.toString();

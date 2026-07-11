@@ -1,6 +1,7 @@
 import {
   decodeEmbeddedThumbnailUrl,
   isEmbeddedThumbnailUrl,
+  isLegacyThumbnailComputeUrl,
   toPublicThumbnailUrl
 } from "./public-thumbnail";
 
@@ -37,5 +38,31 @@ describe("public thumbnail helpers", () => {
     expect(isEmbeddedThumbnailUrl("data:image/png;base64,aGVsbG8=")).toBe(true);
     expect(decoded?.contentType).toBe("image/png");
     expect(decoded?.buffer.toString("utf8")).toBe("hello");
+  });
+
+  it.each([
+    "/api/thumbnail?host=old.example.com",
+    "/api/app-thumbnail/app-1/1",
+    "https://old-project.vercel.app/api/thumbnail?host=old.example.com",
+    "https://old-project.vercel.app/api/app-thumbnail/app-1/1",
+    "https://old-project.vercel.app/api/%61pp-thumbnail/app-1/1"
+  ])("detects legacy compute URLs regardless of origin: %s", (value) => {
+    expect(isLegacyThumbnailComputeUrl(value)).toBe(true);
+  });
+
+  it("does not classify legitimate external or embedded images as legacy compute URLs", () => {
+    expect(
+      isLegacyThumbnailComputeUrl("https://example.com/images/thumb.png")
+    ).toBe(false);
+    expect(
+      isLegacyThumbnailComputeUrl("data:image/png;base64,aGVsbG8=")
+    ).toBe(false);
+  });
+
+  it.each([
+    "/api/thumbnail?host=old.example.com",
+    "https://old-project.vercel.app/api/app-thumbnail/app-1/1"
+  ])("hides legacy compute URLs from public conversion: %s", (thumbnailUrl) => {
+    expect(toPublicThumbnailUrl({ thumbnailUrl })).toBeNull();
   });
 });

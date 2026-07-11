@@ -2,7 +2,10 @@ import { put } from "@vercel/blob";
 import type { ThumbnailMode } from "@/lib/apps/types";
 import { fetchLinkPreview } from "@/lib/metadata/fetch-link-preview";
 import { capturePageThumbnail } from "./page-capture";
-import { isSupportedThumbnailUrl } from "./public-thumbnail";
+import {
+  isLegacyThumbnailComputeUrl,
+  isSupportedThumbnailUrl
+} from "./public-thumbnail";
 
 export const MAX_THUMBNAIL_UPLOAD_BYTES = 5 * 1024 * 1024;
 
@@ -113,21 +116,34 @@ async function captureThumbnailOrNull(sourceUrl: string) {
   }
 }
 
+function normalizeThumbnailCandidate(thumbnailUrl: string | null | undefined) {
+  if (
+    !thumbnailUrl ||
+    isLegacyThumbnailComputeUrl(thumbnailUrl) ||
+    !isSupportedThumbnailUrl(thumbnailUrl)
+  ) {
+    return null;
+  }
+
+  return thumbnailUrl;
+}
+
 async function resolveAutoThumbnail(sourceUrl: string) {
   try {
     const preview = await fetchLinkPreview(sourceUrl);
+    const previewImageUrl = normalizeThumbnailCandidate(preview.imageUrl);
 
-    if (preview.imageUrl) {
-      return preview.imageUrl;
+    if (previewImageUrl) {
+      return previewImageUrl;
     }
 
     const capturedImageUrl = await captureThumbnailOrNull(sourceUrl);
 
-    return capturedImageUrl;
+    return normalizeThumbnailCandidate(capturedImageUrl);
   } catch {
     const capturedImageUrl = await captureThumbnailOrNull(sourceUrl);
 
-    return capturedImageUrl;
+    return normalizeThumbnailCandidate(capturedImageUrl);
   }
 }
 
@@ -140,11 +156,10 @@ export async function resolveThumbnailInput({
   sourceUrl,
   thumbnailUrl
 }: ResolveThumbnailOptions) {
-  const validExistingThumbnailUrl = isSupportedThumbnailUrl(
+  const validExistingThumbnailUrl = normalizeThumbnailCandidate(
     existingThumbnailUrl
-  )
-    ? existingThumbnailUrl
-    : null;
+  );
+  const validSubmittedThumbnailUrl = normalizeThumbnailCandidate(thumbnailUrl);
   const preservedThumbnail =
     validExistingThumbnailUrl && !allowPlaceholderReset
       ? {
@@ -176,10 +191,11 @@ export async function resolveThumbnailInput({
 
     return {
       thumbnailMode:
-        thumbnailUrl || preservedThumbnail?.thumbnailUrl
+        validSubmittedThumbnailUrl || preservedThumbnail?.thumbnailUrl
           ? existingThumbnailMode ?? ("upload" as const)
           : ("placeholder" as const),
-      thumbnailUrl: thumbnailUrl || preservedThumbnail?.thumbnailUrl || null
+      thumbnailUrl:
+        validSubmittedThumbnailUrl || preservedThumbnail?.thumbnailUrl || null
     };
   }
 
@@ -187,7 +203,9 @@ export async function resolveThumbnailInput({
 
   return {
     thumbnailMode:
-      autoUrl || thumbnailUrl ? ("auto" as const) : ("placeholder" as const),
-    thumbnailUrl: autoUrl ?? thumbnailUrl ?? null
+      autoUrl || validSubmittedThumbnailUrl
+        ? ("auto" as const)
+        : ("placeholder" as const),
+    thumbnailUrl: autoUrl ?? validSubmittedThumbnailUrl ?? null
   };
 }

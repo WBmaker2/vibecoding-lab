@@ -144,6 +144,62 @@ describe("resolveThumbnailInput", () => {
     });
   });
 
+  it.each([
+    "/api/thumbnail?host=old.example.com",
+    "https://old-project.vercel.app/api/app-thumbnail/app-1/1"
+  ])("does not use a stale form compute URL after auto failure: %s", async (staleUrl) => {
+    mockedFetchLinkPreview.mockRejectedValue(new Error("network failure"));
+    mockedCapturePageThumbnail.mockResolvedValue(null);
+
+    const result = await resolveThumbnailInput({
+      mode: "auto",
+      file: null,
+      sourceUrl: "https://paps-tracker.vercel.app",
+      thumbnailUrl: staleUrl
+    });
+
+    expect(result).toEqual({
+      thumbnailMode: "placeholder",
+      thumbnailUrl: null
+    });
+  });
+
+  it.each([
+    "/api/thumbnail?host=old.example.com",
+    "https://old-project.vercel.app/api/app-thumbnail/app-1/1"
+  ])("does not preserve a stale existing compute URL: %s", async (staleUrl) => {
+    mockedFetchLinkPreview.mockRejectedValue(new Error("network failure"));
+    mockedCapturePageThumbnail.mockResolvedValue(null);
+
+    const result = await resolveThumbnailInput({
+      mode: "placeholder",
+      file: null,
+      sourceUrl: "https://paps-tracker.vercel.app",
+      existingThumbnailMode: "auto",
+      existingThumbnailUrl: staleUrl
+    });
+
+    expect(result).toEqual({
+      thumbnailMode: "placeholder",
+      thumbnailUrl: null
+    });
+  });
+
+  it("preserves a legitimate existing external image URL", async () => {
+    const result = await resolveThumbnailInput({
+      mode: "placeholder",
+      file: null,
+      sourceUrl: "https://paps-tracker.vercel.app",
+      existingThumbnailMode: "auto",
+      existingThumbnailUrl: "https://images.example.com/paps.png"
+    });
+
+    expect(result).toEqual({
+      thumbnailMode: "auto",
+      thumbnailUrl: "https://images.example.com/paps.png"
+    });
+  });
+
   it("preserves an existing thumbnail when placeholder mode is not confirmed", async () => {
     const result = await resolveThumbnailInput({
       mode: "placeholder",

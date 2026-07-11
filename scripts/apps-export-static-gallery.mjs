@@ -35,7 +35,7 @@ const MIME_TO_EXTENSION = {
   "image/tiff": "tiff"
 };
 const DIRECT_INTERNAL_THUMBNAIL_PREFIXES = [
-  "/api/app-thumbnail/",
+  "/api/app-thumbnail",
   "/api/thumbnail"
 ];
 
@@ -204,47 +204,48 @@ function resolveSafePath(value) {
   return decodeURIComponent(parsed.pathname);
 }
 
-function isDirectInternalThumbnailRoute(value) {
-  if (!value.startsWith("/")) {
-    return false;
-  }
+function normalizeThumbnailPath(value) {
+  try {
+    const pathname = decodeURIComponent(
+      new URL(value, STATIC_ASSET_BASE_URL).pathname
+    );
+    const segments = [];
 
-  const pathname = decodeRelativePath(value);
-  if (!pathname) {
-    return false;
-  }
+    for (const segment of pathname.split("/")) {
+      if (!segment || segment === ".") {
+        continue;
+      }
 
-  if (hasDotTraversalSegments(pathname)) {
-    return false;
-  }
+      if (segment === "..") {
+        segments.pop();
+        continue;
+      }
 
-  return DIRECT_INTERNAL_THUMBNAIL_PREFIXES.some((prefix) =>
-    pathname.startsWith(prefix)
-  );
+      segments.push(segment);
+    }
+
+    const normalized = `/${segments.join("/")}`;
+    return normalized.length > 1
+      ? normalized.replace(/\/+$/, "")
+      : normalized;
+  } catch {
+    return null;
+  }
 }
 
 function isLegacyInternalThumbnailUrl(value) {
-  if (value.startsWith("/") && !value.startsWith("//")) {
-    return isDirectInternalThumbnailRoute(value);
-  }
-
-  if (!isSafeSameOriginThumbnailUrl(value)) {
+  if (typeof value !== "string" || !value.trim()) {
     return false;
   }
 
-  try {
-    const pathname = decodeURIComponent(new URL(value, BASE_URL).pathname);
+  const pathname = normalizeThumbnailPath(value.trim());
 
-    if (hasDotTraversalSegments(pathname)) {
-      return false;
-    }
-
-    return DIRECT_INTERNAL_THUMBNAIL_PREFIXES.some((prefix) =>
-      pathname.startsWith(prefix)
-    );
-  } catch {
-    return false;
-  }
+  return Boolean(
+    pathname &&
+      DIRECT_INTERNAL_THUMBNAIL_PREFIXES.some(
+        (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
+      )
+  );
 }
 
 async function writeBufferAtomically(filePath, buffer) {
