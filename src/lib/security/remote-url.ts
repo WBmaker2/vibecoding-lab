@@ -1,4 +1,5 @@
-import { lookup as dnsLookup, type LookupAddress } from "node:dns/promises";
+import { type LookupAddress } from "node:dns";
+import { lookup as dnsLookup } from "node:dns/promises";
 import { request as httpRequest, type IncomingHttpHeaders } from "node:http";
 import { request as httpsRequest } from "node:https";
 import { isIP } from "node:net";
@@ -344,7 +345,7 @@ async function validateRemoteUrl(
     return { address: hostname, family, url };
   }
 
-  const lookup = options.lookup ?? dnsLookup;
+  const lookup = options.lookup ?? (dnsLookup as LookupFn);
   const lookupPromise = lookup(hostname, { all: true, verbatim: true });
   const addresses = await withDeadline(
     lookupPromise,
