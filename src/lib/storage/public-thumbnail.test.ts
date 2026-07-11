@@ -2,6 +2,7 @@ import {
   decodeEmbeddedThumbnailUrl,
   isEmbeddedThumbnailUrl,
   isLegacyThumbnailComputeUrl,
+  isUnsafeThumbnailUrl,
   toPublicThumbnailUrl
 } from "./public-thumbnail";
 
@@ -57,6 +58,15 @@ describe("public thumbnail helpers", () => {
     expect(
       isLegacyThumbnailComputeUrl("data:image/png;base64,aGVsbG8=")
     ).toBe(false);
+  });
+
+  it.each([
+    "https://old-project.vercel.app/api/app-thumbnail/%2e%2e/app-1/1",
+    "/images/../api/thumbnail"
+  ])("classifies traversal separately from legacy compute URLs: %s", (value) => {
+    expect(isUnsafeThumbnailUrl(value)).toBe(true);
+    expect(isLegacyThumbnailComputeUrl(value)).toBe(false);
+    expect(toPublicThumbnailUrl({ thumbnailUrl: value })).toBeNull();
   });
 
   it.each([

@@ -132,26 +132,6 @@ function hasDotTraversalSegments(pathname) {
   return segments.some((segment) => segment === "." || segment === "..");
 }
 
-function decodeRelativePath(value) {
-  const pathOnly = value.split(/[?#]/)[0];
-
-  try {
-    return decodeURIComponent(pathOnly);
-  } catch {
-    return null;
-  }
-}
-
-function hasUnsafeRelativeDotTraversal(value) {
-  const decoded = decodeRelativePath(value);
-
-  if (!decoded) {
-    return true;
-  }
-
-  return hasDotTraversalSegments(decoded);
-}
-
 function getRawUrlPath(value) {
   const match =
     value.match(/^[a-z][a-z0-9+.-]*:\/\/[^/?#]*(\/[^?#]*)?/i) ??
@@ -258,7 +238,7 @@ function isLegacyInternalThumbnailUrl(value) {
   const normalizedPath = normalizeThumbnailPath(value.trim());
 
   if (!normalizedPath || normalizedPath.hasUnsafeTraversal) {
-    return Boolean(normalizedPath?.hasUnsafeTraversal);
+    return false;
   }
 
   return DIRECT_INTERNAL_THUMBNAIL_PREFIXES.some((prefix) => {
@@ -281,6 +261,16 @@ function isLegacyInternalThumbnailUrl(value) {
         .filter(Boolean).length === 2
     );
   });
+}
+
+function isUnsafeThumbnailUrl(value) {
+  if (typeof value !== "string" || !value.trim()) {
+    return false;
+  }
+
+  const normalizedPath = normalizeThumbnailPath(value.trim());
+
+  return !normalizedPath || normalizedPath.hasUnsafeTraversal;
 }
 
 async function writeBufferAtomically(filePath, buffer) {
@@ -618,8 +608,8 @@ async function materializeThumbnail(
   }
 
   if (rawUrl.startsWith("/") && !rawUrl.startsWith("//")) {
-    if (hasUnsafeRelativeDotTraversal(rawUrl)) {
-      throw new Error(`Unsafe relative thumbnail path: ${rawUrl}`);
+    if (isUnsafeThumbnailUrl(rawUrl)) {
+      return null;
     }
 
     if (isLegacyInternalThumbnailUrl(rawUrl)) {
@@ -651,6 +641,10 @@ async function materializeThumbnail(
 
   const resolvedAbsoluteUrl = resolveHttpOrProtocolRelativeUrl(rawUrl);
   if (resolvedAbsoluteUrl) {
+    if (isUnsafeThumbnailUrl(rawUrl)) {
+      return null;
+    }
+
     if (isLegacyInternalThumbnailUrl(rawUrl)) {
       return findReusableLegacyThumbnail(
         app?.id,
@@ -813,7 +807,11 @@ async function run() {
     thumbnailFiles: existingThumbnailFiles
   });
 
-  if (reuseDecision.reusable) {
+  const hasUnsafeThumbnail = apps.some((app) =>
+    isUnsafeThumbnailUrl(app?.thumbnailUrl)
+  );
+
+  if (reuseDecision.reusable && !hasUnsafeThumbnail) {
     console.log(
       `gallery-export changed=false reason=${reuseDecision.reason}`
     );

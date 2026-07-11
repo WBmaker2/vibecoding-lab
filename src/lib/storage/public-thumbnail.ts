@@ -79,7 +79,7 @@ export function isLegacyThumbnailComputeUrl(
   const normalizedPath = normalizeThumbnailPath(thumbnailUrl.trim());
 
   if (!normalizedPath || normalizedPath.hasUnsafeTraversal) {
-    return Boolean(normalizedPath?.hasUnsafeTraversal);
+    return false;
   }
 
   if (normalizedPath.pathname === "/api/thumbnail") {
@@ -98,6 +98,18 @@ export function isLegacyThumbnailComputeUrl(
   );
 }
 
+export function isUnsafeThumbnailUrl(
+  thumbnailUrl: string | null | undefined
+) {
+  if (!thumbnailUrl?.trim()) {
+    return false;
+  }
+
+  const normalizedPath = normalizeThumbnailPath(thumbnailUrl.trim());
+
+  return !normalizedPath || normalizedPath.hasUnsafeTraversal;
+}
+
 export function toPublicThumbnailUrl({
   thumbnailUrl
 }: {
@@ -108,6 +120,7 @@ export function toPublicThumbnailUrl({
   }
 
   if (
+    isUnsafeThumbnailUrl(thumbnailUrl) ||
     isLegacyThumbnailComputeUrl(thumbnailUrl) ||
     !isSupportedThumbnailUrl(thumbnailUrl)
   ) {

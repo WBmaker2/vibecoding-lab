@@ -274,6 +274,67 @@ describe("static gallery exporter thumbnail entry safety", () => {
     }
   });
 
+  it("does not reuse or fetch a prior local asset for an encoded traversal URL", async () => {
+    const fixture = await fs.mkdtemp(
+      path.join(os.tmpdir(), "hvc-gallery-export-traversal-prune-test-")
+    );
+    const outputJson = path.join(fixture, "src", "data", "public-apps.json");
+    const outputThumbnailDir = path.join(fixture, "public", "app-thumbnails");
+    const backup = path.join(fixture, "backup.json");
+    let requests = 0;
+    const server = createServer((_request, response) => {
+      requests += 1;
+      response.writeHead(200, { "content-type": "image/png" });
+      response.end("unexpected network fetch");
+    });
+
+    try {
+      await fs.mkdir(path.dirname(outputJson), { recursive: true });
+      await fs.mkdir(outputThumbnailDir, { recursive: true });
+      await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+      const address = server.address();
+      const unsafeApp = {
+        ...app,
+        title: "Unsafe traversal",
+        thumbnailUrl: `http://127.0.0.1:${address.port}/api/app-thumbnail/%2e%2e/app-1/1`
+      };
+
+      await fs.writeFile(
+        outputJson,
+        JSON.stringify(
+          {
+            version: 1,
+            generatedAt: "2026-07-10T00:00:00.000Z",
+            appCount: 1,
+            apps: [app]
+          },
+          null,
+          2
+        )
+      );
+      await fs.writeFile(backup, JSON.stringify({ apps: [unsafeApp] }, null, 2));
+      await fs.writeFile(path.join(outputThumbnailDir, "alpha.png"), "old local");
+
+      const result = await runExporter({
+        backup,
+        outputJson,
+        outputThumbnailDir,
+        baseUrl: "https://static.example.test"
+      });
+      const snapshot = JSON.parse(await fs.readFile(outputJson, "utf8"));
+
+      expect(result.code).toBe(0);
+      expect(requests).toBe(0);
+      expect(snapshot.apps[0].thumbnailUrl).toBeNull();
+      await expect(
+        fs.access(path.join(outputThumbnailDir, "alpha.png"))
+      ).rejects.toMatchObject({ code: "ENOENT" });
+    } finally {
+      await new Promise((resolve) => server.close(resolve));
+      await fs.rm(fixture, { recursive: true, force: true });
+    }
+  });
+
   it("reuses an existing local snapshot asset for a legacy internal URL without fetching it", async () => {
     const fixture = await fs.mkdtemp(
       path.join(os.tmpdir(), "hvc-gallery-export-legacy-reuse-test-")

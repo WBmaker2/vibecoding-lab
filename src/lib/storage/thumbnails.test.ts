@@ -218,6 +218,22 @@ describe("resolveThumbnailInput", () => {
     });
   });
 
+  it("rejects an existing absolute encoded traversal URL in admin resolution", async () => {
+    const result = await resolveThumbnailInput({
+      mode: "placeholder",
+      file: null,
+      sourceUrl: "https://paps-tracker.vercel.app",
+      existingThumbnailMode: "auto",
+      existingThumbnailUrl:
+        "https://old-project.vercel.app/api/app-thumbnail/%2e%2e/app-1/1"
+    });
+
+    expect(result).toEqual({
+      thumbnailMode: "placeholder",
+      thumbnailUrl: null
+    });
+  });
+
   it("preserves an existing thumbnail when placeholder mode is not confirmed", async () => {
     const result = await resolveThumbnailInput({
       mode: "placeholder",

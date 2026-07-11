@@ -4,6 +4,7 @@ import { fetchLinkPreview } from "@/lib/metadata/fetch-link-preview";
 import { capturePageThumbnail } from "./page-capture";
 import {
   isLegacyThumbnailComputeUrl,
+  isUnsafeThumbnailUrl,
   isSupportedThumbnailUrl
 } from "./public-thumbnail";
 
@@ -119,6 +120,7 @@ async function captureThumbnailOrNull(sourceUrl: string) {
 function normalizeThumbnailCandidate(thumbnailUrl: string | null | undefined) {
   if (
     !thumbnailUrl ||
+    isUnsafeThumbnailUrl(thumbnailUrl) ||
     isLegacyThumbnailComputeUrl(thumbnailUrl) ||
     !isSupportedThumbnailUrl(thumbnailUrl)
   ) {
