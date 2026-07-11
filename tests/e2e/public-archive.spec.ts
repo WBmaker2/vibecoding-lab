@@ -9,18 +9,19 @@ test("public archive supports search and tag filtering", async ({ page }) => {
   await expect(page.getByText(/공개 아카이브/i)).toBeVisible();
   await expect(page.getByText(/^대표 태그$/)).toBeVisible();
 
+  await page.getByRole("button", { name: "대표 태그 펼치기" }).click();
   await page.getByRole("button", { name: "#영어" }).click();
   await expect(page.getByLabel("활성 필터").getByText("#영어")).toBeVisible();
   await expect(page.getByRole("button", { name: "필터 초기화" })).toBeVisible();
-  await expect(page.getByText("Talking Vocab Quiz")).toBeVisible();
+  await expect(page.getByText("AI 원어민 단어 퀴즈 쇼")).toBeVisible();
   await expect(page.getByText("Class Random Seat")).toHaveCount(0);
 
   await page.getByRole("button", { name: "필터 초기화" }).click();
-  await page.getByRole("searchbox", { name: "앱 검색" }).fill("형성평가");
+  await page.getByRole("searchbox", { name: "앱 검색" }).fill("원어민");
   await expect(
-    page.getByLabel("활성 필터").getByText('검색어 "형성평가"')
+    page.getByLabel("활성 필터").getByText('검색어 "원어민"')
   ).toBeVisible();
-  await expect(page.getByText("Talking Vocab Quiz")).toBeVisible();
+  await expect(page.getByText("AI 원어민 단어 퀴즈 쇼")).toBeVisible();
 
   await page.getByRole("searchbox", { name: "앱 검색" }).fill("없는앱");
   await expect(

@@ -24,9 +24,10 @@ test("admin can log in and create an app", async ({ page }) => {
 
   await expect(page.getByText("Reading Timer")).toBeVisible();
 
-  await page.goto("/");
-  await page.getByRole("searchbox", { name: "앱 검색" }).fill("Reading Timer");
   await expect(
-    page.getByRole("heading", { name: "Reading Timer" })
+    page.getByRole("heading", { name: "등록된 앱 라이브러리" })
   ).toBeVisible();
+
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Reading Timer" })).toBeVisible();
 });
