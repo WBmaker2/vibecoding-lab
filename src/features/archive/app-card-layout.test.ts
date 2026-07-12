@@ -44,6 +44,9 @@ describe("archive app card layout styles", () => {
     const mobileTagStyles = styles.match(
       /\.archive-hero \.tag-filter-bar \{([\s\S]*?)\n\}/
     )?.[1] ?? "";
+    const mobileTagChipStyles = styles.match(
+      /\.archive-hero \.tag-filter-bar \.tag-chip \{([\s\S]*?)\n  \}/
+    )?.[1] ?? "";
 
     expect(heroStyles).toContain("border: 0");
     expect(heroStyles).toContain("background: transparent");
@@ -51,5 +54,8 @@ describe("archive app card layout styles", () => {
     expect(heroStyles).toContain("box-shadow: none");
     expect(mobileTagStyles).toContain("flex-wrap: nowrap");
     expect(mobileTagStyles).toContain("overflow-x: auto");
+    expect(mobileTagChipStyles).toContain("flex: 0 0 auto");
+    expect(mobileTagChipStyles).toContain("min-width: max-content");
+    expect(mobileTagChipStyles).toContain("white-space: nowrap");
   });
 });

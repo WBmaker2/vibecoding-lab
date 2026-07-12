@@ -1542,6 +1542,12 @@ select {
     padding-bottom: 4px;
   }
 
+  .archive-hero .tag-filter-bar .tag-chip {
+    flex: 0 0 auto;
+    min-width: max-content;
+    white-space: nowrap;
+  }
+
   .archive-search-input {
     padding: 16px 18px;
   }

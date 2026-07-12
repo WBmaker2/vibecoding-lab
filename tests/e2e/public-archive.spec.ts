@@ -27,6 +27,25 @@ test("public archive supports compact browsing on desktop and mobile", async ({
   await expect(page.getByRole("button", { name: "모든 태그 보기" })).toBeVisible();
   await expect(page.getByRole("button", { name: "업데이트 내역" })).toBeVisible();
 
+  const representativeTagMetrics = await page
+    .getByRole("button", { name: "#수업" })
+    .evaluate((tag) => {
+      const styles = window.getComputedStyle(tag);
+      const bounds = tag.getBoundingClientRect();
+
+      return {
+        flexShrink: styles.flexShrink,
+        height: bounds.height,
+        whiteSpace: styles.whiteSpace,
+        width: bounds.width
+      };
+    });
+
+  expect(representativeTagMetrics.flexShrink).toBe("0");
+  expect(representativeTagMetrics.whiteSpace).toBe("nowrap");
+  expect(representativeTagMetrics.width).toBeGreaterThan(48);
+  expect(representativeTagMetrics.height).toBeLessThan(48);
+
   const firstCard = page.locator(".app-card").first();
   await expect(firstCard).toBeVisible();
   const firstCardBox = await firstCard.boundingBox();

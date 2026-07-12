@@ -101,10 +101,24 @@ confirmed true PNG dimensions of 1440x1000 and 390x844.
 Desktop inspection found three visible first-row cards with real thumbnails,
 clear hierarchy, stable tag/content spacing, and no overlap or truncation.
 Mobile inspection found search, representative tags, update history, results,
-and the first card at top 690.93px with `scrollY = 0`, inside the 844px
+and the first card at top 608.43px with `scrollY = 0`, inside the 844px
 viewport. The mobile document/body scroll width equals the browser client width;
-only the representative-tag region scrolls horizontally. Browser console logs
-contained no warnings or errors.
+only the representative-tag region scrolls horizontally. All 10 representative
+chips use `flex-shrink: 0` and `white-space: nowrap`, render at 32.5px height,
+and keep Korean labels on one line. Browser console logs contained no warnings
+or errors.
+
+### Mobile Tag Readability Correction
+
+- RED layout test: 1 of 4 tests failed because the mobile chip rule lacked
+  shrink and line-wrap protection.
+- CSS fix: `flex: 0 0 auto`, `min-width: max-content`, and
+  `white-space: nowrap` were added to mobile representative tag chips.
+- Focused archive/layout verification: 3 files, 10 tests passed.
+- E2E verification: 2 tests passed, including computed-style, chip-dimension,
+  horizontal-scroll, and first-card viewport assertions.
+- Corrected screenshots overwrote the original paths and were visually
+  inspected at exact 1440x1000 and 390x844 PNG dimensions.
 
 ## Concerns
 
