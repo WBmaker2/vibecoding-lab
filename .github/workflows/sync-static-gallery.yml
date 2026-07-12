@@ -1,0 +1,95 @@
+name: Sync Static Gallery
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: Production base URL for materializing internal thumbnails
+        required: false
+        default: https://www.vivehong.shop
+      reason:
+        description: Reason for starting this sync
+        required: false
+        default: admin-button
+
+permissions:
+  contents: write
+
+concurrency:
+  group: static-gallery-sync-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      BASE_URL: ${{ inputs.base_url || 'https://www.vivehong.shop' }}
+      POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+      SYNC_REASON: ${{ inputs.reason || 'admin-button' }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Checkout dispatch ref
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Show sync request
+        run: |
+          echo "Reason: $SYNC_REASON"
+          echo "Base URL: $BASE_URL"
+
+      - name: Export static gallery snapshot
+        run: npm run apps:export-static-gallery -- --base-url "$BASE_URL"
+
+      - name: Verify static gallery snapshot
+        run: npm run apps:verify-static-gallery
+
+      - name: Run focused tests
+        run: npm test -- src/lib/apps/static-public-apps.test.ts src/app/__tests__/home-shell.test.tsx src/app/api/admin/sync-static-gallery/route.test.ts src/features/admin/admin-workspace.test.tsx
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Check generated diff
+        run: git diff --check
+
+      - name: Commit generated gallery files
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/public-apps.json public/app-thumbnails
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No static gallery changes to commit."
+          else
+            git commit -m "chore: sync static gallery"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Push generated gallery files
+        if: steps.commit.outputs.changed == 'true'
+        run: git push
+
+      - name: Pull Vercel project settings
+        if: steps.commit.outputs.changed == 'true' && env.VERCEL_TOKEN != '' && env.VERCEL_ORG_ID != '' && env.VERCEL_PROJECT_ID != ''
+        run: npm exec --yes vercel@latest -- pull --yes --environment=production --token "$VERCEL_TOKEN"
+
+      - name: Deploy to Vercel
+        if: steps.commit.outputs.changed == 'true' && env.VERCEL_TOKEN != '' && env.VERCEL_ORG_ID != '' && env.VERCEL_PROJECT_ID != ''
+        run: npm exec --yes vercel@latest -- deploy --prod --yes --token "$VERCEL_TOKEN"
