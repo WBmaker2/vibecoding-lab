@@ -448,3 +448,47 @@ Fix base: `5fbca6a`
 No production DB, GitHub API/dispatch, push, deployment, or other external
 action was run. No remaining concern was found in this narrowly scoped race
 fix.
+
+## Audited Development Dependency Update
+
+Date: 2026-07-12
+Base: `232f1a9`
+
+`npm audit fix` was applied without `--force`. The resulting change is
+dependency-only in `package-lock.json`; `package.json` declaration ranges and
+the direct `drizzle-kit` version remain unchanged. The lockfile now records:
+
+- `vitest 3.2.7` and `vite 7.3.6`.
+- `ws 8.21.0`.
+- Vite's nested `esbuild 0.28.1`.
+- `js-yaml 4.3.0` and the TypeScript ESLint nested `brace-expansion 5.0.7`.
+- Babel core packages at `7.29.7` (with `@babel/runtime 7.29.2`).
+- `drizzle-kit 0.31.10` unchanged; no downgrade or semver-major fix was
+  accepted.
+
+### Final Audit Counts
+
+- `npm audit`: **4 moderate**, **0 low**, **0 high**, **0 critical**.
+- `npm audit --omit=dev`: **0 vulnerabilities**.
+- The four remaining moderate entries are `drizzle-kit 0.31.10`,
+  `@esbuild-kit/esm-loader 2.6.5`, `@esbuild-kit/core-utils 3.3.2`, and the
+  aggregated vulnerable `esbuild` paths under those tooling dependencies:
+  `@esbuild-kit/core-utils/node_modules/esbuild 0.18.20` and
+  `tsx/node_modules/esbuild 0.27.7`.
+- npm's only proposed complete fix is `drizzle-kit 0.18.1`, marked
+  `isSemVerMajor: true`; it was intentionally not applied. These are
+  development-tooling findings only, and the production dependency audit is
+  clean.
+
+### Final Dependency Verification
+
+- `npm test`: **43 files, 312 tests passed** with Vitest `3.2.7`.
+- `npm run lint`: passed with zero warnings.
+- `npm run build`: passed; `/` remained static.
+- `npm run test:e2e`: **2 tests passed**.
+- `git diff --check`: passed.
+- After build, `next-env.d.ts` retained the pre-existing exact import
+  `./.next/dev/types/routes.d.ts`; it remains unstaged and uncommitted.
+- No worktree-root `tsconfig.tsbuildinfo` remains.
+
+No production DB, GitHub API/dispatch, push, or deployment command was run.
