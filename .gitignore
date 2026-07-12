@@ -1,7 +1,10 @@
 .worktrees/
 .superpowers/
+.gstack/
+.playwright-mcp/
 .next/
 node_modules/
+*.tsbuildinfo
 .env
 .env.local
 .env.*.local
