@@ -5,9 +5,9 @@ import {
   acquireStaticGallerySyncLease,
   getActiveStaticGallerySyncLease,
   releaseStaticGallerySyncLease,
-  setStaticGallerySyncPreviousRun,
   setStaticGallerySyncRun,
   toPublicStaticGalleryDispatchMarker,
+  withStaticGallerySyncLeaseDispatchFence,
   type StaticGallerySyncLease
 } from "@/lib/apps/static-gallery-sync-lease";
 import {
@@ -76,7 +76,7 @@ function workflowRunsUrl(config: GitHubConfig): string {
   const params = new URLSearchParams({
     branch: config.ref,
     event: "workflow_dispatch",
-    per_page: "10"
+    per_page: "1"
   });
 
   return `https://api.github.com/repos/${config.owner}/${config.repo}/actions/workflows/${config.workflowId}/runs?${params.toString()}`;
@@ -132,6 +132,8 @@ function getRequestedWorkflowRun(
     return null;
   }
 
+  const requestedAtSecond = Math.floor(requestedAt / 1000);
+
   return (
     runs.find((run) => {
       const createdAt = run.createdAt ? Date.parse(run.createdAt) : Number.NaN;
@@ -139,7 +141,7 @@ function getRequestedWorkflowRun(
       return (
         run.id !== lease.previousRunId &&
         Number.isFinite(createdAt) &&
-        createdAt >= requestedAt
+        Math.floor(createdAt / 1000) >= requestedAtSecond
       );
     }) ?? null
   );
@@ -184,6 +186,16 @@ function leaseError() {
       error: "동기화 중복 방지 잠금을 사용할 수 없습니다."
     },
     { status: 503 }
+  );
+}
+
+function leaseOwnershipLostError() {
+  return NextResponse.json(
+    {
+      code: "SYNC_LEASE_OWNERSHIP_LOST",
+      error: "동기화 요청 권한이 만료되었습니다. 다시 시도해 주세요."
+    },
+    { status: 409 }
   );
 }
 
@@ -342,24 +354,35 @@ export async function POST(request: Request) {
       );
     }
 
-    await setStaticGallerySyncPreviousRun(lease.leaseToken, latestRun?.id ?? null);
+    const reason = await getReason(request);
+    const fencedDispatch = await withStaticGallerySyncLeaseDispatchFence(
+      lease.leaseToken,
+      latestRun?.id ?? null,
+      async () =>
+        fetch(workflowDispatchUrl(config), {
+          method: "POST",
+          headers: {
+            accept: "application/vnd.github+json",
+            authorization: `Bearer ${config.token}`,
+            "content-type": "application/json",
+            "x-github-api-version": "2022-11-28"
+          },
+          body: JSON.stringify({
+            ref: config.ref,
+            inputs: {
+              base_url: config.baseUrl,
+              reason
+            }
+          })
+        })
+    );
 
-    const response = await fetch(workflowDispatchUrl(config), {
-      method: "POST",
-      headers: {
-        accept: "application/vnd.github+json",
-        authorization: `Bearer ${config.token}`,
-        "content-type": "application/json",
-        "x-github-api-version": "2022-11-28"
-      },
-      body: JSON.stringify({
-        ref: config.ref,
-        inputs: {
-          base_url: config.baseUrl,
-          reason: await getReason(request)
-        }
-      })
-    });
+    if (!fencedDispatch) {
+      return leaseOwnershipLostError();
+    }
+
+    lease = fencedDispatch.lease;
+    const response = fencedDispatch.result;
 
     if (!response.ok) {
       await releaseStaticGallerySyncLease(lease.leaseToken);

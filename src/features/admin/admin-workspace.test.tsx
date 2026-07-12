@@ -347,6 +347,131 @@ describe("AdminWorkspace", () => {
     expect(statusRequestCount).toBe(requestCountAfterCompletion);
   }, 12000);
 
+  it("refreshes when the first GET after 202 is already successful", async () => {
+    let statusRequestCount = 0;
+    const dispatchMarker = {
+      id: "marker-immediate-success",
+      requestedAt: "2026-07-10T01:00:00.000Z",
+      leaseExpiresAt: "2026-07-10T01:30:00.000Z",
+      runId: null
+    };
+    const completedRun = {
+      id: 777,
+      status: "completed",
+      conclusion: "success",
+      htmlUrl: "https://github.com/WBmaker2/vibecoding-lab/actions/runs/777",
+      createdAt: "2026-07-10T01:00:00.000Z",
+      updatedAt: "2026-07-10T01:01:00.000Z"
+    };
+    vi.mocked(globalThis.fetch).mockImplementation(async (_input, init) => {
+      if (init?.method === "POST") {
+        return new Response(
+          JSON.stringify({ dispatched: true, dispatchMarker }),
+          { status: 202 }
+        );
+      }
+
+      statusRequestCount += 1;
+      return new Response(
+        JSON.stringify(
+          statusRequestCount === 1
+            ? { run: null, dispatchMarker: null }
+            : {
+                run: completedRun,
+                dispatchMarker: {
+                  ...dispatchMarker,
+                  runId: completedRun.id
+                }
+              }
+        ),
+        { status: 200 }
+      );
+    });
+
+    render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    await waitFor(() => expect(statusRequestCount).toBe(1));
+    fireEvent.click(screen.getByRole("button", { name: "수정 사항 동기화" }));
+
+    await waitFor(() => expect(routerRefreshMock).toHaveBeenCalledOnce());
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "동기화가 완료되었습니다"
+    );
+  });
+
+  it("does not refresh when the first GET after 202 is a terminal failure", async () => {
+    let statusRequestCount = 0;
+    const dispatchMarker = {
+      id: "marker-immediate-failure",
+      requestedAt: "2026-07-10T01:00:00.000Z",
+      leaseExpiresAt: "2026-07-10T01:30:00.000Z",
+      runId: null
+    };
+    const failedRun = {
+      id: 778,
+      status: "completed",
+      conclusion: "failure",
+      htmlUrl: "https://github.com/WBmaker2/vibecoding-lab/actions/runs/778",
+      createdAt: "2026-07-10T01:00:00.000Z",
+      updatedAt: "2026-07-10T01:01:00.000Z"
+    };
+    vi.mocked(globalThis.fetch).mockImplementation(async (_input, init) => {
+      if (init?.method === "POST") {
+        return new Response(
+          JSON.stringify({ dispatched: true, dispatchMarker }),
+          { status: 202 }
+        );
+      }
+
+      statusRequestCount += 1;
+      return new Response(
+        JSON.stringify(
+          statusRequestCount === 1
+            ? { run: null, dispatchMarker: null }
+            : {
+                run: failedRun,
+                dispatchMarker: { ...dispatchMarker, runId: failedRun.id }
+              }
+        ),
+        { status: 200 }
+      );
+    });
+
+    render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    await waitFor(() => expect(statusRequestCount).toBe(1));
+    fireEvent.click(screen.getByRole("button", { name: "수정 사항 동기화" }));
+
+    await waitFor(() =>
+      expect(screen.getByRole("status")).toHaveTextContent(
+        "동기화에 실패했습니다"
+      )
+    );
+    expect(routerRefreshMock).not.toHaveBeenCalled();
+  });
+
   it("keeps sync disabled and shows the active run link", async () => {
     const activeRun = {
       id: 321,

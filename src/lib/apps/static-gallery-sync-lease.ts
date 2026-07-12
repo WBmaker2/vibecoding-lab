@@ -20,8 +20,8 @@ interface LeaseRow {
   run_id: number | bigint | null;
 }
 
-async function ensureLeaseTable() {
-  await getDb().execute(sql`
+async function ensureLeaseTable(db = getDb()) {
+  await db.execute(sql`
     CREATE TABLE IF NOT EXISTS static_gallery_sync_leases (
       lease_key text PRIMARY KEY,
       lease_token text NOT NULL,
@@ -77,42 +77,48 @@ export function toPublicStaticGalleryDispatchMarker(
 }
 
 export async function acquireStaticGallerySyncLease(): Promise<StaticGallerySyncLease | null> {
-  await ensureLeaseTable();
-
+  const db = getDb();
+  await ensureLeaseTable(db);
   const leaseToken = randomUUID();
   const markerId = randomUUID();
-  const result = await getDb().execute(sql`
-    INSERT INTO static_gallery_sync_leases (
-      lease_key,
-      lease_token,
-      marker_id,
-      requested_at,
-      expires_at,
-      previous_run_id,
-      run_id
-    )
-    VALUES (
-      ${LEASE_KEY},
-      ${leaseToken},
-      ${markerId},
-      NOW(),
-      NOW() + (${STATIC_GALLERY_SYNC_LEASE_SECONDS} * INTERVAL '1 second'),
-      NULL,
-      NULL
-    )
-    ON CONFLICT (lease_key) DO UPDATE SET
-      lease_token = EXCLUDED.lease_token,
-      marker_id = EXCLUDED.marker_id,
-      requested_at = EXCLUDED.requested_at,
-      expires_at = EXCLUDED.expires_at,
-      previous_run_id = NULL,
-      run_id = NULL
-    WHERE static_gallery_sync_leases.expires_at <= NOW()
-    RETURNING lease_token, marker_id, requested_at, expires_at, previous_run_id, run_id
-  `);
-  const row = (result as unknown as LeaseRow[])[0];
 
-  return row ? fromRow(row) : null;
+  return db.transaction(async (transaction) => {
+    await transaction.execute(sql`
+      SELECT pg_advisory_xact_lock(hashtext(${LEASE_KEY})::bigint)
+    `);
+    const result = await transaction.execute(sql`
+      INSERT INTO static_gallery_sync_leases (
+        lease_key,
+        lease_token,
+        marker_id,
+        requested_at,
+        expires_at,
+        previous_run_id,
+        run_id
+      )
+      VALUES (
+        ${LEASE_KEY},
+        ${leaseToken},
+        ${markerId},
+        NOW(),
+        NOW() + (${STATIC_GALLERY_SYNC_LEASE_SECONDS} * INTERVAL '1 second'),
+        NULL,
+        NULL
+      )
+      ON CONFLICT (lease_key) DO UPDATE SET
+        lease_token = EXCLUDED.lease_token,
+        marker_id = EXCLUDED.marker_id,
+        requested_at = EXCLUDED.requested_at,
+        expires_at = EXCLUDED.expires_at,
+        previous_run_id = NULL,
+        run_id = NULL
+      WHERE static_gallery_sync_leases.expires_at <= NOW()
+      RETURNING lease_token, marker_id, requested_at, expires_at, previous_run_id, run_id
+    `);
+    const row = (result as unknown as LeaseRow[])[0];
+
+    return row ? fromRow(row) : null;
+  });
 }
 
 export async function getActiveStaticGallerySyncLease(): Promise<StaticGallerySyncLease | null> {
@@ -130,17 +136,41 @@ export async function getActiveStaticGallerySyncLease(): Promise<StaticGallerySy
   return row ? fromRow(row) : null;
 }
 
-export async function setStaticGallerySyncPreviousRun(
+export async function withStaticGallerySyncLeaseDispatchFence<T>(
   leaseToken: string,
-  previousRunId: number | null
-): Promise<void> {
-  await getDb().execute(sql`
-    UPDATE static_gallery_sync_leases
-    SET previous_run_id = ${previousRunId}
-    WHERE lease_key = ${LEASE_KEY}
-      AND lease_token = ${leaseToken}
-      AND expires_at > NOW()
-  `);
+  previousRunId: number | null,
+  dispatch: (lease: StaticGallerySyncLease) => Promise<T>
+): Promise<{ lease: StaticGallerySyncLease; result: T } | null> {
+  const db = getDb();
+  await ensureLeaseTable(db);
+
+  return db.transaction(async (transaction) => {
+    await transaction.execute(sql`
+      SELECT pg_advisory_xact_lock(hashtext(${LEASE_KEY})::bigint)
+    `);
+    const result = await transaction.execute(sql`
+      UPDATE static_gallery_sync_leases
+      SET
+        previous_run_id = ${previousRunId},
+        expires_at = NOW() + (${STATIC_GALLERY_SYNC_LEASE_SECONDS} * INTERVAL '1 second')
+      WHERE lease_key = ${LEASE_KEY}
+        AND lease_token = ${leaseToken}
+        AND expires_at > NOW()
+      RETURNING lease_token, marker_id, requested_at, expires_at, previous_run_id, run_id
+    `);
+    const row = (result as unknown as LeaseRow[])[0];
+
+    if (!row) {
+      return null;
+    }
+
+    const lease = fromRow(row);
+
+    return {
+      lease,
+      result: await dispatch(lease)
+    };
+  });
 }
 
 export async function setStaticGallerySyncRun(

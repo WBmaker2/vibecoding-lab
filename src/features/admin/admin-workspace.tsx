@@ -353,7 +353,7 @@ export function AdminWorkspace({
           kind: "info",
           message: "동기화 작업을 시작했습니다. 실행 상태를 확인하는 중입니다."
         });
-        await loadLatestRun();
+        await loadLatestRun(true);
       }
     } catch (error) {
       if (!mountedRef.current) {
