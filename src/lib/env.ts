@@ -4,7 +4,7 @@ export const envSchema = z.object({
   POSTGRES_URL: z.string().min(1),
   BLOB_READ_WRITE_TOKEN: z.string().min(1),
   ADMIN_PASSWORD_HASH: z.string().min(1),
-  SESSION_SECRET: z.string().min(16),
+  SESSION_SECRET: z.string().min(32),
   APP_BASE_URL: z.string().url()
 });
 

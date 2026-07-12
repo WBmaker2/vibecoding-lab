@@ -48,7 +48,7 @@ describe("ArchiveHero", () => {
     const heroTop = container.querySelector(".archive-hero-top");
     const mascotImage = container.querySelector(".archive-hero-mascot-image");
 
-    expect(heroTop).toContainElement(mascotImage);
+    expect(heroTop).toContainElement(mascotImage as HTMLElement);
     expect(container.querySelector(".mascot-note-shell")).not.toBeInTheDocument();
     expect(container.querySelector(".hero-frame")).not.toBeInTheDocument();
   });

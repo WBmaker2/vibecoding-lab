@@ -17,6 +17,7 @@ import {
   type StaticGalleryDispatchMarker,
   type StaticGallerySyncRun
 } from "@/lib/apps/static-gallery-sync-state";
+import { getStaticGalleryAssetIntegrity } from "@/lib/apps/static-gallery-asset-integrity";
 import { getStaticGalleryBaseline } from "@/lib/apps/static-public-apps";
 
 const DEFAULT_GITHUB_OWNER = "WBmaker2";
@@ -34,6 +35,11 @@ interface GitHubConfig {
   workflowId: string;
   ref: string;
   baseUrl: string;
+}
+
+interface WorkflowRunCandidate {
+  marker: string | null;
+  run: StaticGallerySyncRun;
 }
 
 function getConfig(): GitHubConfig {
@@ -56,7 +62,25 @@ function stringOrNull(value: unknown): string | null {
   return typeof value === "string" ? value : null;
 }
 
-function normalizeWorkflowRun(value: unknown): StaticGallerySyncRun | null {
+function extractWorkflowMarker(value: Record<string, unknown>) {
+  const prefix = "Sync Static Gallery :: ";
+
+  for (const field of ["display_title", "run_name", "name"]) {
+    const displayTitle = value[field];
+
+    if (typeof displayTitle === "string" && displayTitle.startsWith(prefix)) {
+      const marker = displayTitle.slice(prefix.length).trim();
+
+      if (marker) {
+        return marker;
+      }
+    }
+  }
+
+  return null;
+}
+
+function normalizeWorkflowRun(value: unknown): WorkflowRunCandidate | null {
   if (
     !isRecord(value) ||
     typeof value.id !== "number" ||
@@ -66,12 +90,15 @@ function normalizeWorkflowRun(value: unknown): StaticGallerySyncRun | null {
   }
 
   return {
-    id: value.id,
-    status: stringOrNull(value.status),
-    conclusion: stringOrNull(value.conclusion),
-    htmlUrl: stringOrNull(value.html_url),
-    createdAt: stringOrNull(value.created_at),
-    updatedAt: stringOrNull(value.updated_at)
+    marker: extractWorkflowMarker(value),
+    run: {
+      id: value.id,
+      status: stringOrNull(value.status),
+      conclusion: stringOrNull(value.conclusion),
+      htmlUrl: stringOrNull(value.html_url),
+      createdAt: stringOrNull(value.created_at),
+      updatedAt: stringOrNull(value.updated_at)
+    }
   };
 }
 
@@ -79,7 +106,7 @@ function workflowRunsUrl(config: GitHubConfig): string {
   const params = new URLSearchParams({
     branch: config.ref,
     event: "workflow_dispatch",
-    per_page: "1"
+    per_page: "30"
   });
 
   return `https://api.github.com/repos/${config.owner}/${config.repo}/actions/workflows/${config.workflowId}/runs?${params.toString()}`;
@@ -109,7 +136,7 @@ async function fetchWithTimeout(
 
 async function getWorkflowRuns(
   config: GitHubConfig
-): Promise<StaticGallerySyncRun[]> {
+): Promise<WorkflowRunCandidate[]> {
   const response = await fetchWithTimeout(
     workflowRunsUrl(config),
     {
@@ -131,44 +158,28 @@ async function getWorkflowRuns(
   const payload = (await response.json()) as { workflow_runs?: unknown };
 
   return Array.isArray(payload.workflow_runs)
-    ? payload.workflow_runs
+      ? payload.workflow_runs
         .map(normalizeWorkflowRun)
-        .filter((run): run is StaticGallerySyncRun => run !== null)
+        .filter((run): run is WorkflowRunCandidate => run !== null)
     : [];
 }
 
 function getLatestWorkflowRun(
-  runs: StaticGallerySyncRun[]
+  runs: WorkflowRunCandidate[]
 ): StaticGallerySyncRun | null {
-  return runs[0] ?? null;
+  return runs[0]?.run ?? null;
 }
 
 function getRequestedWorkflowRun(
-  runs: StaticGallerySyncRun[],
+  runs: WorkflowRunCandidate[],
   lease: StaticGallerySyncLease
 ): StaticGallerySyncRun | null {
-  if (lease.runId !== null) {
-    return runs.find((run) => run.id === lease.runId) ?? null;
-  }
-
-  const requestedAt = Date.parse(lease.requestedAt);
-
-  if (!Number.isFinite(requestedAt)) {
-    return null;
-  }
-
-  const requestedAtSecond = Math.floor(requestedAt / 1000);
-
   return (
-    runs.find((run) => {
-      const createdAt = run.createdAt ? Date.parse(run.createdAt) : Number.NaN;
-
-      return (
-        run.id !== lease.previousRunId &&
-        Number.isFinite(createdAt) &&
-        Math.floor(createdAt / 1000) >= requestedAtSecond
-      );
-    }) ?? null
+    runs.find(
+      (candidate) =>
+        candidate.marker === lease.id &&
+        (lease.runId === null || candidate.run.id === lease.runId)
+    )?.run ?? null
   );
 }
 
@@ -300,7 +311,7 @@ export async function GET() {
     return leaseError();
   }
 
-  let runs: StaticGallerySyncRun[];
+  let runs: WorkflowRunCandidate[];
 
   try {
     runs = await getWorkflowRuns(config);
@@ -347,7 +358,9 @@ export async function POST(request: Request) {
   try {
     const repo = getAppRepository();
     const apps = await repo.listAdminApps();
-    summary = getStaticGallerySyncSummary(apps, getStaticGalleryBaseline());
+    const baseline = getStaticGalleryBaseline();
+    const assetIntegrity = await getStaticGalleryAssetIntegrity(baseline);
+    summary = getStaticGallerySyncSummary(apps, baseline, assetIntegrity);
   } catch {
     return summaryError();
   }
@@ -391,6 +404,8 @@ export async function POST(request: Request) {
     );
   }
 
+  const acquiredLease = lease;
+
   let latestRun: StaticGallerySyncRun | null;
 
   try {
@@ -418,7 +433,7 @@ export async function POST(request: Request) {
 
   try {
     fencedDispatch = await withStaticGallerySyncLeaseDispatchFence(
-      lease.leaseToken,
+      acquiredLease.leaseToken,
       latestRun?.id ?? null,
       async () =>
         fetchWithTimeout(
@@ -435,7 +450,8 @@ export async function POST(request: Request) {
               ref: config.ref,
               inputs: {
                 base_url: config.baseUrl,
-                reason
+                reason,
+                request_marker: acquiredLease.id
               }
             })
           },
@@ -443,7 +459,7 @@ export async function POST(request: Request) {
         )
     );
   } catch {
-    await releaseSafely(lease.leaseToken);
+    await releaseSafely(acquiredLease.leaseToken);
     return leaseError();
   }
 

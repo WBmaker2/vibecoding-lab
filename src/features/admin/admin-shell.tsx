@@ -6,15 +6,19 @@ import {
   updateAppAction
 } from "@/app/admin/actions";
 import type { AdminAppRecord } from "@/lib/apps/types";
-import type { StaticGalleryBaseline } from "@/lib/apps/static-gallery-sync-state";
+import type {
+  StaticGalleryAssetIntegrity,
+  StaticGalleryBaseline
+} from "@/lib/apps/static-gallery-sync-state";
 import { AdminWorkspace } from "./admin-workspace";
 
 interface AdminShellProps {
+  assetIntegrity: StaticGalleryAssetIntegrity;
   apps: AdminAppRecord[];
   baseline: StaticGalleryBaseline;
 }
 
-export function AdminShell({ apps, baseline }: AdminShellProps) {
+export function AdminShell({ apps, assetIntegrity, baseline }: AdminShellProps) {
   const suggestedTags = [...new Set(apps.flatMap((app) => app.tags))].sort(
     (left, right) => left.localeCompare(right, "ko")
   );
@@ -22,6 +26,7 @@ export function AdminShell({ apps, baseline }: AdminShellProps) {
   return (
     <AdminWorkspace
       apps={apps}
+      assetIntegrity={assetIntegrity}
       baseline={baseline}
       createAction={createAppAction}
       deleteAction={deleteAppAction}

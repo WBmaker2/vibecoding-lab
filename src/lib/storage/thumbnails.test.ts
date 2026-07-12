@@ -14,8 +14,7 @@ vi.mock(
   "./page-capture",
   () => ({
     capturePageThumbnail: vi.fn()
-  }),
-  { virtual: true }
+  })
 );
 
 describe("resolveThumbnailInput", () => {
@@ -240,12 +239,12 @@ describe("resolveThumbnailInput", () => {
       file: null,
       sourceUrl: "https://paps-tracker.vercel.app",
       existingThumbnailMode: "auto",
-      existingThumbnailUrl: "data:image/png;base64,existing"
+      existingThumbnailUrl: "data:image/png;base64,iVBORw0KGgo="
     });
 
     expect(result).toEqual({
       thumbnailMode: "auto",
-      thumbnailUrl: "data:image/png;base64,existing"
+      thumbnailUrl: "data:image/png;base64,iVBORw0KGgo="
     });
   });
 
@@ -270,7 +269,7 @@ describe("resolveThumbnailInput", () => {
       file: null,
       sourceUrl: "https://paps-tracker.vercel.app",
       existingThumbnailMode: "auto",
-      existingThumbnailUrl: "data:image/png;base64,existing",
+      existingThumbnailUrl: "data:image/png;base64,iVBORw0KGgo=",
       allowPlaceholderReset: true
     });
 

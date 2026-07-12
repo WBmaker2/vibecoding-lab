@@ -18,6 +18,7 @@
 - Metadata fetches must use an 8-second timeout, at most 3 redirects, an HTML response limit of 1 MiB, and HTML/XHTML content types only. Thumbnail uploads must be one of PNG, JPEG, WebP, GIF, or AVIF and at most 5 MiB.
 - `/api/thumbnail` and `/api/app-thumbnail/[id]/[version]` must not exist after Task 3. New auto-thumbnail failures store no compute-backed URL; the static card background remains the visual fallback.
 - When DB-backed public fields and required local thumbnail files are unchanged, export must preserve the previous `generatedAt`, write no files, create no commit, push nothing, and run no Vercel deployment. A changed run still verifies, tests, lints, builds, commits, pushes, and deploys.
+- The committed snapshot carries a deterministic SHA-256 manifest for every local thumbnail. Admin-only asset integrity checks compare that manifest with the local file set; public `/` never reads the filesystem.
 - Dependency remediation must use non-breaking current releases that clear `npm audit --omit=dev`; do not use `npm audit fix --force`.
 - Admin sync UI must identify pending record count, last snapshot time, queued/in-progress/completed/failed workflow state, and a GitHub run link. It must disable no-op and duplicate dispatches.
 - The public UI keeps the current Hong identity but removes the floating-card treatment from the hero, shows at most 10 representative tags by default, shows at most 4 tags per app card, uses card radii no larger than 8px, and places the first app card inside the initial 390x844 viewport.
@@ -129,7 +130,7 @@ Expected RED: helper missing.
 
 - [ ] **Step 2: Implement deterministic reuse detection**
 
-Compare the ordered DB-backed fields `id`, `title`, `summary`, `url`, `githubUrl`, `tags`, `thumbnailMode`, `subject`, `grade`, `memo`, `createdAt`, and `updatedAt`. Treat local `thumbnailUrl` as materialized output: require every snapshot `/app-thumbnails/<file>` to exist and require the directory to contain exactly the referenced file set.
+Compare the ordered DB-backed fields `id`, `title`, `summary`, `url`, `githubUrl`, `tags`, `thumbnailMode`, `subject`, `grade`, `memo`, `createdAt`, and `updatedAt`. Treat local `thumbnailUrl` as materialized output: require every snapshot `/app-thumbnails/<file>` to exist, require the directory to contain exactly the referenced file set, and compare the deterministic asset manifest bytes.
 
 - [ ] **Step 3: Make export preserve bytes on no-op**
 
@@ -305,7 +306,7 @@ Commit: `test: restore e2e and security gates`
 - Modify: `README.md`
 
 **Interfaces:**
-- Produces: `StaticGalleryBaseline { generatedAt: string; appCount: number; updatedAtById: Record<string, string> }`.
+- Produces: `StaticGalleryBaseline { generatedAt: string; appCount: number; updatedAtById: Record<string, string>; assetManifest: StaticGalleryAssetManifest }`.
 - Produces: `getStaticGallerySyncSummary(adminApps, baseline): { pendingCount: number; dbCount: number; snapshotCount: number; generatedAt: string }` where added, deleted, or timestamp-changed IDs each count once.
 - Produces: authenticated `GET /api/admin/sync-static-gallery` returning `{ run: null | { id, status, conclusion, htmlUrl, createdAt, updatedAt } }`.
 - `POST` returns 200 with `dispatched: false` for no changes, 409 with the active run for a duplicate, or 202 with `dispatched: true` after GitHub accepts dispatch.
@@ -332,7 +333,7 @@ Expected RED: GET and pre-dispatch guards do not exist.
 
 - [ ] **Step 4: Implement GitHub run normalization and dispatch guards**
 
-Query `GET /repos/{owner}/{repo}/actions/workflows/{workflow}/runs?branch={ref}&event=workflow_dispatch&per_page=1`, normalize only the six public fields, and use `cache: "no-store"`. Authenticate before config, DB, or GitHub work. POST first checks pending summary, then rejects `queued`, `in_progress`, `waiting`, `requested`, or `pending` latest runs before dispatch.
+Query `GET /repos/{owner}/{repo}/actions/workflows/{workflow}/runs?branch={ref}&event=workflow_dispatch&per_page=30`, normalize only the six public fields plus an internal exact `display_title` marker, and use `cache: "no-store"`. Authenticate before config, DB, or GitHub work. POST first checks pending summary, then rejects `queued`, `in_progress`, `waiting`, `requested`, or `pending` latest runs before dispatch. Dispatch includes a unique public `request_marker` input and the workflow run name is `Sync Static Gallery :: <request_marker>`; an active lease is reconciled only when that exact marker is found. An expired or unmatched marker remains unknown and is never guessed from timestamps or the latest unrelated run.
 
 - [ ] **Step 5: Write failing admin status UI tests**
 
@@ -474,3 +475,10 @@ Commit: `feat: compact the public app archive`
 - Type consistency: `StaticGalleryBaseline`, route run shape, and `AdminWorkspace` polling props use the same field names throughout Task 5.
 - Static constraint: No task adds a public DB call, public API thumbnail, or `next/image` card path.
 - Placeholder scan: Every implementation step has concrete files, behavior, commands, and expected outcomes.
+
+## Final Review Fix Wave Refinements
+
+- Exporter image downloads reuse the pinned `fetchSafeResource` transport from `src/lib/security/remote-url.ts`. They validate credential-free public HTTP(S), every redirect, timeout, redirect count, 5 MiB body size, allow-listed MIME, and magic bytes before writing. Data URLs and uploads use the same image policy module.
+- `assetManifest` contains sorted local thumbnail paths, byte sizes, and SHA-256 digests. The admin server compares it with the actual local file set; missing, extra, non-file, or changed assets make the sync pending. Public `/` consumes only the committed JSON snapshot and never performs this check.
+- Workflow correlation uses `request_marker`, a public UUID stored separately from the lease token. The marker is sent as a workflow input and displayed in `run-name`; status polling searches 30 recent dispatch runs and accepts only an exact marker match. Timestamp-only and latest-run guessing are prohibited.
+- `scripts/db-migrate.mjs` applies sorted unapplied SQL files through `hvc_schema_migrations`. The base table and GitHub URL migrations are idempotent, `0002_static_gallery_sync_leases.sql` is selected on clean and existing databases, and runtime table creation remains only as a compatibility fallback.

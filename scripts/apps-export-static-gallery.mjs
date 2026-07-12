@@ -1,7 +1,10 @@
+import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import postgres from "postgres";
+import { decodeDataImageUrl } from "../src/lib/security/image-policy.mjs";
 import { getReusableSnapshotDecision } from "./lib/static-gallery-export-state.mjs";
+import { fetchSafeImage } from "./lib/safe-image-download.mjs";
 
 const DEFAULT_BASE_URL = "https://www.vivehong.shop";
 const OUTPUT_JSON_PATH = path.resolve(
@@ -18,22 +21,9 @@ const CLI_FLAGS = {
   baseUrl: "--base-url"
 };
 
-const DATA_IMAGE_PATTERN =
-  /^data:(image\/[a-z0-9.+-]+);base64,([a-z0-9+/=\s]+)$/i;
 const STATIC_ASSET_BASE_URL = "https://static.local";
 
 const VALID_THUMBNAIL_MODES = new Set(["auto", "upload", "placeholder"]);
-const MIME_TO_EXTENSION = {
-  "image/png": "png",
-  "image/jpg": "jpg",
-  "image/jpeg": "jpg",
-  "image/webp": "webp",
-  "image/gif": "gif",
-  "image/svg+xml": "svg",
-  "image/avif": "avif",
-  "image/bmp": "bmp",
-  "image/tiff": "tiff"
-};
 const DIRECT_INTERNAL_THUMBNAIL_PREFIXES = [
   "/api/app-thumbnail",
   "/api/thumbnail"
@@ -316,58 +306,6 @@ function resolveHttpOrProtocolRelativeUrl(value) {
   return null;
 }
 
-function getDataImageInfo(value) {
-  const match = value.match(DATA_IMAGE_PATTERN);
-  if (!match) {
-    return null;
-  }
-
-  const [, contentType, payload] = match;
-  const extension =
-    MIME_TO_EXTENSION[contentType.toLowerCase()] || contentType.split("/")[1];
-  const buffer = Buffer.from(payload, "base64");
-
-  if (!buffer.byteLength) {
-    return null;
-  }
-
-  return {
-    extension,
-    buffer
-  };
-}
-
-function inferExtensionFromMime(contentType) {
-  if (!contentType) {
-    return null;
-  }
-
-  const normalized = contentType.split(";")[0]?.trim().toLowerCase() ?? "";
-  return MIME_TO_EXTENSION[normalized] || null;
-}
-
-function inferExtensionFromPath(urlValue) {
-  const normalized = new URL(urlValue).pathname.split("?")[0];
-  const fileName = normalized.split("/").pop();
-
-  if (!fileName) {
-    return null;
-  }
-
-  const parts = fileName.split(".");
-  if (parts.length < 2) {
-    return null;
-  }
-
-  const extension = parts.at(-1);
-
-  if (!extension || extension.length > 6) {
-    return null;
-  }
-
-  return extension.toLowerCase().match(/^[a-z0-9]+$/) ? extension.toLowerCase() : null;
-}
-
 function sanitizeSlug(value, fallback) {
   const normalized = value
     .normalize("NFKD")
@@ -394,20 +332,6 @@ function makeSafeSlug(app, index, used) {
   used.add(slug);
 
   return slug;
-}
-
-function resolveContentTypeExtension(urlValue, headers) {
-  const fromHeader = inferExtensionFromMime(headers.get("content-type"));
-  if (fromHeader) {
-    return fromHeader;
-  }
-
-  const fromPath = inferExtensionFromPath(urlValue);
-  if (fromPath) {
-    return fromPath;
-  }
-
-  return "png";
 }
 
 function normalizeExistingLocalThumbnailPath(value) {
@@ -465,20 +389,11 @@ function findReusableLegacyThumbnail(appId, previousSnapshot, thumbnailFiles) {
 
 async function downloadAndWriteImage(urlValue, baseUrl, filename) {
   const targetUrl = new URL(urlValue, baseUrl).toString();
-  const response = await fetch(targetUrl, {
-    headers: { "user-agent": "codex-export-static-gallery" }
-  });
-
-  if (!response.ok) {
-    return { failed: true };
-  }
-
-  const responseBuffer = Buffer.from(await response.arrayBuffer());
-  const extension = resolveContentTypeExtension(targetUrl, response.headers);
+  const image = await fetchSafeImage(targetUrl);
   const extFilename =
-    path.extname(filename) ? filename : `${filename}.${extension}`;
+    path.extname(filename) ? filename : `${filename}.${image.extension}`;
   const output = path.join(OUTPUT_THUMBNAIL_DIR, extFilename);
-  await writeBufferAtomically(output, responseBuffer);
+  await writeBufferAtomically(output, image.body);
 
   return {
     failed: false,
@@ -628,7 +543,7 @@ async function materializeThumbnail(
   }
 
   if (rawUrl.startsWith("data:")) {
-    const dataImage = getDataImageInfo(rawUrl);
+    const dataImage = decodeDataImageUrl(rawUrl);
     if (!dataImage) {
       return null;
     }
@@ -672,7 +587,7 @@ async function materializeThumbnail(
       throw new Error(`Unable to materialize same-origin thumbnail: ${rawUrl}`);
     }
 
-    return resolvedAbsoluteUrl;
+    return null;
   }
 
   return null;
@@ -687,6 +602,16 @@ function validateSnapshotPayload(payload) {
     throw new Error("snapshot payload must have version 1");
   }
 
+  if (
+    typeof payload.generatedAt !== "string" ||
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(
+      payload.generatedAt
+    ) ||
+    new Date(payload.generatedAt).toISOString() !== payload.generatedAt
+  ) {
+    throw new Error("snapshot payload must have a valid generatedAt");
+  }
+
   if (!Array.isArray(payload.apps)) {
     throw new Error("snapshot payload must include an apps array");
   }
@@ -697,6 +622,28 @@ function validateSnapshotPayload(payload) {
 
   if (payload.apps.length !== payload.appCount) {
     throw new Error("snapshot appCount must match number of apps");
+  }
+
+  if (!Array.isArray(payload.assetManifest)) {
+    throw new Error("snapshot payload must include an assetManifest array");
+  }
+
+  const manifestPaths = new Set();
+
+  for (const entry of payload.assetManifest) {
+    if (
+      !entry ||
+      typeof entry.path !== "string" ||
+      !/^\/app-thumbnails\/[^/]+$/.test(entry.path) ||
+      manifestPaths.has(entry.path) ||
+      !Number.isSafeInteger(entry.size) ||
+      entry.size < 0 ||
+      !/^[a-f0-9]{64}$/i.test(entry.sha256)
+    ) {
+      throw new Error("snapshot payload has an invalid asset manifest entry");
+    }
+
+    manifestPaths.add(entry.path);
   }
 
   for (const app of payload.apps) {
@@ -755,19 +702,60 @@ async function readThumbnailFiles() {
     const entries = await fs.readdir(OUTPUT_THUMBNAIL_DIR, {
       withFileTypes: true
     });
-    return entries.map((entry) => ({
-      name: entry.name,
-      type: entry.isFile()
-        ? "file"
-        : entry.isSymbolicLink()
-          ? "symlink"
-          : entry.isDirectory()
-            ? "directory"
-            : "other"
-    }));
+    return Promise.all(
+      entries.map(async (entry) => {
+        if (!entry.isFile()) {
+          return {
+            name: entry.name,
+            type: entry.isSymbolicLink()
+              ? "symlink"
+              : entry.isDirectory()
+                ? "directory"
+                : "other"
+          };
+        }
+
+        const buffer = await fs.readFile(
+          path.join(OUTPUT_THUMBNAIL_DIR, entry.name)
+        );
+
+        return {
+          name: entry.name,
+          type: "file",
+          size: buffer.byteLength,
+          sha256: createHash("sha256").update(buffer).digest("hex")
+        };
+      })
+    );
   } catch {
     return [];
   }
+}
+
+async function createAssetManifest(apps) {
+  const referencedFiles = new Set(
+    apps
+      .map((app) => app.thumbnailUrl)
+      .filter(
+        (thumbnailUrl) =>
+          typeof thumbnailUrl === "string" &&
+          thumbnailUrl.startsWith("/app-thumbnails/")
+      )
+      .map((thumbnailUrl) => thumbnailUrl.slice("/app-thumbnails/".length))
+  );
+  const manifest = [];
+
+  for (const filename of [...referencedFiles].sort()) {
+    const filePath = path.join(OUTPUT_THUMBNAIL_DIR, filename);
+    const buffer = await fs.readFile(filePath);
+    manifest.push({
+      path: `/app-thumbnails/${filename}`,
+      size: buffer.byteLength,
+      sha256: createHash("sha256").update(buffer).digest("hex")
+    });
+  }
+
+  return manifest;
 }
 
 async function removeOrphanedThumbnailFiles(snapshot) {
@@ -849,6 +837,7 @@ async function run() {
   }
 
   const payload = {
+    assetManifest: await createAssetManifest(normalizedApps),
     version: 1,
     generatedAt: new Date().toISOString(),
     appCount: normalizedApps.length,

@@ -19,6 +19,18 @@ function stableJson(value) {
   return JSON.stringify(value);
 }
 
+function isValidGeneratedAt(value) {
+  if (
+    typeof value !== "string" ||
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(value)
+  ) {
+    return false;
+  }
+
+  const date = new Date(value);
+  return Number.isFinite(date.getTime()) && date.toISOString() === value;
+}
+
 function getReferencedThumbnailFiles(apps) {
   const files = new Set();
 
@@ -85,6 +97,10 @@ export function getReusableSnapshotDecision({
     return { reusable: false, reason: "invalid-snapshot" };
   }
 
+  if (!isValidGeneratedAt(snapshot.generatedAt)) {
+    return { reusable: false, reason: "invalid-generated-at" };
+  }
+
   if (sourceApps.length !== snapshot.apps.length) {
     return { reusable: false, reason: "app-count-changed" };
   }
@@ -117,6 +133,53 @@ export function getReusableSnapshotDecision({
     [...referenced.files].some((file) => !materialized.files.has(file))
   ) {
     return { reusable: false, reason: "thumbnail-set-changed" };
+  }
+
+  if (Array.isArray(snapshot.assetManifest)) {
+    const manifestByPath = new Map(
+      snapshot.assetManifest.map((entry) => [entry.path, entry])
+    );
+    const localPaths = new Set(
+      [...referenced.files].map((file) => `${LOCAL_THUMBNAIL_PREFIX}${file}`)
+    );
+
+    if (
+      manifestByPath.size !== snapshot.assetManifest.length ||
+      manifestByPath.size !== localPaths.size ||
+      [...localPaths].some((file) => !manifestByPath.has(file)) ||
+      snapshot.assetManifest.some(
+        (entry) =>
+          !entry ||
+          typeof entry.path !== "string" ||
+          !/^\/app-thumbnails\/[^/]+$/.test(entry.path) ||
+          !Number.isSafeInteger(entry.size) ||
+          !/^[a-f0-9]{64}$/i.test(entry.sha256)
+      )
+    ) {
+      return { reusable: false, reason: "asset-manifest-changed" };
+    }
+
+    const filesByName = new Map(
+      (thumbnailFiles ?? [])
+        .filter((entry) => entry && typeof entry === "object")
+        .map((entry) => [entry.name, entry])
+    );
+
+    for (const [file, entry] of manifestByPath) {
+      const name = file.slice(LOCAL_THUMBNAIL_PREFIX.length);
+      const actual = filesByName.get(name);
+
+      if (
+        !actual ||
+        actual.type !== "file" ||
+        actual.size !== entry.size ||
+        actual.sha256 !== entry.sha256
+      ) {
+        return { reusable: false, reason: "asset-manifest-changed" };
+      }
+    }
+  } else {
+    return { reusable: false, reason: "missing-asset-manifest" };
   }
 
   return { reusable: true, reason: "snapshot-reusable" };

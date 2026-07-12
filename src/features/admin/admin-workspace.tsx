@@ -6,6 +6,7 @@ import type { AdminAppRecord } from "@/lib/apps/types";
 import {
   getStaticGallerySyncSummary,
   isActiveStaticGalleryRun,
+  type StaticGalleryAssetIntegrity,
   type StaticGalleryBaseline,
   type StaticGalleryDispatchMarker,
   type StaticGallerySyncRun
@@ -19,6 +20,7 @@ import { AppForm } from "./app-form";
 import { AppList } from "./app-list";
 
 interface AdminWorkspaceProps {
+  assetIntegrity?: StaticGalleryAssetIntegrity;
   apps: AdminAppRecord[];
   baseline: StaticGalleryBaseline;
   createAction: (formData: FormData) => void | Promise<void>;
@@ -30,6 +32,7 @@ interface AdminWorkspaceProps {
 }
 
 export function AdminWorkspace({
+  assetIntegrity,
   apps,
   baseline,
   createAction,
@@ -71,8 +74,8 @@ export function AdminWorkspace({
   );
 
   const syncSummary = useMemo(
-    () => getStaticGallerySyncSummary(localApps, baseline),
-    [baseline, localApps]
+    () => getStaticGallerySyncSummary(localApps, baseline, assetIntegrity),
+    [assetIntegrity, baseline, localApps]
   );
 
   const syncRunIsActive = isActiveStaticGalleryRun(syncRun);
@@ -346,6 +349,7 @@ export function AdminWorkspace({
           kind: "success",
           message: "동기화할 수정 사항이 없습니다"
         });
+        router.refresh();
       } else {
         setDispatchMarker(payload.dispatchMarker ?? null);
         setSyncRun(null);

@@ -1,2 +1,2 @@
 ALTER TABLE "apps"
-ADD COLUMN "github_url" text;
+ADD COLUMN IF NOT EXISTS "github_url" text;

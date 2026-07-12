@@ -1,7 +1,7 @@
-const EMBEDDED_IMAGE_URL_PATTERN = /^data:(image\/[a-z0-9.+-]+);base64,([a-z0-9+/=\s]+)$/i;
+import { decodeDataImageUrl } from "@/lib/security/image-policy.mjs";
 
 export function isEmbeddedThumbnailUrl(thumbnailUrl: string | null | undefined) {
-  return Boolean(thumbnailUrl && EMBEDDED_IMAGE_URL_PATTERN.test(thumbnailUrl));
+  return Boolean(thumbnailUrl && decodeDataImageUrl(thumbnailUrl));
 }
 
 export function isSupportedThumbnailUrl(
@@ -131,21 +131,5 @@ export function toPublicThumbnailUrl({
 }
 
 export function decodeEmbeddedThumbnailUrl(thumbnailUrl: string) {
-  const match = thumbnailUrl.match(EMBEDDED_IMAGE_URL_PATTERN);
-
-  if (!match) {
-    return null;
-  }
-
-  const [, contentType, base64Payload] = match;
-  const buffer = Buffer.from(base64Payload, "base64");
-
-  if (!buffer.byteLength) {
-    return null;
-  }
-
-  return {
-    contentType,
-    buffer
-  };
+  return decodeDataImageUrl(thumbnailUrl);
 }

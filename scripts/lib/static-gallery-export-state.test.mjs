@@ -36,6 +36,13 @@ const baseApps = [
 ];
 
 const baseSnapshot = {
+  assetManifest: [
+    {
+      path: "/app-thumbnails/alpha.png",
+      size: 5,
+      sha256: "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8"
+    }
+  ],
   version: 1,
   generatedAt: "2026-07-10T00:00:00.000Z",
   appCount: 2,
@@ -45,7 +52,18 @@ const baseSnapshot = {
   ]
 };
 
-function decisionFor({ sourceApps = baseApps, snapshot = baseSnapshot, thumbnailFiles = ["alpha.png"] } = {}) {
+function decisionFor({
+  sourceApps = baseApps,
+  snapshot = baseSnapshot,
+  thumbnailFiles = [
+    {
+      name: "alpha.png",
+      type: "file",
+      size: 5,
+      sha256: "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8"
+    }
+  ]
+} = {}) {
   return getReusableSnapshotDecision({ sourceApps, snapshot, thumbnailFiles });
 }
 
@@ -72,4 +90,13 @@ describe("getReusableSnapshotDecision", () => {
   ])("does not reuse when %s", (_label, createChanges) => {
     expect(decisionFor(createChanges())).toMatchObject({ reusable: false });
   });
+
+  it.each([null, "", "not-a-date", "2026-02-30T00:00:00.000Z"])(
+    "does not reuse a snapshot with malformed generatedAt: %s",
+    (generatedAt) => {
+      expect(
+        decisionFor({ snapshot: { ...baseSnapshot, generatedAt } })
+      ).toMatchObject({ reusable: false, reason: "invalid-generated-at" });
+    }
+  );
 });

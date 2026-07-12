@@ -56,6 +56,15 @@ test("public archive supports compact browsing on desktop and mobile", async ({
     await page.evaluate(() => document.documentElement.scrollWidth)
   ).toBe(await page.evaluate(() => window.innerWidth));
   await expect(page.locator(".app-card-thumbnail")).toHaveCount(56);
+  await expect
+    .poll(
+      () =>
+        firstCard
+          .locator(".app-card-thumbnail")
+          .evaluate((image) => (image as HTMLImageElement).naturalWidth),
+      { message: "the visible app thumbnail should load as an image" }
+    )
+    .toBeGreaterThan(0);
   await expect(
     page.getByRole("link", { name: /앱 새 창에서 열기/ }).first()
   ).toBeVisible();

@@ -92,4 +92,19 @@ describe("session helpers", () => {
     mocks.cookieStore.get.mockReturnValue({ value: validToken.slice(0, 8) });
     await expect(hasAdminSession()).resolves.toBe(false);
   });
+
+  it.each([
+    [31, false],
+    [32, true]
+  ])("honors the %s-character session secret boundary", (length, valid) => {
+    process.env.SESSION_SECRET = "s".repeat(length);
+
+    if (valid) {
+      expect(createAdminSessionToken()).toMatch(/^[a-f0-9]{64}$/);
+    } else {
+      expect(() => createAdminSessionToken()).toThrow(
+        "SESSION_SECRET must be at least 32 characters."
+      );
+    }
+  });
 });

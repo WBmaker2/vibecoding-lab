@@ -6,6 +6,8 @@ import {
   toPublicThumbnailUrl
 } from "./public-thumbnail";
 
+const VALID_PNG_DATA_URL = "data:image/png;base64,iVBORw0KGgo=";
+
 describe("public thumbnail helpers", () => {
   it("keeps external thumbnail URLs unchanged for the public payload", () => {
     expect(
@@ -18,7 +20,7 @@ describe("public thumbnail helpers", () => {
   it("does not expose embedded thumbnails through a runtime route", () => {
     expect(
       toPublicThumbnailUrl({
-        thumbnailUrl: "data:image/png;base64,aGVsbG8="
+        thumbnailUrl: VALID_PNG_DATA_URL
       })
     ).toBeNull();
   });
@@ -32,13 +34,13 @@ describe("public thumbnail helpers", () => {
   });
 
   it("detects and decodes embedded image payloads", () => {
-    const decoded = decodeEmbeddedThumbnailUrl(
-      "data:image/png;base64,aGVsbG8="
-    );
+    const decoded = decodeEmbeddedThumbnailUrl(VALID_PNG_DATA_URL);
 
-    expect(isEmbeddedThumbnailUrl("data:image/png;base64,aGVsbG8=")).toBe(true);
+    expect(isEmbeddedThumbnailUrl(VALID_PNG_DATA_URL)).toBe(true);
     expect(decoded?.contentType).toBe("image/png");
-    expect(decoded?.buffer.toString("utf8")).toBe("hello");
+    expect(decoded?.buffer).toEqual(
+      Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])
+    );
   });
 
   it.each([

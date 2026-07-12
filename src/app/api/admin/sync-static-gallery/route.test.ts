@@ -4,6 +4,7 @@ const {
   acquireStaticGallerySyncLeaseMock,
   getAppRepositoryMock,
   getActiveStaticGallerySyncLeaseMock,
+  getStaticGalleryAssetIntegrityMock,
   getStaticGalleryBaselineMock,
   getStaticGallerySyncSummaryMock,
   hasAdminSessionMock,
@@ -17,6 +18,7 @@ const {
   getAppRepositoryMock: vi.fn(),
   getActiveStaticGallerySyncLeaseMock: vi.fn(),
   getStaticGalleryBaselineMock: vi.fn(),
+  getStaticGalleryAssetIntegrityMock: vi.fn(),
   getStaticGallerySyncSummaryMock: vi.fn(),
   hasAdminSessionMock: vi.fn(),
   listAdminAppsMock: vi.fn(),
@@ -46,6 +48,10 @@ vi.mock("@/lib/apps/static-gallery-sync-lease", () => ({
 
 vi.mock("@/lib/apps/static-public-apps", () => ({
   getStaticGalleryBaseline: getStaticGalleryBaselineMock
+}));
+
+vi.mock("@/lib/apps/static-gallery-asset-integrity", () => ({
+  getStaticGalleryAssetIntegrity: getStaticGalleryAssetIntegrityMock
 }));
 
 vi.mock("@/lib/apps/static-gallery-sync-state", () => ({
@@ -79,8 +85,8 @@ const lease = {
   id: "marker-123",
   requestedAt: "2026-07-10T03:00:00.000Z",
   leaseExpiresAt: "2026-07-10T03:30:00.000Z",
-  previousRunId: null,
-  runId: null
+  previousRunId: null as number | null,
+  runId: null as number | null
 };
 
 const publicMarker = {
@@ -136,6 +142,7 @@ describe("/api/admin/sync-static-gallery", () => {
     hasAdminSessionMock.mockReset();
     getAppRepositoryMock.mockReset();
     getStaticGalleryBaselineMock.mockReset();
+    getStaticGalleryAssetIntegrityMock.mockReset();
     getStaticGallerySyncSummaryMock.mockReset();
     listAdminAppsMock.mockReset();
     process.env = { ...originalEnv };
@@ -148,9 +155,14 @@ describe("/api/admin/sync-static-gallery", () => {
     getAppRepositoryMock.mockReturnValue({ listAdminApps: listAdminAppsMock });
     listAdminAppsMock.mockResolvedValue([]);
     getStaticGalleryBaselineMock.mockReturnValue({
+      assetManifest: [],
       generatedAt: summary.generatedAt,
       appCount: 1,
       updatedAtById: {}
+    });
+    getStaticGalleryAssetIntegrityMock.mockResolvedValue({
+      valid: true,
+      reason: "assets-match"
     });
     getStaticGallerySyncSummaryMock.mockReturnValue(summary);
     acquireStaticGallerySyncLeaseMock.mockResolvedValue({ ...lease });
@@ -226,6 +238,7 @@ describe("/api/admin/sync-static-gallery", () => {
               html_url: "https://github.com/WBmaker2/vibecoding-lab/actions/runs/123",
               created_at: "2026-07-10T01:00:00.000Z",
               updated_at: "2026-07-10T01:02:00.000Z",
+              display_title: "Sync Static Gallery :: unrelated-marker",
               run_attempt: 4,
               token: "must-not-leak"
             }
@@ -251,7 +264,7 @@ describe("/api/admin/sync-static-gallery", () => {
       }
     });
     expect(fetchMock).toHaveBeenCalledWith(
-      "https://api.github.com/repos/WBmaker2/vibecoding-lab/actions/workflows/sync-static-gallery.yml/runs?branch=codex%2Fhongs-vibe-coding-lab&event=workflow_dispatch&per_page=1",
+      "https://api.github.com/repos/WBmaker2/vibecoding-lab/actions/workflows/sync-static-gallery.yml/runs?branch=codex%2Fhongs-vibe-coding-lab&event=workflow_dispatch&per_page=30",
       expect.objectContaining({
         method: "GET",
         cache: "no-store",
@@ -338,7 +351,8 @@ describe("/api/admin/sync-static-gallery", () => {
         method: "POST",
         headers: expect.objectContaining({
           authorization: "Bearer test-token"
-        })
+        }),
+        body: expect.stringContaining('"request_marker":"marker-123"')
       })
     );
   });
@@ -622,13 +636,13 @@ describe("/api/admin/sync-static-gallery", () => {
     expect(setStaticGallerySyncRunMock).not.toHaveBeenCalled();
   });
 
-  it("matches a new run when GitHub truncates created_at to whole seconds", async () => {
+  it("matches a run only when its public display marker exactly matches", async () => {
     hasAdminSessionMock.mockResolvedValue(true);
     process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
     const activeLease = {
       ...lease,
       previousRunId: 700,
-      requestedAt: "2026-07-10T03:00:00.750Z"
+      requestedAt: "2026-07-10T03:00:59.750Z"
     };
     getActiveStaticGallerySyncLeaseMock.mockResolvedValue(activeLease);
     setStaticGallerySyncRunMock.mockResolvedValue({ ...activeLease, runId: 701 });
@@ -641,6 +655,7 @@ describe("/api/admin/sync-static-gallery", () => {
               status: "in_progress",
               conclusion: null,
               html_url: "https://github.com/runs/701",
+              display_title: "Sync Static Gallery :: marker-123",
               created_at: "2026-07-10T03:00:00.000Z",
               updated_at: "2026-07-10T03:00:00.000Z"
             }
@@ -661,16 +676,50 @@ describe("/api/admin/sync-static-gallery", () => {
     );
   });
 
+  it("keeps an unmatched marker unknown instead of adopting the latest run", async () => {
+    hasAdminSessionMock.mockResolvedValue(true);
+    process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
+    const activeLease = { ...lease, previousRunId: 700 };
+    getActiveStaticGallerySyncLeaseMock.mockResolvedValue(activeLease);
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          workflow_runs: [
+            {
+              id: 702,
+              status: "completed",
+              conclusion: "success",
+              html_url: "https://github.com/runs/702",
+              display_title: "Sync Static Gallery :: another-marker",
+              created_at: "2026-07-10T03:01:00.000Z",
+              updated_at: "2026-07-10T03:02:00.000Z"
+            }
+          ]
+        }),
+        { status: 200 }
+      )
+    );
+
+    const response = await GET();
+
+    expect(await response.json()).toMatchObject({
+      run: null,
+      dispatchMarker: expect.objectContaining({ id: activeLease.id })
+    });
+    expect(setStaticGallerySyncRunMock).not.toHaveBeenCalled();
+  });
+
   it("releases the marker after the requested run reaches a terminal state", async () => {
     hasAdminSessionMock.mockResolvedValue(true);
     process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
     const activeLease = { ...lease, previousRunId: 700 };
     const completedRun = {
-      id: 701,
-      status: "completed",
-      conclusion: "success",
-      html_url: "https://github.com/runs/701",
-      created_at: "2026-07-10T03:01:00.000Z",
+            id: 701,
+            status: "completed",
+            conclusion: "success",
+            html_url: "https://github.com/runs/701",
+            display_title: "Sync Static Gallery :: marker-123",
+            created_at: "2026-07-10T03:01:00.000Z",
       updated_at: "2026-07-10T03:02:00.000Z"
     };
     getActiveStaticGallerySyncLeaseMock.mockResolvedValue(activeLease);

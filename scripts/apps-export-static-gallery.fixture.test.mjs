@@ -117,6 +117,13 @@ describe("static gallery exporter thumbnail entry safety", () => {
         outputJson,
         JSON.stringify(
           {
+            assetManifest: [
+              {
+                path: "/app-thumbnails/alpha.png",
+                size: 5,
+                sha256: "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8"
+              }
+            ],
             version: 1,
             generatedAt: "2026-07-10T00:00:00.000Z",
             appCount: 2,
@@ -181,6 +188,13 @@ describe("static gallery exporter thumbnail entry safety", () => {
         outputJson,
         JSON.stringify(
           {
+            assetManifest: [
+              {
+                path: "/app-thumbnails/alpha.png",
+                size: 5,
+                sha256: "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8"
+              }
+            ],
             version: 1,
             generatedAt: "2026-07-10T00:00:00.000Z",
             appCount: 1,
@@ -212,7 +226,7 @@ describe("static gallery exporter thumbnail entry safety", () => {
     }
   });
 
-  it("materializes a legitimate external image with a route-like path", async () => {
+  it("rejects a private route-like image URL without network access", async () => {
     const fixture = await fs.mkdtemp(
       path.join(os.tmpdir(), "hvc-gallery-export-route-like-image-test-")
     );
@@ -261,13 +275,11 @@ describe("static gallery exporter thumbnail entry safety", () => {
       const snapshot = JSON.parse(await fs.readFile(outputJson, "utf8"));
 
       expect(result.code).toBe(0);
-      expect(requests).toBe(1);
-      expect(snapshot.apps[0].thumbnailUrl).toBe(
-        "/app-thumbnails/alpha.png"
-      );
-      await expect(
-        fs.readFile(path.join(outputThumbnailDir, "alpha.png"), "utf8")
-      ).resolves.toBe("external image");
+      expect(requests).toBe(0);
+      expect(snapshot.apps[0].thumbnailUrl).toBeNull();
+      await expect(fs.access(path.join(outputThumbnailDir, "alpha.png"))).rejects.toMatchObject({
+        code: "ENOENT"
+      });
     } finally {
       await new Promise((resolve) => server.close(resolve));
       await fs.rm(fixture, { recursive: true, force: true });
@@ -526,6 +538,13 @@ describe("static gallery exporter thumbnail entry safety", () => {
         outputJson,
         JSON.stringify(
           {
+            assetManifest: [
+              {
+                path: "/app-thumbnails/alpha.png",
+                size: 5,
+                sha256: "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8"
+              }
+            ],
             version: 1,
             generatedAt: "2026-07-10T00:00:00.000Z",
             appCount: 1,

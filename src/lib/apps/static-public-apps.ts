@@ -1,7 +1,10 @@
 import snapshot from "@/data/public-apps.json";
 import { isLegacyThumbnailComputeUrl } from "@/lib/storage/public-thumbnail";
 import type { PublicAppRecord, ThumbnailMode } from "./types";
-import type { StaticGalleryBaseline } from "./static-gallery-sync-state";
+import type {
+  StaticGalleryAssetManifest,
+  StaticGalleryBaseline
+} from "./static-gallery-sync-state";
 import path from "node:path";
 
 export interface SerializedPublicAppRecord {
@@ -20,6 +23,7 @@ export interface SerializedPublicAppRecord {
 }
 
 interface PublicAppsSnapshot {
+  assetManifest: StaticGalleryAssetManifest;
   version: number;
   generatedAt: string;
   appCount: number;
@@ -160,6 +164,9 @@ export function getStaticGalleryBaseline(): StaticGalleryBaseline {
   const staticSnapshot = snapshot as PublicAppsSnapshot;
 
   return {
+    assetManifest: Array.isArray(staticSnapshot.assetManifest)
+      ? staticSnapshot.assetManifest
+      : [],
     generatedAt: staticSnapshot.generatedAt,
     appCount: staticSnapshot.appCount,
     updatedAtById: Object.fromEntries(

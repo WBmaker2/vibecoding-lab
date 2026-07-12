@@ -24,6 +24,32 @@ The six planned priorities are complete and locally verified:
 No production database operation, GitHub request or workflow dispatch, push, or
 deployment was performed while completing Task 6.
 
+## Final Review Fix Wave
+
+The final review findings were closed in the shared worktree without contacting
+the production database, GitHub API, dispatching Actions, pushing, or deploying.
+
+- Exporter image downloads now use the existing pinned `fetchSafeResource`
+  transport. Absolute credential-free HTTP(S), public DNS answers, every
+  redirect, timeout, redirect count, 5 MiB body limit, allow-listed image MIME,
+  and magic bytes are enforced before a file is written.
+- Uploads, embedded data URLs, captured data URLs, and exporter data URLs share
+  the same image policy. Invalid MIME, SVG, oversized, and spoofed signatures
+  resolve to rejection or placeholder/null and are never materialized.
+- The committed snapshot now carries 56 sorted asset manifest entries with byte
+  sizes and SHA-256 digests. Admin-only integrity checks make missing, extra,
+  non-file, or changed assets pending; public `/` remains snapshot-only.
+- Dispatch correlation uses a public UUID `request_marker` input and the exact
+  `Sync Static Gallery :: <marker>` workflow run title. Status polling checks
+  30 recent runs and never adopts an unrelated latest run or lease token.
+- `npm run db:migrate` now selects sorted unapplied migrations through the
+  repeatable `hvc_schema_migrations` table. `0000`, `0001`, and `0002` are safe
+  for clean and existing schemas; runtime table creation remains a compatibility
+  fallback.
+- No-op `{ dispatched: false }` refreshes the admin route so the baseline cannot
+  remain stale after another instance completes a sync. `SESSION_SECRET` now has
+  the same 32-character minimum in env parsing and session behavior.
+
 ## Public UI Delivery
 
 - `getRepresentativeTags(apps, limit = 10)` counts app frequency once per app,
@@ -151,3 +177,30 @@ or errors.
   verify the intended behavior.
 - Snapshot-specific titles and tags used by public E2E may need adjustment after
   a future deliberate static gallery replacement.
+
+## Final Fix Verification
+
+### RED/GREEN
+
+- RED focused run covered the new image policy/downloader, migration selection,
+  malformed `generatedAt`, asset drift, exact marker dispatch, no-op refresh,
+  and 31/32-character env boundary. It failed at the expected missing-module
+  and missing-behavior assertions before implementation.
+- `npm test -- src/lib/security/image-policy.test.ts scripts/lib/safe-image-download.test.mjs src/lib/storage/public-thumbnail.test.ts src/lib/storage/thumbnails.test.ts src/lib/security/remote-url.test.ts`: 5 files, 99 tests passed.
+- `npm test -- scripts/lib/static-gallery-export-state.test.mjs scripts/apps-export-static-gallery.fixture.test.mjs src/lib/apps/static-gallery-sync-state.test.ts src/lib/apps/static-gallery-asset-integrity.test.ts`: 4 files, 32 tests passed.
+- `npm test -- src/app/api/admin/sync-static-gallery/route.test.ts`: 21 tests passed.
+- `npm test -- scripts/db-migrate.test.mjs src/lib/env.test.ts src/lib/auth/session.test.ts src/lib/storage/public-thumbnail.test.ts src/lib/storage/thumbnails.test.ts`: 5 files, 51 tests passed.
+
+### Full Gates
+
+- `npm test`: 40 files, 273 tests passed.
+- `npm run lint`: passed.
+- `npm audit --omit=dev`: found 0 vulnerabilities.
+- `node --check scripts/apps-export-static-gallery.mjs`, `node --check scripts/lib/safe-image-download.mjs`, `node --check scripts/db-migrate.mjs`: passed.
+- `npm run build`: passed; `/` was `○ (Static) prerendered as static content`, and no runtime thumbnail route was listed.
+- `npm run test:e2e`: 2 tests passed, including a visible thumbnail `naturalWidth > 0` assertion.
+- `git diff --check`: passed.
+- Local static integrity check: `appCount=56`, `uniqueIds=56`, `thumbnailAssets=56`, `manifestEntries=56`, `missing=[]`, `extra=[]`, `badManifest=0`.
+- After build, `next-env.d.ts` was restored to the pre-existing
+  `./.next/dev/types/routes.d.ts` import and remains the only unrelated
+  pre-existing worktree change; it was not staged or committed.

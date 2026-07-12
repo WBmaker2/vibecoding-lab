@@ -1,4 +1,4 @@
-CREATE TABLE "apps" (
+CREATE TABLE IF NOT EXISTS "apps" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"title" text NOT NULL,
 	"summary" text NOT NULL,

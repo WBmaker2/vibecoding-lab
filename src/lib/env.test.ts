@@ -33,4 +33,13 @@ describe("env helpers", () => {
     });
     expect(hasPostgresUrl()).toBe(false);
   });
+
+  it("rejects a 31-character session secret and accepts 32 characters", () => {
+    process.env.APP_BASE_URL = "http://localhost:3000";
+    process.env.SESSION_SECRET = "a".repeat(31);
+    expect(() => getOptionalEnv()).toThrow();
+
+    process.env.SESSION_SECRET = "a".repeat(32);
+    expect(getOptionalEnv().SESSION_SECRET).toBe("a".repeat(32));
+  });
 });

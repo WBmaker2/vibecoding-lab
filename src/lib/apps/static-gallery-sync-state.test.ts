@@ -5,6 +5,7 @@ import {
 } from "./static-gallery-sync-state";
 
 const baseline: StaticGalleryBaseline = {
+  assetManifest: [],
   generatedAt: "2026-07-10T00:00:00.000Z",
   appCount: 2,
   updatedAtById: {
@@ -105,6 +106,23 @@ describe("getStaticGallerySyncSummary", () => {
             "app-2": "not-a-date"
           }
         }
+      ).pendingCount
+    ).toBe(1);
+  });
+
+  it.each([
+    ["missing required thumbnail", "missing-assets"],
+    ["extra thumbnail", "extra-assets"],
+    ["changed thumbnail bytes", "changed-assets"]
+  ])("treats %s as pending even when timestamps match", (_label, reason) => {
+    expect(
+      getStaticGallerySyncSummary(
+        [
+          app("app-1", "2026-07-09T00:00:00.000Z"),
+          app("app-2", "2026-07-09T01:00:00.000Z")
+        ],
+        baseline,
+        { valid: false, reason }
       ).pendingCount
     ).toBe(1);
   });

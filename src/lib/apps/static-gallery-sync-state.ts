@@ -1,6 +1,20 @@
 import type { AdminAppRecord } from "./types";
 
+export interface StaticGalleryAssetManifestEntry {
+  path: string;
+  size: number;
+  sha256: string;
+}
+
+export type StaticGalleryAssetManifest = StaticGalleryAssetManifestEntry[];
+
+export interface StaticGalleryAssetIntegrity {
+  valid: boolean;
+  reason: string;
+}
+
 export interface StaticGalleryBaseline {
+  assetManifest: StaticGalleryAssetManifest;
   generatedAt: string;
   appCount: number;
   updatedAtById: Record<string, string>;
@@ -45,12 +59,26 @@ export function isActiveStaticGalleryRun(
 
 function getTime(value: Date | string): number | null {
   const time = value instanceof Date ? value.getTime() : Date.parse(value);
+
+  if (
+    typeof value === "string" &&
+    (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(value)
+      ? new Date(value).toISOString() !== value
+      : false)
+  ) {
+    return null;
+  }
+
   return Number.isFinite(time) ? time : null;
 }
 
 export function getStaticGallerySyncSummary(
   adminApps: AdminAppRecord[],
-  baseline: StaticGalleryBaseline
+  baseline: StaticGalleryBaseline,
+  assetIntegrity: StaticGalleryAssetIntegrity = {
+    valid: isValidAssetManifest(baseline.assetManifest),
+    reason: "baseline-asset-manifest"
+  }
 ): StaticGallerySyncSummary {
   const adminById = new Map(adminApps.map((app) => [app.id, app]));
   const ids = new Set([
@@ -58,6 +86,10 @@ export function getStaticGallerySyncSummary(
     ...Object.keys(baseline.updatedAtById)
   ]);
   let pendingCount = 0;
+
+  if (getTime(baseline.generatedAt) === null || !assetIntegrity.valid) {
+    pendingCount = 1;
+  }
 
   for (const id of ids) {
     const adminApp = adminById.get(id);
@@ -82,4 +114,29 @@ export function getStaticGallerySyncSummary(
     snapshotCount: baseline.appCount,
     generatedAt: baseline.generatedAt
   };
+}
+
+function isValidAssetManifest(value: StaticGalleryAssetManifest) {
+  if (!Array.isArray(value)) {
+    return false;
+  }
+
+  const paths = new Set<string>();
+
+  return value.every((entry) => {
+    if (
+      !entry ||
+      typeof entry.path !== "string" ||
+      !/^\/app-thumbnails\/[^/]+$/.test(entry.path) ||
+      paths.has(entry.path) ||
+      !Number.isSafeInteger(entry.size) ||
+      entry.size < 0 ||
+      !/^[a-f0-9]{64}$/i.test(entry.sha256)
+    ) {
+      return false;
+    }
+
+    paths.add(entry.path);
+    return true;
+  });
 }

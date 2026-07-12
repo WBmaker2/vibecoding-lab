@@ -31,6 +31,7 @@ const originalConsoleError = console.error.bind(console);
 const actWarnings: string[] = [];
 
 const baseline = {
+  assetManifest: [],
   generatedAt: "2026-07-10T00:00:00.000Z",
   appCount: 2,
   updatedAtById: {
@@ -40,6 +41,7 @@ const baseline = {
 };
 
 const changedBaseline = {
+  assetManifest: [],
   generatedAt: baseline.generatedAt,
   appCount: 0,
   updatedAtById: {}
@@ -236,6 +238,39 @@ describe("AdminWorkspace", () => {
     expect(
       screen.getByRole("button", { name: "수정 사항 동기화" })
     ).not.toBeDisabled();
+  });
+
+  it("refreshes the admin route after a no-op response", async () => {
+    vi.mocked(globalThis.fetch).mockImplementation(async (_input, init) => {
+      if (init?.method === "POST") {
+        return new Response(JSON.stringify({ dispatched: false }), { status: 200 });
+      }
+
+      return new Response(JSON.stringify({ run: null }), { status: 200 });
+    });
+
+    render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: "수정 사항 동기화" })).not.toBeDisabled()
+    );
+    fireEvent.click(screen.getByRole("button", { name: "수정 사항 동기화" }));
+
+    await waitFor(() => expect(routerRefreshMock).toHaveBeenCalledOnce());
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "동기화할 수정 사항이 없습니다"
+    );
   });
 
   it("dispatches and polls the latest run until successful completion", async () => {
