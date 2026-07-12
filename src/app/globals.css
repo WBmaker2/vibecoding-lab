@@ -743,20 +743,47 @@ select {
 }
 
 .admin-sync-status {
+  display: grid;
+  gap: 4px;
   max-width: 360px;
   margin: 0;
   text-align: right;
   font-size: 0.9rem;
-  font-weight: 700;
   line-height: 1.5;
+}
+
+.admin-sync-status p {
+  margin: 0;
+}
+
+.admin-sync-status-primary {
+  color: var(--text-strong);
+  font-weight: 800;
 }
 
 .admin-sync-status-success {
   color: #256f48;
 }
 
+.admin-sync-status-info {
+  color: var(--accent);
+}
+
 .admin-sync-status-error {
   color: #b23b3b;
+}
+
+.admin-sync-run {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-sync-run a {
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .admin-header-stats {

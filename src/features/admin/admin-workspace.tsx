@@ -1,7 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { AdminAppRecord } from "@/lib/apps/types";
+import {
+  getStaticGallerySyncSummary,
+  isActiveStaticGalleryRun,
+  type StaticGalleryBaseline,
+  type StaticGallerySyncRun
+} from "@/lib/apps/static-gallery-sync-state";
 import {
   buildAdminAppPreviewFromFormData,
   getChangedAdminFieldLabels,
@@ -12,6 +19,7 @@ import { AppList } from "./app-list";
 
 interface AdminWorkspaceProps {
   apps: AdminAppRecord[];
+  baseline: StaticGalleryBaseline;
   createAction: (formData: FormData) => void | Promise<void>;
   deleteAction: (formData: FormData) => void | Promise<void>;
   logoutAction: (formData: FormData) => void | Promise<void>;
@@ -22,6 +30,7 @@ interface AdminWorkspaceProps {
 
 export function AdminWorkspace({
   apps,
+  baseline,
   createAction,
   deleteAction,
   logoutAction,
@@ -29,6 +38,7 @@ export function AdminWorkspace({
   suggestedTags,
   updateAction
 }: AdminWorkspaceProps) {
+  const router = useRouter();
   const [localApps, setLocalApps] = useState(apps);
   const [selectedAppId, setSelectedAppId] = useState<string | null>(null);
   const [recentChange, setRecentChange] = useState<RecentAdminChange | null>(
@@ -36,9 +46,10 @@ export function AdminWorkspace({
   );
   const [syncPending, setSyncPending] = useState(false);
   const [syncStatus, setSyncStatus] = useState<{
-    kind: "error" | "success";
+    kind: "error" | "info" | "success";
     message: string;
   } | null>(null);
+  const [syncRun, setSyncRun] = useState<StaticGallerySyncRun | null>(null);
 
   useEffect(() => {
     setLocalApps(apps);
@@ -53,6 +64,123 @@ export function AdminWorkspace({
     () => new Set(localApps.flatMap((app) => app.tags)).size,
     [localApps]
   );
+
+  const syncSummary = useMemo(
+    () => getStaticGallerySyncSummary(localApps, baseline),
+    [baseline, localApps]
+  );
+
+  const syncRunIsActive = isActiveStaticGalleryRun(syncRun);
+
+  const applyLatestRun = useCallback(
+    (run: StaticGallerySyncRun | null, refreshOnSuccess = false) => {
+      setSyncRun(run);
+
+      if (isActiveStaticGalleryRun(run)) {
+        setSyncStatus({
+          kind: "info",
+          message: "동기화 작업이 실행 중입니다."
+        });
+        return;
+      }
+
+      if (run?.conclusion === "success") {
+        setSyncStatus({
+          kind: "success",
+          message: "동기화가 완료되었습니다."
+        });
+
+        if (refreshOnSuccess) {
+          router.refresh();
+        }
+      } else if (run?.conclusion) {
+        setSyncStatus({
+          kind: "error",
+          message: "동기화에 실패했습니다. GitHub Actions 실행 결과를 확인해 주세요."
+        });
+      }
+    },
+    [router]
+  );
+
+  const loadLatestRun = useCallback(
+    async (refreshOnSuccess = false) => {
+      try {
+        const response = await fetch("/api/admin/sync-static-gallery", {
+          cache: "no-store"
+        });
+        const payload = (await response.json().catch(() => ({}))) as {
+          error?: string;
+          run?: StaticGallerySyncRun | null;
+        };
+
+        if (!response.ok) {
+          throw new Error(payload.error || "동기화 상태를 불러오지 못했습니다.");
+        }
+
+        applyLatestRun(payload.run ?? null, refreshOnSuccess);
+      } catch (error) {
+        setSyncStatus({
+          kind: "error",
+          message:
+            error instanceof Error
+              ? error.message
+              : "동기화 상태를 불러오지 못했습니다."
+        });
+      }
+    },
+    [applyLatestRun]
+  );
+
+  useEffect(() => {
+    void loadLatestRun();
+  }, [loadLatestRun]);
+
+  useEffect(() => {
+    if (!syncRunIsActive) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      void loadLatestRun(true);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, [loadLatestRun, syncRunIsActive]);
+
+  function formatSnapshotDate(value: string) {
+    const date = new Date(value);
+    return Number.isNaN(date.getTime())
+      ? "알 수 없음"
+      : date.toLocaleDateString("ko-KR");
+  }
+
+  function getRunStatusLabel(run: StaticGallerySyncRun) {
+    const statusLabels: Record<string, string> = {
+      completed: "완료",
+      in_progress: "실행 중",
+      pending: "보류 중",
+      queued: "대기 중",
+      requested: "요청됨",
+      waiting: "대기 중"
+    };
+    const conclusionLabels: Record<string, string> = {
+      cancelled: "취소됨",
+      failure: "실패",
+      neutral: "중립",
+      success: "성공",
+      skipped: "건너뜀",
+      timed_out: "시간 초과"
+    };
+    const status = run.status
+      ? (statusLabels[run.status] ?? run.status)
+      : "알 수 없음";
+    const conclusion = run.conclusion
+      ? (conclusionLabels[run.conclusion] ?? run.conclusion)
+      : "진행 중";
+
+    return `상태 ${status} · 결과 ${conclusion}`;
+  }
 
   const currentSuggestedTags = useMemo(() => {
     const tags = [...new Set(localApps.flatMap((app) => app.tags))].sort(
@@ -134,8 +262,15 @@ export function AdminWorkspace({
         })
       });
       const payload = (await response.json().catch(() => ({}))) as {
+        dispatched?: boolean;
         error?: string;
+        run?: StaticGallerySyncRun | null;
       };
+
+      if (response.status === 409 && payload.run) {
+        applyLatestRun(payload.run);
+        return;
+      }
 
       if (!response.ok) {
         throw new Error(
@@ -143,11 +278,18 @@ export function AdminWorkspace({
         );
       }
 
-      setSyncStatus({
-        kind: "success",
-        message:
-          "동기화 작업을 시작했습니다. GitHub Actions와 Vercel 배포가 완료되면 공개 페이지에 반영됩니다."
-      });
+      if (payload.dispatched === false) {
+        setSyncStatus({
+          kind: "success",
+          message: "동기화할 수정 사항이 없습니다"
+        });
+      } else {
+        setSyncStatus({
+          kind: "info",
+          message: "동기화 작업을 시작했습니다. 실행 상태를 확인하는 중입니다."
+        });
+        await loadLatestRun();
+      }
     } catch (error) {
       setSyncStatus({
         kind: "error",
@@ -182,7 +324,7 @@ export function AdminWorkspace({
           <div className="admin-header-actions">
             <button
               className="admin-secondary-button"
-              disabled={syncPending}
+              disabled={syncPending || syncSummary.pendingCount === 0 || syncRunIsActive}
               onClick={handleStaticGallerySync}
               type="button"
             >
@@ -200,14 +342,35 @@ export function AdminWorkspace({
             </form>
           </div>
 
-          {syncStatus ? (
-            <p
-              className={`admin-sync-status admin-sync-status-${syncStatus.kind}`}
-              role="status"
-            >
-              {syncStatus.message}
+          <div
+            className={`admin-sync-status${syncStatus ? ` admin-sync-status-${syncStatus.kind}` : ""}`}
+            role="status"
+          >
+            <p className="admin-sync-status-primary">
+              {syncSummary.pendingCount === 0
+                ? "동기화할 수정 사항이 없습니다"
+                : `${syncSummary.pendingCount}건의 수정 사항`}
             </p>
-          ) : null}
+            <p>
+              DB 앱 {syncSummary.dbCount}개 · 정적 스냅샷 {syncSummary.snapshotCount}개
+            </p>
+            <p>마지막 스냅샷: {formatSnapshotDate(syncSummary.generatedAt)}</p>
+            {syncStatus ? <p>{syncStatus.message}</p> : null}
+            {syncRun ? (
+              <div className="admin-sync-run">
+                <span>{getRunStatusLabel(syncRun)}</span>
+                {syncRun.htmlUrl ? (
+                  <a
+                    href={syncRun.htmlUrl}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    GitHub Actions에서 보기
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
         </div>
       </header>
 

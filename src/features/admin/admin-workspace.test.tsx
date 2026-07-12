@@ -7,10 +7,39 @@ import {
   waitFor,
   within
 } from "@testing-library/react";
+import { afterEach, beforeEach, vi } from "vitest";
 import type { AdminAppRecord } from "@/lib/apps/types";
 import { AdminWorkspace } from "./admin-workspace";
 
+const { routerMock, routerRefreshMock } = vi.hoisted(() => {
+  const routerRefreshMock = vi.fn();
+
+  return {
+    routerMock: { refresh: routerRefreshMock },
+    routerRefreshMock
+  };
+});
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => routerMock
+}));
+
 const noopAction = async () => {};
+
+const baseline = {
+  generatedAt: "2026-07-10T00:00:00.000Z",
+  appCount: 2,
+  updatedAtById: {
+    "app-1": "2026-04-05T00:00:00.000Z",
+    "app-2": "2026-04-05T00:00:00.000Z"
+  }
+};
+
+const changedBaseline = {
+  generatedAt: baseline.generatedAt,
+  appCount: 0,
+  updatedAtById: {}
+};
 
 function readGlobalStyles() {
   return readFileSync(join(process.cwd(), "src/app/globals.css"), "utf8");
@@ -56,10 +85,20 @@ const apps: AdminAppRecord[] = [
 ];
 
 describe("AdminWorkspace", () => {
+  beforeEach(() => {
+    routerRefreshMock.mockReset();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  });
+
   it("switches the workbench into edit mode when an app card is selected", () => {
     render(
       <AdminWorkspace
         apps={apps}
+        baseline={baseline}
         createAction={noopAction}
         deleteAction={noopAction}
         logoutAction={noopAction}
@@ -95,6 +134,7 @@ describe("AdminWorkspace", () => {
     render(
       <AdminWorkspace
         apps={apps}
+        baseline={baseline}
         createAction={noopAction}
         deleteAction={noopAction}
         logoutAction={noopAction}
@@ -117,6 +157,7 @@ describe("AdminWorkspace", () => {
     render(
       <AdminWorkspace
         apps={apps}
+        baseline={baseline}
         createAction={noopAction}
         deleteAction={noopAction}
         logoutAction={noopAction}
@@ -131,17 +172,82 @@ describe("AdminWorkspace", () => {
     ).toHaveAttribute("href", "/api/admin/backup");
   });
 
-  it("starts the static gallery sync workflow from the workspace header", async () => {
-    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(
-      new Response(JSON.stringify({ ok: true }), {
-        headers: { "content-type": "application/json" },
-        status: 200
-      })
+  it("shows no changes and disables sync when the snapshot matches", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ run: null }), { status: 200 })
     );
 
     render(
       <AdminWorkspace
         apps={apps}
+        baseline={baseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    expect(
+      await screen.findByText("동기화할 수정 사항이 없습니다")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "수정 사항 동기화" })
+    ).toBeDisabled();
+  });
+
+  it("shows the union count of pending changes", () => {
+    render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    expect(screen.getByText("2건의 수정 사항")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "수정 사항 동기화" })
+    ).not.toBeDisabled();
+  });
+
+  it("dispatches and polls the latest run until successful completion", async () => {
+    vi.useFakeTimers();
+    let statusRequestCount = 0;
+    const activeRun = {
+      id: 123,
+      status: "in_progress",
+      conclusion: null,
+      htmlUrl: "https://github.com/WBmaker2/vibecoding-lab/actions/runs/123",
+      createdAt: "2026-07-10T01:00:00.000Z",
+      updatedAt: "2026-07-10T01:00:00.000Z"
+    };
+    const completedRun = { ...activeRun, status: "completed", conclusion: "success" };
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(
+      async (_input, init) => {
+        if (init?.method === "POST") {
+          return new Response(JSON.stringify({ dispatched: true }), { status: 202 });
+        }
+
+        statusRequestCount += 1;
+        return new Response(
+          JSON.stringify({ run: statusRequestCount === 1 ? null : statusRequestCount === 2 ? activeRun : completedRun }),
+          { status: 200 }
+        );
+      }
+    );
+
+    render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
         createAction={noopAction}
         deleteAction={noopAction}
         logoutAction={noopAction}
@@ -152,27 +258,102 @@ describe("AdminWorkspace", () => {
     );
 
     fireEvent.click(screen.getByRole("button", { name: "수정 사항 동기화" }));
-
-    await waitFor(() => {
-      expect(fetchSpy).toHaveBeenCalledWith(
-        "/api/admin/sync-static-gallery",
-        expect.objectContaining({
-          method: "POST",
-          body: JSON.stringify({ reason: "admin-sync-button" })
-        })
-      );
-    });
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "동기화 작업을 시작했습니다"
+    await vi.runOnlyPendingTimersAsync();
+    await Promise.resolve();
+    await Promise.resolve();
+    expect(fetchSpy).toHaveBeenCalledWith(
+      "/api/admin/sync-static-gallery",
+      expect.objectContaining({ method: "POST" })
+    );
+    expect(screen.getByRole("link", { name: "GitHub Actions에서 보기" })).toHaveAttribute(
+      "href",
+      activeRun.htmlUrl
     );
 
-    fetchSpy.mockRestore();
+    await vi.advanceTimersByTimeAsync(5000);
+    await Promise.resolve();
+    await Promise.resolve();
+    await vi.runOnlyPendingTimersAsync();
+    await Promise.resolve();
+
+    expect(routerRefreshMock).toHaveBeenCalledOnce();
+    expect(screen.getByRole("status")).toHaveTextContent("동기화가 완료되었습니다");
+    const requestCountAfterCompletion = statusRequestCount;
+
+    await vi.advanceTimersByTimeAsync(5000);
+    expect(statusRequestCount).toBe(requestCountAfterCompletion);
+  }, 12000);
+
+  it("keeps sync disabled and shows the active run link", async () => {
+    const activeRun = {
+      id: 321,
+      status: "queued",
+      conclusion: null,
+      htmlUrl: "https://github.com/WBmaker2/vibecoding-lab/actions/runs/321",
+      createdAt: "2026-07-10T01:00:00.000Z",
+      updatedAt: "2026-07-10T01:00:00.000Z"
+    };
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ run: activeRun }), { status: 200 })
+    );
+
+    render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    await screen.findByRole("link", { name: "GitHub Actions에서 보기" });
+    expect(screen.getByRole("button", { name: "수정 사항 동기화" })).toBeDisabled();
+    expect(screen.getByRole("link", { name: "GitHub Actions에서 보기" })).toHaveAttribute(
+      "target",
+      "_blank"
+    );
+  });
+
+  it("shows an error when the workflow completes unsuccessfully", async () => {
+    const failedRun = {
+      id: 654,
+      status: "completed",
+      conclusion: "failure",
+      htmlUrl: "https://github.com/WBmaker2/vibecoding-lab/actions/runs/654",
+      createdAt: "2026-07-10T01:00:00.000Z",
+      updatedAt: "2026-07-10T01:00:00.000Z"
+    };
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ run: failedRun }), { status: 200 })
+    );
+
+    render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "동기화에 실패했습니다"
+    );
   });
 
   it("shows a Github action only for apps with a github link", () => {
     render(
       <AdminWorkspace
         apps={apps}
+        baseline={baseline}
         createAction={noopAction}
         deleteAction={noopAction}
         logoutAction={noopAction}
@@ -197,6 +378,7 @@ describe("AdminWorkspace", () => {
     render(
       <AdminWorkspace
         apps={apps}
+        baseline={baseline}
         createAction={noopAction}
         deleteAction={noopAction}
         logoutAction={noopAction}
@@ -267,6 +449,7 @@ describe("AdminWorkspace", () => {
     render(
       <AdminWorkspace
         apps={apps}
+        baseline={baseline}
         createAction={noopAction}
         deleteAction={noopAction}
         logoutAction={noopAction}

@@ -1,6 +1,7 @@
 import snapshot from "@/data/public-apps.json";
 import { isLegacyThumbnailComputeUrl } from "@/lib/storage/public-thumbnail";
 import type { PublicAppRecord, ThumbnailMode } from "./types";
+import type { StaticGalleryBaseline } from "./static-gallery-sync-state";
 import path from "node:path";
 
 export interface SerializedPublicAppRecord {
@@ -153,4 +154,16 @@ export function toStaticPublicAppRecord(
 
 export function listStaticPublicApps() {
   return (snapshot as PublicAppsSnapshot).apps.map(toStaticPublicAppRecord);
+}
+
+export function getStaticGalleryBaseline(): StaticGalleryBaseline {
+  const staticSnapshot = snapshot as PublicAppsSnapshot;
+
+  return {
+    generatedAt: staticSnapshot.generatedAt,
+    appCount: staticSnapshot.appCount,
+    updatedAtById: Object.fromEntries(
+      staticSnapshot.apps.map((app) => [app.id, app.updatedAt])
+    )
+  };
 }
