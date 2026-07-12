@@ -1,4 +1,5 @@
 import type { AdminAppRecord } from "./types";
+import { isCanonicalGeneratedAt } from "./static-gallery-snapshot-policy.mjs";
 
 export interface StaticGalleryAssetManifestEntry {
   path: string;
@@ -14,7 +15,7 @@ export interface StaticGalleryAssetIntegrity {
 }
 
 export interface StaticGalleryBaseline {
-  assetManifest: StaticGalleryAssetManifest;
+  assetManifest?: unknown;
   generatedAt: string;
   appCount: number;
   updatedAtById: Record<string, string>;
@@ -60,15 +61,6 @@ export function isActiveStaticGalleryRun(
 function getTime(value: Date | string): number | null {
   const time = value instanceof Date ? value.getTime() : Date.parse(value);
 
-  if (
-    typeof value === "string" &&
-    (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(value)
-      ? new Date(value).toISOString() !== value
-      : false)
-  ) {
-    return null;
-  }
-
   return Number.isFinite(time) ? time : null;
 }
 
@@ -76,7 +68,7 @@ export function getStaticGallerySyncSummary(
   adminApps: AdminAppRecord[],
   baseline: StaticGalleryBaseline,
   assetIntegrity: StaticGalleryAssetIntegrity = {
-    valid: isValidAssetManifest(baseline.assetManifest),
+    valid: isValidStaticGalleryAssetManifest(baseline.assetManifest),
     reason: "baseline-asset-manifest"
   }
 ): StaticGallerySyncSummary {
@@ -87,7 +79,7 @@ export function getStaticGallerySyncSummary(
   ]);
   let pendingCount = 0;
 
-  if (getTime(baseline.generatedAt) === null || !assetIntegrity.valid) {
+  if (!isCanonicalGeneratedAt(baseline.generatedAt) || !assetIntegrity.valid) {
     pendingCount = 1;
   }
 
@@ -116,7 +108,9 @@ export function getStaticGallerySyncSummary(
   };
 }
 
-function isValidAssetManifest(value: StaticGalleryAssetManifest) {
+export function isValidStaticGalleryAssetManifest(
+  value: unknown
+): value is StaticGalleryAssetManifest {
   if (!Array.isArray(value)) {
     return false;
   }

@@ -1,6 +1,21 @@
-import { toStaticPublicAppRecord } from "./static-public-apps";
+import {
+  getStaticGalleryBaseline,
+  toStaticPublicAppRecord
+} from "./static-public-apps";
 
 describe("static public apps", () => {
+  it("preserves a legacy snapshot with no assetManifest key", () => {
+    const legacyBaseline = getStaticGalleryBaseline({
+      version: 1,
+      generatedAt: "2026-07-10T00:00:00.000Z",
+      appCount: 0,
+      apps: []
+    });
+
+    expect(Object.hasOwn(legacyBaseline, "assetManifest")).toBe(false);
+    expect(legacyBaseline.assetManifest).toBeUndefined();
+  });
+
   it("converts serialized snapshot apps into public app records", () => {
     const record = toStaticPublicAppRecord({
       id: "reading-timer",

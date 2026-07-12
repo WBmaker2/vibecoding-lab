@@ -1,3 +1,5 @@
+import { isCanonicalGeneratedAt } from "../../src/lib/apps/static-gallery-snapshot-policy.mjs";
+
 const COMPARED_FIELDS = [
   "id",
   "title",
@@ -17,18 +19,6 @@ const LOCAL_THUMBNAIL_PREFIX = "/app-thumbnails/";
 
 function stableJson(value) {
   return JSON.stringify(value);
-}
-
-function isValidGeneratedAt(value) {
-  if (
-    typeof value !== "string" ||
-    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(value)
-  ) {
-    return false;
-  }
-
-  const date = new Date(value);
-  return Number.isFinite(date.getTime()) && date.toISOString() === value;
 }
 
 function getReferencedThumbnailFiles(apps) {
@@ -97,7 +87,7 @@ export function getReusableSnapshotDecision({
     return { reusable: false, reason: "invalid-snapshot" };
   }
 
-  if (!isValidGeneratedAt(snapshot.generatedAt)) {
+  if (!isCanonicalGeneratedAt(snapshot.generatedAt)) {
     return { reusable: false, reason: "invalid-generated-at" };
   }
 

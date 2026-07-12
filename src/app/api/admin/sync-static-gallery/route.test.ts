@@ -238,6 +238,27 @@ describe("/api/admin/sync-static-gallery", () => {
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
+  it.each(["", "bad marker", "marker/../run", "x".repeat(129)])(
+    "rejects a malformed request marker with structured 400: %s",
+    async (requestMarker) => {
+      hasAdminSessionMock.mockResolvedValue(true);
+      const url = new URL("http://localhost/api/admin/sync-static-gallery");
+      url.searchParams.set("request_marker", requestMarker);
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+
+      const response = await GET(new Request(url));
+
+      expect(response.status).toBe(400);
+      expect(await response.json()).toEqual({
+        code: "SYNC_REQUEST_MARKER_INVALID",
+        error: "동기화 요청 marker 형식이 올바르지 않습니다."
+      });
+      expect(getActiveStaticGallerySyncLeaseMock).not.toHaveBeenCalled();
+      expect(getStaticGallerySyncLeaseByMarkerMock).not.toHaveBeenCalled();
+      expect(fetchSpy).not.toHaveBeenCalled();
+    }
+  );
+
   it("returns only normalized fields for the latest workflow run", async () => {
     hasAdminSessionMock.mockResolvedValue(true);
     process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";

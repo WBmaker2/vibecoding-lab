@@ -1,10 +1,7 @@
 import snapshot from "@/data/public-apps.json";
 import { isLegacyThumbnailComputeUrl } from "@/lib/storage/public-thumbnail";
 import type { PublicAppRecord, ThumbnailMode } from "./types";
-import type {
-  StaticGalleryAssetManifest,
-  StaticGalleryBaseline
-} from "./static-gallery-sync-state";
+import type { StaticGalleryBaseline } from "./static-gallery-sync-state";
 import path from "node:path";
 
 export interface SerializedPublicAppRecord {
@@ -23,7 +20,7 @@ export interface SerializedPublicAppRecord {
 }
 
 interface PublicAppsSnapshot {
-  assetManifest: StaticGalleryAssetManifest;
+  assetManifest?: unknown;
   version: number;
   generatedAt: string;
   appCount: number;
@@ -160,17 +157,20 @@ export function listStaticPublicApps() {
   return (snapshot as PublicAppsSnapshot).apps.map(toStaticPublicAppRecord);
 }
 
-export function getStaticGalleryBaseline(): StaticGalleryBaseline {
-  const staticSnapshot = snapshot as PublicAppsSnapshot;
-
-  return {
-    assetManifest: Array.isArray(staticSnapshot.assetManifest)
-      ? staticSnapshot.assetManifest
-      : [],
+export function getStaticGalleryBaseline(
+  staticSnapshot: PublicAppsSnapshot = snapshot as PublicAppsSnapshot
+): StaticGalleryBaseline {
+  const baseline: StaticGalleryBaseline = {
     generatedAt: staticSnapshot.generatedAt,
     appCount: staticSnapshot.appCount,
     updatedAtById: Object.fromEntries(
       staticSnapshot.apps.map((app) => [app.id, app.updatedAt])
     )
   };
+
+  if (Object.hasOwn(staticSnapshot, "assetManifest")) {
+    baseline.assetManifest = staticSnapshot.assetManifest;
+  }
+
+  return baseline;
 }

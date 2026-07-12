@@ -2,10 +2,11 @@ import { createHash } from "node:crypto";
 import type { Dirent } from "node:fs";
 import fs from "node:fs/promises";
 import path from "node:path";
-import type {
-  StaticGalleryAssetIntegrity,
-  StaticGalleryAssetManifest,
-  StaticGalleryBaseline
+import {
+  isValidStaticGalleryAssetManifest,
+  type StaticGalleryAssetIntegrity,
+  type StaticGalleryAssetManifest,
+  type StaticGalleryBaseline
 } from "./static-gallery-sync-state";
 
 const STATIC_THUMBNAIL_DIR = path.resolve(
@@ -58,6 +59,16 @@ export function compareStaticGalleryAssetManifest(
 export async function getStaticGalleryAssetIntegrity(
   baseline: StaticGalleryBaseline
 ): Promise<StaticGalleryAssetIntegrity> {
+  if (!isValidStaticGalleryAssetManifest(baseline.assetManifest)) {
+    return {
+      valid: false,
+      reason:
+        baseline.assetManifest === undefined
+          ? "missing-asset-manifest"
+          : "invalid-asset-manifest"
+    };
+  }
+
   let entries: Dirent[];
 
   try {

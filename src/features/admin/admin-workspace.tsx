@@ -137,6 +137,23 @@ export function AdminWorkspace({
     []
   );
 
+  const expireTrackedRequest = useCallback(
+    (markerId: string) => {
+      if (dispatchMarkerRef.current?.id !== markerId) {
+        return;
+      }
+
+      trackDispatchMarker(null);
+      setSyncRun(null);
+      setSyncPending(false);
+      setSyncStatus({
+        kind: "error",
+        message: "동기화 요청 확인 시간이 만료되었습니다. 다시 시도해 주세요."
+      });
+    },
+    [trackDispatchMarker]
+  );
+
   const applyLatestRun = useCallback(
     (
       run: StaticGallerySyncRun | null,
@@ -231,6 +248,14 @@ export function AdminWorkspace({
       refreshOnSuccess = false,
       requestedMarker = dispatchMarkerRef.current
     ) => {
+      const requestMarkerId = requestedMarker?.id ?? null;
+      const requestContextIsCurrent = () =>
+        (dispatchMarkerRef.current?.id ?? null) === requestMarkerId;
+
+      if (!requestContextIsCurrent()) {
+        return;
+      }
+
       try {
         const statusUrl = requestedMarker
           ? `/api/admin/sync-static-gallery?request_marker=${encodeURIComponent(requestedMarker.id)}`
@@ -245,6 +270,10 @@ export function AdminWorkspace({
           run?: StaticGallerySyncRun | null;
           scope?: StaticGalleryRunScope;
         };
+
+        if (!requestContextIsCurrent()) {
+          return;
+        }
 
         if (!response.ok) {
           throw new Error(payload.error || "동기화 상태를 불러오지 못했습니다.");
@@ -284,7 +313,10 @@ export function AdminWorkspace({
           requestedMarker
         );
       } catch (error) {
-        if (!mountedRef.current) {
+        if (
+          !mountedRef.current ||
+          !requestContextIsCurrent()
+        ) {
           return;
         }
 
@@ -326,6 +358,28 @@ export function AdminWorkspace({
 
     return () => window.clearInterval(timer);
   }, [loadLatestRun, syncTrackingIsActive]);
+
+  useEffect(() => {
+    if (!dispatchMarker || syncRun) {
+      return;
+    }
+
+    const expiresAt = Date.parse(dispatchMarker.leaseExpiresAt);
+    const remaining = Number.isFinite(expiresAt)
+      ? Math.max(0, expiresAt - Date.now())
+      : 0;
+
+    if (remaining === 0) {
+      expireTrackedRequest(dispatchMarker.id);
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      expireTrackedRequest(dispatchMarker.id);
+    }, remaining);
+
+    return () => window.clearTimeout(timer);
+  }, [dispatchMarker, expireTrackedRequest, syncRun]);
 
   function formatSnapshotDate(value: string) {
     const date = new Date(value);

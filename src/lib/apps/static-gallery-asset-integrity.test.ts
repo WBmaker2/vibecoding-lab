@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { compareStaticGalleryAssetManifest } from "./static-gallery-asset-integrity";
+import {
+  compareStaticGalleryAssetManifest,
+  getStaticGalleryAssetIntegrity
+} from "./static-gallery-asset-integrity";
 
 const alpha = {
   path: "/app-thumbnails/alpha.png",
@@ -8,6 +11,33 @@ const alpha = {
 };
 
 describe("static gallery asset integrity", () => {
+  it("fails closed for a legacy snapshot with no asset manifest", async () => {
+    await expect(
+      getStaticGalleryAssetIntegrity({
+        generatedAt: "2026-07-10T00:00:00.000Z",
+        appCount: 0,
+        updatedAtById: {}
+      })
+    ).resolves.toEqual({
+      valid: false,
+      reason: "missing-asset-manifest"
+    });
+  });
+
+  it("fails closed for a malformed asset manifest", async () => {
+    await expect(
+      getStaticGalleryAssetIntegrity({
+        assetManifest: null,
+        generatedAt: "2026-07-10T00:00:00.000Z",
+        appCount: 0,
+        updatedAtById: {}
+      })
+    ).resolves.toEqual({
+      valid: false,
+      reason: "invalid-asset-manifest"
+    });
+  });
+
   it("accepts the same manifest regardless of entry order", () => {
     expect(
       compareStaticGalleryAssetManifest(

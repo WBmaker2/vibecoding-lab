@@ -297,3 +297,99 @@ The workflow migration requires its existing `POSTGRES_URL` secret. Exact
 request history is intentionally bounded to 30 returned runs and a 24-hour
 lease-row lookup; beyond that boundary the UI remains unknown/retry and never
 labels an unrelated run as the request's completion.
+
+## Final Sync Boundary Fix Wave
+
+Date: 2026-07-12
+Fix base: `40ec083`
+
+### Delivered Contracts
+
+- A request-specific marker with no matching run now expires exactly at its
+  public `leaseExpiresAt` boundary. Expiry clears session storage and the
+  request run, stops the 5-second polling interval, exposes an accessible retry
+  status, and re-enables sync when pending changes remain. Global workflow
+  history stays separate and is never adopted as that request's completion.
+  The fake-timer test also rejects a poll that began before expiry and proves
+  its late error cannot replace the terminal retry state, then unmounts with
+  zero timers.
+- `getStaticGalleryBaseline()` preserves the absence of legacy
+  `assetManifest` instead of coercing it to `[]`. Missing and malformed
+  manifests are pending and fail local integrity before filesystem comparison;
+  an explicitly present empty array retains its existing valid meaning.
+- `isCanonicalGeneratedAt()` now lives in one Node-compatible
+  `static-gallery-snapshot-policy.mjs` module, with a declaration-only
+  `.d.mts` companion for Next TypeScript. Both exporter reuse and the admin
+  sync summary reject parseable but noncanonical timestamps.
+- The admin status route distinguishes an absent `request_marker` from a
+  malformed value. Malformed empty, whitespace, traversal-like, and oversized
+  values return structured HTTP 400
+  `SYNC_REQUEST_MARKER_INVALID` before lease or GitHub work.
+
+### Exact RED/GREEN Evidence
+
+- Initial RED:
+  `npm test -- src/features/admin/admin-workspace.test.tsx src/lib/apps/static-public-apps.test.ts src/lib/apps/static-gallery-sync-state.test.ts scripts/lib/static-gallery-export-state.test.mjs src/app/api/admin/sync-static-gallery/route.test.ts`
+  reported 4 failed files and 1 passed file, with 8 failed and 78 passed tests.
+  Failures covered unknown-marker expiry, legacy manifest coercion,
+  noncanonical admin timestamps, and all malformed marker query cases.
+- Intermediate GREEN exposed two fake-timer fixture issues while the four
+  non-React files passed: 2 failed and 84 passed tests. The existing workflow
+  fixture received an explicit system time, and the expiry poll fixture now
+  creates a fresh `Response` per request so body consumption cannot mask the
+  boundary.
+- Final focused:
+  `npm test -- src/features/admin/admin-workspace.test.tsx src/lib/apps/static-public-apps.test.ts src/lib/apps/static-gallery-sync-state.test.ts src/lib/apps/static-gallery-asset-integrity.test.ts scripts/lib/static-gallery-export-state.test.mjs src/app/api/admin/sync-static-gallery/route.test.ts`
+  passed 6 files and 93 tests.
+- The dedicated expiry test passed with a poll left in flight across expiry,
+  verified retry text and enabled sync, observed no later fetches, and reached
+  `vi.getTimerCount() === 0` after unmount.
+- Self-review late-error RED:
+  `npm test -- src/features/admin/admin-workspace.test.tsx -t "expires an unknown marker"`
+  failed 1 test because a delayed polling rejection replaced the retry text
+  with `late polling failure`. After stale marker-specific results and errors
+  were ignored, the same command passed 1 test with 17 skipped.
+- Self-review global-history RED:
+  `npm test -- src/features/admin/admin-workspace.test.tsx -t "ignores global history"`
+  failed 1 test because a mount-time history response erased the newly created
+  marker and displayed unrelated success. After guarding the full request
+  context, both global-history and expiry race tests passed together (2 passed,
+  17 skipped).
+
+### Final Command Evidence
+
+- `npm test`: 43 files, 311 tests passed.
+- `npm run lint`: passed with zero warnings.
+- `npx tsc --noEmit`: passed.
+- `npm run build`: passed; `/` was listed as `○ (Static)`, while admin and
+  admin sync routes remained dynamic.
+- The generated prerender manifest confirmed
+  `{"rootPrerendered":true,"initialRevalidateSeconds":false,"srcRoute":"/"}`.
+- `npm run test:e2e`: 2 tests passed. Public E2E rendered all 56 thumbnail
+  elements, loaded the visible image, and observed no runtime image optimizer
+  or thumbnail API request.
+- `npm audit --omit=dev`: exit 0, found 0 vulnerabilities.
+- `npm audit --audit-level=high`: executed and exited 1 on the existing
+  developer dependency graph with 10 advisories (1 low, 6 moderate, 2 high,
+  1 critical). No dependency or lockfile change was made in this scoped wave.
+- `npm test -- scripts/sync-static-gallery-workflow.test.mjs`: 2 YAML
+  parse/order tests passed.
+- Node 24.13.1 `--check` passed for the shared snapshot policy and exporter
+  state modules. A `--trace-warnings` import smoke loaded the policy,
+  exporter, remote URL transport, image policy, and safe downloader with:
+  `node=v24.13.1 imports=5 canonical-policy=ok warnings=none`.
+- Offline local verifier smoke:
+  `{"ok":true,"appCount":56,"manifestCount":56,"thumbnailStats":{"local":56,"remote":0,"null":0,"other":0},"assetIntegrity":{"valid":true,"reason":"assets-match"},"missingLocalThumbnailFileCount":0}`.
+  It used the committed snapshot as comparison input and contacted no DB.
+- `git diff --check`: passed after the final report update.
+- After build and E2E, `next-env.d.ts` was restored to the pre-existing
+  `./.next/dev/types/routes.d.ts` import, left unstaged, and generated
+  `tsconfig.tsbuildinfo` was removed.
+
+### Operational Boundary And Concerns
+
+No production DB, GitHub API/dispatch, push, or deployment command was run.
+The only remaining concern is the pre-existing developer-tool audit backlog
+listed above; production dependencies report zero advisories. The request
+history remains intentionally bounded, and an unmatched request now ends in
+retry at its public lease deadline rather than guessing from global history.

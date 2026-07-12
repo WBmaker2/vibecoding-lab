@@ -185,16 +185,37 @@ function getRequestedWorkflowRun(
   );
 }
 
-function getRequestMarker(request?: Request) {
+type RequestMarkerResult =
+  | { status: "absent" }
+  | { status: "invalid" }
+  | { status: "valid"; value: string };
+
+function getRequestMarker(request?: Request): RequestMarkerResult {
   if (!request) {
-    return null;
+    return { status: "absent" };
   }
 
-  const marker = new URL(request.url).searchParams.get("request_marker")?.trim();
+  const searchParams = new URL(request.url).searchParams;
+
+  if (!searchParams.has("request_marker")) {
+    return { status: "absent" };
+  }
+
+  const marker = searchParams.get("request_marker") ?? "";
 
   return marker && marker.length <= 128 && /^[a-z0-9-]+$/i.test(marker)
-    ? marker
-    : null;
+    ? { status: "valid", value: marker }
+    : { status: "invalid" };
+}
+
+function requestMarkerError() {
+  return NextResponse.json(
+    {
+      code: "SYNC_REQUEST_MARKER_INVALID",
+      error: "동기화 요청 marker 형식이 올바르지 않습니다."
+    },
+    { status: 400 }
+  );
 }
 
 async function getReason(request: Request) {
@@ -311,13 +332,21 @@ export async function GET(request?: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  const requestMarkerResult = getRequestMarker(request);
+
+  if (requestMarkerResult.status === "invalid") {
+    return requestMarkerError();
+  }
+
+  const requestMarker =
+    requestMarkerResult.status === "valid" ? requestMarkerResult.value : null;
+
   const config = getConfig();
 
   if (!config.token) {
     return configurationError();
   }
 
-  const requestMarker = getRequestMarker(request);
   let lease: StaticGallerySyncLease | null;
 
   try {

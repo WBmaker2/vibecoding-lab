@@ -276,6 +276,7 @@ describe("AdminWorkspace", () => {
 
   it("dispatches and polls the latest run until successful completion", async () => {
     vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-07-10T01:00:00.000Z"));
     let statusRequestCount = 0;
     const dispatchMarker = {
       id: "marker-123",
@@ -640,6 +641,212 @@ describe("AdminWorkspace", () => {
     ).toBeNull();
   });
 
+  it("ignores global history that arrives after a request marker is created", async () => {
+    const marker = {
+      id: "marker-after-history",
+      requestedAt: new Date().toISOString(),
+      leaseExpiresAt: new Date(Date.now() + 30 * 60 * 1000).toISOString(),
+      runId: null
+    };
+    const unrelatedRun = {
+      id: 998,
+      status: "completed",
+      conclusion: "success",
+      htmlUrl: "https://github.com/runs/998",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    let resolveGlobalHistory: ((response: Response) => void) | null = null;
+    const fetchSpy = vi.mocked(globalThis.fetch);
+    fetchSpy.mockImplementation((input, init) => {
+      if (init?.method === "POST") {
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({ dispatched: true, dispatchMarker: marker }),
+            { status: 202 }
+          )
+        );
+      }
+
+      if (String(input).includes(`request_marker=${marker.id}`)) {
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({
+              scope: "request",
+              requestMarker: marker.id,
+              run: null,
+              dispatchMarker: null
+            }),
+            { status: 200 }
+          )
+        );
+      }
+
+      return new Promise<Response>((resolve) => {
+        resolveGlobalHistory = resolve;
+      });
+    });
+
+    render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(1));
+    fireEvent.click(screen.getByRole("button", { name: "수정 사항 동기화" }));
+    expect(
+      await screen.findByText("동기화 요청을 확인하는 중입니다.")
+    ).toBeInTheDocument();
+    expect(resolveGlobalHistory).not.toBeNull();
+
+    await act(async () => {
+      resolveGlobalHistory?.(
+        new Response(
+          JSON.stringify({ scope: "history", run: unrelatedRun }),
+          { status: 200 }
+        )
+      );
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "동기화 요청을 확인하는 중입니다."
+    );
+    expect(screen.queryByText("최근 동기화 실행 기록입니다.")).toBeNull();
+    expect(
+      window.sessionStorage.getItem("hvc-static-gallery-request-marker")
+    ).toContain(marker.id);
+  });
+
+  it("expires an unknown marker into retry and stops every polling timer", async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-07-12T00:00:00.000Z"));
+    const marker = {
+      id: "marker-expiring",
+      requestedAt: "2026-07-11T23:30:00.000Z",
+      leaseExpiresAt: "2026-07-12T00:00:06.000Z",
+      runId: null
+    };
+    window.sessionStorage.setItem(
+      "hvc-static-gallery-request-marker",
+      JSON.stringify(marker)
+    );
+    const clearIntervalSpy = vi.spyOn(window, "clearInterval");
+    const clearTimeoutSpy = vi.spyOn(window, "clearTimeout");
+    const fetchSpy = vi.mocked(globalThis.fetch);
+    let requestCount = 0;
+    let rejectDelayedStatus: ((reason: Error) => void) | null = null;
+    const createUnknownResponse = () =>
+      new Response(
+        JSON.stringify({
+          scope: "request",
+          requestMarker: marker.id,
+          run: null,
+          dispatchMarker: null
+        }),
+        { status: 200 }
+      );
+    fetchSpy.mockImplementation(() => {
+      requestCount += 1;
+
+      if (requestCount === 1) {
+        return Promise.resolve(createUnknownResponse());
+      }
+
+      return new Promise<Response>((_resolve, reject) => {
+        rejectDelayedStatus = reject;
+      });
+    });
+
+    const view = render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    await act(async () => {
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+      await vi.advanceTimersByTimeAsync(0);
+    });
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "동기화 요청을 확인하는 중입니다."
+    );
+    expect(
+      screen.getByRole("button", { name: "수정 사항 동기화" })
+    ).toBeDisabled();
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(5999);
+    });
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "동기화 요청을 확인하는 중입니다."
+    );
+    expect(rejectDelayedStatus).not.toBeNull();
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(2);
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "동기화 요청 확인 시간이 만료되었습니다. 다시 시도해 주세요."
+    );
+    expect(
+      screen.getByRole("button", { name: "수정 사항 동기화" })
+    ).not.toBeDisabled();
+    expect(
+      window.sessionStorage.getItem("hvc-static-gallery-request-marker")
+    ).toBeNull();
+    const requestCountAfterExpiry = fetchSpy.mock.calls.length;
+
+    await act(async () => {
+      rejectDelayedStatus?.(new Error("late polling failure"));
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+      await vi.advanceTimersByTimeAsync(0);
+    });
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "동기화 요청 확인 시간이 만료되었습니다. 다시 시도해 주세요."
+    );
+    expect(
+      window.sessionStorage.getItem("hvc-static-gallery-request-marker")
+    ).toBeNull();
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(10_000);
+    });
+
+    expect(fetchSpy).toHaveBeenCalledTimes(requestCountAfterExpiry);
+    expect(clearIntervalSpy).toHaveBeenCalled();
+    expect(clearTimeoutSpy).toHaveBeenCalled();
+    view.unmount();
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
   it("shows an unrelated failed workflow only as global history", async () => {
     const failedRun = {
       id: 654,
@@ -668,8 +875,10 @@ describe("AdminWorkspace", () => {
       />
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "최근 동기화 실행 기록입니다."
+    await waitFor(() =>
+      expect(screen.getByRole("status")).toHaveTextContent(
+        "최근 동기화 실행 기록입니다."
+      )
     );
     expect(screen.getByRole("status")).not.toHaveTextContent(
       "동기화에 실패했습니다"

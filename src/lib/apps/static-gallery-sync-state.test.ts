@@ -29,6 +29,11 @@ function app(id: string, updatedAt: string): AdminAppRecord {
 }
 
 describe("getStaticGallerySyncSummary", () => {
+  const matchingApps = [
+    app("app-1", "2026-07-09T00:00:00.000Z"),
+    app("app-2", "2026-07-09T01:00:00.000Z")
+  ];
+
   it("reports no pending changes when DB and snapshot match exactly", () => {
     expect(
       getStaticGallerySyncSummary(
@@ -44,6 +49,51 @@ describe("getStaticGallerySyncSummary", () => {
       snapshotCount: 2,
       generatedAt: baseline.generatedAt
     });
+  });
+
+  it("treats an absent legacy asset manifest as pending", () => {
+    const legacyBaseline: StaticGalleryBaseline = {
+      generatedAt: baseline.generatedAt,
+      appCount: 0,
+      updatedAtById: {}
+    };
+
+    expect(
+      getStaticGallerySyncSummary([], legacyBaseline).pendingCount
+    ).toBe(1);
+  });
+
+  it.each([null, {}, [{ path: "bad" }]])(
+    "treats a malformed asset manifest as pending: %j",
+    (assetManifest) => {
+      expect(
+        getStaticGallerySyncSummary(matchingApps, {
+          ...baseline,
+          assetManifest: assetManifest as never
+        }).pendingCount
+      ).toBe(1);
+    }
+  );
+
+  it("keeps an explicitly present empty manifest valid", () => {
+    expect(
+      getStaticGallerySyncSummary(matchingApps, {
+        ...baseline,
+        assetManifest: []
+      }).pendingCount
+    ).toBe(0);
+  });
+
+  it.each([
+    "2026-07-10T00:00:00Z",
+    "2026-07-10T00:00:00.000+00:00"
+  ])("treats parseable noncanonical generatedAt as pending: %s", (generatedAt) => {
+    expect(
+      getStaticGallerySyncSummary(matchingApps, {
+        ...baseline,
+        generatedAt
+      }).pendingCount
+    ).toBe(1);
   });
 
   it("counts an app added to the DB once", () => {

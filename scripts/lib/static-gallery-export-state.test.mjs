@@ -91,7 +91,14 @@ describe("getReusableSnapshotDecision", () => {
     expect(decisionFor(createChanges())).toMatchObject({ reusable: false });
   });
 
-  it.each([null, "", "not-a-date", "2026-02-30T00:00:00.000Z"])(
+  it.each([
+    null,
+    "",
+    "not-a-date",
+    "2026-02-30T00:00:00.000Z",
+    "2026-07-10T00:00:00Z",
+    "2026-07-10T00:00:00.000+00:00"
+  ])(
     "does not reuse a snapshot with malformed generatedAt: %s",
     (generatedAt) => {
       expect(
