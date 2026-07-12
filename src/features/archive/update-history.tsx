@@ -22,11 +22,31 @@ export const UPDATE_HISTORY = [
 ] as const;
 
 const DIALOG_TITLE = "Hong's Vibe Coding Lab 업데이트 내역";
+const FOCUSABLE_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  '[tabindex]:not([tabindex="-1"])',
+  '[contenteditable="true"]'
+].join(", ");
+
+function getFocusableElements(container: HTMLElement) {
+  return Array.from(
+    container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+  ).filter(
+    (element) =>
+      !element.hasAttribute("hidden") &&
+      element.getAttribute("aria-hidden") !== "true"
+  );
+}
 
 export function UpdateHistory() {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isOpen) {
@@ -42,6 +62,38 @@ export function UpdateHistory() {
         event.preventDefault();
         setIsOpen(false);
         triggerRef.current?.focus();
+        return;
+      }
+
+      if (event.key !== "Tab" || !dialogRef.current) {
+        return;
+      }
+
+      const focusableElements = getFocusableElements(dialogRef.current);
+
+      if (focusableElements.length === 0) {
+        event.preventDefault();
+        dialogRef.current.focus();
+        return;
+      }
+
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement;
+      const focusIsOutsideDialog = !dialogRef.current.contains(activeElement);
+
+      if (focusIsOutsideDialog) {
+        event.preventDefault();
+        (event.shiftKey ? lastFocusable : firstFocusable).focus();
+        return;
+      }
+
+      if (event.shiftKey && activeElement === firstFocusable) {
+        event.preventDefault();
+        lastFocusable.focus();
+      } else if (!event.shiftKey && activeElement === lastFocusable) {
+        event.preventDefault();
+        firstFocusable.focus();
       }
     }
 
@@ -75,7 +127,9 @@ export function UpdateHistory() {
             aria-labelledby="update-history-title"
             aria-modal="true"
             className="update-history-dialog"
+            ref={dialogRef}
             role="dialog"
+            tabIndex={-1}
           >
             <div className="update-history-dialog-header">
               <h2 id="update-history-title">{DIALOG_TITLE}</h2>

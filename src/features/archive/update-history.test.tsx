@@ -45,4 +45,58 @@ describe("UpdateHistory", () => {
     expect(document.body.style.overflow).toBe("");
     expect(trigger).toHaveFocus();
   });
+
+  it("contains forward and backward Tab navigation inside the dialog", () => {
+    render(<UpdateHistory />);
+    fireEvent.click(screen.getByRole("button", { name: "업데이트 내역" }));
+
+    const closeButton = screen.getByRole("button", { name: "닫기" });
+    expect(closeButton).toHaveFocus();
+
+    const forwardTab = new KeyboardEvent("keydown", {
+      bubbles: true,
+      cancelable: true,
+      key: "Tab"
+    });
+    fireEvent(document, forwardTab);
+
+    expect(forwardTab.defaultPrevented).toBe(true);
+    expect(closeButton).toHaveFocus();
+
+    const backwardTab = new KeyboardEvent("keydown", {
+      bubbles: true,
+      cancelable: true,
+      key: "Tab",
+      shiftKey: true
+    });
+    fireEvent(document, backwardTab);
+
+    expect(backwardTab.defaultPrevented).toBe(true);
+    expect(closeButton).toHaveFocus();
+  });
+
+  it("removes the focus trap and restores body scrolling on unmount", () => {
+    const outsideButton = document.createElement("button");
+    document.body.append(outsideButton);
+    const { unmount } = render(<UpdateHistory />);
+
+    fireEvent.click(screen.getByRole("button", { name: "업데이트 내역" }));
+    expect(document.body.style.overflow).toBe("hidden");
+
+    unmount();
+    outsideButton.focus();
+
+    const tabEvent = new KeyboardEvent("keydown", {
+      bubbles: true,
+      cancelable: true,
+      key: "Tab"
+    });
+    fireEvent(document, tabEvent);
+
+    expect(document.body.style.overflow).toBe("");
+    expect(tabEvent.defaultPrevented).toBe(false);
+    expect(outsideButton).toHaveFocus();
+
+    outsideButton.remove();
+  });
 });

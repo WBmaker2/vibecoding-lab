@@ -26,8 +26,14 @@ export function ArchiveHero({
   const [isAllTagsOpen, setIsAllTagsOpen] = useState(false);
   const tagPanelId = "archive-tag-panel";
   const representativeTagSet = new Set(representativeTags);
+  const collapsedRepresentativeTags = representativeTags.slice(0, 10);
+  const activeTag = activeTags[0];
   const hasAdditionalTags = allTags.some((tag) => !representativeTagSet.has(tag));
-  const visibleTags = isAllTagsOpen ? allTags : representativeTags;
+  const collapsedTags =
+    activeTag && !representativeTagSet.has(activeTag)
+      ? [...collapsedRepresentativeTags.slice(0, -1), activeTag]
+      : collapsedRepresentativeTags;
+  const visibleTags = isAllTagsOpen ? allTags : collapsedTags;
 
   return (
     <section className="archive-hero">

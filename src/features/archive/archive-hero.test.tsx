@@ -1,5 +1,36 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { useState } from "react";
 import { ArchiveHero } from "./archive-hero";
+
+const REPRESENTATIVE_TAGS = [
+  "수업",
+  "수학",
+  "융합",
+  "과학",
+  "사회",
+  "데이터",
+  "업무",
+  "국어",
+  "담임",
+  "시뮬레이션"
+];
+
+function FilterableArchiveHero() {
+  const [activeTags, setActiveTags] = useState<string[]>([]);
+
+  return (
+    <ArchiveHero
+      activeTags={activeTags}
+      allTags={[...REPRESENTATIVE_TAGS, "영어"]}
+      onQueryChange={() => {}}
+      onToggleTag={(tag) =>
+        setActiveTags((current) => (current.includes(tag) ? [] : [tag]))
+      }
+      query=""
+      representativeTags={REPRESENTATIVE_TAGS}
+    />
+  );
+}
 
 describe("ArchiveHero", () => {
   it("keeps the mascot image beside the headline and outside the Hong's Note card", () => {
@@ -94,5 +125,46 @@ describe("ArchiveHero", () => {
     fireEvent.click(screen.getByRole("button", { name: "모든 태그 접기" }));
 
     expect(screen.queryByRole("button", { name: "#과학" })).not.toBeInTheDocument();
+  });
+
+  it("keeps a selected non-representative tag visible and removable after collapse", () => {
+    render(<FilterableArchiveHero />);
+
+    fireEvent.click(screen.getByRole("button", { name: "모든 태그 보기" }));
+    fireEvent.click(screen.getByRole("button", { name: "#영어" }));
+    fireEvent.click(screen.getByRole("button", { name: "모든 태그 접기" }));
+
+    const toolbar = screen.getByRole("toolbar", { name: "태그 필터" });
+    const visibleTagLabels = Array.from(
+      toolbar.querySelectorAll("button"),
+      (button) => button.textContent
+    );
+
+    expect(visibleTagLabels).toEqual([
+      "#수업",
+      "#수학",
+      "#융합",
+      "#과학",
+      "#사회",
+      "#데이터",
+      "#업무",
+      "#국어",
+      "#담임",
+      "#영어"
+    ]);
+    expect(screen.getByRole("button", { name: "#영어" })).toHaveAttribute(
+      "aria-pressed",
+      "true"
+    );
+    expect(
+      screen.queryByRole("button", { name: "#시뮬레이션" })
+    ).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "#영어" }));
+
+    expect(screen.queryByRole("button", { name: "#영어" })).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "#시뮬레이션" })
+    ).toHaveAttribute("aria-pressed", "false");
   });
 });

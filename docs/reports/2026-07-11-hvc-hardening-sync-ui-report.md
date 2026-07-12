@@ -29,7 +29,9 @@ deployment was performed while completing Task 6.
 - `getRepresentativeTags(apps, limit = 10)` counts app frequency once per app,
   sorts ties by Korean label, and is memoized by the archive page.
 - The top 10 tags render immediately; `모든 태그 보기` expands the full set and
-  `모든 태그 접기` restores the representative set. Only one tag remains active.
+  `모든 태그 접기` restores at most 10 controls. If the active tag is outside
+  the representative set, it replaces the final representative chip until the
+  user clears it. Only one tag remains active.
 - Cards render four tags plus `+N`, use an 8px radius, preserve a stable 16:9
   thumbnail area, and defer offscreen rendering with
   `content-visibility: auto` / `contain-intrinsic-size: 440px`.
@@ -119,6 +121,26 @@ or errors.
   horizontal-scroll, and first-card viewport assertions.
 - Corrected screenshots overwrote the original paths and were visually
   inspected at exact 1440x1000 and 390x844 PNG dimensions.
+
+### Active Filter And Modal Focus Correction
+
+- RED command:
+  `npm test -- src/features/archive/archive-hero.test.tsx src/features/archive/update-history.test.tsx src/features/archive/archive-page.test.tsx`
+  produced 2 expected failures and 9 passes. The new tests exposed the hidden
+  active `#영어` chip after collapse and the missing forward Tab containment.
+- After the fixes, the same command passed all 11 tests across 3 files.
+- The archive-hero test now selects a non-representative tag, collapses the full
+  list, verifies exactly 10 ordered chips with the active chip selected, and
+  clicks that chip to clear the filter and restore the omitted representative.
+- The update-history tests now verify both forward Tab and Shift+Tab containment
+  on the close button, plus listener removal and body-scroll restoration after
+  unmount. Escape, explicit close, and trigger-focus return remain covered.
+- The full Task 6 focused suite passed 19 tests across 6 files; `npm run lint`
+  passed; `npm run test:e2e` passed both browser tests; and final
+  `git diff --check` passed with no output.
+- This follow-up changed interaction logic and tests only, with no layout CSS or
+  visible markup change. The previously corrected and inspected desktop/mobile
+  screenshots therefore remain the visual evidence paths listed above.
 
 ## Concerns
 
