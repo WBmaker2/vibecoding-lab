@@ -241,6 +241,20 @@ describe("AdminWorkspace", () => {
   it("dispatches and polls the latest run until successful completion", async () => {
     vi.useFakeTimers();
     let statusRequestCount = 0;
+    const dispatchMarker = {
+      id: "marker-123",
+      requestedAt: "2026-07-10T01:00:00.000Z",
+      leaseExpiresAt: "2026-07-10T01:30:00.000Z",
+      runId: null
+    };
+    const oldRun = {
+      id: 99,
+      status: "completed",
+      conclusion: "success",
+      htmlUrl: "https://github.com/WBmaker2/vibecoding-lab/actions/runs/99",
+      createdAt: "2026-07-09T01:00:00.000Z",
+      updatedAt: "2026-07-09T01:02:00.000Z"
+    };
     const activeRun = {
       id: 123,
       status: "in_progress",
@@ -253,12 +267,29 @@ describe("AdminWorkspace", () => {
     const fetchSpy = vi.mocked(globalThis.fetch);
     fetchSpy.mockImplementation(async (_input, init) => {
       if (init?.method === "POST") {
-        return new Response(JSON.stringify({ dispatched: true }), { status: 202 });
+        return new Response(
+          JSON.stringify({ dispatched: true, dispatchMarker }),
+          { status: 202 }
+        );
       }
 
       statusRequestCount += 1;
+      const statusPayload =
+        statusRequestCount === 1
+          ? { run: null, dispatchMarker: null }
+          : statusRequestCount === 2
+            ? { run: oldRun, dispatchMarker }
+            : statusRequestCount === 3
+              ? {
+                  run: activeRun,
+                  dispatchMarker: { ...dispatchMarker, runId: activeRun.id }
+                }
+              : {
+                  run: completedRun,
+                  dispatchMarker: { ...dispatchMarker, runId: completedRun.id }
+                };
       return new Response(
-        JSON.stringify({ run: statusRequestCount === 1 ? null : statusRequestCount === 2 ? activeRun : completedRun }),
+        JSON.stringify(statusPayload),
         { status: 200 }
       );
     });
@@ -286,6 +317,15 @@ describe("AdminWorkspace", () => {
       "/api/admin/sync-static-gallery",
       expect.objectContaining({ method: "POST" })
     );
+    expect(screen.getByRole("button", { name: "수정 사항 동기화" })).toBeDisabled();
+    expect(screen.queryByRole("link", { name: "GitHub Actions에서 보기" })).toBeNull();
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(5000);
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+
     expect(screen.getByRole("link", { name: "GitHub Actions에서 보기" })).toHaveAttribute(
       "href",
       activeRun.htmlUrl
@@ -339,6 +379,39 @@ describe("AdminWorkspace", () => {
       "target",
       "_blank"
     );
+  });
+
+  it("cleans the polling timer when an unresolved dispatch unmounts", async () => {
+    const marker = {
+      id: "marker-unresolved",
+      requestedAt: "2026-07-10T01:00:00.000Z",
+      leaseExpiresAt: "2026-07-10T01:30:00.000Z",
+      runId: null
+    };
+    const clearIntervalSpy = vi.spyOn(window, "clearInterval");
+    vi.mocked(globalThis.fetch).mockResolvedValue(
+      new Response(JSON.stringify({ run: null, dispatchMarker: marker }), {
+        status: 200
+      })
+    );
+
+    const view = render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    await screen.findByText("동기화 요청을 확인하는 중입니다.");
+    view.unmount();
+
+    expect(clearIntervalSpy).toHaveBeenCalled();
   });
 
   it("shows an error when the workflow completes unsuccessfully", async () => {

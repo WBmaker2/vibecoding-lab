@@ -1,12 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { AdminAppRecord } from "@/lib/apps/types";
 import {
   getStaticGallerySyncSummary,
   isActiveStaticGalleryRun,
   type StaticGalleryBaseline,
+  type StaticGalleryDispatchMarker,
   type StaticGallerySyncRun
 } from "@/lib/apps/static-gallery-sync-state";
 import {
@@ -50,6 +51,10 @@ export function AdminWorkspace({
     message: string;
   } | null>(null);
   const [syncRun, setSyncRun] = useState<StaticGallerySyncRun | null>(null);
+  const [dispatchMarker, setDispatchMarker] =
+    useState<StaticGalleryDispatchMarker | null>(null);
+  const mountedRef = useRef(true);
+  const refreshedRunIdRef = useRef<number | null>(null);
 
   useEffect(() => {
     setLocalApps(apps);
@@ -71,12 +76,51 @@ export function AdminWorkspace({
   );
 
   const syncRunIsActive = isActiveStaticGalleryRun(syncRun);
+  const syncAwaitingRequestedRun = Boolean(
+    dispatchMarker &&
+      (!dispatchMarker.runId || !syncRun || syncRun.id !== dispatchMarker.runId)
+  );
+  const syncTrackingIsActive = syncAwaitingRequestedRun || syncRunIsActive;
+
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
   const applyLatestRun = useCallback(
-    (run: StaticGallerySyncRun | null, refreshOnSuccess = false) => {
-      setSyncRun(run);
+    (
+      run: StaticGallerySyncRun | null,
+      marker: StaticGalleryDispatchMarker | null,
+      refreshOnSuccess = false
+    ) => {
+      if (!mountedRef.current) {
+        return;
+      }
 
-      if (isActiveStaticGalleryRun(run)) {
+      setDispatchMarker(marker);
+
+      const requestedRun =
+        marker && marker.runId !== null
+          ? run?.id === marker.runId
+            ? run
+            : null
+          : marker
+            ? null
+            : run;
+
+      if (marker && !requestedRun) {
+        setSyncRun(null);
+        setSyncStatus({
+          kind: "info",
+          message: "동기화 요청을 확인하는 중입니다."
+        });
+        return;
+      }
+
+      setSyncRun(requestedRun);
+
+      if (isActiveStaticGalleryRun(requestedRun)) {
         setSyncStatus({
           kind: "info",
           message: "동기화 작업이 실행 중입니다."
@@ -84,16 +128,20 @@ export function AdminWorkspace({
         return;
       }
 
-      if (run?.conclusion === "success") {
+      if (requestedRun?.conclusion === "success") {
         setSyncStatus({
           kind: "success",
           message: "동기화가 완료되었습니다."
         });
 
-        if (refreshOnSuccess) {
+        if (
+          refreshOnSuccess &&
+          refreshedRunIdRef.current !== requestedRun.id
+        ) {
+          refreshedRunIdRef.current = requestedRun.id;
           router.refresh();
         }
-      } else if (run?.conclusion) {
+      } else if (requestedRun?.conclusion) {
         setSyncStatus({
           kind: "error",
           message: "동기화에 실패했습니다. GitHub Actions 실행 결과를 확인해 주세요."
@@ -110,6 +158,7 @@ export function AdminWorkspace({
           cache: "no-store"
         });
         const payload = (await response.json().catch(() => ({}))) as {
+          dispatchMarker?: StaticGalleryDispatchMarker | null;
           error?: string;
           run?: StaticGallerySyncRun | null;
         };
@@ -118,8 +167,16 @@ export function AdminWorkspace({
           throw new Error(payload.error || "동기화 상태를 불러오지 못했습니다.");
         }
 
-        applyLatestRun(payload.run ?? null, refreshOnSuccess);
+        applyLatestRun(
+          payload.run ?? null,
+          payload.dispatchMarker ?? null,
+          refreshOnSuccess
+        );
       } catch (error) {
+        if (!mountedRef.current) {
+          return;
+        }
+
         setSyncStatus({
           kind: "error",
           message:
@@ -137,7 +194,7 @@ export function AdminWorkspace({
   }, [loadLatestRun]);
 
   useEffect(() => {
-    if (!syncRunIsActive) {
+    if (!syncTrackingIsActive) {
       return;
     }
 
@@ -146,7 +203,7 @@ export function AdminWorkspace({
     }, 5000);
 
     return () => window.clearInterval(timer);
-  }, [loadLatestRun, syncRunIsActive]);
+  }, [loadLatestRun, syncTrackingIsActive]);
 
   function formatSnapshotDate(value: string) {
     const date = new Date(value);
@@ -263,12 +320,18 @@ export function AdminWorkspace({
       });
       const payload = (await response.json().catch(() => ({}))) as {
         dispatched?: boolean;
+        dispatchMarker?: StaticGalleryDispatchMarker | null;
         error?: string;
         run?: StaticGallerySyncRun | null;
       };
 
       if (response.status === 409 && payload.run) {
-        applyLatestRun(payload.run);
+        applyLatestRun(payload.run, payload.dispatchMarker ?? null);
+        return;
+      }
+
+      if (response.status === 409 && payload.dispatchMarker) {
+        applyLatestRun(null, payload.dispatchMarker);
         return;
       }
 
@@ -284,6 +347,8 @@ export function AdminWorkspace({
           message: "동기화할 수정 사항이 없습니다"
         });
       } else {
+        setDispatchMarker(payload.dispatchMarker ?? null);
+        setSyncRun(null);
         setSyncStatus({
           kind: "info",
           message: "동기화 작업을 시작했습니다. 실행 상태를 확인하는 중입니다."
@@ -291,6 +356,10 @@ export function AdminWorkspace({
         await loadLatestRun();
       }
     } catch (error) {
+      if (!mountedRef.current) {
+        return;
+      }
+
       setSyncStatus({
         kind: "error",
         message:
@@ -299,7 +368,9 @@ export function AdminWorkspace({
             : "동기화 작업을 시작하지 못했습니다."
       });
     } finally {
-      setSyncPending(false);
+      if (mountedRef.current) {
+        setSyncPending(false);
+      }
     }
   }
 
@@ -324,7 +395,11 @@ export function AdminWorkspace({
           <div className="admin-header-actions">
             <button
               className="admin-secondary-button"
-              disabled={syncPending || syncSummary.pendingCount === 0 || syncRunIsActive}
+              disabled={
+                syncPending ||
+                syncSummary.pendingCount === 0 ||
+                syncTrackingIsActive
+              }
               onClick={handleStaticGallerySync}
               type="button"
             >

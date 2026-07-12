@@ -22,6 +22,13 @@ export interface StaticGallerySyncRun {
   updatedAt: string | null;
 }
 
+export interface StaticGalleryDispatchMarker {
+  id: string;
+  requestedAt: string;
+  leaseExpiresAt: string;
+  runId: number | null;
+}
+
 export const ACTIVE_WORKFLOW_STATUSES = new Set([
   "queued",
   "in_progress",

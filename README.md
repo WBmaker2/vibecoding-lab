@@ -96,6 +96,8 @@ POSTGRES_URL=... npm run apps:import:backup -- ./tmp/backups/<backup-file>.json
 
 관리자 로그인 후 `/api/admin/backup`으로도 최신 앱 목록 JSON을 내보낼 수 있습니다.
 
+동기화 요청의 cross-instance 중복 방지 lease와 dispatch marker는 `POSTGRES_URL`에 연결된 `static_gallery_sync_leases` 테이블에 저장됩니다. 이 테이블은 동기화 상태 조회 또는 시작 시 `CREATE TABLE IF NOT EXISTS`로 안전하게 보장되므로 별도의 운영 수동 migration이 필요하지 않습니다. lease는 30분 후 만료되며 GitHub 상태 조회나 dispatch 실패 시 즉시 해제됩니다. 저장되는 lease token은 서버에서만 사용하고 관리자 API에는 marker ID, 요청 시각, 만료 시각, 확인된 workflow run ID만 반환합니다.
+
 ## 정적 공개 갤러리 동기화
 
 공개 첫 화면은 Vercel 사용량을 줄이기 위해 DB를 직접 읽지 않고 `src/data/public-apps.json`과 `public/app-thumbnails/`에 커밋된 정적 파일을 사용합니다. 관리자 페이지에서 앱을 등록, 수정, 삭제하면 DB의 관리자 목록은 즉시 바뀌지만 공개 페이지에는 아직 반영되지 않습니다.

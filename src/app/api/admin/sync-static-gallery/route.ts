@@ -2,13 +2,21 @@ import { NextResponse } from "next/server";
 import { hasAdminSession } from "@/lib/auth/session";
 import { getAppRepository } from "@/lib/apps/repository";
 import {
-  getStaticGalleryBaseline
-} from "@/lib/apps/static-public-apps";
+  acquireStaticGallerySyncLease,
+  getActiveStaticGallerySyncLease,
+  releaseStaticGallerySyncLease,
+  setStaticGallerySyncPreviousRun,
+  setStaticGallerySyncRun,
+  toPublicStaticGalleryDispatchMarker,
+  type StaticGallerySyncLease
+} from "@/lib/apps/static-gallery-sync-lease";
 import {
   ACTIVE_WORKFLOW_STATUSES,
   getStaticGallerySyncSummary,
+  type StaticGalleryDispatchMarker,
   type StaticGallerySyncRun
 } from "@/lib/apps/static-gallery-sync-state";
+import { getStaticGalleryBaseline } from "@/lib/apps/static-public-apps";
 
 const DEFAULT_GITHUB_OWNER = "WBmaker2";
 const DEFAULT_GITHUB_REPO = "vibecoding-lab";
@@ -46,7 +54,11 @@ function stringOrNull(value: unknown): string | null {
 }
 
 function normalizeWorkflowRun(value: unknown): StaticGallerySyncRun | null {
-  if (!isRecord(value) || typeof value.id !== "number" || !Number.isFinite(value.id)) {
+  if (
+    !isRecord(value) ||
+    typeof value.id !== "number" ||
+    !Number.isSafeInteger(value.id)
+  ) {
     return null;
   }
 
@@ -64,15 +76,19 @@ function workflowRunsUrl(config: GitHubConfig): string {
   const params = new URLSearchParams({
     branch: config.ref,
     event: "workflow_dispatch",
-    per_page: "1"
+    per_page: "10"
   });
 
   return `https://api.github.com/repos/${config.owner}/${config.repo}/actions/workflows/${config.workflowId}/runs?${params.toString()}`;
 }
 
-async function getLatestWorkflowRun(
+function workflowDispatchUrl(config: GitHubConfig): string {
+  return `https://api.github.com/repos/${config.owner}/${config.repo}/actions/workflows/${config.workflowId}/dispatches`;
+}
+
+async function getWorkflowRuns(
   config: GitHubConfig
-): Promise<StaticGallerySyncRun | null> {
+): Promise<StaticGallerySyncRun[]> {
   const response = await fetch(workflowRunsUrl(config), {
     method: "GET",
     cache: "no-store",
@@ -88,17 +104,45 @@ async function getLatestWorkflowRun(
   }
 
   const payload = (await response.json()) as { workflow_runs?: unknown };
-  const firstRun = Array.isArray(payload.workflow_runs)
-    ? payload.workflow_runs[0]
-    : null;
 
-  return normalizeWorkflowRun(firstRun);
+  return Array.isArray(payload.workflow_runs)
+    ? payload.workflow_runs
+        .map(normalizeWorkflowRun)
+        .filter((run): run is StaticGallerySyncRun => run !== null)
+    : [];
 }
 
-async function getSyncSummary() {
-  const repo = getAppRepository();
-  const apps = await repo.listAdminApps();
-  return getStaticGallerySyncSummary(apps, getStaticGalleryBaseline());
+function getLatestWorkflowRun(
+  runs: StaticGallerySyncRun[]
+): StaticGallerySyncRun | null {
+  return runs[0] ?? null;
+}
+
+function getRequestedWorkflowRun(
+  runs: StaticGallerySyncRun[],
+  lease: StaticGallerySyncLease
+): StaticGallerySyncRun | null {
+  if (lease.runId !== null) {
+    return runs.find((run) => run.id === lease.runId) ?? null;
+  }
+
+  const requestedAt = Date.parse(lease.requestedAt);
+
+  if (!Number.isFinite(requestedAt)) {
+    return null;
+  }
+
+  return (
+    runs.find((run) => {
+      const createdAt = run.createdAt ? Date.parse(run.createdAt) : Number.NaN;
+
+      return (
+        run.id !== lease.previousRunId &&
+        Number.isFinite(createdAt) &&
+        createdAt >= requestedAt
+      );
+    }) ?? null
+  );
 }
 
 async function getReason(request: Request) {
@@ -115,6 +159,7 @@ async function getReason(request: Request) {
 function configurationError() {
   return NextResponse.json(
     {
+      code: "SYNC_GITHUB_NOT_CONFIGURED",
       error:
         "GitHub workflow dispatch is not configured. Set HVC_SYNC_GITHUB_TOKEN."
     },
@@ -122,11 +167,52 @@ function configurationError() {
   );
 }
 
+function summaryError() {
+  return NextResponse.json(
+    {
+      code: "SYNC_SUMMARY_UNAVAILABLE",
+      error: "동기화할 앱 목록을 확인하지 못했습니다."
+    },
+    { status: 503 }
+  );
+}
+
+function leaseError() {
+  return NextResponse.json(
+    {
+      code: "SYNC_LEASE_UNAVAILABLE",
+      error: "동기화 중복 방지 잠금을 사용할 수 없습니다."
+    },
+    { status: 503 }
+  );
+}
+
 function statusError() {
   return NextResponse.json(
-    { error: "GitHub Actions 실행 상태를 확인하지 못했습니다." },
+    {
+      code: "SYNC_STATUS_UNAVAILABLE",
+      error: "GitHub Actions 실행 상태를 확인하지 못했습니다."
+    },
     { status: 502 }
   );
+}
+
+function dispatchError(status: number) {
+  return NextResponse.json(
+    {
+      code: "SYNC_DISPATCH_FAILED",
+      error: `GitHub workflow dispatch failed with status ${status}.`
+    },
+    { status: 502 }
+  );
+}
+
+async function releaseSafely(leaseToken: string) {
+  try {
+    await releaseStaticGallerySyncLease(leaseToken);
+  } catch {
+    // Preserve the original failure response; the bounded lease remains the fallback.
+  }
 }
 
 export async function GET() {
@@ -140,11 +226,49 @@ export async function GET() {
     return configurationError();
   }
 
+  let lease: StaticGallerySyncLease | null;
+
   try {
-    return NextResponse.json({ run: await getLatestWorkflowRun(config) });
+    lease = await getActiveStaticGallerySyncLease();
+  } catch {
+    return leaseError();
+  }
+
+  let runs: StaticGallerySyncRun[];
+
+  try {
+    runs = await getWorkflowRuns(config);
   } catch {
     return statusError();
   }
+
+  const run = lease
+    ? getRequestedWorkflowRun(runs, lease)
+    : getLatestWorkflowRun(runs);
+
+  if (lease && run && lease.runId !== run.id) {
+    try {
+      lease = (await setStaticGallerySyncRun(lease.leaseToken, run.id)) ?? lease;
+    } catch {
+      return leaseError();
+    }
+  }
+
+  const dispatchMarker: StaticGalleryDispatchMarker | null = lease
+    ? toPublicStaticGalleryDispatchMarker(lease)
+    : null;
+
+  if (
+    lease &&
+    run &&
+    lease.runId === run.id &&
+    run.status === "completed" &&
+    run.conclusion
+  ) {
+    await releaseSafely(lease.leaseToken);
+  }
+
+  return NextResponse.json({ run, dispatchMarker });
 }
 
 export async function POST(request: Request) {
@@ -152,7 +276,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const summary = await getSyncSummary();
+  let summary: Awaited<ReturnType<typeof getStaticGallerySyncSummary>>;
+
+  try {
+    const repo = getAppRepository();
+    const apps = await repo.listAdminApps();
+    summary = getStaticGallerySyncSummary(apps, getStaticGalleryBaseline());
+  } catch {
+    return summaryError();
+  }
 
   if (summary.pendingCount === 0) {
     return NextResponse.json({ dispatched: false });
@@ -164,28 +296,55 @@ export async function POST(request: Request) {
     return configurationError();
   }
 
-  let latestRun: StaticGallerySyncRun | null;
+  let lease: StaticGallerySyncLease | null;
 
   try {
-    latestRun = await getLatestWorkflowRun(config);
+    lease = await acquireStaticGallerySyncLease();
   } catch {
-    return statusError();
+    return leaseError();
   }
 
-  if (latestRun?.status && ACTIVE_WORKFLOW_STATUSES.has(latestRun.status)) {
+  if (!lease) {
+    let activeLease: StaticGallerySyncLease | null = null;
+
+    try {
+      activeLease = await getActiveStaticGallerySyncLease();
+    } catch {
+      return leaseError();
+    }
+
     return NextResponse.json(
       {
-        error: "이미 실행 중인 동기화 작업이 있습니다.",
-        run: latestRun
+        code: "SYNC_ALREADY_REQUESTED",
+        dispatchMarker: activeLease
+          ? toPublicStaticGalleryDispatchMarker(activeLease)
+          : null,
+        error: "이미 동기화 작업이 요청되었거나 실행 중입니다."
       },
       { status: 409 }
     );
   }
 
-  const reason = await getReason(request);
-  const response = await fetch(
-    `https://api.github.com/repos/${config.owner}/${config.repo}/actions/workflows/${config.workflowId}/dispatches`,
-    {
+  try {
+    const runs = await getWorkflowRuns(config);
+    const latestRun = getLatestWorkflowRun(runs);
+
+    if (latestRun?.status && ACTIVE_WORKFLOW_STATUSES.has(latestRun.status)) {
+      await releaseStaticGallerySyncLease(lease.leaseToken);
+
+      return NextResponse.json(
+        {
+          code: "SYNC_ALREADY_RUNNING",
+          error: "이미 실행 중인 동기화 작업이 있습니다.",
+          run: latestRun
+        },
+        { status: 409 }
+      );
+    }
+
+    await setStaticGallerySyncPreviousRun(lease.leaseToken, latestRun?.id ?? null);
+
+    const response = await fetch(workflowDispatchUrl(config), {
       method: "POST",
       headers: {
         accept: "application/vnd.github+json",
@@ -197,20 +356,25 @@ export async function POST(request: Request) {
         ref: config.ref,
         inputs: {
           base_url: config.baseUrl,
-          reason
+          reason: await getReason(request)
         }
       })
-    }
-  );
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      await releaseStaticGallerySyncLease(lease.leaseToken);
+      return dispatchError(response.status);
+    }
+
     return NextResponse.json(
       {
-        error: `GitHub workflow dispatch failed with status ${response.status}.`
+        dispatched: true,
+        dispatchMarker: toPublicStaticGalleryDispatchMarker(lease)
       },
-      { status: 502 }
+      { status: 202 }
     );
+  } catch {
+    await releaseSafely(lease.leaseToken);
+    return statusError();
   }
-
-  return NextResponse.json({ dispatched: true }, { status: 202 });
 }
