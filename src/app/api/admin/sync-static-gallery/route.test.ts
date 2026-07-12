@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const {
   acquireStaticGallerySyncLeaseMock,
@@ -59,7 +59,12 @@ vi.mock("@/lib/apps/static-gallery-sync-state", () => ({
   getStaticGallerySyncSummary: getStaticGallerySyncSummaryMock
 }));
 
-import { GET, POST } from "./route";
+import {
+  GET,
+  GITHUB_DISPATCH_TIMEOUT_MS,
+  GITHUB_STATUS_TIMEOUT_MS,
+  POST
+} from "./route";
 
 const originalEnv = { ...process.env };
 const summary = {
@@ -85,11 +90,44 @@ const publicMarker = {
   runId: null
 };
 
+function uncertainPayload(
+  uncertainty: "commit" | "github-server" | "transport"
+) {
+  return {
+    code: "SYNC_DISPATCH_UNCERTAIN",
+    dispatched: true,
+    dispatchMarker: publicMarker,
+    error:
+      "GitHub 동기화 요청 결과를 확정하지 못했습니다. 실행 상태를 확인합니다.",
+    outcome: "uncertain",
+    uncertainty
+  };
+}
+
 function request(method: "GET" | "POST" = "POST") {
   return new Request("http://localhost/api/admin/sync-static-gallery", {
     method,
     body: method === "POST" ? JSON.stringify({ reason: "button click" }) : undefined
   });
+}
+
+function rejectWhenAborted(init?: RequestInit): Promise<Response> {
+  return new Promise((_, reject) => {
+    const abort = () => reject(new DOMException("aborted", "AbortError"));
+
+    if (init?.signal?.aborted) {
+      abort();
+      return;
+    }
+
+    init?.signal?.addEventListener("abort", abort, { once: true });
+  });
+}
+
+async function flushAsyncWork() {
+  for (let index = 0; index < 30; index += 1) {
+    await Promise.resolve();
+  }
 }
 
 describe("/api/admin/sync-static-gallery", () => {
@@ -131,10 +169,19 @@ describe("/api/admin/sync-static-gallery", () => {
           leaseExpiresAt: "2026-07-10T04:00:00.000Z"
         };
 
-        return {
-          lease: renewedLease,
-          result: await dispatch(renewedLease)
-        };
+        try {
+          return {
+            status: "completed",
+            lease: renewedLease,
+            result: await dispatch(renewedLease)
+          };
+        } catch {
+          return {
+            status: "dispatch_uncertain",
+            phase: "transport",
+            lease: renewedLease
+          };
+        }
       }
     );
     setStaticGallerySyncRunMock.mockImplementation(async (token: string, runId: number) => ({
@@ -148,6 +195,10 @@ describe("/api/admin/sync-static-gallery", () => {
       leaseExpiresAt: value.leaseExpiresAt,
       runId: value.runId
     }));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it("rejects unauthenticated GET before repository or GitHub work", async () => {
@@ -295,7 +346,9 @@ describe("/api/admin/sync-static-gallery", () => {
   it("rejects a stale lease owner before GitHub dispatch", async () => {
     hasAdminSessionMock.mockResolvedValue(true);
     process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
-    withStaticGallerySyncLeaseDispatchFenceMock.mockResolvedValue(null);
+    withStaticGallerySyncLeaseDispatchFenceMock.mockResolvedValue({
+      status: "ownership_lost"
+    });
     const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
       new Response(JSON.stringify({ workflow_runs: [] }), { status: 200 })
     );
@@ -311,6 +364,27 @@ describe("/api/admin/sync-static-gallery", () => {
     expect(
       fetchMock.mock.calls.filter(([, init]) => init?.method === "POST")
     ).toHaveLength(0);
+  });
+
+  it("fails fast when the final advisory lock is unavailable", async () => {
+    hasAdminSessionMock.mockResolvedValue(true);
+    process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
+    withStaticGallerySyncLeaseDispatchFenceMock.mockResolvedValue({
+      status: "lock_unavailable"
+    });
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ workflow_runs: [] }), { status: 200 })
+    );
+
+    const response = await POST(request());
+
+    expect(response.status).toBe(409);
+    expect(await response.json()).toEqual({
+      code: "SYNC_LEASE_BUSY",
+      error: "다른 동기화 요청이 잠금을 확인 중입니다. 잠시 후 다시 시도해 주세요."
+    });
+    expect(fetchMock).toHaveBeenCalledOnce();
+    expect(releaseStaticGallerySyncLeaseMock).not.toHaveBeenCalled();
   });
 
   it("dispatches only once when two changed POST calls race", async () => {
@@ -351,7 +425,69 @@ describe("/api/admin/sync-static-gallery", () => {
     );
   });
 
-  it("releases the lease when GitHub rejects the dispatch", async () => {
+  it("aborts a timed-out pre-dispatch status check and releases the lease", async () => {
+    vi.useFakeTimers();
+    hasAdminSessionMock.mockResolvedValue(true);
+    process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
+    const fetchMock = vi
+      .spyOn(globalThis, "fetch")
+      .mockImplementation((_input, init) => rejectWhenAborted(init));
+
+    const responsePromise = POST(request());
+    await flushAsyncWork();
+    expect(fetchMock).toHaveBeenCalledOnce();
+    await vi.advanceTimersByTimeAsync(GITHUB_STATUS_TIMEOUT_MS);
+    const response = await responsePromise;
+
+    expect(response.status).toBe(502);
+    expect(await response.json()).toEqual({
+      code: "SYNC_STATUS_UNAVAILABLE",
+      error: "GitHub Actions 실행 상태를 확인하지 못했습니다."
+    });
+    expect(releaseStaticGallerySyncLeaseMock).toHaveBeenCalledWith(
+      lease.leaseToken
+    );
+  });
+
+  it("preserves the marker when dispatch times out ambiguously", async () => {
+    vi.useFakeTimers();
+    hasAdminSessionMock.mockResolvedValue(true);
+    process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
+    const fetchMock = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify({ workflow_runs: [] }), { status: 200 })
+      )
+      .mockImplementationOnce((_input, init) => rejectWhenAborted(init));
+
+    const responsePromise = POST(request());
+    await flushAsyncWork();
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    await vi.advanceTimersByTimeAsync(GITHUB_DISPATCH_TIMEOUT_MS);
+    const response = await responsePromise;
+
+    expect(response.status).toBe(202);
+    expect(await response.json()).toEqual(uncertainPayload("transport"));
+    expect(releaseStaticGallerySyncLeaseMock).not.toHaveBeenCalled();
+  });
+
+  it("preserves the marker when dispatch fails with a network ambiguity", async () => {
+    hasAdminSessionMock.mockResolvedValue(true);
+    process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify({ workflow_runs: [] }), { status: 200 })
+      )
+      .mockRejectedValueOnce(new TypeError("socket closed"));
+
+    const response = await POST(request());
+
+    expect(response.status).toBe(202);
+    expect(await response.json()).toEqual(uncertainPayload("transport"));
+    expect(releaseStaticGallerySyncLeaseMock).not.toHaveBeenCalled();
+  });
+
+  it("preserves the marker for an ambiguous GitHub 5xx", async () => {
     hasAdminSessionMock.mockResolvedValue(true);
     process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
     vi.spyOn(globalThis, "fetch")
@@ -360,14 +496,69 @@ describe("/api/admin/sync-static-gallery", () => {
 
     const response = await POST(request());
 
+    expect(response.status).toBe(202);
+    expect(await response.json()).toEqual(uncertainPayload("github-server"));
+    expect(releaseStaticGallerySyncLeaseMock).not.toHaveBeenCalled();
+  });
+
+  it("releases the lease for an explicit GitHub 4xx rejection", async () => {
+    hasAdminSessionMock.mockResolvedValue(true);
+    process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify({ workflow_runs: [] }), { status: 200 })
+      )
+      .mockResolvedValueOnce(new Response(null, { status: 422 }));
+
+    const response = await POST(request());
+
     expect(response.status).toBe(502);
     expect(await response.json()).toEqual({
-      code: "SYNC_DISPATCH_FAILED",
-      error: "GitHub workflow dispatch failed with status 500."
+      code: "SYNC_DISPATCH_REJECTED",
+      error: "GitHub workflow dispatch was rejected with status 422.",
+      outcome: "rejected"
     });
     expect(releaseStaticGallerySyncLeaseMock).toHaveBeenCalledWith(
       lease.leaseToken
     );
+  });
+
+  it("preserves the marker when accepted dispatch is followed by commit failure", async () => {
+    hasAdminSessionMock.mockResolvedValue(true);
+    process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
+    withStaticGallerySyncLeaseDispatchFenceMock.mockImplementation(
+      async (
+        token: string,
+        previousRunId: number | null,
+        dispatch: (renewedLease: typeof lease) => Promise<Response>
+      ) => {
+        const renewedLease = {
+          ...lease,
+          leaseToken: token,
+          previousRunId,
+          leaseExpiresAt: publicMarker.leaseExpiresAt
+        };
+        const result = await dispatch(renewedLease);
+
+        return {
+          status: "dispatch_uncertain",
+          phase: "commit",
+          lease: renewedLease,
+          result
+        };
+      }
+    );
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify({ workflow_runs: [] }), { status: 200 })
+      )
+      .mockResolvedValueOnce(new Response(null, { status: 204 }));
+
+    const response = await POST(request());
+
+    expect(response.status).toBe(202);
+    expect(await response.json()).toEqual(uncertainPayload("commit"));
+    expect(releaseStaticGallerySyncLeaseMock).not.toHaveBeenCalled();
   });
 
   it("returns a structured summary error when Postgres-backed app loading fails", async () => {

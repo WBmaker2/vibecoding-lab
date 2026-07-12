@@ -8,6 +8,7 @@ import {
   setStaticGallerySyncRun,
   toPublicStaticGalleryDispatchMarker,
   withStaticGallerySyncLeaseDispatchFence,
+  type StaticGallerySyncDispatchFenceResult,
   type StaticGallerySyncLease
 } from "@/lib/apps/static-gallery-sync-lease";
 import {
@@ -23,6 +24,8 @@ const DEFAULT_GITHUB_REPO = "vibecoding-lab";
 const DEFAULT_WORKFLOW_ID = "sync-static-gallery.yml";
 const DEFAULT_SYNC_REF = "codex/hongs-vibe-coding-lab";
 const DEFAULT_BASE_URL = "https://www.vivehong.shop";
+export const GITHUB_STATUS_TIMEOUT_MS = 8_000;
+export const GITHUB_DISPATCH_TIMEOUT_MS = 12_000;
 
 interface GitHubConfig {
   token: string | undefined;
@@ -86,18 +89,40 @@ function workflowDispatchUrl(config: GitHubConfig): string {
   return `https://api.github.com/repos/${config.owner}/${config.repo}/actions/workflows/${config.workflowId}/dispatches`;
 }
 
+async function fetchWithTimeout(
+  input: Parameters<typeof fetch>[0],
+  init: RequestInit,
+  timeoutMs: number
+): Promise<Response> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(input, {
+      ...init,
+      signal: controller.signal
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function getWorkflowRuns(
   config: GitHubConfig
 ): Promise<StaticGallerySyncRun[]> {
-  const response = await fetch(workflowRunsUrl(config), {
-    method: "GET",
-    cache: "no-store",
-    headers: {
-      accept: "application/vnd.github+json",
-      authorization: `Bearer ${config.token}`,
-      "x-github-api-version": "2022-11-28"
-    }
-  });
+  const response = await fetchWithTimeout(
+    workflowRunsUrl(config),
+    {
+      method: "GET",
+      cache: "no-store",
+      headers: {
+        accept: "application/vnd.github+json",
+        authorization: `Bearer ${config.token}`,
+        "x-github-api-version": "2022-11-28"
+      }
+    },
+    GITHUB_STATUS_TIMEOUT_MS
+  );
 
   if (!response.ok) {
     throw new Error(`GitHub workflow status failed with status ${response.status}.`);
@@ -199,6 +224,16 @@ function leaseOwnershipLostError() {
   );
 }
 
+function leaseBusyError() {
+  return NextResponse.json(
+    {
+      code: "SYNC_LEASE_BUSY",
+      error: "다른 동기화 요청이 잠금을 확인 중입니다. 잠시 후 다시 시도해 주세요."
+    },
+    { status: 409 }
+  );
+}
+
 function statusError() {
   return NextResponse.json(
     {
@@ -209,13 +244,32 @@ function statusError() {
   );
 }
 
-function dispatchError(status: number) {
+function dispatchRejectedError(status: number) {
   return NextResponse.json(
     {
-      code: "SYNC_DISPATCH_FAILED",
-      error: `GitHub workflow dispatch failed with status ${status}.`
+      code: "SYNC_DISPATCH_REJECTED",
+      error: `GitHub workflow dispatch was rejected with status ${status}.`,
+      outcome: "rejected"
     },
     { status: 502 }
+  );
+}
+
+function dispatchUncertainResponse(
+  lease: StaticGallerySyncLease,
+  uncertainty: "commit" | "github-server" | "transport"
+) {
+  return NextResponse.json(
+    {
+      code: "SYNC_DISPATCH_UNCERTAIN",
+      dispatched: true,
+      dispatchMarker: toPublicStaticGalleryDispatchMarker(lease),
+      error:
+        "GitHub 동기화 요청 결과를 확정하지 못했습니다. 실행 상태를 확인합니다.",
+      outcome: "uncertain",
+      uncertainty
+    },
+    { status: 202 }
   );
 }
 
@@ -337,58 +391,79 @@ export async function POST(request: Request) {
     );
   }
 
+  let latestRun: StaticGallerySyncRun | null;
+
   try {
-    const runs = await getWorkflowRuns(config);
-    const latestRun = getLatestWorkflowRun(runs);
+    latestRun = getLatestWorkflowRun(await getWorkflowRuns(config));
+  } catch {
+    await releaseSafely(lease.leaseToken);
+    return statusError();
+  }
 
-    if (latestRun?.status && ACTIVE_WORKFLOW_STATUSES.has(latestRun.status)) {
-      await releaseStaticGallerySyncLease(lease.leaseToken);
+  if (latestRun?.status && ACTIVE_WORKFLOW_STATUSES.has(latestRun.status)) {
+    await releaseSafely(lease.leaseToken);
 
-      return NextResponse.json(
-        {
-          code: "SYNC_ALREADY_RUNNING",
-          error: "이미 실행 중인 동기화 작업이 있습니다.",
-          run: latestRun
-        },
-        { status: 409 }
-      );
-    }
+    return NextResponse.json(
+      {
+        code: "SYNC_ALREADY_RUNNING",
+        error: "이미 실행 중인 동기화 작업이 있습니다.",
+        run: latestRun
+      },
+      { status: 409 }
+    );
+  }
 
-    const reason = await getReason(request);
-    const fencedDispatch = await withStaticGallerySyncLeaseDispatchFence(
+  const reason = await getReason(request);
+  let fencedDispatch: StaticGallerySyncDispatchFenceResult<Response>;
+
+  try {
+    fencedDispatch = await withStaticGallerySyncLeaseDispatchFence(
       lease.leaseToken,
       latestRun?.id ?? null,
       async () =>
-        fetch(workflowDispatchUrl(config), {
-          method: "POST",
-          headers: {
-            accept: "application/vnd.github+json",
-            authorization: `Bearer ${config.token}`,
-            "content-type": "application/json",
-            "x-github-api-version": "2022-11-28"
+        fetchWithTimeout(
+          workflowDispatchUrl(config),
+          {
+            method: "POST",
+            headers: {
+              accept: "application/vnd.github+json",
+              authorization: `Bearer ${config.token}`,
+              "content-type": "application/json",
+              "x-github-api-version": "2022-11-28"
+            },
+            body: JSON.stringify({
+              ref: config.ref,
+              inputs: {
+                base_url: config.baseUrl,
+                reason
+              }
+            })
           },
-          body: JSON.stringify({
-            ref: config.ref,
-            inputs: {
-              base_url: config.baseUrl,
-              reason
-            }
-          })
-        })
+          GITHUB_DISPATCH_TIMEOUT_MS
+        )
     );
+  } catch {
+    await releaseSafely(lease.leaseToken);
+    return leaseError();
+  }
 
-    if (!fencedDispatch) {
-      return leaseOwnershipLostError();
-    }
+  if (fencedDispatch.status === "ownership_lost") {
+    return leaseOwnershipLostError();
+  }
 
-    lease = fencedDispatch.lease;
-    const response = fencedDispatch.result;
+  if (fencedDispatch.status === "lock_unavailable") {
+    return leaseBusyError();
+  }
 
-    if (!response.ok) {
-      await releaseStaticGallerySyncLease(lease.leaseToken);
-      return dispatchError(response.status);
-    }
+  lease = fencedDispatch.lease;
 
+  if (fencedDispatch.status === "dispatch_uncertain") {
+    return dispatchUncertainResponse(lease, fencedDispatch.phase);
+  }
+
+  const response = fencedDispatch.result;
+
+  if (response.ok) {
     return NextResponse.json(
       {
         dispatched: true,
@@ -396,8 +471,12 @@ export async function POST(request: Request) {
       },
       { status: 202 }
     );
-  } catch {
-    await releaseSafely(lease.leaseToken);
-    return statusError();
   }
+
+  if (response.status >= 400 && response.status < 500) {
+    await releaseSafely(lease.leaseToken);
+    return dispatchRejectedError(response.status);
+  }
+
+  return dispatchUncertainResponse(lease, "github-server");
 }

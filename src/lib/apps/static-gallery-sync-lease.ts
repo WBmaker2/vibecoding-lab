@@ -20,6 +20,30 @@ interface LeaseRow {
   run_id: number | bigint | null;
 }
 
+interface AdvisoryLockRow {
+  locked: boolean;
+}
+
+export type StaticGallerySyncDispatchFenceResult<T> =
+  | {
+      status: "completed";
+      lease: StaticGallerySyncLease;
+      result: T;
+    }
+  | {
+      status: "dispatch_uncertain";
+      phase: "commit";
+      lease: StaticGallerySyncLease;
+      result: T;
+    }
+  | {
+      status: "dispatch_uncertain";
+      phase: "transport";
+      lease: StaticGallerySyncLease;
+    }
+  | { status: "lock_unavailable" }
+  | { status: "ownership_lost" };
+
 async function ensureLeaseTable(db = getDb()) {
   await db.execute(sql`
     CREATE TABLE IF NOT EXISTS static_gallery_sync_leases (
@@ -83,9 +107,15 @@ export async function acquireStaticGallerySyncLease(): Promise<StaticGallerySync
   const markerId = randomUUID();
 
   return db.transaction(async (transaction) => {
-    await transaction.execute(sql`
-      SELECT pg_advisory_xact_lock(hashtext(${LEASE_KEY})::bigint)
+    const lockResult = await transaction.execute(sql`
+      SELECT pg_try_advisory_xact_lock(hashtext(${LEASE_KEY})::bigint) AS locked
     `);
+    const lockRow = (lockResult as unknown as AdvisoryLockRow[])[0];
+
+    if (lockRow?.locked !== true) {
+      return null;
+    }
+
     const result = await transaction.execute(sql`
       INSERT INTO static_gallery_sync_leases (
         lease_key,
@@ -140,14 +170,20 @@ export async function withStaticGallerySyncLeaseDispatchFence<T>(
   leaseToken: string,
   previousRunId: number | null,
   dispatch: (lease: StaticGallerySyncLease) => Promise<T>
-): Promise<{ lease: StaticGallerySyncLease; result: T } | null> {
+): Promise<StaticGallerySyncDispatchFenceResult<T>> {
   const db = getDb();
   await ensureLeaseTable(db);
 
-  return db.transaction(async (transaction) => {
-    await transaction.execute(sql`
-      SELECT pg_advisory_xact_lock(hashtext(${LEASE_KEY})::bigint)
+  const prepared = await db.transaction(async (transaction) => {
+    const lockResult = await transaction.execute(sql`
+      SELECT pg_try_advisory_xact_lock(hashtext(${LEASE_KEY})::bigint) AS locked
     `);
+    const lockRow = (lockResult as unknown as AdvisoryLockRow[])[0];
+
+    if (lockRow?.locked !== true) {
+      return { status: "lock_unavailable" } as const;
+    }
+
     const result = await transaction.execute(sql`
       UPDATE static_gallery_sync_leases
       SET
@@ -161,16 +197,81 @@ export async function withStaticGallerySyncLeaseDispatchFence<T>(
     const row = (result as unknown as LeaseRow[])[0];
 
     if (!row) {
-      return null;
+      return { status: "ownership_lost" } as const;
     }
 
-    const lease = fromRow(row);
+    return {
+      status: "prepared",
+      lease: fromRow(row)
+    } as const;
+  });
+
+  if (prepared.status !== "prepared") {
+    return prepared;
+  }
+
+  let dispatchStarted = false;
+  let dispatchCompleted = false;
+  let dispatchResult: T | undefined;
+
+  try {
+    return await db.transaction(async (transaction) => {
+      const lockResult = await transaction.execute(sql`
+        SELECT pg_try_advisory_xact_lock(hashtext(${LEASE_KEY})::bigint) AS locked
+      `);
+      const lockRow = (lockResult as unknown as AdvisoryLockRow[])[0];
+
+      if (lockRow?.locked !== true) {
+        return { status: "lock_unavailable" } as const;
+      }
+
+      const result = await transaction.execute(sql`
+        UPDATE static_gallery_sync_leases
+        SET
+          previous_run_id = ${previousRunId},
+          expires_at = NOW() + (${STATIC_GALLERY_SYNC_LEASE_SECONDS} * INTERVAL '1 second')
+        WHERE lease_key = ${LEASE_KEY}
+          AND lease_token = ${leaseToken}
+          AND expires_at > NOW()
+        RETURNING lease_token, marker_id, requested_at, expires_at, previous_run_id, run_id
+      `);
+      const row = (result as unknown as LeaseRow[])[0];
+
+      if (!row) {
+        return { status: "ownership_lost" } as const;
+      }
+
+      const lease = fromRow(row);
+      dispatchStarted = true;
+      dispatchResult = await dispatch(lease);
+      dispatchCompleted = true;
+
+      return {
+        status: "completed",
+        lease,
+        result: dispatchResult
+      } as const;
+    });
+  } catch (error) {
+    if (!dispatchStarted) {
+      throw error;
+    }
+
+    if (dispatchCompleted) {
+      return {
+        status: "dispatch_uncertain",
+        phase: "commit",
+        lease: prepared.lease,
+        result: dispatchResult as T
+      };
+    }
 
     return {
-      lease,
-      result: await dispatch(lease)
+      status: "dispatch_uncertain",
+      phase: "transport",
+      lease: prepared.lease
     };
-  });
+  }
 }
 
 export async function setStaticGallerySyncRun(
