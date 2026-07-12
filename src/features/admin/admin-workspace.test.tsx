@@ -1,6 +1,8 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import {
+  act,
+  cleanup,
   fireEvent,
   render,
   screen,
@@ -25,6 +27,8 @@ vi.mock("next/navigation", () => ({
 }));
 
 const noopAction = async () => {};
+const originalConsoleError = console.error.bind(console);
+const actWarnings: string[] = [];
 
 const baseline = {
   generatedAt: "2026-07-10T00:00:00.000Z",
@@ -87,11 +91,27 @@ const apps: AdminAppRecord[] = [
 describe("AdminWorkspace", () => {
   beforeEach(() => {
     routerRefreshMock.mockReset();
+    actWarnings.length = 0;
+    vi.spyOn(globalThis, "fetch").mockImplementation(
+      () => new Promise<Response>(() => {})
+    );
+    vi.spyOn(console, "error").mockImplementation((...args) => {
+      originalConsoleError(...args);
+
+      const message = args.map(String).join(" ");
+
+      if (message.includes("not wrapped in act")) {
+        actWarnings.push(message);
+      }
+    });
   });
 
   afterEach(() => {
+    cleanup();
     vi.useRealTimers();
+    const unexpectedActWarnings = [...actWarnings];
     vi.restoreAllMocks();
+    expect(unexpectedActWarnings).toEqual([]);
   });
 
   it("switches the workbench into edit mode when an app card is selected", () => {
@@ -173,7 +193,7 @@ describe("AdminWorkspace", () => {
   });
 
   it("shows no changes and disables sync when the snapshot matches", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+    vi.mocked(globalThis.fetch).mockResolvedValue(
       new Response(JSON.stringify({ run: null }), { status: 200 })
     );
 
@@ -230,19 +250,18 @@ describe("AdminWorkspace", () => {
       updatedAt: "2026-07-10T01:00:00.000Z"
     };
     const completedRun = { ...activeRun, status: "completed", conclusion: "success" };
-    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(
-      async (_input, init) => {
-        if (init?.method === "POST") {
-          return new Response(JSON.stringify({ dispatched: true }), { status: 202 });
-        }
-
-        statusRequestCount += 1;
-        return new Response(
-          JSON.stringify({ run: statusRequestCount === 1 ? null : statusRequestCount === 2 ? activeRun : completedRun }),
-          { status: 200 }
-        );
+    const fetchSpy = vi.mocked(globalThis.fetch);
+    fetchSpy.mockImplementation(async (_input, init) => {
+      if (init?.method === "POST") {
+        return new Response(JSON.stringify({ dispatched: true }), { status: 202 });
       }
-    );
+
+      statusRequestCount += 1;
+      return new Response(
+        JSON.stringify({ run: statusRequestCount === 1 ? null : statusRequestCount === 2 ? activeRun : completedRun }),
+        { status: 200 }
+      );
+    });
 
     render(
       <AdminWorkspace
@@ -257,10 +276,12 @@ describe("AdminWorkspace", () => {
       />
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "수정 사항 동기화" }));
-    await vi.runOnlyPendingTimersAsync();
-    await Promise.resolve();
-    await Promise.resolve();
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "수정 사항 동기화" }));
+      await vi.runOnlyPendingTimersAsync();
+      await Promise.resolve();
+      await Promise.resolve();
+    });
     expect(fetchSpy).toHaveBeenCalledWith(
       "/api/admin/sync-static-gallery",
       expect.objectContaining({ method: "POST" })
@@ -270,17 +291,19 @@ describe("AdminWorkspace", () => {
       activeRun.htmlUrl
     );
 
-    await vi.advanceTimersByTimeAsync(5000);
-    await Promise.resolve();
-    await Promise.resolve();
-    await vi.runOnlyPendingTimersAsync();
-    await Promise.resolve();
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(5000);
+      await Promise.resolve();
+      await Promise.resolve();
+    });
 
     expect(routerRefreshMock).toHaveBeenCalledOnce();
     expect(screen.getByRole("status")).toHaveTextContent("동기화가 완료되었습니다");
     const requestCountAfterCompletion = statusRequestCount;
 
-    await vi.advanceTimersByTimeAsync(5000);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(5000);
+    });
     expect(statusRequestCount).toBe(requestCountAfterCompletion);
   }, 12000);
 
@@ -293,7 +316,7 @@ describe("AdminWorkspace", () => {
       createdAt: "2026-07-10T01:00:00.000Z",
       updatedAt: "2026-07-10T01:00:00.000Z"
     };
-    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+    vi.mocked(globalThis.fetch).mockResolvedValue(
       new Response(JSON.stringify({ run: activeRun }), { status: 200 })
     );
 
@@ -327,7 +350,7 @@ describe("AdminWorkspace", () => {
       createdAt: "2026-07-10T01:00:00.000Z",
       updatedAt: "2026-07-10T01:00:00.000Z"
     };
-    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+    vi.mocked(globalThis.fetch).mockResolvedValue(
       new Response(JSON.stringify({ run: failedRun }), { status: 200 })
     );
 
