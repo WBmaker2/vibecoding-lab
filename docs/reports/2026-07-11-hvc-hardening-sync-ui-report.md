@@ -393,3 +393,58 @@ The only remaining concern is the pre-existing developer-tool audit backlog
 listed above; production dependencies report zero advisories. The request
 history remains intentionally bounded, and an unmatched request now ends in
 retry at its public lease deadline rather than guessing from global history.
+
+
+## Final Admin Sync Generation Race Fix
+
+Date: 2026-07-12
+Fix base: `5fbca6a`
+
+### Delivered Contract
+
+- Admin sync request context now carries a monotonically increasing generation
+  in addition to the public marker ID. The generation advances before any
+  null/marker ID transition is published, including expiry's marker clear.
+- Every `loadLatestRun()` captures both generation and marker ID. A response or
+  rejection can update status, run, storage, or refresh behavior only while
+  both values still match. This preserves the existing active, expired,
+  marker-specific late-response, and late-error protections while closing the
+  markerless `null -> marker -> null` ABA race.
+- The deterministic fake-timer test keeps the initial markerless history GET
+  and a marker status GET deferred, installs the dispatch marker, expires it
+  into retry, then settles both stale operations. Retry text, null run/marker,
+  enabled sync button, stopped polling, and zero timers after unmount all
+  remain unchanged with clean React `act` output.
+
+### Exact RED/GREEN Evidence
+
+- The first fixture run reached the installed marker but stopped on the
+  intentional pending-request label `동기화 시작 중...`; the assertion was
+  corrected to check that disabled label without changing product code.
+- Corrected RED:
+  `npm test -- src/features/admin/admin-workspace.test.tsx -t "invalidates markerless history"`
+  failed 1 test with 19 skipped because the original markerless history
+  response replaced retry with unrelated successful history after expiry.
+- GREEN: the same command passed 1 test with 19 skipped after generation and
+  marker context were both required to match.
+
+### Final Command Evidence
+
+- Admin focused:
+  `npm test -- src/features/admin/admin-workspace.test.tsx` passed 1 file and
+  20 tests.
+- Full Task 5/marker focused:
+  `npm test -- src/lib/apps/static-gallery-sync-state.test.ts src/lib/apps/static-gallery-sync-lease.test.ts src/app/api/admin/sync-static-gallery/route.test.ts src/features/admin/admin-workspace.test.tsx`
+  passed 4 files and 73 tests.
+- `npm run lint`: passed with zero warnings.
+- `npm run test:e2e`: 2 tests passed.
+- `git diff --check`: passed after the report update.
+- `next-env.d.ts` remained exactly on
+  `./.next/dev/types/routes.d.ts`, unstaged and uncommitted; no
+  `tsconfig.tsbuildinfo` was created.
+
+### Operational Boundary
+
+No production DB, GitHub API/dispatch, push, deployment, or other external
+action was run. No remaining concern was found in this narrowly scoped race
+fix.

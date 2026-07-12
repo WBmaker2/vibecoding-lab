@@ -84,6 +84,7 @@ export function AdminWorkspace({
   const [dispatchMarker, setDispatchMarker] =
     useState<StaticGalleryDispatchMarker | null>(null);
   const dispatchMarkerRef = useRef<StaticGalleryDispatchMarker | null>(null);
+  const requestContextGenerationRef = useRef(0);
   const mountedRef = useRef(true);
   const refreshedRunIdRef = useRef<number | null>(null);
 
@@ -118,6 +119,13 @@ export function AdminWorkspace({
 
   const trackDispatchMarker = useCallback(
     (marker: StaticGalleryDispatchMarker | null, persist = true) => {
+      const currentMarkerId = dispatchMarkerRef.current?.id ?? null;
+      const nextMarkerId = marker?.id ?? null;
+
+      if (currentMarkerId !== nextMarkerId) {
+        requestContextGenerationRef.current += 1;
+      }
+
       dispatchMarkerRef.current = marker;
       setDispatchMarker(marker);
 
@@ -249,7 +257,9 @@ export function AdminWorkspace({
       requestedMarker = dispatchMarkerRef.current
     ) => {
       const requestMarkerId = requestedMarker?.id ?? null;
+      const requestContextGeneration = requestContextGenerationRef.current;
       const requestContextIsCurrent = () =>
+        requestContextGenerationRef.current === requestContextGeneration &&
         (dispatchMarkerRef.current?.id ?? null) === requestMarkerId;
 
       if (!requestContextIsCurrent()) {

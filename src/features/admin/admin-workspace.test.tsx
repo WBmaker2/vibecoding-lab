@@ -729,6 +729,147 @@ describe("AdminWorkspace", () => {
     ).toContain(marker.id);
   });
 
+  it("invalidates markerless history across marker install and expiry", async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-07-12T00:00:00.000Z"));
+    const marker = {
+      id: "marker-generation-expiry",
+      requestedAt: "2026-07-12T00:00:00.000Z",
+      leaseExpiresAt: "2026-07-12T00:00:06.000Z",
+      runId: null
+    };
+    const unrelatedRun = {
+      id: 997,
+      status: "completed",
+      conclusion: "success",
+      htmlUrl: "https://github.com/runs/997",
+      createdAt: "2026-07-11T23:00:00.000Z",
+      updatedAt: "2026-07-11T23:00:00.000Z"
+    };
+    let resolveInitialHistory: ((response: Response) => void) | null = null;
+    let rejectMarkerStatus: ((reason: Error) => void) | null = null;
+    let markerStatusRequestCount = 0;
+    const clearIntervalSpy = vi.spyOn(window, "clearInterval");
+    const clearTimeoutSpy = vi.spyOn(window, "clearTimeout");
+    const fetchSpy = vi.mocked(globalThis.fetch);
+    fetchSpy.mockImplementation((input, init) => {
+      if (init?.method === "POST") {
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({ dispatched: true, dispatchMarker: marker }),
+            { status: 202 }
+          )
+        );
+      }
+
+      if (String(input).includes(`request_marker=${marker.id}`)) {
+        markerStatusRequestCount += 1;
+
+        if (markerStatusRequestCount === 1) {
+          return new Promise<Response>((_resolve, reject) => {
+            rejectMarkerStatus = reject;
+          });
+        }
+
+        return new Promise<Response>(() => {});
+      }
+
+      return new Promise<Response>((resolve) => {
+        resolveInitialHistory = resolve;
+      });
+    });
+
+    const view = render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    await act(async () => {
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    expect(resolveInitialHistory).not.toBeNull();
+
+    fireEvent.click(screen.getByRole("button", { name: "수정 사항 동기화" }));
+    await act(async () => {
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+      await vi.advanceTimersByTimeAsync(0);
+    });
+    expect(
+      window.sessionStorage.getItem("hvc-static-gallery-request-marker")
+    ).toContain(marker.id);
+    expect(rejectMarkerStatus).not.toBeNull();
+    expect(
+      screen.getByRole("button", { name: "동기화 시작 중..." })
+    ).toBeDisabled();
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(6001);
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "동기화 요청 확인 시간이 만료되었습니다. 다시 시도해 주세요."
+    );
+    expect(
+      screen.getByRole("button", { name: "수정 사항 동기화" })
+    ).not.toBeDisabled();
+    expect(
+      window.sessionStorage.getItem("hvc-static-gallery-request-marker")
+    ).toBeNull();
+    const requestCountAfterExpiry = fetchSpy.mock.calls.length;
+
+    await act(async () => {
+      resolveInitialHistory?.(
+        new Response(
+          JSON.stringify({ scope: "history", run: unrelatedRun }),
+          { status: 200 }
+        )
+      );
+      rejectMarkerStatus?.(new Error("late marker status failure"));
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+      await vi.advanceTimersByTimeAsync(0);
+    });
+
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "동기화 요청 확인 시간이 만료되었습니다. 다시 시도해 주세요."
+    );
+    expect(screen.queryByText("최근 동기화 실행 기록입니다.")).toBeNull();
+    expect(
+      screen.queryByRole("link", { name: "GitHub Actions에서 보기" })
+    ).toBeNull();
+    expect(
+      window.sessionStorage.getItem("hvc-static-gallery-request-marker")
+    ).toBeNull();
+    expect(
+      screen.getByRole("button", { name: "수정 사항 동기화" })
+    ).not.toBeDisabled();
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(10_000);
+    });
+    expect(fetchSpy).toHaveBeenCalledTimes(requestCountAfterExpiry);
+    expect(clearIntervalSpy).toHaveBeenCalled();
+    expect(clearTimeoutSpy).toHaveBeenCalled();
+    view.unmount();
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
   it("expires an unknown marker into retry and stops every polling timer", async () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-07-12T00:00:00.000Z"));
