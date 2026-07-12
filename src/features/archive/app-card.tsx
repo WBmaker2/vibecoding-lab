@@ -9,6 +9,8 @@ export function AppCard({ app }: AppCardProps) {
   const note = app.memo ?? "";
   const notePreview =
     note.length > 42 ? `${note.slice(0, 42).trimEnd()}…` : note;
+  const visibleTags = app.tags.slice(0, 4);
+  const additionalTagCount = Math.max(0, app.tags.length - visibleTags.length);
 
   return (
     <article className="app-card">
@@ -42,11 +44,16 @@ export function AppCard({ app }: AppCardProps) {
         </div>
 
         <div className="app-card-tags" aria-label={`${app.title} 태그`}>
-          {app.tags.map((tag) => (
+          {visibleTags.map((tag) => (
             <span className="tag-chip tag-chip-static" key={tag}>
               #{tag}
             </span>
           ))}
+          {additionalTagCount > 0 ? (
+            <span className="tag-chip tag-chip-static app-card-tag-overflow">
+              +{additionalTagCount}
+            </span>
+          ) : null}
         </div>
 
         {submeta ? <p className="app-card-submeta">{submeta}</p> : null}
@@ -67,7 +74,8 @@ export function AppCard({ app }: AppCardProps) {
           rel="noreferrer"
           target="_blank"
         >
-          앱 열기
+          <span aria-hidden="true">앱 열기</span>
+          <span className="sr-only">{app.title} 앱 새 창에서 열기</span>
         </a>
       </div>
     </article>

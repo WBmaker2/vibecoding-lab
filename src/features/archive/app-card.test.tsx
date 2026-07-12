@@ -35,9 +35,32 @@ describe("AppCard", () => {
     ).toHaveAttribute("referrerPolicy", "no-referrer");
     expect(screen.getByText("영어 · 초등")).toBeInTheDocument();
     expect(screen.getByText("메이커 노트")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "앱 열기" })).toHaveAttribute(
+    expect(
+      screen.getByRole("link", { name: "Reading Timer 앱 새 창에서 열기" })
+    ).toHaveAttribute(
       "href",
       "https://example.com/reading-timer"
     );
+  });
+
+  it("shows four tags and a compact overflow count", () => {
+    render(
+      <AppCard
+        app={{
+          ...sampleApp,
+          tags: ["읽기", "영어", "교실", "활동", "초등", "타이머"]
+        }}
+      />
+    );
+
+    const tagList = screen.getByLabelText("Reading Timer 태그");
+
+    expect(tagList).toHaveTextContent("#읽기");
+    expect(tagList).toHaveTextContent("#영어");
+    expect(tagList).toHaveTextContent("#교실");
+    expect(tagList).toHaveTextContent("#활동");
+    expect(tagList).toHaveTextContent("+2");
+    expect(tagList).not.toHaveTextContent("#초등");
+    expect(tagList).not.toHaveTextContent("#타이머");
   });
 });

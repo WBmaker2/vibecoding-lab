@@ -1,6 +1,7 @@
 "use client";
 
 import { startTransition, useMemo, useState } from "react";
+import { getRepresentativeTags } from "@/lib/apps/representative-tags";
 import type { PublicAppRecord } from "@/lib/apps/types";
 import { filterApps } from "@/lib/search/filter-apps";
 import { AppCard } from "./app-card";
@@ -21,6 +22,10 @@ export function ArchivePage({ initialApps }: ArchivePageProps) {
       [...new Set(initialApps.flatMap((app) => app.tags))].sort((left, right) =>
         left.localeCompare(right, "ko")
       ),
+    [initialApps]
+  );
+  const representativeTags = useMemo(
+    () => getRepresentativeTags(initialApps),
     [initialApps]
   );
 
@@ -44,7 +49,8 @@ export function ArchivePage({ initialApps }: ArchivePageProps) {
         onQueryChange={setQuery}
         onToggleTag={toggleTag}
         query={query}
-        tags={availableTags}
+        allTags={availableTags}
+        representativeTags={representativeTags}
       />
 
       <section className="archive-results">

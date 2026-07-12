@@ -9,19 +9,17 @@ describe("ArchiveHero", () => {
         onQueryChange={() => {}}
         onToggleTag={() => {}}
         query=""
-        tags={["영어", "업무경감"]}
+        allTags={["과학", "업무경감", "영어"]}
+        representativeTags={["영어", "업무경감"]}
       />
     );
 
-    expect(screen.getByText("Hong's Note")).toBeInTheDocument();
-    expect(screen.queryByText("Hong Note")).not.toBeInTheDocument();
-
     const heroTop = container.querySelector(".archive-hero-top");
-    const noteShell = container.querySelector(".mascot-note-shell");
     const mascotImage = container.querySelector(".archive-hero-mascot-image");
 
     expect(heroTop).toContainElement(mascotImage);
-    expect(noteShell).not.toContainElement(mascotImage);
+    expect(container.querySelector(".mascot-note-shell")).not.toBeInTheDocument();
+    expect(container.querySelector(".hero-frame")).not.toBeInTheDocument();
   });
 
   it("renders the mascot from its direct static asset path", () => {
@@ -31,7 +29,8 @@ describe("ArchiveHero", () => {
         onQueryChange={() => {}}
         onToggleTag={() => {}}
         query=""
-        tags={[]}
+        allTags={[]}
+        representativeTags={[]}
       />
     );
 
@@ -51,7 +50,8 @@ describe("ArchiveHero", () => {
         onQueryChange={() => {}}
         onToggleTag={() => {}}
         query=""
-        tags={["영어", "업무경감"]}
+        allTags={["업무경감", "영어", "과학"]}
+        representativeTags={["영어", "업무경감"]}
       />
     );
 
@@ -59,38 +59,40 @@ describe("ArchiveHero", () => {
     expect(
       screen.getByText("태그를 하나씩 클릭해 원하는 앱을 알아보세요.")
     ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "대표 태그 펼치기" })
-    ).toHaveAttribute("aria-expanded", "false");
-    expect(
-      screen.queryByRole("toolbar", { name: "태그 필터" })
-    ).not.toBeInTheDocument();
+    expect(screen.getByRole("toolbar", { name: "태그 필터" })).toBeVisible();
+    expect(screen.getByRole("button", { name: "#영어" })).toBeVisible();
+    expect(screen.getByRole("button", { name: "모든 태그 보기" })).toHaveAttribute(
+      "aria-expanded",
+      "false"
+    );
   });
 
-  it("toggles representative tags with the arrow button", () => {
+  it("expands and collapses the complete tag set", () => {
     render(
       <ArchiveHero
         activeTags={[]}
         onQueryChange={() => {}}
         onToggleTag={() => {}}
         query=""
-        tags={["영어", "업무경감"]}
+        allTags={["과학", "업무경감", "영어"]}
+        representativeTags={["영어", "업무경감"]}
       />
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "대표 태그 펼치기" }));
+    expect(screen.queryByRole("button", { name: "#과학" })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "모든 태그 보기" }));
 
     expect(
       screen.getByRole("toolbar", { name: "태그 필터" })
     ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "대표 태그 접기" })
-    ).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("button", { name: "#과학" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "모든 태그 접기" })).toHaveAttribute(
+      "aria-expanded",
+      "true"
+    );
 
-    fireEvent.click(screen.getByRole("button", { name: "대표 태그 접기" }));
+    fireEvent.click(screen.getByRole("button", { name: "모든 태그 접기" }));
 
-    expect(
-      screen.queryByRole("toolbar", { name: "태그 필터" })
-    ).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "#과학" })).not.toBeInTheDocument();
   });
 });

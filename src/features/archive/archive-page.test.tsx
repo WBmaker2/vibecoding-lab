@@ -37,7 +37,6 @@ describe("ArchivePage", () => {
   it("shows active filter state and clears it from the results bar", () => {
     render(<ArchivePage initialApps={sampleApps} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "대표 태그 펼치기" }));
     fireEvent.click(screen.getByRole("button", { name: "#영어" }));
     fireEvent.change(screen.getByRole("searchbox", { name: "앱 검색" }), {
       target: { value: "형성평가" }
@@ -60,8 +59,6 @@ describe("ArchivePage", () => {
 
   it("keeps only one representative tag selected at a time", () => {
     render(<ArchivePage initialApps={sampleApps} />);
-
-    fireEvent.click(screen.getByRole("button", { name: "대표 태그 펼치기" }));
 
     const englishTag = screen.getByRole("button", { name: "#영어" });
     const adminTag = screen.getByRole("button", { name: "#업무경감" });

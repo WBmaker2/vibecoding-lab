@@ -4,13 +4,15 @@ import Image from "next/image";
 import { useState } from "react";
 import { SearchBar } from "./search-bar";
 import { TagFilterBar } from "./tag-filter-bar";
+import { UpdateHistory } from "./update-history";
 
 interface ArchiveHeroProps {
   activeTags: string[];
   onQueryChange: (value: string) => void;
   onToggleTag: (tag: string) => void;
   query: string;
-  tags: string[];
+  allTags: string[];
+  representativeTags: string[];
 }
 
 export function ArchiveHero({
@@ -18,16 +20,23 @@ export function ArchiveHero({
   onQueryChange,
   onToggleTag,
   query,
-  tags
+  allTags,
+  representativeTags
 }: ArchiveHeroProps) {
-  const [isTagPanelOpen, setIsTagPanelOpen] = useState(false);
-  const tagPanelId = "representative-tag-panel";
+  const [isAllTagsOpen, setIsAllTagsOpen] = useState(false);
+  const tagPanelId = "archive-tag-panel";
+  const representativeTagSet = new Set(representativeTags);
+  const hasAdditionalTags = allTags.some((tag) => !representativeTagSet.has(tag));
+  const visibleTags = isAllTagsOpen ? allTags : representativeTags;
 
   return (
-    <section className="hero-frame archive-hero">
+    <section className="archive-hero">
       <div className="archive-hero-top">
         <div className="archive-hero-copy">
-          <p className="eyebrow">Minimal Archive for Classroom Apps</p>
+          <div className="archive-hero-utility">
+            <p className="eyebrow">Minimal Archive for Classroom Apps</p>
+            <UpdateHistory />
+          </div>
           <h1>Hong&apos;s Vibe Coding Lab</h1>
           <p className="hero-copy">
             교실 수업과 교사 업무를 가볍게 만드는 웹앱을 빠르게 찾고 바로 열 수
@@ -38,25 +47,13 @@ export function ArchiveHero({
         <Image
           alt="태그 탐색을 안내하는 Hong 캐릭터"
           className="archive-hero-mascot-image"
-          height={168}
+          height={96}
           priority
-          sizes="(max-width: 720px) 82px, 148px"
+          sizes="(max-width: 720px) 64px, 76px"
           src="/images/mascots/hong-default.png"
           unoptimized
-          width={132}
+          width={76}
         />
-      </div>
-
-      <div className="archive-hero-mascot">
-        <div className="mascot-note-shell">
-          <div className="mascot-note-header">
-            <p className="mascot-note-label">Hong&apos;s Note</p>
-          </div>
-          <p className="mascot-note">
-            설명은 짧게, 검색과 대표 태그는 바로 보이게 두어 필요한 도구를
-            곧장 찾을 수 있게 합니다.
-          </p>
-        </div>
       </div>
 
       <SearchBar
@@ -74,25 +71,24 @@ export function ArchiveHero({
               태그를 하나씩 클릭해 원하는 앱을 알아보세요.
             </p>
           </div>
+        </div>
+        <div id={tagPanelId}>
+          <TagFilterBar
+            activeTags={activeTags}
+            onToggleTag={onToggleTag}
+            tags={visibleTags}
+          />
+        </div>
+        {hasAdditionalTags ? (
           <button
             aria-controls={tagPanelId}
-            aria-expanded={isTagPanelOpen}
-            aria-label={isTagPanelOpen ? "대표 태그 접기" : "대표 태그 펼치기"}
+            aria-expanded={isAllTagsOpen}
             className="tag-panel-toggle"
-            onClick={() => setIsTagPanelOpen((current) => !current)}
+            onClick={() => setIsAllTagsOpen((current) => !current)}
             type="button"
           >
-            <span className="tag-panel-toggle-icon" aria-hidden="true" />
+            {isAllTagsOpen ? "모든 태그 접기" : "모든 태그 보기"}
           </button>
-        </div>
-        {isTagPanelOpen ? (
-          <div id={tagPanelId}>
-            <TagFilterBar
-              activeTags={activeTags}
-              onToggleTag={onToggleTag}
-              tags={tags}
-            />
-          </div>
         ) : null}
       </div>
     </section>

@@ -1,0 +1,48 @@
+import { fireEvent, render, screen } from "@testing-library/react";
+import { UpdateHistory } from "./update-history";
+
+describe("UpdateHistory", () => {
+  it("opens an accessible dialog with the exact dated entries", () => {
+    render(<UpdateHistory />);
+
+    const trigger = screen.getByRole("button", { name: "업데이트 내역" });
+    fireEvent.click(trigger);
+
+    const dialog = screen.getByRole("dialog", {
+      name: "Hong's Vibe Coding Lab 업데이트 내역"
+    });
+
+    expect(dialog).toHaveTextContent("2026-04-04");
+    expect(dialog).toHaveTextContent("개발");
+    expect(dialog).toHaveTextContent(
+      "교실용 웹앱을 모아 찾고 열 수 있는 공개 아카이브를 시작했습니다."
+    );
+    expect(dialog).toHaveTextContent("2026-05-11");
+    expect(dialog).toHaveTextContent(
+      "공개 목록과 썸네일을 정적 자산으로 전환해 Vercel 사용량을 줄였습니다."
+    );
+    expect(dialog).toHaveTextContent("2026-07-12");
+    expect(dialog).toHaveTextContent(
+      "관리자 보안, 무변경 동기화, 상태 표시, 테스트와 모바일 탐색 화면을 개선했습니다."
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "닫기" }));
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+  });
+
+  it("closes on Escape and restores body scrolling", () => {
+    render(<UpdateHistory />);
+    const trigger = screen.getByRole("button", { name: "업데이트 내역" });
+
+    fireEvent.click(trigger);
+    expect(document.body.style.overflow).toBe("hidden");
+
+    fireEvent.keyDown(document, { key: "Escape" });
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(document.body.style.overflow).toBe("");
+    expect(trigger).toHaveFocus();
+  });
+});

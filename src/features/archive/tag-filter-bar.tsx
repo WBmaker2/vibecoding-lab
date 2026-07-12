@@ -12,7 +12,12 @@ export function TagFilterBar({
   onToggleTag
 }: TagFilterBarProps) {
   return (
-    <div className="tag-filter-bar" role="toolbar" aria-label="태그 필터">
+    <div
+      aria-label="태그 필터"
+      aria-orientation="horizontal"
+      className="tag-filter-bar"
+      role="toolbar"
+    >
       {tags.map((tag) => {
         const active = activeTags.includes(tag);
 

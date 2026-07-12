@@ -29,4 +29,27 @@ describe("archive app card layout styles", () => {
 
     expect(mediaStyles).toContain("overflow: hidden");
   });
+
+  it("keeps repeated cards compact and defers offscreen rendering", () => {
+    const cardStyles = getCssBlock(readGlobalStyles(), "\\.app-card");
+
+    expect(cardStyles).toContain("border-radius: 8px");
+    expect(cardStyles).toContain("content-visibility: auto");
+    expect(cardStyles).toContain("contain-intrinsic-size: 440px");
+  });
+
+  it("keeps the hero unframed and representative tags on one mobile row", () => {
+    const styles = readGlobalStyles();
+    const heroStyles = getCssBlock(styles, "\\.archive-hero");
+    const mobileTagStyles = styles.match(
+      /\.archive-hero \.tag-filter-bar \{([\s\S]*?)\n\}/
+    )?.[1] ?? "";
+
+    expect(heroStyles).toContain("border: 0");
+    expect(heroStyles).toContain("background: transparent");
+    expect(heroStyles).toContain("backdrop-filter: none");
+    expect(heroStyles).toContain("box-shadow: none");
+    expect(mobileTagStyles).toContain("flex-wrap: nowrap");
+    expect(mobileTagStyles).toContain("overflow-x: auto");
+  });
 });
