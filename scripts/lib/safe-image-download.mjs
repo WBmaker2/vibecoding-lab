@@ -1,4 +1,4 @@
-import { fetchSafeResource } from "../../src/lib/security/remote-url.ts";
+import { fetchSafeResource } from "../../src/lib/security/remote-url.mjs";
 import {
   MAX_IMAGE_BYTES,
   validateImageBytes

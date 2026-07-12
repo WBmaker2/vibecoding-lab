@@ -482,3 +482,11 @@ Commit: `feat: compact the public app archive`
 - `assetManifest` contains sorted local thumbnail paths, byte sizes, and SHA-256 digests. The admin server compares it with the actual local file set; missing, extra, non-file, or changed assets make the sync pending. Public `/` consumes only the committed JSON snapshot and never performs this check.
 - Workflow correlation uses `request_marker`, a public UUID stored separately from the lease token. The marker is sent as a workflow input and displayed in `run-name`; status polling searches 30 recent dispatch runs and accepts only an exact marker match. Timestamp-only and latest-run guessing are prohibited.
 - `scripts/db-migrate.mjs` applies sorted unapplied SQL files through `hvc_schema_migrations`. The base table and GitHub URL migrations are idempotent, `0002_static_gallery_sync_leases.sql` is selected on clean and existing databases, and runtime table creation remains only as a compatibility fallback.
+
+## Final Integration Re-review Refinements
+
+- Quote the workflow `run-name` and parse the committed workflow with `js-yaml`; run `npm run db:migrate` after dependency installation and before exporter access.
+- Keep request-scoped status explicit. A `request_marker` query searches only the 30 returned workflow runs for that exact marker and may load its lease row for 24 hours after request time. Markerless status is global `history`, while reload restores only the public marker from session storage. The private lease token never enters API or browser state.
+- Import backup preparation applies the shared data-image MIME, 5 MiB, and magic-byte policy before any database client or INSERT. The verifier accepts `thumbnailUrl: null` while rejecting remote/invalid local references, missing files, and asset manifest drift.
+- Execute the pinned remote transport from one Node-compatible `remote-url.mjs` module. Next TypeScript uses a declaration-backed wrapper, and scripts import the `.mjs` runtime directly without type-stripping or module-type warnings.
+- Reject a declared oversized `File` and an encoded oversized data URL before allocating their full byte buffers; exactly 5 MiB remains accepted when MIME and signature are valid.

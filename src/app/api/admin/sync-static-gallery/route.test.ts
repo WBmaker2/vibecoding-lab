@@ -4,6 +4,7 @@ const {
   acquireStaticGallerySyncLeaseMock,
   getAppRepositoryMock,
   getActiveStaticGallerySyncLeaseMock,
+  getStaticGallerySyncLeaseByMarkerMock,
   getStaticGalleryAssetIntegrityMock,
   getStaticGalleryBaselineMock,
   getStaticGallerySyncSummaryMock,
@@ -17,6 +18,7 @@ const {
   acquireStaticGallerySyncLeaseMock: vi.fn(),
   getAppRepositoryMock: vi.fn(),
   getActiveStaticGallerySyncLeaseMock: vi.fn(),
+  getStaticGallerySyncLeaseByMarkerMock: vi.fn(),
   getStaticGalleryBaselineMock: vi.fn(),
   getStaticGalleryAssetIntegrityMock: vi.fn(),
   getStaticGallerySyncSummaryMock: vi.fn(),
@@ -39,6 +41,7 @@ vi.mock("@/lib/apps/repository", () => ({
 vi.mock("@/lib/apps/static-gallery-sync-lease", () => ({
   acquireStaticGallerySyncLease: acquireStaticGallerySyncLeaseMock,
   getActiveStaticGallerySyncLease: getActiveStaticGallerySyncLeaseMock,
+  getStaticGallerySyncLeaseByMarker: getStaticGallerySyncLeaseByMarkerMock,
   releaseStaticGallerySyncLease: releaseStaticGallerySyncLeaseMock,
   setStaticGallerySyncRun: setStaticGallerySyncRunMock,
   toPublicStaticGalleryDispatchMarker: toPublicStaticGalleryDispatchMarkerMock,
@@ -110,8 +113,17 @@ function uncertainPayload(
   };
 }
 
-function request(method: "GET" | "POST" = "POST") {
-  return new Request("http://localhost/api/admin/sync-static-gallery", {
+function request(
+  method: "GET" | "POST" = "POST",
+  requestMarker?: string
+) {
+  const url = new URL("http://localhost/api/admin/sync-static-gallery");
+
+  if (requestMarker) {
+    url.searchParams.set("request_marker", requestMarker);
+  }
+
+  return new Request(url, {
     method,
     body: method === "POST" ? JSON.stringify({ reason: "button click" }) : undefined
   });
@@ -167,6 +179,8 @@ describe("/api/admin/sync-static-gallery", () => {
     getStaticGallerySyncSummaryMock.mockReturnValue(summary);
     acquireStaticGallerySyncLeaseMock.mockResolvedValue({ ...lease });
     getActiveStaticGallerySyncLeaseMock.mockResolvedValue(null);
+    getStaticGallerySyncLeaseByMarkerMock.mockReset();
+    getStaticGallerySyncLeaseByMarkerMock.mockResolvedValue(null);
     releaseStaticGallerySyncLeaseMock.mockResolvedValue(undefined);
     withStaticGallerySyncLeaseDispatchFenceMock.mockImplementation(
       async (
@@ -253,6 +267,7 @@ describe("/api/admin/sync-static-gallery", () => {
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({
       dispatchMarker: null,
+      scope: "history",
       run: {
         id: 123,
         status: "completed",
@@ -626,6 +641,7 @@ describe("/api/admin/sync-static-gallery", () => {
 
     expect(await response.json()).toEqual({
       run: null,
+      scope: "active",
       dispatchMarker: {
         id: activeLease.id,
         requestedAt: activeLease.requestedAt,
@@ -669,6 +685,7 @@ describe("/api/admin/sync-static-gallery", () => {
     const payload = await response.json();
 
     expect(payload.run.id).toBe(701);
+    expect(payload.scope).toBe("active");
     expect(payload.dispatchMarker.runId).toBe(701);
     expect(setStaticGallerySyncRunMock).toHaveBeenCalledWith(
       activeLease.leaseToken,
@@ -705,6 +722,96 @@ describe("/api/admin/sync-static-gallery", () => {
     expect(await response.json()).toMatchObject({
       run: null,
       dispatchMarker: expect.objectContaining({ id: activeLease.id })
+    });
+    expect(setStaticGallerySyncRunMock).not.toHaveBeenCalled();
+  });
+
+  it("matches an expired requested marker behind an unrelated latest run", async () => {
+    hasAdminSessionMock.mockResolvedValue(true);
+    process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
+    const expiredLease = {
+      ...lease,
+      leaseExpiresAt: "2026-07-10T02:30:00.000Z"
+    };
+    getStaticGallerySyncLeaseByMarkerMock.mockResolvedValue(expiredLease);
+    setStaticGallerySyncRunMock.mockResolvedValue(null);
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          workflow_runs: [
+            {
+              id: 702,
+              status: "completed",
+              conclusion: "success",
+              html_url: "https://github.com/runs/702",
+              display_title: "Sync Static Gallery :: another-marker",
+              created_at: "2026-07-10T03:01:00.000Z",
+              updated_at: "2026-07-10T03:02:00.000Z"
+            },
+            {
+              id: 701,
+              status: "completed",
+              conclusion: "success",
+              html_url: "https://github.com/runs/701",
+              display_title: "Sync Static Gallery :: marker-123",
+              created_at: "2026-07-10T03:00:00.000Z",
+              updated_at: "2026-07-10T03:01:00.000Z"
+            }
+          ]
+        }),
+        { status: 200 }
+      )
+    );
+
+    const response = await GET(request("GET", expiredLease.id));
+    const payload = await response.json();
+
+    expect(payload).toMatchObject({
+      scope: "request",
+      requestMarker: expiredLease.id,
+      run: { id: 701 },
+      dispatchMarker: { id: expiredLease.id }
+    });
+    expect(JSON.stringify(payload)).not.toContain(expiredLease.leaseToken);
+    expect(getStaticGallerySyncLeaseByMarkerMock).toHaveBeenCalledWith(
+      expiredLease.id
+    );
+  });
+
+  it("keeps an expired unmatched marker unknown", async () => {
+    hasAdminSessionMock.mockResolvedValue(true);
+    process.env.HVC_SYNC_GITHUB_TOKEN = "test-token";
+    const expiredLease = {
+      ...lease,
+      leaseExpiresAt: "2026-07-10T02:30:00.000Z"
+    };
+    getStaticGallerySyncLeaseByMarkerMock.mockResolvedValue(expiredLease);
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          workflow_runs: [
+            {
+              id: 702,
+              status: "completed",
+              conclusion: "success",
+              html_url: "https://github.com/runs/702",
+              display_title: "Sync Static Gallery :: another-marker",
+              created_at: "2026-07-10T03:01:00.000Z",
+              updated_at: "2026-07-10T03:02:00.000Z"
+            }
+          ]
+        }),
+        { status: 200 }
+      )
+    );
+
+    const response = await GET(request("GET", expiredLease.id));
+
+    expect(await response.json()).toMatchObject({
+      scope: "request",
+      requestMarker: expiredLease.id,
+      run: null,
+      dispatchMarker: { id: expiredLease.id }
     });
     expect(setStaticGallerySyncRunMock).not.toHaveBeenCalled();
   });

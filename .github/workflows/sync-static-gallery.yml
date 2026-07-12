@@ -1,5 +1,5 @@
 name: Sync Static Gallery
-run-name: Sync Static Gallery :: ${{ inputs.request_marker }}
+run-name: "Sync Static Gallery :: ${{ inputs.request_marker }}"
 
 on:
   workflow_dispatch:
@@ -49,6 +49,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Apply database migrations
+        run: npm run db:migrate
 
       - name: Show sync request
         run: |

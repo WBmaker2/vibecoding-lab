@@ -21,6 +21,7 @@ import {
   toPublicStaticGalleryDispatchMarker,
   withStaticGallerySyncLeaseDispatchFence
 } from "./static-gallery-sync-lease";
+import * as leaseModule from "./static-gallery-sync-lease";
 
 const dialect = new PgDialect();
 const row = {
@@ -326,5 +327,29 @@ describe("static gallery sync lease", () => {
       leaseExpiresAt: row.expires_at,
       runId: null
     });
+  });
+
+  it("looks up a requested marker only inside the bounded retention window", async () => {
+    const lookup = (
+      leaseModule as typeof leaseModule & {
+        getStaticGallerySyncLeaseByMarker?: (
+          markerId: string
+        ) => Promise<unknown>;
+      }
+    ).getStaticGallerySyncLeaseByMarker;
+
+    expect(lookup).toBeTypeOf("function");
+
+    if (!lookup) {
+      return;
+    }
+
+    executeMock.mockResolvedValueOnce([]).mockResolvedValueOnce([row]);
+    const found = await lookup("marker-id");
+    const statements = executedSql();
+
+    expect(found).toMatchObject({ id: "marker-id" });
+    expect(statements[1]).toContain("where marker_id =");
+    expect(statements[1]).toContain("requested_at >= now() -");
   });
 });

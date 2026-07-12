@@ -109,6 +109,43 @@ export function validateImageBytes(contentType, bytes) {
 const DATA_IMAGE_PATTERN =
   /^data:(image\/[a-z0-9.+-]+);base64,([a-z0-9+/=\s]+)$/i;
 
+function inspectBase64Payload(value) {
+  let compactLength = 0;
+  let padding = 0;
+  let sawPadding = false;
+
+  for (const character of value) {
+    if (/\s/.test(character)) {
+      continue;
+    }
+
+    compactLength += 1;
+
+    if (character === "=") {
+      sawPadding = true;
+      padding += 1;
+
+      if (padding > 2) {
+        return null;
+      }
+      continue;
+    }
+
+    if (sawPadding || !/[a-z0-9+/]/i.test(character)) {
+      return null;
+    }
+  }
+
+  if (!compactLength || compactLength % 4 === 1) {
+    return null;
+  }
+
+  return {
+    compactLength,
+    decodedLength: Math.floor((compactLength * 3) / 4) - padding
+  };
+}
+
 export function decodeDataImageUrl(value) {
   if (typeof value !== "string") {
     return null;
@@ -121,15 +158,19 @@ export function decodeDataImageUrl(value) {
   }
 
   const [, contentType, encodedPayload] = match;
-  const payload = encodedPayload.replace(/\s/g, "");
+  const inspected = inspectBase64Payload(encodedPayload);
 
   if (
-    !payload ||
-    payload.length % 4 === 1 ||
-    !/^[a-z0-9+/]*={0,2}$/i.test(payload)
+    !inspected ||
+    inspected.decodedLength > MAX_IMAGE_BYTES
   ) {
     return null;
   }
+
+  const payload =
+    inspected.compactLength === encodedPayload.length
+      ? encodedPayload
+      : encodedPayload.replace(/\s/g, "");
 
   try {
     const buffer = Buffer.from(payload, "base64");

@@ -4,6 +4,7 @@ import { getAppRepository } from "@/lib/apps/repository";
 import {
   acquireStaticGallerySyncLease,
   getActiveStaticGallerySyncLease,
+  getStaticGallerySyncLeaseByMarker,
   releaseStaticGallerySyncLease,
   setStaticGallerySyncRun,
   toPublicStaticGalleryDispatchMarker,
@@ -172,15 +173,28 @@ function getLatestWorkflowRun(
 
 function getRequestedWorkflowRun(
   runs: WorkflowRunCandidate[],
-  lease: StaticGallerySyncLease
+  markerId: string,
+  runId: number | null
 ): StaticGallerySyncRun | null {
   return (
     runs.find(
       (candidate) =>
-        candidate.marker === lease.id &&
-        (lease.runId === null || candidate.run.id === lease.runId)
+        candidate.marker === markerId &&
+        (runId === null || candidate.run.id === runId)
     )?.run ?? null
   );
+}
+
+function getRequestMarker(request?: Request) {
+  if (!request) {
+    return null;
+  }
+
+  const marker = new URL(request.url).searchParams.get("request_marker")?.trim();
+
+  return marker && marker.length <= 128 && /^[a-z0-9-]+$/i.test(marker)
+    ? marker
+    : null;
 }
 
 async function getReason(request: Request) {
@@ -292,7 +306,7 @@ async function releaseSafely(leaseToken: string) {
   }
 }
 
-export async function GET() {
+export async function GET(request?: Request) {
   if (!(await hasAdminSession())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -303,10 +317,13 @@ export async function GET() {
     return configurationError();
   }
 
+  const requestMarker = getRequestMarker(request);
   let lease: StaticGallerySyncLease | null;
 
   try {
-    lease = await getActiveStaticGallerySyncLease();
+    lease = requestMarker
+      ? await getStaticGallerySyncLeaseByMarker(requestMarker)
+      : await getActiveStaticGallerySyncLease();
   } catch {
     return leaseError();
   }
@@ -319,9 +336,11 @@ export async function GET() {
     return statusError();
   }
 
-  const run = lease
-    ? getRequestedWorkflowRun(runs, lease)
-    : getLatestWorkflowRun(runs);
+  const run = requestMarker
+    ? getRequestedWorkflowRun(runs, requestMarker, lease?.runId ?? null)
+    : lease
+      ? getRequestedWorkflowRun(runs, lease.id, lease.runId)
+      : getLatestWorkflowRun(runs);
 
   if (lease && run && lease.runId !== run.id) {
     try {
@@ -345,7 +364,12 @@ export async function GET() {
     await releaseSafely(lease.leaseToken);
   }
 
-  return NextResponse.json({ run, dispatchMarker });
+  return NextResponse.json({
+    run,
+    dispatchMarker,
+    scope: requestMarker ? "request" : lease ? "active" : "history",
+    ...(requestMarker ? { requestMarker } : {})
+  });
 }
 
 export async function POST(request: Request) {

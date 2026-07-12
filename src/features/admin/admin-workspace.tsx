@@ -19,6 +19,33 @@ import {
 import { AppForm } from "./app-form";
 import { AppList } from "./app-list";
 
+const SYNC_REQUEST_MARKER_STORAGE_KEY =
+  "hvc-static-gallery-request-marker";
+
+type StaticGalleryRunScope = "active" | "history" | "request";
+
+function readStoredDispatchMarker(): StaticGalleryDispatchMarker | null {
+  try {
+    const value = JSON.parse(
+      window.sessionStorage.getItem(SYNC_REQUEST_MARKER_STORAGE_KEY) ?? "null"
+    ) as Partial<StaticGalleryDispatchMarker> | null;
+
+    if (
+      !value ||
+      typeof value.id !== "string" ||
+      typeof value.requestedAt !== "string" ||
+      typeof value.leaseExpiresAt !== "string" ||
+      (value.runId !== null && !Number.isSafeInteger(value.runId))
+    ) {
+      return null;
+    }
+
+    return value as StaticGalleryDispatchMarker;
+  } catch {
+    return null;
+  }
+}
+
 interface AdminWorkspaceProps {
   assetIntegrity?: StaticGalleryAssetIntegrity;
   apps: AdminAppRecord[];
@@ -56,6 +83,7 @@ export function AdminWorkspace({
   const [syncRun, setSyncRun] = useState<StaticGallerySyncRun | null>(null);
   const [dispatchMarker, setDispatchMarker] =
     useState<StaticGalleryDispatchMarker | null>(null);
+  const dispatchMarkerRef = useRef<StaticGalleryDispatchMarker | null>(null);
   const mountedRef = useRef(true);
   const refreshedRunIdRef = useRef<number | null>(null);
 
@@ -79,10 +107,7 @@ export function AdminWorkspace({
   );
 
   const syncRunIsActive = isActiveStaticGalleryRun(syncRun);
-  const syncAwaitingRequestedRun = Boolean(
-    dispatchMarker &&
-      (!dispatchMarker.runId || !syncRun || syncRun.id !== dispatchMarker.runId)
-  );
+  const syncAwaitingRequestedRun = Boolean(dispatchMarker && !syncRun);
   const syncTrackingIsActive = syncAwaitingRequestedRun || syncRunIsActive;
 
   useEffect(() => {
@@ -91,28 +116,73 @@ export function AdminWorkspace({
     };
   }, []);
 
+  const trackDispatchMarker = useCallback(
+    (marker: StaticGalleryDispatchMarker | null, persist = true) => {
+      dispatchMarkerRef.current = marker;
+      setDispatchMarker(marker);
+
+      if (!persist) {
+        return;
+      }
+
+      if (marker) {
+        window.sessionStorage.setItem(
+          SYNC_REQUEST_MARKER_STORAGE_KEY,
+          JSON.stringify(marker)
+        );
+      } else {
+        window.sessionStorage.removeItem(SYNC_REQUEST_MARKER_STORAGE_KEY);
+      }
+    },
+    []
+  );
+
   const applyLatestRun = useCallback(
     (
       run: StaticGallerySyncRun | null,
       marker: StaticGalleryDispatchMarker | null,
-      refreshOnSuccess = false
+      refreshOnSuccess = false,
+      scope: StaticGalleryRunScope = marker ? "active" : "history",
+      requestedMarker: StaticGalleryDispatchMarker | null = null
     ) => {
       if (!mountedRef.current) {
         return;
       }
 
-      setDispatchMarker(marker);
+      if (scope === "history") {
+        trackDispatchMarker(null);
+        setSyncRun(run);
+
+        if (isActiveStaticGalleryRun(run)) {
+          setSyncStatus({
+            kind: "info",
+            message: "최근 동기화 작업이 실행 중입니다."
+          });
+        } else if (run) {
+          setSyncStatus({
+            kind: "info",
+            message: "최근 동기화 실행 기록입니다."
+          });
+        }
+        return;
+      }
+
+      const effectiveMarker =
+        scope === "request" ? marker ?? requestedMarker : marker;
+      trackDispatchMarker(effectiveMarker);
 
       const requestedRun =
-        marker && marker.runId !== null
-          ? run?.id === marker.runId
+        scope === "request"
+          ? run
+          : effectiveMarker && effectiveMarker.runId !== null
+          ? run?.id === effectiveMarker.runId
             ? run
             : null
-          : marker
+          : effectiveMarker
             ? null
             : run;
 
-      if (marker && !requestedRun) {
+      if (effectiveMarker && !requestedRun) {
         setSyncRun(null);
         setSyncStatus({
           kind: "info",
@@ -132,6 +202,7 @@ export function AdminWorkspace({
       }
 
       if (requestedRun?.conclusion === "success") {
+        window.sessionStorage.removeItem(SYNC_REQUEST_MARKER_STORAGE_KEY);
         setSyncStatus({
           kind: "success",
           message: "동기화가 완료되었습니다."
@@ -145,35 +216,72 @@ export function AdminWorkspace({
           router.refresh();
         }
       } else if (requestedRun?.conclusion) {
+        window.sessionStorage.removeItem(SYNC_REQUEST_MARKER_STORAGE_KEY);
         setSyncStatus({
           kind: "error",
           message: "동기화에 실패했습니다. GitHub Actions 실행 결과를 확인해 주세요."
         });
       }
     },
-    [router]
+    [router, trackDispatchMarker]
   );
 
   const loadLatestRun = useCallback(
-    async (refreshOnSuccess = false) => {
+    async (
+      refreshOnSuccess = false,
+      requestedMarker = dispatchMarkerRef.current
+    ) => {
       try {
-        const response = await fetch("/api/admin/sync-static-gallery", {
+        const statusUrl = requestedMarker
+          ? `/api/admin/sync-static-gallery?request_marker=${encodeURIComponent(requestedMarker.id)}`
+          : "/api/admin/sync-static-gallery";
+        const response = await fetch(statusUrl, {
           cache: "no-store"
         });
         const payload = (await response.json().catch(() => ({}))) as {
           dispatchMarker?: StaticGalleryDispatchMarker | null;
           error?: string;
+          requestMarker?: string;
           run?: StaticGallerySyncRun | null;
+          scope?: StaticGalleryRunScope;
         };
 
         if (!response.ok) {
           throw new Error(payload.error || "동기화 상태를 불러오지 못했습니다.");
         }
 
+        if (requestedMarker && payload.scope) {
+          if (
+            payload.scope !== "request" ||
+            payload.requestMarker !== requestedMarker.id
+          ) {
+            applyLatestRun(
+              null,
+              requestedMarker,
+              false,
+              "request",
+              requestedMarker
+            );
+            return;
+          }
+
+          applyLatestRun(
+            payload.run ?? null,
+            payload.dispatchMarker ?? requestedMarker,
+            refreshOnSuccess,
+            "request",
+            requestedMarker
+          );
+          return;
+        }
+
         applyLatestRun(
           payload.run ?? null,
           payload.dispatchMarker ?? null,
-          refreshOnSuccess
+          refreshOnSuccess,
+          payload.scope ??
+            (payload.dispatchMarker ? "active" : "history"),
+          requestedMarker
         );
       } catch (error) {
         if (!mountedRef.current) {
@@ -193,8 +301,19 @@ export function AdminWorkspace({
   );
 
   useEffect(() => {
-    void loadLatestRun();
-  }, [loadLatestRun]);
+    const storedMarker = readStoredDispatchMarker();
+
+    if (storedMarker) {
+      trackDispatchMarker(storedMarker, false);
+      setSyncStatus({
+        kind: "info",
+        message: "동기화 요청을 확인하는 중입니다."
+      });
+      void loadLatestRun(false, storedMarker);
+    } else {
+      void loadLatestRun();
+    }
+  }, [loadLatestRun, trackDispatchMarker]);
 
   useEffect(() => {
     if (!syncTrackingIsActive) {
@@ -202,7 +321,7 @@ export function AdminWorkspace({
     }
 
     const timer = window.setInterval(() => {
-      void loadLatestRun(true);
+      void loadLatestRun(true, dispatchMarkerRef.current);
     }, 5000);
 
     return () => window.clearInterval(timer);
@@ -329,12 +448,17 @@ export function AdminWorkspace({
       };
 
       if (response.status === 409 && payload.run) {
-        applyLatestRun(payload.run, payload.dispatchMarker ?? null);
+        applyLatestRun(
+          payload.run,
+          payload.dispatchMarker ?? null,
+          false,
+          "active"
+        );
         return;
       }
 
       if (response.status === 409 && payload.dispatchMarker) {
-        applyLatestRun(null, payload.dispatchMarker);
+        applyLatestRun(null, payload.dispatchMarker, false, "active");
         return;
       }
 
@@ -351,13 +475,14 @@ export function AdminWorkspace({
         });
         router.refresh();
       } else {
-        setDispatchMarker(payload.dispatchMarker ?? null);
+        const marker = payload.dispatchMarker ?? null;
+        trackDispatchMarker(marker);
         setSyncRun(null);
         setSyncStatus({
           kind: "info",
           message: "동기화 작업을 시작했습니다. 실행 상태를 확인하는 중입니다."
         });
-        await loadLatestRun(true);
+        await loadLatestRun(true, marker);
       }
     } catch (error) {
       if (!mountedRef.current) {

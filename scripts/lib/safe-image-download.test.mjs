@@ -1,3 +1,6 @@
+import { spawnSync } from "node:child_process";
+import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { describe, expect, it, vi } from "vitest";
 import { MAX_IMAGE_BYTES } from "../../src/lib/security/image-policy.mjs";
 import { fetchSafeImage } from "./safe-image-download.mjs";
@@ -17,6 +20,31 @@ function resource(overrides = {}) {
 }
 
 describe("safe exporter image download", () => {
+  it("imports the default pinned transport without runtime warnings", () => {
+    const moduleUrl = pathToFileURL(
+      path.resolve(process.cwd(), "scripts/lib/safe-image-download.mjs")
+    ).href;
+    const childEnv = { ...process.env };
+    delete childEnv.NODE_OPTIONS;
+    delete childEnv.VITEST;
+    const result = spawnSync(
+      process.execPath,
+      [
+        "--input-type=module",
+        "--eval",
+        `import(${JSON.stringify(moduleUrl)}).then((module) => console.log(typeof module.fetchSafeImage))`
+      ],
+      { encoding: "utf8", env: childEnv }
+    );
+
+    expect({
+      error: result.error?.message,
+      status: result.status,
+      stderr: result.stderr
+    }).toEqual({ error: undefined, status: 0, stderr: "" });
+    expect(result.stdout.trim()).toBe("function");
+  });
+
   it("uses the pinned resource transport and validates a fixture without network", async () => {
     const fetchResource = vi.fn().mockResolvedValue(resource());
 

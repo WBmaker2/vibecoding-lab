@@ -5,6 +5,7 @@ import type { StaticGalleryDispatchMarker } from "./static-gallery-sync-state";
 
 const LEASE_KEY = "static-gallery-sync";
 export const STATIC_GALLERY_SYNC_LEASE_SECONDS = 30 * 60;
+export const STATIC_GALLERY_SYNC_MARKER_RETENTION_SECONDS = 24 * 60 * 60;
 
 export interface StaticGallerySyncLease extends StaticGalleryDispatchMarker {
   leaseToken: string;
@@ -159,6 +160,23 @@ export async function getActiveStaticGallerySyncLease(): Promise<StaticGallerySy
     FROM static_gallery_sync_leases
     WHERE lease_key = ${LEASE_KEY}
       AND expires_at > NOW()
+    LIMIT 1
+  `);
+  const row = (result as unknown as LeaseRow[])[0];
+
+  return row ? fromRow(row) : null;
+}
+
+export async function getStaticGallerySyncLeaseByMarker(
+  markerId: string
+): Promise<StaticGallerySyncLease | null> {
+  await ensureLeaseTable();
+
+  const result = await getDb().execute(sql`
+    SELECT lease_token, marker_id, requested_at, expires_at, previous_run_id, run_id
+    FROM static_gallery_sync_leases
+    WHERE marker_id = ${markerId}
+      AND requested_at >= NOW() - (${STATIC_GALLERY_SYNC_MARKER_RETENTION_SECONDS} * INTERVAL '1 second')
     LIMIT 1
   `);
   const row = (result as unknown as LeaseRow[])[0];

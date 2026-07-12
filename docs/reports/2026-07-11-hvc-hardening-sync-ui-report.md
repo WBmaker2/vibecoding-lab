@@ -204,3 +204,96 @@ or errors.
 - After build, `next-env.d.ts` was restored to the pre-existing
   `./.next/dev/types/routes.d.ts` import and remains the only unrelated
   pre-existing worktree change; it was not staged or committed.
+
+## Final Integration Re-review Fix Wave
+
+Date: 2026-07-12
+Fix base: `7364e15`
+
+### Delivered Contracts
+
+- The workflow `run-name` is quoted and parsed as YAML. The workflow runs
+  `npm run db:migrate` after `npm ci` and before exporter access. The
+  README still requires the pre-deploy migration because the admin route needs
+  the lease table before it can dispatch the workflow.
+- Request-specific polling uses `request_marker` and searches only for an
+  exact marker in the bounded 30-run response. The lease row can be recovered
+  for 24 hours after `requested_at`; an expired or missing exact run remains
+  unknown. Markerless status is explicitly global `history`, and browser
+  reload stores only the public marker in session storage. No lease token is
+  serialized.
+- The static verifier accepts `thumbnailUrl: null` placeholders and rejects
+  remote/other URLs, unsafe or missing local references, non-file/extra assets,
+  and size/SHA-256 manifest drift.
+- Backup import preparation applies the shared MIME, 5 MiB, and magic-byte
+  policy before a database client or INSERT. Valid supported data images remain;
+  SVG, malformed, oversized, and spoofed data images become a placeholder with
+  `thumbnailUrl: null`.
+- The pinned DNS/public-IP/redirect/timeout/response-size transport executes
+  from one Node-compatible `remote-url.mjs` runtime. The TypeScript module is
+  a declaration-backed re-export, and scripts no longer import `.ts`.
+- Declared oversized `File` objects and oversized encoded data URLs are
+  rejected before their full byte buffers are allocated. Exactly 5 MiB remains
+  accepted when MIME and signature are valid.
+
+### Exact RED/GREEN Evidence
+
+- Initial RED:
+  `npm test -- scripts/sync-static-gallery-workflow.test.mjs scripts/lib/static-gallery-verifier.test.mjs scripts/lib/apps-import-backup-preparation.test.mjs`
+  failed all 3 files: one YAML parse failure at the unquoted `::` and two
+  expected missing-module collection failures.
+- Initial GREEN: the same command passed 3 files and 3 tests.
+- Boundary RED:
+  `npm test -- scripts/sync-static-gallery-workflow.test.mjs scripts/lib/static-gallery-verifier.test.mjs scripts/lib/apps-import-backup-preparation.test.mjs src/lib/security/image-policy.test.ts src/lib/storage/thumbnails.test.ts`
+  reported 4 failed and 36 passed tests across 5 files. The failures were the
+  absent migration step, undetected manifest drift, data URL preallocation,
+  and File preallocation.
+- Boundary GREEN: the same command passed 5 files and 40 tests.
+- Marker/runtime RED:
+  `npm test -- src/app/api/admin/sync-static-gallery/route.test.ts src/lib/apps/static-gallery-sync-lease.test.ts src/features/admin/admin-workspace.test.tsx scripts/lib/safe-image-download.test.mjs`
+  reported 7 failed and 49 passed tests across 4 files. Active/history scope,
+  expired exact matching, reload persistence, and bounded lease lookup were
+  missing; the initial child-process smoke also exposed its jsdom URL harness.
+- Corrected transport RED temporarily restored the direct `.mjs` to `.ts`
+  import. `npm test -- scripts/lib/safe-image-download.test.mjs` then reported
+  1 failed and 5 passed tests with `MODULE_TYPELESS_PACKAGE_JSON` on stderr.
+  Restoring the `.mjs` runtime made the same command pass all 6 tests with
+  empty stderr.
+- Marker/runtime GREEN:
+  `npm test -- src/app/api/admin/sync-static-gallery/route.test.ts src/lib/apps/static-gallery-sync-lease.test.ts src/features/admin/admin-workspace.test.tsx scripts/lib/safe-image-download.test.mjs src/lib/security/remote-url.test.ts`
+  passed 5 files and 107 tests.
+- Self-review verifier RED: `npm test -- scripts/lib/static-gallery-verifier.test.mjs`
+  reported 2 failed and 4 passed tests for malformed percent-encoding and an
+  unreferenced manifest asset. GREEN passed all 6 verifier tests.
+- Final focused run across all 10 re-review files passed 149 tests.
+
+### Final Command Evidence
+
+- `npm test`: 43 files, 293 tests passed.
+- `npm run lint`: passed.
+- `npx tsc --noEmit`: passed.
+- `npm audit --omit=dev`: found 0 vulnerabilities.
+- `npm run build`: passed; `/` was `○ (Static)`, and the build listed
+  only the admin backup/sync API routes with no runtime thumbnail route.
+- `npm run test:e2e`: 2 tests passed.
+- Independent YAML parse exited 0 and printed
+  `{"runName":"Sync Static Gallery :: ${{ inputs.request_marker }}","migrationRun":"npm run db:migrate"}`.
+- The default transport child-process smoke passed with stdout `function` and
+  empty stderr. Independent imports of `remote-url.mjs`, safe image download,
+  verifier, and importer exited 0 without warnings or DB access.
+- `node --check` passed for `remote-url.mjs`, `image-policy.mjs`,
+  `safe-image-download.mjs`, verifier, importer, and `db-migrate.mjs`.
+- `git diff --check`: passed.
+- Static integrity:
+  `{"appCount":56,"uniqueIds":56,"thumbnailAssets":56,"referencedAssets":56,"manifestEntries":56,"missing":[],"extra":[],"badManifest":[]}`.
+- After build and E2E, `next-env.d.ts` was restored to the pre-existing
+  `./.next/dev/types/routes.d.ts` import, remained unstaged, and generated
+  `tsconfig.tsbuildinfo` was removed.
+
+### Operational Boundary And Concerns
+
+No production DB, GitHub API/dispatch, push, or deployment command was run.
+The workflow migration requires its existing `POSTGRES_URL` secret. Exact
+request history is intentionally bounded to 30 returned runs and a 24-hour
+lease-row lookup; beyond that boundary the UI remains unknown/retry and never
+labels an unrelated run as the request's completion.

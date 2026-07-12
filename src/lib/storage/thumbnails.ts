@@ -31,6 +31,10 @@ function toDataUrl(contentType: string, buffer: ArrayBuffer) {
 }
 
 async function validateImageFile(file: File) {
+  if (file.size > MAX_IMAGE_BYTES) {
+    throw new Error("Image must be 5 MiB or smaller.");
+  }
+
   const buffer = new Uint8Array(await file.arrayBuffer());
   const validated = validateImageBytes(file.type, buffer);
 

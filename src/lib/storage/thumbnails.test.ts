@@ -20,6 +20,9 @@ vi.mock(
 describe("resolveThumbnailInput", () => {
   const mockedFetchLinkPreview = vi.mocked(fetchLinkPreview);
   const mockedCapturePageThumbnail = vi.mocked(capturePageThumbnail);
+  const validPng = new Uint8Array([
+    0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a
+  ]);
 
   function createUploadFile(
     bytes: Uint8Array,
@@ -36,7 +39,7 @@ describe("resolveThumbnailInput", () => {
       name,
       size: bytes.byteLength,
       type
-    } as File;
+    } as unknown as File;
   }
 
   beforeEach(() => {
@@ -280,11 +283,14 @@ describe("resolveThumbnailInput", () => {
   });
 
   it("rejects uploads larger than the server-side limit", async () => {
-    const file = createUploadFile(
-      new Uint8Array(MAX_THUMBNAIL_UPLOAD_BYTES + 1),
-      "image/png",
-      "large.png"
-    );
+    const arrayBuffer = vi.fn(async () => validPng.buffer);
+    const file = {
+      arrayBuffer,
+      lastModified: 0,
+      name: "large.png",
+      size: MAX_THUMBNAIL_UPLOAD_BYTES + 1,
+      type: "image/png"
+    } as unknown as File;
 
     await expect(
       resolveThumbnailInput({
@@ -293,6 +299,30 @@ describe("resolveThumbnailInput", () => {
         sourceUrl: "https://example.com"
       })
     ).rejects.toThrow(/5 MiB|size/i);
+    expect(arrayBuffer).not.toHaveBeenCalled();
+  });
+
+  it("accepts a file declared at exactly the server-side limit", async () => {
+    const arrayBuffer = vi.fn(async () => validPng.buffer);
+    const file = {
+      arrayBuffer,
+      lastModified: 0,
+      name: "boundary.png",
+      size: MAX_THUMBNAIL_UPLOAD_BYTES,
+      type: "image/png"
+    } as unknown as File;
+
+    await expect(
+      resolveThumbnailInput({
+        mode: "upload",
+        file,
+        sourceUrl: "https://example.com"
+      })
+    ).resolves.toMatchObject({
+      thumbnailMode: "upload",
+      thumbnailUrl: expect.stringMatching(/^data:image\/png;base64,/)
+    });
+    expect(arrayBuffer).toHaveBeenCalledOnce();
   });
 
   it("rejects SVG uploads", async () => {

@@ -94,6 +94,7 @@ describe("AdminWorkspace", () => {
   beforeEach(() => {
     routerRefreshMock.mockReset();
     actWarnings.length = 0;
+    window.sessionStorage.clear();
     vi.spyOn(globalThis, "fetch").mockImplementation(
       () => new Promise<Response>(() => {})
     );
@@ -574,7 +575,72 @@ describe("AdminWorkspace", () => {
     expect(clearIntervalSpy).toHaveBeenCalled();
   });
 
-  it("shows an error when the workflow completes unsuccessfully", async () => {
+  it("reloads a persisted request marker without adopting global history", async () => {
+    const marker = {
+      id: "marker-reload",
+      requestedAt: new Date().toISOString(),
+      leaseExpiresAt: new Date(Date.now() + 30 * 60 * 1000).toISOString(),
+      runId: null
+    };
+    const unrelatedRun = {
+      id: 999,
+      status: "completed",
+      conclusion: "success",
+      htmlUrl: "https://github.com/runs/999",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    window.sessionStorage.setItem(
+      "hvc-static-gallery-request-marker",
+      JSON.stringify(marker)
+    );
+    const fetchSpy = vi.mocked(globalThis.fetch);
+    fetchSpy.mockImplementation(async (input) => {
+      if (String(input).includes(`request_marker=${marker.id}`)) {
+        return new Response(
+          JSON.stringify({
+            scope: "request",
+            requestMarker: marker.id,
+            run: null,
+            dispatchMarker: null
+          }),
+          { status: 200 }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ scope: "history", run: unrelatedRun }),
+        { status: 200 }
+      );
+    });
+
+    render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    expect(
+      await screen.findByText("동기화 요청을 확인하는 중입니다.")
+    ).toBeInTheDocument();
+    expect(fetchSpy).toHaveBeenCalledWith(
+      `/api/admin/sync-static-gallery?request_marker=${marker.id}`,
+      expect.objectContaining({ cache: "no-store" })
+    );
+    expect(screen.queryByText("동기화가 완료되었습니다.")).toBeNull();
+    expect(
+      screen.queryByRole("link", { name: "GitHub Actions에서 보기" })
+    ).toBeNull();
+  });
+
+  it("shows an unrelated failed workflow only as global history", async () => {
     const failedRun = {
       id: 654,
       status: "completed",
@@ -584,7 +650,9 @@ describe("AdminWorkspace", () => {
       updatedAt: "2026-07-10T01:00:00.000Z"
     };
     vi.mocked(globalThis.fetch).mockResolvedValue(
-      new Response(JSON.stringify({ run: failedRun }), { status: 200 })
+      new Response(JSON.stringify({ scope: "history", run: failedRun }), {
+        status: 200
+      })
     );
 
     render(
@@ -601,6 +669,9 @@ describe("AdminWorkspace", () => {
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
+      "최근 동기화 실행 기록입니다."
+    );
+    expect(screen.getByRole("status")).not.toHaveTextContent(
       "동기화에 실패했습니다"
     );
   });

@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   decodeDataImageUrl,
   MAX_IMAGE_BYTES,
@@ -31,10 +31,24 @@ describe("shared image policy", () => {
   });
 
   it("rejects an embedded image over 5 MiB before materialization", () => {
-    const oversized = new Uint8Array(MAX_IMAGE_BYTES + 1);
-    oversized.set(validPng);
+    const oversized = Buffer.alloc(MAX_IMAGE_BYTES + 1).toString("base64");
+    const bufferFrom = vi.spyOn(Buffer, "from");
 
-    expect(() => validateImageBytes("image/png", oversized)).toThrow(/5 MiB/i);
-    expect(decodeDataImageUrl(dataUrl("image/png", oversized))).toBeNull();
+    expect(
+      decodeDataImageUrl(`data:image/png;base64,${oversized}`)
+    ).toBeNull();
+    expect(bufferFrom).not.toHaveBeenCalled();
+    bufferFrom.mockRestore();
+  });
+
+  it("accepts an embedded image at exactly the 5 MiB decoded boundary", () => {
+    const boundary = Buffer.alloc(MAX_IMAGE_BYTES);
+    boundary.set(validPng);
+
+    expect(
+      decodeDataImageUrl(
+        `data:image/png;base64,${boundary.toString("base64")}`
+      )?.buffer.byteLength
+    ).toBe(MAX_IMAGE_BYTES);
   });
 });
