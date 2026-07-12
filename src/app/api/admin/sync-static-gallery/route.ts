@@ -452,6 +452,7 @@ export async function POST(request: Request) {
   }
 
   if (fencedDispatch.status === "lock_unavailable") {
+    await releaseSafely(lease.leaseToken);
     return leaseBusyError();
   }
 

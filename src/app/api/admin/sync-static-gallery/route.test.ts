@@ -384,7 +384,12 @@ describe("/api/admin/sync-static-gallery", () => {
       error: "다른 동기화 요청이 잠금을 확인 중입니다. 잠시 후 다시 시도해 주세요."
     });
     expect(fetchMock).toHaveBeenCalledOnce();
-    expect(releaseStaticGallerySyncLeaseMock).not.toHaveBeenCalled();
+    expect(
+      fetchMock.mock.calls.filter(([, init]) => init?.method === "POST")
+    ).toHaveLength(0);
+    expect(releaseStaticGallerySyncLeaseMock).toHaveBeenCalledWith(
+      lease.leaseToken
+    );
   });
 
   it("dispatches only once when two changed POST calls race", async () => {
