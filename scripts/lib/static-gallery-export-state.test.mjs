@@ -91,6 +91,23 @@ describe("getReusableSnapshotDecision", () => {
     expect(decisionFor(createChanges())).toMatchObject({ reusable: false });
   });
 
+  it("does not reuse when a saved thumbnail was not materialized", () => {
+    expect(
+      decisionFor({
+        snapshot: {
+          ...baseSnapshot,
+          apps: [
+            { ...baseSnapshot.apps[0], thumbnailUrl: null },
+            baseSnapshot.apps[1]
+          ]
+        }
+      })
+    ).toMatchObject({
+      reusable: false,
+      reason: "app-1-thumbnail-missing"
+    });
+  });
+
   it.each([
     null,
     "",

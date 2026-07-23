@@ -367,8 +367,12 @@ describe("fetchSafeHtml", () => {
     const requestOptions: {
       lookup?: (
         hostname: string,
-        options: object,
-        callback: (error: Error | null, address: string, family: number) => void
+        options: { all?: boolean },
+        callback: (
+          error: Error | null,
+          address: string | { address: string; family: number }[],
+          family?: number
+        ) => void
       ) => void;
     } = {};
     transportMocks.httpsRequest.mockImplementationOnce(
@@ -421,6 +425,21 @@ describe("fetchSafeHtml", () => {
     );
 
     expect(address).toEqual({ address: "93.184.216.34", family: 4 });
+
+    const addresses = await new Promise<{ address: string; family: number }[]>(
+      (resolve, reject) => {
+        requestOptions.lookup?.("example.com", { all: true }, (error, value) => {
+          if (error || !Array.isArray(value)) {
+            reject(error ?? new Error("Expected all lookup results."));
+            return;
+          }
+
+          resolve(value);
+        });
+      }
+    );
+
+    expect(addresses).toEqual([{ address: "93.184.216.34", family: 4 }]);
   });
 
   it("fetches a bounded resource through the pinned transport", async () => {

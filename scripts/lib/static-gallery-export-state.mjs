@@ -106,6 +106,18 @@ export function getReusableSnapshotDecision({
         };
       }
     }
+
+    const sourceHasThumbnail =
+      sourceApp?.thumbnailMode !== "placeholder" &&
+      typeof sourceApp?.thumbnailUrl === "string" &&
+      sourceApp.thumbnailUrl.trim().length > 0;
+
+    if (sourceHasThumbnail && !snapshotApp?.thumbnailUrl) {
+      return {
+        reusable: false,
+        reason: `app-${index + 1}-thumbnail-missing`
+      };
+    }
   }
 
   const referenced = getReferencedThumbnailFiles(snapshot.apps);

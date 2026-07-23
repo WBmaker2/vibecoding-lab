@@ -76,6 +76,11 @@
       "sha256": "55f4f1d346f350b87fb537b42e1b1f3945374d74866a82e1451dd011bc1e2a45"
     },
     {
+      "path": "/app-thumbnails/3d9dcb26-f6f6-4cb2-bd89-71028efe899b.png",
+      "size": 101706,
+      "sha256": "7f425dd1235f0e48152bfa743fbcbaef1614e4c341a8fe2deac8c3689ac3ddcc"
+    },
+    {
       "path": "/app-thumbnails/3f602cb9-e07f-422c-9f40-127145020bc2.png",
       "size": 169647,
       "sha256": "5044837e8d974fd06aa37bc9b37bd1ada0bf6f699e61ee246f09a4dd7486b437"
@@ -94,6 +99,11 @@
       "path": "/app-thumbnails/422f88e0-ac58-42c6-afa4-9d557979eaf8.png",
       "size": 164734,
       "sha256": "375d4600af55215051e73d78a590b645d32c8c4365633342140a3f1f3fe45dfd"
+    },
+    {
+      "path": "/app-thumbnails/424c6d52-5aad-4f0e-bfc2-5f06fefcb30e.png",
+      "size": 363794,
+      "sha256": "58384e54cb57dd3fb2290c635920086f71aa0a15b77b7a007c96d41c9347eff9"
     },
     {
       "path": "/app-thumbnails/42b8f202-db48-42f6-a8aa-e35192687889.png",
@@ -151,6 +161,11 @@
       "sha256": "74afb4b6a7f3a69ee7d37e346ade75df72658e3c368cdeb4a4c841b4fb58a18b"
     },
     {
+      "path": "/app-thumbnails/6738aefd-9410-4b80-8d95-2549be89e3d4.png",
+      "size": 192853,
+      "sha256": "e52ed797a04fca846d14e8c74fd5d16b539d1d98d987cc5c426f1a9a68047b0d"
+    },
+    {
       "path": "/app-thumbnails/680f7079-9f3a-4b90-ab32-e418cd40aab9.png",
       "size": 125205,
       "sha256": "901a13322328d7e6c87cf9ae45ba657505b23a0356fb7e2fc9bf67b1cbdfa6e8"
@@ -179,6 +194,11 @@
       "path": "/app-thumbnails/7b66f642-63da-4389-bce4-35e5d708b6d0.png",
       "size": 199388,
       "sha256": "8a98db02d92f32a2490569cf30e8484b71df7c9988ae1cfbc86a1b4ca4a07f01"
+    },
+    {
+      "path": "/app-thumbnails/837829ee-abd3-46a7-9554-ec83055bbdf0.png",
+      "size": 156553,
+      "sha256": "3c251a47488a3c6d0085d90dc1141e4f16869fbcf1a0f26439b09516680bf89f"
     },
     {
       "path": "/app-thumbnails/86c0c19a-c4bf-4ef1-822b-75162b385271.png",
@@ -281,9 +301,19 @@
       "sha256": "f6b11c2aaba1828f3ee90b09aa9042f4ff7312a208ba59cd834495f332db41ec"
     },
     {
+      "path": "/app-thumbnails/b023a954-b497-4467-b043-64910bd20dac.png",
+      "size": 197768,
+      "sha256": "ac8d6c605c722ed52aba3eed08a2c0f2d6efd4163c246eaa3da4f45b9b4efd3e"
+    },
+    {
       "path": "/app-thumbnails/b52fd0e4-768b-4cc1-806c-53deef04f003.png",
       "size": 393199,
       "sha256": "6603cd66f37b4650d164e12652b9fdaf998f4c72ad7b378954c54a8155176a2e"
+    },
+    {
+      "path": "/app-thumbnails/b5c444ba-0d76-4bc5-b787-3132985da0d3.png",
+      "size": 44678,
+      "sha256": "f9c4462b37a65ff076017d477aeab864a2540a713029890a1b34d1d81ccc41f3"
     },
     {
       "path": "/app-thumbnails/b8f82bb6-65a5-4876-8c75-b52cc125e5be.png",
@@ -304,6 +334,11 @@
       "path": "/app-thumbnails/c7de79fb-516a-4167-9d21-ba282a2cf5de.png",
       "size": 81138,
       "sha256": "24af47df218af556ec76a0e22b3929dbfe0f801033db7f5ae43a2cf6ae47d16e"
+    },
+    {
+      "path": "/app-thumbnails/c84042dc-2d55-4438-9cf0-9b0006ef758e.png",
+      "size": 278884,
+      "sha256": "6f5c76136941a88d33b237e02ed5e27f3d5a1474f62b30f024f9cacc37a8ea01"
     },
     {
       "path": "/app-thumbnails/ca39ad82-aec4-4011-84a8-56cfaa981631.jpg",
@@ -334,6 +369,11 @@
       "path": "/app-thumbnails/d9e05a77-4d67-4c0e-be07-48b069383791.png",
       "size": 214556,
       "sha256": "f38e78b998e792ae11d08c993a8ce1a2c164009d2094c8a63816f97b72e42353"
+    },
+    {
+      "path": "/app-thumbnails/dbf5fa15-fe4b-47a5-a186-29e4f50d8665.png",
+      "size": 65593,
+      "sha256": "86d6a17c4cf7bf993198f49b184337251188cf9d060a5977c0276205b69d12ac"
     },
     {
       "path": "/app-thumbnails/e3673005-3e93-42cd-9076-044480a41344.png",
@@ -382,9 +422,172 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-07-23T08:44:01.348Z",
+  "generatedAt": "2026-07-23T09:22:56.716Z",
   "appCount": 84,
   "apps": [
+    {
+      "id": "b5c444ba-0d76-4bc5-b787-3132985da0d3",
+      "title": "PDF to PNG 1080p",
+      "summary": "교사가 PDF 자료를 브라우저에서 1080p PNG 이미지로 변환하고 여러 페이지는 ZIP으로 내려받는 도구입니다.",
+      "url": "https://wbmaker2.github.io/pdf-to-png/",
+      "githubUrl": "https://github.com/WBmaker2/pdf-to-png",
+      "tags": [
+        "PDF",
+        "업무"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/b5c444ba-0d76-4bc5-b787-3132985da0d3.png",
+      "subject": "공통",
+      "grade": null,
+      "memo": "PDF 안내문이나 학습지를 이미지 파일로 나누어 LMS, 슬라이드, 학급 게시 자료에 활용할 때 사용할 수 있습니다. 파일은 서버로 업로드하지 않고 브라우저에서 처리됩니다.",
+      "createdAt": "2026-05-03T09:33:29.709Z",
+      "updatedAt": "2026-07-23T09:14:28.416Z"
+    },
+    {
+      "id": "c84042dc-2d55-4438-9cf0-9b0006ef758e",
+      "title": "PAPS 학생 기록 시스템",
+      "summary": "교사가 PAPS 세션을 열고 학생 기록 입력, 대표 기록 검토, Google Sheets 동기화를 한 흐름으로 관리하는 체력평가 도구입니다.",
+      "url": "https://paps-tracker.vercel.app",
+      "githubUrl": "https://github.com/WBmaker2/paps-tracker",
+      "tags": [
+        "체육",
+        "수업",
+        "업무",
+        "데이터",
+        "그래프"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/c84042dc-2d55-4438-9cf0-9b0006ef758e.png",
+      "subject": "체육",
+      "grade": "초등 3~6학년",
+      "memo": "교사가 학교·학급·학생 명단을 준비하고 단일 반 또는 2반 분할 세션을 열면, 학생은 이름을 선택해 기록을 제출합니다. 교사는 대표 기록, 요약표, 동기화 상태를 확인하며 Google Sheets 기반으로 운영 데이터를 관리할 수 있습니다.",
+      "createdAt": "2026-04-19T01:51:40.541Z",
+      "updatedAt": "2026-07-23T09:14:00.818Z"
+    },
+    {
+      "id": "837829ee-abd3-46a7-9554-ec83055bbdf0",
+      "title": "우리 반 학급일지",
+      "summary": "교사가 출결, 수업 내용, 학급 일지, 학생별 누가기록을 한 화면에서 정리하고 백업할 수 있는 학급 운영 기록 도구입니다.",
+      "url": "https://class-journal2.vercel.app",
+      "githubUrl": "https://github.com/WBmaker2/class-journal2",
+      "tags": [
+        "담임",
+        "업무",
+        "데이터",
+        "그래프"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/837829ee-abd3-46a7-9554-ec83055bbdf0.png",
+      "subject": "공통",
+      "grade": null,
+      "memo": "출결 관리, 오늘의 수업, 학급 일지, 학생별 누가기록, 대시보드와 시간표 관리를 한 곳에서 다루며 PDF/Excel 내보내기와 클라우드 동기화 흐름까지 지원하는 교사용 기록 도구입니다.",
+      "createdAt": "2026-04-19T00:53:49.113Z",
+      "updatedAt": "2026-07-23T09:13:26.454Z"
+    },
+    {
+      "id": "424c6d52-5aad-4f0e-bfc2-5f06fefcb30e",
+      "title": "AI 원어민 단어 퀴즈 쇼",
+      "summary": "초등 영어 수업에서 단어 세트를 불러와 듣기·말하기·게임 활동을 바로 여는 수업용 퀴즈 앱",
+      "url": "https://talking-vacab-quiz.vercel.app",
+      "githubUrl": "https://github.com/WBmaker2/talking-vacab-quiz",
+      "tags": [
+        "영어",
+        "수업",
+        "게임",
+        "실시간",
+        "퀴즈"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/424c6d52-5aad-4f0e-bfc2-5f06fefcb30e.png",
+      "subject": "영어",
+      "grade": "초등 3~6학년",
+      "memo": "교사가 단어 세트를 저장·공개하면 학생은 학교·선생님·학년·단원을 선택해 여러 활동으로 이어서 사용할 수 있습니다.",
+      "createdAt": "2026-04-12T11:53:18.249Z",
+      "updatedAt": "2026-07-23T09:12:51.802Z"
+    },
+    {
+      "id": "dbf5fa15-fe4b-47a5-a186-29e4f50d8665",
+      "title": "친환경 수송 조건 설계소",
+      "summary": "초등 3~4학년 학생이 짐, 거리, 길 조건에 맞는 수레 부품을 고르고 결과를 비교하는 과학 탐구 활동입니다.",
+      "url": "https://eco-transport-design-studio.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "과학",
+        "초등과학",
+        "환경",
+        "생각실험",
+        "비교실험"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/dbf5fa15-fe4b-47a5-a186-29e4f50d8665.png",
+      "subject": "과학",
+      "grade": "초등 3~4학년",
+      "memo": "과학 수업에서 옮길 물건, 거리, 길, 움직이는 힘을 살펴보고 수레 부품을 한 가지씩 바꿔 조건별 결과와 생각할 점을 비교하는 활동에 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:08:19.446Z",
+      "updatedAt": "2026-07-23T09:09:30.564Z"
+    },
+    {
+      "id": "3d9dcb26-f6f6-4cb2-bd89-71028efe899b",
+      "title": "정보 손실 통신소",
+      "summary": "초등학생이 전달된 문장을 비교해 달라진 뜻을 찾고, 안전하게 다시 전하는 방법을 연습하는 국어 학습 앱입니다.",
+      "url": "https://information-loss-communication-station.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "국어",
+        "의사소통",
+        "정보전달",
+        "초등수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/3d9dcb26-f6f6-4cb2-bd89-71028efe899b.png",
+      "subject": "국어",
+      "grade": "초등 3~6학년",
+      "memo": "원문과 전달문을 비교하며 빠짐·추가·뜻 변화를 근거로 설명하고, 안전한 전달문을 만들어 보는 수업 활동에 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:09:30.871Z",
+      "updatedAt": "2026-07-23T09:09:15.077Z"
+    },
+    {
+      "id": "b023a954-b497-4467-b043-64910bd20dac",
+      "title": "오래된 물건 사건파일",
+      "summary": "초등 5~6학년이 실제 박물관 유물 사진과 새 단서를 비교하며 역사 가설을 기록하고 고쳐 보는 탐구 활동 앱입니다.",
+      "url": "https://old-object-case-files.wbmaker.chatgpt.site/",
+      "githubUrl": null,
+      "tags": [
+        "역사",
+        "자료 탐구",
+        "관찰과해석",
+        "초등",
+        "추론활동"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/b023a954-b497-4467-b043-64910bd20dac.png",
+      "subject": "사회",
+      "grade": "초등 5~6학년",
+      "memo": "사회 수업에서 유물 사진을 관찰한 뒤, 박물관 기록과 새 단서를 비교하며 처음 생각을 근거에 맞게 고쳐 보는 활동으로 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:12:49.955Z",
+      "updatedAt": "2026-07-23T09:08:59.766Z"
+    },
+    {
+      "id": "6738aefd-9410-4b80-8d95-2549be89e3d4",
+      "title": "빛길 구조대",
+      "summary": "초등 5~6학년 학생이 빛의 직진·반사·굴절을 예상하고 거울과 렌즈의 빛길로 확인하는 과학 탐구 앱입니다.",
+      "url": "https://light-path-rescue-team.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "초등과학",
+        "과학수업",
+        "탐구활동",
+        "빛",
+        "거울과 렌즈"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/6738aefd-9410-4b80-8d95-2549be89e3d4.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "빛길을 먼저 예상하고 장치를 고른 뒤 결과를 설명하는 수업용 활동입니다. 실제 거울·렌즈 실험 전후의 개념 확인에 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:14:18.104Z",
+      "updatedAt": "2026-07-23T09:07:42.794Z"
+    },
     {
       "id": "e417c1ae-442e-4225-a7d3-c126f655183a",
       "title": "클라우드 수업실",
@@ -407,27 +610,6 @@
       "updatedAt": "2026-07-22T22:35:06.579Z"
     },
     {
-      "id": "6738aefd-9410-4b80-8d95-2549be89e3d4",
-      "title": "빛길 구조대",
-      "summary": "초등 5~6학년 학생이 빛의 직진·반사·굴절을 예상하고 거울과 렌즈의 빛길로 확인하는 과학 탐구 앱입니다.",
-      "url": "https://light-path-rescue-team.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "초등과학",
-        "과학수업",
-        "탐구활동",
-        "빛",
-        "거울과 렌즈"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
-      "subject": "과학",
-      "grade": "초등 5~6학년",
-      "memo": "빛길을 먼저 예상하고 장치를 고른 뒤 결과를 설명하는 수업용 활동입니다. 실제 거울·렌즈 실험 전후의 개념 확인에 활용할 수 있습니다.",
-      "createdAt": "2026-07-22T22:14:18.104Z",
-      "updatedAt": "2026-07-22T22:14:18.104Z"
-    },
-    {
       "id": "f058dc1c-3ee5-4368-ba32-23ed3fcaac37",
       "title": "삼권분립 사건 처리실",
       "summary": "초등 5~6학년이 가상 사건을 따라 국회·행정부·법원의 역할과 권력 분립의 까닭을 살펴보는 사회 학습 앱입니다.",
@@ -446,27 +628,6 @@
       "memo": "민주주의와 시민 참여 단원에서 세 가지 가상 사건을 순서대로 살피며, 국가기관이 하는 일과 서로 다시 살피는 까닭을 정리하는 활동에 활용할 수 있습니다.",
       "createdAt": "2026-07-22T22:13:35.820Z",
       "updatedAt": "2026-07-22T22:13:35.820Z"
-    },
-    {
-      "id": "b023a954-b497-4467-b043-64910bd20dac",
-      "title": "오래된 물건 사건파일",
-      "summary": "초등 5~6학년이 실제 박물관 유물 사진과 새 단서를 비교하며 역사 가설을 기록하고 고쳐 보는 탐구 활동 앱입니다.",
-      "url": "https://old-object-case-files.wbmaker.chatgpt.site/",
-      "githubUrl": null,
-      "tags": [
-        "역사",
-        "자료 탐구",
-        "관찰과해석",
-        "초등",
-        "추론활동"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
-      "subject": "사회",
-      "grade": "초등 5~6학년",
-      "memo": "사회 수업에서 유물 사진을 관찰한 뒤, 박물관 기록과 새 단서를 비교하며 처음 생각을 근거에 맞게 고쳐 보는 활동으로 활용할 수 있습니다.",
-      "createdAt": "2026-07-22T22:12:49.955Z",
-      "updatedAt": "2026-07-22T22:12:49.955Z"
     },
     {
       "id": "643c543f-599c-4a5d-83f6-57d31acd0394",
@@ -548,47 +709,6 @@
       "memo": "초등 저학년 아동권리 수업에서 실제 경험을 말하지 않고, 만든 이야기 속 장면을 통해 여러 도움 방법과 어른의 역할을 함께 살펴볼 수 있습니다.",
       "createdAt": "2026-07-22T22:09:48.616Z",
       "updatedAt": "2026-07-22T22:09:48.616Z"
-    },
-    {
-      "id": "3d9dcb26-f6f6-4cb2-bd89-71028efe899b",
-      "title": "정보 손실 통신소",
-      "summary": "초등학생이 전달된 문장을 비교해 달라진 뜻을 찾고, 안전하게 다시 전하는 방법을 연습하는 국어 학습 앱입니다.",
-      "url": "https://information-loss-communication-station.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "국어",
-        "의사소통",
-        "정보전달",
-        "초등수업"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
-      "subject": "국어",
-      "grade": "초등 3~6학년",
-      "memo": "원문과 전달문을 비교하며 빠짐·추가·뜻 변화를 근거로 설명하고, 안전한 전달문을 만들어 보는 수업 활동에 활용할 수 있습니다.",
-      "createdAt": "2026-07-22T22:09:30.871Z",
-      "updatedAt": "2026-07-22T22:09:30.871Z"
-    },
-    {
-      "id": "dbf5fa15-fe4b-47a5-a186-29e4f50d8665",
-      "title": "친환경 수송 조건 설계소",
-      "summary": "초등 3~4학년 학생이 짐, 거리, 길 조건에 맞는 수레 부품을 고르고 결과를 비교하는 과학 탐구 활동입니다.",
-      "url": "https://eco-transport-design-studio.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "과학",
-        "초등과학",
-        "환경",
-        "생각실험",
-        "비교실험"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
-      "subject": "과학",
-      "grade": "초등 3~4학년",
-      "memo": "과학 수업에서 옮길 물건, 거리, 길, 움직이는 힘을 살펴보고 수레 부품을 한 가지씩 바꿔 조건별 결과와 생각할 점을 비교하는 활동에 활용할 수 있습니다.",
-      "createdAt": "2026-07-22T22:08:19.446Z",
-      "updatedAt": "2026-07-22T22:08:19.446Z"
     },
     {
       "id": "b8f82bb6-65a5-4876-8c75-b52cc125e5be",
@@ -1608,27 +1728,6 @@
       "updatedAt": "2026-05-13T02:48:53.692Z"
     },
     {
-      "id": "424c6d52-5aad-4f0e-bfc2-5f06fefcb30e",
-      "title": "AI 원어민 단어 퀴즈 쇼",
-      "summary": "초등 영어 수업에서 단어 세트를 불러와 듣기·말하기·게임 활동을 바로 여는 수업용 퀴즈 앱",
-      "url": "https://talking-vacab-quiz.vercel.app",
-      "githubUrl": "https://github.com/WBmaker2/talking-vacab-quiz",
-      "tags": [
-        "영어",
-        "수업",
-        "게임",
-        "실시간",
-        "퀴즈"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": null,
-      "subject": "영어",
-      "grade": "초등 3~6학년",
-      "memo": "교사가 단어 세트를 저장·공개하면 학생은 학교·선생님·학년·단원을 선택해 여러 활동으로 이어서 사용할 수 있습니다.",
-      "createdAt": "2026-04-12T11:53:18.249Z",
-      "updatedAt": "2026-05-13T02:48:01.890Z"
-    },
-    {
       "id": "96932b6e-d720-4fdb-80ff-1db37f5b0e6f",
       "title": "감성 톡톡 동시 스튜디오",
       "summary": "3~4학년 학생이 동시 낭송을 녹음하고 시의 분위기에 맞는 사운드를 골라 오디오 엽서로 저장하는 국어·음악 융합 웹앱",
@@ -1789,65 +1888,6 @@
       "memo": "날씨 미션을 읽고 필요한 옷차림과 준비물을 선택하면 캐릭터가 실시간으로 바뀌며, 외출 전 체크리스트에서 완료/아직 상태를 바로 확인할 수 있습니다.",
       "createdAt": "2026-05-08T14:55:17.940Z",
       "updatedAt": "2026-05-13T00:44:12.159Z"
-    },
-    {
-      "id": "837829ee-abd3-46a7-9554-ec83055bbdf0",
-      "title": "우리 반 학급일지",
-      "summary": "교사가 출결, 수업 내용, 학급 일지, 학생별 누가기록을 한 화면에서 정리하고 백업할 수 있는 학급 운영 기록 도구입니다.",
-      "url": "https://class-journal2.vercel.app",
-      "githubUrl": "https://github.com/WBmaker2/class-journal2",
-      "tags": [
-        "담임",
-        "업무",
-        "데이터",
-        "그래프"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": null,
-      "subject": "공통",
-      "grade": null,
-      "memo": "출결 관리, 오늘의 수업, 학급 일지, 학생별 누가기록, 대시보드와 시간표 관리를 한 곳에서 다루며 PDF/Excel 내보내기와 클라우드 동기화 흐름까지 지원하는 교사용 기록 도구입니다.",
-      "createdAt": "2026-04-19T00:53:49.113Z",
-      "updatedAt": "2026-05-13T00:40:00.588Z"
-    },
-    {
-      "id": "c84042dc-2d55-4438-9cf0-9b0006ef758e",
-      "title": "PAPS 학생 기록 시스템",
-      "summary": "교사가 PAPS 세션을 열고 학생 기록 입력, 대표 기록 검토, Google Sheets 동기화를 한 흐름으로 관리하는 체력평가 도구입니다.",
-      "url": "https://paps-tracker.vercel.app",
-      "githubUrl": "https://github.com/WBmaker2/paps-tracker",
-      "tags": [
-        "체육",
-        "수업",
-        "업무",
-        "데이터",
-        "그래프"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": null,
-      "subject": "체육",
-      "grade": "초등 3~6학년",
-      "memo": "교사가 학교·학급·학생 명단을 준비하고 단일 반 또는 2반 분할 세션을 열면, 학생은 이름을 선택해 기록을 제출합니다. 교사는 대표 기록, 요약표, 동기화 상태를 확인하며 Google Sheets 기반으로 운영 데이터를 관리할 수 있습니다.",
-      "createdAt": "2026-04-19T01:51:40.541Z",
-      "updatedAt": "2026-05-13T00:39:20.557Z"
-    },
-    {
-      "id": "b5c444ba-0d76-4bc5-b787-3132985da0d3",
-      "title": "PDF to PNG 1080p",
-      "summary": "교사가 PDF 자료를 브라우저에서 1080p PNG 이미지로 변환하고 여러 페이지는 ZIP으로 내려받는 도구입니다.",
-      "url": "https://wbmaker2.github.io/pdf-to-png/",
-      "githubUrl": "https://github.com/WBmaker2/pdf-to-png",
-      "tags": [
-        "PDF",
-        "업무"
-      ],
-      "thumbnailMode": "auto",
-      "thumbnailUrl": null,
-      "subject": "공통",
-      "grade": null,
-      "memo": "PDF 안내문이나 학습지를 이미지 파일로 나누어 LMS, 슬라이드, 학급 게시 자료에 활용할 때 사용할 수 있습니다. 파일은 서버로 업로드하지 않고 브라우저에서 처리됩니다.",
-      "createdAt": "2026-05-03T09:33:29.709Z",
-      "updatedAt": "2026-05-08T14:24:18.547Z"
     },
     {
       "id": "a453fce0-6a74-4cb2-99aa-0a7d847114da",

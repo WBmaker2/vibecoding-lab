@@ -283,7 +283,13 @@ function requestPinnedResponse(validated, options) {
         const requestOptions = {
             headers: toRequestHeaders(options.headers),
             hostname,
-            lookup: (_hostname, _lookupOptions, callback) => callback(null, address, family),
+            lookup: (_hostname, lookupOptions, callback) => {
+                if (lookupOptions?.all) {
+                    callback(null, [{ address, family }]);
+                    return;
+                }
+                callback(null, address, family);
+            },
             method: options.method,
             path: `${url.pathname}${url.search}`,
             port: url.port || undefined,
