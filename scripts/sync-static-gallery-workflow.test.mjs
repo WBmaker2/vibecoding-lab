@@ -33,4 +33,12 @@ describe("static gallery sync workflow", () => {
     expect(migrationIndex).toBeGreaterThan(installIndex);
     expect(exportIndex).toBeGreaterThan(migrationIndex);
   });
+
+  it("delegates production deployment to the Vercel Git integration", async () => {
+    const source = await fs.readFile(WORKFLOW_PATH, "utf8");
+
+    expect(source).toContain("run: git push");
+    expect(source).not.toContain("VERCEL_TOKEN");
+    expect(source).not.toContain("vercel@latest");
+  });
 });

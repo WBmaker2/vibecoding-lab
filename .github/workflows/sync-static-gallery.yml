@@ -31,9 +31,6 @@ jobs:
       POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
       SYNC_REASON: ${{ inputs.reason || 'admin-button' }}
       SYNC_REQUEST_MARKER: ${{ inputs.request_marker }}
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     steps:
       - name: Checkout dispatch ref
         uses: actions/checkout@v4
@@ -106,19 +103,11 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         run: git push
 
-      - name: Pull Vercel project settings
-        if: steps.changes.outputs.changed == 'true' && env.VERCEL_TOKEN != '' && env.VERCEL_ORG_ID != '' && env.VERCEL_PROJECT_ID != ''
-        run: npm exec --yes vercel@latest -- pull --yes --environment=production --token "$VERCEL_TOKEN"
-
-      - name: Deploy to Vercel
-        if: steps.changes.outputs.changed == 'true' && env.VERCEL_TOKEN != '' && env.VERCEL_ORG_ID != '' && env.VERCEL_PROJECT_ID != ''
-        run: npm exec --yes vercel@latest -- deploy --prod --yes --token "$VERCEL_TOKEN"
-
       - name: Summarize no-op sync
         if: steps.changes.outputs.changed == 'false'
         run: |
           {
             echo "## Static gallery sync"
             echo
-            echo "No generated gallery changes detected; verification, commit, push, and deployment were skipped."
+            echo "No generated gallery changes detected; verification, commit, push, and Vercel Git deployment were skipped."
           } >> "$GITHUB_STEP_SUMMARY"

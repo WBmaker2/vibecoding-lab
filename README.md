@@ -111,21 +111,18 @@ POSTGRES_URL=... npm run apps:import:backup -- ./tmp/backups/<backup-file>.json
 1. `npm run db:migrate`로 idempotent migration을 적용합니다.
 2. DB에서 앱 목록을 읽어 `src/data/public-apps.json`을 다시 생성합니다.
 3. 썸네일을 `public/app-thumbnails/` 로컬 파일로 물질화합니다.
-4. 기존 스냅샷과 로컬 썸네일 집합·SHA-256 asset manifest가 DB-backed 필드, 순서, ID까지 동일하면 JSON과 썸네일 파일을 건드리지 않고 `changed=false`로 종료합니다. 이때 검증, 테스트, 린트, 빌드, 커밋, 푸시, Vercel 배포를 건너뜁니다.
+4. 기존 스냅샷과 로컬 썸네일 집합·SHA-256 asset manifest가 DB-backed 필드, 순서, ID까지 동일하면 JSON과 썸네일 파일을 건드리지 않고 `changed=false`로 종료합니다. 이때 검증, 테스트, 린트, 빌드, 커밋, 푸시, Vercel Git 배포를 건너뜁니다.
 5. 변경이 있으면 `npm run apps:verify-static-gallery`로 DB와 정적 스냅샷의 개수, 필드, 정렬, nullable placeholder, 로컬 파일, asset manifest를 검증합니다.
 6. 누락·추가·변경된 asset이 있으면 exporter가 manifest와 로컬 파일을 다시 만들고, 테스트·린트·빌드를 통과하면 생성 파일을 커밋하고 푸시합니다.
-7. Vercel 배포 secret이 있으면 운영 배포까지 이어서 실행합니다. 없더라도 Vercel Git 연동이 켜져 있으면 푸시된 커밋이 일반 배포 흐름을 탈 수 있습니다.
+7. Vercel Git 연동이 `main`을 운영 배포 브랜치로 감시하므로, 푸시된 커밋이 운영 배포를 시작합니다.
 
 GitHub 저장소에는 아래 Actions secrets를 설정합니다.
 
 ```bash
 POSTGRES_URL=
-VERCEL_TOKEN=
-VERCEL_ORG_ID=
-VERCEL_PROJECT_ID=
 ```
 
-`POSTGRES_URL`은 필수입니다. `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`는 워크플로 안에서 직접 Vercel production deploy까지 실행하려는 경우에만 필요합니다.
+`POSTGRES_URL`은 필수입니다. Vercel은 GitHub `main` 연결로 배포하므로 GitHub Actions에 별도 Vercel 토큰을 보관하지 않습니다.
 
 ## Vercel 배포
 
