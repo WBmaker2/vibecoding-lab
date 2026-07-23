@@ -1,8 +1,970 @@
 {
+  "assetManifest": [
+    {
+      "path": "/app-thumbnails/0118a475-a6af-4be2-849e-416bcd2e9ee8.png",
+      "size": 698720,
+      "sha256": "f5b8206622f4e8c5614b47cddae33fb7bcc78280be0eb95539f38e31b1ef4331"
+    },
+    {
+      "path": "/app-thumbnails/0a1a350d-2f4d-4676-ba63-f33ad2147328.png",
+      "size": 290961,
+      "sha256": "c3f4f66b85af9c9e3515d5bbace566d1eb51288acdd96c5a129a66bdbbf92758"
+    },
+    {
+      "path": "/app-thumbnails/10829a2a-f96b-48ee-bca7-bd28c9748f27.png",
+      "size": 151407,
+      "sha256": "5fc8a43197f4b252195961dcf93b9150233f787e99effcd3bc36839cfc2139bf"
+    },
+    {
+      "path": "/app-thumbnails/13db4453-420a-447c-a4e9-67d330852ee5.png",
+      "size": 215552,
+      "sha256": "4fd15a733575e4b5b2cf9e2be46698afe2a26f658450053298bddb710adef960"
+    },
+    {
+      "path": "/app-thumbnails/1c13b710-5da9-4f8d-be49-c7b6af20fedb.png",
+      "size": 25089,
+      "sha256": "c88f2f209fe6002e318ff3289bfbd86f755f4046cedebc7fb0c7bd3ae5d9e45d"
+    },
+    {
+      "path": "/app-thumbnails/1f459bb8-1d78-42e0-a1a1-e2505f3be832.png",
+      "size": 253453,
+      "sha256": "a93fe974f664f9987c95340fba2af5be628d57d6771fb31b9bbbfff34d29e789"
+    },
+    {
+      "path": "/app-thumbnails/25f6d160-3efc-42c7-accd-4f62eb0f7635.png",
+      "size": 39188,
+      "sha256": "e3235f06fa0c42f2edb40aa94cadae73aee291828d0b7130891879d878234faa"
+    },
+    {
+      "path": "/app-thumbnails/28e6a55c-4cc2-4fba-8741-09e56d7ba87b.png",
+      "size": 88169,
+      "sha256": "831066d38e9691cf97ef664d254fda0ff9eda60be824c5b86ca53f9f1e2771ed"
+    },
+    {
+      "path": "/app-thumbnails/29a0ce2f-bbeb-45bd-8306-54880dd3a6cc.png",
+      "size": 135248,
+      "sha256": "94be6286e41fd6a4a063f0ef7bf520833148e790f6e4740effb001e2d56d84be"
+    },
+    {
+      "path": "/app-thumbnails/2c47b201-4941-4d74-a5b0-bb84d696e01c.png",
+      "size": 96981,
+      "sha256": "4073cf338e3241ae52fc91164fdb069d856a231c974abe4a244e91e3720853bf"
+    },
+    {
+      "path": "/app-thumbnails/2f302bf0-c012-4432-a585-106e74385b7d.png",
+      "size": 169344,
+      "sha256": "23565454a10a2afce94a47f35582aae93996286117ec1d140bb7c46d82e29f68"
+    },
+    {
+      "path": "/app-thumbnails/31d29c7a-8ce6-4ba0-a5aa-e4bb984848b5.png",
+      "size": 240303,
+      "sha256": "38745dfd8924623ca384c70182324e850dfb24f10291505ad2512a35abbb9dc0"
+    },
+    {
+      "path": "/app-thumbnails/373e131a-54eb-41a6-852f-aa54431b29c8.png",
+      "size": 303398,
+      "sha256": "ad7a74faeb01852fdad15797a9282f3a58ce32adb4809481839af0cfd32f9bd7"
+    },
+    {
+      "path": "/app-thumbnails/3a72009d-c1ad-48b5-86b4-6eb870143eea.png",
+      "size": 67609,
+      "sha256": "eb16948b3f58fcf5a7f74f17db27135eb3bae593c00f3a449d4eba74572af18c"
+    },
+    {
+      "path": "/app-thumbnails/3cb419a8-6c37-4e15-9d0d-6b0634be0bc4.png",
+      "size": 375215,
+      "sha256": "55f4f1d346f350b87fb537b42e1b1f3945374d74866a82e1451dd011bc1e2a45"
+    },
+    {
+      "path": "/app-thumbnails/3f602cb9-e07f-422c-9f40-127145020bc2.png",
+      "size": 169647,
+      "sha256": "5044837e8d974fd06aa37bc9b37bd1ada0bf6f699e61ee246f09a4dd7486b437"
+    },
+    {
+      "path": "/app-thumbnails/4013316e-7506-46aa-9f24-7175b379ea27.png",
+      "size": 157481,
+      "sha256": "99c3ceb0b8eae5404081690ee9cf13903081ba7f9461e07d9f14a8cc9ede5fc1"
+    },
+    {
+      "path": "/app-thumbnails/40acf4df-03d2-4802-a334-b56401956299.png",
+      "size": 307133,
+      "sha256": "885b1eb236a74c15fcad0871d142b1ce525b31b6d69b61552501b753ba9fd932"
+    },
+    {
+      "path": "/app-thumbnails/422f88e0-ac58-42c6-afa4-9d557979eaf8.png",
+      "size": 164734,
+      "sha256": "375d4600af55215051e73d78a590b645d32c8c4365633342140a3f1f3fe45dfd"
+    },
+    {
+      "path": "/app-thumbnails/42b8f202-db48-42f6-a8aa-e35192687889.png",
+      "size": 80883,
+      "sha256": "bb4999073f6d0007cf80eaf7e78590425009477d68ca44acab46dd9187eeeb3e"
+    },
+    {
+      "path": "/app-thumbnails/47acd11b-2f45-4029-8813-3add585cd1aa.png",
+      "size": 166995,
+      "sha256": "00bc7196a5c04c5f24411cac7a5f76922aaca0b04a5a386b859aa5b396a231ae"
+    },
+    {
+      "path": "/app-thumbnails/48b67d53-f103-4fc7-9544-59e8a73b2686.png",
+      "size": 101854,
+      "sha256": "405b8c2cead00c5895d9ac379f2cae83dab507f80679fcd5c82fc49f8427d38c"
+    },
+    {
+      "path": "/app-thumbnails/511d5334-1e2c-40ac-8f9b-bc7bc22a1a21.png",
+      "size": 40129,
+      "sha256": "d74f712525f24f22ae21b0c6710da76b94f91c99c3d14132fd2c64e6d370ecca"
+    },
+    {
+      "path": "/app-thumbnails/5543c36a-42d8-49ba-b2e2-85a2c4f193ea.png",
+      "size": 95891,
+      "sha256": "752d5c741381146391aae22b7aab9ce2d57a60409b9e10725f655602202eebf3"
+    },
+    {
+      "path": "/app-thumbnails/56f95ab1-4ad1-45b6-8eac-e5ba6cf543b8.png",
+      "size": 128680,
+      "sha256": "9dc0726fcaad1936fbe997db65160ef4d7fcee70c71a2c691f77d53070acc6e5"
+    },
+    {
+      "path": "/app-thumbnails/596fc43f-8908-492f-b328-d43aae7e984d.png",
+      "size": 241033,
+      "sha256": "56b7220a98414dee211207f8ae04819293d0425bb2b9d93bc2f9d3639e44b33a"
+    },
+    {
+      "path": "/app-thumbnails/5aff20b9-e329-4536-8761-a82adee6cfb2.jpg",
+      "size": 77943,
+      "sha256": "54a06c472884fa6c1046a71d824db875634b2b4ec59815b2d1eb7a254e7ae732"
+    },
+    {
+      "path": "/app-thumbnails/60646b44-ffef-45f9-a774-65df50211a9a.png",
+      "size": 337540,
+      "sha256": "95e7ce380fc07c786529ef6d6532f9e9207e923a43e33fc953b2bbbc1db7a1d0"
+    },
+    {
+      "path": "/app-thumbnails/636a7672-622a-4ba7-8f94-a1d61fb1a853.png",
+      "size": 123288,
+      "sha256": "4723a95cc65f837e89d1c596f65b892539200a6c9f3bbb53f15a4fd492b66db2"
+    },
+    {
+      "path": "/app-thumbnails/643c543f-599c-4a5d-83f6-57d31acd0394.jpg",
+      "size": 81947,
+      "sha256": "74afb4b6a7f3a69ee7d37e346ade75df72658e3c368cdeb4a4c841b4fb58a18b"
+    },
+    {
+      "path": "/app-thumbnails/680f7079-9f3a-4b90-ab32-e418cd40aab9.png",
+      "size": 125205,
+      "sha256": "901a13322328d7e6c87cf9ae45ba657505b23a0356fb7e2fc9bf67b1cbdfa6e8"
+    },
+    {
+      "path": "/app-thumbnails/6b801106-2602-42d8-8cd2-d26716433860.png",
+      "size": 393199,
+      "sha256": "a34bf2435deed9dcf0a690e2eb743725431116e9998c13343b20773f48b84e49"
+    },
+    {
+      "path": "/app-thumbnails/7507c704-bd01-497e-aeb5-1578209b0d6e.png",
+      "size": 168923,
+      "sha256": "9b6a04e694fb9ce7ac7750f07dbc717687357b178d0847ec5388c887f2708332"
+    },
+    {
+      "path": "/app-thumbnails/77669d34-e66c-4f01-a74c-f703447fa17d.png",
+      "size": 393199,
+      "sha256": "30e66ddb9bb6425b1280ff235bc45efe270fff5da19070a897dd3dbf86500910"
+    },
+    {
+      "path": "/app-thumbnails/79bce259-c3aa-40f7-892b-f46be5fbe3fc.png",
+      "size": 236580,
+      "sha256": "97eb3f0f727efd4a4e1f7492efabf6b955e826e381622493512533b2338855ab"
+    },
+    {
+      "path": "/app-thumbnails/7b66f642-63da-4389-bce4-35e5d708b6d0.png",
+      "size": 199388,
+      "sha256": "8a98db02d92f32a2490569cf30e8484b71df7c9988ae1cfbc86a1b4ca4a07f01"
+    },
+    {
+      "path": "/app-thumbnails/86c0c19a-c4bf-4ef1-822b-75162b385271.png",
+      "size": 99093,
+      "sha256": "5a0112b75d672bb55da90c96c35fd94eea92e71fbcc1bdc650db5ac5256c0628"
+    },
+    {
+      "path": "/app-thumbnails/876e4653-4056-431f-ae17-27b5e45d0b4b.png",
+      "size": 150966,
+      "sha256": "faccb80c005a4cc115f7d6fb2ddbc9709a843dc16a1a138826ae04e188de5b7f"
+    },
+    {
+      "path": "/app-thumbnails/890a0ba1-6e4c-4bf8-a9d9-2009802a94fb.png",
+      "size": 62283,
+      "sha256": "983d428d84d221c726acc11e38b8a57d118850525786c394faaaaa799e4921d3"
+    },
+    {
+      "path": "/app-thumbnails/8ce3212a-1d5a-4987-8a51-bc6ecdb96324.png",
+      "size": 91428,
+      "sha256": "0aeb578bcf3e3c11e710803a7a60e04d69ccaa4a117e7c583d37a7af1b287a1f"
+    },
+    {
+      "path": "/app-thumbnails/8dcda375-afc0-4a15-9235-e8df7cad85a6.png",
+      "size": 148838,
+      "sha256": "4e196882596441170bd6ab0ece405dcd9d2f6fb7ec9f9c2cc52301f2c390ceb2"
+    },
+    {
+      "path": "/app-thumbnails/91fc1ce8-f455-464d-ace8-f2d2b2ed2985.png",
+      "size": 369624,
+      "sha256": "f1bc49edce7eb332dccb20cf05764ec841a98685dee6d432a9b3d5da30344e3a"
+    },
+    {
+      "path": "/app-thumbnails/96932b6e-d720-4fdb-80ff-1db37f5b0e6f.png",
+      "size": 110588,
+      "sha256": "79ff4af4dbf73d4dbc284f7974f50f22de9582a73ab8243141bb3dac759fc182"
+    },
+    {
+      "path": "/app-thumbnails/9925ecdd-4483-4f9b-bb96-8aed89662621.png",
+      "size": 236977,
+      "sha256": "94dcb8c367ee7a1e17d383509e64d2683fa017650c8ba832de97e976b1013fbf"
+    },
+    {
+      "path": "/app-thumbnails/9a61427f-7760-48ff-8e95-52e7264dd838.png",
+      "size": 168715,
+      "sha256": "e947549c27a5b5994bf8187a295b2c34928f432ce26989e773e4476e0522dc19"
+    },
+    {
+      "path": "/app-thumbnails/9a942662-4e1c-4ab5-aa65-b8e2a082ec2f.png",
+      "size": 126867,
+      "sha256": "3173cdd38480dd92156bc1be6640c04b3bd0458f6d7225c58040ea8b1bc7e0cd"
+    },
+    {
+      "path": "/app-thumbnails/9c98f5c3-758a-47ba-bf90-59799f820e4f.png",
+      "size": 231567,
+      "sha256": "28f4b9a94cf8f71c0545d11b4281c87d9b0e2aa4dc0995a507c8846b81ddc454"
+    },
+    {
+      "path": "/app-thumbnails/9e77dba6-7388-4b21-bf2e-b74b9d9e5193.png",
+      "size": 77615,
+      "sha256": "30073c1efddcebdea28ad3a9b477acfd77e9d745ac07680ecdcebd762b71d5d4"
+    },
+    {
+      "path": "/app-thumbnails/a062beee-cba2-4074-a637-182d3b9af316.png",
+      "size": 233673,
+      "sha256": "819a9f86255f914317b9e2f022c6b72f42c32d85cd9833e83c55c48b1bed475d"
+    },
+    {
+      "path": "/app-thumbnails/a134be86-a969-4e39-b131-9c61247f4c87.png",
+      "size": 320396,
+      "sha256": "5a5ae79d5950dda759edaeef4450a6994b73b44413fa587af3aa3476b67c364c"
+    },
+    {
+      "path": "/app-thumbnails/a453fce0-6a74-4cb2-99aa-0a7d847114da.png",
+      "size": 300973,
+      "sha256": "474a6cf11652605d16637e8ffae8701297a7f73a75f0c611281d58a01ad04525"
+    },
+    {
+      "path": "/app-thumbnails/a569fbf0-1e50-4286-aef8-b0e38ea6aa8d.png",
+      "size": 211543,
+      "sha256": "904a8f23aebe06393f398a42c07b84206a7daa9257cb1fa0ef82454d9ca5252b"
+    },
+    {
+      "path": "/app-thumbnails/a990e157-a2d7-4ded-b339-5ca3a1b50a66.jpg",
+      "size": 68591,
+      "sha256": "e60ab7131d23bdb5a716ce2f567473021678b918260e46d220e5e69344e60a7f"
+    },
+    {
+      "path": "/app-thumbnails/ac622468-2710-4183-9a67-f2489ae000c5.png",
+      "size": 300284,
+      "sha256": "0e25dc616a225a7dabad9c38b5b46aba252c35026bea5e6b93b04c67d8a25589"
+    },
+    {
+      "path": "/app-thumbnails/acd41aa8-8a45-4051-8a7f-fcff679d56a4.png",
+      "size": 91740,
+      "sha256": "9fee5d4d381c4755b44879c6a66fad6069b560e5c1586c57eaeaf5c7d167d5eb"
+    },
+    {
+      "path": "/app-thumbnails/af1fee94-763b-4f7c-9607-bc685873a2fc.png",
+      "size": 80208,
+      "sha256": "f6b11c2aaba1828f3ee90b09aa9042f4ff7312a208ba59cd834495f332db41ec"
+    },
+    {
+      "path": "/app-thumbnails/b52fd0e4-768b-4cc1-806c-53deef04f003.png",
+      "size": 393199,
+      "sha256": "6603cd66f37b4650d164e12652b9fdaf998f4c72ad7b378954c54a8155176a2e"
+    },
+    {
+      "path": "/app-thumbnails/b8f82bb6-65a5-4876-8c75-b52cc125e5be.png",
+      "size": 96365,
+      "sha256": "ea62a9a5de166bf965b7954020fe5b45e7076a348e73d598816c8b6ab68eb2eb"
+    },
+    {
+      "path": "/app-thumbnails/bebd1fd7-5b54-4923-a476-fae00288d4e2.png",
+      "size": 393199,
+      "sha256": "b549d43deec400c9833494ed5213aa9fb20f3cfd856fa1c3b3551ad751d64dc5"
+    },
+    {
+      "path": "/app-thumbnails/c4962759-1d6a-4070-85a8-cc46c91a70f1.png",
+      "size": 34784,
+      "sha256": "b3e0148b44bde4cc762fe0b24fecc8332404dd21aa5b4bd1b2c259016a680467"
+    },
+    {
+      "path": "/app-thumbnails/c7de79fb-516a-4167-9d21-ba282a2cf5de.png",
+      "size": 81138,
+      "sha256": "24af47df218af556ec76a0e22b3929dbfe0f801033db7f5ae43a2cf6ae47d16e"
+    },
+    {
+      "path": "/app-thumbnails/ca39ad82-aec4-4011-84a8-56cfaa981631.jpg",
+      "size": 101770,
+      "sha256": "15bf16774b371fae4d01cc4f33f5a39592fdf4638463233d3bddd41c5826e462"
+    },
+    {
+      "path": "/app-thumbnails/ca54acea-5292-4aff-80bd-8ea5da49294c.png",
+      "size": 110947,
+      "sha256": "2795ce1d9b413b212d8444924f658af80500a1b027b9588b1f07b2159d6935ba"
+    },
+    {
+      "path": "/app-thumbnails/d093f79b-8672-4498-8f39-b65397fff216.png",
+      "size": 330967,
+      "sha256": "17bf7514106786d258a8d7951544cede5bf383c1a8d05fd2d61c0dfc7dc1211d"
+    },
+    {
+      "path": "/app-thumbnails/d13ba3a7-be1e-4aab-bc7a-de1df66bd8f3.jpg",
+      "size": 207053,
+      "sha256": "c61700e2ce81cdcc24f07e1d71e8b5ebfcacebb71e191f4edae6acc7bef6fd4f"
+    },
+    {
+      "path": "/app-thumbnails/d2caab9f-3456-4df5-b0b4-da7bb141bf9f.png",
+      "size": 393199,
+      "sha256": "2a7ca71939f927558d33b5adbb1a9859a6701002935f1f77201c0eb4f00611c1"
+    },
+    {
+      "path": "/app-thumbnails/d9e05a77-4d67-4c0e-be07-48b069383791.png",
+      "size": 214556,
+      "sha256": "f38e78b998e792ae11d08c993a8ce1a2c164009d2094c8a63816f97b72e42353"
+    },
+    {
+      "path": "/app-thumbnails/e3673005-3e93-42cd-9076-044480a41344.png",
+      "size": 153181,
+      "sha256": "bb93d8c7f7ca99dfcff9e52803d135e434097f68d402a5c5916225944362d4bf"
+    },
+    {
+      "path": "/app-thumbnails/e417c1ae-442e-4225-a7d3-c126f655183a.png",
+      "size": 121305,
+      "sha256": "45fd7e0ad0f6cdf7ddfb1a5548072bcfdf8ac796a7c1ac2ed120548c22091f7c"
+    },
+    {
+      "path": "/app-thumbnails/e41f2952-cbee-4463-9205-c3e7ce269602.png",
+      "size": 194404,
+      "sha256": "11bd3b0d6d2c41d56fe47fe796ccee7eef18bf5d5fd00812d4fca2d18eceb26d"
+    },
+    {
+      "path": "/app-thumbnails/f058dc1c-3ee5-4368-ba32-23ed3fcaac37.png",
+      "size": 82285,
+      "sha256": "5d66cd32f0aac974effbc308d878b5f7aa230cf70cd696da863556bea453f216"
+    },
+    {
+      "path": "/app-thumbnails/f1fc0953-7d49-42c5-a0cc-68b0a564e765.png",
+      "size": 364770,
+      "sha256": "fb70848c980c6b36d8fdf7e4f9df48df487dbea1c19312b619c3e54a2a5064a8"
+    },
+    {
+      "path": "/app-thumbnails/f3dcbbf0-6443-43c9-8b3b-dcc60f532c66.png",
+      "size": 393199,
+      "sha256": "d58a60ca8b7186ebc14f574d4a8dc90b4f373617dc14c6a8b9ed22dacd5bc54a"
+    },
+    {
+      "path": "/app-thumbnails/fbdbaf4e-1c6d-4644-8de7-cde51f5e9c9d.png",
+      "size": 90762,
+      "sha256": "c24abecfc5adbb5406e1dd6fe9cb9808f4c58f7f5cf8e4827130035f30ff2005"
+    },
+    {
+      "path": "/app-thumbnails/feb7f03f-05fc-4c43-8919-060423577589.png",
+      "size": 218589,
+      "sha256": "8ab1f351ec9fae55b908daf5319c13a2d07835da3f46831d93df4c94da9e3e3d"
+    },
+    {
+      "path": "/app-thumbnails/feee9f4c-ebef-455d-a303-c6016dca3ea9.png",
+      "size": 393199,
+      "sha256": "fa6f3d58f83412aaa1b6b76be6c9a8e635bb0048acbe2b2a07afb65bb9be8cac"
+    }
+  ],
   "version": 1,
-  "generatedAt": "2026-07-09T13:01:13.764Z",
-  "appCount": 56,
+  "generatedAt": "2026-07-23T08:44:01.348Z",
+  "appCount": 84,
   "apps": [
+    {
+      "id": "e417c1ae-442e-4225-a7d3-c126f655183a",
+      "title": "클라우드 수업실",
+      "summary": "교사가 학생 답변을 붙여넣어 수업용 워드 클라우드와 단어 빈도표를 바로 만드는 도구",
+      "url": "https://wbmaker2.github.io/edu-word-cloud/",
+      "githubUrl": "https://github.com/WBmaker2/edu-word-cloud",
+      "tags": [
+        "교사용 도구",
+        "워드 클라우드",
+        "수업 활동",
+        "단어 분석",
+        "시각화"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/e417c1ae-442e-4225-a7d3-c126f655183a.png",
+      "subject": "공통",
+      "grade": null,
+      "memo": "학생 답변이나 수업 내용을 붙여넣고 모양·색상·글꼴을 골라 워드 클라우드 수업 자료를 빠르게 만들 수 있습니다.",
+      "createdAt": "2026-07-22T22:35:06.579Z",
+      "updatedAt": "2026-07-22T22:35:06.579Z"
+    },
+    {
+      "id": "6738aefd-9410-4b80-8d95-2549be89e3d4",
+      "title": "빛길 구조대",
+      "summary": "초등 5~6학년 학생이 빛의 직진·반사·굴절을 예상하고 거울과 렌즈의 빛길로 확인하는 과학 탐구 앱입니다.",
+      "url": "https://light-path-rescue-team.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "초등과학",
+        "과학수업",
+        "탐구활동",
+        "빛",
+        "거울과 렌즈"
+      ],
+      "thumbnailMode": "placeholder",
+      "thumbnailUrl": null,
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "빛길을 먼저 예상하고 장치를 고른 뒤 결과를 설명하는 수업용 활동입니다. 실제 거울·렌즈 실험 전후의 개념 확인에 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:14:18.104Z",
+      "updatedAt": "2026-07-22T22:14:18.104Z"
+    },
+    {
+      "id": "f058dc1c-3ee5-4368-ba32-23ed3fcaac37",
+      "title": "삼권분립 사건 처리실",
+      "summary": "초등 5~6학년이 가상 사건을 따라 국회·행정부·법원의 역할과 권력 분립의 까닭을 살펴보는 사회 학습 앱입니다.",
+      "url": "https://separation-of-powers-case-room.wbmaker.chatgpt.site/",
+      "githubUrl": null,
+      "tags": [
+        "초등사회",
+        "삼권분립",
+        "민주주의",
+        "가상사건"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/f058dc1c-3ee5-4368-ba32-23ed3fcaac37.png",
+      "subject": "사회",
+      "grade": "초등 5~6학년",
+      "memo": "민주주의와 시민 참여 단원에서 세 가지 가상 사건을 순서대로 살피며, 국가기관이 하는 일과 서로 다시 살피는 까닭을 정리하는 활동에 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:13:35.820Z",
+      "updatedAt": "2026-07-22T22:13:35.820Z"
+    },
+    {
+      "id": "b023a954-b497-4467-b043-64910bd20dac",
+      "title": "오래된 물건 사건파일",
+      "summary": "초등 5~6학년이 실제 박물관 유물 사진과 새 단서를 비교하며 역사 가설을 기록하고 고쳐 보는 탐구 활동 앱입니다.",
+      "url": "https://old-object-case-files.wbmaker.chatgpt.site/",
+      "githubUrl": null,
+      "tags": [
+        "역사",
+        "자료 탐구",
+        "관찰과해석",
+        "초등",
+        "추론활동"
+      ],
+      "thumbnailMode": "placeholder",
+      "thumbnailUrl": null,
+      "subject": "사회",
+      "grade": "초등 5~6학년",
+      "memo": "사회 수업에서 유물 사진을 관찰한 뒤, 박물관 기록과 새 단서를 비교하며 처음 생각을 근거에 맞게 고쳐 보는 활동으로 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:12:49.955Z",
+      "updatedAt": "2026-07-22T22:12:49.955Z"
+    },
+    {
+      "id": "643c543f-599c-4a5d-83f6-57d31acd0394",
+      "title": "특허 탐정사무소",
+      "summary": "초등 3~4학년 학생이 가상 발명품의 같은 점과 다른 점을 근거로 비교하며 생각을 고쳐 보는 탐구 활동 앱입니다.",
+      "url": "https://patent-detective-office.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "3~4학년",
+        "근거찾기",
+        "탐구활동"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/643c543f-599c-4a5d-83f6-57d31acd0394.jpg",
+      "subject": "공통",
+      "grade": "초등 3~4학년",
+      "memo": "발명·특허 관련 탐구 수업에서 A·B·C 자료를 읽고 근거를 골라 처음 생각을 고쳐 보는 활동으로 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:12:10.589Z",
+      "updatedAt": "2026-07-22T22:12:10.589Z"
+    },
+    {
+      "id": "10829a2a-f96b-48ee-bca7-bd28c9748f27",
+      "title": "이미지 의미 편집실",
+      "summary": "초등학생이 같은 이미지의 자르기·크기·글·색 변화를 비교하며 화면에서 찾은 까닭으로 느낌과 뜻을 설명하는 국어·미술 활동입니다.",
+      "url": "https://image-meaning-editing-studio.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "국어",
+        "미술",
+        "이미지 읽기",
+        "편집 비교",
+        "미디어 리터러시"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/10829a2a-f96b-48ee-bca7-bd28c9748f27.png",
+      "subject": "국어 · 미술",
+      "grade": "초등 4~6학년",
+      "memo": "국어와 미술 수업에서 같은 장면을 자르기·크기·글·색으로 바꾸어 보고, 보이는 변화와 느낌의 까닭을 함께 말해 보는 활동에 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:09:20.437Z",
+      "updatedAt": "2026-07-22T22:11:53.892Z"
+    },
+    {
+      "id": "876e4653-4056-431f-ae17-27b5e45d0b4b",
+      "title": "태양·그림자 관계 기록국",
+      "summary": "초등 과학 수업에서 태양 고도·그림자 길이·기온의 관계를 자료로 비교하고 설명하는 탐구 활동 앱",
+      "url": "https://sun-shadow-record-office.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "과학",
+        "초등",
+        "태양",
+        "그림자",
+        "자료 탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/876e4653-4056-431f-ae17-27b5e45d0b4b.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "교사가 안전 약속부터 시간 기록 복원, 그래프·숫자표 해석, 계절 비교까지 순서대로 활용할 수 있는 자료 탐구 활동입니다.",
+      "createdAt": "2026-07-22T22:11:25.573Z",
+      "updatedAt": "2026-07-22T22:11:25.573Z"
+    },
+    {
+      "id": "79bce259-c3aa-40f7-892b-f46be5fbe3fc",
+      "title": "내 권리 선택 극장",
+      "summary": "초등 1~2학년이 만든 이야기 속 장면을 보며 권리와 도움받는 방법을 익히는 아동권리 수업 활동",
+      "url": "https://my-rights-choice-theater.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "아동권리",
+        "생활교육",
+        "안전교육",
+        "초등 저학년"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/79bce259-c3aa-40f7-892b-f46be5fbe3fc.png",
+      "subject": "공통",
+      "grade": "초등 1~2학년",
+      "memo": "초등 저학년 아동권리 수업에서 실제 경험을 말하지 않고, 만든 이야기 속 장면을 통해 여러 도움 방법과 어른의 역할을 함께 살펴볼 수 있습니다.",
+      "createdAt": "2026-07-22T22:09:48.616Z",
+      "updatedAt": "2026-07-22T22:09:48.616Z"
+    },
+    {
+      "id": "3d9dcb26-f6f6-4cb2-bd89-71028efe899b",
+      "title": "정보 손실 통신소",
+      "summary": "초등학생이 전달된 문장을 비교해 달라진 뜻을 찾고, 안전하게 다시 전하는 방법을 연습하는 국어 학습 앱입니다.",
+      "url": "https://information-loss-communication-station.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "국어",
+        "의사소통",
+        "정보전달",
+        "초등수업"
+      ],
+      "thumbnailMode": "placeholder",
+      "thumbnailUrl": null,
+      "subject": "국어",
+      "grade": "초등 3~6학년",
+      "memo": "원문과 전달문을 비교하며 빠짐·추가·뜻 변화를 근거로 설명하고, 안전한 전달문을 만들어 보는 수업 활동에 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:09:30.871Z",
+      "updatedAt": "2026-07-22T22:09:30.871Z"
+    },
+    {
+      "id": "dbf5fa15-fe4b-47a5-a186-29e4f50d8665",
+      "title": "친환경 수송 조건 설계소",
+      "summary": "초등 3~4학년 학생이 짐, 거리, 길 조건에 맞는 수레 부품을 고르고 결과를 비교하는 과학 탐구 활동입니다.",
+      "url": "https://eco-transport-design-studio.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "과학",
+        "초등과학",
+        "환경",
+        "생각실험",
+        "비교실험"
+      ],
+      "thumbnailMode": "placeholder",
+      "thumbnailUrl": null,
+      "subject": "과학",
+      "grade": "초등 3~4학년",
+      "memo": "과학 수업에서 옮길 물건, 거리, 길, 움직이는 힘을 살펴보고 수레 부품을 한 가지씩 바꿔 조건별 결과와 생각할 점을 비교하는 활동에 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:08:19.446Z",
+      "updatedAt": "2026-07-22T22:08:19.446Z"
+    },
+    {
+      "id": "b8f82bb6-65a5-4876-8c75-b52cc125e5be",
+      "title": "소리 차단 재료 연구소",
+      "summary": "초등학생이 가상 장치에서 한 가지 조건씩 바꾸며 소리가 지나가는 길과 줄어드는 조건을 비교해 보는 과학 탐구 앱입니다.",
+      "url": "https://sound-blocking-material-lab.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "과학",
+        "소리",
+        "비교실험",
+        "변인통제",
+        "초등과학"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/b8f82bb6-65a5-4876-8c75-b52cc125e5be.png",
+      "subject": "과학",
+      "grade": "초등 3~4학년",
+      "memo": "3~4학년 소리 단원에서 실제 실험 전에 한 가지만 바꾸어 결과와 근거를 비교하는 탐구 활동으로 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:08:09.143Z",
+      "updatedAt": "2026-07-22T22:08:09.143Z"
+    },
+    {
+      "id": "8ce3212a-1d5a-4987-8a51-bc6ecdb96324",
+      "title": "가능성 예보국",
+      "summary": "초등 5~6학년이 첫 자료와 새 자료를 비교하며 가능성을 분수와 말로 예보해 보는 수학 활동",
+      "url": "https://possibility-forecast-office.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "초등수학",
+        "가능성",
+        "분수",
+        "자료해석",
+        "예보"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/8ce3212a-1d5a-4987-8a51-bc6ecdb96324.png",
+      "subject": "수학",
+      "grade": "초등 5~6학년",
+      "memo": "15~20분 개인 또는 2인 활동으로 자료를 세고 새 자료를 합쳐 예보를 유지하거나 바꾸는 과정을 토의합니다.",
+      "createdAt": "2026-07-22T22:07:52.391Z",
+      "updatedAt": "2026-07-22T22:07:52.391Z"
+    },
+    {
+      "id": "ca54acea-5292-4aff-80bd-8ea5da49294c",
+      "title": "화면 속 자 정비소",
+      "summary": "초등 1~2학년 학생이 고장난 화면 속 자를 고치며 바른 길이 재기 방법을 익히는 수학 활동 앱",
+      "url": "https://measurement-standard-rod-repair-shop.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "초등수학",
+        "길이 측정",
+        "단위칸",
+        "오개념 교정",
+        "수업 활동"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/ca54acea-5292-4aff-80bd-8ea5da49294c.png",
+      "subject": "수학",
+      "grade": "초등 1~2학년",
+      "memo": "길이 측정 첫 수업에서 시작점, 같은 크기의 칸, 틈과 겹침, 눈금 사이 세기를 순서대로 살펴보는 활동으로 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:07:36.451Z",
+      "updatedAt": "2026-07-22T22:07:36.451Z"
+    },
+    {
+      "id": "636a7672-622a-4ba7-8f94-a1d61fb1a853",
+      "title": "용해 조건 탐사선",
+      "summary": "초등 5~6학년 학생이 소금과 설탕의 용해 조건을 예측·관찰·비교하며 근거에 맞는 규칙을 만드는 과학 탐구 앱",
+      "url": "https://solubility-condition-explorer.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "초등과학",
+        "용해",
+        "비교실험",
+        "탐구학습",
+        "과학수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/636a7672-622a-4ba7-8f94-a1d61fb1a853.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "물질 종류와 물 온도를 한 번에 하나씩 바꾸어 비교하고, 예상-관찰-근거-규칙의 5단계로 용해 개념을 정리하는 수업에 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:03:52.954Z",
+      "updatedAt": "2026-07-22T22:07:21.130Z"
+    },
+    {
+      "id": "feb7f03f-05fc-4c43-8919-060423577589",
+      "title": "지시어 관제실",
+      "summary": "초등학생이 앞뒤 문맥을 살펴 가리키는 말을 찾아 뜻을 분명히 하는 국어 활동 앱입니다.",
+      "url": "https://reference-expression-control-room.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "국어",
+        "문맥 읽기",
+        "지시어",
+        "초등 3~6학년"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/feb7f03f-05fc-4c43-8919-060423577589.png",
+      "subject": "국어",
+      "grade": "초등 3~6학년",
+      "memo": "국어 시간에 앞뒤 내용을 읽고, 가리키는 말과 그 까닭을 함께 찾아보는 활동으로 사용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:06:49.242Z",
+      "updatedAt": "2026-07-22T22:06:49.242Z"
+    },
+    {
+      "id": "7b66f642-63da-4389-bce4-35e5d708b6d0",
+      "title": "달 관측 기록 복원소",
+      "summary": "초등학생이 앞뒤 달 관측 기록을 비교해 빈칸의 달 모양을 추론하는 과학 학습 앱입니다.",
+      "url": "https://moon-observation-record-restoration.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "초등과학",
+        "달의위상",
+        "관찰기록",
+        "추론활동",
+        "3~4학년"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/7b66f642-63da-4389-bce4-35e5d708b6d0.png",
+      "subject": "과학",
+      "grade": "초등 3~4학년",
+      "memo": "여러 날의 달 모양을 앞뒤 기록으로 비교해 빈칸을 복원하며, 밝은 부분의 변화와 자료가 부족할 때의 판단을 함께 살펴보는 수업 활동입니다.",
+      "createdAt": "2026-07-22T22:06:47.687Z",
+      "updatedAt": "2026-07-22T22:06:47.687Z"
+    },
+    {
+      "id": "28e6a55c-4cc2-4fba-8741-09e56d7ba87b",
+      "title": "열 이동 배달 추적소",
+      "summary": "초등학교 5~6학년 학생이 온도 자료를 읽고 열이 어디로 이동하는지 찾아보는 과학 학습 앱입니다.",
+      "url": "https://heat-transfer-delivery-tracker.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "초등과학",
+        "열이동",
+        "탐구활동",
+        "전도·대류·복사"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/28e6a55c-4cc2-4fba-8741-09e56d7ba87b.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "온도 변화를 보고 열의 이동 방향을 예측한 뒤, 전도·대류·복사를 근거와 함께 비교하는 수업 활동에 활용할 수 있습니다.",
+      "createdAt": "2026-07-22T22:05:18.770Z",
+      "updatedAt": "2026-07-22T22:05:18.770Z"
+    },
+    {
+      "id": "a990e157-a2d7-4ded-b339-5ca3a1b50a66",
+      "title": "실험 리포트 조립소",
+      "summary": "초등학생이 과학 실험 기록에서 관찰 사실과 해석을 구분하고 근거로 연결해 짧은 리포트를 완성하는 학습 앱입니다.",
+      "url": "https://experiment-report-assembler.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "초등과학",
+        "실험보고서",
+        "관찰과해석",
+        "근거찾기",
+        "교과융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a990e157-a2d7-4ded-b339-5ca3a1b50a66.jpg",
+      "subject": "과학·국어",
+      "grade": "초등 4학년",
+      "memo": "실험 후 보고서 쓰기 전에 관찰 사실과 해석을 구분하고, 두 관찰 기록으로 해석을 뒷받침하는 관계를 연습하는 수업 활동입니다.",
+      "createdAt": "2026-07-17T03:30:48.906Z",
+      "updatedAt": "2026-07-17T03:32:24.048Z"
+    },
+    {
+      "id": "3a72009d-c1ad-48b5-86b4-6eb870143eea",
+      "title": "분류 기준 뒤집개",
+      "summary": "초등 1~2학년 학생이 같은 단추를 서로 다른 기준으로 나누고 개수를 세며 분류 결과의 변화를 비교하는 수학 활동입니다.",
+      "url": "https://classification-criteria-flipper.wbmaker.chatgpt.site",
+      "githubUrl": null,
+      "tags": [
+        "초등수학",
+        "초등저학년",
+        "분류",
+        "개수세기"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/3a72009d-c1ad-48b5-86b4-6eb870143eea.png",
+      "subject": "수학",
+      "grade": "초등 1~2학년",
+      "memo": "같은 단추 여섯 개를 색·모양·구멍 수·무늬 중 두 기준으로 직접 나누고 개수를 세어 보며, 기준에 따라 분류 결과가 달라짐을 비교하는 8~12분 수학 활동입니다.",
+      "createdAt": "2026-07-17T01:27:17.761Z",
+      "updatedAt": "2026-07-17T01:27:17.761Z"
+    },
+    {
+      "id": "5aff20b9-e329-4536-8761-a82adee6cfb2",
+      "title": "이야기 마음 근거 수사대",
+      "summary": "초등 저학년이 이야기 속 말·행동·표정을 단서로 인물의 마음과 여러 생각을 근거 있게 짐작하는 국어 읽기 활동 앱",
+      "url": "https://wbmaker2.github.io/story-heart-evidence-detective/",
+      "githubUrl": "https://github.com/WBmaker2/story-heart-evidence-detective",
+      "tags": [
+        "국어",
+        "독해",
+        "마음짐작",
+        "근거찾기",
+        "초등저학년"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/5aff20b9-e329-4536-8761-a82adee6cfb2.jpg",
+      "subject": "국어",
+      "grade": "초등 1~2학년",
+      "memo": "연습 사건 뒤 여섯 이야기를 읽고 마음 하나와 단서 두 장을 연결한 뒤 다른 생각을 함께 살펴보는 점수 없는 활동입니다.",
+      "createdAt": "2026-07-17T00:22:36.037Z",
+      "updatedAt": "2026-07-17T00:22:36.037Z"
+    },
+    {
+      "id": "e3673005-3e93-42cd-9076-044480a41344",
+      "title": "십 묶음 택배 터미널",
+      "summary": "초등 1~2학년 학생이 밝은 택배 놀이에서 0부터 100까지의 수를 십 묶음과 낱개로 나타내며 수량과 자리값을 익히는 수학 학습 앱입니다.",
+      "url": "https://ten-bundle-terminal.wbmaker.chatgpt.site",
+      "githubUrl": "https://github.com/WBmaker2/ten-bundle-terminal",
+      "tags": [
+        "수학",
+        "초등저학년",
+        "수개념",
+        "십묶음",
+        "자리값"
+      ],
+      "thumbnailMode": "auto",
+      "thumbnailUrl": "/app-thumbnails/e3673005-3e93-42cd-9076-044480a41344.png",
+      "subject": "수학",
+      "grade": "초등 1~2학년",
+      "memo": "고정 9개 미션에서 낱개 10개를 십 묶음 1개로 묶고 다시 풀며 전체 수가 그대로인지 확인합니다. 화면의 '지금 할 일' 안내를 따라 숫자 쓰기, 수 읽기, 일·십 자리 관계를 10~15분 개별 학습이나 수학 보충 활동으로 연습할 수 있습니다.",
+      "createdAt": "2026-07-14T13:18:33.193Z",
+      "updatedAt": "2026-07-15T07:16:10.523Z"
+    },
+    {
+      "id": "ca39ad82-aec4-4011-84a8-56cfaa981631",
+      "title": "깜빡이 회로 수리센터",
+      "summary": "초등 5~6학년 학생이 회로의 증상과 닫힌 길을 근거로 고장 원인을 진단하고 최소 수정으로 복구하는 과학 학습 앱입니다.",
+      "url": "https://blinking-circuit-repair-center.wbmaker.chatgpt.site",
+      "githubUrl": "https://github.com/WBmaker2/blinking-circuit-repair-center",
+      "tags": [
+        "과학",
+        "과학실험",
+        "전기회로",
+        "시뮬레이션",
+        "안전"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/ca39ad82-aec4-4011-84a8-56cfaa981631.jpg",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "전기 회로 단원에서 실제 실험 전·후로 닫힌 경로, 전구 접점, 끊어진 전선, 간헐 접촉, 두 전지 직렬연결을 점검하고 수리 근거를 설명하는 15~20분 탐구 활동에 활용할 수 있습니다.",
+      "createdAt": "2026-07-14T12:23:14.047Z",
+      "updatedAt": "2026-07-14T12:23:14.047Z"
+    },
+    {
+      "id": "2f302bf0-c012-4432-a585-106e74385b7d",
+      "title": "공정 배분 실험실",
+      "summary": "초등 3~4학년 학생이 같은 가상 상황에 네 가지 배분 기준을 적용하고 결과와 한계를 비교하는 도덕 생각 실험입니다.",
+      "url": "https://fair-distribution-lab.wbmaker.chatgpt.site",
+      "githubUrl": "https://github.com/WBmaker2/fair-distribution-lab",
+      "tags": [
+        "공정",
+        "배분",
+        "도덕",
+        "생각실험",
+        "초등"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/2f302bf0-c012-4432-a585-106e74385b7d.png",
+      "subject": "도덕",
+      "grade": "초등 3~4학년",
+      "memo": "첫 배분의 절차를 살피고 똑같이·필요·기여·추첨 기준의 결과와 한계를 비교한 뒤, 새 사실에 따라 판단을 유지하거나 바꾸며 근거를 구성하는 수업 활동입니다.",
+      "createdAt": "2026-07-14T12:17:17.811Z",
+      "updatedAt": "2026-07-14T12:17:17.811Z"
+    },
+    {
+      "id": "48b67d53-f103-4fc7-9544-59e8a73b2686",
+      "title": "팩트체크 편집국",
+      "summary": "초등 4~6학년 학생이 가상 자료의 출처와 근거를 비교해 판정을 내리고 정확한 제목을 만드는 교과융합 팩트체크 활동 앱",
+      "url": "https://wbmaker2.github.io/fact-check-newsroom/",
+      "githubUrl": "https://github.com/WBmaker2/fact-check-newsroom",
+      "tags": [
+        "팩트체크",
+        "미디어리터러시",
+        "자료해석",
+        "교과융합",
+        "초등교육"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/48b67d53-f103-4fc7-9544-59e8a73b2686.png",
+      "subject": "교과융합",
+      "grade": "초등 4~6학년",
+      "memo": "국어·수학·과학·사회의 가상 사건을 선택해 확인할 말 찾기, 자료 살펴보기, 비교, 판단, 제목 만들기 순서로 활동할 수 있습니다.",
+      "createdAt": "2026-07-14T09:39:08.518Z",
+      "updatedAt": "2026-07-14T09:39:08.518Z"
+    },
+    {
+      "id": "91fc1ce8-f455-464d-ace8-f2d2b2ed2985",
+      "title": "한 방울의 귀환: 물 수확 장치 설계실",
+      "summary": "초등 3~4학년 학생이 증발·응결·물 이동을 관찰하고 한 변인만 바꾸어 물 수집 결과를 비교·설명하는 과학 실험 시뮬레이션입니다.",
+      "url": "https://one-drop-return.wbmaker.chatgpt.site",
+      "githubUrl": "https://github.com/WBmaker2/one-drop-return",
+      "tags": [
+        "증발과응결",
+        "물의상태변화",
+        "과학실험",
+        "변인통제",
+        "초등과학"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/91fc1ce8-f455-464d-ace8-f2d2b2ed2985.png",
+      "subject": "과학",
+      "grade": "초등 3~4학년",
+      "memo": "물의 상태 변화 단원에서 실제 실험 전 장치 원리와 공정한 비교 방법을 익히고, 24개 보존 표식으로 물 수지를 확인하는 사전 탐구 활동에 활용할 수 있습니다.",
+      "createdAt": "2026-07-14T09:30:01.340Z",
+      "updatedAt": "2026-07-14T09:30:01.340Z"
+    },
+    {
+      "id": "af1fee94-763b-4f7c-9607-bc685873a2fc",
+      "title": "생활도구 리디자인 클리닉",
+      "summary": "초등 1~2학년이 생활도구의 불편을 관찰하고 부품을 바꿔 같은 조건으로 시험하며 설계 이유를 설명하는 창의 활동 앱",
+      "url": "https://wbmaker2.github.io/everyday-tool-redesign-clinic/",
+      "githubUrl": "https://github.com/WBmaker2/everyday-tool-redesign-clinic",
+      "tags": [
+        "창의활동",
+        "생활도구",
+        "리디자인",
+        "관찰",
+        "초등저학년"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/af1fee94-763b-4f7c-9607-bc685873a2fc.png",
+      "subject": "통합",
+      "grade": "초등 1~2학년",
+      "memo": "생활도구 하나를 선택해 사용 장면의 불편 근거를 찾고, 모양·기능·재료와 표면을 바꾼 뒤 같은 조건으로 전후를 시험합니다. 완성된 리디자인 처방전을 보며 바꾼 이유와 새로 생긴 불편까지 함께 설명할 수 있습니다.",
+      "createdAt": "2026-07-13T20:01:16.149Z",
+      "updatedAt": "2026-07-13T20:01:16.149Z"
+    },
+    {
+      "id": "680f7079-9f3a-4b90-ab32-e418cd40aab9",
+      "title": "AI 데이터 품질검사소",
+      "summary": "초등 5~6학년 학생이 가상 도서 데이터를 점검하며 데이터 품질과 AI 결과 변화를 체험하는 교육용 시뮬레이션",
+      "url": "https://wbmaker2.github.io/ai-data-quality-inspector/",
+      "githubUrl": "https://github.com/WBmaker2/ai-data-quality-inspector",
+      "tags": [
+        "인공지능",
+        "데이터",
+        "데이터 품질",
+        "실과",
+        "시뮬레이션"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/680f7079-9f3a-4b90-ab32-e418cd40aab9.png",
+      "subject": "실과",
+      "grade": "초등 5~6학년",
+      "memo": "가상 도서 데이터에서 누락·오표기·중복·대표성·개인정보 문제를 찾고, 근거에 따라 정비한 뒤 같은 시험의 결과 변화를 비교하는 수업 활동에 활용할 수 있습니다.",
+      "createdAt": "2026-07-13T13:19:01.797Z",
+      "updatedAt": "2026-07-13T13:19:01.797Z"
+    },
+    {
+      "id": "9e77dba6-7388-4b21-bf2e-b74b9d9e5193",
+      "title": "등호 수사대",
+      "summary": "초등 3~4학년 학생이 등식의 양쪽 값을 따로 계산하고 비교하며 등호의 뜻을 익히는 수학 학습 앱",
+      "url": "https://wbmaker2.github.io/equality-detective/",
+      "githubUrl": "https://github.com/WBmaker2/equality-detective",
+      "tags": [
+        "수학",
+        "등호",
+        "등식",
+        "초등수학",
+        "형성평가"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/9e77dba6-7388-4b21-bf2e-b74b9d9e5193.png",
+      "subject": "수학",
+      "grade": "초등 3~4학년",
+      "memo": "도움·기본·도전 단계의 9문항을 풀며 같을까요, 빈칸 채우기, 틀린 식 고치기 활동을 진행하고 오답만 다시 풀 수 있습니다.",
+      "createdAt": "2026-07-13T13:14:43.524Z",
+      "updatedAt": "2026-07-13T13:14:43.524Z"
+    },
     {
       "id": "0118a475-a6af-4be2-849e-416bcd2e9ee8",
       "title": "교사를 위한 구글 AI 스튜디오 연수원",
@@ -659,7 +1621,7 @@
         "퀴즈"
       ],
       "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/424c6d52-5aad-4f0e-bfc2-5f06fefcb30e.png",
+      "thumbnailUrl": null,
       "subject": "영어",
       "grade": "초등 3~6학년",
       "memo": "교사가 단어 세트를 저장·공개하면 학생은 학교·선생님·학년·단원을 선택해 여러 활동으로 이어서 사용할 수 있습니다.",
@@ -841,7 +1803,7 @@
         "그래프"
       ],
       "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/837829ee-abd3-46a7-9554-ec83055bbdf0.png",
+      "thumbnailUrl": null,
       "subject": "공통",
       "grade": null,
       "memo": "출결 관리, 오늘의 수업, 학급 일지, 학생별 누가기록, 대시보드와 시간표 관리를 한 곳에서 다루며 PDF/Excel 내보내기와 클라우드 동기화 흐름까지 지원하는 교사용 기록 도구입니다.",
@@ -862,7 +1824,7 @@
         "그래프"
       ],
       "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/c84042dc-2d55-4438-9cf0-9b0006ef758e.png",
+      "thumbnailUrl": null,
       "subject": "체육",
       "grade": "초등 3~6학년",
       "memo": "교사가 학교·학급·학생 명단을 준비하고 단일 반 또는 2반 분할 세션을 열면, 학생은 이름을 선택해 기록을 제출합니다. 교사는 대표 기록, 요약표, 동기화 상태를 확인하며 Google Sheets 기반으로 운영 데이터를 관리할 수 있습니다.",
@@ -880,7 +1842,7 @@
         "업무"
       ],
       "thumbnailMode": "auto",
-      "thumbnailUrl": "/app-thumbnails/b5c444ba-0d76-4bc5-b787-3132985da0d3.png",
+      "thumbnailUrl": null,
       "subject": "공통",
       "grade": null,
       "memo": "PDF 안내문이나 학습지를 이미지 파일로 나누어 LMS, 슬라이드, 학급 게시 자료에 활용할 때 사용할 수 있습니다. 파일은 서버로 업로드하지 않고 브라우저에서 처리됩니다.",
@@ -1136,288 +2098,6 @@
       "memo": "물체 팔레트에서 무게가 표시된 물체를 골라 시소 양쪽 거리 칸에 올리며 무게 효과와 균형 변화를 관찰할 수 있어 [4과01-02] 수평잡기 활동 도입과 탐구에 활용하기 좋습니다.",
       "createdAt": "2026-05-01T02:51:37.425Z",
       "updatedAt": "2026-05-08T12:40:54.204Z"
-    }
-  ],
-  "assetManifest": [
-    {
-      "path": "/app-thumbnails/0118a475-a6af-4be2-849e-416bcd2e9ee8.png",
-      "size": 698720,
-      "sha256": "f5b8206622f4e8c5614b47cddae33fb7bcc78280be0eb95539f38e31b1ef4331"
-    },
-    {
-      "path": "/app-thumbnails/0a1a350d-2f4d-4676-ba63-f33ad2147328.png",
-      "size": 290961,
-      "sha256": "c3f4f66b85af9c9e3515d5bbace566d1eb51288acdd96c5a129a66bdbbf92758"
-    },
-    {
-      "path": "/app-thumbnails/13db4453-420a-447c-a4e9-67d330852ee5.png",
-      "size": 215552,
-      "sha256": "4fd15a733575e4b5b2cf9e2be46698afe2a26f658450053298bddb710adef960"
-    },
-    {
-      "path": "/app-thumbnails/1c13b710-5da9-4f8d-be49-c7b6af20fedb.png",
-      "size": 25089,
-      "sha256": "c88f2f209fe6002e318ff3289bfbd86f755f4046cedebc7fb0c7bd3ae5d9e45d"
-    },
-    {
-      "path": "/app-thumbnails/1f459bb8-1d78-42e0-a1a1-e2505f3be832.png",
-      "size": 253453,
-      "sha256": "a93fe974f664f9987c95340fba2af5be628d57d6771fb31b9bbbfff34d29e789"
-    },
-    {
-      "path": "/app-thumbnails/25f6d160-3efc-42c7-accd-4f62eb0f7635.png",
-      "size": 39188,
-      "sha256": "e3235f06fa0c42f2edb40aa94cadae73aee291828d0b7130891879d878234faa"
-    },
-    {
-      "path": "/app-thumbnails/29a0ce2f-bbeb-45bd-8306-54880dd3a6cc.png",
-      "size": 135248,
-      "sha256": "94be6286e41fd6a4a063f0ef7bf520833148e790f6e4740effb001e2d56d84be"
-    },
-    {
-      "path": "/app-thumbnails/2c47b201-4941-4d74-a5b0-bb84d696e01c.png",
-      "size": 96981,
-      "sha256": "4073cf338e3241ae52fc91164fdb069d856a231c974abe4a244e91e3720853bf"
-    },
-    {
-      "path": "/app-thumbnails/31d29c7a-8ce6-4ba0-a5aa-e4bb984848b5.png",
-      "size": 240303,
-      "sha256": "38745dfd8924623ca384c70182324e850dfb24f10291505ad2512a35abbb9dc0"
-    },
-    {
-      "path": "/app-thumbnails/373e131a-54eb-41a6-852f-aa54431b29c8.png",
-      "size": 303398,
-      "sha256": "ad7a74faeb01852fdad15797a9282f3a58ce32adb4809481839af0cfd32f9bd7"
-    },
-    {
-      "path": "/app-thumbnails/3cb419a8-6c37-4e15-9d0d-6b0634be0bc4.png",
-      "size": 375215,
-      "sha256": "55f4f1d346f350b87fb537b42e1b1f3945374d74866a82e1451dd011bc1e2a45"
-    },
-    {
-      "path": "/app-thumbnails/3f602cb9-e07f-422c-9f40-127145020bc2.png",
-      "size": 169647,
-      "sha256": "5044837e8d974fd06aa37bc9b37bd1ada0bf6f699e61ee246f09a4dd7486b437"
-    },
-    {
-      "path": "/app-thumbnails/4013316e-7506-46aa-9f24-7175b379ea27.png",
-      "size": 157481,
-      "sha256": "99c3ceb0b8eae5404081690ee9cf13903081ba7f9461e07d9f14a8cc9ede5fc1"
-    },
-    {
-      "path": "/app-thumbnails/40acf4df-03d2-4802-a334-b56401956299.png",
-      "size": 307133,
-      "sha256": "885b1eb236a74c15fcad0871d142b1ce525b31b6d69b61552501b753ba9fd932"
-    },
-    {
-      "path": "/app-thumbnails/422f88e0-ac58-42c6-afa4-9d557979eaf8.png",
-      "size": 164734,
-      "sha256": "375d4600af55215051e73d78a590b645d32c8c4365633342140a3f1f3fe45dfd"
-    },
-    {
-      "path": "/app-thumbnails/424c6d52-5aad-4f0e-bfc2-5f06fefcb30e.png",
-      "size": 192698,
-      "sha256": "d893091be6ccc36714e497aaf0f4efd385e02f335c13f8e39a5f2f71c576976d"
-    },
-    {
-      "path": "/app-thumbnails/42b8f202-db48-42f6-a8aa-e35192687889.png",
-      "size": 80883,
-      "sha256": "bb4999073f6d0007cf80eaf7e78590425009477d68ca44acab46dd9187eeeb3e"
-    },
-    {
-      "path": "/app-thumbnails/47acd11b-2f45-4029-8813-3add585cd1aa.png",
-      "size": 166995,
-      "sha256": "00bc7196a5c04c5f24411cac7a5f76922aaca0b04a5a386b859aa5b396a231ae"
-    },
-    {
-      "path": "/app-thumbnails/511d5334-1e2c-40ac-8f9b-bc7bc22a1a21.png",
-      "size": 40129,
-      "sha256": "d74f712525f24f22ae21b0c6710da76b94f91c99c3d14132fd2c64e6d370ecca"
-    },
-    {
-      "path": "/app-thumbnails/5543c36a-42d8-49ba-b2e2-85a2c4f193ea.png",
-      "size": 95891,
-      "sha256": "752d5c741381146391aae22b7aab9ce2d57a60409b9e10725f655602202eebf3"
-    },
-    {
-      "path": "/app-thumbnails/56f95ab1-4ad1-45b6-8eac-e5ba6cf543b8.png",
-      "size": 128680,
-      "sha256": "9dc0726fcaad1936fbe997db65160ef4d7fcee70c71a2c691f77d53070acc6e5"
-    },
-    {
-      "path": "/app-thumbnails/596fc43f-8908-492f-b328-d43aae7e984d.png",
-      "size": 241033,
-      "sha256": "56b7220a98414dee211207f8ae04819293d0425bb2b9d93bc2f9d3639e44b33a"
-    },
-    {
-      "path": "/app-thumbnails/60646b44-ffef-45f9-a774-65df50211a9a.png",
-      "size": 337540,
-      "sha256": "95e7ce380fc07c786529ef6d6532f9e9207e923a43e33fc953b2bbbc1db7a1d0"
-    },
-    {
-      "path": "/app-thumbnails/6b801106-2602-42d8-8cd2-d26716433860.png",
-      "size": 393199,
-      "sha256": "a34bf2435deed9dcf0a690e2eb743725431116e9998c13343b20773f48b84e49"
-    },
-    {
-      "path": "/app-thumbnails/7507c704-bd01-497e-aeb5-1578209b0d6e.png",
-      "size": 168923,
-      "sha256": "9b6a04e694fb9ce7ac7750f07dbc717687357b178d0847ec5388c887f2708332"
-    },
-    {
-      "path": "/app-thumbnails/77669d34-e66c-4f01-a74c-f703447fa17d.png",
-      "size": 393199,
-      "sha256": "30e66ddb9bb6425b1280ff235bc45efe270fff5da19070a897dd3dbf86500910"
-    },
-    {
-      "path": "/app-thumbnails/837829ee-abd3-46a7-9554-ec83055bbdf0.png",
-      "size": 69475,
-      "sha256": "d3a4928db4e4bcb5247418f506121394b6ade74f6425a225b1b6d9e12f929e8a"
-    },
-    {
-      "path": "/app-thumbnails/86c0c19a-c4bf-4ef1-822b-75162b385271.png",
-      "size": 99093,
-      "sha256": "5a0112b75d672bb55da90c96c35fd94eea92e71fbcc1bdc650db5ac5256c0628"
-    },
-    {
-      "path": "/app-thumbnails/890a0ba1-6e4c-4bf8-a9d9-2009802a94fb.png",
-      "size": 62283,
-      "sha256": "983d428d84d221c726acc11e38b8a57d118850525786c394faaaaa799e4921d3"
-    },
-    {
-      "path": "/app-thumbnails/8dcda375-afc0-4a15-9235-e8df7cad85a6.png",
-      "size": 148838,
-      "sha256": "4e196882596441170bd6ab0ece405dcd9d2f6fb7ec9f9c2cc52301f2c390ceb2"
-    },
-    {
-      "path": "/app-thumbnails/96932b6e-d720-4fdb-80ff-1db37f5b0e6f.png",
-      "size": 110588,
-      "sha256": "79ff4af4dbf73d4dbc284f7974f50f22de9582a73ab8243141bb3dac759fc182"
-    },
-    {
-      "path": "/app-thumbnails/9925ecdd-4483-4f9b-bb96-8aed89662621.png",
-      "size": 236977,
-      "sha256": "94dcb8c367ee7a1e17d383509e64d2683fa017650c8ba832de97e976b1013fbf"
-    },
-    {
-      "path": "/app-thumbnails/9a61427f-7760-48ff-8e95-52e7264dd838.png",
-      "size": 168715,
-      "sha256": "e947549c27a5b5994bf8187a295b2c34928f432ce26989e773e4476e0522dc19"
-    },
-    {
-      "path": "/app-thumbnails/9a942662-4e1c-4ab5-aa65-b8e2a082ec2f.png",
-      "size": 126867,
-      "sha256": "3173cdd38480dd92156bc1be6640c04b3bd0458f6d7225c58040ea8b1bc7e0cd"
-    },
-    {
-      "path": "/app-thumbnails/9c98f5c3-758a-47ba-bf90-59799f820e4f.png",
-      "size": 231567,
-      "sha256": "28f4b9a94cf8f71c0545d11b4281c87d9b0e2aa4dc0995a507c8846b81ddc454"
-    },
-    {
-      "path": "/app-thumbnails/a062beee-cba2-4074-a637-182d3b9af316.png",
-      "size": 233673,
-      "sha256": "819a9f86255f914317b9e2f022c6b72f42c32d85cd9833e83c55c48b1bed475d"
-    },
-    {
-      "path": "/app-thumbnails/a134be86-a969-4e39-b131-9c61247f4c87.png",
-      "size": 320396,
-      "sha256": "5a5ae79d5950dda759edaeef4450a6994b73b44413fa587af3aa3476b67c364c"
-    },
-    {
-      "path": "/app-thumbnails/a453fce0-6a74-4cb2-99aa-0a7d847114da.png",
-      "size": 300973,
-      "sha256": "474a6cf11652605d16637e8ffae8701297a7f73a75f0c611281d58a01ad04525"
-    },
-    {
-      "path": "/app-thumbnails/a569fbf0-1e50-4286-aef8-b0e38ea6aa8d.png",
-      "size": 211543,
-      "sha256": "904a8f23aebe06393f398a42c07b84206a7daa9257cb1fa0ef82454d9ca5252b"
-    },
-    {
-      "path": "/app-thumbnails/ac622468-2710-4183-9a67-f2489ae000c5.png",
-      "size": 300284,
-      "sha256": "0e25dc616a225a7dabad9c38b5b46aba252c35026bea5e6b93b04c67d8a25589"
-    },
-    {
-      "path": "/app-thumbnails/acd41aa8-8a45-4051-8a7f-fcff679d56a4.png",
-      "size": 91740,
-      "sha256": "9fee5d4d381c4755b44879c6a66fad6069b560e5c1586c57eaeaf5c7d167d5eb"
-    },
-    {
-      "path": "/app-thumbnails/b52fd0e4-768b-4cc1-806c-53deef04f003.png",
-      "size": 393199,
-      "sha256": "6603cd66f37b4650d164e12652b9fdaf998f4c72ad7b378954c54a8155176a2e"
-    },
-    {
-      "path": "/app-thumbnails/b5c444ba-0d76-4bc5-b787-3132985da0d3.png",
-      "size": 53104,
-      "sha256": "ce0bdb72ca3ed9079b8eaeb08737dbbf06fd837f134555fd1462caa0673c2771"
-    },
-    {
-      "path": "/app-thumbnails/bebd1fd7-5b54-4923-a476-fae00288d4e2.png",
-      "size": 393199,
-      "sha256": "b549d43deec400c9833494ed5213aa9fb20f3cfd856fa1c3b3551ad751d64dc5"
-    },
-    {
-      "path": "/app-thumbnails/c4962759-1d6a-4070-85a8-cc46c91a70f1.png",
-      "size": 34784,
-      "sha256": "b3e0148b44bde4cc762fe0b24fecc8332404dd21aa5b4bd1b2c259016a680467"
-    },
-    {
-      "path": "/app-thumbnails/c7de79fb-516a-4167-9d21-ba282a2cf5de.png",
-      "size": 81138,
-      "sha256": "24af47df218af556ec76a0e22b3929dbfe0f801033db7f5ae43a2cf6ae47d16e"
-    },
-    {
-      "path": "/app-thumbnails/c84042dc-2d55-4438-9cf0-9b0006ef758e.png",
-      "size": 240311,
-      "sha256": "9ea99cdb21dcca7d20be450ba27d8e58e95ab46facd60776ee2c1e6d72ff6db3"
-    },
-    {
-      "path": "/app-thumbnails/d093f79b-8672-4498-8f39-b65397fff216.png",
-      "size": 330967,
-      "sha256": "17bf7514106786d258a8d7951544cede5bf383c1a8d05fd2d61c0dfc7dc1211d"
-    },
-    {
-      "path": "/app-thumbnails/d13ba3a7-be1e-4aab-bc7a-de1df66bd8f3.jpg",
-      "size": 207053,
-      "sha256": "c61700e2ce81cdcc24f07e1d71e8b5ebfcacebb71e191f4edae6acc7bef6fd4f"
-    },
-    {
-      "path": "/app-thumbnails/d2caab9f-3456-4df5-b0b4-da7bb141bf9f.png",
-      "size": 393199,
-      "sha256": "2a7ca71939f927558d33b5adbb1a9859a6701002935f1f77201c0eb4f00611c1"
-    },
-    {
-      "path": "/app-thumbnails/d9e05a77-4d67-4c0e-be07-48b069383791.png",
-      "size": 214556,
-      "sha256": "f38e78b998e792ae11d08c993a8ce1a2c164009d2094c8a63816f97b72e42353"
-    },
-    {
-      "path": "/app-thumbnails/e41f2952-cbee-4463-9205-c3e7ce269602.png",
-      "size": 194404,
-      "sha256": "11bd3b0d6d2c41d56fe47fe796ccee7eef18bf5d5fd00812d4fca2d18eceb26d"
-    },
-    {
-      "path": "/app-thumbnails/f1fc0953-7d49-42c5-a0cc-68b0a564e765.png",
-      "size": 364770,
-      "sha256": "fb70848c980c6b36d8fdf7e4f9df48df487dbea1c19312b619c3e54a2a5064a8"
-    },
-    {
-      "path": "/app-thumbnails/f3dcbbf0-6443-43c9-8b3b-dcc60f532c66.png",
-      "size": 393199,
-      "sha256": "d58a60ca8b7186ebc14f574d4a8dc90b4f373617dc14c6a8b9ed22dacd5bc54a"
-    },
-    {
-      "path": "/app-thumbnails/fbdbaf4e-1c6d-4644-8de7-cde51f5e9c9d.png",
-      "size": 90762,
-      "sha256": "c24abecfc5adbb5406e1dd6fe9cb9808f4c58f7f5cf8e4827130035f30ff2005"
-    },
-    {
-      "path": "/app-thumbnails/feee9f4c-ebef-455d-a303-c6016dca3ea9.png",
-      "size": 393199,
-      "sha256": "fa6f3d58f83412aaa1b6b76be6c9a8e635bb0048acbe2b2a07afb65bb9be8cac"
     }
   ]
 }
