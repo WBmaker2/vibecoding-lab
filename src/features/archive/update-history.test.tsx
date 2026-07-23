@@ -25,6 +25,10 @@ describe("UpdateHistory", () => {
     expect(dialog).toHaveTextContent(
       "관리자 보안, 무변경 동기화, 상태 표시, 테스트와 모바일 탐색 화면을 개선했습니다."
     );
+    expect(dialog).toHaveTextContent("2026-07-23");
+    expect(dialog).toHaveTextContent(
+      "관리자 동기화가 운영 main 브랜치에서 최신 앱 목록과 썸네일을 다시 만들도록 복구했습니다."
+    );
 
     fireEvent.click(screen.getByRole("button", { name: "닫기" }));
 

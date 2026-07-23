@@ -24,7 +24,7 @@ import { getStaticGalleryBaseline } from "@/lib/apps/static-public-apps";
 const DEFAULT_GITHUB_OWNER = "WBmaker2";
 const DEFAULT_GITHUB_REPO = "vibecoding-lab";
 const DEFAULT_WORKFLOW_ID = "sync-static-gallery.yml";
-const DEFAULT_SYNC_REF = "codex/hongs-vibe-coding-lab";
+const DEFAULT_SYNC_REF = "main";
 const DEFAULT_BASE_URL = "https://www.vivehong.shop";
 export const GITHUB_STATUS_TIMEOUT_MS = 8_000;
 export const GITHUB_DISPATCH_TIMEOUT_MS = 12_000;

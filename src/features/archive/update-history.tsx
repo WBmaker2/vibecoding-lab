@@ -4,6 +4,12 @@ import { useEffect, useRef, useState } from "react";
 
 export const UPDATE_HISTORY = [
   {
+    date: "2026-07-23",
+    kind: "개선",
+    detail:
+      "관리자 동기화가 운영 main 브랜치에서 최신 앱 목록과 썸네일을 다시 만들도록 복구했습니다."
+  },
+  {
     date: "2026-04-04",
     kind: "개발",
     detail: "교실용 웹앱을 모아 찾고 열 수 있는 공개 아카이브를 시작했습니다."

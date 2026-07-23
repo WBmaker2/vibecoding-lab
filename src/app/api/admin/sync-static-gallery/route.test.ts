@@ -300,7 +300,7 @@ describe("/api/admin/sync-static-gallery", () => {
       }
     });
     expect(fetchMock).toHaveBeenCalledWith(
-      "https://api.github.com/repos/WBmaker2/vibecoding-lab/actions/workflows/sync-static-gallery.yml/runs?branch=codex%2Fhongs-vibe-coding-lab&event=workflow_dispatch&per_page=30",
+      "https://api.github.com/repos/WBmaker2/vibecoding-lab/actions/workflows/sync-static-gallery.yml/runs?branch=main&event=workflow_dispatch&per_page=30",
       expect.objectContaining({
         method: "GET",
         cache: "no-store",
@@ -388,7 +388,14 @@ describe("/api/admin/sync-static-gallery", () => {
         headers: expect.objectContaining({
           authorization: "Bearer test-token"
         }),
-        body: expect.stringContaining('"request_marker":"marker-123"')
+        body: JSON.stringify({
+          ref: "main",
+          inputs: {
+            base_url: "https://www.vivehong.shop",
+            reason: "button click",
+            request_marker: "marker-123"
+          }
+        })
       })
     );
   });

@@ -49,11 +49,11 @@ HVC_SYNC_GITHUB_TOKEN=
 HVC_SYNC_GITHUB_OWNER=WBmaker2
 HVC_SYNC_GITHUB_REPO=vibecoding-lab
 HVC_SYNC_GITHUB_WORKFLOW_ID=sync-static-gallery.yml
-HVC_SYNC_GITHUB_REF=codex/hongs-vibe-coding-lab
+HVC_SYNC_GITHUB_REF=main
 HVC_SYNC_BASE_URL=https://www.vivehong.shop
 ```
 
-`HVC_SYNC_GITHUB_TOKEN`은 대상 저장소의 Actions workflow dispatch 권한이 있는 GitHub 토큰이어야 합니다. `HVC_SYNC_GITHUB_REF`는 실제 운영 배포 브랜치와 워크플로 파일이 있는 브랜치로 맞춥니다. GitHub가 `sync-static-gallery.yml` 워크플로를 인식하려면 이 파일이 저장소의 기본 브랜치 또는 Actions에서 인식되는 운영 브랜치에 올라가 있어야 합니다. 서버는 lease token과 별도의 UUID `request_marker`를 workflow input으로 보내며, workflow run 이름에도 같은 marker를 표시합니다. 관리자 상태 조회는 최근 30개 run에서 이 marker가 정확히 일치하는 경우에만 해당 요청으로 연결하고, 만료된 marker 행도 24시간 범위 안에서 조회합니다. 브라우저 reload 시에는 공개 marker만 세션에 보존합니다. marker 없는 최초 조회의 최근 workflow run은 전역 실행 기록일 뿐 특정 요청의 완료로 표시하지 않습니다.
+`HVC_SYNC_GITHUB_TOKEN`은 대상 저장소의 Actions workflow dispatch 권한이 있는 GitHub 토큰이어야 합니다. `HVC_SYNC_GITHUB_REF`는 실제 운영 배포 브랜치와 워크플로 파일이 있는 브랜치로 맞추며, 이 프로젝트의 운영값은 `main`입니다. GitHub가 `sync-static-gallery.yml` 워크플로를 인식하려면 이 파일이 저장소의 기본 브랜치 또는 Actions에서 인식되는 운영 브랜치에 올라가 있어야 합니다. 서버는 lease token과 별도의 UUID `request_marker`를 workflow input으로 보내며, workflow run 이름에도 같은 marker를 표시합니다. 관리자 상태 조회는 최근 30개 run에서 이 marker가 정확히 일치하는 경우에만 해당 요청으로 연결하고, 만료된 marker 행도 24시간 범위 안에서 조회합니다. 브라우저 reload 시에는 공개 marker만 세션에 보존합니다. marker 없는 최초 조회의 최근 workflow run은 전역 실행 기록일 뿐 특정 요청의 완료로 표시하지 않습니다.
 
 ## 테스트
 

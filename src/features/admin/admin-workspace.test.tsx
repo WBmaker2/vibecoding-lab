@@ -274,6 +274,58 @@ describe("AdminWorkspace", () => {
     );
   });
 
+  it("clears prior workflow history when dispatch is rejected", async () => {
+    const oldRun = {
+      id: 99,
+      status: "completed",
+      conclusion: "success",
+      htmlUrl: "https://github.com/WBmaker2/vibecoding-lab/actions/runs/99",
+      createdAt: "2026-07-09T01:00:00.000Z",
+      updatedAt: "2026-07-09T01:02:00.000Z"
+    };
+
+    vi.mocked(globalThis.fetch).mockImplementation(async (_input, init) => {
+      if (init?.method === "POST") {
+        return new Response(
+          JSON.stringify({
+            error: "GitHub workflow dispatch was rejected with status 422."
+          }),
+          { status: 502 }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ scope: "history", run: oldRun }),
+        { status: 200 }
+      );
+    });
+
+    render(
+      <AdminWorkspace
+        apps={apps}
+        baseline={changedBaseline}
+        createAction={noopAction}
+        deleteAction={noopAction}
+        logoutAction={noopAction}
+        removeTagAction={noopAction}
+        suggestedTags={["영어", "게임형", "업무경감"]}
+        updateAction={noopAction}
+      />
+    );
+
+    await screen.findByRole("link", { name: "GitHub Actions에서 보기" });
+    fireEvent.click(screen.getByRole("button", { name: "수정 사항 동기화" }));
+
+    await waitFor(() =>
+      expect(screen.getByRole("status")).toHaveTextContent(
+        "GitHub workflow dispatch was rejected with status 422."
+      )
+    );
+    expect(
+      screen.queryByRole("link", { name: "GitHub Actions에서 보기" })
+    ).toBeNull();
+  });
+
   it("dispatches and polls the latest run until successful completion", async () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-07-10T01:00:00.000Z"));

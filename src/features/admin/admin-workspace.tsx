@@ -553,6 +553,8 @@ export function AdminWorkspace({
         return;
       }
 
+      trackDispatchMarker(null);
+      setSyncRun(null);
       setSyncStatus({
         kind: "error",
         message:
