@@ -11,7 +11,6 @@ const COMPARED_FIELDS = [
   "githubUrl",
   "tags",
   "thumbnailMode",
-  "thumbnailUrl",
   "subject",
   "grade",
   "memo",

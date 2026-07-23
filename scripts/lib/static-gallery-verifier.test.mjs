@@ -97,6 +97,42 @@ describe("static gallery verifier", () => {
     });
   });
 
+  it("accepts a database thumbnail materialized as a local static asset", async () => {
+    const verifyStaticGallerySnapshot = await loadVerifier();
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), "hvc-verifier-"));
+    const thumbnailDir = path.join(root, "app-thumbnails");
+    fixtureDirectories.push(root);
+    await fs.mkdir(thumbnailDir);
+    const bytes = Buffer.from("static-thumbnail");
+    const thumbnailUrl = "/app-thumbnails/app.png";
+    await fs.writeFile(path.join(thumbnailDir, "app.png"), bytes);
+    const sourceApp = app("https://images.example.com/app.png");
+    const snapshotApp = { ...sourceApp, thumbnailUrl };
+
+    const result = await verifyStaticGallerySnapshot({
+      dbApps: [sourceApp],
+      snapshot: {
+        version: 1,
+        appCount: 1,
+        apps: [snapshotApp],
+        assetManifest: [
+          {
+            path: thumbnailUrl,
+            size: bytes.byteLength,
+            sha256: createHash("sha256").update(bytes).digest("hex")
+          }
+        ]
+      },
+      thumbnailDir
+    });
+
+    expect(result).toMatchObject({
+      ok: true,
+      mismatchCount: 0,
+      assetIntegrity: { valid: true, reason: "assets-match" }
+    });
+  });
+
   it("rejects a missing local thumbnail reference", async () => {
     const verifyStaticGallerySnapshot = await loadVerifier();
     const root = await fs.mkdtemp(path.join(os.tmpdir(), "hvc-verifier-"));
