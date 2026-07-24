@@ -36,6 +36,9 @@ describe("static public apps", () => {
     expect(record.updatedAt).toBeInstanceOf(Date);
     expect(record.thumbnailUrl).toBe("/app-thumbnails/reading-timer.webp");
     expect(record.tags).toEqual(["읽기", "영어"]);
+    expect(record.subjects).toEqual(["영어"]);
+    expect(record.gradeBands).toEqual(["all"]);
+    expect(record.audience).toBe("student");
   });
 
   it("drops internal compute thumbnail URLs from the static public payload", () => {

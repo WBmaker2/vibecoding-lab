@@ -5,6 +5,11 @@ type SearchableApp = {
   subject?: string;
   grade?: string;
   memo?: string;
+  subjects?: string[];
+  gradeBands?: string[];
+  audience?: string;
+  interactionType?: string;
+  learningProcess?: string[];
 };
 
 export function filterApps<T extends SearchableApp>(
@@ -21,7 +26,12 @@ export function filterApps<T extends SearchableApp>(
       ...app.tags,
       app.subject ?? "",
       app.grade ?? "",
-      app.memo ?? ""
+      app.memo ?? "",
+      ...(app.subjects ?? []),
+      ...(app.gradeBands ?? []),
+      app.audience ?? "",
+      app.interactionType ?? "",
+      ...(app.learningProcess ?? [])
     ]
       .join(" ")
       .toLowerCase();

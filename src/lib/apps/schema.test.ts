@@ -22,6 +22,29 @@ describe("appInputSchema", () => {
     expect(parsed.memo).toBe("교실 화면 공유에 적합");
   });
 
+  it("normalizes structured metadata while preserving legacy display fields", () => {
+    const parsed = appInputSchema.parse({
+      title: "대칭 아트 스튜디오",
+      summary: "수학과 미술을 연결해 대칭 작품을 만드는 학생용 앱",
+      url: "https://example.com/symmetry",
+      tags: ["수학", "미술", "제작"],
+      thumbnailMode: "placeholder",
+      subject: "수학 / 미술",
+      grade: "초5-6",
+      audience: "student",
+      interactionType: "creation",
+      learningProcess: ["구상", "제작", "공유"]
+    });
+
+    expect(parsed.subject).toBe("수학 / 미술");
+    expect(parsed.grade).toBe("초5-6");
+    expect(parsed.subjects).toEqual(["수학", "미술"]);
+    expect(parsed.gradeBands).toEqual(["5-6"]);
+    expect(parsed.audience).toBe("student");
+    expect(parsed.interactionType).toBe("creation");
+    expect(parsed.learningProcess).toEqual(["구상", "제작", "공유"]);
+  });
+
   it("stores tags without leading hashtag markers", () => {
     const parsed = appInputSchema.parse({
       title: "Teacher Helper",

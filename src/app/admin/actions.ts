@@ -9,6 +9,10 @@ import { normalizeTags as normalizeAppTags } from "@/lib/apps/tags";
 import type { AdminAppRecord } from "@/lib/apps/types";
 import { resolveThumbnailInput } from "@/lib/storage/thumbnails";
 
+function parseList(value: FormDataEntryValue | null) {
+  return String(value ?? "").split(/[,\n]/).map((item) => item.trim()).filter(Boolean);
+}
+
 function normalizeTags(formData: FormData) {
   const raw = String(formData.get("tagsJson") ?? "[]");
   const parsed = JSON.parse(raw) as string[];
@@ -46,7 +50,10 @@ async function getAppInput(
     thumbnailUrl: resolvedThumbnail.thumbnailUrl ?? undefined,
     subject: String(formData.get("subject") ?? "") || undefined,
     grade: String(formData.get("grade") ?? "") || undefined,
-    memo: String(formData.get("memo") ?? "") || undefined
+    memo: String(formData.get("memo") ?? "") || undefined,
+    audience: String(formData.get("audience") ?? "") || undefined,
+    interactionType: String(formData.get("interactionType") ?? "") || undefined,
+    learningProcess: parseList(formData.get("learningProcess"))
   });
 }
 

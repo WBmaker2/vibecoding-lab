@@ -14,7 +14,8 @@
     "apps:backup:live": "node scripts/apps-backup-live.mjs",
     "apps:import:backup": "node scripts/apps-import-backup.mjs",
     "apps:export-static-gallery": "node scripts/apps-export-static-gallery.mjs",
-    "apps:verify-static-gallery": "node scripts/apps-verify-static-gallery.mjs"
+    "apps:verify-static-gallery": "node scripts/apps-verify-static-gallery.mjs",
+    "apps:verify-production-gallery": "node scripts/verify-production-gallery.mjs"
   },
   "dependencies": {
     "@sparticuz/chromium": "149.0.0",

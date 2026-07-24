@@ -1,3 +1,5 @@
+import type { AppAudience, AppInteractionType, GradeBand } from "./metadata";
+
 export type ThumbnailMode = "auto" | "upload" | "placeholder";
 
 interface BaseAppRecord {
@@ -11,6 +13,11 @@ interface BaseAppRecord {
   subject?: string;
   grade?: string;
   memo?: string;
+  subjects?: string[];
+  gradeBands?: GradeBand[];
+  audience?: AppAudience;
+  interactionType?: AppInteractionType;
+  learningProcess?: string[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,4 +39,9 @@ export interface AppInput {
   subject?: string;
   grade?: string;
   memo?: string;
+  subjects?: string[];
+  gradeBands?: GradeBand[];
+  audience?: AppAudience;
+  interactionType?: AppInteractionType;
+  learningProcess?: string[];
 }

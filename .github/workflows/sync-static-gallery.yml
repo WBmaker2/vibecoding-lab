@@ -7,7 +7,7 @@ on:
       base_url:
         description: Production base URL for materializing internal thumbnails
         required: false
-        default: https://www.vivehong.shop
+        default: https://www.vibehong.shop
       reason:
         description: Reason for starting this sync
         required: false
@@ -27,7 +27,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     env:
-      BASE_URL: ${{ inputs.base_url || 'https://www.vivehong.shop' }}
+      BASE_URL: ${{ inputs.base_url || 'https://www.vibehong.shop' }}
       POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
       SYNC_REASON: ${{ inputs.reason || 'admin-button' }}
       SYNC_REQUEST_MARKER: ${{ inputs.request_marker }}
@@ -111,3 +111,6 @@ jobs:
             echo
             echo "No generated gallery changes detected; verification, commit, push, and Vercel Git deployment were skipped."
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Verify production gallery deployment
+        run: npm run apps:verify-production-gallery -- --base-url "$BASE_URL"

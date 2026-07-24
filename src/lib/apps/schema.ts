@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { isSupportedThumbnailUrl } from "@/lib/storage/public-thumbnail";
 import { normalizeTags } from "./tags";
+import { APP_AUDIENCES, GRADE_BANDS, INTERACTION_TYPES, normalizeAppMetadata } from "./metadata";
 
 const optionalText = z.string().trim().min(1).optional().or(z.literal("").transform(() => undefined));
 const githubHosts = new Set(["github.com", "www.github.com"]);
@@ -40,7 +41,12 @@ export const appInputSchema = z.object({
   thumbnailUrl,
   subject: optionalText,
   grade: optionalText,
-  memo: optionalText
-});
+  memo: optionalText,
+  subjects: z.array(z.string()).optional(),
+  gradeBands: z.array(z.enum(GRADE_BANDS)).optional(),
+  audience: z.enum(APP_AUDIENCES).optional(),
+  interactionType: z.enum(INTERACTION_TYPES).optional(),
+  learningProcess: z.array(z.string()).optional()
+}).transform((input) => ({ ...input, ...normalizeAppMetadata(input) }));
 
 export type AppInputSchema = z.infer<typeof appInputSchema>;

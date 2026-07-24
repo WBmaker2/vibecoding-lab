@@ -1,6 +1,7 @@
 import snapshot from "@/data/public-apps.json";
 import { isLegacyThumbnailComputeUrl } from "@/lib/storage/public-thumbnail";
 import type { PublicAppRecord, ThumbnailMode } from "./types";
+import { normalizeAppMetadata } from "./metadata";
 import type { StaticGalleryBaseline } from "./static-gallery-sync-state";
 import path from "node:path";
 
@@ -15,6 +16,11 @@ export interface SerializedPublicAppRecord {
   subject?: string | null;
   grade?: string | null;
   memo?: string | null;
+  subjects?: string[] | null;
+  gradeBands?: string[] | null;
+  audience?: string | null;
+  interactionType?: string | null;
+  learningProcess?: string[] | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -137,6 +143,7 @@ function normalizeStaticThumbnailUrl(value: string | null): string | null {
 export function toStaticPublicAppRecord(
   app: SerializedPublicAppRecord
 ): PublicAppRecord {
+  const metadata = normalizeAppMetadata(app);
   return {
     id: app.id,
     title: app.title,
@@ -148,6 +155,7 @@ export function toStaticPublicAppRecord(
     subject: app.subject ?? undefined,
     grade: app.grade ?? undefined,
     memo: app.memo ?? undefined,
+    ...metadata,
     createdAt: new Date(app.createdAt),
     updatedAt: new Date(app.updatedAt)
   };

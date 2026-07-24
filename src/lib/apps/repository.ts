@@ -3,6 +3,7 @@ import { getDb, isDatabaseConfigured } from "@/db/client";
 import { apps } from "@/db/schema";
 import { toPublicThumbnailUrl } from "@/lib/storage/public-thumbnail";
 import { normalizeTags } from "./tags";
+import { normalizeAppMetadata } from "./metadata";
 import type { AdminAppRecord, AppInput, PublicAppRecord } from "./types";
 
 export interface AppRepository {
@@ -82,9 +83,15 @@ export function toPublicAppRecord(record: {
   subject?: string | null;
   grade?: string | null;
   memo?: string | null;
+  subjects?: string[] | null;
+  gradeBands?: string[] | null;
+  audience?: string | null;
+  interactionType?: string | null;
+  learningProcess?: string[] | null;
   createdAt: Date;
   updatedAt: Date;
 }): PublicAppRecord {
+  const metadata = normalizeAppMetadata(record);
   return {
     id: record.id,
     title: record.title,
@@ -96,6 +103,7 @@ export function toPublicAppRecord(record: {
     subject: record.subject ?? undefined,
     grade: record.grade ?? undefined,
     memo: record.memo ?? undefined,
+    ...metadata,
     createdAt: record.createdAt,
     updatedAt: record.updatedAt
   };
@@ -106,6 +114,7 @@ export function toAdminAppRecord(record: AdminAppRecord): AdminAppRecord;
 export function toAdminAppRecord(
   record: typeof apps.$inferSelect | AdminAppRecord
 ): AdminAppRecord {
+  const metadata = normalizeAppMetadata(record);
   return {
     id: record.id,
     title: record.title,
@@ -119,7 +128,8 @@ export function toAdminAppRecord(
     memo: record.memo ?? undefined,
     createdAt: record.createdAt,
     updatedAt: record.updatedAt,
-    githubUrl: record.githubUrl ?? undefined
+    githubUrl: record.githubUrl ?? undefined,
+    ...metadata
   };
 }
 
@@ -151,6 +161,11 @@ class InMemoryAppRepository implements AppRepository {
       subject: input.subject || undefined,
       grade: input.grade || undefined,
       memo: input.memo || undefined,
+      subjects: input.subjects,
+      gradeBands: input.gradeBands,
+      audience: input.audience,
+      interactionType: input.interactionType,
+      learningProcess: input.learningProcess,
       createdAt: now,
       updatedAt: now
     };
@@ -178,6 +193,11 @@ class InMemoryAppRepository implements AppRepository {
       subject: input.subject || undefined,
       grade: input.grade || undefined,
       memo: input.memo || undefined,
+      subjects: input.subjects,
+      gradeBands: input.gradeBands,
+      audience: input.audience,
+      interactionType: input.interactionType,
+      learningProcess: input.learningProcess,
       updatedAt: new Date()
     };
 
@@ -265,7 +285,12 @@ class PostgresAppRepository implements AppRepository {
         thumbnailUrl: input.thumbnailUrl ?? null,
         subject: input.subject ?? null,
         grade: input.grade ?? null,
-        memo: input.memo ?? null
+        memo: input.memo ?? null,
+        subjects: input.subjects ?? [],
+        gradeBands: input.gradeBands ?? [],
+        audience: input.audience ?? null,
+        interactionType: input.interactionType ?? null,
+        learningProcess: input.learningProcess ?? []
       })
       .returning();
 

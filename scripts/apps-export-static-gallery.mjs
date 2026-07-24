@@ -442,6 +442,11 @@ function toPublicSnapshotApp(raw, index) {
     subject: coerceNullableText(raw.subject),
     grade: coerceNullableText(raw.grade),
     memo: coerceNullableText(raw.memo),
+    subjects: coerceTags(raw.subjects),
+    gradeBands: coerceTags(raw.gradeBands),
+    audience: coerceNullableText(raw.audience),
+    interactionType: coerceNullableText(raw.interactionType),
+    learningProcess: coerceTags(raw.learningProcess),
     createdAt: normalizeDateValue(raw.createdAt),
     updatedAt: normalizeDateValue(raw.updatedAt)
   };
@@ -468,6 +473,11 @@ async function fetchAppsFromPostgres() {
         subject,
         grade,
         memo,
+        subjects,
+        grade_bands as "gradeBands",
+        audience,
+        interaction_type as "interactionType",
+        learning_process as "learningProcess",
         created_at as "createdAt",
         updated_at as "updatedAt"
       from apps
@@ -829,6 +839,11 @@ async function run() {
       subject: rawApp.subject ?? null,
       grade: rawApp.grade ?? null,
       memo: rawApp.memo ?? null,
+      subjects: Array.isArray(rawApp.subjects) ? rawApp.subjects : [],
+      gradeBands: Array.isArray(rawApp.gradeBands) ? rawApp.gradeBands : [],
+      audience: rawApp.audience ?? null,
+      interactionType: rawApp.interactionType ?? null,
+      learningProcess: Array.isArray(rawApp.learningProcess) ? rawApp.learningProcess : [],
       createdAt: normalizeDateValue(rawApp.createdAt),
       updatedAt: normalizeDateValue(rawApp.updatedAt)
     };

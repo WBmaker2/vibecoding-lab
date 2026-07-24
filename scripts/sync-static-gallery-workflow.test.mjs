@@ -34,6 +34,13 @@ describe("static gallery sync workflow", () => {
     expect(exportIndex).toBeGreaterThan(migrationIndex);
   });
 
+  it("uses the canonical production domain and verifies the live app count", async () => {
+    const source = await fs.readFile(WORKFLOW_PATH, "utf8");
+    expect(source).toContain("https://www.vibehong.shop");
+    expect(source).not.toContain("www.vivehong.shop");
+    expect(source).toContain("npm run apps:verify-production-gallery");
+  });
+
   it("delegates production deployment to the Vercel Git integration", async () => {
     const source = await fs.readFile(WORKFLOW_PATH, "utf8");
 

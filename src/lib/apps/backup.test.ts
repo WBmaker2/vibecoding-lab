@@ -42,6 +42,11 @@ describe("createAppsBackupPayload", () => {
         subject: "영어",
         grade: "초등 5학년",
         memo: "짧은 복습 시간에 좋습니다.",
+        subjects: ["영어"],
+        gradeBands: ["5-6"],
+        audience: "student",
+        interactionType: "practice",
+        learningProcess: ["문제 해결", "피드백", "반복"],
         createdAt: "2026-04-05T00:00:00.000Z",
         updatedAt: "2026-04-05T01:30:00.000Z"
       }

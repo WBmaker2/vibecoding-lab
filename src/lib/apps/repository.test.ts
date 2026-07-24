@@ -13,6 +13,11 @@ const baseRecord: AdminAppRecord = {
   subject: "영어",
   grade: "초등",
   memo: "메모",
+  subjects: ["영어"],
+  gradeBands: ["all"],
+  audience: "student",
+  interactionType: "practice",
+  learningProcess: ["문제 해결", "피드백", "반복"],
   createdAt: new Date("2026-05-01T00:00:00.000Z"),
   updatedAt: new Date("2026-05-01T01:00:00.000Z")
 };
@@ -28,5 +33,7 @@ describe("toAdminAppRecord", () => {
     const record = toPublicAppRecord(baseRecord);
 
     expect(record.thumbnailUrl).toBeNull();
+    expect(record.subjects).toEqual(["영어"]);
+    expect(record.gradeBands).toEqual(["all"]);
   });
 });

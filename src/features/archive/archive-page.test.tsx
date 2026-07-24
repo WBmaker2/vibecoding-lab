@@ -57,7 +57,7 @@ describe("ArchivePage", () => {
     expect(screen.queryByLabelText("활성 필터")).not.toBeInTheDocument();
   });
 
-  it("keeps only one representative tag selected at a time", () => {
+  it("keeps multiple representative tags selected and applies AND filtering", () => {
     render(<ArchivePage initialApps={sampleApps} />);
 
     const englishTag = screen.getByRole("button", { name: "#영어" });
@@ -66,12 +66,13 @@ describe("ArchivePage", () => {
     fireEvent.click(englishTag);
     fireEvent.click(adminTag);
 
-    expect(englishTag).toHaveAttribute("aria-pressed", "false");
+    expect(englishTag).toHaveAttribute("aria-pressed", "true");
     expect(adminTag).toHaveAttribute("aria-pressed", "true");
 
     const activeFilters = screen.getByLabelText("활성 필터");
 
-    expect(within(activeFilters).queryByText("#영어")).not.toBeInTheDocument();
+    expect(within(activeFilters).getByText("#영어")).toBeInTheDocument();
     expect(within(activeFilters).getByText("#업무경감")).toBeInTheDocument();
+    expect(screen.getByText("조건을 조금 바꾸면 더 잘 찾을 수 있습니다")).toBeInTheDocument();
   });
 });

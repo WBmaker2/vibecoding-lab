@@ -441,7 +441,18 @@
       "grade": null,
       "memo": "PDF 안내문이나 학습지를 이미지 파일로 나누어 LMS, 슬라이드, 학급 게시 자료에 활용할 때 사용할 수 있습니다. 파일은 서버로 업로드하지 않고 브라우저에서 처리됩니다.",
       "createdAt": "2026-05-03T09:33:29.709Z",
-      "updatedAt": "2026-07-23T09:14:28.416Z"
+      "updatedAt": "2026-07-23T09:14:28.416Z",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "teacher",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ]
     },
     {
       "id": "c84042dc-2d55-4438-9cf0-9b0006ef758e",
@@ -462,7 +473,21 @@
       "grade": "초등 3~6학년",
       "memo": "교사가 학교·학급·학생 명단을 준비하고 단일 반 또는 2반 분할 세션을 열면, 학생은 이름을 선택해 기록을 제출합니다. 교사는 대표 기록, 요약표, 동기화 상태를 확인하며 Google Sheets 기반으로 운영 데이터를 관리할 수 있습니다.",
       "createdAt": "2026-04-19T01:51:40.541Z",
-      "updatedAt": "2026-07-23T09:14:00.818Z"
+      "updatedAt": "2026-07-23T09:14:00.818Z",
+      "subjects": [
+        "체육"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "mixed",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ]
     },
     {
       "id": "837829ee-abd3-46a7-9554-ec83055bbdf0",
@@ -482,7 +507,18 @@
       "grade": null,
       "memo": "출결 관리, 오늘의 수업, 학급 일지, 학생별 누가기록, 대시보드와 시간표 관리를 한 곳에서 다루며 PDF/Excel 내보내기와 클라우드 동기화 흐름까지 지원하는 교사용 기록 도구입니다.",
       "createdAt": "2026-04-19T00:53:49.113Z",
-      "updatedAt": "2026-07-23T09:13:26.454Z"
+      "updatedAt": "2026-07-23T09:13:26.454Z",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "mixed",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ]
     },
     {
       "id": "424c6d52-5aad-4f0e-bfc2-5f06fefcb30e",
@@ -503,7 +539,21 @@
       "grade": "초등 3~6학년",
       "memo": "교사가 단어 세트를 저장·공개하면 학생은 학교·선생님·학년·단원을 선택해 여러 활동으로 이어서 사용할 수 있습니다.",
       "createdAt": "2026-04-12T11:53:18.249Z",
-      "updatedAt": "2026-07-23T09:12:51.802Z"
+      "updatedAt": "2026-07-23T09:12:51.802Z",
+      "subjects": [
+        "영어"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ]
     },
     {
       "id": "dbf5fa15-fe4b-47a5-a186-29e4f50d8665",
@@ -524,7 +574,21 @@
       "grade": "초등 3~4학년",
       "memo": "과학 수업에서 옮길 물건, 거리, 길, 움직이는 힘을 살펴보고 수레 부품을 한 가지씩 바꿔 조건별 결과와 생각할 점을 비교하는 활동에 활용할 수 있습니다.",
       "createdAt": "2026-07-22T22:08:19.446Z",
-      "updatedAt": "2026-07-23T09:09:30.564Z"
+      "updatedAt": "2026-07-23T09:09:30.564Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "3d9dcb26-f6f6-4cb2-bd89-71028efe899b",
@@ -544,7 +608,21 @@
       "grade": "초등 3~6학년",
       "memo": "원문과 전달문을 비교하며 빠짐·추가·뜻 변화를 근거로 설명하고, 안전한 전달문을 만들어 보는 수업 활동에 활용할 수 있습니다.",
       "createdAt": "2026-07-22T22:09:30.871Z",
-      "updatedAt": "2026-07-23T09:09:15.077Z"
+      "updatedAt": "2026-07-23T09:09:15.077Z",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "b023a954-b497-4467-b043-64910bd20dac",
@@ -565,7 +643,20 @@
       "grade": "초등 5~6학년",
       "memo": "사회 수업에서 유물 사진을 관찰한 뒤, 박물관 기록과 새 단서를 비교하며 처음 생각을 근거에 맞게 고쳐 보는 활동으로 활용할 수 있습니다.",
       "createdAt": "2026-07-22T22:12:49.955Z",
-      "updatedAt": "2026-07-23T09:08:59.766Z"
+      "updatedAt": "2026-07-23T09:08:59.766Z",
+      "subjects": [
+        "사회"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "6738aefd-9410-4b80-8d95-2549be89e3d4",
@@ -586,7 +677,20 @@
       "grade": "초등 5~6학년",
       "memo": "빛길을 먼저 예상하고 장치를 고른 뒤 결과를 설명하는 수업용 활동입니다. 실제 거울·렌즈 실험 전후의 개념 확인에 활용할 수 있습니다.",
       "createdAt": "2026-07-22T22:14:18.104Z",
-      "updatedAt": "2026-07-23T09:07:42.794Z"
+      "updatedAt": "2026-07-23T09:07:42.794Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "e417c1ae-442e-4225-a7d3-c126f655183a",
@@ -607,7 +711,18 @@
       "grade": null,
       "memo": "학생 답변이나 수업 내용을 붙여넣고 모양·색상·글꼴을 골라 워드 클라우드 수업 자료를 빠르게 만들 수 있습니다.",
       "createdAt": "2026-07-22T22:35:06.579Z",
-      "updatedAt": "2026-07-22T22:35:06.579Z"
+      "updatedAt": "2026-07-22T22:35:06.579Z",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "mixed",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "f058dc1c-3ee5-4368-ba32-23ed3fcaac37",
@@ -627,7 +742,20 @@
       "grade": "초등 5~6학년",
       "memo": "민주주의와 시민 참여 단원에서 세 가지 가상 사건을 순서대로 살피며, 국가기관이 하는 일과 서로 다시 살피는 까닭을 정리하는 활동에 활용할 수 있습니다.",
       "createdAt": "2026-07-22T22:13:35.820Z",
-      "updatedAt": "2026-07-22T22:13:35.820Z"
+      "updatedAt": "2026-07-22T22:13:35.820Z",
+      "subjects": [
+        "사회"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "mixed",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ]
     },
     {
       "id": "643c543f-599c-4a5d-83f6-57d31acd0394",
@@ -646,7 +774,20 @@
       "grade": "초등 3~4학년",
       "memo": "발명·특허 관련 탐구 수업에서 A·B·C 자료를 읽고 근거를 골라 처음 생각을 고쳐 보는 활동으로 활용할 수 있습니다.",
       "createdAt": "2026-07-22T22:12:10.589Z",
-      "updatedAt": "2026-07-22T22:12:10.589Z"
+      "updatedAt": "2026-07-22T22:12:10.589Z",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "10829a2a-f96b-48ee-bca7-bd28c9748f27",
@@ -667,7 +808,22 @@
       "grade": "초등 4~6학년",
       "memo": "국어와 미술 수업에서 같은 장면을 자르기·크기·글·색으로 바꾸어 보고, 보이는 변화와 느낌의 까닭을 함께 말해 보는 활동에 활용할 수 있습니다.",
       "createdAt": "2026-07-22T22:09:20.437Z",
-      "updatedAt": "2026-07-22T22:11:53.892Z"
+      "updatedAt": "2026-07-22T22:11:53.892Z",
+      "subjects": [
+        "국어",
+        "미술"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "creation",
+      "learningProcess": [
+        "구상",
+        "제작",
+        "공유"
+      ]
     },
     {
       "id": "876e4653-4056-431f-ae17-27b5e45d0b4b",
@@ -688,7 +844,20 @@
       "grade": "초등 5~6학년",
       "memo": "교사가 안전 약속부터 시간 기록 복원, 그래프·숫자표 해석, 계절 비교까지 순서대로 활용할 수 있는 자료 탐구 활동입니다.",
       "createdAt": "2026-07-22T22:11:25.573Z",
-      "updatedAt": "2026-07-22T22:11:25.573Z"
+      "updatedAt": "2026-07-22T22:11:25.573Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "79bce259-c3aa-40f7-892b-f46be5fbe3fc",
@@ -708,7 +877,20 @@
       "grade": "초등 1~2학년",
       "memo": "초등 저학년 아동권리 수업에서 실제 경험을 말하지 않고, 만든 이야기 속 장면을 통해 여러 도움 방법과 어른의 역할을 함께 살펴볼 수 있습니다.",
       "createdAt": "2026-07-22T22:09:48.616Z",
-      "updatedAt": "2026-07-22T22:09:48.616Z"
+      "updatedAt": "2026-07-22T22:09:48.616Z",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "b8f82bb6-65a5-4876-8c75-b52cc125e5be",
@@ -729,7 +911,21 @@
       "grade": "초등 3~4학년",
       "memo": "3~4학년 소리 단원에서 실제 실험 전에 한 가지만 바꾸어 결과와 근거를 비교하는 탐구 활동으로 활용할 수 있습니다.",
       "createdAt": "2026-07-22T22:08:09.143Z",
-      "updatedAt": "2026-07-22T22:08:09.143Z"
+      "updatedAt": "2026-07-22T22:08:09.143Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "8ce3212a-1d5a-4987-8a51-bc6ecdb96324",
@@ -750,7 +946,20 @@
       "grade": "초등 5~6학년",
       "memo": "15~20분 개인 또는 2인 활동으로 자료를 세고 새 자료를 합쳐 예보를 유지하거나 바꾸는 과정을 토의합니다.",
       "createdAt": "2026-07-22T22:07:52.391Z",
-      "updatedAt": "2026-07-22T22:07:52.391Z"
+      "updatedAt": "2026-07-22T22:07:52.391Z",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "ca54acea-5292-4aff-80bd-8ea5da49294c",
@@ -771,7 +980,20 @@
       "grade": "초등 1~2학년",
       "memo": "길이 측정 첫 수업에서 시작점, 같은 크기의 칸, 틈과 겹침, 눈금 사이 세기를 순서대로 살펴보는 활동으로 활용할 수 있습니다.",
       "createdAt": "2026-07-22T22:07:36.451Z",
-      "updatedAt": "2026-07-22T22:07:36.451Z"
+      "updatedAt": "2026-07-22T22:07:36.451Z",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "636a7672-622a-4ba7-8f94-a1d61fb1a853",
@@ -792,7 +1014,21 @@
       "grade": "초등 5~6학년",
       "memo": "물질 종류와 물 온도를 한 번에 하나씩 바꾸어 비교하고, 예상-관찰-근거-규칙의 5단계로 용해 개념을 정리하는 수업에 활용할 수 있습니다.",
       "createdAt": "2026-07-22T22:03:52.954Z",
-      "updatedAt": "2026-07-22T22:07:21.130Z"
+      "updatedAt": "2026-07-22T22:07:21.130Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "feb7f03f-05fc-4c43-8919-060423577589",
@@ -812,7 +1048,21 @@
       "grade": "초등 3~6학년",
       "memo": "국어 시간에 앞뒤 내용을 읽고, 가리키는 말과 그 까닭을 함께 찾아보는 활동으로 사용할 수 있습니다.",
       "createdAt": "2026-07-22T22:06:49.242Z",
-      "updatedAt": "2026-07-22T22:06:49.242Z"
+      "updatedAt": "2026-07-22T22:06:49.242Z",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "7b66f642-63da-4389-bce4-35e5d708b6d0",
@@ -833,7 +1083,20 @@
       "grade": "초등 3~4학년",
       "memo": "여러 날의 달 모양을 앞뒤 기록으로 비교해 빈칸을 복원하며, 밝은 부분의 변화와 자료가 부족할 때의 판단을 함께 살펴보는 수업 활동입니다.",
       "createdAt": "2026-07-22T22:06:47.687Z",
-      "updatedAt": "2026-07-22T22:06:47.687Z"
+      "updatedAt": "2026-07-22T22:06:47.687Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "28e6a55c-4cc2-4fba-8741-09e56d7ba87b",
@@ -853,7 +1116,20 @@
       "grade": "초등 5~6학년",
       "memo": "온도 변화를 보고 열의 이동 방향을 예측한 뒤, 전도·대류·복사를 근거와 함께 비교하는 수업 활동에 활용할 수 있습니다.",
       "createdAt": "2026-07-22T22:05:18.770Z",
-      "updatedAt": "2026-07-22T22:05:18.770Z"
+      "updatedAt": "2026-07-22T22:05:18.770Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "a990e157-a2d7-4ded-b339-5ca3a1b50a66",
@@ -874,7 +1150,21 @@
       "grade": "초등 4학년",
       "memo": "실험 후 보고서 쓰기 전에 관찰 사실과 해석을 구분하고, 두 관찰 기록으로 해석을 뒷받침하는 관계를 연습하는 수업 활동입니다.",
       "createdAt": "2026-07-17T03:30:48.906Z",
-      "updatedAt": "2026-07-17T03:32:24.048Z"
+      "updatedAt": "2026-07-17T03:32:24.048Z",
+      "subjects": [
+        "과학",
+        "국어"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "3a72009d-c1ad-48b5-86b4-6eb870143eea",
@@ -894,7 +1184,20 @@
       "grade": "초등 1~2학년",
       "memo": "같은 단추 여섯 개를 색·모양·구멍 수·무늬 중 두 기준으로 직접 나누고 개수를 세어 보며, 기준에 따라 분류 결과가 달라짐을 비교하는 8~12분 수학 활동입니다.",
       "createdAt": "2026-07-17T01:27:17.761Z",
-      "updatedAt": "2026-07-17T01:27:17.761Z"
+      "updatedAt": "2026-07-17T01:27:17.761Z",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "5aff20b9-e329-4536-8761-a82adee6cfb2",
@@ -915,7 +1218,20 @@
       "grade": "초등 1~2학년",
       "memo": "연습 사건 뒤 여섯 이야기를 읽고 마음 하나와 단서 두 장을 연결한 뒤 다른 생각을 함께 살펴보는 점수 없는 활동입니다.",
       "createdAt": "2026-07-17T00:22:36.037Z",
-      "updatedAt": "2026-07-17T00:22:36.037Z"
+      "updatedAt": "2026-07-17T00:22:36.037Z",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "e3673005-3e93-42cd-9076-044480a41344",
@@ -936,7 +1252,20 @@
       "grade": "초등 1~2학년",
       "memo": "고정 9개 미션에서 낱개 10개를 십 묶음 1개로 묶고 다시 풀며 전체 수가 그대로인지 확인합니다. 화면의 '지금 할 일' 안내를 따라 숫자 쓰기, 수 읽기, 일·십 자리 관계를 10~15분 개별 학습이나 수학 보충 활동으로 연습할 수 있습니다.",
       "createdAt": "2026-07-14T13:18:33.193Z",
-      "updatedAt": "2026-07-15T07:16:10.523Z"
+      "updatedAt": "2026-07-15T07:16:10.523Z",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "ca39ad82-aec4-4011-84a8-56cfaa981631",
@@ -957,7 +1286,21 @@
       "grade": "초등 5~6학년",
       "memo": "전기 회로 단원에서 실제 실험 전·후로 닫힌 경로, 전구 접점, 끊어진 전선, 간헐 접촉, 두 전지 직렬연결을 점검하고 수리 근거를 설명하는 15~20분 탐구 활동에 활용할 수 있습니다.",
       "createdAt": "2026-07-14T12:23:14.047Z",
-      "updatedAt": "2026-07-14T12:23:14.047Z"
+      "updatedAt": "2026-07-14T12:23:14.047Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "2f302bf0-c012-4432-a585-106e74385b7d",
@@ -978,7 +1321,21 @@
       "grade": "초등 3~4학년",
       "memo": "첫 배분의 절차를 살피고 똑같이·필요·기여·추첨 기준의 결과와 한계를 비교한 뒤, 새 사실에 따라 판단을 유지하거나 바꾸며 근거를 구성하는 수업 활동입니다.",
       "createdAt": "2026-07-14T12:17:17.811Z",
-      "updatedAt": "2026-07-14T12:17:17.811Z"
+      "updatedAt": "2026-07-14T12:17:17.811Z",
+      "subjects": [
+        "도덕"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "48b67d53-f103-4fc7-9544-59e8a73b2686",
@@ -999,7 +1356,21 @@
       "grade": "초등 4~6학년",
       "memo": "국어·수학·과학·사회의 가상 사건을 선택해 확인할 말 찾기, 자료 살펴보기, 비교, 판단, 제목 만들기 순서로 활동할 수 있습니다.",
       "createdAt": "2026-07-14T09:39:08.518Z",
-      "updatedAt": "2026-07-14T09:39:08.518Z"
+      "updatedAt": "2026-07-14T09:39:08.518Z",
+      "subjects": [
+        "교과융합"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "creation",
+      "learningProcess": [
+        "구상",
+        "제작",
+        "공유"
+      ]
     },
     {
       "id": "91fc1ce8-f455-464d-ace8-f2d2b2ed2985",
@@ -1020,7 +1391,21 @@
       "grade": "초등 3~4학년",
       "memo": "물의 상태 변화 단원에서 실제 실험 전 장치 원리와 공정한 비교 방법을 익히고, 24개 보존 표식으로 물 수지를 확인하는 사전 탐구 활동에 활용할 수 있습니다.",
       "createdAt": "2026-07-14T09:30:01.340Z",
-      "updatedAt": "2026-07-14T09:30:01.340Z"
+      "updatedAt": "2026-07-14T09:30:01.340Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "af1fee94-763b-4f7c-9607-bc685873a2fc",
@@ -1041,7 +1426,20 @@
       "grade": "초등 1~2학년",
       "memo": "생활도구 하나를 선택해 사용 장면의 불편 근거를 찾고, 모양·기능·재료와 표면을 바꾼 뒤 같은 조건으로 전후를 시험합니다. 완성된 리디자인 처방전을 보며 바꾼 이유와 새로 생긴 불편까지 함께 설명할 수 있습니다.",
       "createdAt": "2026-07-13T20:01:16.149Z",
-      "updatedAt": "2026-07-13T20:01:16.149Z"
+      "updatedAt": "2026-07-13T20:01:16.149Z",
+      "subjects": [
+        "통합"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "680f7079-9f3a-4b90-ab32-e418cd40aab9",
@@ -1062,7 +1460,21 @@
       "grade": "초등 5~6학년",
       "memo": "가상 도서 데이터에서 누락·오표기·중복·대표성·개인정보 문제를 찾고, 근거에 따라 정비한 뒤 같은 시험의 결과 변화를 비교하는 수업 활동에 활용할 수 있습니다.",
       "createdAt": "2026-07-13T13:19:01.797Z",
-      "updatedAt": "2026-07-13T13:19:01.797Z"
+      "updatedAt": "2026-07-13T13:19:01.797Z",
+      "subjects": [
+        "실과"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "9e77dba6-7388-4b21-bf2e-b74b9d9e5193",
@@ -1083,7 +1495,20 @@
       "grade": "초등 3~4학년",
       "memo": "도움·기본·도전 단계의 9문항을 풀며 같을까요, 빈칸 채우기, 틀린 식 고치기 활동을 진행하고 오답만 다시 풀 수 있습니다.",
       "createdAt": "2026-07-13T13:14:43.524Z",
-      "updatedAt": "2026-07-13T13:14:43.524Z"
+      "updatedAt": "2026-07-13T13:14:43.524Z",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "0118a475-a6af-4be2-849e-416bcd2e9ee8",
@@ -1104,7 +1529,21 @@
       "grade": "전학년",
       "memo": "교사를 위한 바이브코딩 학습 사이트",
       "createdAt": "2026-07-09T11:57:11.682Z",
-      "updatedAt": "2026-07-09T11:59:30.628Z"
+      "updatedAt": "2026-07-09T11:59:30.628Z",
+      "subjects": [
+        "바이브코딩"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "teacher",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "596fc43f-8908-492f-b328-d43aae7e984d",
@@ -1126,7 +1565,21 @@
       "grade": "초등 5~6학년",
       "memo": "사회 시간에는 선택과 소비 기준을, 수학 시간에는 실생활 자료를 표와 그래프로 해석하는 활동으로 연결할 수 있습니다.",
       "createdAt": "2026-06-21T04:22:30.643Z",
-      "updatedAt": "2026-07-09T11:59:18.692Z"
+      "updatedAt": "2026-07-09T11:59:18.692Z",
+      "subjects": [
+        "사회",
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "d093f79b-8672-4498-8f39-b65397fff216",
@@ -1147,7 +1600,22 @@
       "grade": "초등",
       "memo": "수위 조절과 개발·보전 카드 조합을 바꾸며 갯벌의 자연 정화 작용과 지속가능한 선택을 토론할 수 있는 수업용 탐구 앱입니다.",
       "createdAt": "2026-06-18T13:34:49.004Z",
-      "updatedAt": "2026-07-09T11:58:40.677Z"
+      "updatedAt": "2026-07-09T11:58:40.677Z",
+      "subjects": [
+        "과학",
+        "사회"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "31d29c7a-8ce6-4ba0-a5aa-e4bb984848b5",
@@ -1168,7 +1636,21 @@
       "grade": "초등 4학년",
       "memo": "각도 어림 게임과 삼각형 꼭짓점 조작 활동을 한 화면에서 진행할 수 있어 도형 단원의 각도 감각과 내각의 합 개념을 탐구하는 수업에 활용하기 좋습니다. 드래그와 키보드 방향키 조작을 모두 지원합니다.",
       "createdAt": "2026-06-17T13:06:29.937Z",
-      "updatedAt": "2026-06-29T09:48:46.781Z"
+      "updatedAt": "2026-06-29T09:48:46.781Z",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "86c0c19a-c4bf-4ef1-822b-75162b385271",
@@ -1187,7 +1669,18 @@
       "grade": null,
       "memo": "수업 자료 준비나 기기별 사진 형식 변환이 필요할 때 서버 업로드 없이 브라우저에서 안전하게 처리할 수 있습니다.",
       "createdAt": "2026-06-29T09:05:14.815Z",
-      "updatedAt": "2026-06-29T09:47:35.090Z"
+      "updatedAt": "2026-06-29T09:47:35.090Z",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "student",
+      "interactionType": "utility",
+      "learningProcess": [
+        "변환",
+        "확인",
+        "저장"
+      ]
     },
     {
       "id": "fbdbaf4e-1c6d-4644-8de7-cde51f5e9c9d",
@@ -1209,7 +1702,21 @@
       "grade": "초등 5~6학년",
       "memo": "정삼각형, 정사각형, 정오각형부터 별, 나선, 꽃 모양까지 거북이 명령을 실행하며 다각형의 외각과 반복 구조를 관찰할 수 있습니다. 자유 도형 그리기에서는 이동거리, 회전각, 반복 횟수를 직접 조합해 순차와 반복 프로그래밍 구조를 함께 실험할 수 있습니다.",
       "createdAt": "2026-05-09T12:35:29.044Z",
-      "updatedAt": "2026-06-21T06:37:19.895Z"
+      "updatedAt": "2026-06-21T06:37:19.895Z",
+      "subjects": [
+        "수학",
+        "실과"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "422f88e0-ac58-42c6-afa4-9d557979eaf8",
@@ -1230,7 +1737,22 @@
       "grade": "초등 3~4학년",
       "memo": "3~4학년 소리 단원에서 물의 양과 소리 높낮이를 안전하게 비교하고, 도레미 튜닝과 짧은 연주로 음악 활동까지 이어갈 수 있습니다.",
       "createdAt": "2026-05-12T10:34:08.273Z",
-      "updatedAt": "2026-06-21T06:36:53.981Z"
+      "updatedAt": "2026-06-21T06:36:53.981Z",
+      "subjects": [
+        "과학",
+        "음악"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "2c47b201-4941-4d74-a5b0-bb84d696e01c",
@@ -1251,7 +1773,22 @@
       "grade": "3-4학년군",
       "memo": "10,000원 예산 안에서 필수/선택 소비를 비교하고, 학생 활동지·발표 카드·교사용 수업안을 함께 활용해 계산 과정과 소비 이유를 말할 수 있도록 돕습니다.",
       "createdAt": "2026-05-12T09:21:45.938Z",
-      "updatedAt": "2026-06-21T06:36:33.974Z"
+      "updatedAt": "2026-06-21T06:36:33.974Z",
+      "subjects": [
+        "사회",
+        "수학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "4013316e-7506-46aa-9f24-7175b379ea27",
@@ -1272,7 +1809,21 @@
       "grade": "5~6학년",
       "memo": "세로·가로·대각선 대칭축, 격자 보기, 점 탐구, 거리 힌트, 작품 카드 저장과 공유 문구 복사를 활용해 선대칭 성질을 시각적으로 설명하고 미술 작품으로 확장할 수 있습니다.",
       "createdAt": "2026-05-08T14:55:08.027Z",
-      "updatedAt": "2026-06-21T06:36:17.147Z"
+      "updatedAt": "2026-06-21T06:36:17.147Z",
+      "subjects": [
+        "수학",
+        "미술"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "creation",
+      "learningProcess": [
+        "구상",
+        "제작",
+        "공유"
+      ]
     },
     {
       "id": "b52fd0e4-768b-4cc1-806c-53deef04f003",
@@ -1292,7 +1843,23 @@
       "grade": "초3-6",
       "memo": "3~4학년 미술의 조형 요소와 5~6학년 과학의 빛 단원에서 색의 비율과 결과를 비교하며 관찰 기록을 남기는 활동에 활용할 수 있습니다.",
       "createdAt": "2026-04-24T13:23:35.648Z",
-      "updatedAt": "2026-06-21T06:35:40.457Z"
+      "updatedAt": "2026-06-21T06:35:40.457Z",
+      "subjects": [
+        "미술",
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "373e131a-54eb-41a6-852f-aa54431b29c8",
@@ -1313,7 +1880,24 @@
       "grade": "초등 1~6학년",
       "memo": "아침 활동, 중간놀이, 수업 중 집중 전환 시간에 전자칠판으로 룰렛을 돌려 전체 학생이 짧게 몸을 풀도록 활용할 수 있습니다. 교사 관리화면에서 미션 문구를 저장하거나 기본값으로 초기화할 수 있습니다.",
       "createdAt": "2026-04-26T13:16:36.556Z",
-      "updatedAt": "2026-06-21T06:35:15.099Z"
+      "updatedAt": "2026-06-21T06:35:15.099Z",
+      "subjects": [
+        "체육",
+        "바른생활"
+      ],
+      "gradeBands": [
+        "all",
+        "1-2",
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "7507c704-bd01-497e-aeb5-1578209b0d6e",
@@ -1336,7 +1920,22 @@
       "grade": "초5-6",
       "memo": "교사가 토론 세션을 만들고 학생은 QR 또는 세션 코드로 들어와 찬성·반대·중립 의견과 근거를 제출합니다. 전자칠판에서는 학급 의견 비율과 색상 포스트잇을 함께 보며 토의·토론을 진행할 수 있습니다.",
       "createdAt": "2026-04-26T13:21:14.825Z",
-      "updatedAt": "2026-06-21T06:34:21.695Z"
+      "updatedAt": "2026-06-21T06:34:21.695Z",
+      "subjects": [
+        "국어",
+        "사회",
+        "도덕"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ]
     },
     {
       "id": "0a1a350d-2f4d-4676-ba63-f33ad2147328",
@@ -1356,7 +1955,21 @@
       "grade": "초등 5~6학년",
       "memo": "실과의 데이터 유형과 AI 활용 이해, 도덕의 정보통신 윤리 성찰을 함께 다루는 수업용 앱입니다. 학생은 하루 목표 사용 시간과 실제 사용량, AI 질문 횟수, 윤리 체크와 성찰 메모를 기록하며 절제 습관을 돌아볼 수 있습니다.",
       "createdAt": "2026-04-30T13:47:20.926Z",
-      "updatedAt": "2026-06-21T06:33:50.884Z"
+      "updatedAt": "2026-06-21T06:33:50.884Z",
+      "subjects": [
+        "실과",
+        "도덕"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "9c98f5c3-758a-47ba-bf90-59799f820e4f",
@@ -1377,7 +1990,21 @@
       "grade": "5~6학년",
       "memo": "5~6학년 실과의 용돈 관리와 수학의 원그래프 활동을 연결해, 학생이 받은 돈과 사용한 돈, 남은 돈을 확인하고 주간 목표와 소비 비율을 바탕으로 자신의 경제 습관을 성찰하도록 돕는 수업용 앱입니다.",
       "createdAt": "2026-04-26T01:17:26.605Z",
-      "updatedAt": "2026-06-21T06:33:17.612Z"
+      "updatedAt": "2026-06-21T06:33:17.612Z",
+      "subjects": [
+        "실과",
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "77669d34-e66c-4f01-a74c-f703447fa17d",
@@ -1396,7 +2023,20 @@
       "grade": "초등 6학년",
       "memo": "기관 버튼, 흐름 애니메이션, 수준별 설명, 몸속 소리, 퀴즈를 활용해 우리 몸 기관의 위치와 상호 관련성을 수업 중 바로 확인할 수 있습니다.",
       "createdAt": "2026-06-17T14:02:52.777Z",
-      "updatedAt": "2026-06-21T06:32:09.940Z"
+      "updatedAt": "2026-06-21T06:32:09.940Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "ac622468-2710-4183-9a67-f2489ae000c5",
@@ -1417,7 +2057,21 @@
       "grade": "초등 3~6학년",
       "memo": "기본 문제 세트와 교사용 세트 만들기를 함께 제공해 학생 활동, 개별 연습, 수업 후 리포트 확인에 활용할 수 있습니다.",
       "createdAt": "2026-06-18T13:35:04.780Z",
-      "updatedAt": "2026-06-21T06:31:25.193Z"
+      "updatedAt": "2026-06-21T06:31:25.193Z",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "a569fbf0-1e50-4286-aef8-b0e38ea6aa8d",
@@ -1439,7 +2093,22 @@
       "grade": "초등",
       "memo": "수학의 표와 그래프 해석 활동과 도덕·환경교육의 기후 행동 실천을 연결해, 학생이 자신의 하루 실천을 점수와 추세로 돌아볼 수 있습니다.",
       "createdAt": "2026-06-21T01:34:32.771Z",
-      "updatedAt": "2026-06-21T06:31:00.563Z"
+      "updatedAt": "2026-06-21T06:31:00.563Z",
+      "subjects": [
+        "수학",
+        "도덕",
+        "환경"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "6b801106-2602-42d8-8cd2-d26716433860",
@@ -1459,7 +2128,21 @@
       "grade": "초등 5~6학년",
       "memo": "고유어·한자어·외래어·신조어 등 낱말의 확장 현상을 조선 후기와 개항기 문물 도입 맥락에 연결해 살펴보는 시각 탐구 활동에 활용할 수 있습니다.",
       "createdAt": "2026-06-21T02:59:59.788Z",
-      "updatedAt": "2026-06-21T06:30:25.548Z"
+      "updatedAt": "2026-06-21T06:30:25.548Z",
+      "subjects": [
+        "국어",
+        "사회"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "9a61427f-7760-48ff-8e95-52e7264dd838",
@@ -1481,7 +2164,21 @@
       "grade": "초등 3~4학년",
       "memo": "학생이 새 관찰 횟수와 관찰 문장을 기록하고, 교사는 복사·파일·QR 제출 기능으로 결과를 모아 확인할 수 있습니다.",
       "createdAt": "2026-06-21T04:33:44.749Z",
-      "updatedAt": "2026-06-21T06:29:49.490Z"
+      "updatedAt": "2026-06-21T06:29:49.490Z",
+      "subjects": [
+        "과학",
+        "수학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "1c13b710-5da9-4f8d-be49-c7b6af20fedb",
@@ -1502,7 +2199,20 @@
       "grade": "초등",
       "memo": "종이 학습지 풀이를 사진으로 제출하고 교사가 태블릿에서 바로 확인해 첨삭하는 수업 흐름에 맞춘 도구입니다. 학생은 로그인 없이 수업 코드와 번호로 입장하고, 교사는 제출 현황과 수업 기록을 관리할 수 있습니다.",
       "createdAt": "2026-05-21T08:39:43.196Z",
-      "updatedAt": "2026-06-14T07:38:57.556Z"
+      "updatedAt": "2026-06-14T07:38:57.556Z",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "mixed",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ]
     },
     {
       "id": "8dcda375-afc0-4a15-9235-e8df7cad85a6",
@@ -1521,7 +2231,20 @@
       "grade": "초등",
       "memo": "학생이 USB로 micro:bit를 연결하고 티처블 머신 음성 모델의 on/off class name을 시리얼 통신으로 보내 AI 선풍기 활동을 실습할 수 있습니다.",
       "createdAt": "2026-06-10T10:33:26.216Z",
-      "updatedAt": "2026-06-14T07:37:56.296Z"
+      "updatedAt": "2026-06-14T07:37:56.296Z",
+      "subjects": [
+        "실과"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "5543c36a-42d8-49ba-b2e2-85a2c4f193ea",
@@ -1539,7 +2262,22 @@
       "grade": "3-6학년",
       "memo": "키보드 F/J와 터치 버튼으로 궁편·채편·양편을 연주하고, 정간보 패턴을 따라 교실에서 개인 장단 연습을 할 수 있습니다. 실제 장구 녹음 샘플과 교사용 운영 자료를 함께 제공합니다.",
       "createdAt": "2026-05-12T12:32:46.714Z",
-      "updatedAt": "2026-06-14T07:37:42.782Z"
+      "updatedAt": "2026-06-14T07:37:42.782Z",
+      "subjects": [
+        "음악",
+        "국악"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "9925ecdd-4483-4f9b-bb96-8aed89662621",
@@ -1559,7 +2297,22 @@
       "grade": "초등 5~6학년",
       "memo": "산성비, 바다 산성화, 기후변화와 폭우 등 환경 주제를 골라 피해 사례와 기후 행동 다짐을 기사로 쓰고, localStorage 기반 학급 게시판에 공유할 수 있는 융합 수업용 웹 앱입니다.",
       "createdAt": "2026-06-14T03:07:22.313Z",
-      "updatedAt": "2026-06-14T07:37:23.242Z"
+      "updatedAt": "2026-06-14T07:37:23.242Z",
+      "subjects": [
+        "과학",
+        "사회",
+        "국어"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ]
     },
     {
       "id": "511d5334-1e2c-40ac-8f9b-bc7bc22a1a21",
@@ -1579,7 +2332,22 @@
       "grade": "초등 3~4학년",
       "memo": "정사각형과 직사각형의 변과 각도 성질을 거북이 명령으로 직접 그려보고, 완성한 도형을 색칠해 학급 갤러리에 전시할 수 있는 수업용 활동 앱입니다.",
       "createdAt": "2026-06-14T06:30:26.183Z",
-      "updatedAt": "2026-06-14T07:35:48.876Z"
+      "updatedAt": "2026-06-14T07:35:48.876Z",
+      "subjects": [
+        "수학",
+        "미술",
+        "정보"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "creation",
+      "learningProcess": [
+        "구상",
+        "제작",
+        "공유"
+      ]
     },
     {
       "id": "3f602cb9-e07f-422c-9f40-127145020bc2",
@@ -1600,7 +2368,21 @@
       "grade": "초등 1-2학년",
       "memo": "감정 단추를 선택하면 감정에 맞는 짧은 말놀이 동시와 고운 말 표현이 나타나고, 학생은 자기 목소리로 낭송을 녹음해 우리 반 방송국 게시판에 올릴 수 있습니다. 서버 없이 브라우저에 저장되는 구조라 수업 중 감정 나눔과 바르고 고운 말 표현 연습에 바로 활용하기 좋습니다.",
       "createdAt": "2026-06-14T06:23:46.487Z",
-      "updatedAt": "2026-06-14T07:35:13.144Z"
+      "updatedAt": "2026-06-14T07:35:13.144Z",
+      "subjects": [
+        "국어",
+        "즐거운 생활"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ]
     },
     {
       "id": "42b8f202-db48-42f6-a8aa-e35192687889",
@@ -1619,7 +2401,20 @@
       "grade": "교사용",
       "memo": "학교 행정 메모, 점검 체크리스트, 수업 운영 아이디어를 빠르게 기록하고 로컬 및 서버 백업으로 보관하는 H Memo의 공개 다운로드 안내 페이지입니다.",
       "createdAt": "2026-05-17T00:33:08.028Z",
-      "updatedAt": "2026-05-21T08:35:17.357Z"
+      "updatedAt": "2026-05-21T08:35:17.357Z",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "teacher"
+      ],
+      "audience": "teacher",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ]
     },
     {
       "id": "d13ba3a7-be1e-4aab-bc7a-de1df66bd8f3",
@@ -1641,7 +2436,21 @@
       "grade": "초등 3-4학년",
       "memo": "우리 동네의 살기 좋은 곳, 주의할 곳, 도움받는 곳을 지도에 찍어 모둠별 탐구 결과를 정리하는 수업 도구입니다. 학급·모둠명 저장, CSV·JSON·PDF 내보내기, JSON 가져오기 미리보기와 기록 추가 병합을 지원합니다.",
       "createdAt": "2026-04-20T10:59:06.808Z",
-      "updatedAt": "2026-05-15T05:51:40.365Z"
+      "updatedAt": "2026-05-15T05:51:40.365Z",
+      "subjects": [
+        "사회",
+        "안전"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ]
     },
     {
       "id": "feee9f4c-ebef-455d-a303-c6016dca3ea9",
@@ -1662,7 +2471,22 @@
       "grade": "초등 4~6학년",
       "memo": "학생들이 오늘 교실에서 발생한 쓰레기와 전기 사용량을 입력하며 환경 보호 실천을 데이터로 돌아볼 수 있습니다.",
       "createdAt": "2026-04-20T09:20:30.348Z",
-      "updatedAt": "2026-05-13T03:04:04.820Z"
+      "updatedAt": "2026-05-13T03:04:04.820Z",
+      "subjects": [
+        "과학",
+        "실과"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "acd41aa8-8a45-4051-8a7f-fcff679d56a4",
@@ -1680,7 +2504,18 @@
       "grade": null,
       "memo": "담임교사가 하루 업무함에서 공문과 마감을 확인하고, 수합판·템플릿·캘린더·데이터 백업까지 개인 저장소 기준으로 이어서 관리할 수 있습니다.",
       "createdAt": "2026-05-05T03:37:28.683Z",
-      "updatedAt": "2026-05-13T02:53:16.156Z"
+      "updatedAt": "2026-05-13T02:53:16.156Z",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "teacher",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ]
     },
     {
       "id": "890a0ba1-6e4c-4bf8-a9d9-2009802a94fb",
@@ -1703,7 +2538,21 @@
       "grade": "초등 5~6학년",
       "memo": "자료와 가능성 단원에서 실제 학급 의사결정을 투표로 수집하고, 결과를 세 가지 그래프로 비교하며 그래프 선택과 해석을 토론할 수 있습니다.",
       "createdAt": "2026-05-12T10:24:23.220Z",
-      "updatedAt": "2026-05-13T02:49:40.278Z"
+      "updatedAt": "2026-05-13T02:49:40.278Z",
+      "subjects": [
+        "수학",
+        "창체"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ]
     },
     {
       "id": "c4962759-1d6a-4070-85a8-cc46c91a70f1",
@@ -1725,7 +2574,20 @@
       "grade": "초등~고등",
       "memo": "교사는 학급 설정, 명부, 자리 배치, 칭찬 기록, 회의 안건, 규칙 합의를 관리하고 학생은 참여 코드로 안건 제출과 투표에 참여할 수 있습니다.",
       "createdAt": "2026-05-03T11:00:00.920Z",
-      "updatedAt": "2026-05-13T02:48:53.692Z"
+      "updatedAt": "2026-05-13T02:48:53.692Z",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ]
     },
     {
       "id": "96932b6e-d720-4fdb-80ff-1db37f5b0e6f",
@@ -1745,7 +2607,21 @@
       "grade": "초등 3~4학년",
       "memo": "학생이 자신의 동시나 좋아하는 시를 낭송하고, 빗소리·잔잔한 피아노·파도 소리·새소리 중 어울리는 사운드를 선택해 감정을 입체적으로 표현합니다. 녹음과 믹싱은 브라우저 안에서 처리되며, 교사는 수업 가이드와 실기기 마이크 체크리스트를 활용해 수업 전 점검할 수 있습니다.",
       "createdAt": "2026-05-09T11:31:13.447Z",
-      "updatedAt": "2026-05-13T02:45:54.029Z"
+      "updatedAt": "2026-05-13T02:45:54.029Z",
+      "subjects": [
+        "국어",
+        "음악"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "creation",
+      "learningProcess": [
+        "구상",
+        "제작",
+        "공유"
+      ]
     },
     {
       "id": "bebd1fd7-5b54-4923-a476-fae00288d4e2",
@@ -1765,7 +2641,20 @@
       "grade": "3~4학년",
       "memo": "경상북도 OpenStreetMap 지도에서 기본 문화유산 7개를 탐험하고, 시군 프리셋으로 내 문화유산 핀을 추가하며, 수업 정리 단계에서 학생 이름 없이 탐험 기록을 인쇄할 수 있습니다.",
       "createdAt": "2026-04-30T13:31:33.438Z",
-      "updatedAt": "2026-05-13T02:41:49.642Z"
+      "updatedAt": "2026-05-13T02:41:49.642Z",
+      "subjects": [
+        "사회"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "reference",
+      "learningProcess": [
+        "검색",
+        "탐색",
+        "확인"
+      ]
     },
     {
       "id": "3cb419a8-6c37-4e15-9d0d-6b0634be0bc4",
@@ -1786,7 +2675,20 @@
       "grade": "5~6학년",
       "memo": "조선의 건국부터 병자호란까지 주요 인물과 사건을 학생 조사 결과와 함께 정리할 수 있는 수업용 웹앱입니다.",
       "createdAt": "2026-04-20T12:15:47.431Z",
-      "updatedAt": "2026-05-13T02:40:32.229Z"
+      "updatedAt": "2026-05-13T02:40:32.229Z",
+      "subjects": [
+        "사회"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ]
     },
     {
       "id": "d2caab9f-3456-4df5-b0b4-da7bb141bf9f",
@@ -1807,7 +2709,22 @@
       "grade": "초등 5~6학년",
       "memo": "학생이 스페이스바나 화면 터치로 심장 압박을 연습하면 실시간 BPM과 색상 피드백으로 권장 압박 속도에 가까운지 확인할 수 있습니다.",
       "createdAt": "2026-04-20T11:53:39.633Z",
-      "updatedAt": "2026-05-13T02:39:15.358Z"
+      "updatedAt": "2026-05-13T02:39:15.358Z",
+      "subjects": [
+        "체육",
+        "안전"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "25f6d160-3efc-42c7-accd-4f62eb0f7635",
@@ -1827,7 +2744,23 @@
       "grade": "1~6학년",
       "memo": "도형의 이동, 회전을 학습할 수 있는 게임입니다.\r\n리더보드가 있어 선의의 경쟁을 할 수 있습니다.",
       "createdAt": "2026-04-24T05:06:47.050Z",
-      "updatedAt": "2026-05-13T00:48:37.286Z"
+      "updatedAt": "2026-05-13T00:48:37.286Z",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "all",
+        "1-2",
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "e41f2952-cbee-4463-9205-c3e7ce269602",
@@ -1848,7 +2781,20 @@
       "grade": "초등",
       "memo": "교사는 Google 로그인으로 수업 세션을 만들고 학생은 코드와 이름으로 입장해 캐릭터를 움직이며 행성별 음악을 감상하고 채팅으로 생각을 나눌 수 있습니다.",
       "createdAt": "2026-04-23T13:51:58.655Z",
-      "updatedAt": "2026-05-13T00:48:06.336Z"
+      "updatedAt": "2026-05-13T00:48:06.336Z",
+      "subjects": [
+        "음악"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ]
     },
     {
       "id": "13db4453-420a-447c-a4e9-67d330852ee5",
@@ -1868,7 +2814,21 @@
       "grade": "초등 3~6학년",
       "memo": "학생들이 킥, 스네어, 하이햇, 박수로 16박 패턴을 만들고 QR/공유 링크로 친구 비트를 열어볼 수 있어 음악 구성 요소와 말붙임새 활동에 활용할 수 있습니다.",
       "createdAt": "2026-04-20T09:19:28.087Z",
-      "updatedAt": "2026-05-13T00:45:38.586Z"
+      "updatedAt": "2026-05-13T00:45:38.586Z",
+      "subjects": [
+        "음악"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ]
     },
     {
       "id": "d9e05a77-4d67-4c0e-be07-48b069383791",
@@ -1887,7 +2847,21 @@
       "grade": "초등 1~2학년",
       "memo": "날씨 미션을 읽고 필요한 옷차림과 준비물을 선택하면 캐릭터가 실시간으로 바뀌며, 외출 전 체크리스트에서 완료/아직 상태를 바로 확인할 수 있습니다.",
       "createdAt": "2026-05-08T14:55:17.940Z",
-      "updatedAt": "2026-05-13T00:44:12.159Z"
+      "updatedAt": "2026-05-13T00:44:12.159Z",
+      "subjects": [
+        "바른 생활",
+        "슬기로운 생활"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ]
     },
     {
       "id": "a453fce0-6a74-4cb2-99aa-0a7d847114da",
@@ -1907,7 +2881,18 @@
       "grade": null,
       "memo": "학급별 학생과 자리표를 등록한 뒤 자리 배치 확인, 무작위 발표자 선정, 수업 타이머를 한 화면에서 사용할 수 있습니다. 기본은 브라우저 로컬 저장이라 로그인 없이 바로 쓰고, 필요할 때 Google 로그인으로 백업할 수 있습니다.",
       "createdAt": "2026-04-19T01:45:49.296Z",
-      "updatedAt": "2026-05-08T14:09:41.706Z"
+      "updatedAt": "2026-05-08T14:09:41.706Z",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "mixed",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ]
     },
     {
       "id": "60646b44-ffef-45f9-a774-65df50211a9a",
@@ -1925,7 +2910,20 @@
       "grade": "초등·중등·고등",
       "memo": "수업 중 어휘 확인, 가정 학습, 발음 듣기와 말하기 점검 활동에 바로 활용할 수 있습니다.",
       "createdAt": "2026-04-19T01:31:31.045Z",
-      "updatedAt": "2026-05-08T12:57:57.714Z"
+      "updatedAt": "2026-05-08T12:57:57.714Z",
+      "subjects": [
+        "영어"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "reference",
+      "learningProcess": [
+        "검색",
+        "탐색",
+        "확인"
+      ]
     },
     {
       "id": "c7de79fb-516a-4167-9d21-ba282a2cf5de",
@@ -1943,7 +2941,18 @@
       "grade": null,
       "memo": "대시보드, 체크리스트, 업무관리, 통계, 백업 화면을 통해 학급 운영 업무를 매일 확인하고 반복 업무 누락을 줄이는 데 사용할 수 있습니다.",
       "createdAt": "2026-04-19T01:38:38.164Z",
-      "updatedAt": "2026-05-08T12:57:30.132Z"
+      "updatedAt": "2026-05-08T12:57:30.132Z",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "teacher",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ]
     },
     {
       "id": "f1fc0953-7d49-42c5-a0cc-68b0a564e765",
@@ -1962,7 +2971,20 @@
       "grade": "초등 4학년",
       "memo": "분자와 분모 슬라이더로 두 분수를 직접 만들고 원형/막대 모델로 비교할 수 있어, 분수의 의미와 크기 비교 수업에서 탐구 활동이나 개별 연습으로 활용하기 좋습니다.",
       "createdAt": "2026-04-20T10:30:43.570Z",
-      "updatedAt": "2026-05-08T12:54:55.664Z"
+      "updatedAt": "2026-05-08T12:54:55.664Z",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "a134be86-a969-4e39-b131-9c61247f4c87",
@@ -1981,7 +3003,21 @@
       "grade": "5~6학년",
       "memo": "5~6학년 과학 수업에서 태양계 행성의 크기와 태양으로부터의 거리, 공전 속도 차이를 관찰하고 미션 풀이와 자전·공전 개념 정리에 활용할 수 있습니다.",
       "createdAt": "2026-04-19T05:35:34.726Z",
-      "updatedAt": "2026-05-08T12:53:41.945Z"
+      "updatedAt": "2026-05-08T12:53:41.945Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     },
     {
       "id": "9a942662-4e1c-4ab5-aa65-b8e2a082ec2f",
@@ -2001,7 +3037,21 @@
       "grade": "전 학년",
       "memo": "아침 조회나 상담 전 학생 번호를 눌러 오늘의 마음 날씨를 남기고, 교사는 통계와 선생님 모드로 학급의 정서 흐름을 자연스럽게 확인할 수 있습니다.",
       "createdAt": "2026-04-20T12:48:23.915Z",
-      "updatedAt": "2026-05-08T12:53:03.895Z"
+      "updatedAt": "2026-05-08T12:53:03.895Z",
+      "subjects": [
+        "도덕",
+        "창체"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "mixed",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ]
     },
     {
       "id": "f3dcbbf0-6443-43c9-8b3b-dcc60f532c66",
@@ -2021,7 +3071,21 @@
       "grade": "3~6학년",
       "memo": "앞으로 계속 영어 카드 랜덤 뽑기를 추가할 예정입니다.",
       "createdAt": "2026-04-23T07:31:53.504Z",
-      "updatedAt": "2026-05-08T12:50:57.842Z"
+      "updatedAt": "2026-05-08T12:50:57.842Z",
+      "subjects": [
+        "영어"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "a062beee-cba2-4074-a637-182d3b9af316",
@@ -2040,7 +3104,20 @@
       "grade": "초등",
       "memo": "모둠 활동에서 학생들이 문장을 한 줄씩 덧붙이고 생성 이미지로 장면을 확인하며 이야기 흐름을 함께 만들 수 있습니다.",
       "createdAt": "2026-04-20T11:00:21.905Z",
-      "updatedAt": "2026-05-08T12:50:26.278Z"
+      "updatedAt": "2026-05-08T12:50:26.278Z",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ]
     },
     {
       "id": "47acd11b-2f45-4029-8813-3add585cd1aa",
@@ -2059,7 +3136,20 @@
       "grade": "초등 3~4학년",
       "memo": "3~4학년 도형 단원에서 학생들이 꼭짓점을 직접 움직이며 삼각형과 사각형의 변 길이, 각도, 도형의 성질을 눈으로 확인하고 설명하는 탐구 활동에 활용할 수 있습니다.",
       "createdAt": "2026-04-24T12:59:54.116Z",
-      "updatedAt": "2026-05-08T12:48:43.572Z"
+      "updatedAt": "2026-05-08T12:48:43.572Z",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ]
     },
     {
       "id": "40acf4df-03d2-4802-a334-b56401956299",
@@ -2079,7 +3169,20 @@
       "grade": "초등 1~2학년",
       "memo": "분침을 드래그하면 시침이 함께 움직이고, 미션·탐험 지도·보상함으로 시각 읽기를 반복 연습할 수 있습니다.",
       "createdAt": "2026-04-26T01:30:47.796Z",
-      "updatedAt": "2026-05-08T12:47:12.648Z"
+      "updatedAt": "2026-05-08T12:47:12.648Z",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "29a0ce2f-bbeb-45bd-8306-54880dd3a6cc",
@@ -2099,7 +3202,20 @@
       "grade": "초3-4",
       "memo": "강낭콩이나 토마토 등 식물 기르기 활동에서 날짜별 키, 관찰 메모, 사진을 누적하고 그래프로 성장 시기를 함께 확인할 수 있습니다.",
       "createdAt": "2026-04-26T13:19:01.455Z",
-      "updatedAt": "2026-05-08T12:43:08.696Z"
+      "updatedAt": "2026-05-08T12:43:08.696Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ]
     },
     {
       "id": "1f459bb8-1d78-42e0-a1a1-e2505f3be832",
@@ -2118,7 +3234,20 @@
       "grade": "1~2학년",
       "memo": "문장 성분과 문장 부호를 색깔 블록과 기차 칸으로 조립하며 연습할 수 있어 저학년 국어 쓰기 활동의 도입이나 개별 연습에 활용하기 좋습니다.",
       "createdAt": "2026-04-26T13:26:48.967Z",
-      "updatedAt": "2026-05-08T12:42:29.004Z"
+      "updatedAt": "2026-05-08T12:42:29.004Z",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "creation",
+      "learningProcess": [
+        "구상",
+        "제작",
+        "공유"
+      ]
     },
     {
       "id": "56f95ab1-4ad1-45b6-8eac-e5ba6cf543b8",
@@ -2137,7 +3266,21 @@
       "grade": "초등 3~4학년",
       "memo": "물체 팔레트에서 무게가 표시된 물체를 골라 시소 양쪽 거리 칸에 올리며 무게 효과와 균형 변화를 관찰할 수 있어 [4과01-02] 수평잡기 활동 도입과 탐구에 활용하기 좋습니다.",
       "createdAt": "2026-05-01T02:51:37.425Z",
-      "updatedAt": "2026-05-08T12:40:54.204Z"
+      "updatedAt": "2026-05-08T12:40:54.204Z",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ]
     }
   ]
 }

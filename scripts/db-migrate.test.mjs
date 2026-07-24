@@ -46,14 +46,16 @@ describe("database migration selection", () => {
 
   it("ships idempotent SQL for clean and existing schemas", async () => {
     const migrationDirectory = path.resolve(process.cwd(), "src/db/migrations");
-    const [base, github, leases] = await Promise.all([
+    const [base, github, leases, metadata] = await Promise.all([
       fs.readFile(path.join(migrationDirectory, "0000_chemical_morph.sql"), "utf8"),
       fs.readFile(path.join(migrationDirectory, "0001_add_github_url.sql"), "utf8"),
-      fs.readFile(path.join(migrationDirectory, "0002_static_gallery_sync_leases.sql"), "utf8")
+      fs.readFile(path.join(migrationDirectory, "0002_static_gallery_sync_leases.sql"), "utf8"),
+      fs.readFile(path.join(migrationDirectory, "0003_structured_app_metadata.sql"), "utf8")
     ]);
 
     expect(base).toContain("CREATE TABLE IF NOT EXISTS");
     expect(github).toContain("ADD COLUMN IF NOT EXISTS");
     expect(leases).toContain("CREATE TABLE IF NOT EXISTS");
+    expect(metadata.match(/ADD COLUMN IF NOT EXISTS/g)).toHaveLength(5);
   });
 });

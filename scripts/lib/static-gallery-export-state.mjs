@@ -11,6 +11,11 @@ const COMPARED_FIELDS = [
   "subject",
   "grade",
   "memo",
+  "subjects",
+  "gradeBands",
+  "audience",
+  "interactionType",
+  "learningProcess",
   "createdAt",
   "updatedAt"
 ];
@@ -19,6 +24,16 @@ const LOCAL_THUMBNAIL_PREFIX = "/app-thumbnails/";
 
 function stableJson(value) {
   return JSON.stringify(value);
+}
+
+function comparableField(field, value) {
+  if (["subjects", "gradeBands", "learningProcess"].includes(field)) {
+    return Array.isArray(value) ? value : [];
+  }
+  if (["audience", "interactionType"].includes(field)) {
+    return value ?? null;
+  }
+  return value;
 }
 
 function getReferencedThumbnailFiles(apps) {
@@ -99,7 +114,7 @@ export function getReusableSnapshotDecision({
     const snapshotApp = snapshot.apps[index];
 
     for (const field of COMPARED_FIELDS) {
-      if (stableJson(sourceApp?.[field]) !== stableJson(snapshotApp?.[field])) {
+      if (stableJson(comparableField(field, sourceApp?.[field])) !== stableJson(comparableField(field, snapshotApp?.[field]))) {
         return {
           reusable: false,
           reason: `app-${index + 1}-${field}-changed`

@@ -12,6 +12,11 @@ export const apps = pgTable("apps", {
   subject: text("subject"),
   grade: text("grade"),
   memo: text("memo"),
+  subjects: text("subjects").array(),
+  gradeBands: text("grade_bands").array(),
+  audience: text("audience"),
+  interactionType: text("interaction_type"),
+  learningProcess: text("learning_process").array(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull()
 });

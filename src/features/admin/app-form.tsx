@@ -134,6 +134,23 @@ export function AppForm({
             <input defaultValue={initialApp?.grade} name="grade" />
           </label>
 
+          <label className="admin-field">
+            <span>사용자</span>
+            <select defaultValue={initialApp?.audience ?? "student"} name="audience">
+              <option value="student">학생</option><option value="teacher">교사</option><option value="mixed">학생·교사</option>
+            </select>
+          </label>
+          <label className="admin-field">
+            <span>상호작용 유형</span>
+            <select defaultValue={initialApp?.interactionType ?? "practice"} name="interactionType">
+              <option value="practice">연습·문제 해결</option><option value="simulation">시뮬레이션</option><option value="collaboration">협업</option><option value="creation">창작</option><option value="management">관리</option><option value="reference">자료 탐색</option><option value="utility">도구</option>
+            </select>
+          </label>
+          <label className="admin-field admin-field-full">
+            <span>학습 과정</span>
+            <input defaultValue={initialApp?.learningProcess?.join(", ")} name="learningProcess" placeholder="예측, 조작, 비교, 설명" />
+          </label>
+
           <label className="admin-field admin-field-full">
             <span>메이커 노트</span>
             <textarea defaultValue={initialApp?.memo} name="memo" rows={4} />

@@ -1,4 +1,5 @@
 import type { AdminAppRecord, ThumbnailMode } from "./types";
+import { normalizeAppMetadata } from "./metadata";
 
 export interface SerializedAppRecord {
   id: string;
@@ -12,6 +13,11 @@ export interface SerializedAppRecord {
   subject: string | null;
   grade: string | null;
   memo: string | null;
+  subjects: string[];
+  gradeBands: string[];
+  audience: string | null;
+  interactionType: string | null;
+  learningProcess: string[];
   createdAt: string;
   updatedAt: string;
 }
@@ -24,6 +30,7 @@ export interface AppsBackupPayload {
 }
 
 export function serializeAppRecord(app: AdminAppRecord): SerializedAppRecord {
+  const metadata = normalizeAppMetadata(app);
   return {
     id: app.id,
     title: app.title,
@@ -36,6 +43,11 @@ export function serializeAppRecord(app: AdminAppRecord): SerializedAppRecord {
     subject: app.subject ?? null,
     grade: app.grade ?? null,
     memo: app.memo ?? null,
+    subjects: metadata.subjects,
+    gradeBands: metadata.gradeBands,
+    audience: metadata.audience,
+    interactionType: metadata.interactionType,
+    learningProcess: metadata.learningProcess,
     createdAt: app.createdAt.toISOString(),
     updatedAt: app.updatedAt.toISOString()
   };

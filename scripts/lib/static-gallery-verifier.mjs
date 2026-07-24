@@ -14,12 +14,27 @@ const COMPARED_FIELDS = [
   "subject",
   "grade",
   "memo",
+  "subjects",
+  "gradeBands",
+  "audience",
+  "interactionType",
+  "learningProcess",
   "createdAt",
   "updatedAt"
 ];
 
 function stableJson(value) {
   return JSON.stringify(value);
+}
+
+function comparableField(field, value) {
+  if (["subjects", "gradeBands", "learningProcess"].includes(field)) {
+    return Array.isArray(value) ? value : [];
+  }
+  if (["audience", "interactionType"].includes(field)) {
+    return value ?? null;
+  }
+  return value;
 }
 
 function classifyThumbnail(thumbnailUrl) {
@@ -138,7 +153,7 @@ function compareAppSets(dbApps, snapshotApps) {
     }
 
     const fields = COMPARED_FIELDS.filter(
-      (field) => stableJson(app[field]) !== stableJson(snapshotApp[field])
+      (field) => stableJson(comparableField(field, app[field])) !== stableJson(comparableField(field, snapshotApp[field]))
     );
 
     if (fields.length > 0) {

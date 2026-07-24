@@ -14,6 +14,11 @@ const app: AdminAppRecord = {
   subject: "체육",
   grade: "전학년",
   memo: "",
+  subjects: ["체육"],
+  gradeBands: ["all"],
+  audience: "mixed",
+  interactionType: "management",
+  learningProcess: ["기록", "정리", "확인"],
   createdAt: new Date("2026-04-05T00:00:00.000Z"),
   updatedAt: new Date("2026-04-05T00:00:00.000Z")
 };
@@ -34,5 +39,24 @@ describe("AppForm", () => {
     });
 
     expect(lastTagRemoveButton.closest("label")).toBeNull();
+  });
+
+  it("renders structured metadata controls with current values", () => {
+    render(
+      <AppForm
+        action={async () => {}}
+        initialApp={app}
+        submitLabel="수정 저장"
+        suggestedTags={[]}
+      />
+    );
+
+    expect(screen.getByRole("combobox", { name: "사용자" })).toHaveValue("mixed");
+    expect(screen.getByRole("combobox", { name: "상호작용 유형" })).toHaveValue(
+      "management"
+    );
+    expect(screen.getByRole("textbox", { name: "학습 과정" })).toHaveValue(
+      "기록, 정리, 확인"
+    );
   });
 });
