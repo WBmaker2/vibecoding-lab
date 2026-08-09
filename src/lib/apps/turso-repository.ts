@@ -180,7 +180,7 @@ export class TursoAppRepository implements AppRepository {
           audience, interaction_type, learning_process, created_at, updated_at
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
-      args: [id, ...args]
+      args: [id, ...args, now.toISOString()]
     });
 
     const record = await this.getApp(id);
