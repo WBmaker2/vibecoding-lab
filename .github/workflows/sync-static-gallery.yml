@@ -29,6 +29,8 @@ jobs:
     env:
       BASE_URL: ${{ inputs.base_url || 'https://www.vibehong.shop' }}
       POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+      TURSO_DATABASE_URL: ${{ secrets.TURSO_DATABASE_URL }}
+      TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
       SYNC_REASON: ${{ inputs.reason || 'admin-button' }}
       SYNC_REQUEST_MARKER: ${{ inputs.request_marker }}
     steps:
@@ -48,7 +50,12 @@ jobs:
         run: npm ci
 
       - name: Apply database migrations
-        run: npm run db:migrate
+        run: |
+          if [[ -n "$TURSO_DATABASE_URL" || -n "$TURSO_AUTH_TOKEN" ]]; then
+            npm run db:migrate:turso
+          else
+            npm run db:migrate
+          fi
 
       - name: Show sync request
         run: |

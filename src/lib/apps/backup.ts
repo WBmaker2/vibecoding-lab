@@ -24,6 +24,7 @@ export interface SerializedAppRecord {
 
 export interface AppsBackupPayload {
   version: 1;
+  scope: "admin";
   generatedAt: string;
   appCount: number;
   apps: SerializedAppRecord[];
@@ -59,6 +60,7 @@ export function createAppsBackupPayload(
 ): AppsBackupPayload {
   return {
     version: 1,
+    scope: "admin",
     generatedAt: generatedAt.toISOString(),
     appCount: apps.length,
     apps: apps.map(serializeAppRecord)

@@ -1,7 +1,9 @@
 import { randomUUID } from "node:crypto";
 import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
+import { hasTursoDatabase } from "@/lib/env";
 import type { StaticGalleryDispatchMarker } from "./static-gallery-sync-state";
+import * as tursoLease from "./turso-static-gallery-sync-lease";
 
 const LEASE_KEY = "static-gallery-sync";
 export const STATIC_GALLERY_SYNC_LEASE_SECONDS = 30 * 60;
@@ -102,6 +104,10 @@ export function toPublicStaticGalleryDispatchMarker(
 }
 
 export async function acquireStaticGallerySyncLease(): Promise<StaticGallerySyncLease | null> {
+  if (hasTursoDatabase()) {
+    return tursoLease.acquireStaticGallerySyncLease();
+  }
+
   const db = getDb();
   await ensureLeaseTable(db);
   const leaseToken = randomUUID();
@@ -153,6 +159,10 @@ export async function acquireStaticGallerySyncLease(): Promise<StaticGallerySync
 }
 
 export async function getActiveStaticGallerySyncLease(): Promise<StaticGallerySyncLease | null> {
+  if (hasTursoDatabase()) {
+    return tursoLease.getActiveStaticGallerySyncLease();
+  }
+
   await ensureLeaseTable();
 
   const result = await getDb().execute(sql`
@@ -170,6 +180,10 @@ export async function getActiveStaticGallerySyncLease(): Promise<StaticGallerySy
 export async function getStaticGallerySyncLeaseByMarker(
   markerId: string
 ): Promise<StaticGallerySyncLease | null> {
+  if (hasTursoDatabase()) {
+    return tursoLease.getStaticGallerySyncLeaseByMarker(markerId);
+  }
+
   await ensureLeaseTable();
 
   const result = await getDb().execute(sql`
@@ -189,6 +203,14 @@ export async function withStaticGallerySyncLeaseDispatchFence<T>(
   previousRunId: number | null,
   dispatch: (lease: StaticGallerySyncLease) => Promise<T>
 ): Promise<StaticGallerySyncDispatchFenceResult<T>> {
+  if (hasTursoDatabase()) {
+    return tursoLease.withStaticGallerySyncLeaseDispatchFence(
+      leaseToken,
+      previousRunId,
+      dispatch
+    );
+  }
+
   const db = getDb();
   await ensureLeaseTable(db);
 
@@ -296,6 +318,10 @@ export async function setStaticGallerySyncRun(
   leaseToken: string,
   runId: number
 ): Promise<StaticGallerySyncLease | null> {
+  if (hasTursoDatabase()) {
+    return tursoLease.setStaticGallerySyncRun(leaseToken, runId);
+  }
+
   const result = await getDb().execute(sql`
     UPDATE static_gallery_sync_leases
     SET run_id = ${runId}
@@ -312,6 +338,11 @@ export async function setStaticGallerySyncRun(
 export async function releaseStaticGallerySyncLease(
   leaseToken: string
 ): Promise<void> {
+  if (hasTursoDatabase()) {
+    await tursoLease.releaseStaticGallerySyncLease(leaseToken);
+    return;
+  }
+
   await getDb().execute(sql`
     DELETE FROM static_gallery_sync_leases
     WHERE lease_key = ${LEASE_KEY}

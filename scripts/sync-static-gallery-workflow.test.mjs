@@ -24,7 +24,7 @@ describe("static gallery sync workflow", () => {
     const steps = workflow.jobs.sync.steps;
     const installIndex = steps.findIndex((step) => step.run === "npm ci");
     const migrationIndex = steps.findIndex(
-      (step) => step.run === "npm run db:migrate"
+      (step) => step.run?.includes("db:migrate")
     );
     const exportIndex = steps.findIndex((step) =>
       step.run?.startsWith("npm run apps:export-static-gallery")

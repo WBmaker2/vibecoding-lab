@@ -32,6 +32,8 @@ npm run dev
 
 ```bash
 POSTGRES_URL=
+TURSO_DATABASE_URL=
+TURSO_AUTH_TOKEN=
 BLOB_READ_WRITE_TOKEN=
 ADMIN_PASSWORD_HASH=
 SESSION_SECRET=
@@ -40,7 +42,7 @@ APP_BASE_URL=http://localhost:3000
 
 `SESSION_SECRET`는 32자 이상이어야 합니다. 31자 이하는 관리자 세션을 만들거나 검증하지 못합니다.
 
-현재 구현은 로컬 개발 편의를 위해 메모리 저장 fallback이 포함되어 있습니다. 운영 환경에서는 `POSTGRES_URL`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`를 반드시 설정하고 Postgres를 사용해 영구 저장하는 것을 권장합니다.
+현재 구현은 로컬 개발 편의를 위해 메모리 저장 fallback이 포함되어 있습니다. 운영 환경에서는 `BLOB_READ_WRITE_TOKEN`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`과 함께 `TURSO_DATABASE_URL`/`TURSO_AUTH_TOKEN` 또는 기존 `POSTGRES_URL`을 설정해야 합니다. Turso 두 값이 모두 설정되면 Turso가 Postgres보다 우선합니다.
 
 관리자 페이지의 `수정 사항 동기화` 버튼을 운영에서 사용하려면 Vercel 환경변수에 아래 서버 전용 값을 추가합니다. 이 값들은 브라우저에 노출되지 않고 `/api/admin/sync-static-gallery`에서 GitHub Actions를 시작할 때만 사용됩니다.
 
@@ -103,7 +105,19 @@ POSTGRES_URL=... npm run apps:import:backup -- ./tmp/backups/<backup-file>.json
 
 관리자 로그인 후 `/api/admin/backup`으로도 최신 앱 목록 JSON을 내보낼 수 있습니다.
 
-동기화 요청의 cross-instance 중복 방지 lease와 dispatch marker는 `POSTGRES_URL`에 연결된 `static_gallery_sync_leases` 테이블에 저장됩니다. 배포 시에는 `npm run db:migrate`가 `src/db/migrations/*.sql`을 이름순으로 선택해 `hvc_schema_migrations`에 기록하며, clean/existing DB 모두에서 repeatable하게 적용합니다. sync workflow도 exporter 실행 전에 같은 migration 명령을 반복 실행합니다. 다만 관리자 버튼은 workflow dispatch 전에 lease 테이블을 사용하므로, 최초 운영 활성화 전의 pre-deploy migration 명령은 반드시 유지해야 합니다. 런타임의 `CREATE TABLE IF NOT EXISTS`는 이전 배포와의 호환 fallback으로만 남아 있습니다. lease는 30분 후 만료되며 GitHub 상태 조회나 dispatch 실패 시 즉시 해제됩니다. 저장되는 lease token은 서버에서만 사용하고 관리자 API에는 marker ID, 요청 시각, 만료 시각, 확인된 workflow run ID만 반환합니다.
+### Turso Free로 이관
+
+관리자 페이지에서 내려받은 `scope: "admin"` JSON 백업만 이관에 사용하십시오. 공개 `public-apps.json`이나 랜딩 페이지 HTML 백업은 관리자 전용 GitHub 링크를 포함하지 않을 수 있어 이관 도구가 거부합니다.
+
+```bash
+TURSO_DATABASE_URL=libsql://... TURSO_AUTH_TOKEN=... npm run db:migrate:turso
+TURSO_DATABASE_URL=libsql://... TURSO_AUTH_TOKEN=... npm run apps:import:backup:turso -- --backup ./tmp/backups/<admin-backup>.json
+TURSO_DATABASE_URL=libsql://... TURSO_AUTH_TOKEN=... npm run apps:verify:turso -- ./tmp/backups/<admin-backup>.json
+```
+
+Turso 대상 `apps` 테이블이 비어 있지 않으면 import가 기본 중단됩니다. 기존 데이터와 대조가 끝난 뒤 명시적으로 `--allow-non-empty`를 사용할 수 있지만, 일반 전환에서는 빈 DB에 먼저 import하는 방식을 권장합니다. `TURSO_DATABASE_URL`과 `TURSO_AUTH_TOKEN`은 반드시 함께 설정해야 합니다.
+
+동기화 요청의 cross-instance 중복 방지 lease와 dispatch marker는 선택된 provider의 `static_gallery_sync_leases` 테이블에 저장됩니다. Turso에서는 SQLite 호환 lease를 사용하고, Postgres에서는 기존 lease를 사용합니다. lease는 30분 후 만료되며 GitHub 상태 조회나 dispatch 실패 시 즉시 해제됩니다. 저장되는 lease token은 서버에서만 사용하고 관리자 API에는 marker ID, 요청 시각, 만료 시각, 확인된 workflow run ID만 반환합니다.
 
 ## 정적 공개 갤러리 동기화
 
@@ -113,7 +127,7 @@ POSTGRES_URL=... npm run apps:import:backup -- ./tmp/backups/<backup-file>.json
 
 공개 페이지에 반영할 준비가 되면 관리자 페이지 상단의 `수정 사항 동기화` 버튼을 누릅니다. 관리자 화면은 커밋된 정적 스냅샷의 생성일, DB/스냅샷 개수, 변경 건수를 먼저 보여주며, 변경이 없으면 GitHub Actions를 시작하지 않습니다. 실행 중인 작업이 있으면 중복 시작을 막고 GitHub Actions 실행 상태와 링크를 표시합니다. 버튼은 인증된 관리자 세션에서만 GitHub Actions의 `Sync Static Gallery` 워크플로를 시작합니다. 워크플로는 아래 순서로 실행됩니다.
 
-1. `npm run db:migrate`로 idempotent migration을 적용합니다.
+1. Turso 환경 변수가 있으면 `npm run db:migrate:turso`, 없으면 `npm run db:migrate`로 idempotent migration을 적용합니다.
 2. DB에서 앱 목록을 읽어 `src/data/public-apps.json`을 다시 생성합니다.
 3. 썸네일을 `public/app-thumbnails/` 로컬 파일로 물질화합니다.
 4. 기존 스냅샷과 로컬 썸네일 집합·SHA-256 asset manifest가 DB-backed 필드, 순서, ID까지 동일하면 JSON과 썸네일 파일을 건드리지 않고 `changed=false`로 종료합니다. 이때 검증, 테스트, 린트, 빌드, 커밋, 푸시, Vercel Git 배포를 건너뜁니다.
@@ -126,13 +140,15 @@ GitHub 저장소에는 아래 Actions secrets를 설정합니다.
 
 ```bash
 POSTGRES_URL=
+TURSO_DATABASE_URL=
+TURSO_AUTH_TOKEN=
 ```
 
-`POSTGRES_URL`은 필수입니다. Vercel은 GitHub `main` 연결로 배포하므로 GitHub Actions에 별도 Vercel 토큰을 보관하지 않습니다.
+Turso로 전환한 뒤에는 GitHub Actions secrets에 `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`을 등록합니다. `POSTGRES_URL`은 검증 기간의 롤백용으로 보존할 수 있습니다. Vercel은 GitHub `main` 연결로 배포하므로 GitHub Actions에 별도 Vercel 토큰을 보관하지 않습니다.
 
 ## Vercel 배포
 
 1. 저장소를 Vercel 프로젝트에 연결합니다.
-2. `POSTGRES_URL`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`, `APP_BASE_URL`를 등록합니다.
+2. `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`, `APP_BASE_URL`를 등록합니다. 기존 Postgres로 롤백할 때만 `POSTGRES_URL`을 사용합니다.
 3. 관리자 동기화 버튼을 사용할 경우 `HVC_SYNC_GITHUB_TOKEN`과 `HVC_SYNC_*` 값을 함께 등록합니다.
 4. `main` 또는 원하는 배포 브랜치에서 배포합니다.

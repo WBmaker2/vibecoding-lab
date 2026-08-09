@@ -7,6 +7,12 @@ export const UPDATE_HISTORY = [
     date: "2026-08-09",
     kind: "개선",
     detail:
+      "관리자 영구 저장소를 Turso로 옮길 수 있도록 이관 도구, 원본 대조, Postgres 롤백 경로를 추가했습니다."
+  },
+  {
+    date: "2026-08-09",
+    kind: "개선",
+    detail:
       "관리자 DB 한도 초과 시 서버 오류 대신 읽기 전용 스냅샷 안내 화면을 표시하도록 개선했습니다."
   },
   {
@@ -157,8 +163,8 @@ export function UpdateHistory() {
             </div>
 
             <ol className="update-history-list">
-              {UPDATE_HISTORY.map((entry) => (
-                <li key={entry.date}>
+              {UPDATE_HISTORY.map((entry, index) => (
+                <li key={`${entry.date}-${index}`}>
                   <div className="update-history-entry-meta">
                     <time dateTime={entry.date}>{entry.date}</time>
                     <span>{entry.kind}</span>

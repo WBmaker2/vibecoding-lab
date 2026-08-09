@@ -1,8 +1,12 @@
 import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
-import postgres from "postgres";
 import { decodeDataImageUrl } from "../src/lib/security/image-policy.mjs";
+import {
+  fetchAppsFromConfiguredDatabase,
+  toPublicSnapshotApp
+} from "./lib/apps-database.mjs";
+import { getConfiguredDatabaseProvider } from "./lib/database-provider.mjs";
 import { getReusableSnapshotDecision } from "./lib/static-gallery-export-state.mjs";
 import { fetchSafeImage } from "./lib/safe-image-download.mjs";
 
@@ -413,85 +417,6 @@ function normalizeDateValue(value) {
   return new Date(value).toISOString();
 }
 
-function coerceText(value) {
-  return typeof value === "string" ? value : "";
-}
-
-function coerceNullableText(value) {
-  return value == null ? null : coerceText(value);
-}
-
-function coerceTags(value) {
-  if (!Array.isArray(value)) {
-    return [];
-  }
-
-  return value.filter((tag) => typeof tag === "string");
-}
-
-function toPublicSnapshotApp(raw, index) {
-  return {
-    id: coerceText(raw.id) || `app-${index + 1}`,
-    title: coerceText(raw.title),
-    summary: coerceText(raw.summary),
-    url: coerceText(raw.url),
-    githubUrl: coerceNullableText(raw.githubUrl),
-    tags: coerceTags(raw.tags),
-    thumbnailMode: normalizeThumbnailMode(raw.thumbnailMode),
-    thumbnailUrl: coerceNullableText(raw.thumbnailUrl),
-    subject: coerceNullableText(raw.subject),
-    grade: coerceNullableText(raw.grade),
-    memo: coerceNullableText(raw.memo),
-    subjects: coerceTags(raw.subjects),
-    gradeBands: coerceTags(raw.gradeBands),
-    audience: coerceNullableText(raw.audience),
-    interactionType: coerceNullableText(raw.interactionType),
-    learningProcess: coerceTags(raw.learningProcess),
-    createdAt: normalizeDateValue(raw.createdAt),
-    updatedAt: normalizeDateValue(raw.updatedAt)
-  };
-}
-
-async function fetchAppsFromPostgres() {
-  const databaseUrl = process.env.POSTGRES_URL;
-
-  const sql = postgres(databaseUrl, {
-    prepare: false
-  });
-
-  try {
-    const rows = await sql`
-      select
-        id,
-        title,
-        summary,
-        url,
-        github_url as "githubUrl",
-        tags,
-        thumbnail_mode as "thumbnailMode",
-        thumbnail_url as "thumbnailUrl",
-        subject,
-        grade,
-        memo,
-        subjects,
-        grade_bands as "gradeBands",
-        audience,
-        interaction_type as "interactionType",
-        learning_process as "learningProcess",
-        created_at as "createdAt",
-        updated_at as "updatedAt"
-      from apps
-      order by
-        updated_at desc,
-        created_at desc
-    `;
-
-    return rows.map((row, index) => toPublicSnapshotApp(row, index));
-  } finally {
-    await sql.end({ timeout: 5 });
-  }
-}
-
 async function fetchAppsFromBackup(backupPath) {
   const raw = await fs.readFile(backupPath, "utf8");
   const payload = JSON.parse(raw);
@@ -504,9 +429,12 @@ async function fetchAppsFromBackup(backupPath) {
 }
 
 async function fetchApps() {
-  if (!process.env.POSTGRES_URL && !BACKUP_PATH) {
+  if (
+    getConfiguredDatabaseProvider() === "none" &&
+    !BACKUP_PATH
+  ) {
     throw new Error(
-      "Cannot refresh public snapshot: POSTGRES_URL is missing and --backup was not provided."
+      "Cannot refresh public snapshot: database variables are missing and --backup was not provided."
     );
   }
 
@@ -514,7 +442,7 @@ async function fetchApps() {
     return fetchAppsFromBackup(BACKUP_PATH);
   }
 
-  return fetchAppsFromPostgres();
+  return fetchAppsFromConfiguredDatabase();
 }
 
 async function materializeThumbnail(

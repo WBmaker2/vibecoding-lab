@@ -1,10 +1,15 @@
 import { desc, eq } from "drizzle-orm";
 import { getDb, isDatabaseConfigured } from "@/db/client";
 import { apps } from "@/db/schema";
-import { toPublicThumbnailUrl } from "@/lib/storage/public-thumbnail";
-import { normalizeTags } from "./tags";
-import { normalizeAppMetadata } from "./metadata";
+import { getDatabaseProvider } from "@/lib/env";
+import { TursoAppRepository } from "./turso-repository";
+import {
+  toAdminAppRecord,
+  toPublicAppRecord
+} from "./record-mappers";
 import type { AdminAppRecord, AppInput, PublicAppRecord } from "./types";
+
+export { toAdminAppRecord, toPublicAppRecord } from "./record-mappers";
 
 export interface AppRepository {
   listPublicApps(): Promise<PublicAppRecord[]>;
@@ -71,67 +76,6 @@ function createSeedApps(): AdminAppRecord[] {
 const memoryStore = {
   apps: createSeedApps()
 };
-
-export function toPublicAppRecord(record: {
-  id: string;
-  title: string;
-  summary: string;
-  url: string;
-  tags: string[];
-  thumbnailMode: string;
-  thumbnailUrl: string | null;
-  subject?: string | null;
-  grade?: string | null;
-  memo?: string | null;
-  subjects?: string[] | null;
-  gradeBands?: string[] | null;
-  audience?: string | null;
-  interactionType?: string | null;
-  learningProcess?: string[] | null;
-  createdAt: Date;
-  updatedAt: Date;
-}): PublicAppRecord {
-  const metadata = normalizeAppMetadata(record);
-  return {
-    id: record.id,
-    title: record.title,
-    summary: record.summary,
-    url: record.url,
-    tags: normalizeTags(record.tags),
-    thumbnailMode: record.thumbnailMode as PublicAppRecord["thumbnailMode"],
-    thumbnailUrl: toPublicThumbnailUrl({ thumbnailUrl: record.thumbnailUrl }),
-    subject: record.subject ?? undefined,
-    grade: record.grade ?? undefined,
-    memo: record.memo ?? undefined,
-    ...metadata,
-    createdAt: record.createdAt,
-    updatedAt: record.updatedAt
-  };
-}
-
-export function toAdminAppRecord(record: typeof apps.$inferSelect): AdminAppRecord;
-export function toAdminAppRecord(record: AdminAppRecord): AdminAppRecord;
-export function toAdminAppRecord(
-  record: typeof apps.$inferSelect | AdminAppRecord
-): AdminAppRecord {
-  const metadata = normalizeAppMetadata(record);
-  return {
-    id: record.id,
-    title: record.title,
-    summary: record.summary,
-    url: record.url,
-    tags: normalizeTags(record.tags),
-    thumbnailMode: record.thumbnailMode as AdminAppRecord["thumbnailMode"],
-    thumbnailUrl: record.thumbnailUrl ?? null,
-    subject: record.subject ?? undefined,
-    grade: record.grade ?? undefined,
-    memo: record.memo ?? undefined,
-    createdAt: record.createdAt,
-    updatedAt: record.updatedAt,
-    githubUrl: record.githubUrl ?? undefined,
-    ...metadata
-  };
-}
 
 class InMemoryAppRepository implements AppRepository {
   async listPublicApps(): Promise<PublicAppRecord[]> {
@@ -365,7 +309,11 @@ class PostgresAppRepository implements AppRepository {
 }
 
 export function getAppRepository(): AppRepository {
-  if (isDatabaseConfigured()) {
+  if (getDatabaseProvider() === "turso") {
+    return new TursoAppRepository();
+  }
+
+  if (isDatabaseConfigured() && getDatabaseProvider() === "postgres") {
     return new PostgresAppRepository();
   }
 

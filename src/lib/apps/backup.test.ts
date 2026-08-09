@@ -27,6 +27,7 @@ describe("createAppsBackupPayload", () => {
     );
 
     expect(payload.version).toBe(1);
+    expect(payload.scope).toBe("admin");
     expect(payload.appCount).toBe(1);
     expect(payload.generatedAt).toBe("2026-04-06T12:00:00.000Z");
     expect(payload.apps).toEqual([
