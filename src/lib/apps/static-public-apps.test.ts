@@ -16,6 +16,18 @@ describe("static public apps", () => {
     expect(legacyBaseline.assetManifest).toBeUndefined();
   });
 
+  it("reads the optional catalog revision from the snapshot", () => {
+    const baseline = getStaticGalleryBaseline({
+      version: 1,
+      generatedAt: "2026-07-10T00:00:00.000Z",
+      catalogRevision: 12,
+      appCount: 0,
+      apps: []
+    });
+
+    expect(baseline.catalogRevision).toBe(12);
+  });
+
   it("converts serialized snapshot apps into public app records", () => {
     const record = toStaticPublicAppRecord({
       id: "reading-timer",

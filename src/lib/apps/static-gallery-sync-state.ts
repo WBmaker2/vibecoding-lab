@@ -16,6 +16,7 @@ export interface StaticGalleryAssetIntegrity {
 
 export interface StaticGalleryBaseline {
   assetManifest?: unknown;
+  catalogRevision?: number;
   generatedAt: string;
   appCount: number;
   updatedAtById: Record<string, string>;

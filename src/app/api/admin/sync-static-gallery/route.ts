@@ -20,6 +20,7 @@ import {
 } from "@/lib/apps/static-gallery-sync-state";
 import { getStaticGalleryAssetIntegrity } from "@/lib/apps/static-gallery-asset-integrity";
 import { getStaticGalleryBaseline } from "@/lib/apps/static-public-apps";
+import { isCanonicalGeneratedAt } from "@/lib/apps/static-gallery-snapshot-policy.mjs";
 
 const DEFAULT_GITHUB_OWNER = "WBmaker2";
 const DEFAULT_GITHUB_REPO = "vibecoding-lab";
@@ -406,19 +407,42 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  const baseline = getStaticGalleryBaseline();
   let summary: Awaited<ReturnType<typeof getStaticGallerySyncSummary>>;
+  let catalogRevision: number | null = null;
 
   try {
     const repo = getAppRepository();
-    const apps = await repo.listAdminApps();
-    const baseline = getStaticGalleryBaseline();
     const assetIntegrity = await getStaticGalleryAssetIntegrity(baseline);
+    if (repo.getCatalogRevision) {
+      try {
+        catalogRevision = await repo.getCatalogRevision();
+      } catch {
+        catalogRevision = null;
+      }
+    }
+
+    const revisionMatchesSnapshot =
+      catalogRevision !== null &&
+      baseline.catalogRevision === catalogRevision &&
+      isCanonicalGeneratedAt(baseline.generatedAt) &&
+      assetIntegrity.valid;
+
+    if (revisionMatchesSnapshot) {
+      return NextResponse.json({ dispatched: false });
+    }
+
+    const apps = await repo.listAdminApps();
     summary = getStaticGallerySyncSummary(apps, baseline, assetIntegrity);
   } catch {
     return summaryError();
   }
 
-  if (summary.pendingCount === 0) {
+  const revisionNeedsSync =
+    catalogRevision !== null &&
+    baseline.catalogRevision !== catalogRevision;
+
+  if (summary.pendingCount === 0 && !revisionNeedsSync) {
     return NextResponse.json({ dispatched: false });
   }
 

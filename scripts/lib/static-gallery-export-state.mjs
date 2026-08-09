@@ -88,6 +88,7 @@ function normalizeThumbnailFiles(thumbnailFiles) {
 
 export function getReusableSnapshotDecision({
   sourceApps,
+  sourceCatalogRevision,
   snapshot,
   thumbnailFiles
 }) {
@@ -104,6 +105,13 @@ export function getReusableSnapshotDecision({
 
   if (!isCanonicalGeneratedAt(snapshot.generatedAt)) {
     return { reusable: false, reason: "invalid-generated-at" };
+  }
+
+  if (
+    Number.isSafeInteger(sourceCatalogRevision) &&
+    snapshot.catalogRevision !== sourceCatalogRevision
+  ) {
+    return { reusable: false, reason: "catalog-revision-changed" };
   }
 
   if (sourceApps.length !== snapshot.apps.length) {

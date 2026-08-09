@@ -141,6 +141,26 @@ export async function readTursoApps({ client, databaseUrl, authToken } = {}) {
   return result.rows.map((row, index) => rowToApp(row, index));
 }
 
+export async function readTursoCatalogRevision({ client, databaseUrl, authToken } = {}) {
+  const target = client ?? createTursoClient({ databaseUrl, authToken });
+  const result = await target.execute({
+    sql: `
+      SELECT revision
+      FROM app_catalog_state
+      WHERE state_key = 'apps'
+      LIMIT 1
+    `,
+    args: []
+  });
+  const revision = Number(result.rows[0]?.revision);
+
+  if (!Number.isSafeInteger(revision) || revision < 0) {
+    throw new Error("Turso app catalog revision is missing or invalid.");
+  }
+
+  return revision;
+}
+
 export function toTursoInsertStatement(app, { upsert = false } = {}) {
   const normalized = normalizeTursoApp(app);
 

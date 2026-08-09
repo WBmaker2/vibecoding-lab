@@ -48,6 +48,22 @@ export const TURSO_MIGRATIONS = [
       `,
       "CREATE INDEX IF NOT EXISTS static_gallery_sync_leases_marker_idx ON static_gallery_sync_leases (marker_id, requested_at)"
     ]
+  },
+  {
+    name: "0002_app_catalog_state",
+    statements: [
+      `
+        CREATE TABLE IF NOT EXISTS app_catalog_state (
+          state_key TEXT PRIMARY KEY NOT NULL,
+          revision INTEGER NOT NULL DEFAULT 0
+        )
+      `,
+      `
+        INSERT INTO app_catalog_state (state_key, revision)
+        VALUES ('apps', 0)
+        ON CONFLICT (state_key) DO NOTHING
+      `
+    ]
   }
 ];
 

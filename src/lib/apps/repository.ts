@@ -1,6 +1,6 @@
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, sql } from "drizzle-orm";
 import { getDb, isDatabaseConfigured } from "@/db/client";
-import { apps } from "@/db/schema";
+import { appCatalogState, apps } from "@/db/schema";
 import { getDatabaseProvider } from "@/lib/env";
 import { TursoAppRepository } from "./turso-repository";
 import {
@@ -14,6 +14,7 @@ export { toAdminAppRecord, toPublicAppRecord } from "./record-mappers";
 export interface AppRepository {
   listPublicApps(): Promise<PublicAppRecord[]>;
   listAdminApps(): Promise<AdminAppRecord[]>;
+  getCatalogRevision?(): Promise<number>;
   getApp(id: string): Promise<AdminAppRecord | null>;
   createApp(input: AppInput): Promise<AdminAppRecord>;
   updateApp(id: string, input: AppInput): Promise<AdminAppRecord>;
@@ -74,7 +75,8 @@ function createSeedApps(): AdminAppRecord[] {
 }
 
 const memoryStore = {
-  apps: createSeedApps()
+  apps: createSeedApps(),
+  catalogRevision: 0
 };
 
 class InMemoryAppRepository implements AppRepository {
@@ -115,6 +117,7 @@ class InMemoryAppRepository implements AppRepository {
     };
 
     memoryStore.apps = [record, ...memoryStore.apps];
+    memoryStore.catalogRevision += 1;
     return record;
   }
 
@@ -148,12 +151,15 @@ class InMemoryAppRepository implements AppRepository {
     memoryStore.apps = memoryStore.apps.map((app) =>
       app.id === id ? updated : app
     );
+    memoryStore.catalogRevision += 1;
 
     return updated;
   }
 
   async deleteApp(id: string): Promise<void> {
+    const hadApp = memoryStore.apps.some((app) => app.id === id);
     memoryStore.apps = memoryStore.apps.filter((app) => app.id !== id);
+    if (hadApp) memoryStore.catalogRevision += 1;
   }
 
   async removeTag(id: string, tag: string): Promise<AdminAppRecord> {
@@ -182,12 +188,55 @@ class InMemoryAppRepository implements AppRepository {
     memoryStore.apps = memoryStore.apps.map((app) =>
       app.id === id ? updated : app
     );
+    memoryStore.catalogRevision += 1;
 
     return updated;
+  }
+
+  async getCatalogRevision(): Promise<number> {
+    return memoryStore.catalogRevision;
   }
 }
 
 class PostgresAppRepository implements AppRepository {
+  private async ensureCatalogState(db: ReturnType<typeof getDb>) {
+    await db
+      .insert(appCatalogState)
+      .values({ stateKey: "apps", revision: 0 })
+      .onConflictDoNothing();
+  }
+
+  private async bumpCatalogRevision(db: ReturnType<typeof getDb>) {
+    try {
+      await this.ensureCatalogState(db);
+      await db
+        .update(appCatalogState)
+        .set({ revision: sql`${appCatalogState.revision} + 1` })
+        .where(eq(appCatalogState.stateKey, "apps"));
+    } catch (error) {
+      console.warn(
+        "Postgres catalog revision was not updated; sync will use the full comparison fallback.",
+        error
+      );
+    }
+  }
+
+  async getCatalogRevision(): Promise<number> {
+    const db = getDb();
+    const [state] = await db
+      .select({ revision: appCatalogState.revision })
+      .from(appCatalogState)
+      .where(eq(appCatalogState.stateKey, "apps"))
+      .limit(1);
+    const revision = Number(state?.revision);
+
+    if (!Number.isSafeInteger(revision) || revision < 0) {
+      throw new Error("Postgres app catalog revision is invalid.");
+    }
+
+    return revision;
+  }
+
   async listPublicApps(): Promise<PublicAppRecord[]> {
     const db = getDb();
     const records = await db
@@ -238,6 +287,7 @@ class PostgresAppRepository implements AppRepository {
       })
       .returning();
 
+    await this.bumpCatalogRevision(db);
     return toAdminAppRecord(record);
   }
 
@@ -265,12 +315,19 @@ class PostgresAppRepository implements AppRepository {
       throw new Error("App not found.");
     }
 
+    await this.bumpCatalogRevision(db);
     return toAdminAppRecord(record);
   }
 
   async deleteApp(id: string): Promise<void> {
     const db = getDb();
-    await db.delete(apps).where(eq(apps.id, id));
+    const result = await db
+      .delete(apps)
+      .where(eq(apps.id, id))
+      .returning({ id: apps.id });
+    if (result.length > 0) {
+      await this.bumpCatalogRevision(db);
+    }
   }
 
   async removeTag(id: string, tag: string): Promise<AdminAppRecord> {
@@ -304,6 +361,7 @@ class PostgresAppRepository implements AppRepository {
       throw new Error("App not found.");
     }
 
+    await this.bumpCatalogRevision(db);
     return toAdminAppRecord(record);
   }
 }

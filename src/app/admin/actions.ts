@@ -80,7 +80,12 @@ export async function updateAppAction(formData: FormData) {
   await requireAdminSession();
   const id = String(formData.get("id") ?? "");
   const repo = getAppRepository();
-  const existingApp = (await repo.listAdminApps()).find((app) => app.id === id);
+  const existingApp = await repo.getApp(id);
+
+  if (!existingApp) {
+    throw new Error("App not found.");
+  }
+
   const input = await getAppInput(formData, existingApp);
 
   await repo.updateApp(id, input);

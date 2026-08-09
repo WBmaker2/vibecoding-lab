@@ -41,6 +41,7 @@ describe("admin mutation actions", () => {
     mocks.getAppRepository.mockReturnValue({
       createApp: vi.fn(),
       deleteApp: vi.fn(),
+      getApp: vi.fn(),
       listAdminApps: vi.fn(),
       removeTag: vi.fn(),
       updateApp: vi.fn()

@@ -30,3 +30,8 @@ export const staticGallerySyncLeases = pgTable("static_gallery_sync_leases", {
   previousRunId: bigint("previous_run_id", { mode: "number" }),
   runId: bigint("run_id", { mode: "number" })
 });
+
+export const appCatalogState = pgTable("app_catalog_state", {
+  stateKey: text("state_key").primaryKey(),
+  revision: bigint("revision", { mode: "number" }).notNull().default(0)
+});

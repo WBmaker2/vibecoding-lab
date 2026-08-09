@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { decodeDataImageUrl } from "../src/lib/security/image-policy.mjs";
 import {
-  fetchAppsFromConfiguredDatabase,
+  fetchAppSnapshotFromConfiguredDatabase,
   toPublicSnapshotApp
 } from "./lib/apps-database.mjs";
 import { getConfiguredDatabaseProvider } from "./lib/database-provider.mjs";
@@ -439,10 +439,13 @@ async function fetchApps() {
   }
 
   if (BACKUP_PATH) {
-    return fetchAppsFromBackup(BACKUP_PATH);
+    return {
+      apps: await fetchAppsFromBackup(BACKUP_PATH),
+      catalogRevision: null
+    };
   }
 
-  return fetchAppsFromConfiguredDatabase();
+  return fetchAppSnapshotFromConfiguredDatabase();
 }
 
 async function materializeThumbnail(
@@ -548,6 +551,13 @@ function validateSnapshotPayload(payload) {
     new Date(payload.generatedAt).toISOString() !== payload.generatedAt
   ) {
     throw new Error("snapshot payload must have a valid generatedAt");
+  }
+
+  if (
+    payload.catalogRevision !== undefined &&
+    (!Number.isSafeInteger(payload.catalogRevision) || payload.catalogRevision < 0)
+  ) {
+    throw new Error("snapshot payload must have a valid catalogRevision");
   }
 
   if (!Array.isArray(payload.apps)) {
@@ -724,11 +734,12 @@ async function removeOrphanedThumbnailFiles(snapshot) {
 }
 
 async function run() {
-  const apps = await fetchApps();
+  const { apps, catalogRevision } = await fetchApps();
   const existingSnapshot = await readExistingSnapshot();
   const existingThumbnailFiles = await readThumbnailFiles();
   const reuseDecision = getReusableSnapshotDecision({
     sourceApps: apps,
+    sourceCatalogRevision: catalogRevision,
     snapshot: existingSnapshot,
     thumbnailFiles: existingThumbnailFiles
   });
@@ -784,7 +795,10 @@ async function run() {
     version: 1,
     generatedAt: new Date().toISOString(),
     appCount: normalizedApps.length,
-    apps: normalizedApps
+    apps: normalizedApps,
+    ...(Number.isSafeInteger(catalogRevision)
+      ? { catalogRevision }
+      : {})
   };
 
   await writeSnapshotAtomically(payload);

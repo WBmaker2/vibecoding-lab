@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 const {
   acquireStaticGallerySyncLeaseMock,
   getAppRepositoryMock,
+  getCatalogRevisionMock,
   getActiveStaticGallerySyncLeaseMock,
   getStaticGallerySyncLeaseByMarkerMock,
   getStaticGalleryAssetIntegrityMock,
@@ -17,6 +18,7 @@ const {
 } = vi.hoisted(() => ({
   acquireStaticGallerySyncLeaseMock: vi.fn(),
   getAppRepositoryMock: vi.fn(),
+  getCatalogRevisionMock: vi.fn(),
   getActiveStaticGallerySyncLeaseMock: vi.fn(),
   getStaticGallerySyncLeaseByMarkerMock: vi.fn(),
   getStaticGalleryBaselineMock: vi.fn(),
@@ -153,6 +155,7 @@ describe("/api/admin/sync-static-gallery", () => {
     vi.restoreAllMocks();
     hasAdminSessionMock.mockReset();
     getAppRepositoryMock.mockReset();
+    getCatalogRevisionMock.mockReset();
     getStaticGalleryBaselineMock.mockReset();
     getStaticGalleryAssetIntegrityMock.mockReset();
     getStaticGallerySyncSummaryMock.mockReset();
@@ -325,6 +328,31 @@ describe("/api/admin/sync-static-gallery", () => {
     expect(await response.json()).toEqual({ dispatched: false });
     expect(fetchSpy).not.toHaveBeenCalled();
     expect(listAdminAppsMock).toHaveBeenCalledOnce();
+  });
+
+  it("returns a revision-based no-op without reading the app list", async () => {
+    hasAdminSessionMock.mockResolvedValue(true);
+    getStaticGalleryBaselineMock.mockReturnValue({
+      assetManifest: [],
+      catalogRevision: 7,
+      generatedAt: summary.generatedAt,
+      appCount: 1,
+      updatedAtById: {}
+    });
+    getAppRepositoryMock.mockReturnValue({
+      getCatalogRevision: getCatalogRevisionMock,
+      listAdminApps: listAdminAppsMock
+    });
+    getCatalogRevisionMock.mockResolvedValue(7);
+    const fetchSpy = vi.spyOn(globalThis, "fetch");
+
+    const response = await POST(request());
+
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ dispatched: false });
+    expect(getCatalogRevisionMock).toHaveBeenCalledOnce();
+    expect(listAdminAppsMock).not.toHaveBeenCalled();
+    expect(fetchSpy).not.toHaveBeenCalled();
   });
 
   it("rejects a changed request when the latest workflow run is active", async () => {

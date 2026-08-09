@@ -1,3 +1,4 @@
+import { type Client } from "@libsql/client";
 import { getTursoClient } from "@/db/turso-client";
 import { normalizeAppMetadata } from "./metadata";
 import { toAdminAppRecord, toPublicAppRecord } from "./record-mappers";
@@ -138,6 +139,59 @@ const SELECT_COLUMNS = `
   updated_at
 `;
 
+const CATALOG_STATE_KEY = "apps";
+let catalogStateReadyClient: Client | null = null;
+
+async function ensureCatalogState(client: Client) {
+  if (catalogStateReadyClient === client) {
+    return;
+  }
+
+  await client.batch(
+    [
+      {
+        sql: `
+          CREATE TABLE IF NOT EXISTS app_catalog_state (
+            state_key TEXT PRIMARY KEY NOT NULL,
+            revision INTEGER NOT NULL DEFAULT 0
+          )
+        `,
+        args: []
+      },
+      {
+        sql: `
+          INSERT INTO app_catalog_state (state_key, revision)
+          VALUES (?, 0)
+          ON CONFLICT (state_key) DO NOTHING
+        `,
+        args: [CATALOG_STATE_KEY]
+      }
+    ],
+    "write"
+  );
+
+  catalogStateReadyClient = client;
+}
+
+async function bumpCatalogRevision(client: Client) {
+  try {
+    await ensureCatalogState(client);
+    await client.execute({
+      sql: `
+        UPDATE app_catalog_state
+        SET revision = revision + 1
+        WHERE state_key = ?
+      `,
+      args: [CATALOG_STATE_KEY]
+    });
+  } catch (error) {
+    console.warn(
+      "Turso catalog revision was not updated; sync will use the full comparison fallback.",
+      error
+    );
+  }
+}
+
 export class TursoAppRepository implements AppRepository {
   async listPublicApps(): Promise<PublicAppRecord[]> {
     const result = await getTursoClient().execute({
@@ -157,6 +211,26 @@ export class TursoAppRepository implements AppRepository {
     return result.rows.map((row) => toRecord(row as TursoRow));
   }
 
+  async getCatalogRevision(): Promise<number> {
+    const client = getTursoClient();
+    const result = await client.execute({
+      sql: `
+        SELECT revision
+        FROM app_catalog_state
+        WHERE state_key = ?
+        LIMIT 1
+      `,
+      args: [CATALOG_STATE_KEY]
+    });
+    const revision = Number(result.rows[0]?.revision);
+
+    if (!Number.isSafeInteger(revision) || revision < 0) {
+      throw new Error("Turso app catalog revision is invalid.");
+    }
+
+    return revision;
+  }
+
   async getApp(id: string): Promise<AdminAppRecord | null> {
     const result = await getTursoClient().execute({
       sql: `SELECT ${SELECT_COLUMNS} FROM apps WHERE id = ? LIMIT 1`,
@@ -168,34 +242,35 @@ export class TursoAppRepository implements AppRepository {
   }
 
   async createApp(input: AppInput): Promise<AdminAppRecord> {
+    const client = getTursoClient();
     const id = crypto.randomUUID();
     const now = new Date();
     const args = toArgs(input, now);
 
-    await getTursoClient().execute({
+    const result = await client.execute({
       sql: `
         INSERT INTO apps (
           id, title, summary, url, github_url, tags, thumbnail_mode,
           thumbnail_url, subject, grade, memo, subjects, grade_bands,
           audience, interaction_type, learning_process, created_at, updated_at
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        RETURNING ${SELECT_COLUMNS}
       `,
       args: [id, ...args, now.toISOString()]
     });
 
-    const record = await this.getApp(id);
-    if (!record) throw new Error("Turso app insert did not return a record.");
-    return record;
+    const row = result.rows[0];
+    if (!row) throw new Error("Turso app insert did not return a record.");
+    await bumpCatalogRevision(client);
+    return toRecord(row as TursoRow);
   }
 
   async updateApp(id: string, input: AppInput): Promise<AdminAppRecord> {
-    const existing = await this.getApp(id);
-    if (!existing) throw new Error("App not found.");
-
+    const client = getTursoClient();
     const now = new Date();
     const args = toArgs(input, now);
 
-    await getTursoClient().execute({
+    const result = await client.execute({
       sql: `
         UPDATE apps SET
           title = ?, summary = ?, url = ?, github_url = ?, tags = ?,
@@ -203,23 +278,31 @@ export class TursoAppRepository implements AppRepository {
           memo = ?, subjects = ?, grade_bands = ?, audience = ?,
           interaction_type = ?, learning_process = ?, updated_at = ?
         WHERE id = ?
+        RETURNING ${SELECT_COLUMNS}
       `,
       args: [...args, id]
     });
 
-    const record = await this.getApp(id);
-    if (!record) throw new Error("App not found.");
-    return record;
+    const row = result.rows[0];
+    if (!row) throw new Error("App not found.");
+    await bumpCatalogRevision(client);
+    return toRecord(row as TursoRow);
   }
 
   async deleteApp(id: string): Promise<void> {
-    await getTursoClient().execute({
+    const client = getTursoClient();
+    const result = await client.execute({
       sql: "DELETE FROM apps WHERE id = ?",
       args: [id]
     });
+
+    if (result.rowsAffected > 0) {
+      await bumpCatalogRevision(client);
+    }
   }
 
   async removeTag(id: string, tag: string): Promise<AdminAppRecord> {
+    const client = getTursoClient();
     const existing = await this.getApp(id);
     if (!existing) throw new Error("App not found.");
     if (existing.tags.length <= 1) {
@@ -229,13 +312,19 @@ export class TursoAppRepository implements AppRepository {
     const nextTags = existing.tags.filter((item) => item !== tag);
     if (nextTags.length === existing.tags.length) return existing;
 
-    await getTursoClient().execute({
-      sql: "UPDATE apps SET tags = ?, updated_at = ? WHERE id = ?",
+    const result = await client.execute({
+      sql: `
+        UPDATE apps
+        SET tags = ?, updated_at = ?
+        WHERE id = ?
+        RETURNING ${SELECT_COLUMNS}
+      `,
       args: [JSON.stringify(nextTags), new Date().toISOString(), id]
     });
 
-    const record = await this.getApp(id);
-    if (!record) throw new Error("App not found.");
-    return record;
+    const row = result.rows[0];
+    if (!row) throw new Error("App not found.");
+    await bumpCatalogRevision(client);
+    return toRecord(row as TursoRow);
   }
 }

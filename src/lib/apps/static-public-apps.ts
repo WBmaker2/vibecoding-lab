@@ -27,6 +27,7 @@ export interface SerializedPublicAppRecord {
 
 interface PublicAppsSnapshot {
   assetManifest?: unknown;
+  catalogRevision?: number;
   version: number;
   generatedAt: string;
   appCount: number;
@@ -175,6 +176,15 @@ export function getStaticGalleryBaseline(
       staticSnapshot.apps.map((app) => [app.id, app.updatedAt])
     )
   };
+
+  const catalogRevision = staticSnapshot.catalogRevision;
+  if (
+    typeof catalogRevision === "number" &&
+    Number.isSafeInteger(catalogRevision) &&
+    catalogRevision >= 0
+  ) {
+    baseline.catalogRevision = catalogRevision;
+  }
 
   if (Object.hasOwn(staticSnapshot, "assetManifest")) {
     baseline.assetManifest = staticSnapshot.assetManifest;

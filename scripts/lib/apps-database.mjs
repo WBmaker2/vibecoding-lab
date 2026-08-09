@@ -1,6 +1,10 @@
 import postgres from "postgres";
 import { getConfiguredDatabaseProvider } from "./database-provider.mjs";
-import { readTursoApps } from "./turso-apps.mjs";
+import {
+  createTursoClient,
+  readTursoApps,
+  readTursoCatalogRevision
+} from "./turso-apps.mjs";
 
 function normalizeDateValue(value) {
   if (typeof value === "string") return value;
@@ -51,39 +55,98 @@ export function toPublicSnapshotApp(raw, index) {
   };
 }
 
-export async function fetchAppsFromPostgres(databaseUrl = process.env.POSTGRES_URL) {
+function toCatalogRevision(value) {
+  const revision = Number(value);
+  return Number.isSafeInteger(revision) && revision >= 0 ? revision : null;
+}
+
+async function fetchPostgresSnapshot(
+  databaseUrl = process.env.POSTGRES_URL
+) {
   if (!databaseUrl) throw new Error("POSTGRES_URL is not configured.");
   const sql = postgres(databaseUrl, { prepare: false });
 
   try {
-    const rows = await sql`
-      select
-        id,
-        title,
-        summary,
-        url,
-        github_url as "githubUrl",
-        tags,
-        thumbnail_mode as "thumbnailMode",
-        thumbnail_url as "thumbnailUrl",
-        subject,
-        grade,
-        memo,
-        subjects,
-        grade_bands as "gradeBands",
-        audience,
-        interaction_type as "interactionType",
-        learning_process as "learningProcess",
-        created_at as "createdAt",
-        updated_at as "updatedAt"
-      from apps
-      order by updated_at desc, created_at desc
-    `;
+    const [rows, stateRows] = await Promise.all([
+      sql`
+        select
+          id,
+          title,
+          summary,
+          url,
+          github_url as "githubUrl",
+          tags,
+          thumbnail_mode as "thumbnailMode",
+          thumbnail_url as "thumbnailUrl",
+          subject,
+          grade,
+          memo,
+          subjects,
+          grade_bands as "gradeBands",
+          audience,
+          interaction_type as "interactionType",
+          learning_process as "learningProcess",
+          created_at as "createdAt",
+          updated_at as "updatedAt"
+        from apps
+        order by updated_at desc, created_at desc
+      `,
+      sql`
+        select revision
+        from app_catalog_state
+        where state_key = 'apps'
+        limit 1
+      `
+    ]);
 
-    return rows.map((row, index) => toPublicSnapshotApp(row, index));
+    return {
+      apps: rows.map((row, index) => toPublicSnapshotApp(row, index)),
+      catalogRevision: toCatalogRevision(stateRows[0]?.revision)
+    };
   } finally {
     await sql.end({ timeout: 5 });
   }
+}
+
+export async function fetchAppsFromPostgres(
+  databaseUrl = process.env.POSTGRES_URL
+) {
+  return (await fetchPostgresSnapshot(databaseUrl)).apps;
+}
+
+export async function fetchAppSnapshotFromConfiguredDatabase({
+  databaseUrl = process.env.POSTGRES_URL,
+  tursoDatabaseUrl = process.env.TURSO_DATABASE_URL,
+  authToken = process.env.TURSO_AUTH_TOKEN,
+  provider = getConfiguredDatabaseProvider({
+    postgresUrl: databaseUrl,
+    tursoDatabaseUrl,
+    tursoAuthToken: authToken
+  })
+} = {}) {
+  if (provider === "turso") {
+    const client = createTursoClient({
+      databaseUrl: tursoDatabaseUrl,
+      authToken
+    });
+    const [apps, catalogRevision] = await Promise.all([
+      readTursoApps({ client }),
+      readTursoCatalogRevision({ client })
+    ]);
+
+    return {
+      apps: apps.map(toPublicSnapshotApp),
+      catalogRevision
+    };
+  }
+
+  if (provider === "postgres") {
+    return fetchPostgresSnapshot(databaseUrl);
+  }
+
+  throw new Error(
+    "No database is configured. Set Turso variables or POSTGRES_URL, or provide --backup."
+  );
 }
 
 export async function fetchAppsFromConfiguredDatabase({
@@ -96,19 +159,12 @@ export async function fetchAppsFromConfiguredDatabase({
     tursoAuthToken: authToken
   })
 } = {}) {
-  if (provider === "turso") {
-    const apps = await readTursoApps({
-      databaseUrl: tursoDatabaseUrl,
-      authToken
-    });
-    return apps.map(toPublicSnapshotApp);
-  }
-
-  if (provider === "postgres") {
-    return fetchAppsFromPostgres(databaseUrl);
-  }
-
-  throw new Error(
-    "No database is configured. Set Turso variables or POSTGRES_URL, or provide --backup."
-  );
+  return (
+    await fetchAppSnapshotFromConfiguredDatabase({
+      databaseUrl,
+      tursoDatabaseUrl,
+      authToken,
+      provider
+    })
+  ).apps;
 }

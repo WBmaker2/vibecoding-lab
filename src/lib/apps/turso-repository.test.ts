@@ -1,11 +1,18 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { executeMock } = vi.hoisted(() => ({
-  executeMock: vi.fn()
-}));
+const { batchMock, client, executeMock } = vi.hoisted(() => {
+  const executeMock = vi.fn();
+  const batchMock = vi.fn();
+
+  return {
+    batchMock,
+    client: { batch: batchMock, execute: executeMock },
+    executeMock
+  };
+});
 
 vi.mock("@/db/turso-client", () => ({
-  getTursoClient: () => ({ execute: executeMock })
+  getTursoClient: () => client
 }));
 
 import { TursoAppRepository } from "./turso-repository";
@@ -34,12 +41,12 @@ const row = {
 describe("TursoAppRepository", () => {
   beforeEach(() => {
     executeMock.mockReset();
+    batchMock.mockReset();
+    batchMock.mockResolvedValue([]);
   });
 
   it("passes both timestamps when creating an app", async () => {
-    executeMock
-      .mockResolvedValueOnce({ rows: [] })
-      .mockResolvedValueOnce({ rows: [row] });
+    executeMock.mockResolvedValueOnce({ rows: [row] });
 
     const repository = new TursoAppRepository();
     const created = await repository.createApp({
@@ -57,5 +64,37 @@ describe("TursoAppRepository", () => {
     expect(created.id).toBe(row.id);
     expect(insertCall.args).toHaveLength(18);
     expect(insertCall.args.at(-1)).toBe(insertCall.args.at(-2));
+  });
+
+  it("updates one app without a follow-up read", async () => {
+    executeMock.mockResolvedValueOnce({ rows: [row] });
+
+    const repository = new TursoAppRepository();
+    const updated = await repository.updateApp(row.id, {
+      title: "수정된 앱",
+      summary: row.summary,
+      url: row.url,
+      tags: ["turso"],
+      thumbnailMode: "placeholder"
+    });
+
+    expect(updated.id).toBe(row.id);
+    expect(executeMock).toHaveBeenCalledTimes(2);
+    expect(executeMock.mock.calls[0][0].sql).toContain("RETURNING");
+    expect(executeMock.mock.calls[1][0].sql).toContain(
+      "UPDATE app_catalog_state"
+    );
+  });
+
+  it("reads the catalog revision from one state row", async () => {
+    executeMock.mockResolvedValueOnce({ rows: [{ revision: 7 }] });
+
+    const repository = new TursoAppRepository();
+
+    await expect(repository.getCatalogRevision()).resolves.toBe(7);
+    expect(executeMock).toHaveBeenCalledOnce();
+    expect(executeMock.mock.calls[0][0].sql).toContain(
+      "FROM app_catalog_state"
+    );
   });
 });

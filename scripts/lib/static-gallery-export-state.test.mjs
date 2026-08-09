@@ -54,6 +54,7 @@ const baseSnapshot = {
 
 function decisionFor({
   sourceApps = baseApps,
+  sourceCatalogRevision,
   snapshot = baseSnapshot,
   thumbnailFiles = [
     {
@@ -64,7 +65,12 @@ function decisionFor({
     }
   ]
 } = {}) {
-  return getReusableSnapshotDecision({ sourceApps, snapshot, thumbnailFiles });
+  return getReusableSnapshotDecision({
+    sourceApps,
+    sourceCatalogRevision,
+    snapshot,
+    thumbnailFiles
+  });
 }
 
 describe("getReusableSnapshotDecision", () => {
@@ -74,6 +80,15 @@ describe("getReusableSnapshotDecision", () => {
     });
 
     expect(result.reusable).toBe(true);
+  });
+
+  it("does not reuse a snapshot when the catalog revision changes", () => {
+    expect(
+      decisionFor({
+        sourceCatalogRevision: 4,
+        snapshot: { ...baseSnapshot, catalogRevision: 3 }
+      })
+    ).toEqual({ reusable: false, reason: "catalog-revision-changed" });
   });
 
   it.each([
