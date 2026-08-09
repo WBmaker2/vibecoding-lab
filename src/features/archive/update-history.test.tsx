@@ -29,6 +29,10 @@ describe("UpdateHistory", () => {
     expect(dialog).toHaveTextContent(
       "관리자 동기화가 운영 main 브랜치에서 최신 앱 목록과 썸네일을 다시 만들도록 복구했습니다."
     );
+    expect(dialog).toHaveTextContent("2026-08-09");
+    expect(dialog).toHaveTextContent(
+      "관리자 DB 한도 초과 시 서버 오류 대신 읽기 전용 스냅샷 안내 화면을 표시하도록 개선했습니다."
+    );
 
     fireEvent.click(screen.getByRole("button", { name: "닫기" }));
 

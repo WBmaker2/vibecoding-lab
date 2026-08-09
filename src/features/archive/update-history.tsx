@@ -4,6 +4,12 @@ import { useEffect, useRef, useState } from "react";
 
 export const UPDATE_HISTORY = [
   {
+    date: "2026-08-09",
+    kind: "개선",
+    detail:
+      "관리자 DB 한도 초과 시 서버 오류 대신 읽기 전용 스냅샷 안내 화면을 표시하도록 개선했습니다."
+  },
+  {
     date: "2026-07-23",
     kind: "개선",
     detail:

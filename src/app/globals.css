@@ -935,6 +935,49 @@ select {
   font-weight: 700;
 }
 
+.admin-db-fallback-panel {
+  display: grid;
+  gap: 12px;
+  border-color: rgba(178, 59, 59, 0.22);
+  background: linear-gradient(180deg, rgba(255, 248, 244, 0.96), rgba(255, 255, 255, 0.96));
+}
+
+.admin-db-fallback-panel h2,
+.admin-db-fallback-panel p {
+  margin: 0;
+}
+
+.admin-db-fallback-panel p {
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+.admin-db-fallback-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 8px 0 0;
+}
+
+.admin-db-fallback-facts div {
+  border: 1px solid rgba(217, 223, 234, 0.9);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 14px;
+}
+
+.admin-db-fallback-facts dt {
+  color: var(--text-soft);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.admin-db-fallback-facts dd {
+  margin: 4px 0 0;
+  color: var(--text-strong);
+  font-weight: 800;
+}
+
 .admin-header-stats {
   display: flex;
   gap: 8px;
@@ -1615,7 +1658,8 @@ select {
   }
 
   .admin-workspace-grid,
-  .admin-form-grid {
+  .admin-form-grid,
+  .admin-db-fallback-facts {
     grid-template-columns: 1fr;
   }
 

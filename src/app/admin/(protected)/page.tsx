@@ -1,13 +1,26 @@
+import { redirect } from "next/navigation";
 import { AdminShell } from "@/features/admin/admin-shell";
-import { getAppRepository } from "@/lib/apps/repository";
-import { getStaticGalleryAssetIntegrity } from "@/lib/apps/static-gallery-asset-integrity";
-import { getStaticGalleryBaseline } from "@/lib/apps/static-public-apps";
+import { AdminDatabaseFallback } from "@/features/admin/admin-database-fallback";
+import { loadAdminPageData } from "@/lib/apps/admin-page-data";
+import { hasAdminSession } from "@/lib/auth/session";
 
 export default async function AdminPage() {
-  const repo = getAppRepository();
-  const apps = await repo.listAdminApps();
-  const baseline = getStaticGalleryBaseline();
-  const assetIntegrity = await getStaticGalleryAssetIntegrity(baseline);
+  if (!(await hasAdminSession())) {
+    redirect("/admin/login");
+  }
+
+  const { apps, assetIntegrity, baseline, dataSource } =
+    await loadAdminPageData();
+
+  if (dataSource.kind === "static-fallback") {
+    return (
+      <AdminDatabaseFallback
+        apps={apps}
+        baseline={baseline}
+        reason={dataSource.reason}
+      />
+    );
+  }
 
   return (
     <AdminShell
