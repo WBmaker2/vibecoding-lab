@@ -12,8 +12,8 @@
     },
     {
       "path": "/app-thumbnails/10829a2a-f96b-48ee-bca7-bd28c9748f27.png",
-      "size": 151407,
-      "sha256": "5fc8a43197f4b252195961dcf93b9150233f787e99effcd3bc36839cfc2139bf"
+      "size": 351673,
+      "sha256": "925dcc227725a012dc8033381479f61c7b00d50d144b2493436455be932eb910"
     },
     {
       "path": "/app-thumbnails/13db4453-420a-447c-a4e9-67d330852ee5.png",
@@ -67,8 +67,8 @@
     },
     {
       "path": "/app-thumbnails/3a72009d-c1ad-48b5-86b4-6eb870143eea.png",
-      "size": 67609,
-      "sha256": "eb16948b3f58fcf5a7f74f17db27135eb3bae593c00f3a449d4eba74572af18c"
+      "size": 100359,
+      "sha256": "edca2fbdf58f8ad2b4ca974c81ff291225e3cb3a11cb39285d80c7b0fa7f321b"
     },
     {
       "path": "/app-thumbnails/3cb419a8-6c37-4e15-9d0d-6b0634be0bc4.png",
@@ -141,11 +141,6 @@
       "sha256": "56b7220a98414dee211207f8ae04819293d0425bb2b9d93bc2f9d3639e44b33a"
     },
     {
-      "path": "/app-thumbnails/5aff20b9-e329-4536-8761-a82adee6cfb2.jpg",
-      "size": 77943,
-      "sha256": "54a06c472884fa6c1046a71d824db875634b2b4ec59815b2d1eb7a254e7ae732"
-    },
-    {
       "path": "/app-thumbnails/60646b44-ffef-45f9-a774-65df50211a9a.png",
       "size": 337540,
       "sha256": "95e7ce380fc07c786529ef6d6532f9e9207e923a43e33fc953b2bbbc1db7a1d0"
@@ -156,9 +151,9 @@
       "sha256": "4723a95cc65f837e89d1c596f65b892539200a6c9f3bbb53f15a4fd492b66db2"
     },
     {
-      "path": "/app-thumbnails/643c543f-599c-4a5d-83f6-57d31acd0394.jpg",
-      "size": 81947,
-      "sha256": "74afb4b6a7f3a69ee7d37e346ade75df72658e3c368cdeb4a4c841b4fb58a18b"
+      "path": "/app-thumbnails/643c543f-599c-4a5d-83f6-57d31acd0394.png",
+      "size": 176278,
+      "sha256": "8de3ad051e8ab77a97cdf649fcdc5a8697b437a07506662dfc8ae2b4457322b2"
     },
     {
       "path": "/app-thumbnails/6738aefd-9410-4b80-8d95-2549be89e3d4.png",
@@ -187,13 +182,13 @@
     },
     {
       "path": "/app-thumbnails/79bce259-c3aa-40f7-892b-f46be5fbe3fc.png",
-      "size": 236580,
-      "sha256": "97eb3f0f727efd4a4e1f7492efabf6b955e826e381622493512533b2338855ab"
+      "size": 236804,
+      "sha256": "6f366bbcb6129c27e4f10849a5bbbf8d3ca5203d6a8a9624ae05cef400b76169"
     },
     {
       "path": "/app-thumbnails/7b66f642-63da-4389-bce4-35e5d708b6d0.png",
-      "size": 199388,
-      "sha256": "8a98db02d92f32a2490569cf30e8484b71df7c9988ae1cfbc86a1b4ca4a07f01"
+      "size": 318264,
+      "sha256": "af8d0e74358d6b879d15e8c68ff383618f8b6df0952cbe4b14d12c3df46109c2"
     },
     {
       "path": "/app-thumbnails/837829ee-abd3-46a7-9554-ec83055bbdf0.png",
@@ -207,8 +202,8 @@
     },
     {
       "path": "/app-thumbnails/876e4653-4056-431f-ae17-27b5e45d0b4b.png",
-      "size": 150966,
-      "sha256": "faccb80c005a4cc115f7d6fb2ddbc9709a843dc16a1a138826ae04e188de5b7f"
+      "size": 155905,
+      "sha256": "ad1f6dcb3384bc23ba7ad6214a920cf2f9d2e30e3fa5ab9319952b9fb525643f"
     },
     {
       "path": "/app-thumbnails/890a0ba1-6e4c-4bf8-a9d9-2009802a94fb.png",
@@ -281,9 +276,9 @@
       "sha256": "904a8f23aebe06393f398a42c07b84206a7daa9257cb1fa0ef82454d9ca5252b"
     },
     {
-      "path": "/app-thumbnails/a990e157-a2d7-4ded-b339-5ca3a1b50a66.jpg",
-      "size": 68591,
-      "sha256": "e60ab7131d23bdb5a716ce2f567473021678b918260e46d220e5e69344e60a7f"
+      "path": "/app-thumbnails/a990e157-a2d7-4ded-b339-5ca3a1b50a66.png",
+      "size": 201211,
+      "sha256": "c5c7e8f8f7edbd255a682daa42b13aa6598e00a7c3f4f3cedc2f42efacb86baa"
     },
     {
       "path": "/app-thumbnails/ac622468-2710-4183-9a67-f2489ae000c5.png",
@@ -302,8 +297,8 @@
     },
     {
       "path": "/app-thumbnails/b023a954-b497-4467-b043-64910bd20dac.png",
-      "size": 197768,
-      "sha256": "ac8d6c605c722ed52aba3eed08a2c0f2d6efd4163c246eaa3da4f45b9b4efd3e"
+      "size": 198919,
+      "sha256": "8b1ad48bf3aa2d056b1e1c3438fb247c50fb4d236832773aadeb898b5ecb47bc"
     },
     {
       "path": "/app-thumbnails/b52fd0e4-768b-4cc1-806c-53deef04f003.png",
@@ -317,8 +312,8 @@
     },
     {
       "path": "/app-thumbnails/b8f82bb6-65a5-4876-8c75-b52cc125e5be.png",
-      "size": 96365,
-      "sha256": "ea62a9a5de166bf965b7954020fe5b45e7076a348e73d598816c8b6ab68eb2eb"
+      "size": 98699,
+      "sha256": "5e3b84df6bdd054758560357b098601c4d73a66c16bd344d4e386f0d4428e5a9"
     },
     {
       "path": "/app-thumbnails/bebd1fd7-5b54-4923-a476-fae00288d4e2.png",
@@ -392,8 +387,8 @@
     },
     {
       "path": "/app-thumbnails/f058dc1c-3ee5-4368-ba32-23ed3fcaac37.png",
-      "size": 82285,
-      "sha256": "5d66cd32f0aac974effbc308d878b5f7aa230cf70cd696da863556bea453f216"
+      "size": 84338,
+      "sha256": "0fb470b96a1d6d9b833f87a99e7785a0a9838902c6f5865279ffef972db5f173"
     },
     {
       "path": "/app-thumbnails/f1fc0953-7d49-42c5-a0cc-68b0a564e765.png",
@@ -412,8 +407,8 @@
     },
     {
       "path": "/app-thumbnails/feb7f03f-05fc-4c43-8919-060423577589.png",
-      "size": 218589,
-      "sha256": "8ab1f351ec9fae55b908daf5319c13a2d07835da3f46831d93df4c94da9e3e3d"
+      "size": 220286,
+      "sha256": "f7f9f575c573bcce6a85848f02f94f57eccd0d5143f8acae5e970b9e21fad3a0"
     },
     {
       "path": "/app-thumbnails/feee9f4c-ebef-455d-a303-c6016dca3ea9.png",
@@ -422,9 +417,674 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-08-09T07:52:55.420Z",
+  "generatedAt": "2026-08-16T12:50:28.967Z",
   "appCount": 84,
   "apps": [
+    {
+      "id": "dbf5fa15-fe4b-47a5-a186-29e4f50d8665",
+      "title": "친환경 수송 조건 설계소",
+      "summary": "초등 3~4학년 학생이 짐, 거리, 길 조건에 맞는 수레 부품을 고르고 결과를 비교하는 과학 탐구 활동입니다.",
+      "url": "https://wbmaker2.github.io/eco-friendly-transport-condition-design-studio/",
+      "githubUrl": "https://github.com/WBmaker2/eco-friendly-transport-condition-design-studio",
+      "tags": [
+        "과학",
+        "환경",
+        "발명",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/dbf5fa15-fe4b-47a5-a186-29e4f50d8665.png",
+      "subject": "과학",
+      "grade": "초등 3~4학년",
+      "memo": "과학 수업에서 옮길 물건, 거리, 길, 움직이는 힘을 살펴보고 수레 부품을 한 가지씩 바꿔 조건별 결과와 생각할 점을 비교하는 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-07-22T22:08:19.446Z",
+      "updatedAt": "2026-08-16T12:47:15.573Z"
+    },
+    {
+      "id": "b8f82bb6-65a5-4876-8c75-b52cc125e5be",
+      "title": "소리 차단 재료 연구소",
+      "summary": "초등학생이 가상 장치에서 한 가지 조건씩 바꾸며 소리가 지나가는 길과 줄어드는 조건을 비교해 보는 과학 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/sound-blocking-material-lab/",
+      "githubUrl": "https://github.com/WBmaker2/sound-blocking-material-lab",
+      "tags": [
+        "과학",
+        "실험",
+        "탐구",
+        "추론",
+        "소리",
+        "변인통제",
+        "시뮬레이션"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/b8f82bb6-65a5-4876-8c75-b52cc125e5be.png",
+      "subject": "과학",
+      "grade": "초등 3~4학년",
+      "memo": "3~4학년 소리 단원에서 실제 실험 전에 한 가지만 바꾸어 결과와 근거를 비교하는 탐구 활동으로 활용할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-07-22T22:08:09.143Z",
+      "updatedAt": "2026-08-16T12:46:00.218Z"
+    },
+    {
+      "id": "5aff20b9-e329-4536-8761-a82adee6cfb2",
+      "title": "이야기 마음 근거 수사대",
+      "summary": "초등 저학년이 이야기 속 말·행동·표정을 단서로 인물의 마음과 여러 생각을 근거 있게 짐작하는 국어 읽기 활동 앱",
+      "url": "https://wbmaker2.github.io/story-heart-evidence-detective/",
+      "githubUrl": "https://github.com/WBmaker2/story-heart-evidence-detective",
+      "tags": [
+        "국어",
+        "저학년",
+        "마음",
+        "맥락",
+        "추론"
+      ],
+      "thumbnailMode": "placeholder",
+      "thumbnailUrl": null,
+      "subject": "국어",
+      "grade": "초등 1~2학년",
+      "memo": "연습 사건 뒤 여섯 이야기를 읽고 마음 하나와 단서 두 장을 연결한 뒤 다른 생각을 함께 살펴보는 점수 없는 활동입니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-17T00:22:36.037Z",
+      "updatedAt": "2026-08-16T12:44:50.870Z"
+    },
+    {
+      "id": "f058dc1c-3ee5-4368-ba32-23ed3fcaac37",
+      "title": "삼권분립 사건 처리실",
+      "summary": "초등 5~6학년이 가상 사건을 따라 국회·행정부·법원의 역할과 권력 분립의 까닭을 살펴보는 사회 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/separation-of-powers-case-room/",
+      "githubUrl": "https://github.com/WBmaker2/separation-of-powers-case-room",
+      "tags": [
+        "사회",
+        "탐구",
+        "회의"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/f058dc1c-3ee5-4368-ba32-23ed3fcaac37.png",
+      "subject": "사회",
+      "grade": "초등 5~6학년",
+      "memo": "민주주의와 시민 참여 단원에서 세 가지 가상 사건을 순서대로 살피며, 국가기관이 하는 일과 서로 다시 살피는 까닭을 정리하는 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "사회"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "mixed",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ],
+      "createdAt": "2026-07-22T22:13:35.820Z",
+      "updatedAt": "2026-08-16T12:33:43.266Z"
+    },
+    {
+      "id": "8ce3212a-1d5a-4987-8a51-bc6ecdb96324",
+      "title": "가능성 예보국",
+      "summary": "초등 5~6학년이 첫 자료와 새 자료를 비교하며 가능성을 분수와 말로 예보해 보는 수학 활동",
+      "url": "https://wbmaker2.github.io/possibility-forecast-office/",
+      "githubUrl": "https://github.com/WBmaker2/possibility-forecast-office",
+      "tags": [
+        "가능성",
+        "분수",
+        "수학",
+        "수업",
+        "융합",
+        "소통"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/8ce3212a-1d5a-4987-8a51-bc6ecdb96324.png",
+      "subject": "수학",
+      "grade": "초등 5~6학년",
+      "memo": "15~20분 개인 또는 2인 활동으로 자료를 세고 새 자료를 합쳐 예보를 유지하거나 바꾸는 과정을 토의합니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:07:52.391Z",
+      "updatedAt": "2026-08-16T12:31:51.254Z"
+    },
+    {
+      "id": "feb7f03f-05fc-4c43-8919-060423577589",
+      "title": "지시어 관제실",
+      "summary": "초등학생이 앞뒤 문맥을 살펴 가리키는 말을 찾아 뜻을 분명히 하는 국어 활동 앱입니다.",
+      "url": "https://wbmaker2.github.io/reference-expression-control-room/",
+      "githubUrl": "https://github.com/WBmaker2/reference-expression-control-room",
+      "tags": [
+        "국어",
+        "맥락",
+        "소통"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/feb7f03f-05fc-4c43-8919-060423577589.png",
+      "subject": "국어",
+      "grade": "초등 3~6학년",
+      "memo": "국어 시간에 앞뒤 내용을 읽고, 가리키는 말과 그 까닭을 함께 찾아보는 활동으로 사용할 수 있습니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:06:49.242Z",
+      "updatedAt": "2026-08-16T12:30:45.192Z"
+    },
+    {
+      "id": "643c543f-599c-4a5d-83f6-57d31acd0394",
+      "title": "특허 탐정사무소",
+      "summary": "초등 3~4학년 학생이 가상 발명품의 같은 점과 다른 점을 근거로 비교하며 생각을 고쳐 보는 탐구 활동 앱입니다.",
+      "url": "https://wbmaker2.github.io/patent-detective-office/",
+      "githubUrl": "https://github.com/WBmaker2/patent-detective-office",
+      "tags": [
+        "발명",
+        "경제",
+        "관찰",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/643c543f-599c-4a5d-83f6-57d31acd0394.png",
+      "subject": "공통",
+      "grade": "초등 3~4학년",
+      "memo": "발명·특허 관련 탐구 수업에서 A·B·C 자료를 읽고 근거를 골라 처음 생각을 고쳐 보는 활동으로 활용할 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:12:10.589Z",
+      "updatedAt": "2026-08-16T12:28:34.222Z"
+    },
+    {
+      "id": "636a7672-622a-4ba7-8f94-a1d61fb1a853",
+      "title": "용해 조건 탐사선",
+      "summary": "초등 5~6학년 학생이 소금과 설탕의 용해 조건을 예측·관찰·비교하며 근거에 맞는 규칙을 만드는 과학 탐구 앱",
+      "url": "https://wbmaker2.github.io/solubility-condition-explorer/",
+      "githubUrl": "https://github.com/WBmaker2/solubility-condition-explorer",
+      "tags": [
+        "과학",
+        "실험",
+        "관찰",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/636a7672-622a-4ba7-8f94-a1d61fb1a853.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "물질 종류와 물 온도를 한 번에 하나씩 바꾸어 비교하고, 예상-관찰-근거-규칙의 5단계로 용해 개념을 정리하는 수업에 활용할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-07-22T22:03:52.954Z",
+      "updatedAt": "2026-08-16T12:26:18.769Z"
+    },
+    {
+      "id": "b023a954-b497-4467-b043-64910bd20dac",
+      "title": "오래된 물건 사건파일",
+      "summary": "초등 5~6학년이 실제 박물관 유물 사진과 새 단서를 비교하며 역사 가설을 기록하고 고쳐 보는 탐구 활동 앱입니다.",
+      "url": "https://wbmaker2.github.io/old-object-case-files/",
+      "githubUrl": "https://github.com/WBmaker2/old-object-case-files",
+      "tags": [
+        "사회",
+        "역사",
+        "관찰",
+        "탐구",
+        "추론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/b023a954-b497-4467-b043-64910bd20dac.png",
+      "subject": "사회",
+      "grade": "초등 5~6학년",
+      "memo": "사회 수업에서 유물 사진을 관찰한 뒤, 박물관 기록과 새 단서를 비교하며 처음 생각을 근거에 맞게 고쳐 보는 활동으로 활용할 수 있습니다.",
+      "subjects": [
+        "사회"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:12:49.955Z",
+      "updatedAt": "2026-08-16T12:25:25.936Z"
+    },
+    {
+      "id": "79bce259-c3aa-40f7-892b-f46be5fbe3fc",
+      "title": "내 권리 선택 극장",
+      "summary": "초등 1~2학년이 만든 이야기 속 장면을 보며 권리와 도움받는 방법을 익히는 아동권리 수업 활동",
+      "url": "https://wbmaker2.github.io/my-rights-choice-theater/",
+      "githubUrl": "https://github.com/WBmaker2/my-rights-choice-theater",
+      "tags": [
+        "저학년",
+        "안전",
+        "국어",
+        "도덕",
+        "수업",
+        "마음"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/79bce259-c3aa-40f7-892b-f46be5fbe3fc.png",
+      "subject": "공통",
+      "grade": "초등 1~2학년",
+      "memo": "초등 저학년 아동권리 수업에서 실제 경험을 말하지 않고, 만든 이야기 속 장면을 통해 여러 도움 방법과 어른의 역할을 함께 살펴볼 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:09:48.616Z",
+      "updatedAt": "2026-08-16T12:22:37.055Z"
+    },
+    {
+      "id": "ca54acea-5292-4aff-80bd-8ea5da49294c",
+      "title": "화면 속 자 정비소",
+      "summary": "초등 1~2학년 학생이 고장난 화면 속 자를 고치며 바른 길이 재기 방법을 익히는 수학 활동 앱",
+      "url": "https://wbmaker2.github.io/measurement-standard-rod-repair-shop/",
+      "githubUrl": "https://github.com/WBmaker2/measurement-standard-rod-repair-shop",
+      "tags": [
+        "수학",
+        "측정",
+        "수업",
+        "저학년"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/ca54acea-5292-4aff-80bd-8ea5da49294c.png",
+      "subject": "수학",
+      "grade": "초등 1~2학년",
+      "memo": "길이 측정 첫 수업에서 시작점, 같은 크기의 칸, 틈과 겹침, 눈금 사이 세기를 순서대로 살펴보는 활동으로 활용할 수 있습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:07:36.451Z",
+      "updatedAt": "2026-08-16T12:21:18.372Z"
+    },
+    {
+      "id": "6738aefd-9410-4b80-8d95-2549be89e3d4",
+      "title": "빛길 구조대",
+      "summary": "초등 5~6학년 학생이 빛의 직진·반사·굴절을 예상하고 거울과 렌즈의 빛길로 확인하는 과학 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/light-path-rescue-team/",
+      "githubUrl": "https://github.com/WBmaker2/light-path-rescue-team",
+      "tags": [
+        "과학",
+        "실험",
+        "탐구",
+        "각도",
+        "대칭"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/6738aefd-9410-4b80-8d95-2549be89e3d4.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "빛길을 먼저 예상하고 장치를 고른 뒤 결과를 설명하는 수업용 활동입니다. 실제 거울·렌즈 실험 전후의 개념 확인에 활용할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:14:18.104Z",
+      "updatedAt": "2026-08-16T12:18:18.987Z"
+    },
+    {
+      "id": "3d9dcb26-f6f6-4cb2-bd89-71028efe899b",
+      "title": "정보 손실 통신소",
+      "summary": "초등학생이 전달된 문장을 비교해 달라진 뜻을 찾고, 안전하게 다시 전하는 방법을 연습하는 국어 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/information-loss-communication-station/",
+      "githubUrl": "https://github.com/WBmaker2/information-loss-communication-station",
+      "tags": [
+        "국어",
+        "소통"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/3d9dcb26-f6f6-4cb2-bd89-71028efe899b.png",
+      "subject": "국어",
+      "grade": "초등 3~6학년",
+      "memo": "원문과 전달문을 비교하며 빠짐·추가·뜻 변화를 근거로 설명하고, 안전한 전달문을 만들어 보는 수업 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:09:30.871Z",
+      "updatedAt": "2026-08-16T12:17:22.202Z"
+    },
+    {
+      "id": "10829a2a-f96b-48ee-bca7-bd28c9748f27",
+      "title": "이미지 의미 편집실",
+      "summary": "초등학생이 같은 이미지의 자르기·크기·글·색 변화를 비교하며 화면에서 찾은 까닭으로 느낌과 뜻을 설명하는 국어·미술 활동입니다.",
+      "url": "https://wbmaker2.github.io/image-meaning-editing-studio/",
+      "githubUrl": "https://github.com/WBmaker2/image-meaning-editing-studio",
+      "tags": [
+        "국어",
+        "미술",
+        "관찰"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/10829a2a-f96b-48ee-bca7-bd28c9748f27.png",
+      "subject": "국어 · 미술",
+      "grade": "초등 4~6학년",
+      "memo": "국어와 미술 수업에서 같은 장면을 자르기·크기·글·색으로 바꾸어 보고, 보이는 변화와 느낌의 까닭을 함께 말해 보는 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "국어",
+        "미술"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "creation",
+      "learningProcess": [
+        "구상",
+        "제작",
+        "공유"
+      ],
+      "createdAt": "2026-07-22T22:09:20.437Z",
+      "updatedAt": "2026-08-16T12:16:19.704Z"
+    },
+    {
+      "id": "28e6a55c-4cc2-4fba-8741-09e56d7ba87b",
+      "title": "열 이동 배달 추적소",
+      "summary": "초등학교 5~6학년 학생이 온도 자료를 읽고 열이 어디로 이동하는지 찾아보는 과학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/heat-transfer-delivery-tracker/",
+      "githubUrl": "https://github.com/WBmaker2/heat-transfer-delivery-tracker",
+      "tags": [
+        "과학",
+        "실험",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/28e6a55c-4cc2-4fba-8741-09e56d7ba87b.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "온도 변화를 보고 열의 이동 방향을 예측한 뒤, 전도·대류·복사를 근거와 함께 비교하는 수업 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:05:18.770Z",
+      "updatedAt": "2026-08-16T12:15:25.545Z"
+    },
+    {
+      "id": "a990e157-a2d7-4ded-b339-5ca3a1b50a66",
+      "title": "실험 리포트 조립소",
+      "summary": "초등학생이 과학 실험 기록에서 관찰 사실과 해석을 구분하고 근거로 연결해 짧은 리포트를 완성하는 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/experiment-report-assembler/",
+      "githubUrl": "https://github.com/WBmaker2/experiment-report-assembler",
+      "tags": [
+        "과학",
+        "융합",
+        "실험",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a990e157-a2d7-4ded-b339-5ca3a1b50a66.png",
+      "subject": "과학·국어",
+      "grade": "초등 4학년",
+      "memo": "실험 후 보고서 쓰기 전에 관찰 사실과 해석을 구분하고, 두 관찰 기록으로 해석을 뒷받침하는 관계를 연습하는 수업 활동입니다.",
+      "subjects": [
+        "과학",
+        "국어"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-17T03:30:48.906Z",
+      "updatedAt": "2026-08-16T12:14:39.849Z"
+    },
+    {
+      "id": "3a72009d-c1ad-48b5-86b4-6eb870143eea",
+      "title": "분류 기준 뒤집개",
+      "summary": "초등 1~2학년 학생이 같은 단추를 서로 다른 기준으로 나누고 개수를 세며 분류 결과의 변화를 비교하는 수학 활동입니다.",
+      "url": "https://wbmaker2.github.io/classification-criteria-flipper/",
+      "githubUrl": "https://github.com/WBmaker2/classification-criteria-flipper",
+      "tags": [
+        "수학",
+        "저학년",
+        "분류"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/3a72009d-c1ad-48b5-86b4-6eb870143eea.png",
+      "subject": "수학",
+      "grade": "초등 1~2학년",
+      "memo": "같은 단추 여섯 개를 색·모양·구멍 수·무늬 중 두 기준으로 직접 나누고 개수를 세어 보며, 기준에 따라 분류 결과가 달라짐을 비교하는 8~12분 수학 활동입니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-17T01:27:17.761Z",
+      "updatedAt": "2026-08-16T12:14:05.864Z"
+    },
+    {
+      "id": "7b66f642-63da-4389-bce4-35e5d708b6d0",
+      "title": "달 관측 기록 복원소",
+      "summary": "초등학생이 앞뒤 달 관측 기록을 비교해 빈칸의 달 모양을 추론하는 과학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/moon-observation-record-restoration-station/",
+      "githubUrl": "https://github.com/WBmaker2/moon-observation-record-restoration-station",
+      "tags": [
+        "3~4학년"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/7b66f642-63da-4389-bce4-35e5d708b6d0.png",
+      "subject": "과학",
+      "grade": "초등 3~4학년",
+      "memo": "여러 날의 달 모양을 앞뒤 기록으로 비교해 빈칸을 복원하며, 밝은 부분의 변화와 자료가 부족할 때의 판단을 함께 살펴보는 수업 활동입니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:06:47.687Z",
+      "updatedAt": "2026-08-16T12:03:30.814Z"
+    },
+    {
+      "id": "876e4653-4056-431f-ae17-27b5e45d0b4b",
+      "title": "태양·그림자 관계 기록국",
+      "summary": "초등 과학 수업에서 태양 고도·그림자 길이·기온의 관계를 자료로 비교하고 설명하는 탐구 활동 앱",
+      "url": "https://wbmaker2.github.io/sun-shadow-relationship-record-office/",
+      "githubUrl": "https://github.com/WBmaker2/sun-shadow-relationship-record-office",
+      "tags": [
+        "과학",
+        "초등"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/876e4653-4056-431f-ae17-27b5e45d0b4b.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "교사가 안전 약속부터 시간 기록 복원, 그래프·숫자표 해석, 계절 비교까지 순서대로 활용할 수 있는 자료 탐구 활동입니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:11:25.573Z",
+      "updatedAt": "2026-08-16T12:03:18.971Z"
+    },
+    {
+      "id": "a062beee-cba2-4074-a637-182d3b9af316",
+      "title": "(실패작)상상 톡톡, 이어지는 이야기 기차",
+      "summary": "친구들이 한 문장씩 이야기를 이어 쓰고 AI 장면 그림으로 상상력을 확장하는 협업 글쓰기 앱입니다.",
+      "url": "https://wbmaker2.github.io/ai-story-chain/",
+      "githubUrl": "https://github.com/WBmaker2/ai-story-chain",
+      "tags": [
+        "국어",
+        "수업",
+        "실패작"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a062beee-cba2-4074-a637-182d3b9af316.png",
+      "subject": "국어",
+      "grade": "초등",
+      "memo": "모둠 활동에서 학생들이 문장을 한 줄씩 덧붙이고 생성 이미지로 장면을 확인하며 이야기 흐름을 함께 만들 수 있습니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ],
+      "createdAt": "2026-04-20T11:00:21.905Z",
+      "updatedAt": "2026-08-16T11:58:28.661Z"
+    },
     {
       "id": "b5c444ba-0d76-4bc5-b787-3132985da0d3",
       "title": "PDF to PNG 1080p",
@@ -556,143 +1216,6 @@
       "updatedAt": "2026-07-23T09:12:51.802Z"
     },
     {
-      "id": "dbf5fa15-fe4b-47a5-a186-29e4f50d8665",
-      "title": "친환경 수송 조건 설계소",
-      "summary": "초등 3~4학년 학생이 짐, 거리, 길 조건에 맞는 수레 부품을 고르고 결과를 비교하는 과학 탐구 활동입니다.",
-      "url": "https://eco-transport-design-studio.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "과학",
-        "초등과학",
-        "환경",
-        "생각실험",
-        "비교실험"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/dbf5fa15-fe4b-47a5-a186-29e4f50d8665.png",
-      "subject": "과학",
-      "grade": "초등 3~4학년",
-      "memo": "과학 수업에서 옮길 물건, 거리, 길, 움직이는 힘을 살펴보고 수레 부품을 한 가지씩 바꿔 조건별 결과와 생각할 점을 비교하는 활동에 활용할 수 있습니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "3-4"
-      ],
-      "audience": "student",
-      "interactionType": "simulation",
-      "learningProcess": [
-        "예측",
-        "조작",
-        "비교",
-        "설명"
-      ],
-      "createdAt": "2026-07-22T22:08:19.446Z",
-      "updatedAt": "2026-07-23T09:09:30.564Z"
-    },
-    {
-      "id": "3d9dcb26-f6f6-4cb2-bd89-71028efe899b",
-      "title": "정보 손실 통신소",
-      "summary": "초등학생이 전달된 문장을 비교해 달라진 뜻을 찾고, 안전하게 다시 전하는 방법을 연습하는 국어 학습 앱입니다.",
-      "url": "https://information-loss-communication-station.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "국어",
-        "의사소통",
-        "정보전달",
-        "초등수업"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/3d9dcb26-f6f6-4cb2-bd89-71028efe899b.png",
-      "subject": "국어",
-      "grade": "초등 3~6학년",
-      "memo": "원문과 전달문을 비교하며 빠짐·추가·뜻 변화를 근거로 설명하고, 안전한 전달문을 만들어 보는 수업 활동에 활용할 수 있습니다.",
-      "subjects": [
-        "국어"
-      ],
-      "gradeBands": [
-        "3-4",
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:09:30.871Z",
-      "updatedAt": "2026-07-23T09:09:15.077Z"
-    },
-    {
-      "id": "b023a954-b497-4467-b043-64910bd20dac",
-      "title": "오래된 물건 사건파일",
-      "summary": "초등 5~6학년이 실제 박물관 유물 사진과 새 단서를 비교하며 역사 가설을 기록하고 고쳐 보는 탐구 활동 앱입니다.",
-      "url": "https://old-object-case-files.wbmaker.chatgpt.site/",
-      "githubUrl": null,
-      "tags": [
-        "역사",
-        "자료 탐구",
-        "관찰과해석",
-        "초등",
-        "추론활동"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/b023a954-b497-4467-b043-64910bd20dac.png",
-      "subject": "사회",
-      "grade": "초등 5~6학년",
-      "memo": "사회 수업에서 유물 사진을 관찰한 뒤, 박물관 기록과 새 단서를 비교하며 처음 생각을 근거에 맞게 고쳐 보는 활동으로 활용할 수 있습니다.",
-      "subjects": [
-        "사회"
-      ],
-      "gradeBands": [
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:12:49.955Z",
-      "updatedAt": "2026-07-23T09:08:59.766Z"
-    },
-    {
-      "id": "6738aefd-9410-4b80-8d95-2549be89e3d4",
-      "title": "빛길 구조대",
-      "summary": "초등 5~6학년 학생이 빛의 직진·반사·굴절을 예상하고 거울과 렌즈의 빛길로 확인하는 과학 탐구 앱입니다.",
-      "url": "https://light-path-rescue-team.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "초등과학",
-        "과학수업",
-        "탐구활동",
-        "빛",
-        "거울과 렌즈"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/6738aefd-9410-4b80-8d95-2549be89e3d4.png",
-      "subject": "과학",
-      "grade": "초등 5~6학년",
-      "memo": "빛길을 먼저 예상하고 장치를 고른 뒤 결과를 설명하는 수업용 활동입니다. 실제 거울·렌즈 실험 전후의 개념 확인에 활용할 수 있습니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:14:18.104Z",
-      "updatedAt": "2026-07-23T09:07:42.794Z"
-    },
-    {
       "id": "e417c1ae-442e-4225-a7d3-c126f655183a",
       "title": "클라우드 수업실",
       "summary": "교사가 학생 답변을 붙여넣어 수업용 워드 클라우드와 단어 빈도표를 바로 만드는 도구",
@@ -723,515 +1246,6 @@
       ],
       "createdAt": "2026-07-22T22:35:06.579Z",
       "updatedAt": "2026-07-22T22:35:06.579Z"
-    },
-    {
-      "id": "f058dc1c-3ee5-4368-ba32-23ed3fcaac37",
-      "title": "삼권분립 사건 처리실",
-      "summary": "초등 5~6학년이 가상 사건을 따라 국회·행정부·법원의 역할과 권력 분립의 까닭을 살펴보는 사회 학습 앱입니다.",
-      "url": "https://separation-of-powers-case-room.wbmaker.chatgpt.site/",
-      "githubUrl": null,
-      "tags": [
-        "초등사회",
-        "삼권분립",
-        "민주주의",
-        "가상사건"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/f058dc1c-3ee5-4368-ba32-23ed3fcaac37.png",
-      "subject": "사회",
-      "grade": "초등 5~6학년",
-      "memo": "민주주의와 시민 참여 단원에서 세 가지 가상 사건을 순서대로 살피며, 국가기관이 하는 일과 서로 다시 살피는 까닭을 정리하는 활동에 활용할 수 있습니다.",
-      "subjects": [
-        "사회"
-      ],
-      "gradeBands": [
-        "5-6"
-      ],
-      "audience": "mixed",
-      "interactionType": "management",
-      "learningProcess": [
-        "기록",
-        "정리",
-        "확인"
-      ],
-      "createdAt": "2026-07-22T22:13:35.820Z",
-      "updatedAt": "2026-07-22T22:13:35.820Z"
-    },
-    {
-      "id": "643c543f-599c-4a5d-83f6-57d31acd0394",
-      "title": "특허 탐정사무소",
-      "summary": "초등 3~4학년 학생이 가상 발명품의 같은 점과 다른 점을 근거로 비교하며 생각을 고쳐 보는 탐구 활동 앱입니다.",
-      "url": "https://patent-detective-office.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "3~4학년",
-        "근거찾기",
-        "탐구활동"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/643c543f-599c-4a5d-83f6-57d31acd0394.jpg",
-      "subject": "공통",
-      "grade": "초등 3~4학년",
-      "memo": "발명·특허 관련 탐구 수업에서 A·B·C 자료를 읽고 근거를 골라 처음 생각을 고쳐 보는 활동으로 활용할 수 있습니다.",
-      "subjects": [
-        "공통"
-      ],
-      "gradeBands": [
-        "3-4"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:12:10.589Z",
-      "updatedAt": "2026-07-22T22:12:10.589Z"
-    },
-    {
-      "id": "10829a2a-f96b-48ee-bca7-bd28c9748f27",
-      "title": "이미지 의미 편집실",
-      "summary": "초등학생이 같은 이미지의 자르기·크기·글·색 변화를 비교하며 화면에서 찾은 까닭으로 느낌과 뜻을 설명하는 국어·미술 활동입니다.",
-      "url": "https://image-meaning-editing-studio.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "국어",
-        "미술",
-        "이미지 읽기",
-        "편집 비교",
-        "미디어 리터러시"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/10829a2a-f96b-48ee-bca7-bd28c9748f27.png",
-      "subject": "국어 · 미술",
-      "grade": "초등 4~6학년",
-      "memo": "국어와 미술 수업에서 같은 장면을 자르기·크기·글·색으로 바꾸어 보고, 보이는 변화와 느낌의 까닭을 함께 말해 보는 활동에 활용할 수 있습니다.",
-      "subjects": [
-        "국어",
-        "미술"
-      ],
-      "gradeBands": [
-        "3-4",
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "creation",
-      "learningProcess": [
-        "구상",
-        "제작",
-        "공유"
-      ],
-      "createdAt": "2026-07-22T22:09:20.437Z",
-      "updatedAt": "2026-07-22T22:11:53.892Z"
-    },
-    {
-      "id": "876e4653-4056-431f-ae17-27b5e45d0b4b",
-      "title": "태양·그림자 관계 기록국",
-      "summary": "초등 과학 수업에서 태양 고도·그림자 길이·기온의 관계를 자료로 비교하고 설명하는 탐구 활동 앱",
-      "url": "https://sun-shadow-record-office.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "과학",
-        "초등",
-        "태양",
-        "그림자",
-        "자료 탐구"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/876e4653-4056-431f-ae17-27b5e45d0b4b.png",
-      "subject": "과학",
-      "grade": "초등 5~6학년",
-      "memo": "교사가 안전 약속부터 시간 기록 복원, 그래프·숫자표 해석, 계절 비교까지 순서대로 활용할 수 있는 자료 탐구 활동입니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:11:25.573Z",
-      "updatedAt": "2026-07-22T22:11:25.573Z"
-    },
-    {
-      "id": "79bce259-c3aa-40f7-892b-f46be5fbe3fc",
-      "title": "내 권리 선택 극장",
-      "summary": "초등 1~2학년이 만든 이야기 속 장면을 보며 권리와 도움받는 방법을 익히는 아동권리 수업 활동",
-      "url": "https://my-rights-choice-theater.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "아동권리",
-        "생활교육",
-        "안전교육",
-        "초등 저학년"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/79bce259-c3aa-40f7-892b-f46be5fbe3fc.png",
-      "subject": "공통",
-      "grade": "초등 1~2학년",
-      "memo": "초등 저학년 아동권리 수업에서 실제 경험을 말하지 않고, 만든 이야기 속 장면을 통해 여러 도움 방법과 어른의 역할을 함께 살펴볼 수 있습니다.",
-      "subjects": [
-        "공통"
-      ],
-      "gradeBands": [
-        "1-2"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:09:48.616Z",
-      "updatedAt": "2026-07-22T22:09:48.616Z"
-    },
-    {
-      "id": "b8f82bb6-65a5-4876-8c75-b52cc125e5be",
-      "title": "소리 차단 재료 연구소",
-      "summary": "초등학생이 가상 장치에서 한 가지 조건씩 바꾸며 소리가 지나가는 길과 줄어드는 조건을 비교해 보는 과학 탐구 앱입니다.",
-      "url": "https://sound-blocking-material-lab.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "과학",
-        "소리",
-        "비교실험",
-        "변인통제",
-        "초등과학"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/b8f82bb6-65a5-4876-8c75-b52cc125e5be.png",
-      "subject": "과학",
-      "grade": "초등 3~4학년",
-      "memo": "3~4학년 소리 단원에서 실제 실험 전에 한 가지만 바꾸어 결과와 근거를 비교하는 탐구 활동으로 활용할 수 있습니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "3-4"
-      ],
-      "audience": "student",
-      "interactionType": "simulation",
-      "learningProcess": [
-        "예측",
-        "조작",
-        "비교",
-        "설명"
-      ],
-      "createdAt": "2026-07-22T22:08:09.143Z",
-      "updatedAt": "2026-07-22T22:08:09.143Z"
-    },
-    {
-      "id": "8ce3212a-1d5a-4987-8a51-bc6ecdb96324",
-      "title": "가능성 예보국",
-      "summary": "초등 5~6학년이 첫 자료와 새 자료를 비교하며 가능성을 분수와 말로 예보해 보는 수학 활동",
-      "url": "https://possibility-forecast-office.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "초등수학",
-        "가능성",
-        "분수",
-        "자료해석",
-        "예보"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/8ce3212a-1d5a-4987-8a51-bc6ecdb96324.png",
-      "subject": "수학",
-      "grade": "초등 5~6학년",
-      "memo": "15~20분 개인 또는 2인 활동으로 자료를 세고 새 자료를 합쳐 예보를 유지하거나 바꾸는 과정을 토의합니다.",
-      "subjects": [
-        "수학"
-      ],
-      "gradeBands": [
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:07:52.391Z",
-      "updatedAt": "2026-07-22T22:07:52.391Z"
-    },
-    {
-      "id": "ca54acea-5292-4aff-80bd-8ea5da49294c",
-      "title": "화면 속 자 정비소",
-      "summary": "초등 1~2학년 학생이 고장난 화면 속 자를 고치며 바른 길이 재기 방법을 익히는 수학 활동 앱",
-      "url": "https://measurement-standard-rod-repair-shop.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "초등수학",
-        "길이 측정",
-        "단위칸",
-        "오개념 교정",
-        "수업 활동"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/ca54acea-5292-4aff-80bd-8ea5da49294c.png",
-      "subject": "수학",
-      "grade": "초등 1~2학년",
-      "memo": "길이 측정 첫 수업에서 시작점, 같은 크기의 칸, 틈과 겹침, 눈금 사이 세기를 순서대로 살펴보는 활동으로 활용할 수 있습니다.",
-      "subjects": [
-        "수학"
-      ],
-      "gradeBands": [
-        "1-2"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:07:36.451Z",
-      "updatedAt": "2026-07-22T22:07:36.451Z"
-    },
-    {
-      "id": "636a7672-622a-4ba7-8f94-a1d61fb1a853",
-      "title": "용해 조건 탐사선",
-      "summary": "초등 5~6학년 학생이 소금과 설탕의 용해 조건을 예측·관찰·비교하며 근거에 맞는 규칙을 만드는 과학 탐구 앱",
-      "url": "https://solubility-condition-explorer.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "초등과학",
-        "용해",
-        "비교실험",
-        "탐구학습",
-        "과학수업"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/636a7672-622a-4ba7-8f94-a1d61fb1a853.png",
-      "subject": "과학",
-      "grade": "초등 5~6학년",
-      "memo": "물질 종류와 물 온도를 한 번에 하나씩 바꾸어 비교하고, 예상-관찰-근거-규칙의 5단계로 용해 개념을 정리하는 수업에 활용할 수 있습니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "simulation",
-      "learningProcess": [
-        "예측",
-        "조작",
-        "비교",
-        "설명"
-      ],
-      "createdAt": "2026-07-22T22:03:52.954Z",
-      "updatedAt": "2026-07-22T22:07:21.130Z"
-    },
-    {
-      "id": "feb7f03f-05fc-4c43-8919-060423577589",
-      "title": "지시어 관제실",
-      "summary": "초등학생이 앞뒤 문맥을 살펴 가리키는 말을 찾아 뜻을 분명히 하는 국어 활동 앱입니다.",
-      "url": "https://reference-expression-control-room.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "국어",
-        "문맥 읽기",
-        "지시어",
-        "초등 3~6학년"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/feb7f03f-05fc-4c43-8919-060423577589.png",
-      "subject": "국어",
-      "grade": "초등 3~6학년",
-      "memo": "국어 시간에 앞뒤 내용을 읽고, 가리키는 말과 그 까닭을 함께 찾아보는 활동으로 사용할 수 있습니다.",
-      "subjects": [
-        "국어"
-      ],
-      "gradeBands": [
-        "3-4",
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:06:49.242Z",
-      "updatedAt": "2026-07-22T22:06:49.242Z"
-    },
-    {
-      "id": "7b66f642-63da-4389-bce4-35e5d708b6d0",
-      "title": "달 관측 기록 복원소",
-      "summary": "초등학생이 앞뒤 달 관측 기록을 비교해 빈칸의 달 모양을 추론하는 과학 학습 앱입니다.",
-      "url": "https://moon-observation-record-restoration.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "초등과학",
-        "달의위상",
-        "관찰기록",
-        "추론활동",
-        "3~4학년"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/7b66f642-63da-4389-bce4-35e5d708b6d0.png",
-      "subject": "과학",
-      "grade": "초등 3~4학년",
-      "memo": "여러 날의 달 모양을 앞뒤 기록으로 비교해 빈칸을 복원하며, 밝은 부분의 변화와 자료가 부족할 때의 판단을 함께 살펴보는 수업 활동입니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "3-4"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:06:47.687Z",
-      "updatedAt": "2026-07-22T22:06:47.687Z"
-    },
-    {
-      "id": "28e6a55c-4cc2-4fba-8741-09e56d7ba87b",
-      "title": "열 이동 배달 추적소",
-      "summary": "초등학교 5~6학년 학생이 온도 자료를 읽고 열이 어디로 이동하는지 찾아보는 과학 학습 앱입니다.",
-      "url": "https://heat-transfer-delivery-tracker.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "초등과학",
-        "열이동",
-        "탐구활동",
-        "전도·대류·복사"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/28e6a55c-4cc2-4fba-8741-09e56d7ba87b.png",
-      "subject": "과학",
-      "grade": "초등 5~6학년",
-      "memo": "온도 변화를 보고 열의 이동 방향을 예측한 뒤, 전도·대류·복사를 근거와 함께 비교하는 수업 활동에 활용할 수 있습니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:05:18.770Z",
-      "updatedAt": "2026-07-22T22:05:18.770Z"
-    },
-    {
-      "id": "a990e157-a2d7-4ded-b339-5ca3a1b50a66",
-      "title": "실험 리포트 조립소",
-      "summary": "초등학생이 과학 실험 기록에서 관찰 사실과 해석을 구분하고 근거로 연결해 짧은 리포트를 완성하는 학습 앱입니다.",
-      "url": "https://experiment-report-assembler.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "초등과학",
-        "실험보고서",
-        "관찰과해석",
-        "근거찾기",
-        "교과융합"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/a990e157-a2d7-4ded-b339-5ca3a1b50a66.jpg",
-      "subject": "과학·국어",
-      "grade": "초등 4학년",
-      "memo": "실험 후 보고서 쓰기 전에 관찰 사실과 해석을 구분하고, 두 관찰 기록으로 해석을 뒷받침하는 관계를 연습하는 수업 활동입니다.",
-      "subjects": [
-        "과학",
-        "국어"
-      ],
-      "gradeBands": [
-        "3-4"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-17T03:30:48.906Z",
-      "updatedAt": "2026-07-17T03:32:24.048Z"
-    },
-    {
-      "id": "3a72009d-c1ad-48b5-86b4-6eb870143eea",
-      "title": "분류 기준 뒤집개",
-      "summary": "초등 1~2학년 학생이 같은 단추를 서로 다른 기준으로 나누고 개수를 세며 분류 결과의 변화를 비교하는 수학 활동입니다.",
-      "url": "https://classification-criteria-flipper.wbmaker.chatgpt.site",
-      "githubUrl": null,
-      "tags": [
-        "초등수학",
-        "초등저학년",
-        "분류",
-        "개수세기"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/3a72009d-c1ad-48b5-86b4-6eb870143eea.png",
-      "subject": "수학",
-      "grade": "초등 1~2학년",
-      "memo": "같은 단추 여섯 개를 색·모양·구멍 수·무늬 중 두 기준으로 직접 나누고 개수를 세어 보며, 기준에 따라 분류 결과가 달라짐을 비교하는 8~12분 수학 활동입니다.",
-      "subjects": [
-        "수학"
-      ],
-      "gradeBands": [
-        "1-2"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-17T01:27:17.761Z",
-      "updatedAt": "2026-07-17T01:27:17.761Z"
-    },
-    {
-      "id": "5aff20b9-e329-4536-8761-a82adee6cfb2",
-      "title": "이야기 마음 근거 수사대",
-      "summary": "초등 저학년이 이야기 속 말·행동·표정을 단서로 인물의 마음과 여러 생각을 근거 있게 짐작하는 국어 읽기 활동 앱",
-      "url": "https://wbmaker2.github.io/story-heart-evidence-detective/",
-      "githubUrl": "https://github.com/WBmaker2/story-heart-evidence-detective",
-      "tags": [
-        "국어",
-        "독해",
-        "마음짐작",
-        "근거찾기",
-        "초등저학년"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/5aff20b9-e329-4536-8761-a82adee6cfb2.jpg",
-      "subject": "국어",
-      "grade": "초등 1~2학년",
-      "memo": "연습 사건 뒤 여섯 이야기를 읽고 마음 하나와 단서 두 장을 연결한 뒤 다른 생각을 함께 살펴보는 점수 없는 활동입니다.",
-      "subjects": [
-        "국어"
-      ],
-      "gradeBands": [
-        "1-2"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-17T00:22:36.037Z",
-      "updatedAt": "2026-07-17T00:22:36.037Z"
     },
     {
       "id": "e3673005-3e93-42cd-9076-044480a41344",
@@ -3088,38 +3102,6 @@
       "updatedAt": "2026-05-08T12:50:57.842Z"
     },
     {
-      "id": "a062beee-cba2-4074-a637-182d3b9af316",
-      "title": "(실패작)상상 톡톡, 이어지는 이야기 기차",
-      "summary": "친구들이 한 문장씩 이야기를 이어 쓰고 AI 장면 그림으로 상상력을 확장하는 협업 글쓰기 앱입니다.",
-      "url": "https://ai-story-chain.onrender.com/",
-      "githubUrl": "https://github.com/WBmaker2/ai-story-chain",
-      "tags": [
-        "국어",
-        "수업",
-        "실패작"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/a062beee-cba2-4074-a637-182d3b9af316.png",
-      "subject": "국어",
-      "grade": "초등",
-      "memo": "모둠 활동에서 학생들이 문장을 한 줄씩 덧붙이고 생성 이미지로 장면을 확인하며 이야기 흐름을 함께 만들 수 있습니다.",
-      "subjects": [
-        "국어"
-      ],
-      "gradeBands": [
-        "all"
-      ],
-      "audience": "student",
-      "interactionType": "collaboration",
-      "learningProcess": [
-        "의견 제시",
-        "비교",
-        "협의"
-      ],
-      "createdAt": "2026-04-20T11:00:21.905Z",
-      "updatedAt": "2026-05-08T12:50:26.278Z"
-    },
-    {
       "id": "47acd11b-2f45-4029-8813-3add585cd1aa",
       "title": "요리조리 도형 변신 마법사",
       "summary": "초등학생이 꼭짓점을 드래그하며 삼각형과 사각형의 길이·각도·성질을 실시간으로 탐구하는 수학 도형 교구입니다.",
@@ -3283,5 +3265,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 0
+  "catalogRevision": 113
 }
