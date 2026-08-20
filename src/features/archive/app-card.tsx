@@ -1,4 +1,7 @@
+import Link from "next/link";
+import { createAppPath } from "@/lib/apps/app-slug";
 import type { PublicAppRecord } from "@/lib/apps/types";
+import styles from "./app-card.module.css";
 
 interface AppCardProps {
   app: PublicAppRecord;
@@ -68,15 +71,24 @@ export function AppCard({ app }: AppCardProps) {
           </details>
         )}
 
-        <a
-          className="app-card-link"
-          href={app.url}
-          rel="noreferrer"
-          target="_blank"
-        >
-          <span aria-hidden="true">앱 열기</span>
-          <span className="sr-only">{app.title} 앱 새 창에서 열기</span>
-        </a>
+        <div className={styles.actionRow}>
+          <Link
+            aria-label={`${app.title} 자세히 보기`}
+            className={styles.detailLink}
+            href={createAppPath(app)}
+          >
+            자세히 보기
+          </Link>
+          <a
+            className="app-card-link"
+            href={app.url}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <span aria-hidden="true">앱 열기</span>
+            <span className="sr-only">{app.title} 앱 새 창에서 열기</span>
+          </a>
+        </div>
       </div>
     </article>
   );

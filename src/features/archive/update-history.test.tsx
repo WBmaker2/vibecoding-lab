@@ -33,6 +33,10 @@ describe("UpdateHistory", () => {
     expect(dialog).toHaveTextContent(
       "관리자 DB 한도 초과 시 서버 오류 대신 읽기 전용 스냅샷 안내 화면을 표시하도록 개선했습니다."
     );
+    expect(dialog).toHaveTextContent("2026-08-20");
+    expect(dialog).toHaveTextContent(
+      "검색엔진용 사이트맵과 앱 상세 페이지, 구조화 데이터를 추가했습니다."
+    );
 
     fireEvent.click(screen.getByRole("button", { name: "닫기" }));
 

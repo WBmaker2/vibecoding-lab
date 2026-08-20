@@ -1,22 +1,62 @@
 import type { Metadata } from "next";
+import {
+  DEFAULT_SITE_URL,
+  getSiteUrl,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE
+} from "@/lib/seo/site-url";
 
-const DEFAULT_SITE_URL = "https://hongs-vibe-coding-lab.vercel.app";
-
-function normalizeSiteUrl(siteUrl: string) {
-  return siteUrl.startsWith("http") ? siteUrl : `https://${siteUrl}`;
+interface SiteMetadataOptions {
+  googleVerification?: string;
+  naverVerification?: string;
 }
 
 export function createSiteMetadata(
-  siteUrl = process.env.APP_BASE_URL ?? DEFAULT_SITE_URL
+  siteUrl = process.env.APP_BASE_URL ?? DEFAULT_SITE_URL,
+  options: SiteMetadataOptions = {
+    googleVerification: process.env.GOOGLE_SITE_VERIFICATION,
+    naverVerification: process.env.NAVER_SITE_VERIFICATION
+  }
 ): Metadata {
+  const verification =
+    options.googleVerification || options.naverVerification
+      ? {
+          ...(options.googleVerification
+            ? { google: options.googleVerification }
+            : {}),
+          ...(options.naverVerification
+            ? {
+                other: {
+                  "naver-site-verification": options.naverVerification
+                }
+              }
+            : {})
+        }
+      : undefined;
+
   return {
-    metadataBase: new URL(normalizeSiteUrl(siteUrl)),
+    metadataBase: getSiteUrl(siteUrl),
     title: {
-      default: "Hong's Vibe Coding Lab",
-      template: "%s | Hong's Vibe Coding Lab"
+      default: SITE_TITLE,
+      template: `%s | ${SITE_NAME}`
     },
-    description: "교사용 웹앱을 소개하는 미니멀 아카이브",
-    applicationName: "Hong's Vibe Coding Lab",
+    description: SITE_DESCRIPTION,
+    applicationName: SITE_NAME,
+    alternates: {
+      canonical: "/"
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1
+      }
+    },
     keywords: [
       "교사용 웹앱",
       "교사 업무경감",
@@ -24,12 +64,14 @@ export function createSiteMetadata(
       "교실 수업 도구",
       "Hong's Vibe Coding Lab"
     ],
+    ...(verification ? { verification } : {}),
     openGraph: {
-      title: "Hong's Vibe Coding Lab",
-      description: "교실 수업과 교사 업무를 가볍게 만드는 웹앱 아카이브",
+      title: SITE_TITLE,
+      description: SITE_DESCRIPTION,
       locale: "ko_KR",
-      siteName: "Hong's Vibe Coding Lab",
+      siteName: SITE_NAME,
       type: "website",
+      url: "/",
       images: [
         {
           url: "/og-image",
@@ -41,8 +83,8 @@ export function createSiteMetadata(
     },
     twitter: {
       card: "summary_large_image",
-      title: "Hong's Vibe Coding Lab",
-      description: "교실 수업과 교사 업무를 가볍게 만드는 웹앱 아카이브",
+      title: SITE_TITLE,
+      description: SITE_DESCRIPTION,
       images: ["/og-image"]
     },
     icons: {

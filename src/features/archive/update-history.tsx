@@ -4,6 +4,12 @@ import { useEffect, useRef, useState } from "react";
 
 export const UPDATE_HISTORY = [
   {
+    date: "2026-08-20",
+    kind: "개선",
+    detail:
+      "검색엔진용 사이트맵과 앱 상세 페이지, 구조화 데이터를 추가했습니다."
+  },
+  {
     date: "2026-08-09",
     kind: "개선",
     detail:

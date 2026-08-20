@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Hong's Vibe Coding Lab",
     short_name: "Hong's Lab",
-    description: "교실 수업과 교사 업무를 가볍게 만드는 웹앱 아카이브",
+    description: "초등 수업과 교사 업무를 가볍게 만드는 교사용 웹앱 아카이브",
     start_url: "/",
     display: "standalone",
     background_color: "#f4f5f7",

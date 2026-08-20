@@ -3,7 +3,7 @@ import type { PublicAppRecord } from "@/lib/apps/types";
 import { AppCard } from "./app-card";
 
 const sampleApp: PublicAppRecord = {
-  id: "reading-timer",
+  id: "b5c444ba-0d76-4bc5-b787-3132985da0d3",
   title: "Reading Timer",
   summary: "읽기 활동 시간을 관리하는 타이머",
   url: "https://example.com/reading-timer",
@@ -35,6 +35,10 @@ describe("AppCard", () => {
     ).toHaveAttribute("referrerPolicy", "no-referrer");
     expect(screen.getByText("영어 · 초등")).toBeInTheDocument();
     expect(screen.getByText("메이커 노트")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Reading Timer 자세히 보기" })).toHaveAttribute(
+      "href",
+      "/apps/reading-timer-b5c444ba-0d76-4bc5-b787-3132985da0d3"
+    );
     expect(
       screen.getByRole("link", { name: "Reading Timer 앱 새 창에서 열기" })
     ).toHaveAttribute(

@@ -38,11 +38,15 @@ BLOB_READ_WRITE_TOKEN=
 ADMIN_PASSWORD_HASH=
 SESSION_SECRET=
 APP_BASE_URL=http://localhost:3000
+GOOGLE_SITE_VERIFICATION=
+NAVER_SITE_VERIFICATION=
 ```
 
 `SESSION_SECRET`는 32자 이상이어야 합니다. 31자 이하는 관리자 세션을 만들거나 검증하지 못합니다.
 
 현재 구현은 로컬 개발 편의를 위해 메모리 저장 fallback이 포함되어 있습니다. 운영 환경에서는 `BLOB_READ_WRITE_TOKEN`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`과 함께 `TURSO_DATABASE_URL`/`TURSO_AUTH_TOKEN` 또는 기존 `POSTGRES_URL`을 설정해야 합니다. Turso 두 값이 모두 설정되면 Turso가 Postgres보다 우선합니다.
+
+`GOOGLE_SITE_VERIFICATION`과 `NAVER_SITE_VERIFICATION`은 선택값입니다. 각 검색도구에서 HTML `meta` 태그 확인 방식을 고른 뒤 `content="..."` 안의 토큰만 입력합니다. 전체 태그를 넣지 않으며, 값을 추가한 뒤에는 새 배포가 필요합니다.
 
 관리자 페이지의 `수정 사항 동기화` 버튼을 운영에서 사용하려면 Vercel 환경변수에 아래 서버 전용 값을 추가합니다. 이 값들은 브라우저에 노출되지 않고 `/api/admin/sync-static-gallery`에서 GitHub Actions를 시작할 때만 사용됩니다.
 
@@ -152,3 +156,18 @@ Turso로 전환한 뒤에는 GitHub Actions secrets에 `TURSO_DATABASE_URL`, `TU
 2. `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`, `APP_BASE_URL`를 등록합니다. 기존 Postgres로 롤백할 때만 `POSTGRES_URL`을 사용합니다.
 3. 관리자 동기화 버튼을 사용할 경우 `HVC_SYNC_GITHUB_TOKEN`과 `HVC_SYNC_*` 값을 함께 등록합니다.
 4. `main` 또는 원하는 배포 브랜치에서 배포합니다.
+
+## 검색엔진 등록
+
+공개 랜딩과 앱 상세 페이지는 Turso를 조회하지 않고 `src/data/public-apps.json` 정적 스냅샷으로 생성됩니다. 새 앱을 공개 동기화하면 다음 배포에서 앱 상세 페이지와 `/sitemap.xml`이 함께 갱신됩니다.
+
+배포 후 아래 순서로 검색도구를 연결합니다.
+
+1. `https://www.vibehong.shop/robots.txt`와 `https://www.vibehong.shop/sitemap.xml`이 열리는지 확인합니다.
+2. [Google Search Console](https://search.google.com/search-console/about)에서 URL 접두어 속성 `https://www.vibehong.shop`을 추가하고 HTML 태그 확인 방식을 선택합니다.
+3. Google이 제공한 `content` 토큰을 Vercel의 `GOOGLE_SITE_VERIFICATION`에 등록하고 재배포한 뒤 소유권을 확인합니다.
+4. Search Console의 `Sitemaps`에 `https://www.vibehong.shop/sitemap.xml`을 제출합니다.
+5. [네이버 서치어드바이저](https://searchadvisor.naver.com/)에서 같은 사이트를 추가하고 HTML 태그의 `content` 토큰을 `NAVER_SITE_VERIFICATION`에 등록합니다.
+6. 재배포와 소유권 확인 후 네이버의 요청 > 사이트맵 제출에 `https://www.vibehong.shop/sitemap.xml`을 입력합니다.
+
+사이트맵에는 홈과 모든 정적 앱 상세 주소가 포함됩니다. 관리자 및 API 경로는 `robots.txt`에서 크롤링 대상에서 제외하지만, 실제 접근 권한은 기존 관리자 세션 검증으로 보호합니다.

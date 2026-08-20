@@ -3,7 +3,7 @@ import HomePage from "../page";
 
 describe("HomePage", () => {
   it("renders the archive hero and search UI", async () => {
-    render(await HomePage());
+    const { container } = render(await HomePage());
 
     expect(
       screen.getByRole("heading", { name: /Hong's Vibe Coding Lab/i })
@@ -13,5 +13,7 @@ describe("HomePage", () => {
       screen.getByRole("searchbox", { name: /앱 검색/i })
     ).toBeInTheDocument();
     expect(screen.getByText(/^대표 태그$/)).toBeInTheDocument();
+    const structuredData = container.querySelector('script[type="application/ld+json"]');
+    expect(structuredData).toHaveTextContent('"@type":"CollectionPage"');
   });
 });
