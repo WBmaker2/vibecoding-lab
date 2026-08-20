@@ -191,6 +191,16 @@
       "sha256": "af8d0e74358d6b879d15e8c68ff383618f8b6df0952cbe4b14d12c3df46109c2"
     },
     {
+      "path": "/app-thumbnails/837829ee-abd3-46a7-9554-ec83055bbdf0.png",
+      "size": 156553,
+      "sha256": "3c251a47488a3c6d0085d90dc1141e4f16869fbcf1a0f26439b09516680bf89f"
+    },
+    {
+      "path": "/app-thumbnails/86c0c19a-c4bf-4ef1-822b-75162b385271.png",
+      "size": 99093,
+      "sha256": "5a0112b75d672bb55da90c96c35fd94eea92e71fbcc1bdc650db5ac5256c0628"
+    },
+    {
       "path": "/app-thumbnails/876e4653-4056-431f-ae17-27b5e45d0b4b.png",
       "size": 155905,
       "sha256": "ad1f6dcb3384bc23ba7ad6214a920cf2f9d2e30e3fa5ab9319952b9fb525643f"
@@ -256,6 +266,11 @@
       "sha256": "5a5ae79d5950dda759edaeef4450a6994b73b44413fa587af3aa3476b67c364c"
     },
     {
+      "path": "/app-thumbnails/a453fce0-6a74-4cb2-99aa-0a7d847114da.png",
+      "size": 300973,
+      "sha256": "474a6cf11652605d16637e8ffae8701297a7f73a75f0c611281d58a01ad04525"
+    },
+    {
       "path": "/app-thumbnails/a569fbf0-1e50-4286-aef8-b0e38ea6aa8d.png",
       "size": 211543,
       "sha256": "904a8f23aebe06393f398a42c07b84206a7daa9257cb1fa0ef82454d9ca5252b"
@@ -269,6 +284,11 @@
       "path": "/app-thumbnails/ac622468-2710-4183-9a67-f2489ae000c5.png",
       "size": 300284,
       "sha256": "0e25dc616a225a7dabad9c38b5b46aba252c35026bea5e6b93b04c67d8a25589"
+    },
+    {
+      "path": "/app-thumbnails/acd41aa8-8a45-4051-8a7f-fcff679d56a4.png",
+      "size": 91740,
+      "sha256": "9fee5d4d381c4755b44879c6a66fad6069b560e5c1586c57eaeaf5c7d167d5eb"
     },
     {
       "path": "/app-thumbnails/af1fee94-763b-4f7c-9607-bc685873a2fc.png",
@@ -286,6 +306,11 @@
       "sha256": "6603cd66f37b4650d164e12652b9fdaf998f4c72ad7b378954c54a8155176a2e"
     },
     {
+      "path": "/app-thumbnails/b5c444ba-0d76-4bc5-b787-3132985da0d3.png",
+      "size": 44678,
+      "sha256": "f9c4462b37a65ff076017d477aeab864a2540a713029890a1b34d1d81ccc41f3"
+    },
+    {
       "path": "/app-thumbnails/b8f82bb6-65a5-4876-8c75-b52cc125e5be.png",
       "size": 98699,
       "sha256": "5e3b84df6bdd054758560357b098601c4d73a66c16bd344d4e386f0d4428e5a9"
@@ -299,6 +324,11 @@
       "path": "/app-thumbnails/c4962759-1d6a-4070-85a8-cc46c91a70f1.png",
       "size": 34784,
       "sha256": "b3e0148b44bde4cc762fe0b24fecc8332404dd21aa5b4bd1b2c259016a680467"
+    },
+    {
+      "path": "/app-thumbnails/c7de79fb-516a-4167-9d21-ba282a2cf5de.png",
+      "size": 81138,
+      "sha256": "24af47df218af556ec76a0e22b3929dbfe0f801033db7f5ae43a2cf6ae47d16e"
     },
     {
       "path": "/app-thumbnails/c84042dc-2d55-4438-9cf0-9b0006ef758e.png",
@@ -346,6 +376,11 @@
       "sha256": "bb93d8c7f7ca99dfcff9e52803d135e434097f68d402a5c5916225944362d4bf"
     },
     {
+      "path": "/app-thumbnails/e417c1ae-442e-4225-a7d3-c126f655183a.png",
+      "size": 121305,
+      "sha256": "45fd7e0ad0f6cdf7ddfb1a5548072bcfdf8ac796a7c1ac2ed120548c22091f7c"
+    },
+    {
       "path": "/app-thumbnails/e41f2952-cbee-4463-9205-c3e7ce269602.png",
       "size": 194404,
       "sha256": "11bd3b0d6d2c41d56fe47fe796ccee7eef18bf5d5fd00812d4fca2d18eceb26d"
@@ -382,7 +417,7 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-08-20T22:15:09.369Z",
+  "generatedAt": "2026-08-20T22:37:38.870Z",
   "appCount": 84,
   "apps": [
     {
@@ -395,8 +430,8 @@
         "담임",
         "업무"
       ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/c7de79fb-516a-4167-9d21-ba282a2cf5de.png",
       "subject": "공통",
       "grade": "교사용",
       "memo": "대시보드, 체크리스트, 업무관리, 통계, 백업 화면을 통해 학급 운영 업무를 매일 확인하고 반복 업무 누락을 줄이는 데 사용할 수 있습니다.",
@@ -414,7 +449,7 @@
         "확인"
       ],
       "createdAt": "2026-04-19T01:38:38.164Z",
-      "updatedAt": "2026-08-20T22:10:54.268Z"
+      "updatedAt": "2026-08-20T22:36:38.699Z"
     },
     {
       "id": "a453fce0-6a74-4cb2-99aa-0a7d847114da",
@@ -428,8 +463,8 @@
         "랜덤",
         "자리"
       ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a453fce0-6a74-4cb2-99aa-0a7d847114da.png",
       "subject": "공통",
       "grade": "교사용",
       "memo": "학급별 학생과 자리표를 등록한 뒤 자리 배치 확인, 무작위 발표자 선정, 수업 타이머를 한 화면에서 사용할 수 있습니다. 기본은 브라우저 로컬 저장이라 로그인 없이 바로 쓰고, 필요할 때 Google 로그인으로 백업할 수 있습니다.",
@@ -447,7 +482,7 @@
         "확인"
       ],
       "createdAt": "2026-04-19T01:45:49.296Z",
-      "updatedAt": "2026-08-20T22:10:50.966Z"
+      "updatedAt": "2026-08-20T22:36:35.703Z"
     },
     {
       "id": "acd41aa8-8a45-4051-8a7f-fcff679d56a4",
@@ -459,8 +494,8 @@
         "업무",
         "담임"
       ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/acd41aa8-8a45-4051-8a7f-fcff679d56a4.png",
       "subject": "공통",
       "grade": "교사용",
       "memo": "담임교사가 하루 업무함에서 공문과 마감을 확인하고, 수합판·템플릿·캘린더·데이터 백업까지 개인 저장소 기준으로 이어서 관리할 수 있습니다.",
@@ -478,7 +513,7 @@
         "확인"
       ],
       "createdAt": "2026-05-05T03:37:28.683Z",
-      "updatedAt": "2026-08-20T22:10:48.133Z"
+      "updatedAt": "2026-08-20T22:36:29.693Z"
     },
     {
       "id": "86c0c19a-c4bf-4ef1-822b-75162b385271",
@@ -491,8 +526,8 @@
         "JPG",
         "이미지"
       ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/86c0c19a-c4bf-4ef1-822b-75162b385271.png",
       "subject": "공통",
       "grade": "교사용",
       "memo": "수업 자료 준비나 기기별 사진 형식 변환이 필요할 때 서버 업로드 없이 브라우저에서 안전하게 처리할 수 있습니다.",
@@ -510,7 +545,7 @@
         "저장"
       ],
       "createdAt": "2026-06-29T09:05:14.815Z",
-      "updatedAt": "2026-08-20T22:10:44.932Z"
+      "updatedAt": "2026-08-20T22:36:25.292Z"
     },
     {
       "id": "e417c1ae-442e-4225-a7d3-c126f655183a",
@@ -525,8 +560,8 @@
         "단어 분석",
         "시각화"
       ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/e417c1ae-442e-4225-a7d3-c126f655183a.png",
       "subject": "공통",
       "grade": "교사용",
       "memo": "학생 답변이나 수업 내용을 붙여넣고 모양·색상·글꼴을 골라 워드 클라우드 수업 자료를 빠르게 만들 수 있습니다.",
@@ -544,7 +579,7 @@
         "반복"
       ],
       "createdAt": "2026-07-22T22:35:06.579Z",
-      "updatedAt": "2026-08-20T22:10:41.880Z"
+      "updatedAt": "2026-08-20T22:36:21.986Z"
     },
     {
       "id": "837829ee-abd3-46a7-9554-ec83055bbdf0",
@@ -558,8 +593,8 @@
         "데이터",
         "그래프"
       ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/837829ee-abd3-46a7-9554-ec83055bbdf0.png",
       "subject": "공통",
       "grade": "교사용",
       "memo": "출결 관리, 오늘의 수업, 학급 일지, 학생별 누가기록, 대시보드와 시간표 관리를 한 곳에서 다루며 PDF/Excel 내보내기와 클라우드 동기화 흐름까지 지원하는 교사용 기록 도구입니다.",
@@ -577,7 +612,7 @@
         "확인"
       ],
       "createdAt": "2026-04-19T00:53:49.113Z",
-      "updatedAt": "2026-08-20T22:10:38.755Z"
+      "updatedAt": "2026-08-20T22:36:19.522Z"
     },
     {
       "id": "b5c444ba-0d76-4bc5-b787-3132985da0d3",
@@ -589,8 +624,8 @@
         "PDF",
         "업무"
       ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/b5c444ba-0d76-4bc5-b787-3132985da0d3.png",
       "subject": "공통",
       "grade": "교사용",
       "memo": "PDF 안내문이나 학습지를 이미지 파일로 나누어 LMS, 슬라이드, 학급 게시 자료에 활용할 때 사용할 수 있습니다. 파일은 서버로 업로드하지 않고 브라우저에서 처리됩니다.",
@@ -608,7 +643,7 @@
         "확인"
       ],
       "createdAt": "2026-05-03T09:33:29.709Z",
-      "updatedAt": "2026-08-20T22:10:35.824Z"
+      "updatedAt": "2026-08-20T22:36:15.523Z"
     },
     {
       "id": "dbf5fa15-fe4b-47a5-a186-29e4f50d8665",
@@ -3244,5 +3279,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 120
+  "catalogRevision": 127
 }
