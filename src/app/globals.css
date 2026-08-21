@@ -204,9 +204,10 @@ select {
 }
 
 .archive-hero-top {
+  --hero-mascot-width: clamp(112px, 14vw, 184px);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 76px;
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) var(--hero-mascot-width);
+  gap: clamp(20px, 3vw, 40px);
   align-items: center;
 }
 
@@ -256,12 +257,12 @@ select {
 
 .archive-hero-mascot-image {
   justify-self: end;
-  width: 76px;
-  height: 96px;
+  width: var(--hero-mascot-width);
+  height: auto;
   margin-top: 0;
   border-radius: 0;
   filter: drop-shadow(0 18px 24px rgba(62, 95, 146, 0.14));
-  object-fit: cover;
+  object-fit: contain;
   object-position: center top;
 }
 
@@ -1509,8 +1510,9 @@ select {
   }
 
   .archive-hero-top {
-    grid-template-columns: minmax(0, 1fr) 76px;
-    gap: 18px;
+    --hero-mascot-width: clamp(104px, 16vw, 152px);
+    grid-template-columns: minmax(0, 1fr) var(--hero-mascot-width);
+    gap: clamp(18px, 2.5vw, 28px);
   }
 
   .archive-hero-mascot {
@@ -1569,14 +1571,9 @@ select {
   }
 
   .archive-hero-top {
-    grid-template-columns: minmax(0, 1fr) 64px;
-    gap: 14px;
-  }
-
-  .archive-hero-mascot-image {
-    width: 64px;
-    height: 80px;
-    margin-top: 0;
+    --hero-mascot-width: clamp(84px, 24vw, 128px);
+    grid-template-columns: minmax(0, 1fr) var(--hero-mascot-width);
+    gap: clamp(12px, 3vw, 20px);
   }
 
   .archive-hero .tag-filter-bar {

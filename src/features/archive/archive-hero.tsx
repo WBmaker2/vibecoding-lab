@@ -53,12 +53,12 @@ export function ArchiveHero({
         <Image
           alt="태그 탐색을 안내하는 Hong 캐릭터"
           className="archive-hero-mascot-image"
-          height={96}
+          height={2304}
           priority
-          sizes="(max-width: 720px) 64px, 76px"
+          sizes="(max-width: 720px) 128px, 184px"
           src="/images/mascots/hong-default.png"
           unoptimized
-          width={76}
+          width={1856}
         />
       </div>
 

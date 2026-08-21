@@ -71,6 +71,8 @@ describe("ArchiveHero", () => {
       "src",
       "/images/mascots/hong-default.png"
     );
+    expect(mascotImage).toHaveAttribute("width", "1856");
+    expect(mascotImage).toHaveAttribute("height", "2304");
     expect(mascotImage).not.toHaveAttribute("src", expect.stringContaining("/_next/image"));
   });
 
