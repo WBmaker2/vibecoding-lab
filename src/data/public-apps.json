@@ -361,6 +361,11 @@
       "sha256": "5e3b84df6bdd054758560357b098601c4d73a66c16bd344d4e386f0d4428e5a9"
     },
     {
+      "path": "/app-thumbnails/bc954246-e62f-4b14-ae1e-9dfc8e25052e.png",
+      "size": 117752,
+      "sha256": "ba8818e0bace7140acf29ede9b1110c3eca8eab9423a32c206e5306c5a29c650"
+    },
+    {
       "path": "/app-thumbnails/bebd1fd7-5b54-4923-a476-fae00288d4e2.png",
       "size": 393199,
       "sha256": "b549d43deec400c9833494ed5213aa9fb20f3cfd856fa1c3b3551ad751d64dc5"
@@ -436,6 +441,11 @@
       "sha256": "11bd3b0d6d2c41d56fe47fe796ccee7eef18bf5d5fd00812d4fca2d18eceb26d"
     },
     {
+      "path": "/app-thumbnails/ec00c831-5eb4-45ec-be63-a3f7889c39c5.jpg",
+      "size": 38400,
+      "sha256": "a09ecb176dc3c5fb1d93219f48166796becf136adf7cf27e231d65548d71d108"
+    },
+    {
       "path": "/app-thumbnails/f058dc1c-3ee5-4368-ba32-23ed3fcaac37.png",
       "size": 84338,
       "sha256": "0fb470b96a1d6d9b833f87a99e7785a0a9838902c6f5865279ffef972db5f173"
@@ -467,9 +477,111 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-08-24T07:23:26.854Z",
-  "appCount": 94,
+  "generatedAt": "2026-08-24T22:16:06.489Z",
+  "appCount": 95,
   "apps": [
+    {
+      "id": "bc954246-e62f-4b14-ae1e-9dfc8e25052e",
+      "title": "AI Studio 교사 연수원",
+      "summary": "대한민국 교사가 Google AI Studio의 기초부터 프롬프트 설계·수업 적용·안전 검토까지 단계별로 배우고 실습하는 안내 사이트입니다.",
+      "url": "https://google-ai-studio-edu.vercel.app/",
+      "githubUrl": "https://github.com/WBmaker2/google-ai-studio-edu",
+      "tags": [
+        "인공지능",
+        "수업",
+        "업무",
+        "코딩",
+        "안전"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/bc954246-e62f-4b14-ae1e-9dfc8e25052e.png",
+      "subject": "공통",
+      "grade": null,
+      "memo": "교사 연수와 개인 학습에서 AI Studio의 개념을 익히고, 로그인 없이 프롬프트를 조립·복사한 뒤 필요할 때만 개인 Gemini API 키로 결과를 시험해 볼 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "teacher",
+      "interactionType": "reference",
+      "learningProcess": [
+        "이해",
+        "실습",
+        "수업 적용",
+        "검토"
+      ],
+      "createdAt": "2026-08-24T15:00:11.246Z",
+      "updatedAt": "2026-08-24T15:00:11.246Z"
+    },
+    {
+      "id": "ec00c831-5eb4-45ec-be63-a3f7889c39c5",
+      "title": "지층 시간 캡슐",
+      "summary": "초등 5~6학년 학생이 지층 단면과 화석·침식·암맥 단서를 관찰해 상대적인 형성 순서를 복원하는 과학 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/strata-time-capsule/",
+      "githubUrl": "https://github.com/WBmaker2/strata-time-capsule",
+      "tags": [
+        "과학",
+        "탐구",
+        "관찰",
+        "추론",
+        "시각화"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/ec00c831-5eb4-45ec-be63-a3f7889c39c5.jpg",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "지층 단면을 관찰하고 1차 순서, 화석 단서, 침식·암맥 사건의 순서와 근거를 차례로 확인하는 과학 수업용 탐구 활동입니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "관찰",
+        "분류",
+        "순서 복원",
+        "근거 설명"
+      ],
+      "createdAt": "2026-08-24T06:59:31.585Z",
+      "updatedAt": "2026-08-24T14:17:52.974Z"
+    },
+    {
+      "id": "a062beee-cba2-4074-a637-182d3b9af316",
+      "title": "상상 톡톡, 이어지는 이야기 기차",
+      "summary": "친구들이 한 문장씩 이야기를 이어 쓰고 AI 장면 그림으로 상상력을 확장하는 협업 글쓰기 앱입니다.",
+      "url": "https://wbmaker2.github.io/ai-story-chain/",
+      "githubUrl": "https://github.com/WBmaker2/ai-story-chain",
+      "tags": [
+        "국어",
+        "수업",
+        "협동",
+        "창의활동",
+        "인공지능"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a062beee-cba2-4074-a637-182d3b9af316.png",
+      "subject": "국어",
+      "grade": "초등",
+      "memo": "모둠 활동에서 학생들이 문장을 한 줄씩 덧붙이고 생성 이미지로 장면을 확인하며 이야기 흐름을 함께 만들 수 있습니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ],
+      "createdAt": "2026-04-20T11:00:21.905Z",
+      "updatedAt": "2026-08-24T14:11:46.360Z"
+    },
     {
       "id": "24024447-d3b2-4586-98cb-616b3bc0f2e7",
       "title": "마찰 바닥 시험장",
@@ -574,41 +686,6 @@
       ],
       "createdAt": "2026-08-24T07:01:29.690Z",
       "updatedAt": "2026-08-24T07:01:29.690Z"
-    },
-    {
-      "id": "ec00c831-5eb4-45ec-be63-a3f7889c39c5",
-      "title": "지층 시간 캡슐",
-      "summary": "초등 5~6학년 학생이 지층 단면과 화석·침식·암맥 단서를 관찰해 상대적인 형성 순서를 복원하는 과학 탐구 앱입니다.",
-      "url": "https://wbmaker2.github.io/strata-time-capsule/",
-      "githubUrl": "https://github.com/WBmaker2/strata-time-capsule",
-      "tags": [
-        "과학",
-        "탐구",
-        "관찰",
-        "추론",
-        "시각화"
-      ],
-      "thumbnailMode": "auto",
-      "thumbnailUrl": null,
-      "subject": "과학",
-      "grade": "초등 5~6학년",
-      "memo": "지층 단면을 관찰하고 1차 순서, 화석 단서, 침식·암맥 사건의 순서와 근거를 차례로 확인하는 과학 수업용 탐구 활동입니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "관찰",
-        "분류",
-        "순서 복원",
-        "근거 설명"
-      ],
-      "createdAt": "2026-08-24T06:59:31.585Z",
-      "updatedAt": "2026-08-24T06:59:31.585Z"
     },
     {
       "id": "17df8ba0-fdd5-4627-9a61-3de742cd2325",
@@ -1393,40 +1470,6 @@
       ],
       "createdAt": "2026-07-22T22:06:47.687Z",
       "updatedAt": "2026-08-21T06:57:05.073Z"
-    },
-    {
-      "id": "a062beee-cba2-4074-a637-182d3b9af316",
-      "title": "(실패작)상상 톡톡, 이어지는 이야기 기차",
-      "summary": "친구들이 한 문장씩 이야기를 이어 쓰고 AI 장면 그림으로 상상력을 확장하는 협업 글쓰기 앱입니다.",
-      "url": "https://wbmaker2.github.io/ai-story-chain/",
-      "githubUrl": "https://github.com/WBmaker2/ai-story-chain",
-      "tags": [
-        "국어",
-        "수업",
-        "협동",
-        "창의활동",
-        "인공지능"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/a062beee-cba2-4074-a637-182d3b9af316.png",
-      "subject": "국어",
-      "grade": "초등",
-      "memo": "모둠 활동에서 학생들이 문장을 한 줄씩 덧붙이고 생성 이미지로 장면을 확인하며 이야기 흐름을 함께 만들 수 있습니다.",
-      "subjects": [
-        "국어"
-      ],
-      "gradeBands": [
-        "all"
-      ],
-      "audience": "student",
-      "interactionType": "collaboration",
-      "learningProcess": [
-        "의견 제시",
-        "비교",
-        "협의"
-      ],
-      "createdAt": "2026-04-20T11:00:21.905Z",
-      "updatedAt": "2026-08-21T06:56:51.458Z"
     },
     {
       "id": "e417c1ae-442e-4225-a7d3-c126f655183a",
@@ -3682,5 +3725,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 175
+  "catalogRevision": 179
 }
