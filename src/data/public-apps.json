@@ -61,6 +61,11 @@
       "sha256": "94be6286e41fd6a4a063f0ef7bf520833148e790f6e4740effb001e2d56d84be"
     },
     {
+      "path": "/app-thumbnails/2b090a4d-103f-4f42-9a4f-a7451a435bfe.png",
+      "size": 444279,
+      "sha256": "be945c853610abf3eca98f9c7f7c0fa58c1d4b126d9283ec349c50f1662c0a91"
+    },
+    {
       "path": "/app-thumbnails/2c47b201-4941-4d74-a5b0-bb84d696e01c.png",
       "size": 96981,
       "sha256": "4073cf338e3241ae52fc91164fdb069d856a231c974abe4a244e91e3720853bf"
@@ -477,9 +482,42 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-08-24T22:16:06.489Z",
-  "appCount": 95,
+  "generatedAt": "2026-08-28T14:37:54.650Z",
+  "appCount": 96,
   "apps": [
+    {
+      "id": "2b090a4d-103f-4f42-9a4f-a7451a435bfe",
+      "title": "영어 상황 표현 교환대",
+      "summary": "초등 3~6학년 학생이 상황과 말하려는 목적을 먼저 판단하고, 검수된 영어 표현과 상대의 반응을 이어 대화를 완성하며 최초 판단·근거·수정 결과를 기록하는 무음 정적 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/english-situation-expression-desk/",
+      "githubUrl": "https://github.com/WBmaker2/english-situation-expression-desk",
+      "tags": [
+        "영어",
+        "의사소통",
+        "상황표현",
+        "대화연습"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/2b090a4d-103f-4f42-9a4f-a7451a435bfe.png",
+      "subject": "영어",
+      "grade": "초등",
+      "memo": "부탁·제안·초대·수락·사양·감사 상황에서 목적을 먼저 고르고 두 유효 표현을 비교한 뒤 상대 반응까지 연결해요. 점수·순위 없이 최초 판단과 수정 근거를 기록하고, 저장·네트워크 없이 동작합니다.",
+      "subjects": [
+        "영어"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-28T14:35:40.842Z",
+      "updatedAt": "2026-08-28T14:37:16.901Z"
+    },
     {
       "id": "bc954246-e62f-4b14-ae1e-9dfc8e25052e",
       "title": "AI Studio 교사 연수원",
@@ -3725,5 +3763,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 179
+  "catalogRevision": 181
 }
