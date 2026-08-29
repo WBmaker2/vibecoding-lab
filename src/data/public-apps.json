@@ -11,6 +11,11 @@
       "sha256": "c3f4f66b85af9c9e3515d5bbace566d1eb51288acdd96c5a129a66bdbbf92758"
     },
     {
+      "path": "/app-thumbnails/0c78d909-09c7-47d2-ba95-7e9b6e53ad5f.png",
+      "size": 35255,
+      "sha256": "6ed215228bd89fe801a309b8e78f9ce1df0d8e6826dedea1bc8c8b2e1f3e38c4"
+    },
+    {
       "path": "/app-thumbnails/0f7733d5-e97c-4d65-a707-3d229c295b48.jpg",
       "size": 51101,
       "sha256": "fe7ff16f27662863b18f07802da325a53f1cb32733bae2f8f683b5635940581d"
@@ -141,9 +146,19 @@
       "sha256": "ae58cf36d72ba2e1a91bbd13e7a21cab8274e54c57f0c1323d9b3c19ae3ff6f6"
     },
     {
+      "path": "/app-thumbnails/48d7b220-a37d-4502-93cc-b94432cc848d.png",
+      "size": 149878,
+      "sha256": "453fec1f9218260c3e00d1838b6373de0f27fe0ebea46ff05a3ae3ce07f9e256"
+    },
+    {
       "path": "/app-thumbnails/4c12713f-aff0-484f-9ede-b7e80e18e4aa.png",
       "size": 286239,
       "sha256": "cf15ee4b65318a89efdfb39843921db6b27a3f75551423371982978c44098117"
+    },
+    {
+      "path": "/app-thumbnails/4e42e95a-b5ef-4b27-9876-9004781a04e8.png",
+      "size": 113512,
+      "sha256": "f30e7c79ea7b4c45ad5d1b59cd8f67cb9ac141744d3e88b07294a8e683207afd"
     },
     {
       "path": "/app-thumbnails/511d5334-1e2c-40ac-8f9b-bc7bc22a1a21.png",
@@ -216,6 +231,16 @@
       "sha256": "9b6a04e694fb9ce7ac7750f07dbc717687357b178d0847ec5388c887f2708332"
     },
     {
+      "path": "/app-thumbnails/75ec9fee-5c4e-4a16-96a4-ab57dcdc8a1b.png",
+      "size": 119617,
+      "sha256": "415dab3b3dcf9fd31a12b651cccf7027bb52b904671a9b9991c0edfe701bfaae"
+    },
+    {
+      "path": "/app-thumbnails/76b46695-206c-4b21-9d85-096a2545281c.png",
+      "size": 78564,
+      "sha256": "c7b959c35950c67753ffcf6485d56236bbdabb3063119f3cdf54badf2fd6df24"
+    },
+    {
       "path": "/app-thumbnails/77669d34-e66c-4f01-a74c-f703447fa17d.png",
       "size": 393199,
       "sha256": "30e66ddb9bb6425b1280ff235bc45efe270fff5da19070a897dd3dbf86500910"
@@ -229,6 +254,11 @@
       "path": "/app-thumbnails/7b66f642-63da-4389-bce4-35e5d708b6d0.png",
       "size": 318264,
       "sha256": "af8d0e74358d6b879d15e8c68ff383618f8b6df0952cbe4b14d12c3df46109c2"
+    },
+    {
+      "path": "/app-thumbnails/7d8cff7a-3eba-4eb9-9b55-d5fd80118487.png",
+      "size": 97754,
+      "sha256": "91fa1fba8f24e991cf717d3a27dc07fd742875055f62fd1f41f95f70aa66441e"
     },
     {
       "path": "/app-thumbnails/837829ee-abd3-46a7-9554-ec83055bbdf0.png",
@@ -254,6 +284,16 @@
       "path": "/app-thumbnails/890a0ba1-6e4c-4bf8-a9d9-2009802a94fb.png",
       "size": 62283,
       "sha256": "983d428d84d221c726acc11e38b8a57d118850525786c394faaaaa799e4921d3"
+    },
+    {
+      "path": "/app-thumbnails/8ab915b7-4bf6-4153-bc05-6ae93650758f.png",
+      "size": 80635,
+      "sha256": "ed173da6b193a6239a3d45e66a8b3d6841794f4da8dc9134d435aa2e7463a7aa"
+    },
+    {
+      "path": "/app-thumbnails/8b08bf12-471a-4b2d-8966-1d2628eead80.png",
+      "size": 103949,
+      "sha256": "1dad4beea769c9c131156f2893c03ffd6814c8cfc574bbb90c50f0ecb9f45022"
     },
     {
       "path": "/app-thumbnails/8ce3212a-1d5a-4987-8a51-bc6ecdb96324.png",
@@ -351,6 +391,11 @@
       "sha256": "8b1ad48bf3aa2d056b1e1c3438fb247c50fb4d236832773aadeb898b5ecb47bc"
     },
     {
+      "path": "/app-thumbnails/b0b0b7d1-9e95-47c2-859e-9fc6c69cf735.png",
+      "size": 166357,
+      "sha256": "6c73df2d170fa84dc15199d3462b868297c93d3b7b15efc1e9b4e48fb04954a7"
+    },
+    {
       "path": "/app-thumbnails/b52fd0e4-768b-4cc1-806c-53deef04f003.png",
       "size": 393199,
       "sha256": "6603cd66f37b4650d164e12652b9fdaf998f4c72ad7b378954c54a8155176a2e"
@@ -374,6 +419,11 @@
       "path": "/app-thumbnails/bebd1fd7-5b54-4923-a476-fae00288d4e2.png",
       "size": 393199,
       "sha256": "b549d43deec400c9833494ed5213aa9fb20f3cfd856fa1c3b3551ad751d64dc5"
+    },
+    {
+      "path": "/app-thumbnails/c4135648-1a59-40f4-8fb0-1ae54dba2306.png",
+      "size": 91887,
+      "sha256": "e733c80b5474806d0149e0722c73f14c226cf72e220f427a60c8d1a246ad662a"
     },
     {
       "path": "/app-thumbnails/c4962759-1d6a-4070-85a8-cc46c91a70f1.png",
@@ -406,6 +456,11 @@
       "sha256": "bc8b406029b33c326ba5861f34f323d4349a08902554b5de424e57cf5e747e85"
     },
     {
+      "path": "/app-thumbnails/ce06a047-2112-4d52-b1a5-fb5858636610.png",
+      "size": 76684,
+      "sha256": "5ed802f3bf838fdaa1f617e789ff1b6f68f4fe8e3626dc5c3c2e9729cce79f22"
+    },
+    {
       "path": "/app-thumbnails/d093f79b-8672-4498-8f39-b65397fff216.png",
       "size": 330967,
       "sha256": "17bf7514106786d258a8d7951544cede5bf383c1a8d05fd2d61c0dfc7dc1211d"
@@ -429,6 +484,11 @@
       "path": "/app-thumbnails/dbf5fa15-fe4b-47a5-a186-29e4f50d8665.png",
       "size": 65593,
       "sha256": "86d6a17c4cf7bf993198f49b184337251188cf9d060a5977c0276205b69d12ac"
+    },
+    {
+      "path": "/app-thumbnails/de70eb9d-68ba-443d-ba6f-2613e6973c3d.png",
+      "size": 86147,
+      "sha256": "50fa4263bc12db2dde57438c2499e4598753a137e6db64ad181b904b3e81838f"
     },
     {
       "path": "/app-thumbnails/e3673005-3e93-42cd-9076-044480a41344.png",
@@ -482,9 +542,424 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-08-28T14:37:54.650Z",
-  "appCount": 96,
+  "generatedAt": "2026-08-29T01:05:07.017Z",
+  "appCount": 108,
   "apps": [
+    {
+      "id": "de70eb9d-68ba-443d-ba6f-2613e6973c3d",
+      "title": "앱 권한 최소허용 연구소",
+      "summary": "초등 5~6학년 학생이 가상 앱의 기능과 권한을 비교해 필요한 권한만 고르고, 거부·대안·철회 이유까지 연습하는 디지털 시민성 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/minimum-permission-lab/",
+      "githubUrl": "https://github.com/WBmaker2/minimum-permission-lab",
+      "tags": [
+        "안전",
+        "디지털윤리",
+        "시뮬레이션",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/de70eb9d-68ba-443d-ba6f-2613e6973c3d.png",
+      "subject": "실과·도덕·디지털 시민성",
+      "grade": "초등 5~6학년",
+      "memo": "디지털 시민성·개인정보 보호 수업에서 가상 사례의 기능, 필요한 정보, 사용 시점, 보관 여부를 비교하고 최소 권한 판단과 철회 이유를 연습하는 활동으로 활용할 수 있습니다.",
+      "subjects": [
+        "실과",
+        "도덕",
+        "디지털 시민성"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "mixed",
+      "interactionType": "practice",
+      "learningProcess": [
+        "기능 확인 → 권한 비교 → 최소 권한 선택 → 영향 비교 → 수정·근거 작성 → 철회 연습"
+      ],
+      "createdAt": "2026-08-29T00:29:19.887Z",
+      "updatedAt": "2026-08-29T00:29:19.887Z"
+    },
+    {
+      "id": "b0b0b7d1-9e95-47c2-859e-9fc6c69cf735",
+      "title": "전개도 포장 검수소",
+      "summary": "초등학생이 정육면체 전개도를 접으며 면과 모서리 관계를 예측하고 오류를 진단·수리해 근거 문장으로 설명하는 수학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/net-folding-inspection-center/",
+      "githubUrl": "https://github.com/WBmaker2/net-folding-inspection-center",
+      "tags": [
+        "수학",
+        "도형",
+        "추론",
+        "시뮬레이션",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/b0b0b7d1-9e95-47c2-859e-9fc6c69cf735.png",
+      "subject": "수학",
+      "grade": "초등 5~6학년",
+      "memo": "정육면체 전개도를 기준면·접는 순서·면 관계로 살펴보고, 접기 결과를 진단·수리한 뒤 근거 문장으로 설명하는 수학 수업 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:28:45.258Z",
+      "updatedAt": "2026-08-29T00:28:45.258Z"
+    },
+    {
+      "id": "76b46695-206c-4b21-9d85-096a2545281c",
+      "title": "평균 균형 조정실",
+      "summary": "초등 5~6학년 학생이 가상 자료를 고르게 나누고 평균의 변화와 한계를 근거 문장으로 설명하는 수학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/mean-balance-lab/",
+      "githubUrl": "https://github.com/WBmaker2/mean-balance-lab",
+      "tags": [
+        "수학",
+        "자료해석",
+        "탐구",
+        "시뮬레이션",
+        "추론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/76b46695-206c-4b21-9d85-096a2545281c.png",
+      "subject": "수학",
+      "grade": "초등 5~6학년",
+      "memo": "수학 [6수04-01] 평균 수업에서 가상 자료를 고르게 재배분하고, 평균 계산·분포 비교·튀는 값·대표값의 한계를 단계별로 탐구하는 25~35분 활동에 활용할 수 있습니다. 실제 학생 자료나 개인정보 없이 버튼과 키보드로 진행합니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:28:16.616Z",
+      "updatedAt": "2026-08-29T00:28:16.616Z"
+    },
+    {
+      "id": "8ab915b7-4bf6-4153-bc05-6ae93650758f",
+      "title": "관점 렌즈 사건실",
+      "summary": "초등 학습자가 가상 사건을 두 관점으로 읽고 근거를 분류·비교한 뒤 사실을 보존해 다시 써 보는 국어 활동 앱입니다.",
+      "url": "https://wbmaker2.github.io/perspective-lens-case-room/",
+      "githubUrl": "https://github.com/WBmaker2/perspective-lens-case-room",
+      "tags": [
+        "국어",
+        "관찰",
+        "분류",
+        "추론",
+        "토론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/8ab915b7-4bf6-4153-bc05-6ae93650758f.png",
+      "subject": "국어",
+      "grade": "초등 5~6학년",
+      "memo": "국어 읽기 수업에서 같은 사건을 두 관점으로 읽고 근거를 비교한 뒤, 사실을 지키며 관점 전환 문장을 만들어 보는 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "읽기",
+        "분류",
+        "비교",
+        "다시 쓰기"
+      ],
+      "createdAt": "2026-08-29T00:28:04.854Z",
+      "updatedAt": "2026-08-29T00:28:04.854Z"
+    },
+    {
+      "id": "48d7b220-a37d-4502-93cc-b94432cc848d",
+      "title": "세탁표시 구조대",
+      "summary": "초등 6학년 학생이 가상 옷의 세탁표시를 확대해 읽고, 세탁·건조·다림질 순서를 근거와 함께 정해 보는 실과 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/laundry-symbol-rescue-team/",
+      "githubUrl": "https://github.com/WBmaker2/laundry-symbol-rescue-team",
+      "tags": [
+        "생활도구",
+        "실과",
+        "안전",
+        "시뮬레이션",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/48d7b220-a37d-4502-93cc-b94432cc848d.png",
+      "subject": "실과",
+      "grade": "초등 6학년",
+      "memo": "실과 생활 자원 관리 수업에서 가상 의류의 표시를 읽고 공통 조건, 손상 가능성, 자원 사용을 비교하며 관리 계획을 세우는 활동으로 활용할 수 있습니다. 실제 의류는 제품 라벨과 보호자·교사 안내를 먼저 확인합니다.",
+      "subjects": [
+        "실과"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "표시 읽기",
+        "예측",
+        "관리 계획 세우기",
+        "결과 비교",
+        "근거 설명"
+      ],
+      "createdAt": "2026-08-29T00:27:54.998Z",
+      "updatedAt": "2026-08-29T00:27:54.998Z"
+    },
+    {
+      "id": "7d8cff7a-3eba-4eb9-9b55-d5fd80118487",
+      "title": "대화 수리 신호센터",
+      "summary": "초등 3~6학년 학생이 영어 대화에서 헷갈린 부분을 찾고 다시 묻는 네 단계 수리 전략을 연습하는 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/conversation-repair-signal-center/",
+      "githubUrl": "https://github.com/WBmaker2/conversation-repair-signal-center",
+      "tags": [
+        "영어",
+        "대화연습",
+        "상황표현",
+        "소통",
+        "의사소통"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/7d8cff7a-3eba-4eb9-9b55-d5fd80118487.png",
+      "subject": "영어",
+      "grade": "초등 3~6학년",
+      "memo": "영어 대화가 막힌 순간을 관찰·수리·응답·확인 네 단계로 연습하며, 학급에서는 짝 활동이나 개별 연습으로 활용할 수 있습니다. 음성 없이도 대본으로 진행하고 학생 이름·점수·서버 저장 없이 수업을 마칠 수 있습니다.",
+      "subjects": [
+        "영어"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:27:46.305Z",
+      "updatedAt": "2026-08-29T00:27:46.305Z"
+    },
+    {
+      "id": "ce06a047-2112-4d52-b1a5-fb5858636610",
+      "title": "낱말 뜻 갈림길",
+      "summary": "초등 3~4학년 학생이 문맥 단서를 살펴 같은 낱말의 뜻을 구별하고 모호한 문장을 고쳐 쓰는 국어 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/word-meaning-crossroads/",
+      "githubUrl": "https://github.com/WBmaker2/word-meaning-crossroads",
+      "tags": [
+        "국어",
+        "단어 분석",
+        "맥락",
+        "추론",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/ce06a047-2112-4d52-b1a5-fb5858636610.png",
+      "subject": "국어",
+      "grade": "초등 3~4학년",
+      "memo": "국어 수업에서 학생이 같은 낱말이 문장에 따라 달라지는 뜻을 주변 단서로 비교하고, 판단하기 어려운 문장을 여러 방법으로 고쳐 쓰며 근거를 기록하는 20~30분 탐구 활동으로 활용할 수 있습니다. 이름·로그인·저장 없이 화면 텍스트만으로 진행합니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:27:37.979Z",
+      "updatedAt": "2026-08-29T00:27:37.979Z"
+    },
+    {
+      "id": "c4135648-1a59-40f4-8fb0-1ae54dba2306",
+      "title": "도시 기능 입지 심의실",
+      "summary": "초등 5~6학년 학생이 가상 도시의 인구·도로·위험·예산 자료를 비교해 공공시설 후보지를 정하고 주민 관점의 근거를 담은 의견서를 완성하는 사회·수학 탐구 앱",
+      "url": "https://wbmaker2.github.io/civic-facility-siting-room/",
+      "githubUrl": "https://github.com/WBmaker2/civic-facility-siting-room",
+      "tags": [
+        "사회",
+        "수학",
+        "탐구",
+        "시뮬레이션",
+        "토론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/c4135648-1a59-40f4-8fb0-1ae54dba2306.png",
+      "subject": "사회·수학",
+      "grade": "초등 5~6학년",
+      "memo": "가상 도시의 인구 분포, 도로 연결, 이동 단위, 위험 표지, 상대 예산을 비교해 공공시설 입지를 정합니다. 학생이 후보지를 바꾸어 A안과 B안을 만들고, 주민 관점의 차이와 절충 근거를 담은 의견서를 완성하도록 수업 토론과 개별 탐구에 활용할 수 있습니다.",
+      "subjects": [
+        "사회",
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:27:33.025Z",
+      "updatedAt": "2026-08-29T00:27:33.025Z"
+    },
+    {
+      "id": "0c78d909-09c7-47d2-ba95-7e9b6e53ad5f",
+      "title": "규칙 단위 기관실",
+      "summary": "초등 1~2학년이 모양의 반복 규칙에서 가장 짧은 묶음을 찾고 이어 붙이기·수리·번역·자유 제작까지 연습하는 수학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/pattern-unit-engine-room/",
+      "githubUrl": "https://github.com/WBmaker2/pattern-unit-engine-room",
+      "tags": [
+        "수학",
+        "저학년",
+        "추론",
+        "탐구",
+        "시각화"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/0c78d909-09c7-47d2-ba95-7e9b6e53ad5f.png",
+      "subject": "수학",
+      "grade": "초등 1~2학년",
+      "memo": "1~2학년 수학 수업에서 반복 규칙의 가장 짧은 묶음을 찾고, 다음 항을 예측하고, 틀린 칸을 고치고, 다른 모양으로 바꾸고, 나만의 규칙을 만드는 15~25분 활동에 활용할 수 있습니다. 서버와 계정 없이 브라우저에서 진행하며 학생 이름·사진·음성·점수는 수집하지 않습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:27:08.634Z",
+      "updatedAt": "2026-08-29T00:27:08.634Z"
+    },
+    {
+      "id": "75ec9fee-5c4e-4a16-96a4-ab57dcdc8a1b",
+      "title": "혼합물 분리 공정 설계소",
+      "summary": "초등 5~6학년 학생이 혼합물의 성질을 관찰하고 가상 공정의 순서를 설계하며 분리 결과를 설명하는 과학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/mixture-separation-process-lab/",
+      "githubUrl": "https://github.com/WBmaker2/mixture-separation-process-lab",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "실험",
+        "탐구",
+        "안전"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/75ec9fee-5c4e-4a16-96a4-ab57dcdc8a1b.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "초등 5~6학년 과학 수업에서 혼합물의 알갱이 크기, 서로 섞이지 않는 성질, 용해·증발을 차례로 살펴보고 가상 토큰 이동을 근거로 공정을 설계·수정하는 활동에 활용할 수 있습니다. 실제 가열·측정 실험을 대신하지 않으며, 실제 실험은 교사의 안전 지도 아래 별도 절차로 진행합니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:27:03.650Z",
+      "updatedAt": "2026-08-29T00:27:03.650Z"
+    },
+    {
+      "id": "8b08bf12-471a-4b2d-8966-1d2628eead80",
+      "title": "추천 알고리즘 균형 실험실",
+      "summary": "초등 5~6학년 학생이 선택 기록과 추천 분포를 비교하며 반복 선택·다양성·공급 조건이 결과에 미치는 영향을 탐구하는 결정적 가상 실험입니다.",
+      "url": "https://wbmaker2.github.io/recommendation-balance-lab/",
+      "githubUrl": "https://github.com/WBmaker2/recommendation-balance-lab",
+      "tags": [
+        "인공지능",
+        "데이터",
+        "디지털윤리",
+        "시뮬레이션",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/8b08bf12-471a-4b2d-8966-1d2628eead80.png",
+      "subject": "실과",
+      "grade": "초등 5~6학년",
+      "memo": "6실05-04·6실05-05와 연결해 선택 편향, 추천 분포, 다양성의 절충을 학생이 직접 예측·비교·설명하는 30~40분 수업 활동으로 활용할 수 있습니다. 실제 계정·검색 기록 없이 결정적 가상 규칙만 사용합니다.",
+      "subjects": [
+        "실과"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "선택",
+        "예측",
+        "비교",
+        "조정",
+        "설명"
+      ],
+      "createdAt": "2026-08-29T00:26:47.072Z",
+      "updatedAt": "2026-08-29T00:26:47.072Z"
+    },
+    {
+      "id": "4e42e95a-b5ef-4b27-9876-9004781a04e8",
+      "title": "작업 순서 병목 해결소",
+      "summary": "초등 5~6학년 학생이 네 가지 가상 미션의 선후 관계와 제한 자원을 설계하고 병목을 찾아 더 나은 작업 순서를 설명하는 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/workflow-bottleneck-center/",
+      "githubUrl": "https://github.com/WBmaker2/workflow-bottleneck-center",
+      "tags": [
+        "시뮬레이션",
+        "협동",
+        "공정",
+        "실과",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/4e42e95a-b5ef-4b27-9876-9004781a04e8.png",
+      "subject": "실과·정보",
+      "grade": "초등 5~6학년",
+      "memo": "5~6학년 실과·정보 수업에서 네 가지 가상 미션의 선후 관계와 제한 자원을 설계하고, 시뮬레이션으로 기다림 원인을 찾아 수정 보고서까지 완성하는 활동에 활용할 수 있습니다. 점수·순위나 학생 이름 없이 기기 안에서 진행합니다.",
+      "subjects": [
+        "실과",
+        "정보"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:26:37.637Z",
+      "updatedAt": "2026-08-29T00:26:37.637Z"
+    },
     {
       "id": "2b090a4d-103f-4f42-9a4f-a7451a435bfe",
       "title": "영어 상황 표현 교환대",
@@ -3763,5 +4238,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 181
+  "catalogRevision": 193
 }
