@@ -6,6 +6,11 @@
       "sha256": "f5b8206622f4e8c5614b47cddae33fb7bcc78280be0eb95539f38e31b1ef4331"
     },
     {
+      "path": "/app-thumbnails/04f330d5-4f20-462f-b500-f003d872865c.webp",
+      "size": 11514,
+      "sha256": "49adaee233b8bcde6f951c15dd123cff035d156fcf701222a9e5041fd48289a8"
+    },
+    {
       "path": "/app-thumbnails/0a1a350d-2f4d-4676-ba63-f33ad2147328.png",
       "size": 290961,
       "sha256": "c3f4f66b85af9c9e3515d5bbace566d1eb51288acdd96c5a129a66bdbbf92758"
@@ -542,7 +547,7 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-08-29T02:01:35.956Z",
+  "generatedAt": "2026-08-29T02:17:48.565Z",
   "appCount": 110,
   "apps": [
     {
@@ -557,7 +562,7 @@
         "자릿값"
       ],
       "thumbnailMode": "auto",
-      "thumbnailUrl": null,
+      "thumbnailUrl": "/app-thumbnails/04f330d5-4f20-462f-b500-f003d872865c.webp",
       "subject": "수학",
       "grade": "초등 3~4학년",
       "memo": "여섯 개의 검수된 고정 미션으로 0.7 읽기·열 개 교환(값 100 보존)·0.34 구성·0.7>0.65 비교·0.4=0.40 동치·1.02<1.2=1.20 순서를 다룹니다. 점수 없이 최초 판단→근거→수정 기록을 남기고, 서버·저장 없이 동작해 오프라인 교실에서도 사용할 수 있습니다.",
@@ -577,7 +582,7 @@
         "설명"
       ],
       "createdAt": "2026-08-29T02:00:45.163Z",
-      "updatedAt": "2026-08-29T02:00:45.163Z"
+      "updatedAt": "2026-08-29T02:16:38.982Z"
     },
     {
       "id": "7cdc3225-e941-4b39-bb38-29e828ed77f0",
@@ -4305,5 +4310,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 195
+  "catalogRevision": 197
 }
