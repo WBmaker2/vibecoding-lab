@@ -542,9 +542,42 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-08-29T01:05:07.017Z",
-  "appCount": 108,
+  "generatedAt": "2026-08-29T01:42:34.419Z",
+  "appCount": 109,
   "apps": [
+    {
+      "id": "7cdc3225-e941-4b39-bb38-29e828ed77f0",
+      "title": "공기 부피 압축 연구소",
+      "summary": "초등 5~6학년 학생이 밀폐·열림·누출 조건의 가상 주사기 모형에서 공기가 차지하는 공간과 모형 공기 표식의 변화를 예측하고, 유한 상태표의 관찰 결과로 판단을 근거 있게 수정하는 과학 활동 앱입니다.",
+      "url": "https://wbmaker2.github.io/air-compression-rescue-lab/",
+      "githubUrl": "https://github.com/WBmaker2/air-compression-rescue-lab",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "수업"
+      ],
+      "thumbnailMode": "auto",
+      "thumbnailUrl": null,
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "여섯 개의 검수된 고정 미션으로 밀폐 압축·개방 배출·당김 팽창·누출 판단 보류를 다룹니다. 점수 없이 최초 판단→근거→수정 기록을 남기고, 서버·저장 없이 동작해 오프라인 교실에서도 사용할 수 있습니다. 학생 응답은 새로고침하면 사라집니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "관찰",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-08-29T01:41:23.802Z",
+      "updatedAt": "2026-08-29T01:41:23.802Z"
+    },
     {
       "id": "de70eb9d-68ba-443d-ba6f-2613e6973c3d",
       "title": "앱 권한 최소허용 연구소",
@@ -4238,5 +4271,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 193
+  "catalogRevision": 194
 }
