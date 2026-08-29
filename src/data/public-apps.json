@@ -36,6 +36,11 @@
       "sha256": "4fd15a733575e4b5b2cf9e2be46698afe2a26f658450053298bddb710adef960"
     },
     {
+      "path": "/app-thumbnails/14bd29ae-72e1-487d-8fb4-723c3b9666d1.png",
+      "size": 36049,
+      "sha256": "9dcbb40bb8dad579518bbf33a2bce892c25ea58f1fd8bbb51126602464547520"
+    },
+    {
       "path": "/app-thumbnails/17df8ba0-fdd5-4627-9a61-3de742cd2325.png",
       "size": 373585,
       "sha256": "ab2fb35f5e93607d69ffd45689871d878517bc03a2f74f6c0039ed06d7398ccc"
@@ -547,9 +552,42 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-08-29T02:17:48.565Z",
-  "appCount": 110,
+  "generatedAt": "2026-08-29T02:19:14.049Z",
+  "appCount": 111,
   "apps": [
+    {
+      "id": "14bd29ae-72e1-487d-8fb4-723c3b9666d1",
+      "title": "악곡 구조 탐정실",
+      "summary": "짧은 합성 음악 조각을 듣고 같음·다름·되돌아옴을 근거로 AA·AB·ABA 구조를 찾는 초등 3~6학년 음악 감상 활동 앱입니다.",
+      "url": "https://wbmaker2.github.io/music-form-detective/",
+      "githubUrl": "https://github.com/WBmaker2/music-form-detective",
+      "tags": [
+        "음악",
+        "감상",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/14bd29ae-72e1-487d-8fb4-723c3b9666d1.png",
+      "subject": "음악",
+      "grade": "초등 3~6학년",
+      "memo": "구간 반복과 대조, 처음으로 되돌아오는 느낌을 듣기 근거로 판단해 형식(AA·AB·ABA)을 찾는 점수 없는 감상 활동입니다. 저장·네트워크 없이 동작해 음악과 감상 영역 도입이나 개별 학습 활동에 바로 쓸 수 있습니다.",
+      "subjects": [
+        "음악"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "관찰",
+        "비교",
+        "정리"
+      ],
+      "createdAt": "2026-08-29T02:18:28.130Z",
+      "updatedAt": "2026-08-29T02:18:28.130Z"
+    },
     {
       "id": "04f330d5-4f20-462f-b500-f003d872865c",
       "title": "소수 자리 교환소",
@@ -4310,5 +4348,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 197
+  "catalogRevision": 198
 }
