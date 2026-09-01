@@ -226,6 +226,11 @@
       "sha256": "901a13322328d7e6c87cf9ae45ba657505b23a0356fb7e2fc9bf67b1cbdfa6e8"
     },
     {
+      "path": "/app-thumbnails/6a156b7b-8b4d-42f5-b17a-9708480597fb.png",
+      "size": 292317,
+      "sha256": "28c45cc400ef1ff0c4974025eb2ef2ee730ad0568ed60ac84c3950376e9b69cd"
+    },
+    {
       "path": "/app-thumbnails/6aff7689-3530-4b21-97f4-18a1d433ba44.jpg",
       "size": 38582,
       "sha256": "29560b16cb98e5719786e8b2161eb9128d2de04045e5b3a60e48e768f6141ca4"
@@ -552,9 +557,39 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-08-29T02:19:14.049Z",
-  "appCount": 111,
+  "generatedAt": "2026-09-01T00:05:32.051Z",
+  "appCount": 112,
   "apps": [
+    {
+      "id": "6a156b7b-8b4d-42f5-b17a-9708480597fb",
+      "title": "한/영 전환 도우미",
+      "summary": "Windows 사용자가 Shift+Space와 Ctrl+Space를 원하는 대로 켜 두고 어디서나 한/영 입력을 빠르게 전환하는 가벼운 시스템 트레이 도구입니다.",
+      "url": "https://wbmaker2.github.io/shift-space-lang-change/",
+      "githubUrl": "https://github.com/WBmaker2/shift-space-lang-change",
+      "tags": [
+        "생활도구",
+        "업무",
+        "Windows"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/6a156b7b-8b4d-42f5-b17a-9708480597fb.png",
+      "subject": "공통",
+      "grade": null,
+      "memo": "교사와 일반 사용자가 익숙한 단축키로 한/영 입력을 전환할 수 있는 Windows 10/11 x64용 도구입니다. 광고·계정·키 입력 수집 없이 동작하며 GitHub 공개 릴리스에서 설치할 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "teacher",
+      "interactionType": "utility",
+      "learningProcess": [
+        "변환",
+        "확인",
+        "저장"
+      ],
+      "createdAt": "2026-08-31T23:50:30.713Z",
+      "updatedAt": "2026-08-31T23:50:30.713Z"
+    },
     {
       "id": "14bd29ae-72e1-487d-8fb4-723c3b9666d1",
       "title": "악곡 구조 탐정실",
@@ -4348,5 +4383,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 198
+  "catalogRevision": 199
 }
