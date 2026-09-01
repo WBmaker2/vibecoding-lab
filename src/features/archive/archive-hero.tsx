@@ -45,20 +45,19 @@ export function ArchiveHero({
           </div>
           <h1>Hong&apos;s Vibe Coding Lab</h1>
           <p className="hero-copy">
-            교실 수업과 교사 업무를 가볍게 만드는 웹앱을 빠르게 찾고 바로 열 수
-            있는 공개 아카이브입니다.
+            바이브홍이 만든 교실 수업·교사 업무용 웹앱 아카이브입니다.
           </p>
         </div>
 
         <Image
           alt="태그 탐색을 안내하는 Hong 캐릭터"
           className="archive-hero-mascot-image"
-          height={96}
+          height={2304}
           priority
-          sizes="(max-width: 720px) 64px, 76px"
+          sizes="(max-width: 720px) 128px, 184px"
           src="/images/mascots/hong-default.png"
           unoptimized
-          width={76}
+          width={1856}
         />
       </div>
 

@@ -58,4 +58,22 @@ describe("archive app card layout styles", () => {
     expect(mobileTagChipStyles).toContain("min-width: max-content");
     expect(mobileTagChipStyles).toContain("white-space: nowrap");
   });
+
+  it("scales the full-body hero mascot without cropping it", () => {
+    const styles = readGlobalStyles();
+    const heroTopStyles = getCssBlock(styles, "\\.archive-hero-top");
+    const mascotStyles = getCssBlock(styles, "\\.archive-hero-mascot-image");
+
+    expect(heroTopStyles).toContain(
+      "--hero-mascot-width: clamp(112px, 14vw, 184px)"
+    );
+    expect(heroTopStyles).toContain(
+      "grid-template-columns: minmax(0, 1fr) var(--hero-mascot-width)"
+    );
+    expect(heroTopStyles).toContain("gap: clamp(20px, 3vw, 40px)");
+    expect(mascotStyles).toContain("width: var(--hero-mascot-width)");
+    expect(mascotStyles).toContain("height: auto");
+    expect(mascotStyles).toContain("object-fit: contain");
+    expect(mascotStyles).not.toContain("object-fit: cover");
+  });
 });

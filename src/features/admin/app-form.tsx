@@ -38,15 +38,20 @@ export function AppForm({
             <input defaultValue={initialApp?.title} name="title" required />
           </label>
 
-          <label className="admin-field admin-field-full">
-            <span>한 줄 설명</span>
+          <div className="admin-field admin-field-full">
+            <label htmlFor="admin-summary">한 줄 설명</label>
             <textarea
               defaultValue={initialApp?.summary}
+              id="admin-summary"
               name="summary"
               required
               rows={3}
+              aria-describedby="admin-summary-hint"
             />
-          </label>
+            <small className="admin-field-hint" id="admin-summary-hint">
+              누가 무엇을 하기 위한 앱인지 한두 문장으로 적어 주세요.
+            </small>
+          </div>
 
           <label className="admin-field admin-field-full">
             <span>앱 링크</span>
@@ -118,8 +123,8 @@ export function AppForm({
         <div className="admin-form-section-copy">
           <h3>4. 추가 정보</h3>
           <p>
-            과목, 학년, 메이커 노트는 선택 입력이며, 입력하시면 공개 화면에도
-            함께 노출됩니다.
+            과목, 학년, 사용자, 활동 과정, 메이커 노트는 공개 앱 상세의 사실
+            정보로 함께 노출됩니다.
           </p>
         </div>
 
@@ -146,15 +151,36 @@ export function AppForm({
               <option value="practice">연습·문제 해결</option><option value="simulation">시뮬레이션</option><option value="collaboration">협업</option><option value="creation">창작</option><option value="management">관리</option><option value="reference">자료 탐색</option><option value="utility">도구</option>
             </select>
           </label>
-          <label className="admin-field admin-field-full">
-            <span>학습 과정</span>
-            <input defaultValue={initialApp?.learningProcess?.join(", ")} name="learningProcess" placeholder="예측, 조작, 비교, 설명" />
-          </label>
+          <div className="admin-field admin-field-full">
+            <label htmlFor="admin-learning-process">학습 과정</label>
+            <input
+              aria-describedby="admin-learning-process-hint"
+              defaultValue={initialApp?.learningProcess?.join(", ")}
+              id="admin-learning-process"
+              name="learningProcess"
+              placeholder="예측, 조작, 비교, 설명"
+            />
+            <small
+              className="admin-field-hint"
+              id="admin-learning-process-hint"
+            >
+              학생이 실제로 거치는 활동 순서를 쉼표로 구분해 주세요.
+            </small>
+          </div>
 
-          <label className="admin-field admin-field-full">
-            <span>메이커 노트</span>
-            <textarea defaultValue={initialApp?.memo} name="memo" rows={4} />
-          </label>
+          <div className="admin-field admin-field-full">
+            <label htmlFor="admin-memo">메이커 노트</label>
+            <textarea
+              aria-describedby="admin-memo-hint"
+              defaultValue={initialApp?.memo}
+              id="admin-memo"
+              name="memo"
+              rows={4}
+            />
+            <small className="admin-field-hint" id="admin-memo-hint">
+              수업이나 업무에서 언제, 어떻게 활용하는지 적어 주세요.
+            </small>
+          </div>
         </div>
       </section>
 

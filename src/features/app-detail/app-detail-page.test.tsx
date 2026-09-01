@@ -12,6 +12,9 @@ const app: PublicAppRecord = {
   thumbnailUrl: "/app-thumbnails/sample.png",
   subject: "공통",
   grade: "교사용",
+  audience: "teacher",
+  interactionType: "utility",
+  learningProcess: ["변환", "확인", "저장"],
   memo: "학습지와 안내문을 이미지로 나눌 때 사용합니다.",
   createdAt: new Date("2026-05-03T09:33:29.709Z"),
   updatedAt: new Date("2026-07-23T09:14:28.416Z")
@@ -30,14 +33,24 @@ describe("AppDetailPage", () => {
     render(<AppDetailPage app={app} relatedApps={[relatedApp]} />);
 
     expect(screen.getByRole("heading", { level: 1, name: app.title })).toBeInTheDocument();
-    expect(screen.getByText(app.summary)).toBeInTheDocument();
+    expect(screen.getAllByText(app.summary)).toHaveLength(2);
     expect(screen.getByRole("img", { name: `${app.title} 미리보기` })).toHaveAttribute(
       "src",
       app.thumbnailUrl
     );
     expect(screen.getByText("공통 · 교사용")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "한눈에 보기" })).toBeInTheDocument();
+    expect(screen.getByText("교사", { selector: "dd" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "이 앱으로 할 수 있는 일" })).toBeInTheDocument();
+    expect(screen.getByText("변환")).toBeInTheDocument();
     expect(screen.getByText("#PDF")).toBeInTheDocument();
     expect(screen.getByText(app.memo!)).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "자주 묻는 질문" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("PDF to PNG 1080p는 누구를 위한 앱인가요?")
+    ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: `${app.title} 앱 열기` })).toHaveAttribute(
       "href",
       app.url

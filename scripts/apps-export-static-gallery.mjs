@@ -9,6 +9,7 @@ import {
 import { getConfiguredDatabaseProvider } from "./lib/database-provider.mjs";
 import { getReusableSnapshotDecision } from "./lib/static-gallery-export-state.mjs";
 import { fetchSafeImage } from "./lib/safe-image-download.mjs";
+import { auditGeoContent } from "./verify-geo-content.mjs";
 
 const DEFAULT_BASE_URL = "https://www.vivehong.shop";
 const OUTPUT_JSON_PATH = path.resolve(
@@ -800,6 +801,24 @@ async function run() {
       ? { catalogRevision }
       : {})
   };
+
+  const geoAudit = auditGeoContent(payload, {
+    strict: process.env.GEO_CONTENT_STRICT === "1"
+  });
+
+  if (!geoAudit.ok) {
+    const issues = [...geoAudit.errors, ...geoAudit.warnings]
+      .slice(0, 10)
+      .map((issue) => `${issue.code}: ${issue.message}`)
+      .join("; ");
+    throw new Error(`GEO content audit failed: ${issues}`);
+  }
+
+  if (geoAudit.warnings.length > 0) {
+    console.warn(
+      `geo-content warnings=${geoAudit.warnings.length} strict=${geoAudit.strict}`
+    );
+  }
 
   await writeSnapshotAtomically(payload);
   await removeOrphanedThumbnailFiles(payload);

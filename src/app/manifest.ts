@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Hong's Vibe Coding Lab",
-    short_name: "Hong's Lab",
-    description: "초등 수업과 교사 업무를 가볍게 만드는 교사용 웹앱 아카이브",
+    name: "바이브홍 | Hong's Vibe Coding Lab",
+    short_name: "바이브홍",
+    description: "바이브홍이 만든 교실 수업·교사 업무용 웹앱 아카이브",
     start_url: "/",
     display: "standalone",
     background_color: "#f4f5f7",

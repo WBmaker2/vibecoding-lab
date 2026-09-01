@@ -58,5 +58,11 @@ describe("AppForm", () => {
     expect(screen.getByRole("textbox", { name: "학습 과정" })).toHaveValue(
       "기록, 정리, 확인"
     );
+    expect(
+      screen.getByText("누가 무엇을 하기 위한 앱인지 한두 문장으로 적어 주세요.")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("수업이나 업무에서 언제, 어떻게 활용하는지 적어 주세요.")
+    ).toBeInTheDocument();
   });
 });

@@ -71,6 +71,8 @@ describe("ArchiveHero", () => {
       "src",
       "/images/mascots/hong-default.png"
     );
+    expect(mascotImage).toHaveAttribute("width", "1856");
+    expect(mascotImage).toHaveAttribute("height", "2304");
     expect(mascotImage).not.toHaveAttribute("src", expect.stringContaining("/_next/image"));
   });
 
@@ -87,6 +89,9 @@ describe("ArchiveHero", () => {
     );
 
     expect(screen.getByText("대표 태그")).toBeInTheDocument();
+    expect(
+      screen.getByText("바이브홍이 만든 교실 수업·교사 업무용 웹앱 아카이브입니다.")
+    ).toBeInTheDocument();
     expect(
       screen.getByText("태그를 하나씩 클릭해 원하는 앱을 알아보세요.")
     ).toBeInTheDocument();

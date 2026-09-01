@@ -94,6 +94,7 @@ export default async function AppPage({ params }: AppRouteProps) {
     <>
       <JsonLd data={structuredData.softwareApplication} />
       <JsonLd data={structuredData.breadcrumbList} />
+      <JsonLd data={structuredData.faqPage} />
       <AppDetailPage app={app} relatedApps={relatedApps} />
     </>
   );
