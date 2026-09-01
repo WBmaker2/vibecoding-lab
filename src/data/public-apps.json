@@ -361,6 +361,11 @@
       "sha256": "4cd88ee886110f3622c8392683c0bcba5bb51644c13f8c39c5f290ff910c3e86"
     },
     {
+      "path": "/app-thumbnails/a04b8a38-d993-48a7-9c10-3f0e669b610c.png",
+      "size": 2690231,
+      "sha256": "427d846091512f46cb055e7c17e63b618123cbf4d09e89ab98c3f5bb5a9ef1d4"
+    },
+    {
       "path": "/app-thumbnails/a062beee-cba2-4074-a637-182d3b9af316.png",
       "size": 233673,
       "sha256": "819a9f86255f914317b9e2f022c6b72f42c32d85cd9833e83c55c48b1bed475d"
@@ -562,9 +567,44 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-09-01T04:05:46.004Z",
-  "appCount": 113,
+  "generatedAt": "2026-09-01T09:45:55.971Z",
+  "appCount": 114,
   "apps": [
+    {
+      "id": "a04b8a38-d993-48a7-9c10-3f0e669b610c",
+      "title": "태양계 탐사대: 사라진 안내판의 비밀",
+      "summary": "초등학교 5학년 학생이 4쪽 22컷 학습만화와 수업 자료를 읽으며 태양계 행성의 순서·특징·반사광을 탐구하는 과학 수업용 웹앱입니다.",
+      "url": "https://wbmaker2.github.io/grade5-solar-system-webtoon/",
+      "githubUrl": "https://github.com/WBmaker2/grade5-solar-system-webtoon",
+      "tags": [
+        "과학",
+        "수업",
+        "탐구",
+        "시각화"
+      ],
+      "thumbnailMode": "auto",
+      "thumbnailUrl": "/app-thumbnails/a04b8a38-d993-48a7-9c10-3f0e669b610c.png",
+      "subject": "과학",
+      "grade": "초등 5학년",
+      "memo": "과학 수업에서 태양계 행성의 순서, 암석형과 거대행성의 특징, 반사광, 공전 시간을 4쪽 학습만화로 읽고 확인문제와 교사용 안내서·학생 활동지로 확장할 수 있습니다. 17컷은 관찰자 뒤에서 오는 빛이 행성에 반사되어 눈에 들어오는 장면으로 교정되었습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "mixed",
+      "interactionType": "reference",
+      "learningProcess": [
+        "읽기",
+        "관찰",
+        "분류",
+        "설명",
+        "확인"
+      ],
+      "createdAt": "2026-09-01T08:57:48.647Z",
+      "updatedAt": "2026-09-01T08:57:48.647Z"
+    },
     {
       "id": "0408f380-7399-4bdf-a9ce-012d0b9d8653",
       "title": "파이썬 한입 교실",
@@ -4421,5 +4461,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 200
+  "catalogRevision": 201
 }
