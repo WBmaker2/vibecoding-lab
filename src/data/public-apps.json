@@ -6,6 +6,11 @@
       "sha256": "f5b8206622f4e8c5614b47cddae33fb7bcc78280be0eb95539f38e31b1ef4331"
     },
     {
+      "path": "/app-thumbnails/0408f380-7399-4bdf-a9ce-012d0b9d8653.png",
+      "size": 137153,
+      "sha256": "dbe9daa9d5c97c7393f98405aed2b1787558accfd263345bc0a00ed8fc80ec58"
+    },
+    {
       "path": "/app-thumbnails/04f330d5-4f20-462f-b500-f003d872865c.webp",
       "size": 11514,
       "sha256": "49adaee233b8bcde6f951c15dd123cff035d156fcf701222a9e5041fd48289a8"
@@ -557,9 +562,42 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-09-01T00:05:32.051Z",
-  "appCount": 112,
+  "generatedAt": "2026-09-01T04:05:46.004Z",
+  "appCount": 113,
   "apps": [
+    {
+      "id": "0408f380-7399-4bdf-a9ce-012d0b9d8653",
+      "title": "파이썬 한입 교실",
+      "summary": "중학생이 파이썬 기초를 69개 단계로 배우고 브라우저 코드 실습과 결과 확인을 이어가는 자기주도형 코딩 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/python-bite-class/",
+      "githubUrl": "https://github.com/WBmaker2/python-bite-class",
+      "tags": [
+        "코딩",
+        "수업",
+        "실험",
+        "인터랙티브"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/0408f380-7399-4bdf-a9ce-012d0b9d8653.png",
+      "subject": "정보",
+      "grade": "중학생",
+      "memo": "정보 수업의 도입부터 함수·자료 구조·실생활 문제 해결까지 순차 학습에 활용할 수 있으며, 단계별 잠금 해제와 브라우저 실행 결과로 개별 진도를 확인할 수 있습니다.",
+      "subjects": [
+        "정보"
+      ],
+      "gradeBands": [],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "읽기",
+        "실행",
+        "코드 수정",
+        "결과 확인",
+        "단계 완료"
+      ],
+      "createdAt": "2026-09-01T03:56:01.031Z",
+      "updatedAt": "2026-09-01T03:56:01.031Z"
+    },
     {
       "id": "6a156b7b-8b4d-42f5-b17a-9708480597fb",
       "title": "한/영 전환 도우미",
@@ -4383,5 +4421,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 199
+  "catalogRevision": 200
 }
