@@ -1,7 +1,8 @@
 import type { PublicAppRecord } from "@/lib/apps/types";
 import {
   createAppStructuredData,
-  createCollectionStructuredData
+  createCollectionStructuredData,
+  createSiteStructuredData
 } from "./structured-data";
 
 const app: PublicAppRecord = {
@@ -54,6 +55,48 @@ describe("SEO structured data", () => {
     });
     expect(data.softwareApplication).not.toHaveProperty("aggregateRating");
     expect(data.softwareApplication).not.toHaveProperty("review");
+    expect(data.softwareApplication.publisher).toEqual({
+      "@id": "https://example.com/#organization"
+    });
     expect(data.breadcrumbList.itemListElement).toHaveLength(2);
+    expect(data.faqPage).toMatchObject({
+      "@type": "FAQPage",
+      "@id": expect.stringContaining("#faq")
+    });
+    expect(data.faqPage.mainEntity[0]).toMatchObject({
+      "@type": "Question",
+      name: "PDF to PNG 1080p은 무엇인가요?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: app.summary
+      }
+    });
+  });
+
+  it("connects the site, publisher, and collection as one entity graph", () => {
+    const data = createSiteStructuredData([app], "https://example.com");
+    const [organization, website, collection] = data["@graph"];
+
+    expect(data).toMatchObject({ "@context": "https://schema.org" });
+    expect(organization).toMatchObject({
+      "@type": "Organization",
+      "@id": "https://example.com/#organization",
+      name: "Hong's Vibe Coding Lab",
+      alternateName: "바이브홍",
+      logo: "https://example.com/icon",
+      sameAs: ["https://github.com/WBmaker2/vibecoding-lab"]
+    });
+    expect(website).toMatchObject({
+      "@type": "WebSite",
+      "@id": "https://example.com/#website",
+      alternateName: "바이브홍",
+      publisher: { "@id": "https://example.com/#organization" }
+    });
+    expect(collection).toMatchObject({
+      "@type": "CollectionPage",
+      "@id": "https://example.com/#collection",
+      isPartOf: { "@id": "https://example.com/#website" },
+      publisher: { "@id": "https://example.com/#organization" }
+    });
   });
 });

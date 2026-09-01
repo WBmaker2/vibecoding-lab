@@ -8,12 +8,14 @@ describe("HomePage", () => {
     expect(
       screen.getByRole("heading", { name: /Hong's Vibe Coding Lab/i })
     ).toBeInTheDocument();
-    expect(screen.getByText(/공개 아카이브/i)).toBeInTheDocument();
+    expect(screen.getByText(/웹앱 아카이브/i)).toBeInTheDocument();
     expect(
       screen.getByRole("searchbox", { name: /앱 검색/i })
     ).toBeInTheDocument();
     expect(screen.getByText(/^대표 태그$/)).toBeInTheDocument();
     const structuredData = container.querySelector('script[type="application/ld+json"]');
+    expect(structuredData).toHaveTextContent('"@type":"Organization"');
+    expect(structuredData).toHaveTextContent('"@type":"WebSite"');
     expect(structuredData).toHaveTextContent('"@type":"CollectionPage"');
   });
 });

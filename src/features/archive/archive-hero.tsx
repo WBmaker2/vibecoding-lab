@@ -45,8 +45,7 @@ export function ArchiveHero({
           </div>
           <h1>Hong&apos;s Vibe Coding Lab</h1>
           <p className="hero-copy">
-            교실 수업과 교사 업무를 가볍게 만드는 웹앱을 빠르게 찾고 바로 열 수
-            있는 공개 아카이브입니다.
+            바이브홍이 만든 교실 수업·교사 업무용 웹앱 아카이브입니다.
           </p>
         </div>
 

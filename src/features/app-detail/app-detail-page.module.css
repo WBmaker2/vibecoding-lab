@@ -176,6 +176,78 @@
   box-shadow: 0 0 0 4px var(--focus-ring);
 }
 
+.factsSection,
+.processSection {
+  margin-top: 24px;
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.86);
+  padding: 30px;
+}
+
+.factsSection h2,
+.processSection h2 {
+  margin: 0;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+.factGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0 0;
+}
+
+.fact {
+  min-width: 0;
+  border-radius: 16px;
+  background: rgba(62, 95, 146, 0.07);
+  padding: 16px;
+}
+
+.fact dt {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.fact dd {
+  margin: 8px 0 0;
+  color: var(--text-strong);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.processList {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: process-step;
+}
+
+.processList li {
+  counter-increment: process-step;
+  min-width: 0;
+  border: 1px solid rgba(62, 95, 146, 0.16);
+  border-radius: 16px;
+  padding: 16px;
+  color: var(--text-strong);
+  font-weight: 800;
+}
+
+.processList li::before {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent);
+  content: counter(process-step, decimal-leading-zero);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+}
+
 .noteSection {
   margin-top: 24px;
   border: 1px solid var(--panel-border);
@@ -204,6 +276,43 @@
   color: var(--text-soft);
   font-size: 1.02rem;
   line-height: 1.8;
+}
+
+.faqSection {
+  margin-top: 24px;
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.86);
+  padding: 30px;
+}
+
+.faqSection h2 {
+  margin: 0;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+.faqList {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 0;
+}
+
+.faqItem {
+  border-radius: 16px;
+  background: rgba(62, 95, 146, 0.07);
+  padding: 16px 18px;
+}
+
+.faqItem dt {
+  color: var(--text-strong);
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.faqItem dd {
+  margin: 8px 0 0;
+  color: var(--text-soft);
+  line-height: 1.7;
 }
 
 .relatedSection {
@@ -327,7 +436,10 @@
   }
 
   .content,
-  .noteSection {
+  .factsSection,
+  .processSection,
+  .noteSection,
+  .faqSection {
     padding: 24px 20px;
   }
 
@@ -340,5 +452,10 @@
   .footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .factGrid,
+  .processList {
+    grid-template-columns: 1fr 1fr;
   }
 }

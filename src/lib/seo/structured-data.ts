@@ -1,10 +1,13 @@
 import { createAppPath } from "@/lib/apps/app-slug";
+import { createAppFaqItems } from "@/lib/apps/app-faq";
 import type { PublicAppRecord } from "@/lib/apps/types";
 import {
   getAbsoluteUrl,
   getSiteUrl,
+  SITE_BRAND,
   SITE_DESCRIPTION,
-  SITE_NAME
+  SITE_NAME,
+  SITE_REPOSITORY
 } from "./site-url";
 
 const AUDIENCE_LABELS = {
@@ -13,15 +16,15 @@ const AUDIENCE_LABELS = {
   mixed: "교사와 학생"
 } as const;
 
-export function createCollectionStructuredData(
+function createCollectionNode(
   apps: readonly PublicAppRecord[],
   siteUrl?: string
 ) {
   const rootUrl = getSiteUrl(siteUrl).toString();
 
   return {
-    "@context": "https://schema.org",
     "@type": "CollectionPage",
+    "@id": `${rootUrl}#collection`,
     name: SITE_NAME,
     description: SITE_DESCRIPTION,
     url: rootUrl,
@@ -39,9 +42,61 @@ export function createCollectionStructuredData(
   };
 }
 
+export function createCollectionStructuredData(
+  apps: readonly PublicAppRecord[],
+  siteUrl?: string
+) {
+  return {
+    "@context": "https://schema.org",
+    ...createCollectionNode(apps, siteUrl)
+  };
+}
+
+export function createSiteStructuredData(
+  apps: readonly PublicAppRecord[],
+  siteUrl?: string
+) {
+  const rootUrl = getSiteUrl(siteUrl).toString();
+  const organizationId = `${rootUrl}#organization`;
+  const websiteId = `${rootUrl}#website`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": organizationId,
+        name: SITE_NAME,
+        alternateName: SITE_BRAND,
+        description: SITE_DESCRIPTION,
+        url: rootUrl,
+        logo: getAbsoluteUrl("/icon", siteUrl),
+        sameAs: [SITE_REPOSITORY],
+        inLanguage: "ko-KR"
+      },
+      {
+        "@type": "WebSite",
+        "@id": websiteId,
+        name: SITE_NAME,
+        alternateName: SITE_BRAND,
+        description: SITE_DESCRIPTION,
+        url: rootUrl,
+        inLanguage: "ko-KR",
+        publisher: { "@id": organizationId }
+      },
+      {
+        ...createCollectionNode(apps, siteUrl),
+        isPartOf: { "@id": websiteId },
+        publisher: { "@id": organizationId }
+      }
+    ]
+  };
+}
+
 export function createAppStructuredData(app: PublicAppRecord, siteUrl?: string) {
   const rootUrl = getSiteUrl(siteUrl).toString();
   const detailUrl = getAbsoluteUrl(createAppPath(app), siteUrl);
+  const faqItems = createAppFaqItems(app);
   const image = app.thumbnailUrl
     ? getAbsoluteUrl(app.thumbnailUrl, siteUrl)
     : undefined;
@@ -69,8 +124,12 @@ export function createAppStructuredData(app: PublicAppRecord, siteUrl?: string) 
           }
         }
       : {}),
+    publisher: {
+      "@id": `${rootUrl}#organization`
+    },
     isPartOf: {
       "@type": "CollectionPage",
+      "@id": `${rootUrl}#collection`,
       name: SITE_NAME,
       url: rootUrl
     },
@@ -96,5 +155,19 @@ export function createAppStructuredData(app: PublicAppRecord, siteUrl?: string) 
     ]
   };
 
-  return { softwareApplication, breadcrumbList };
+  const faqPage = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${detailUrl}#faq`,
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer
+      }
+    }))
+  };
+
+  return { softwareApplication, breadcrumbList, faqPage };
 }

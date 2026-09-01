@@ -109,6 +109,7 @@ describe("static gallery exporter thumbnail entry safety", () => {
           ...app,
           id: "beta",
           title: "Legacy Beta",
+          url: "https://example.com/beta",
           thumbnailUrl: `${legacyOrigin}/api/%61pp-thumbnail/beta/1`
         }
       ];

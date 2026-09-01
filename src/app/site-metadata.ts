@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {
   DEFAULT_SITE_URL,
   getSiteUrl,
+  SITE_BRAND,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_TITLE
@@ -58,6 +59,8 @@ export function createSiteMetadata(
       }
     },
     keywords: [
+      SITE_BRAND,
+      "바이브홍 웹앱",
       "교사용 웹앱",
       "교사 업무경감",
       "교수 학습용 소프트웨어",

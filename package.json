@@ -18,6 +18,7 @@
     "apps:verify:turso": "node scripts/apps-verify-turso.mjs",
     "apps:export-static-gallery": "node scripts/apps-export-static-gallery.mjs",
     "apps:verify-static-gallery": "node scripts/apps-verify-static-gallery.mjs",
+    "apps:verify-geo": "node scripts/verify-geo-content.mjs",
     "apps:verify-production-gallery": "node scripts/verify-production-gallery.mjs"
   },
   "dependencies": {

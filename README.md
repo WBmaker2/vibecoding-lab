@@ -68,7 +68,22 @@ npm run test
 npm run test:e2e
 npm run lint
 npm run build
+npm run apps:verify-geo
 ```
+
+`apps:verify-geo`는 공개 정적 스냅샷의 GEO 기준선(앱 수, 중복 ID·제목·URL,
+허용된 메타데이터 값, 질문별 사실 완성도)을 검사합니다. 기본 모드는 누락된
+콘텐츠를 경고로 보고하며, 배포 차단 검사가 필요할 때는 `--strict`를 붙입니다.
+
+정적 갤러리 export도 GEO 사전검사를 수행합니다. 기존 콘텐츠와의 호환성을
+위해 기본 export는 오류를 차단하고 누락은 경고로 남기며, 운영 배포 전에
+콘텐츠 누락까지 차단하려면 다음 환경변수를 사용합니다.
+
+```bash
+GEO_CONTENT_STRICT=1 npm run apps:export-static-gallery -- --backup ./tmp/backups/<admin-backup>.json
+```
+
+기준선 질문과 측정 기록은 [`docs/geo/`](./docs/geo/)에 보관합니다.
 
 E2E는 `POSTGRES_URL`을 비워 둔 격리 메모리 저장소를 사용합니다. 관리자 저장은 `/admin` 라이브러리와 새로고침 지속성만 검증하며, 공개 정적 아카이브 반영을 위해 동기화 작업을 시작하지 않습니다.
 
@@ -171,3 +186,10 @@ Turso로 전환한 뒤에는 GitHub Actions secrets에 `TURSO_DATABASE_URL`, `TU
 6. 재배포와 소유권 확인 후 네이버의 요청 > 사이트맵 제출에 `https://www.vibehong.shop/sitemap.xml`을 입력합니다.
 
 사이트맵에는 홈과 모든 정적 앱 상세 주소가 포함됩니다. 관리자 및 API 경로는 `robots.txt`에서 크롤링 대상에서 제외하지만, 실제 접근 권한은 기존 관리자 세션 검증으로 보호합니다.
+
+### AI 검색 크롤러와 `llms.txt`
+
+- `/llms.txt`는 공개 앱 상세 페이지와 각 앱의 사실 정보를 에이전트가 찾기 쉽게 정리한 안내용 문서입니다. 이 파일만으로 검색 순위나 AI 인용이 보장되지는 않습니다.
+- `OAI-SearchBot`, `ChatGPT-User`, `Claude-SearchBot`, `Claude-User`, `PerplexityBot`, `Perplexity-User`에는 공개 페이지를 허용합니다.
+- `GPTBot`, `ClaudeBot`, `Google-Extended`, `CCBot`, `Applebot-Extended`와 같은 학습용 크롤러는 기본적으로 차단합니다. 학습 데이터 제공 여부를 바꾸려면 [`src/app/robots.ts`](./src/app/robots.ts)의 정책을 검토한 뒤 별도 승인으로 변경합니다.
+- 공개 콘텐츠의 설명·대상·교과·활용 과정은 앱 상세 페이지와 `src/data/public-apps.json`의 실제 값만을 기준으로 작성합니다.
