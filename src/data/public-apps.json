@@ -6,9 +6,29 @@
       "sha256": "f5b8206622f4e8c5614b47cddae33fb7bcc78280be0eb95539f38e31b1ef4331"
     },
     {
+      "path": "/app-thumbnails/0408f380-7399-4bdf-a9ce-012d0b9d8653.png",
+      "size": 137153,
+      "sha256": "dbe9daa9d5c97c7393f98405aed2b1787558accfd263345bc0a00ed8fc80ec58"
+    },
+    {
+      "path": "/app-thumbnails/04f330d5-4f20-462f-b500-f003d872865c.webp",
+      "size": 11514,
+      "sha256": "49adaee233b8bcde6f951c15dd123cff035d156fcf701222a9e5041fd48289a8"
+    },
+    {
       "path": "/app-thumbnails/0a1a350d-2f4d-4676-ba63-f33ad2147328.png",
       "size": 290961,
       "sha256": "c3f4f66b85af9c9e3515d5bbace566d1eb51288acdd96c5a129a66bdbbf92758"
+    },
+    {
+      "path": "/app-thumbnails/0c78d909-09c7-47d2-ba95-7e9b6e53ad5f.png",
+      "size": 35255,
+      "sha256": "6ed215228bd89fe801a309b8e78f9ce1df0d8e6826dedea1bc8c8b2e1f3e38c4"
+    },
+    {
+      "path": "/app-thumbnails/0f7733d5-e97c-4d65-a707-3d229c295b48.jpg",
+      "size": 51101,
+      "sha256": "fe7ff16f27662863b18f07802da325a53f1cb32733bae2f8f683b5635940581d"
     },
     {
       "path": "/app-thumbnails/10829a2a-f96b-48ee-bca7-bd28c9748f27.png",
@@ -21,6 +41,16 @@
       "sha256": "4fd15a733575e4b5b2cf9e2be46698afe2a26f658450053298bddb710adef960"
     },
     {
+      "path": "/app-thumbnails/14bd29ae-72e1-487d-8fb4-723c3b9666d1.png",
+      "size": 36049,
+      "sha256": "9dcbb40bb8dad579518bbf33a2bce892c25ea58f1fd8bbb51126602464547520"
+    },
+    {
+      "path": "/app-thumbnails/17df8ba0-fdd5-4627-9a61-3de742cd2325.png",
+      "size": 373585,
+      "sha256": "ab2fb35f5e93607d69ffd45689871d878517bc03a2f74f6c0039ed06d7398ccc"
+    },
+    {
       "path": "/app-thumbnails/1c13b710-5da9-4f8d-be49-c7b6af20fedb.png",
       "size": 25089,
       "sha256": "c88f2f209fe6002e318ff3289bfbd86f755f4046cedebc7fb0c7bd3ae5d9e45d"
@@ -29,6 +59,11 @@
       "path": "/app-thumbnails/1f459bb8-1d78-42e0-a1a1-e2505f3be832.png",
       "size": 253453,
       "sha256": "a93fe974f664f9987c95340fba2af5be628d57d6771fb31b9bbbfff34d29e789"
+    },
+    {
+      "path": "/app-thumbnails/24024447-d3b2-4586-98cb-616b3bc0f2e7.jpg",
+      "size": 46205,
+      "sha256": "cdd8dfceccb513f924ee68a339a09474e1acb8ce8dcfbe8a0fef79211552dcff"
     },
     {
       "path": "/app-thumbnails/25f6d160-3efc-42c7-accd-4f62eb0f7635.png",
@@ -46,14 +81,19 @@
       "sha256": "94be6286e41fd6a4a063f0ef7bf520833148e790f6e4740effb001e2d56d84be"
     },
     {
+      "path": "/app-thumbnails/2b090a4d-103f-4f42-9a4f-a7451a435bfe.png",
+      "size": 444279,
+      "sha256": "be945c853610abf3eca98f9c7f7c0fa58c1d4b126d9283ec349c50f1662c0a91"
+    },
+    {
       "path": "/app-thumbnails/2c47b201-4941-4d74-a5b0-bb84d696e01c.png",
       "size": 96981,
       "sha256": "4073cf338e3241ae52fc91164fdb069d856a231c974abe4a244e91e3720853bf"
     },
     {
       "path": "/app-thumbnails/2f302bf0-c012-4432-a585-106e74385b7d.png",
-      "size": 169344,
-      "sha256": "23565454a10a2afce94a47f35582aae93996286117ec1d140bb7c46d82e29f68"
+      "size": 166720,
+      "sha256": "656b9c5cde7e6834ee91ec10f52fd1239818bca80a61d31de96e2bc0334a5690"
     },
     {
       "path": "/app-thumbnails/31d29c7a-8ce6-4ba0-a5aa-e4bb984848b5.png",
@@ -62,8 +102,8 @@
     },
     {
       "path": "/app-thumbnails/373e131a-54eb-41a6-852f-aa54431b29c8.png",
-      "size": 303398,
-      "sha256": "ad7a74faeb01852fdad15797a9282f3a58ce32adb4809481839af0cfd32f9bd7"
+      "size": 290076,
+      "sha256": "6dede1aa4b1f7c50b3c3ed8c9d87967ad1656a0ede08b6430e10d21d70bc7c91"
     },
     {
       "path": "/app-thumbnails/3a72009d-c1ad-48b5-86b4-6eb870143eea.png",
@@ -107,8 +147,8 @@
     },
     {
       "path": "/app-thumbnails/42b8f202-db48-42f6-a8aa-e35192687889.png",
-      "size": 80883,
-      "sha256": "bb4999073f6d0007cf80eaf7e78590425009477d68ca44acab46dd9187eeeb3e"
+      "size": 134163,
+      "sha256": "a467b691da45c5a60bcce415cb61854c97e146430786fd56a5bd56a5ee09f9c5"
     },
     {
       "path": "/app-thumbnails/47acd11b-2f45-4029-8813-3add585cd1aa.png",
@@ -117,8 +157,23 @@
     },
     {
       "path": "/app-thumbnails/48b67d53-f103-4fc7-9544-59e8a73b2686.png",
-      "size": 101854,
-      "sha256": "405b8c2cead00c5895d9ac379f2cae83dab507f80679fcd5c82fc49f8427d38c"
+      "size": 105430,
+      "sha256": "ae58cf36d72ba2e1a91bbd13e7a21cab8274e54c57f0c1323d9b3c19ae3ff6f6"
+    },
+    {
+      "path": "/app-thumbnails/48d7b220-a37d-4502-93cc-b94432cc848d.png",
+      "size": 149878,
+      "sha256": "453fec1f9218260c3e00d1838b6373de0f27fe0ebea46ff05a3ae3ce07f9e256"
+    },
+    {
+      "path": "/app-thumbnails/4c12713f-aff0-484f-9ede-b7e80e18e4aa.png",
+      "size": 286239,
+      "sha256": "cf15ee4b65318a89efdfb39843921db6b27a3f75551423371982978c44098117"
+    },
+    {
+      "path": "/app-thumbnails/4e42e95a-b5ef-4b27-9876-9004781a04e8.png",
+      "size": 113512,
+      "sha256": "f30e7c79ea7b4c45ad5d1b59cd8f67cb9ac141744d3e88b07294a8e683207afd"
     },
     {
       "path": "/app-thumbnails/511d5334-1e2c-40ac-8f9b-bc7bc22a1a21.png",
@@ -127,8 +182,8 @@
     },
     {
       "path": "/app-thumbnails/5543c36a-42d8-49ba-b2e2-85a2c4f193ea.png",
-      "size": 95891,
-      "sha256": "752d5c741381146391aae22b7aab9ce2d57a60409b9e10725f655602202eebf3"
+      "size": 96548,
+      "sha256": "f1b1e9bde9afe7bb66fa25a2c6f2acd2105c2928879262244c906d970b3851e7"
     },
     {
       "path": "/app-thumbnails/56f95ab1-4ad1-45b6-8eac-e5ba6cf543b8.png",
@@ -136,9 +191,19 @@
       "sha256": "9dc0726fcaad1936fbe997db65160ef4d7fcee70c71a2c691f77d53070acc6e5"
     },
     {
+      "path": "/app-thumbnails/591d081f-4ced-4695-b6b5-3b0acb7335ab.png",
+      "size": 198014,
+      "sha256": "b7046cec0cd8a7acb692ec25f69d7935930c0375756406f2f4047d9d7d269d20"
+    },
+    {
       "path": "/app-thumbnails/596fc43f-8908-492f-b328-d43aae7e984d.png",
       "size": 241033,
       "sha256": "56b7220a98414dee211207f8ae04819293d0425bb2b9d93bc2f9d3639e44b33a"
+    },
+    {
+      "path": "/app-thumbnails/5aff20b9-e329-4536-8761-a82adee6cfb2.png",
+      "size": 93460,
+      "sha256": "18ac54f307dab5e86e53438a3ff0c6c8dcfc36f2398f5ec0ad5eeb70e6df216e"
     },
     {
       "path": "/app-thumbnails/60646b44-ffef-45f9-a774-65df50211a9a.png",
@@ -166,6 +231,16 @@
       "sha256": "901a13322328d7e6c87cf9ae45ba657505b23a0356fb7e2fc9bf67b1cbdfa6e8"
     },
     {
+      "path": "/app-thumbnails/6a156b7b-8b4d-42f5-b17a-9708480597fb.png",
+      "size": 292317,
+      "sha256": "28c45cc400ef1ff0c4974025eb2ef2ee730ad0568ed60ac84c3950376e9b69cd"
+    },
+    {
+      "path": "/app-thumbnails/6aff7689-3530-4b21-97f4-18a1d433ba44.jpg",
+      "size": 38582,
+      "sha256": "29560b16cb98e5719786e8b2161eb9128d2de04045e5b3a60e48e768f6141ca4"
+    },
+    {
       "path": "/app-thumbnails/6b801106-2602-42d8-8cd2-d26716433860.png",
       "size": 393199,
       "sha256": "a34bf2435deed9dcf0a690e2eb743725431116e9998c13343b20773f48b84e49"
@@ -174,6 +249,16 @@
       "path": "/app-thumbnails/7507c704-bd01-497e-aeb5-1578209b0d6e.png",
       "size": 168923,
       "sha256": "9b6a04e694fb9ce7ac7750f07dbc717687357b178d0847ec5388c887f2708332"
+    },
+    {
+      "path": "/app-thumbnails/75ec9fee-5c4e-4a16-96a4-ab57dcdc8a1b.png",
+      "size": 119617,
+      "sha256": "415dab3b3dcf9fd31a12b651cccf7027bb52b904671a9b9991c0edfe701bfaae"
+    },
+    {
+      "path": "/app-thumbnails/76b46695-206c-4b21-9d85-096a2545281c.png",
+      "size": 78564,
+      "sha256": "c7b959c35950c67753ffcf6485d56236bbdabb3063119f3cdf54badf2fd6df24"
     },
     {
       "path": "/app-thumbnails/77669d34-e66c-4f01-a74c-f703447fa17d.png",
@@ -191,6 +276,11 @@
       "sha256": "af8d0e74358d6b879d15e8c68ff383618f8b6df0952cbe4b14d12c3df46109c2"
     },
     {
+      "path": "/app-thumbnails/7d8cff7a-3eba-4eb9-9b55-d5fd80118487.png",
+      "size": 97754,
+      "sha256": "91fa1fba8f24e991cf717d3a27dc07fd742875055f62fd1f41f95f70aa66441e"
+    },
+    {
       "path": "/app-thumbnails/837829ee-abd3-46a7-9554-ec83055bbdf0.png",
       "size": 156553,
       "sha256": "3c251a47488a3c6d0085d90dc1141e4f16869fbcf1a0f26439b09516680bf89f"
@@ -206,9 +296,24 @@
       "sha256": "ad1f6dcb3384bc23ba7ad6214a920cf2f9d2e30e3fa5ab9319952b9fb525643f"
     },
     {
+      "path": "/app-thumbnails/88824ea6-7f4b-40e0-886a-22abb4cab9ea.png",
+      "size": 122141,
+      "sha256": "3eb98db9c109c08e5a81a1e773b43152cbdbfd038cd243e3a69054808beb0841"
+    },
+    {
       "path": "/app-thumbnails/890a0ba1-6e4c-4bf8-a9d9-2009802a94fb.png",
       "size": 62283,
       "sha256": "983d428d84d221c726acc11e38b8a57d118850525786c394faaaaa799e4921d3"
+    },
+    {
+      "path": "/app-thumbnails/8ab915b7-4bf6-4153-bc05-6ae93650758f.png",
+      "size": 80635,
+      "sha256": "ed173da6b193a6239a3d45e66a8b3d6841794f4da8dc9134d435aa2e7463a7aa"
+    },
+    {
+      "path": "/app-thumbnails/8b08bf12-471a-4b2d-8966-1d2628eead80.png",
+      "size": 103949,
+      "sha256": "1dad4beea769c9c131156f2893c03ffd6814c8cfc574bbb90c50f0ecb9f45022"
     },
     {
       "path": "/app-thumbnails/8ce3212a-1d5a-4987-8a51-bc6ecdb96324.png",
@@ -222,8 +327,8 @@
     },
     {
       "path": "/app-thumbnails/91fc1ce8-f455-464d-ace8-f2d2b2ed2985.png",
-      "size": 369624,
-      "sha256": "f1bc49edce7eb332dccb20cf05764ec841a98685dee6d432a9b3d5da30344e3a"
+      "size": 372300,
+      "sha256": "53772ed470d9ac8982a688d60f0cf3f8f73c23d985a26ecf300e473e17874a38"
     },
     {
       "path": "/app-thumbnails/96932b6e-d720-4fdb-80ff-1db37f5b0e6f.png",
@@ -252,8 +357,13 @@
     },
     {
       "path": "/app-thumbnails/9e77dba6-7388-4b21-bf2e-b74b9d9e5193.png",
-      "size": 77615,
-      "sha256": "30073c1efddcebdea28ad3a9b477acfd77e9d745ac07680ecdcebd762b71d5d4"
+      "size": 75453,
+      "sha256": "4cd88ee886110f3622c8392683c0bcba5bb51644c13f8c39c5f290ff910c3e86"
+    },
+    {
+      "path": "/app-thumbnails/a04b8a38-d993-48a7-9c10-3f0e669b610c.png",
+      "size": 2690231,
+      "sha256": "427d846091512f46cb055e7c17e63b618123cbf4d09e89ab98c3f5bb5a9ef1d4"
     },
     {
       "path": "/app-thumbnails/a062beee-cba2-4074-a637-182d3b9af316.png",
@@ -276,6 +386,11 @@
       "sha256": "904a8f23aebe06393f398a42c07b84206a7daa9257cb1fa0ef82454d9ca5252b"
     },
     {
+      "path": "/app-thumbnails/a98ac443-f235-42c9-9bca-00a762c83feb.jpg",
+      "size": 41498,
+      "sha256": "c723d7511e9f488c9012d3289afb73672cac26f847b688aca8ecef3afa9fccf8"
+    },
+    {
       "path": "/app-thumbnails/a990e157-a2d7-4ded-b339-5ca3a1b50a66.png",
       "size": 201211,
       "sha256": "c5c7e8f8f7edbd255a682daa42b13aa6598e00a7c3f4f3cedc2f42efacb86baa"
@@ -292,13 +407,18 @@
     },
     {
       "path": "/app-thumbnails/af1fee94-763b-4f7c-9607-bc685873a2fc.png",
-      "size": 80208,
-      "sha256": "f6b11c2aaba1828f3ee90b09aa9042f4ff7312a208ba59cd834495f332db41ec"
+      "size": 79741,
+      "sha256": "d66d699b80f8fab6d47374855e54adc92a9c1c774c99849ff7134ef1a6d87a8e"
     },
     {
       "path": "/app-thumbnails/b023a954-b497-4467-b043-64910bd20dac.png",
       "size": 198919,
       "sha256": "8b1ad48bf3aa2d056b1e1c3438fb247c50fb4d236832773aadeb898b5ecb47bc"
+    },
+    {
+      "path": "/app-thumbnails/b0b0b7d1-9e95-47c2-859e-9fc6c69cf735.png",
+      "size": 166357,
+      "sha256": "6c73df2d170fa84dc15199d3462b868297c93d3b7b15efc1e9b4e48fb04954a7"
     },
     {
       "path": "/app-thumbnails/b52fd0e4-768b-4cc1-806c-53deef04f003.png",
@@ -316,9 +436,19 @@
       "sha256": "5e3b84df6bdd054758560357b098601c4d73a66c16bd344d4e386f0d4428e5a9"
     },
     {
+      "path": "/app-thumbnails/bc954246-e62f-4b14-ae1e-9dfc8e25052e.png",
+      "size": 117752,
+      "sha256": "ba8818e0bace7140acf29ede9b1110c3eca8eab9423a32c206e5306c5a29c650"
+    },
+    {
       "path": "/app-thumbnails/bebd1fd7-5b54-4923-a476-fae00288d4e2.png",
       "size": 393199,
       "sha256": "b549d43deec400c9833494ed5213aa9fb20f3cfd856fa1c3b3551ad751d64dc5"
+    },
+    {
+      "path": "/app-thumbnails/c4135648-1a59-40f4-8fb0-1ae54dba2306.png",
+      "size": 91887,
+      "sha256": "e733c80b5474806d0149e0722c73f14c226cf72e220f427a60c8d1a246ad662a"
     },
     {
       "path": "/app-thumbnails/c4962759-1d6a-4070-85a8-cc46c91a70f1.png",
@@ -336,14 +466,24 @@
       "sha256": "6f5c76136941a88d33b237e02ed5e27f3d5a1474f62b30f024f9cacc37a8ea01"
     },
     {
-      "path": "/app-thumbnails/ca39ad82-aec4-4011-84a8-56cfaa981631.jpg",
-      "size": 101770,
-      "sha256": "15bf16774b371fae4d01cc4f33f5a39592fdf4638463233d3bddd41c5826e462"
+      "path": "/app-thumbnails/ca39ad82-aec4-4011-84a8-56cfaa981631.png",
+      "size": 263577,
+      "sha256": "41d749ad1d793d20ea1cb64c46ff88ce0167751f3ba7384b35da4327f54c90ba"
     },
     {
       "path": "/app-thumbnails/ca54acea-5292-4aff-80bd-8ea5da49294c.png",
       "size": 110947,
       "sha256": "2795ce1d9b413b212d8444924f658af80500a1b027b9588b1f07b2159d6935ba"
+    },
+    {
+      "path": "/app-thumbnails/cc83950c-0bd5-4e11-b223-0f2d1ae71d33.jpg",
+      "size": 37806,
+      "sha256": "bc8b406029b33c326ba5861f34f323d4349a08902554b5de424e57cf5e747e85"
+    },
+    {
+      "path": "/app-thumbnails/ce06a047-2112-4d52-b1a5-fb5858636610.png",
+      "size": 76684,
+      "sha256": "5ed802f3bf838fdaa1f617e789ff1b6f68f4fe8e3626dc5c3c2e9729cce79f22"
     },
     {
       "path": "/app-thumbnails/d093f79b-8672-4498-8f39-b65397fff216.png",
@@ -362,8 +502,8 @@
     },
     {
       "path": "/app-thumbnails/d9e05a77-4d67-4c0e-be07-48b069383791.png",
-      "size": 214556,
-      "sha256": "f38e78b998e792ae11d08c993a8ce1a2c164009d2094c8a63816f97b72e42353"
+      "size": 148008,
+      "sha256": "2d7e90deaafb8bfd6630a7aeac685e6f613630c7e0ab27a28b4ef9f2105c4142"
     },
     {
       "path": "/app-thumbnails/dbf5fa15-fe4b-47a5-a186-29e4f50d8665.png",
@@ -371,9 +511,14 @@
       "sha256": "86d6a17c4cf7bf993198f49b184337251188cf9d060a5977c0276205b69d12ac"
     },
     {
+      "path": "/app-thumbnails/de70eb9d-68ba-443d-ba6f-2613e6973c3d.png",
+      "size": 86147,
+      "sha256": "50fa4263bc12db2dde57438c2499e4598753a137e6db64ad181b904b3e81838f"
+    },
+    {
       "path": "/app-thumbnails/e3673005-3e93-42cd-9076-044480a41344.png",
-      "size": 153181,
-      "sha256": "bb93d8c7f7ca99dfcff9e52803d135e434097f68d402a5c5916225944362d4bf"
+      "size": 1166021,
+      "sha256": "d63977e092cac83b894da4e262a1498885d88fc66aae1cd56b796511c92460a3"
     },
     {
       "path": "/app-thumbnails/e417c1ae-442e-4225-a7d3-c126f655183a.png",
@@ -384,6 +529,11 @@
       "path": "/app-thumbnails/e41f2952-cbee-4463-9205-c3e7ce269602.png",
       "size": 194404,
       "sha256": "11bd3b0d6d2c41d56fe47fe796ccee7eef18bf5d5fd00812d4fca2d18eceb26d"
+    },
+    {
+      "path": "/app-thumbnails/ec00c831-5eb4-45ec-be63-a3f7889c39c5.jpg",
+      "size": 38400,
+      "sha256": "a09ecb176dc3c5fb1d93219f48166796becf136adf7cf27e231d65548d71d108"
     },
     {
       "path": "/app-thumbnails/f058dc1c-3ee5-4368-ba32-23ed3fcaac37.png",
@@ -417,9 +567,1839 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-08-16T12:50:28.967Z",
-  "appCount": 84,
+  "generatedAt": "2026-09-01T09:45:55.971Z",
+  "appCount": 114,
   "apps": [
+    {
+      "id": "a04b8a38-d993-48a7-9c10-3f0e669b610c",
+      "title": "태양계 탐사대: 사라진 안내판의 비밀",
+      "summary": "초등학교 5학년 학생이 4쪽 22컷 학습만화와 수업 자료를 읽으며 태양계 행성의 순서·특징·반사광을 탐구하는 과학 수업용 웹앱입니다.",
+      "url": "https://wbmaker2.github.io/grade5-solar-system-webtoon/",
+      "githubUrl": "https://github.com/WBmaker2/grade5-solar-system-webtoon",
+      "tags": [
+        "과학",
+        "수업",
+        "탐구",
+        "시각화"
+      ],
+      "thumbnailMode": "auto",
+      "thumbnailUrl": "/app-thumbnails/a04b8a38-d993-48a7-9c10-3f0e669b610c.png",
+      "subject": "과학",
+      "grade": "초등 5학년",
+      "memo": "과학 수업에서 태양계 행성의 순서, 암석형과 거대행성의 특징, 반사광, 공전 시간을 4쪽 학습만화로 읽고 확인문제와 교사용 안내서·학생 활동지로 확장할 수 있습니다. 17컷은 관찰자 뒤에서 오는 빛이 행성에 반사되어 눈에 들어오는 장면으로 교정되었습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "mixed",
+      "interactionType": "reference",
+      "learningProcess": [
+        "읽기",
+        "관찰",
+        "분류",
+        "설명",
+        "확인"
+      ],
+      "createdAt": "2026-09-01T08:57:48.647Z",
+      "updatedAt": "2026-09-01T08:57:48.647Z"
+    },
+    {
+      "id": "0408f380-7399-4bdf-a9ce-012d0b9d8653",
+      "title": "파이썬 한입 교실",
+      "summary": "중학생이 파이썬 기초를 69개 단계로 배우고 브라우저 코드 실습과 결과 확인을 이어가는 자기주도형 코딩 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/python-bite-class/",
+      "githubUrl": "https://github.com/WBmaker2/python-bite-class",
+      "tags": [
+        "코딩",
+        "수업",
+        "실험",
+        "인터랙티브"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/0408f380-7399-4bdf-a9ce-012d0b9d8653.png",
+      "subject": "정보",
+      "grade": "중학생",
+      "memo": "정보 수업의 도입부터 함수·자료 구조·실생활 문제 해결까지 순차 학습에 활용할 수 있으며, 단계별 잠금 해제와 브라우저 실행 결과로 개별 진도를 확인할 수 있습니다.",
+      "subjects": [
+        "정보"
+      ],
+      "gradeBands": [],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "읽기",
+        "실행",
+        "코드 수정",
+        "결과 확인",
+        "단계 완료"
+      ],
+      "createdAt": "2026-09-01T03:56:01.031Z",
+      "updatedAt": "2026-09-01T03:56:01.031Z"
+    },
+    {
+      "id": "6a156b7b-8b4d-42f5-b17a-9708480597fb",
+      "title": "한/영 전환 도우미",
+      "summary": "Windows 사용자가 Shift+Space와 Ctrl+Space를 원하는 대로 켜 두고 어디서나 한/영 입력을 빠르게 전환하는 가벼운 시스템 트레이 도구입니다.",
+      "url": "https://wbmaker2.github.io/shift-space-lang-change/",
+      "githubUrl": "https://github.com/WBmaker2/shift-space-lang-change",
+      "tags": [
+        "생활도구",
+        "업무",
+        "Windows"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/6a156b7b-8b4d-42f5-b17a-9708480597fb.png",
+      "subject": "공통",
+      "grade": null,
+      "memo": "교사와 일반 사용자가 익숙한 단축키로 한/영 입력을 전환할 수 있는 Windows 10/11 x64용 도구입니다. 광고·계정·키 입력 수집 없이 동작하며 GitHub 공개 릴리스에서 설치할 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "teacher",
+      "interactionType": "utility",
+      "learningProcess": [
+        "변환",
+        "확인",
+        "저장"
+      ],
+      "createdAt": "2026-08-31T23:50:30.713Z",
+      "updatedAt": "2026-08-31T23:50:30.713Z"
+    },
+    {
+      "id": "14bd29ae-72e1-487d-8fb4-723c3b9666d1",
+      "title": "악곡 구조 탐정실",
+      "summary": "짧은 합성 음악 조각을 듣고 같음·다름·되돌아옴을 근거로 AA·AB·ABA 구조를 찾는 초등 3~6학년 음악 감상 활동 앱입니다.",
+      "url": "https://wbmaker2.github.io/music-form-detective/",
+      "githubUrl": "https://github.com/WBmaker2/music-form-detective",
+      "tags": [
+        "음악",
+        "감상",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/14bd29ae-72e1-487d-8fb4-723c3b9666d1.png",
+      "subject": "음악",
+      "grade": "초등 3~6학년",
+      "memo": "구간 반복과 대조, 처음으로 되돌아오는 느낌을 듣기 근거로 판단해 형식(AA·AB·ABA)을 찾는 점수 없는 감상 활동입니다. 저장·네트워크 없이 동작해 음악과 감상 영역 도입이나 개별 학습 활동에 바로 쓸 수 있습니다.",
+      "subjects": [
+        "음악"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "관찰",
+        "비교",
+        "정리"
+      ],
+      "createdAt": "2026-08-29T02:18:28.130Z",
+      "updatedAt": "2026-08-29T02:18:28.130Z"
+    },
+    {
+      "id": "04f330d5-4f20-462f-b500-f003d872865c",
+      "title": "소수 자리 교환소",
+      "summary": "초등 3~4학년 학생이 1, 0.1, 0.01 자리 조각을 열 개씩 교환하며 소수의 자릿값, 같은 값의 다른 표현, 크기 비교를 백분위 값으로 판단하는 수학 활동 앱입니다.",
+      "url": "https://wbmaker2.github.io/decimal-place-exchange/",
+      "githubUrl": "https://github.com/WBmaker2/decimal-place-exchange",
+      "tags": [
+        "수학",
+        "소수",
+        "자릿값"
+      ],
+      "thumbnailMode": "auto",
+      "thumbnailUrl": "/app-thumbnails/04f330d5-4f20-462f-b500-f003d872865c.webp",
+      "subject": "수학",
+      "grade": "초등 3~4학년",
+      "memo": "여섯 개의 검수된 고정 미션으로 0.7 읽기·열 개 교환(값 100 보존)·0.34 구성·0.7>0.65 비교·0.4=0.40 동치·1.02<1.2=1.20 순서를 다룹니다. 점수 없이 최초 판단→근거→수정 기록을 남기고, 서버·저장 없이 동작해 오프라인 교실에서도 사용할 수 있습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "관찰",
+        "예측",
+        "교환",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-08-29T02:00:45.163Z",
+      "updatedAt": "2026-08-29T02:16:38.982Z"
+    },
+    {
+      "id": "7cdc3225-e941-4b39-bb38-29e828ed77f0",
+      "title": "공기 부피 압축 연구소",
+      "summary": "초등 5~6학년 학생이 밀폐·열림·누출 조건의 가상 주사기 모형에서 공기가 차지하는 공간과 모형 공기 표식의 변화를 예측하고, 유한 상태표의 관찰 결과로 판단을 근거 있게 수정하는 과학 활동 앱입니다.",
+      "url": "https://wbmaker2.github.io/air-compression-rescue-lab/",
+      "githubUrl": "https://github.com/WBmaker2/air-compression-rescue-lab",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "수업"
+      ],
+      "thumbnailMode": "auto",
+      "thumbnailUrl": null,
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "여섯 개의 검수된 고정 미션으로 밀폐 압축·개방 배출·당김 팽창·누출 판단 보류를 다룹니다. 점수 없이 최초 판단→근거→수정 기록을 남기고, 서버·저장 없이 동작해 오프라인 교실에서도 사용할 수 있습니다. 학생 응답은 새로고침하면 사라집니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "관찰",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-08-29T01:41:23.802Z",
+      "updatedAt": "2026-08-29T01:41:23.802Z"
+    },
+    {
+      "id": "de70eb9d-68ba-443d-ba6f-2613e6973c3d",
+      "title": "앱 권한 최소허용 연구소",
+      "summary": "초등 5~6학년 학생이 가상 앱의 기능과 권한을 비교해 필요한 권한만 고르고, 거부·대안·철회 이유까지 연습하는 디지털 시민성 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/minimum-permission-lab/",
+      "githubUrl": "https://github.com/WBmaker2/minimum-permission-lab",
+      "tags": [
+        "안전",
+        "디지털윤리",
+        "시뮬레이션",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/de70eb9d-68ba-443d-ba6f-2613e6973c3d.png",
+      "subject": "실과·도덕·디지털 시민성",
+      "grade": "초등 5~6학년",
+      "memo": "디지털 시민성·개인정보 보호 수업에서 가상 사례의 기능, 필요한 정보, 사용 시점, 보관 여부를 비교하고 최소 권한 판단과 철회 이유를 연습하는 활동으로 활용할 수 있습니다.",
+      "subjects": [
+        "실과",
+        "도덕",
+        "디지털 시민성"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "mixed",
+      "interactionType": "practice",
+      "learningProcess": [
+        "기능 확인 → 권한 비교 → 최소 권한 선택 → 영향 비교 → 수정·근거 작성 → 철회 연습"
+      ],
+      "createdAt": "2026-08-29T00:29:19.887Z",
+      "updatedAt": "2026-08-29T00:29:19.887Z"
+    },
+    {
+      "id": "b0b0b7d1-9e95-47c2-859e-9fc6c69cf735",
+      "title": "전개도 포장 검수소",
+      "summary": "초등학생이 정육면체 전개도를 접으며 면과 모서리 관계를 예측하고 오류를 진단·수리해 근거 문장으로 설명하는 수학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/net-folding-inspection-center/",
+      "githubUrl": "https://github.com/WBmaker2/net-folding-inspection-center",
+      "tags": [
+        "수학",
+        "도형",
+        "추론",
+        "시뮬레이션",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/b0b0b7d1-9e95-47c2-859e-9fc6c69cf735.png",
+      "subject": "수학",
+      "grade": "초등 5~6학년",
+      "memo": "정육면체 전개도를 기준면·접는 순서·면 관계로 살펴보고, 접기 결과를 진단·수리한 뒤 근거 문장으로 설명하는 수학 수업 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:28:45.258Z",
+      "updatedAt": "2026-08-29T00:28:45.258Z"
+    },
+    {
+      "id": "76b46695-206c-4b21-9d85-096a2545281c",
+      "title": "평균 균형 조정실",
+      "summary": "초등 5~6학년 학생이 가상 자료를 고르게 나누고 평균의 변화와 한계를 근거 문장으로 설명하는 수학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/mean-balance-lab/",
+      "githubUrl": "https://github.com/WBmaker2/mean-balance-lab",
+      "tags": [
+        "수학",
+        "자료해석",
+        "탐구",
+        "시뮬레이션",
+        "추론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/76b46695-206c-4b21-9d85-096a2545281c.png",
+      "subject": "수학",
+      "grade": "초등 5~6학년",
+      "memo": "수학 [6수04-01] 평균 수업에서 가상 자료를 고르게 재배분하고, 평균 계산·분포 비교·튀는 값·대표값의 한계를 단계별로 탐구하는 25~35분 활동에 활용할 수 있습니다. 실제 학생 자료나 개인정보 없이 버튼과 키보드로 진행합니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:28:16.616Z",
+      "updatedAt": "2026-08-29T00:28:16.616Z"
+    },
+    {
+      "id": "8ab915b7-4bf6-4153-bc05-6ae93650758f",
+      "title": "관점 렌즈 사건실",
+      "summary": "초등 학습자가 가상 사건을 두 관점으로 읽고 근거를 분류·비교한 뒤 사실을 보존해 다시 써 보는 국어 활동 앱입니다.",
+      "url": "https://wbmaker2.github.io/perspective-lens-case-room/",
+      "githubUrl": "https://github.com/WBmaker2/perspective-lens-case-room",
+      "tags": [
+        "국어",
+        "관찰",
+        "분류",
+        "추론",
+        "토론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/8ab915b7-4bf6-4153-bc05-6ae93650758f.png",
+      "subject": "국어",
+      "grade": "초등 5~6학년",
+      "memo": "국어 읽기 수업에서 같은 사건을 두 관점으로 읽고 근거를 비교한 뒤, 사실을 지키며 관점 전환 문장을 만들어 보는 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "읽기",
+        "분류",
+        "비교",
+        "다시 쓰기"
+      ],
+      "createdAt": "2026-08-29T00:28:04.854Z",
+      "updatedAt": "2026-08-29T00:28:04.854Z"
+    },
+    {
+      "id": "48d7b220-a37d-4502-93cc-b94432cc848d",
+      "title": "세탁표시 구조대",
+      "summary": "초등 6학년 학생이 가상 옷의 세탁표시를 확대해 읽고, 세탁·건조·다림질 순서를 근거와 함께 정해 보는 실과 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/laundry-symbol-rescue-team/",
+      "githubUrl": "https://github.com/WBmaker2/laundry-symbol-rescue-team",
+      "tags": [
+        "생활도구",
+        "실과",
+        "안전",
+        "시뮬레이션",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/48d7b220-a37d-4502-93cc-b94432cc848d.png",
+      "subject": "실과",
+      "grade": "초등 6학년",
+      "memo": "실과 생활 자원 관리 수업에서 가상 의류의 표시를 읽고 공통 조건, 손상 가능성, 자원 사용을 비교하며 관리 계획을 세우는 활동으로 활용할 수 있습니다. 실제 의류는 제품 라벨과 보호자·교사 안내를 먼저 확인합니다.",
+      "subjects": [
+        "실과"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "표시 읽기",
+        "예측",
+        "관리 계획 세우기",
+        "결과 비교",
+        "근거 설명"
+      ],
+      "createdAt": "2026-08-29T00:27:54.998Z",
+      "updatedAt": "2026-08-29T00:27:54.998Z"
+    },
+    {
+      "id": "7d8cff7a-3eba-4eb9-9b55-d5fd80118487",
+      "title": "대화 수리 신호센터",
+      "summary": "초등 3~6학년 학생이 영어 대화에서 헷갈린 부분을 찾고 다시 묻는 네 단계 수리 전략을 연습하는 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/conversation-repair-signal-center/",
+      "githubUrl": "https://github.com/WBmaker2/conversation-repair-signal-center",
+      "tags": [
+        "영어",
+        "대화연습",
+        "상황표현",
+        "소통",
+        "의사소통"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/7d8cff7a-3eba-4eb9-9b55-d5fd80118487.png",
+      "subject": "영어",
+      "grade": "초등 3~6학년",
+      "memo": "영어 대화가 막힌 순간을 관찰·수리·응답·확인 네 단계로 연습하며, 학급에서는 짝 활동이나 개별 연습으로 활용할 수 있습니다. 음성 없이도 대본으로 진행하고 학생 이름·점수·서버 저장 없이 수업을 마칠 수 있습니다.",
+      "subjects": [
+        "영어"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:27:46.305Z",
+      "updatedAt": "2026-08-29T00:27:46.305Z"
+    },
+    {
+      "id": "ce06a047-2112-4d52-b1a5-fb5858636610",
+      "title": "낱말 뜻 갈림길",
+      "summary": "초등 3~4학년 학생이 문맥 단서를 살펴 같은 낱말의 뜻을 구별하고 모호한 문장을 고쳐 쓰는 국어 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/word-meaning-crossroads/",
+      "githubUrl": "https://github.com/WBmaker2/word-meaning-crossroads",
+      "tags": [
+        "국어",
+        "단어 분석",
+        "맥락",
+        "추론",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/ce06a047-2112-4d52-b1a5-fb5858636610.png",
+      "subject": "국어",
+      "grade": "초등 3~4학년",
+      "memo": "국어 수업에서 학생이 같은 낱말이 문장에 따라 달라지는 뜻을 주변 단서로 비교하고, 판단하기 어려운 문장을 여러 방법으로 고쳐 쓰며 근거를 기록하는 20~30분 탐구 활동으로 활용할 수 있습니다. 이름·로그인·저장 없이 화면 텍스트만으로 진행합니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:27:37.979Z",
+      "updatedAt": "2026-08-29T00:27:37.979Z"
+    },
+    {
+      "id": "c4135648-1a59-40f4-8fb0-1ae54dba2306",
+      "title": "도시 기능 입지 심의실",
+      "summary": "초등 5~6학년 학생이 가상 도시의 인구·도로·위험·예산 자료를 비교해 공공시설 후보지를 정하고 주민 관점의 근거를 담은 의견서를 완성하는 사회·수학 탐구 앱",
+      "url": "https://wbmaker2.github.io/civic-facility-siting-room/",
+      "githubUrl": "https://github.com/WBmaker2/civic-facility-siting-room",
+      "tags": [
+        "사회",
+        "수학",
+        "탐구",
+        "시뮬레이션",
+        "토론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/c4135648-1a59-40f4-8fb0-1ae54dba2306.png",
+      "subject": "사회·수학",
+      "grade": "초등 5~6학년",
+      "memo": "가상 도시의 인구 분포, 도로 연결, 이동 단위, 위험 표지, 상대 예산을 비교해 공공시설 입지를 정합니다. 학생이 후보지를 바꾸어 A안과 B안을 만들고, 주민 관점의 차이와 절충 근거를 담은 의견서를 완성하도록 수업 토론과 개별 탐구에 활용할 수 있습니다.",
+      "subjects": [
+        "사회",
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:27:33.025Z",
+      "updatedAt": "2026-08-29T00:27:33.025Z"
+    },
+    {
+      "id": "0c78d909-09c7-47d2-ba95-7e9b6e53ad5f",
+      "title": "규칙 단위 기관실",
+      "summary": "초등 1~2학년이 모양의 반복 규칙에서 가장 짧은 묶음을 찾고 이어 붙이기·수리·번역·자유 제작까지 연습하는 수학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/pattern-unit-engine-room/",
+      "githubUrl": "https://github.com/WBmaker2/pattern-unit-engine-room",
+      "tags": [
+        "수학",
+        "저학년",
+        "추론",
+        "탐구",
+        "시각화"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/0c78d909-09c7-47d2-ba95-7e9b6e53ad5f.png",
+      "subject": "수학",
+      "grade": "초등 1~2학년",
+      "memo": "1~2학년 수학 수업에서 반복 규칙의 가장 짧은 묶음을 찾고, 다음 항을 예측하고, 틀린 칸을 고치고, 다른 모양으로 바꾸고, 나만의 규칙을 만드는 15~25분 활동에 활용할 수 있습니다. 서버와 계정 없이 브라우저에서 진행하며 학생 이름·사진·음성·점수는 수집하지 않습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:27:08.634Z",
+      "updatedAt": "2026-08-29T00:27:08.634Z"
+    },
+    {
+      "id": "75ec9fee-5c4e-4a16-96a4-ab57dcdc8a1b",
+      "title": "혼합물 분리 공정 설계소",
+      "summary": "초등 5~6학년 학생이 혼합물의 성질을 관찰하고 가상 공정의 순서를 설계하며 분리 결과를 설명하는 과학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/mixture-separation-process-lab/",
+      "githubUrl": "https://github.com/WBmaker2/mixture-separation-process-lab",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "실험",
+        "탐구",
+        "안전"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/75ec9fee-5c4e-4a16-96a4-ab57dcdc8a1b.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "초등 5~6학년 과학 수업에서 혼합물의 알갱이 크기, 서로 섞이지 않는 성질, 용해·증발을 차례로 살펴보고 가상 토큰 이동을 근거로 공정을 설계·수정하는 활동에 활용할 수 있습니다. 실제 가열·측정 실험을 대신하지 않으며, 실제 실험은 교사의 안전 지도 아래 별도 절차로 진행합니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:27:03.650Z",
+      "updatedAt": "2026-08-29T00:27:03.650Z"
+    },
+    {
+      "id": "8b08bf12-471a-4b2d-8966-1d2628eead80",
+      "title": "추천 알고리즘 균형 실험실",
+      "summary": "초등 5~6학년 학생이 선택 기록과 추천 분포를 비교하며 반복 선택·다양성·공급 조건이 결과에 미치는 영향을 탐구하는 결정적 가상 실험입니다.",
+      "url": "https://wbmaker2.github.io/recommendation-balance-lab/",
+      "githubUrl": "https://github.com/WBmaker2/recommendation-balance-lab",
+      "tags": [
+        "인공지능",
+        "데이터",
+        "디지털윤리",
+        "시뮬레이션",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/8b08bf12-471a-4b2d-8966-1d2628eead80.png",
+      "subject": "실과",
+      "grade": "초등 5~6학년",
+      "memo": "6실05-04·6실05-05와 연결해 선택 편향, 추천 분포, 다양성의 절충을 학생이 직접 예측·비교·설명하는 30~40분 수업 활동으로 활용할 수 있습니다. 실제 계정·검색 기록 없이 결정적 가상 규칙만 사용합니다.",
+      "subjects": [
+        "실과"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "선택",
+        "예측",
+        "비교",
+        "조정",
+        "설명"
+      ],
+      "createdAt": "2026-08-29T00:26:47.072Z",
+      "updatedAt": "2026-08-29T00:26:47.072Z"
+    },
+    {
+      "id": "4e42e95a-b5ef-4b27-9876-9004781a04e8",
+      "title": "작업 순서 병목 해결소",
+      "summary": "초등 5~6학년 학생이 네 가지 가상 미션의 선후 관계와 제한 자원을 설계하고 병목을 찾아 더 나은 작업 순서를 설명하는 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/workflow-bottleneck-center/",
+      "githubUrl": "https://github.com/WBmaker2/workflow-bottleneck-center",
+      "tags": [
+        "시뮬레이션",
+        "협동",
+        "공정",
+        "실과",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/4e42e95a-b5ef-4b27-9876-9004781a04e8.png",
+      "subject": "실과·정보",
+      "grade": "초등 5~6학년",
+      "memo": "5~6학년 실과·정보 수업에서 네 가지 가상 미션의 선후 관계와 제한 자원을 설계하고, 시뮬레이션으로 기다림 원인을 찾아 수정 보고서까지 완성하는 활동에 활용할 수 있습니다. 점수·순위나 학생 이름 없이 기기 안에서 진행합니다.",
+      "subjects": [
+        "실과",
+        "정보"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-29T00:26:37.637Z",
+      "updatedAt": "2026-08-29T00:26:37.637Z"
+    },
+    {
+      "id": "2b090a4d-103f-4f42-9a4f-a7451a435bfe",
+      "title": "영어 상황 표현 교환대",
+      "summary": "초등 3~6학년 학생이 상황과 말하려는 목적을 먼저 판단하고, 검수된 영어 표현과 상대의 반응을 이어 대화를 완성하며 최초 판단·근거·수정 결과를 기록하는 무음 정적 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/english-situation-expression-desk/",
+      "githubUrl": "https://github.com/WBmaker2/english-situation-expression-desk",
+      "tags": [
+        "영어",
+        "의사소통",
+        "상황표현",
+        "대화연습"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/2b090a4d-103f-4f42-9a4f-a7451a435bfe.png",
+      "subject": "영어",
+      "grade": "초등",
+      "memo": "부탁·제안·초대·수락·사양·감사 상황에서 목적을 먼저 고르고 두 유효 표현을 비교한 뒤 상대 반응까지 연결해요. 점수·순위 없이 최초 판단과 수정 근거를 기록하고, 저장·네트워크 없이 동작합니다.",
+      "subjects": [
+        "영어"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-08-28T14:35:40.842Z",
+      "updatedAt": "2026-08-28T14:37:16.901Z"
+    },
+    {
+      "id": "bc954246-e62f-4b14-ae1e-9dfc8e25052e",
+      "title": "AI Studio 교사 연수원",
+      "summary": "대한민국 교사가 Google AI Studio의 기초부터 프롬프트 설계·수업 적용·안전 검토까지 단계별로 배우고 실습하는 안내 사이트입니다.",
+      "url": "https://google-ai-studio-edu.vercel.app/",
+      "githubUrl": "https://github.com/WBmaker2/google-ai-studio-edu",
+      "tags": [
+        "인공지능",
+        "수업",
+        "업무",
+        "코딩",
+        "안전"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/bc954246-e62f-4b14-ae1e-9dfc8e25052e.png",
+      "subject": "공통",
+      "grade": null,
+      "memo": "교사 연수와 개인 학습에서 AI Studio의 개념을 익히고, 로그인 없이 프롬프트를 조립·복사한 뒤 필요할 때만 개인 Gemini API 키로 결과를 시험해 볼 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "teacher",
+      "interactionType": "reference",
+      "learningProcess": [
+        "이해",
+        "실습",
+        "수업 적용",
+        "검토"
+      ],
+      "createdAt": "2026-08-24T15:00:11.246Z",
+      "updatedAt": "2026-08-24T15:00:11.246Z"
+    },
+    {
+      "id": "ec00c831-5eb4-45ec-be63-a3f7889c39c5",
+      "title": "지층 시간 캡슐",
+      "summary": "초등 5~6학년 학생이 지층 단면과 화석·침식·암맥 단서를 관찰해 상대적인 형성 순서를 복원하는 과학 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/strata-time-capsule/",
+      "githubUrl": "https://github.com/WBmaker2/strata-time-capsule",
+      "tags": [
+        "과학",
+        "탐구",
+        "관찰",
+        "추론",
+        "시각화"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/ec00c831-5eb4-45ec-be63-a3f7889c39c5.jpg",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "지층 단면을 관찰하고 1차 순서, 화석 단서, 침식·암맥 사건의 순서와 근거를 차례로 확인하는 과학 수업용 탐구 활동입니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "관찰",
+        "분류",
+        "순서 복원",
+        "근거 설명"
+      ],
+      "createdAt": "2026-08-24T06:59:31.585Z",
+      "updatedAt": "2026-08-24T14:17:52.974Z"
+    },
+    {
+      "id": "a062beee-cba2-4074-a637-182d3b9af316",
+      "title": "상상 톡톡, 이어지는 이야기 기차",
+      "summary": "친구들이 한 문장씩 이야기를 이어 쓰고 AI 장면 그림으로 상상력을 확장하는 협업 글쓰기 앱입니다.",
+      "url": "https://wbmaker2.github.io/ai-story-chain/",
+      "githubUrl": "https://github.com/WBmaker2/ai-story-chain",
+      "tags": [
+        "국어",
+        "수업",
+        "협동",
+        "창의활동",
+        "인공지능"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a062beee-cba2-4074-a637-182d3b9af316.png",
+      "subject": "국어",
+      "grade": "초등",
+      "memo": "모둠 활동에서 학생들이 문장을 한 줄씩 덧붙이고 생성 이미지로 장면을 확인하며 이야기 흐름을 함께 만들 수 있습니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "의견 제시",
+        "비교",
+        "협의"
+      ],
+      "createdAt": "2026-04-20T11:00:21.905Z",
+      "updatedAt": "2026-08-24T14:11:46.360Z"
+    },
+    {
+      "id": "24024447-d3b2-4586-98cb-616b3bc0f2e7",
+      "title": "마찰 바닥 시험장",
+      "summary": "초등 3~4학년 학생이 바닥 표면만 바꾸어 이동 거리와 멈춤 구역을 기록·비교하고 마찰이 운동에 미치는 영향을 탐구하는 과학 가상 실험 앱입니다.",
+      "url": "https://wbmaker2.github.io/friction-floor-test-station/",
+      "githubUrl": "https://github.com/WBmaker2/friction-floor-test-station",
+      "tags": [
+        "과학",
+        "탐구",
+        "시뮬레이션",
+        "실험",
+        "변인통제"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/24024447-d3b2-4586-98cb-616b3bc0f2e7.jpg",
+      "subject": "과학",
+      "grade": "초등 3~4학년",
+      "memo": "3~4학년 과학 수업에서 같은 물체와 같은 힘을 유지하고 바닥 표면만 바꾸어 이동 거리와 멈춤 구역을 기록·비교하며, 마찰이 운동을 방해한다는 근거를 설명하는 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "조건 확인",
+        "예측",
+        "가상 실험",
+        "관찰 기록",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-08-24T07:06:16.380Z",
+      "updatedAt": "2026-08-24T07:06:16.380Z"
+    },
+    {
+      "id": "0f7733d5-e97c-4d65-a707-3d229c295b48",
+      "title": "씨앗 이동 전략실",
+      "summary": "초등 3~4학년 학생이 씨앗의 모양과 이동 조건을 관찰하고 거리·분포·도착 지대를 비교해 이동 전략을 설명하는 과학 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/seed-dispersal-strategy-lab/",
+      "githubUrl": "https://github.com/WBmaker2/seed-dispersal-strategy-lab",
+      "tags": [
+        "과학",
+        "탐구",
+        "시뮬레이션",
+        "관찰",
+        "데이터"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/0f7733d5-e97c-4d65-a707-3d229c295b48.jpg",
+      "subject": "과학",
+      "grade": "초등 3~4학년",
+      "memo": "씨앗 도감에서 모양 단서를 확인하고 이동 방식을 예측한 뒤, 한 가지 조건만 바꾸어 최소 두 번 실행합니다. 거리·분포·도착 지대를 비교하고 관찰 결과에 맞는 근거 문장 네 개로 전략 보고서를 완성할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "관찰 → 예측 → 조건 설정 → 실행 → 비교 → 근거 작성"
+      ],
+      "createdAt": "2026-08-24T07:01:42.485Z",
+      "updatedAt": "2026-08-24T07:01:42.485Z"
+    },
+    {
+      "id": "a98ac443-f235-42c9-9bca-00a762c83feb",
+      "title": "별빛 마을 축척 길찾기",
+      "summary": "초등 5~6학년 학생이 가상 지도의 축척을 실제 거리로 환산하고 거리·시간·안전 조건에 맞는 경로를 비교하는 수학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/scale-map-route-finder/",
+      "githubUrl": "https://github.com/WBmaker2/scale-map-route-finder",
+      "tags": [
+        "수학",
+        "지도",
+        "측정",
+        "자료해석",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a98ac443-f235-42c9-9bca-00a762c83feb.jpg",
+      "subject": "수학",
+      "grade": "초등 5~6학년",
+      "memo": "5~6학년 수학의 비와 비율·축척 학습에서 모형 자로 지도 길이를 재고 실제 거리로 환산한 뒤, 거리·시간·안전 조건에 맞는 경로를 비교하고 선택 근거를 설명하는 미션 활동으로 활용할 수 있습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "측정",
+        "환산",
+        "비교",
+        "선택",
+        "설명"
+      ],
+      "createdAt": "2026-08-24T07:01:29.690Z",
+      "updatedAt": "2026-08-24T07:01:29.690Z"
+    },
+    {
+      "id": "17df8ba0-fdd5-4627-9a61-3de742cd2325",
+      "title": "문장 목적 변환소",
+      "summary": "초등 5~6학년 학생이 사실을 보존하며 알리기·안내하기·설득하기·부탁하기 목적과 독자에 맞게 문장을 바꾸는 국어 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/sentence-purpose-transform/",
+      "githubUrl": "https://github.com/WBmaker2/sentence-purpose-transform",
+      "tags": [
+        "국어",
+        "소통",
+        "수업",
+        "인터랙티브"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/17df8ba0-fdd5-4627-9a61-3de742cd2325.png",
+      "subject": "국어",
+      "grade": "초등 5~6학년",
+      "memo": "국어 수업에서 가상 학교 소식을 바탕으로 보존할 사실을 잠그고, 목적·독자에 맞는 표현 조각을 골라 문장을 변환한 뒤 근거를 설명하는 개별·모둠 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "사실 확인",
+        "목적·독자 선택",
+        "문장 변환",
+        "비교",
+        "근거 설명"
+      ],
+      "createdAt": "2026-08-24T06:57:32.016Z",
+      "updatedAt": "2026-08-24T06:57:32.016Z"
+    },
+    {
+      "id": "6aff7689-3530-4b21-97f4-18a1d433ba44",
+      "title": "소리 파형 관찰실",
+      "summary": "초등 5~6학년 학생이 가상 파형의 진폭과 반복 간격을 관찰·비교하며 소리의 크기와 높낮이를 구분해 설명하는 과학·음악 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/sound-waveform-observatory/",
+      "githubUrl": "https://github.com/WBmaker2/sound-waveform-observatory",
+      "tags": [
+        "과학",
+        "음악",
+        "소리",
+        "관찰",
+        "시각화"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/6aff7689-3530-4b21-97f4-18a1d433ba44.jpg",
+      "subject": "과학·음악",
+      "grade": "초등 5~6학년",
+      "memo": "과학·음악 수업에서 파형 도감과 미션 0~5를 따라 진폭·반복 간격을 관찰하고, 소리의 크기·높낮이를 구분한 근거 문장을 만드는 15~20분 개별 또는 짝 활동에 활용할 수 있습니다. 실제 소리·데시벨 측정이나 녹음은 하지 않습니다.",
+      "subjects": [
+        "과학",
+        "음악"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "관찰",
+        "측정",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-08-24T06:56:09.711Z",
+      "updatedAt": "2026-08-24T06:56:09.711Z"
+    },
+    {
+      "id": "591d081f-4ced-4695-b6b5-3b0acb7335ab",
+      "title": "그래프 눈금 수사대",
+      "summary": "초등 5~6학년 학생이 같은 자료를 서로 다른 축·눈금·단위로 비교하며 그래프 표현을 비판적으로 해석하는 수학·미디어 문해 활동입니다.",
+      "url": "https://wbmaker2.github.io/graph-scale-investigator/",
+      "githubUrl": "https://github.com/WBmaker2/graph-scale-investigator",
+      "tags": [
+        "수학",
+        "그래프",
+        "자료해석",
+        "미디어리터러시",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/591d081f-4ced-4695-b6b5-3b0acb7335ab.png",
+      "subject": "수학",
+      "grade": "초등 5~6학년",
+      "memo": "수학 자료와 가능성 단원 또는 미디어 문해 수업에서 약 20분 동안 그래프의 시각적 인상과 실제 수치를 비교하고, 공정한 축으로 고친 이유를 설명하는 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "그래프 관찰 → 실제 값 확인 → 근거 설명 → 축 고치기"
+      ],
+      "createdAt": "2026-08-24T04:34:01.459Z",
+      "updatedAt": "2026-08-24T04:34:01.459Z"
+    },
+    {
+      "id": "88824ea6-7f4b-40e0-886a-22abb4cab9ea",
+      "title": "에너지 변환 릴레이",
+      "summary": "초등 5~6학년 학생이 배터리와 여러 장치를 연결하며 화학·전기·빛·운동·소리 에너지의 변환 과정을 탐구하는 과학 웹앱입니다.",
+      "url": "https://wbmaker2.github.io/energy-conversion-relay/",
+      "githubUrl": "https://github.com/WBmaker2/energy-conversion-relay",
+      "tags": [
+        "과학",
+        "탐구",
+        "시뮬레이션",
+        "인터랙티브",
+        "전기회로"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/88824ea6-7f4b-40e0-886a-22abb4cab9ea.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "5~6학년 과학 수업에서 배터리·전구·모터·소리 장치를 연결하며 화학 에너지가 전기·빛·운동·소리로 바뀌는 과정을 미션, 비교, 문장 완성, 성찰 활동으로 탐구할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "관찰",
+        "조작",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-08-24T04:33:19.628Z",
+      "updatedAt": "2026-08-24T04:33:19.628Z"
+    },
+    {
+      "id": "4c12713f-aff0-484f-9ede-b7e80e18e4aa",
+      "title": "먹이망 연결 복원소",
+      "summary": "초등 5~6학년 학생이 생물 카드를 연결해 먹이망을 복원하고 생물 변화의 연쇄를 추론하는 과학 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/food-web-restoration-station/",
+      "githubUrl": "https://github.com/WBmaker2/food-web-restoration-station",
+      "tags": [
+        "과학",
+        "탐구",
+        "추론",
+        "시뮬레이션",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/4c12713f-aff0-484f-9ede-b7e80e18e4aa.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "과학 수업에서 먹고 먹히는 관계와 생태계 변화를 미션형 활동으로 탐구하고, 학생의 예측 근거와 결과를 비교할 때 활용할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "관계 복원",
+        "변화 예측",
+        "근거 설명",
+        "결과 비교"
+      ],
+      "createdAt": "2026-08-24T04:32:32.477Z",
+      "updatedAt": "2026-08-24T04:32:32.477Z"
+    },
+    {
+      "id": "cc83950c-0bd5-4e11-b223-0f2d1ae71d33",
+      "title": "영양표시 조합 식당",
+      "summary": "초등 5~6학년 학생이 영양표시의 1회·총 제공량을 구분하고 당류·나트륨을 따로 계산해 조건에 맞는 간식 조합을 고르는 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/nutrition-label-combination-cafeteria/",
+      "githubUrl": "https://github.com/WBmaker2/nutrition-label-combination-cafeteria",
+      "tags": [
+        "실과",
+        "수학",
+        "수업",
+        "인터랙티브",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/cc83950c-0bd5-4e11-b223-0f2d1ae71d33.jpg",
+      "subject": "실과·수학",
+      "grade": "초등 5~6학년",
+      "memo": "실과·수학 수업에서 미션 0~5를 순서대로 진행하며 표시 읽기, 포장 전체 환산, 단위별 합산, 가상 조건 조합 설명을 연습할 수 있습니다. 개인 건강 정보나 실제 제품 추천 없이 가상 수치로 운영합니다.",
+      "subjects": [
+        "실과",
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "읽기·계산·비교·설명"
+      ],
+      "createdAt": "2026-08-24T04:29:12.663Z",
+      "updatedAt": "2026-08-24T04:29:12.663Z"
+    },
+    {
+      "id": "25f6d160-3efc-42c7-accd-4f62eb0f7635",
+      "title": "우리학교 테트리스",
+      "summary": "우리학교 친구들과 테트리스 게임을 함께 하며 도형의 회전과 이동을 학습하는 프로그램입니다.",
+      "url": "https://wbmaker01-ai.github.io/tetris-for-everyone/",
+      "githubUrl": null,
+      "tags": [
+        "수학",
+        "게임",
+        "수업",
+        "소리"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/25f6d160-3efc-42c7-accd-4f62eb0f7635.png",
+      "subject": "수학",
+      "grade": "1~6학년",
+      "memo": "도형의 이동, 회전을 학습할 수 있는 게임입니다.\r\n리더보드가 있어 선의의 경쟁을 할 수 있습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "all",
+        "1-2",
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-04-24T05:06:47.050Z",
+      "updatedAt": "2026-08-21T12:21:14.372Z"
+    },
+    {
+      "id": "e3673005-3e93-42cd-9076-044480a41344",
+      "title": "십 묶음 택배 터미널",
+      "summary": "초등 1~2학년 학생이 밝은 택배 놀이에서 0부터 100까지의 수를 십 묶음과 낱개로 나타내며 수량과 자리값을 익히는 수학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/ten-bundle-terminal-pages/",
+      "githubUrl": "https://github.com/WBmaker2/ten-bundle-terminal",
+      "tags": [
+        "수학",
+        "수개념",
+        "십묶음",
+        "자리값",
+        "저학년"
+      ],
+      "thumbnailMode": "auto",
+      "thumbnailUrl": "/app-thumbnails/e3673005-3e93-42cd-9076-044480a41344.png",
+      "subject": "수학",
+      "grade": "초등 1~2학년",
+      "memo": "고정 9개 미션에서 낱개 10개를 십 묶음 1개로 묶고 다시 풀며 전체 수가 그대로인지 확인합니다. 화면의 '지금 할 일' 안내를 따라 숫자 쓰기, 수 읽기, 일·십 자리 관계를 10~15분 개별 학습이나 수학 보충 활동으로 연습할 수 있습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-14T13:18:33.193Z",
+      "updatedAt": "2026-08-21T09:01:47.892Z"
+    },
+    {
+      "id": "2f302bf0-c012-4432-a585-106e74385b7d",
+      "title": "공정 배분 실험실",
+      "summary": "초등 3~4학년 학생이 같은 가상 상황에 네 가지 배분 기준을 적용하고 결과와 한계를 비교하는 도덕 생각 실험입니다.",
+      "url": "https://wbmaker2.github.io/fair-distribution-lab-pages/",
+      "githubUrl": "https://github.com/WBmaker2/fair-distribution-lab",
+      "tags": [
+        "공정",
+        "배분",
+        "도덕",
+        "생각실험"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/2f302bf0-c012-4432-a585-106e74385b7d.png",
+      "subject": "도덕",
+      "grade": "초등 3~4학년",
+      "memo": "첫 배분의 절차를 살피고 똑같이·필요·기여·추첨 기준의 결과와 한계를 비교한 뒤, 새 사실에 따라 판단을 유지하거나 바꾸며 근거를 구성하는 수업 활동입니다.",
+      "subjects": [
+        "도덕"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-07-14T12:17:17.811Z",
+      "updatedAt": "2026-08-21T09:01:45.611Z"
+    },
+    {
+      "id": "91fc1ce8-f455-464d-ace8-f2d2b2ed2985",
+      "title": "한 방울의 귀환: 물 수확 장치 설계실",
+      "summary": "초등 3~4학년 학생이 증발·응결·물 이동을 관찰하고 한 변인만 바꾸어 물 수집 결과를 비교·설명하는 과학 실험 시뮬레이션입니다.",
+      "url": "https://wbmaker2.github.io/one-drop-return-pages/",
+      "githubUrl": "https://github.com/WBmaker2/one-drop-return",
+      "tags": [
+        "증발과응결",
+        "물의상태변화",
+        "변인통제",
+        "과학",
+        "실험"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/91fc1ce8-f455-464d-ace8-f2d2b2ed2985.png",
+      "subject": "과학",
+      "grade": "초등 3~4학년",
+      "memo": "물의 상태 변화 단원에서 실제 실험 전 장치 원리와 공정한 비교 방법을 익히고, 24개 보존 표식으로 물 수지를 확인하는 사전 탐구 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-07-14T09:30:01.340Z",
+      "updatedAt": "2026-08-21T09:01:43.072Z"
+    },
+    {
+      "id": "ca39ad82-aec4-4011-84a8-56cfaa981631",
+      "title": "깜빡이 회로 수리센터",
+      "summary": "초등 5~6학년 학생이 회로의 증상과 닫힌 길을 근거로 고장 원인을 진단하고 최소 수정으로 복구하는 과학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/blinking-circuit-repair-center-pages/",
+      "githubUrl": "https://github.com/WBmaker2/blinking-circuit-repair-center",
+      "tags": [
+        "과학",
+        "전기회로",
+        "시뮬레이션",
+        "안전",
+        "실험"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/ca39ad82-aec4-4011-84a8-56cfaa981631.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "전기 회로 단원에서 실제 실험 전·후로 닫힌 경로, 전구 접점, 끊어진 전선, 간헐 접촉, 두 전지 직렬연결을 점검하고 수리 근거를 설명하는 15~20분 탐구 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-07-14T12:23:14.047Z",
+      "updatedAt": "2026-08-21T09:01:41.356Z"
+    },
+    {
+      "id": "5aff20b9-e329-4536-8761-a82adee6cfb2",
+      "title": "이야기 마음 근거 수사대",
+      "summary": "초등 저학년이 이야기 속 말·행동·표정을 단서로 인물의 마음과 여러 생각을 근거 있게 짐작하는 국어 읽기 활동 앱",
+      "url": "https://wbmaker2.github.io/story-heart-evidence-detective/",
+      "githubUrl": "https://github.com/WBmaker2/story-heart-evidence-detective",
+      "tags": [
+        "국어",
+        "저학년",
+        "마음",
+        "맥락",
+        "추론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/5aff20b9-e329-4536-8761-a82adee6cfb2.png",
+      "subject": "국어",
+      "grade": "초등 1~2학년",
+      "memo": "연습 사건 뒤 여섯 이야기를 읽고 마음 하나와 단서 두 장을 연결한 뒤 다른 생각을 함께 살펴보는 점수 없는 활동입니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-17T00:22:36.037Z",
+      "updatedAt": "2026-08-21T07:37:16.154Z"
+    },
+    {
+      "id": "af1fee94-763b-4f7c-9607-bc685873a2fc",
+      "title": "생활도구 리디자인 클리닉",
+      "summary": "초등 1~2학년이 생활도구의 불편을 관찰하고 부품을 바꿔 같은 조건으로 시험하며 설계 이유를 설명하는 창의 활동 앱",
+      "url": "https://wbmaker2.github.io/everyday-tool-redesign-clinic/",
+      "githubUrl": "https://github.com/WBmaker2/everyday-tool-redesign-clinic",
+      "tags": [
+        "창의활동",
+        "생활도구",
+        "리디자인",
+        "관찰",
+        "저학년"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/af1fee94-763b-4f7c-9607-bc685873a2fc.png",
+      "subject": "통합",
+      "grade": "초등 1~2학년",
+      "memo": "생활도구 하나를 선택해 사용 장면의 불편 근거를 찾고, 모양·기능·재료와 표면을 바꾼 뒤 같은 조건으로 전후를 시험합니다. 완성된 리디자인 처방전을 보며 바꾼 이유와 새로 생긴 불편까지 함께 설명할 수 있습니다.",
+      "subjects": [
+        "통합"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-13T20:01:16.149Z",
+      "updatedAt": "2026-08-21T07:37:03.421Z"
+    },
+    {
+      "id": "373e131a-54eb-41a6-852f-aa54431b29c8",
+      "title": "으쓱으쓱 튼튼 스트레칭 룰렛",
+      "summary": "교실에서 룰렛으로 스트레칭 미션을 뽑고 타이머에 맞춰 함께 몸을 풀 수 있는 수업용 활동 앱",
+      "url": "https://wbmaker2.github.io/healthy-streching-roulette/",
+      "githubUrl": "https://github.com/WBmaker2/healthy-streching-roulette",
+      "tags": [
+        "체육",
+        "수업",
+        "도덕",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/373e131a-54eb-41a6-852f-aa54431b29c8.png",
+      "subject": "체육/바른생활",
+      "grade": "초등 1~6학년",
+      "memo": "아침 활동, 중간놀이, 수업 중 집중 전환 시간에 전자칠판으로 룰렛을 돌려 전체 학생이 짧게 몸을 풀도록 활용할 수 있습니다. 교사 관리화면에서 미션 문구를 저장하거나 기본값으로 초기화할 수 있습니다.",
+      "subjects": [
+        "체육",
+        "바른생활"
+      ],
+      "gradeBands": [
+        "all",
+        "1-2",
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-04-26T13:16:36.556Z",
+      "updatedAt": "2026-08-21T07:36:54.594Z"
+    },
+    {
+      "id": "d9e05a77-4d67-4c0e-be07-48b069383791",
+      "title": "오늘의 날씨 코디네이터: 사계절 옷장",
+      "summary": "초등 1~2학년 학생이 날씨에 맞는 옷과 준비물을 고르고 실시간 체크리스트로 외출 준비를 점검하는 통합교과 활동 앱입니다.",
+      "url": "https://wbmaker2.github.io/weather-outfit-planner/",
+      "githubUrl": "https://github.com/WBmaker2/weather-outfit-planner",
+      "tags": [
+        "날씨",
+        "수업",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/d9e05a77-4d67-4c0e-be07-48b069383791.png",
+      "subject": "바른 생활 / 슬기로운 생활",
+      "grade": "초등 1~2학년",
+      "memo": "날씨 미션을 읽고 필요한 옷차림과 준비물을 선택하면 캐릭터가 실시간으로 바뀌며, 외출 전 체크리스트에서 완료/아직 상태를 바로 확인할 수 있습니다.",
+      "subjects": [
+        "바른 생활",
+        "슬기로운 생활"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ],
+      "createdAt": "2026-05-08T14:55:17.940Z",
+      "updatedAt": "2026-08-21T07:35:34.313Z"
+    },
+    {
+      "id": "48b67d53-f103-4fc7-9544-59e8a73b2686",
+      "title": "팩트체크 편집국",
+      "summary": "초등 4~6학년 학생이 가상 자료의 출처와 근거를 비교해 판정을 내리고 정확한 제목을 만드는 교과융합 팩트체크 활동 앱",
+      "url": "https://wbmaker2.github.io/fact-check-newsroom/",
+      "githubUrl": "https://github.com/WBmaker2/fact-check-newsroom",
+      "tags": [
+        "팩트체크",
+        "미디어리터러시",
+        "자료해석",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/48b67d53-f103-4fc7-9544-59e8a73b2686.png",
+      "subject": "교과융합",
+      "grade": "초등 4~6학년",
+      "memo": "국어·수학·과학·사회의 가상 사건을 선택해 확인할 말 찾기, 자료 살펴보기, 비교, 판단, 제목 만들기 순서로 활동할 수 있습니다.",
+      "subjects": [
+        "교과융합"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "creation",
+      "learningProcess": [
+        "구상",
+        "제작",
+        "공유"
+      ],
+      "createdAt": "2026-07-14T09:39:08.518Z",
+      "updatedAt": "2026-08-21T07:31:59.957Z"
+    },
+    {
+      "id": "9e77dba6-7388-4b21-bf2e-b74b9d9e5193",
+      "title": "등호 수사대",
+      "summary": "초등 3~4학년 학생이 등식의 양쪽 값을 따로 계산하고 비교하며 등호의 뜻을 익히는 수학 학습 앱",
+      "url": "https://wbmaker2.github.io/equality-detective/",
+      "githubUrl": "https://github.com/WBmaker2/equality-detective",
+      "tags": [
+        "수학",
+        "등호",
+        "등식",
+        "형성평가"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/9e77dba6-7388-4b21-bf2e-b74b9d9e5193.png",
+      "subject": "수학",
+      "grade": "초등 3~4학년",
+      "memo": "도움·기본·도전 단계의 9문항을 풀며 같을까요, 빈칸 채우기, 틀린 식 고치기 활동을 진행하고 오답만 다시 풀 수 있습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-13T13:14:43.524Z",
+      "updatedAt": "2026-08-21T07:31:59.014Z"
+    },
+    {
+      "id": "42b8f202-db48-42f6-a8aa-e35192687889",
+      "title": "H Memo",
+      "summary": "교사가 학교 업무 메모를 저장하고 백업하는 Windows 메모앱을 확인하고 설치할 수 있는 안내 페이지",
+      "url": "https://wbmaker2.github.io/h-memo-releases/",
+      "githubUrl": "https://github.com/WBmaker2/h-memo-releases",
+      "tags": [
+        "담임",
+        "업무"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/42b8f202-db48-42f6-a8aa-e35192687889.png",
+      "subject": "공통",
+      "grade": "교사용",
+      "memo": "학교 행정 메모, 점검 체크리스트, 수업 운영 아이디어를 빠르게 기록하고 로컬 및 서버 백업으로 보관하는 H Memo의 공개 다운로드 안내 페이지입니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "teacher"
+      ],
+      "audience": "teacher",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ],
+      "createdAt": "2026-05-17T00:33:08.028Z",
+      "updatedAt": "2026-08-21T07:31:58.090Z"
+    },
+    {
+      "id": "5543c36a-42d8-49ba-b2e2-85a2c4f193ea",
+      "title": "덩기덕 쿵더러러! 디지털 장구 마스터",
+      "summary": "3~6학년이 키보드와 터치로 실제 장구 샘플을 들으며 정간보 장단을 연습하는 국악 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/digital-janggu-simulator/",
+      "githubUrl": "https://github.com/WBmaker2/digital-janggu-simulator",
+      "tags": [
+        "리듬",
+        "음악",
+        "소리",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/5543c36a-42d8-49ba-b2e2-85a2c4f193ea.png",
+      "subject": "음악 / 국악",
+      "grade": "3-6학년",
+      "memo": "키보드 F/J와 터치 버튼으로 궁편·채편·양편을 연주하고, 정간보 패턴을 따라 교실에서 개인 장단 연습을 할 수 있습니다. 실제 장구 녹음 샘플과 교사용 운영 자료를 함께 제공합니다.",
+      "subjects": [
+        "음악",
+        "국악"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-05-12T12:32:46.714Z",
+      "updatedAt": "2026-08-21T07:31:56.664Z"
+    },
+    {
+      "id": "b5c444ba-0d76-4bc5-b787-3132985da0d3",
+      "title": "PDF to PNG 1080p",
+      "summary": "교사가 PDF 자료를 브라우저에서 1080p PNG 이미지로 변환하고 여러 페이지는 ZIP으로 내려받는 도구입니다.",
+      "url": "https://wbmaker2.github.io/pdf-to-png/",
+      "githubUrl": "https://github.com/WBmaker2/pdf-to-png",
+      "tags": [
+        "PDF",
+        "업무",
+        "이미지"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/b5c444ba-0d76-4bc5-b787-3132985da0d3.png",
+      "subject": "공통",
+      "grade": "교사용",
+      "memo": "PDF 안내문이나 학습지를 이미지 파일로 나누어 LMS, 슬라이드, 학급 게시 자료에 활용할 때 사용할 수 있습니다. 파일은 서버로 업로드하지 않고 브라우저에서 처리됩니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "teacher"
+      ],
+      "audience": "teacher",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ],
+      "createdAt": "2026-05-03T09:33:29.709Z",
+      "updatedAt": "2026-08-21T06:57:58.468Z"
+    },
+    {
+      "id": "876e4653-4056-431f-ae17-27b5e45d0b4b",
+      "title": "태양·그림자 관계 기록국",
+      "summary": "초등 과학 수업에서 태양 고도·그림자 길이·기온의 관계를 자료로 비교하고 설명하는 탐구 활동 앱",
+      "url": "https://wbmaker2.github.io/sun-shadow-relationship-record-office/",
+      "githubUrl": "https://github.com/WBmaker2/sun-shadow-relationship-record-office",
+      "tags": [
+        "과학",
+        "탐구",
+        "측정",
+        "그래프",
+        "자료해석"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/876e4653-4056-431f-ae17-27b5e45d0b4b.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "교사가 안전 약속부터 시간 기록 복원, 그래프·숫자표 해석, 계절 비교까지 순서대로 활용할 수 있는 자료 탐구 활동입니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:11:25.573Z",
+      "updatedAt": "2026-08-21T06:57:46.564Z"
+    },
+    {
+      "id": "3d9dcb26-f6f6-4cb2-bd89-71028efe899b",
+      "title": "정보 손실 통신소",
+      "summary": "초등학생이 전달된 문장을 비교해 달라진 뜻을 찾고, 안전하게 다시 전하는 방법을 연습하는 국어 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/information-loss-communication-station/",
+      "githubUrl": "https://github.com/WBmaker2/information-loss-communication-station",
+      "tags": [
+        "국어",
+        "소통",
+        "추론",
+        "자료해석"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/3d9dcb26-f6f6-4cb2-bd89-71028efe899b.png",
+      "subject": "국어",
+      "grade": "초등 3~6학년",
+      "memo": "원문과 전달문을 비교하며 빠짐·추가·뜻 변화를 근거로 설명하고, 안전한 전달문을 만들어 보는 수업 활동에 활용할 수 있습니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:09:30.871Z",
+      "updatedAt": "2026-08-21T06:57:30.955Z"
+    },
+    {
+      "id": "7b66f642-63da-4389-bce4-35e5d708b6d0",
+      "title": "달 관측 기록 복원소",
+      "summary": "초등학생이 앞뒤 달 관측 기록을 비교해 빈칸의 달 모양을 추론하는 과학 학습 앱입니다.",
+      "url": "https://wbmaker2.github.io/moon-observation-record-restoration-station/",
+      "githubUrl": "https://github.com/WBmaker2/moon-observation-record-restoration-station",
+      "tags": [
+        "과학",
+        "탐구",
+        "관찰",
+        "추론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/7b66f642-63da-4389-bce4-35e5d708b6d0.png",
+      "subject": "과학",
+      "grade": "초등 3~4학년",
+      "memo": "여러 날의 달 모양을 앞뒤 기록으로 비교해 빈칸을 복원하며, 밝은 부분의 변화와 자료가 부족할 때의 판단을 함께 살펴보는 수업 활동입니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:06:47.687Z",
+      "updatedAt": "2026-08-21T06:57:05.073Z"
+    },
+    {
+      "id": "e417c1ae-442e-4225-a7d3-c126f655183a",
+      "title": "클라우드 수업실",
+      "summary": "교사가 학생 답변을 붙여넣어 수업용 워드 클라우드와 단어 빈도표를 바로 만드는 도구",
+      "url": "https://wbmaker2.github.io/edu-word-cloud/",
+      "githubUrl": "https://github.com/WBmaker2/edu-word-cloud",
+      "tags": [
+        "워드 클라우드",
+        "단어 분석",
+        "시각화",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/e417c1ae-442e-4225-a7d3-c126f655183a.png",
+      "subject": "공통",
+      "grade": "교사용",
+      "memo": "학생 답변이나 수업 내용을 붙여넣고 모양·색상·글꼴을 골라 워드 클라우드 수업 자료를 빠르게 만들 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "teacher"
+      ],
+      "audience": "mixed",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-07-22T22:35:06.579Z",
+      "updatedAt": "2026-08-21T05:51:28.972Z"
+    },
+    {
+      "id": "c7de79fb-516a-4167-9d21-ba282a2cf5de",
+      "title": "학급 업무 체크리스트",
+      "summary": "담임교사가 학급 업무를 날짜별로 점검하고 미완료 업무와 백업 상태를 한눈에 관리하는 체크리스트입니다.",
+      "url": "https://task-checklist-prod.web.app/",
+      "githubUrl": "https://github.com/WBmaker2/task-checklist",
+      "tags": [
+        "담임",
+        "업무"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/c7de79fb-516a-4167-9d21-ba282a2cf5de.png",
+      "subject": "공통",
+      "grade": "교사용",
+      "memo": "대시보드, 체크리스트, 업무관리, 통계, 백업 화면을 통해 학급 운영 업무를 매일 확인하고 반복 업무 누락을 줄이는 데 사용할 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "teacher"
+      ],
+      "audience": "teacher",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ],
+      "createdAt": "2026-04-19T01:38:38.164Z",
+      "updatedAt": "2026-08-20T22:36:38.699Z"
+    },
+    {
+      "id": "a453fce0-6a74-4cb2-99aa-0a7d847114da",
+      "title": "교실 자리 바꾸기 도우미",
+      "summary": "교사가 학급 자리표를 관리하고 학생 랜덤 뽑기와 타이머를 함께 활용할 수 있는 교실 운영 도구입니다.",
+      "url": "https://class-random-seat.vercel.app",
+      "githubUrl": "https://github.com/WBmaker2/class-random-seat",
+      "tags": [
+        "담임",
+        "업무",
+        "랜덤",
+        "자리"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a453fce0-6a74-4cb2-99aa-0a7d847114da.png",
+      "subject": "공통",
+      "grade": "교사용",
+      "memo": "학급별 학생과 자리표를 등록한 뒤 자리 배치 확인, 무작위 발표자 선정, 수업 타이머를 한 화면에서 사용할 수 있습니다. 기본은 브라우저 로컬 저장이라 로그인 없이 바로 쓰고, 필요할 때 Google 로그인으로 백업할 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "teacher"
+      ],
+      "audience": "mixed",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ],
+      "createdAt": "2026-04-19T01:45:49.296Z",
+      "updatedAt": "2026-08-20T22:36:35.703Z"
+    },
+    {
+      "id": "acd41aa8-8a45-4051-8a7f-fcff679d56a4",
+      "title": "담임 행정 허브",
+      "summary": "담임교사가 공문, 개인 마감, 수합판, 템플릿, 캘린더와 백업을 한 흐름에서 관리하는 개인용 행정 도구",
+      "url": "https://wbmaker2.github.io/homeroom-admin-hub/",
+      "githubUrl": "https://github.com/WBmaker2/homeroom-admin-hub",
+      "tags": [
+        "업무",
+        "담임"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/acd41aa8-8a45-4051-8a7f-fcff679d56a4.png",
+      "subject": "공통",
+      "grade": "교사용",
+      "memo": "담임교사가 하루 업무함에서 공문과 마감을 확인하고, 수합판·템플릿·캘린더·데이터 백업까지 개인 저장소 기준으로 이어서 관리할 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "teacher"
+      ],
+      "audience": "teacher",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ],
+      "createdAt": "2026-05-05T03:37:28.683Z",
+      "updatedAt": "2026-08-20T22:36:29.693Z"
+    },
+    {
+      "id": "86c0c19a-c4bf-4ef1-822b-75162b385271",
+      "title": "HEIC -> JPG 변환기",
+      "summary": "여러 HEIC/HEIF 사진을 브라우저에서 JPG로 변환하고 ZIP으로 내려받을 수 있는 로컬 변환 도구입니다.",
+      "url": "https://wbmaker2.github.io/heic-to-jpg/",
+      "githubUrl": "https://github.com/WBmaker2/heic-to-jpg",
+      "tags": [
+        "HEIC",
+        "JPG",
+        "이미지"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/86c0c19a-c4bf-4ef1-822b-75162b385271.png",
+      "subject": "공통",
+      "grade": "교사용",
+      "memo": "수업 자료 준비나 기기별 사진 형식 변환이 필요할 때 서버 업로드 없이 브라우저에서 안전하게 처리할 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "teacher"
+      ],
+      "audience": "student",
+      "interactionType": "utility",
+      "learningProcess": [
+        "변환",
+        "확인",
+        "저장"
+      ],
+      "createdAt": "2026-06-29T09:05:14.815Z",
+      "updatedAt": "2026-08-20T22:36:25.292Z"
+    },
+    {
+      "id": "837829ee-abd3-46a7-9554-ec83055bbdf0",
+      "title": "우리 반 학급일지",
+      "summary": "교사가 출결, 수업 내용, 학급 일지, 학생별 누가기록을 한 화면에서 정리하고 백업할 수 있는 학급 운영 기록 도구입니다.",
+      "url": "https://class-journal2.vercel.app",
+      "githubUrl": "https://github.com/WBmaker2/class-journal2",
+      "tags": [
+        "담임",
+        "업무",
+        "데이터",
+        "그래프"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/837829ee-abd3-46a7-9554-ec83055bbdf0.png",
+      "subject": "공통",
+      "grade": "교사용",
+      "memo": "출결 관리, 오늘의 수업, 학급 일지, 학생별 누가기록, 대시보드와 시간표 관리를 한 곳에서 다루며 PDF/Excel 내보내기와 클라우드 동기화 흐름까지 지원하는 교사용 기록 도구입니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "teacher"
+      ],
+      "audience": "mixed",
+      "interactionType": "management",
+      "learningProcess": [
+        "기록",
+        "정리",
+        "확인"
+      ],
+      "createdAt": "2026-04-19T00:53:49.113Z",
+      "updatedAt": "2026-08-20T22:36:19.522Z"
+    },
     {
       "id": "dbf5fa15-fe4b-47a5-a186-29e4f50d8665",
       "title": "친환경 수송 조건 설계소",
@@ -490,40 +2470,6 @@
       ],
       "createdAt": "2026-07-22T22:08:09.143Z",
       "updatedAt": "2026-08-16T12:46:00.218Z"
-    },
-    {
-      "id": "5aff20b9-e329-4536-8761-a82adee6cfb2",
-      "title": "이야기 마음 근거 수사대",
-      "summary": "초등 저학년이 이야기 속 말·행동·표정을 단서로 인물의 마음과 여러 생각을 근거 있게 짐작하는 국어 읽기 활동 앱",
-      "url": "https://wbmaker2.github.io/story-heart-evidence-detective/",
-      "githubUrl": "https://github.com/WBmaker2/story-heart-evidence-detective",
-      "tags": [
-        "국어",
-        "저학년",
-        "마음",
-        "맥락",
-        "추론"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
-      "subject": "국어",
-      "grade": "초등 1~2학년",
-      "memo": "연습 사건 뒤 여섯 이야기를 읽고 마음 하나와 단서 두 장을 연결한 뒤 다른 생각을 함께 살펴보는 점수 없는 활동입니다.",
-      "subjects": [
-        "국어"
-      ],
-      "gradeBands": [
-        "1-2"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-17T00:22:36.037Z",
-      "updatedAt": "2026-08-16T12:44:50.870Z"
     },
     {
       "id": "f058dc1c-3ee5-4368-ba32-23ed3fcaac37",
@@ -829,38 +2775,6 @@
       "updatedAt": "2026-08-16T12:18:18.987Z"
     },
     {
-      "id": "3d9dcb26-f6f6-4cb2-bd89-71028efe899b",
-      "title": "정보 손실 통신소",
-      "summary": "초등학생이 전달된 문장을 비교해 달라진 뜻을 찾고, 안전하게 다시 전하는 방법을 연습하는 국어 학습 앱입니다.",
-      "url": "https://wbmaker2.github.io/information-loss-communication-station/",
-      "githubUrl": "https://github.com/WBmaker2/information-loss-communication-station",
-      "tags": [
-        "국어",
-        "소통"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/3d9dcb26-f6f6-4cb2-bd89-71028efe899b.png",
-      "subject": "국어",
-      "grade": "초등 3~6학년",
-      "memo": "원문과 전달문을 비교하며 빠짐·추가·뜻 변화를 근거로 설명하고, 안전한 전달문을 만들어 보는 수업 활동에 활용할 수 있습니다.",
-      "subjects": [
-        "국어"
-      ],
-      "gradeBands": [
-        "3-4",
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:09:30.871Z",
-      "updatedAt": "2026-08-16T12:17:22.202Z"
-    },
-    {
       "id": "10829a2a-f96b-48ee-bca7-bd28c9748f27",
       "title": "이미지 의미 편집실",
       "summary": "초등학생이 같은 이미지의 자르기·크기·글·색 변화를 비교하며 화면에서 찾은 까닭으로 느낌과 뜻을 설명하는 국어·미술 활동입니다.",
@@ -993,128 +2907,6 @@
       "updatedAt": "2026-08-16T12:14:05.864Z"
     },
     {
-      "id": "7b66f642-63da-4389-bce4-35e5d708b6d0",
-      "title": "달 관측 기록 복원소",
-      "summary": "초등학생이 앞뒤 달 관측 기록을 비교해 빈칸의 달 모양을 추론하는 과학 학습 앱입니다.",
-      "url": "https://wbmaker2.github.io/moon-observation-record-restoration-station/",
-      "githubUrl": "https://github.com/WBmaker2/moon-observation-record-restoration-station",
-      "tags": [
-        "3~4학년"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/7b66f642-63da-4389-bce4-35e5d708b6d0.png",
-      "subject": "과학",
-      "grade": "초등 3~4학년",
-      "memo": "여러 날의 달 모양을 앞뒤 기록으로 비교해 빈칸을 복원하며, 밝은 부분의 변화와 자료가 부족할 때의 판단을 함께 살펴보는 수업 활동입니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "3-4"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:06:47.687Z",
-      "updatedAt": "2026-08-16T12:03:30.814Z"
-    },
-    {
-      "id": "876e4653-4056-431f-ae17-27b5e45d0b4b",
-      "title": "태양·그림자 관계 기록국",
-      "summary": "초등 과학 수업에서 태양 고도·그림자 길이·기온의 관계를 자료로 비교하고 설명하는 탐구 활동 앱",
-      "url": "https://wbmaker2.github.io/sun-shadow-relationship-record-office/",
-      "githubUrl": "https://github.com/WBmaker2/sun-shadow-relationship-record-office",
-      "tags": [
-        "과학",
-        "초등"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/876e4653-4056-431f-ae17-27b5e45d0b4b.png",
-      "subject": "과학",
-      "grade": "초등 5~6학년",
-      "memo": "교사가 안전 약속부터 시간 기록 복원, 그래프·숫자표 해석, 계절 비교까지 순서대로 활용할 수 있는 자료 탐구 활동입니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:11:25.573Z",
-      "updatedAt": "2026-08-16T12:03:18.971Z"
-    },
-    {
-      "id": "a062beee-cba2-4074-a637-182d3b9af316",
-      "title": "(실패작)상상 톡톡, 이어지는 이야기 기차",
-      "summary": "친구들이 한 문장씩 이야기를 이어 쓰고 AI 장면 그림으로 상상력을 확장하는 협업 글쓰기 앱입니다.",
-      "url": "https://wbmaker2.github.io/ai-story-chain/",
-      "githubUrl": "https://github.com/WBmaker2/ai-story-chain",
-      "tags": [
-        "국어",
-        "수업",
-        "실패작"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/a062beee-cba2-4074-a637-182d3b9af316.png",
-      "subject": "국어",
-      "grade": "초등",
-      "memo": "모둠 활동에서 학생들이 문장을 한 줄씩 덧붙이고 생성 이미지로 장면을 확인하며 이야기 흐름을 함께 만들 수 있습니다.",
-      "subjects": [
-        "국어"
-      ],
-      "gradeBands": [
-        "all"
-      ],
-      "audience": "student",
-      "interactionType": "collaboration",
-      "learningProcess": [
-        "의견 제시",
-        "비교",
-        "협의"
-      ],
-      "createdAt": "2026-04-20T11:00:21.905Z",
-      "updatedAt": "2026-08-16T11:58:28.661Z"
-    },
-    {
-      "id": "b5c444ba-0d76-4bc5-b787-3132985da0d3",
-      "title": "PDF to PNG 1080p",
-      "summary": "교사가 PDF 자료를 브라우저에서 1080p PNG 이미지로 변환하고 여러 페이지는 ZIP으로 내려받는 도구입니다.",
-      "url": "https://wbmaker2.github.io/pdf-to-png/",
-      "githubUrl": "https://github.com/WBmaker2/pdf-to-png",
-      "tags": [
-        "PDF",
-        "업무"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/b5c444ba-0d76-4bc5-b787-3132985da0d3.png",
-      "subject": "공통",
-      "grade": null,
-      "memo": "PDF 안내문이나 학습지를 이미지 파일로 나누어 LMS, 슬라이드, 학급 게시 자료에 활용할 때 사용할 수 있습니다. 파일은 서버로 업로드하지 않고 브라우저에서 처리됩니다.",
-      "subjects": [
-        "공통"
-      ],
-      "gradeBands": [],
-      "audience": "teacher",
-      "interactionType": "management",
-      "learningProcess": [
-        "기록",
-        "정리",
-        "확인"
-      ],
-      "createdAt": "2026-05-03T09:33:29.709Z",
-      "updatedAt": "2026-07-23T09:14:28.416Z"
-    },
-    {
       "id": "c84042dc-2d55-4438-9cf0-9b0006ef758e",
       "title": "PAPS 학생 기록 시스템",
       "summary": "교사가 PAPS 세션을 열고 학생 기록 입력, 대표 기록 검토, Google Sheets 동기화를 한 흐름으로 관리하는 체력평가 도구입니다.",
@@ -1148,37 +2940,6 @@
       ],
       "createdAt": "2026-04-19T01:51:40.541Z",
       "updatedAt": "2026-07-23T09:14:00.818Z"
-    },
-    {
-      "id": "837829ee-abd3-46a7-9554-ec83055bbdf0",
-      "title": "우리 반 학급일지",
-      "summary": "교사가 출결, 수업 내용, 학급 일지, 학생별 누가기록을 한 화면에서 정리하고 백업할 수 있는 학급 운영 기록 도구입니다.",
-      "url": "https://class-journal2.vercel.app",
-      "githubUrl": "https://github.com/WBmaker2/class-journal2",
-      "tags": [
-        "담임",
-        "업무",
-        "데이터",
-        "그래프"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/837829ee-abd3-46a7-9554-ec83055bbdf0.png",
-      "subject": "공통",
-      "grade": null,
-      "memo": "출결 관리, 오늘의 수업, 학급 일지, 학생별 누가기록, 대시보드와 시간표 관리를 한 곳에서 다루며 PDF/Excel 내보내기와 클라우드 동기화 흐름까지 지원하는 교사용 기록 도구입니다.",
-      "subjects": [
-        "공통"
-      ],
-      "gradeBands": [],
-      "audience": "mixed",
-      "interactionType": "management",
-      "learningProcess": [
-        "기록",
-        "정리",
-        "확인"
-      ],
-      "createdAt": "2026-04-19T00:53:49.113Z",
-      "updatedAt": "2026-07-23T09:13:26.454Z"
     },
     {
       "id": "424c6d52-5aad-4f0e-bfc2-5f06fefcb30e",
@@ -1216,246 +2977,6 @@
       "updatedAt": "2026-07-23T09:12:51.802Z"
     },
     {
-      "id": "e417c1ae-442e-4225-a7d3-c126f655183a",
-      "title": "클라우드 수업실",
-      "summary": "교사가 학생 답변을 붙여넣어 수업용 워드 클라우드와 단어 빈도표를 바로 만드는 도구",
-      "url": "https://wbmaker2.github.io/edu-word-cloud/",
-      "githubUrl": "https://github.com/WBmaker2/edu-word-cloud",
-      "tags": [
-        "교사용 도구",
-        "워드 클라우드",
-        "수업 활동",
-        "단어 분석",
-        "시각화"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/e417c1ae-442e-4225-a7d3-c126f655183a.png",
-      "subject": "공통",
-      "grade": null,
-      "memo": "학생 답변이나 수업 내용을 붙여넣고 모양·색상·글꼴을 골라 워드 클라우드 수업 자료를 빠르게 만들 수 있습니다.",
-      "subjects": [
-        "공통"
-      ],
-      "gradeBands": [],
-      "audience": "mixed",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-22T22:35:06.579Z",
-      "updatedAt": "2026-07-22T22:35:06.579Z"
-    },
-    {
-      "id": "e3673005-3e93-42cd-9076-044480a41344",
-      "title": "십 묶음 택배 터미널",
-      "summary": "초등 1~2학년 학생이 밝은 택배 놀이에서 0부터 100까지의 수를 십 묶음과 낱개로 나타내며 수량과 자리값을 익히는 수학 학습 앱입니다.",
-      "url": "https://ten-bundle-terminal.wbmaker.chatgpt.site",
-      "githubUrl": "https://github.com/WBmaker2/ten-bundle-terminal",
-      "tags": [
-        "수학",
-        "초등저학년",
-        "수개념",
-        "십묶음",
-        "자리값"
-      ],
-      "thumbnailMode": "auto",
-      "thumbnailUrl": "/app-thumbnails/e3673005-3e93-42cd-9076-044480a41344.png",
-      "subject": "수학",
-      "grade": "초등 1~2학년",
-      "memo": "고정 9개 미션에서 낱개 10개를 십 묶음 1개로 묶고 다시 풀며 전체 수가 그대로인지 확인합니다. 화면의 '지금 할 일' 안내를 따라 숫자 쓰기, 수 읽기, 일·십 자리 관계를 10~15분 개별 학습이나 수학 보충 활동으로 연습할 수 있습니다.",
-      "subjects": [
-        "수학"
-      ],
-      "gradeBands": [
-        "1-2"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-14T13:18:33.193Z",
-      "updatedAt": "2026-07-15T07:16:10.523Z"
-    },
-    {
-      "id": "ca39ad82-aec4-4011-84a8-56cfaa981631",
-      "title": "깜빡이 회로 수리센터",
-      "summary": "초등 5~6학년 학생이 회로의 증상과 닫힌 길을 근거로 고장 원인을 진단하고 최소 수정으로 복구하는 과학 학습 앱입니다.",
-      "url": "https://blinking-circuit-repair-center.wbmaker.chatgpt.site",
-      "githubUrl": "https://github.com/WBmaker2/blinking-circuit-repair-center",
-      "tags": [
-        "과학",
-        "과학실험",
-        "전기회로",
-        "시뮬레이션",
-        "안전"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/ca39ad82-aec4-4011-84a8-56cfaa981631.jpg",
-      "subject": "과학",
-      "grade": "초등 5~6학년",
-      "memo": "전기 회로 단원에서 실제 실험 전·후로 닫힌 경로, 전구 접점, 끊어진 전선, 간헐 접촉, 두 전지 직렬연결을 점검하고 수리 근거를 설명하는 15~20분 탐구 활동에 활용할 수 있습니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "simulation",
-      "learningProcess": [
-        "예측",
-        "조작",
-        "비교",
-        "설명"
-      ],
-      "createdAt": "2026-07-14T12:23:14.047Z",
-      "updatedAt": "2026-07-14T12:23:14.047Z"
-    },
-    {
-      "id": "2f302bf0-c012-4432-a585-106e74385b7d",
-      "title": "공정 배분 실험실",
-      "summary": "초등 3~4학년 학생이 같은 가상 상황에 네 가지 배분 기준을 적용하고 결과와 한계를 비교하는 도덕 생각 실험입니다.",
-      "url": "https://fair-distribution-lab.wbmaker.chatgpt.site",
-      "githubUrl": "https://github.com/WBmaker2/fair-distribution-lab",
-      "tags": [
-        "공정",
-        "배분",
-        "도덕",
-        "생각실험",
-        "초등"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/2f302bf0-c012-4432-a585-106e74385b7d.png",
-      "subject": "도덕",
-      "grade": "초등 3~4학년",
-      "memo": "첫 배분의 절차를 살피고 똑같이·필요·기여·추첨 기준의 결과와 한계를 비교한 뒤, 새 사실에 따라 판단을 유지하거나 바꾸며 근거를 구성하는 수업 활동입니다.",
-      "subjects": [
-        "도덕"
-      ],
-      "gradeBands": [
-        "3-4"
-      ],
-      "audience": "student",
-      "interactionType": "simulation",
-      "learningProcess": [
-        "예측",
-        "조작",
-        "비교",
-        "설명"
-      ],
-      "createdAt": "2026-07-14T12:17:17.811Z",
-      "updatedAt": "2026-07-14T12:17:17.811Z"
-    },
-    {
-      "id": "48b67d53-f103-4fc7-9544-59e8a73b2686",
-      "title": "팩트체크 편집국",
-      "summary": "초등 4~6학년 학생이 가상 자료의 출처와 근거를 비교해 판정을 내리고 정확한 제목을 만드는 교과융합 팩트체크 활동 앱",
-      "url": "https://wbmaker2.github.io/fact-check-newsroom/",
-      "githubUrl": "https://github.com/WBmaker2/fact-check-newsroom",
-      "tags": [
-        "팩트체크",
-        "미디어리터러시",
-        "자료해석",
-        "교과융합",
-        "초등교육"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/48b67d53-f103-4fc7-9544-59e8a73b2686.png",
-      "subject": "교과융합",
-      "grade": "초등 4~6학년",
-      "memo": "국어·수학·과학·사회의 가상 사건을 선택해 확인할 말 찾기, 자료 살펴보기, 비교, 판단, 제목 만들기 순서로 활동할 수 있습니다.",
-      "subjects": [
-        "교과융합"
-      ],
-      "gradeBands": [
-        "3-4",
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "creation",
-      "learningProcess": [
-        "구상",
-        "제작",
-        "공유"
-      ],
-      "createdAt": "2026-07-14T09:39:08.518Z",
-      "updatedAt": "2026-07-14T09:39:08.518Z"
-    },
-    {
-      "id": "91fc1ce8-f455-464d-ace8-f2d2b2ed2985",
-      "title": "한 방울의 귀환: 물 수확 장치 설계실",
-      "summary": "초등 3~4학년 학생이 증발·응결·물 이동을 관찰하고 한 변인만 바꾸어 물 수집 결과를 비교·설명하는 과학 실험 시뮬레이션입니다.",
-      "url": "https://one-drop-return.wbmaker.chatgpt.site",
-      "githubUrl": "https://github.com/WBmaker2/one-drop-return",
-      "tags": [
-        "증발과응결",
-        "물의상태변화",
-        "과학실험",
-        "변인통제",
-        "초등과학"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/91fc1ce8-f455-464d-ace8-f2d2b2ed2985.png",
-      "subject": "과학",
-      "grade": "초등 3~4학년",
-      "memo": "물의 상태 변화 단원에서 실제 실험 전 장치 원리와 공정한 비교 방법을 익히고, 24개 보존 표식으로 물 수지를 확인하는 사전 탐구 활동에 활용할 수 있습니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "3-4"
-      ],
-      "audience": "student",
-      "interactionType": "simulation",
-      "learningProcess": [
-        "예측",
-        "조작",
-        "비교",
-        "설명"
-      ],
-      "createdAt": "2026-07-14T09:30:01.340Z",
-      "updatedAt": "2026-07-14T09:30:01.340Z"
-    },
-    {
-      "id": "af1fee94-763b-4f7c-9607-bc685873a2fc",
-      "title": "생활도구 리디자인 클리닉",
-      "summary": "초등 1~2학년이 생활도구의 불편을 관찰하고 부품을 바꿔 같은 조건으로 시험하며 설계 이유를 설명하는 창의 활동 앱",
-      "url": "https://wbmaker2.github.io/everyday-tool-redesign-clinic/",
-      "githubUrl": "https://github.com/WBmaker2/everyday-tool-redesign-clinic",
-      "tags": [
-        "창의활동",
-        "생활도구",
-        "리디자인",
-        "관찰",
-        "초등저학년"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/af1fee94-763b-4f7c-9607-bc685873a2fc.png",
-      "subject": "통합",
-      "grade": "초등 1~2학년",
-      "memo": "생활도구 하나를 선택해 사용 장면의 불편 근거를 찾고, 모양·기능·재료와 표면을 바꾼 뒤 같은 조건으로 전후를 시험합니다. 완성된 리디자인 처방전을 보며 바꾼 이유와 새로 생긴 불편까지 함께 설명할 수 있습니다.",
-      "subjects": [
-        "통합"
-      ],
-      "gradeBands": [
-        "1-2"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-13T20:01:16.149Z",
-      "updatedAt": "2026-07-13T20:01:16.149Z"
-    },
-    {
       "id": "680f7079-9f3a-4b90-ab32-e418cd40aab9",
       "title": "AI 데이터 품질검사소",
       "summary": "초등 5~6학년 학생이 가상 도서 데이터를 점검하며 데이터 품질과 AI 결과 변화를 체험하는 교육용 시뮬레이션",
@@ -1489,40 +3010,6 @@
       ],
       "createdAt": "2026-07-13T13:19:01.797Z",
       "updatedAt": "2026-07-13T13:19:01.797Z"
-    },
-    {
-      "id": "9e77dba6-7388-4b21-bf2e-b74b9d9e5193",
-      "title": "등호 수사대",
-      "summary": "초등 3~4학년 학생이 등식의 양쪽 값을 따로 계산하고 비교하며 등호의 뜻을 익히는 수학 학습 앱",
-      "url": "https://wbmaker2.github.io/equality-detective/",
-      "githubUrl": "https://github.com/WBmaker2/equality-detective",
-      "tags": [
-        "수학",
-        "등호",
-        "등식",
-        "초등수학",
-        "형성평가"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/9e77dba6-7388-4b21-bf2e-b74b9d9e5193.png",
-      "subject": "수학",
-      "grade": "초등 3~4학년",
-      "memo": "도움·기본·도전 단계의 9문항을 풀며 같을까요, 빈칸 채우기, 틀린 식 고치기 활동을 진행하고 오답만 다시 풀 수 있습니다.",
-      "subjects": [
-        "수학"
-      ],
-      "gradeBands": [
-        "3-4"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-07-13T13:14:43.524Z",
-      "updatedAt": "2026-07-13T13:14:43.524Z"
     },
     {
       "id": "0118a475-a6af-4be2-849e-416bcd2e9ee8",
@@ -1665,36 +3152,6 @@
       ],
       "createdAt": "2026-06-17T13:06:29.937Z",
       "updatedAt": "2026-06-29T09:48:46.781Z"
-    },
-    {
-      "id": "86c0c19a-c4bf-4ef1-822b-75162b385271",
-      "title": "HEIC -> JPG 변환기",
-      "summary": "여러 HEIC/HEIF 사진을 브라우저에서 JPG로 변환하고 ZIP으로 내려받을 수 있는 로컬 변환 도구입니다.",
-      "url": "https://wbmaker2.github.io/heic-to-jpg/",
-      "githubUrl": "https://github.com/WBmaker2/heic-to-jpg",
-      "tags": [
-        "HEIC",
-        "JPG",
-        "이미지"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/86c0c19a-c4bf-4ef1-822b-75162b385271.png",
-      "subject": "공통",
-      "grade": null,
-      "memo": "수업 자료 준비나 기기별 사진 형식 변환이 필요할 때 서버 업로드 없이 브라우저에서 안전하게 처리할 수 있습니다.",
-      "subjects": [
-        "공통"
-      ],
-      "gradeBands": [],
-      "audience": "student",
-      "interactionType": "utility",
-      "learningProcess": [
-        "변환",
-        "확인",
-        "저장"
-      ],
-      "createdAt": "2026-06-29T09:05:14.815Z",
-      "updatedAt": "2026-06-29T09:47:35.090Z"
     },
     {
       "id": "fbdbaf4e-1c6d-4644-8de7-cde51f5e9c9d",
@@ -1874,44 +3331,6 @@
       ],
       "createdAt": "2026-04-24T13:23:35.648Z",
       "updatedAt": "2026-06-21T06:35:40.457Z"
-    },
-    {
-      "id": "373e131a-54eb-41a6-852f-aa54431b29c8",
-      "title": "으쓱으쓱 튼튼 스트레칭 룰렛",
-      "summary": "교실에서 룰렛으로 스트레칭 미션을 뽑고 타이머에 맞춰 함께 몸을 풀 수 있는 수업용 활동 앱",
-      "url": "https://wbmaker2.github.io/healthy-streching-roulette/",
-      "githubUrl": "https://github.com/WBmaker2/healthy-streching-roulette",
-      "tags": [
-        "체육",
-        "집중",
-        "수업",
-        "도덕",
-        "통합교과"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/373e131a-54eb-41a6-852f-aa54431b29c8.png",
-      "subject": "체육/바른생활",
-      "grade": "초등 1~6학년",
-      "memo": "아침 활동, 중간놀이, 수업 중 집중 전환 시간에 전자칠판으로 룰렛을 돌려 전체 학생이 짧게 몸을 풀도록 활용할 수 있습니다. 교사 관리화면에서 미션 문구를 저장하거나 기본값으로 초기화할 수 있습니다.",
-      "subjects": [
-        "체육",
-        "바른생활"
-      ],
-      "gradeBands": [
-        "all",
-        "1-2",
-        "3-4",
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-04-26T13:16:36.556Z",
-      "updatedAt": "2026-06-21T06:35:15.099Z"
     },
     {
       "id": "7507c704-bd01-497e-aeb5-1578209b0d6e",
@@ -2261,39 +3680,6 @@
       "updatedAt": "2026-06-14T07:37:56.296Z"
     },
     {
-      "id": "5543c36a-42d8-49ba-b2e2-85a2c4f193ea",
-      "title": "덩기덕 쿵더러러! 디지털 장구 마스터",
-      "summary": "3~6학년이 키보드와 터치로 실제 장구 샘플을 들으며 정간보 장단을 연습하는 국악 학습 앱입니다.",
-      "url": "https://wbmaker2.github.io/digital-janggu-simulator/",
-      "githubUrl": "https://github.com/WBmaker2/digital-janggu-simulator",
-      "tags": [
-        "리듬",
-        "음악"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/5543c36a-42d8-49ba-b2e2-85a2c4f193ea.png",
-      "subject": "음악 / 국악",
-      "grade": "3-6학년",
-      "memo": "키보드 F/J와 터치 버튼으로 궁편·채편·양편을 연주하고, 정간보 패턴을 따라 교실에서 개인 장단 연습을 할 수 있습니다. 실제 장구 녹음 샘플과 교사용 운영 자료를 함께 제공합니다.",
-      "subjects": [
-        "음악",
-        "국악"
-      ],
-      "gradeBands": [
-        "3-4",
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-05-12T12:32:46.714Z",
-      "updatedAt": "2026-06-14T07:37:42.782Z"
-    },
-    {
       "id": "9925ecdd-4483-4f9b-bb96-8aed89662621",
       "title": "초록 지구 구출 대작전: 우리 반 환경 리포터",
       "summary": "초등 5~6학년 학생들이 환경 피해 사례를 조사해 디지털 뉴스레터로 작성하고 학급 게시판에 공유하는 웹 앱입니다.",
@@ -2399,38 +3785,6 @@
       "updatedAt": "2026-06-14T07:35:13.144Z"
     },
     {
-      "id": "42b8f202-db48-42f6-a8aa-e35192687889",
-      "title": "H Memo",
-      "summary": "교사가 학교 업무 메모를 저장하고 백업하는 Windows 메모앱을 확인하고 설치할 수 있는 안내 페이지",
-      "url": "https://wbmaker2.github.io/h-memo-releases/",
-      "githubUrl": "https://github.com/WBmaker2/h-memo-releases",
-      "tags": [
-        "메모",
-        "담임",
-        "업무"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/42b8f202-db48-42f6-a8aa-e35192687889.png",
-      "subject": "공통",
-      "grade": "교사용",
-      "memo": "학교 행정 메모, 점검 체크리스트, 수업 운영 아이디어를 빠르게 기록하고 로컬 및 서버 백업으로 보관하는 H Memo의 공개 다운로드 안내 페이지입니다.",
-      "subjects": [
-        "공통"
-      ],
-      "gradeBands": [
-        "teacher"
-      ],
-      "audience": "teacher",
-      "interactionType": "management",
-      "learningProcess": [
-        "기록",
-        "정리",
-        "확인"
-      ],
-      "createdAt": "2026-05-17T00:33:08.028Z",
-      "updatedAt": "2026-05-21T08:35:17.357Z"
-    },
-    {
       "id": "d13ba3a7-be1e-4aab-bc7a-de1df66bd8f3",
       "title": "우리 동네 안전 탐험대",
       "summary": "학급·모둠별로 동네 장소를 지도에 기록하고 CSV·JSON·PDF로 공유하는 사회·안전 수업용 디지털 지도입니다.",
@@ -2501,35 +3855,6 @@
       ],
       "createdAt": "2026-04-20T09:20:30.348Z",
       "updatedAt": "2026-05-13T03:04:04.820Z"
-    },
-    {
-      "id": "acd41aa8-8a45-4051-8a7f-fcff679d56a4",
-      "title": "담임 행정 허브",
-      "summary": "담임교사가 공문, 개인 마감, 수합판, 템플릿, 캘린더와 백업을 한 흐름에서 관리하는 개인용 행정 도구",
-      "url": "https://wbmaker2.github.io/homeroom-admin-hub/",
-      "githubUrl": "https://github.com/WBmaker2/homeroom-admin-hub",
-      "tags": [
-        "업무",
-        "담임"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/acd41aa8-8a45-4051-8a7f-fcff679d56a4.png",
-      "subject": "공통",
-      "grade": null,
-      "memo": "담임교사가 하루 업무함에서 공문과 마감을 확인하고, 수합판·템플릿·캘린더·데이터 백업까지 개인 저장소 기준으로 이어서 관리할 수 있습니다.",
-      "subjects": [
-        "공통"
-      ],
-      "gradeBands": [],
-      "audience": "teacher",
-      "interactionType": "management",
-      "learningProcess": [
-        "기록",
-        "정리",
-        "확인"
-      ],
-      "createdAt": "2026-05-05T03:37:28.683Z",
-      "updatedAt": "2026-05-13T02:53:16.156Z"
     },
     {
       "id": "890a0ba1-6e4c-4bf8-a9d9-2009802a94fb",
@@ -2741,42 +4066,6 @@
       "updatedAt": "2026-05-13T02:39:15.358Z"
     },
     {
-      "id": "25f6d160-3efc-42c7-accd-4f62eb0f7635",
-      "title": "우리학교 테트리스",
-      "summary": "우리학교 친구들과 테트리스 게임을 함께 하며 도형의 회전과 이동을 학습하는 프로그램입니다.",
-      "url": "https://tetris-rank.web.app/",
-      "githubUrl": null,
-      "tags": [
-        "수학",
-        "게임",
-        "수업",
-        "소리"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/25f6d160-3efc-42c7-accd-4f62eb0f7635.png",
-      "subject": "수학",
-      "grade": "1~6학년",
-      "memo": "도형의 이동, 회전을 학습할 수 있는 게임입니다.\r\n리더보드가 있어 선의의 경쟁을 할 수 있습니다.",
-      "subjects": [
-        "수학"
-      ],
-      "gradeBands": [
-        "all",
-        "1-2",
-        "3-4",
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "피드백",
-        "반복"
-      ],
-      "createdAt": "2026-04-24T05:06:47.050Z",
-      "updatedAt": "2026-05-13T00:48:37.286Z"
-    },
-    {
       "id": "e41f2952-cbee-4463-9205-c3e7ce269602",
       "title": "우주 음악 메타버스",
       "summary": "초등 음악 수업에서 학생들이 행성 사이를 이동하며 음악을 듣고 실시간으로 소통하는 2D 감상 메타버스입니다.",
@@ -2845,70 +4134,6 @@
       "updatedAt": "2026-05-13T00:45:38.586Z"
     },
     {
-      "id": "d9e05a77-4d67-4c0e-be07-48b069383791",
-      "title": "오늘의 날씨 코디네이터: 사계절 옷장",
-      "summary": "초등 1~2학년 학생이 날씨에 맞는 옷과 준비물을 고르고 실시간 체크리스트로 외출 준비를 점검하는 통합교과 활동 앱입니다.",
-      "url": "https://wbmaker2.github.io/weather-outfit-planner/",
-      "githubUrl": "https://github.com/WBmaker2/weather-outfit-planner",
-      "tags": [
-        "통합교과",
-        "날씨",
-        "수업"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/d9e05a77-4d67-4c0e-be07-48b069383791.png",
-      "subject": "바른 생활 / 슬기로운 생활",
-      "grade": "초등 1~2학년",
-      "memo": "날씨 미션을 읽고 필요한 옷차림과 준비물을 선택하면 캐릭터가 실시간으로 바뀌며, 외출 전 체크리스트에서 완료/아직 상태를 바로 확인할 수 있습니다.",
-      "subjects": [
-        "바른 생활",
-        "슬기로운 생활"
-      ],
-      "gradeBands": [
-        "1-2"
-      ],
-      "audience": "student",
-      "interactionType": "management",
-      "learningProcess": [
-        "기록",
-        "정리",
-        "확인"
-      ],
-      "createdAt": "2026-05-08T14:55:17.940Z",
-      "updatedAt": "2026-05-13T00:44:12.159Z"
-    },
-    {
-      "id": "a453fce0-6a74-4cb2-99aa-0a7d847114da",
-      "title": "교실 자리 바꾸기 도우미",
-      "summary": "교사가 학급 자리표를 관리하고 학생 랜덤 뽑기와 타이머를 함께 활용할 수 있는 교실 운영 도구입니다.",
-      "url": "https://class-random-seat.vercel.app",
-      "githubUrl": "https://github.com/WBmaker2/class-random-seat",
-      "tags": [
-        "담임",
-        "업무",
-        "랜덤",
-        "자리"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/a453fce0-6a74-4cb2-99aa-0a7d847114da.png",
-      "subject": "공통",
-      "grade": null,
-      "memo": "학급별 학생과 자리표를 등록한 뒤 자리 배치 확인, 무작위 발표자 선정, 수업 타이머를 한 화면에서 사용할 수 있습니다. 기본은 브라우저 로컬 저장이라 로그인 없이 바로 쓰고, 필요할 때 Google 로그인으로 백업할 수 있습니다.",
-      "subjects": [
-        "공통"
-      ],
-      "gradeBands": [],
-      "audience": "mixed",
-      "interactionType": "management",
-      "learningProcess": [
-        "기록",
-        "정리",
-        "확인"
-      ],
-      "createdAt": "2026-04-19T01:45:49.296Z",
-      "updatedAt": "2026-05-08T14:09:41.706Z"
-    },
-    {
       "id": "60646b44-ffef-45f9-a774-65df50211a9a",
       "title": "선생님의 영단어 사전",
       "summary": "교사와 학생이 2022 개정 영어 어휘와 교과서 표현을 학교급별로 검색하고 발음·말하기 점검까지 확인하는 사전입니다.",
@@ -2938,35 +4163,6 @@
       ],
       "createdAt": "2026-04-19T01:31:31.045Z",
       "updatedAt": "2026-05-08T12:57:57.714Z"
-    },
-    {
-      "id": "c7de79fb-516a-4167-9d21-ba282a2cf5de",
-      "title": "학급 업무 체크리스트",
-      "summary": "담임교사가 학급 업무를 날짜별로 점검하고 미완료 업무와 백업 상태를 한눈에 관리하는 체크리스트입니다.",
-      "url": "https://task-checklist-prod.web.app/",
-      "githubUrl": "https://github.com/WBmaker2/task-checklist",
-      "tags": [
-        "담임",
-        "업무"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": "/app-thumbnails/c7de79fb-516a-4167-9d21-ba282a2cf5de.png",
-      "subject": "공통",
-      "grade": null,
-      "memo": "대시보드, 체크리스트, 업무관리, 통계, 백업 화면을 통해 학급 운영 업무를 매일 확인하고 반복 업무 누락을 줄이는 데 사용할 수 있습니다.",
-      "subjects": [
-        "공통"
-      ],
-      "gradeBands": [],
-      "audience": "teacher",
-      "interactionType": "management",
-      "learningProcess": [
-        "기록",
-        "정리",
-        "확인"
-      ],
-      "createdAt": "2026-04-19T01:38:38.164Z",
-      "updatedAt": "2026-05-08T12:57:30.132Z"
     },
     {
       "id": "f1fc0953-7d49-42c5-a0cc-68b0a564e765",
@@ -3265,5 +4461,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 113
+  "catalogRevision": 201
 }
