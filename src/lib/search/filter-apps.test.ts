@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { filterApps } from "./filter-apps";
+import { filterApps, sortApps } from "./filter-apps";
 
 const apps = [
   {
     id: "1",
+    url: "https://example.com/talking-vocab-quiz",
     title: "Talking Vocab Quiz",
     summary: "영어 단어 퀴즈",
     tags: ["영어", "게임형"],
@@ -18,6 +19,7 @@ const apps = [
   },
   {
     id: "2",
+    url: "https://example.com/class-random-seat",
     title: "Class Random Seat",
     summary: "자리 배치 도구",
     tags: ["학급경영", "업무경감"],
@@ -39,10 +41,28 @@ describe("filterApps", () => {
     expect(filterApps(apps, "영어", [])).toHaveLength(1);
     expect(filterApps(apps, "management", [])).toHaveLength(1);
     expect(filterApps(apps, "3-4", [])).toHaveLength(1);
+    expect(filterApps(apps, "4학년 영어", [])).toHaveLength(1);
+    expect(filterApps(apps, "class-random-seat", [])).toHaveLength(1);
   });
 
   it("requires all selected tags to match", () => {
     expect(filterApps(apps, "", ["학급경영", "업무경감"])).toHaveLength(1);
     expect(filterApps(apps, "", ["영어", "업무경감"])).toHaveLength(0);
+  });
+
+  it("supports structured filters and keeps a deterministic sort", () => {
+    expect(
+      filterApps(apps, "", [], { audience: "teacher" }).map((app) => app.id)
+    ).toEqual(["2"]);
+    expect(
+      filterApps(apps, "", [], { gradeBands: ["3-4"] }).map((app) => app.id)
+    ).toEqual(["1", "2"]);
+    expect(
+      filterApps(apps, "", [], { gradeBands: ["5-6"] }).map((app) => app.id)
+    ).toEqual(["2"]);
+    expect(sortApps(apps, "title").map((app) => app.title)).toEqual([
+      "Class Random Seat",
+      "Talking Vocab Quiz"
+    ]);
   });
 });

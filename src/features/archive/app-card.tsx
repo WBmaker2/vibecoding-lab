@@ -1,19 +1,34 @@
 import Link from "next/link";
 import { createAppPath } from "@/lib/apps/app-slug";
 import type { PublicAppRecord } from "@/lib/apps/types";
+import { ArchiveFavoriteButton } from "./archive-favorite-button";
 import styles from "./app-card.module.css";
 
 interface AppCardProps {
   app: PublicAppRecord;
+  isFavorite?: boolean;
+  onRecordUse?: (appId: string) => void;
+  onToggleFavorite?: (appId: string) => void;
+  returnSearch?: string;
 }
 
-export function AppCard({ app }: AppCardProps) {
+export function AppCard({
+  app,
+  isFavorite = false,
+  onRecordUse,
+  onToggleFavorite,
+  returnSearch = ""
+}: AppCardProps) {
   const submeta = [app.subject, app.grade].filter(Boolean).join(" · ");
   const note = app.memo ?? "";
   const notePreview =
     note.length > 42 ? `${note.slice(0, 42).trimEnd()}…` : note;
   const visibleTags = app.tags.slice(0, 4);
   const additionalTagCount = Math.max(0, app.tags.length - visibleTags.length);
+  const returnHref = returnSearch ? `/${returnSearch}` : "/";
+  const detailHref = returnSearch
+    ? `${createAppPath(app)}?return_to=${encodeURIComponent(returnHref)}`
+    : createAppPath(app);
 
   return (
     <article className="app-card">
@@ -75,13 +90,21 @@ export function AppCard({ app }: AppCardProps) {
           <Link
             aria-label={`${app.title} 자세히 보기`}
             className={styles.detailLink}
-            href={createAppPath(app)}
+            href={detailHref}
           >
             자세히 보기
           </Link>
+          {onToggleFavorite ? (
+            <ArchiveFavoriteButton
+              appTitle={app.title}
+              isFavorite={isFavorite}
+              onToggle={() => onToggleFavorite(app.id)}
+            />
+          ) : null}
           <a
             className="app-card-link"
             href={app.url}
+            onClick={() => onRecordUse?.(app.id)}
             rel="noreferrer"
             target="_blank"
           >

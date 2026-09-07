@@ -4,6 +4,12 @@ import { useEffect, useRef, useState } from "react";
 
 export const UPDATE_HISTORY = [
   {
+    date: "2026-09-07",
+    kind: "개선",
+    detail:
+      "앱이 100개를 넘어도 과목·학년군·대상·활동 방식으로 찾고, 수업 모음·보관함·최근 사용을 이어가도록 공개 탐색과 관리자 일괄 편집을 개편했습니다."
+  },
+  {
     date: "2026-08-20",
     kind: "개선",
     detail:

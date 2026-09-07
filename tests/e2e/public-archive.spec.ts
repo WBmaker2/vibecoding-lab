@@ -55,7 +55,12 @@ test("public archive supports compact browsing on desktop and mobile", async ({
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth)
   ).toBe(await page.evaluate(() => window.innerWidth));
-  await expect(page.locator(".app-card-thumbnail")).toHaveCount(56);
+  await expect(page.locator(".app-card")).toHaveCount(24);
+  await expect(
+    page.getByRole("navigation", { name: "앱 목록 페이지" })
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "2페이지" })).toBeVisible();
+  await expect(page.locator(".app-card-thumbnail")).not.toHaveCount(0);
   await expect
     .poll(
       () =>

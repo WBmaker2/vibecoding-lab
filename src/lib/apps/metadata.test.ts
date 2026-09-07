@@ -56,4 +56,13 @@ describe("normalizeAppMetadata", () => {
     expect(metadata.interactionType).toBe("management");
     expect(metadata.learningProcess).toEqual(["기록", "정리", "확인"]);
   });
+
+  it("groups subject aliases and detects secondary students", () => {
+    expect(
+      normalizeAppMetadata({ subject: "바른 생활", grade: "중학생" })
+    ).toMatchObject({
+      subjects: ["바른생활"],
+      gradeBands: ["secondary"]
+    });
+  });
 });

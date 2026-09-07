@@ -1,14 +1,22 @@
 interface ArchiveResultsStateProps {
+  additionalFilters?: Array<{ id: string; label: string }>;
   activeTags: string[];
   onReset: () => void;
   query: string;
   resultCount: number;
+  sortLabel?: string;
+  totalCount?: number;
 }
 
-function buildActiveFilters(query: string, activeTags: string[]) {
+function buildActiveFilters(
+  query: string,
+  activeTags: string[],
+  additionalFilters: Array<{ id: string; label: string }>
+) {
   const trimmedQuery = query.trim();
 
   return [
+    ...additionalFilters.map((filter) => ({ ...filter, type: "structured" as const })),
     ...activeTags.map((tag) => ({
       id: `tag:${tag}`,
       label: `#${tag}`,
@@ -27,12 +35,15 @@ function buildActiveFilters(query: string, activeTags: string[]) {
 }
 
 export function ArchiveResultsState({
+  additionalFilters = [],
   activeTags,
   onReset,
   query,
-  resultCount
+  resultCount,
+  sortLabel,
+  totalCount
 }: ArchiveResultsStateProps) {
-  const activeFilters = buildActiveFilters(query, activeTags);
+  const activeFilters = buildActiveFilters(query, activeTags, additionalFilters);
   const hasFilters = activeFilters.length > 0;
 
   return (
@@ -40,11 +51,15 @@ export function ArchiveResultsState({
       <div className="archive-results-state-copy">
         <p className="archive-results-state-title">
           <strong>{resultCount}</strong>개의 앱
+          {totalCount !== undefined && totalCount !== resultCount ? (
+            <span className="archive-results-total"> · 전체 {totalCount}개</span>
+          ) : null}
         </p>
         <p className="archive-results-state-detail">
           {hasFilters
             ? "현재 적용된 필터를 한눈에 확인하고, 필요하면 한 번에 초기화할 수 있습니다."
             : "대표 태그를 누르거나 검색어를 입력해 원하는 앱을 빠르게 좁혀보세요."}
+          {sortLabel ? <span className="archive-results-sort">정렬: {sortLabel}</span> : null}
         </p>
       </div>
 

@@ -4,11 +4,13 @@ import { createAppPath } from "@/lib/apps/app-slug";
 import { gradeBandsToLegacyText } from "@/lib/apps/metadata";
 import type { PublicAppRecord } from "@/lib/apps/types";
 import { UpdateHistory } from "@/features/archive/update-history";
+import { ReturnToArchiveLink } from "./return-to-archive-link";
 import styles from "./app-detail-page.module.css";
 
 interface AppDetailPageProps {
   app: PublicAppRecord;
   relatedApps: PublicAppRecord[];
+  returnHref?: string;
 }
 
 function formatUpdatedAt(date: Date) {
@@ -57,7 +59,11 @@ function getAppFacts(app: PublicAppRecord) {
   ].filter((fact): fact is { label: string; value: string } => Boolean(fact.value));
 }
 
-export function AppDetailPage({ app, relatedApps }: AppDetailPageProps) {
+export function AppDetailPage({
+  app,
+  relatedApps,
+  returnHref = "/"
+}: AppDetailPageProps) {
   const submeta = [app.subject, app.grade].filter(Boolean).join(" · ");
   const facts = getAppFacts(app);
   const faqItems = createAppFaqItems(app);
@@ -65,9 +71,9 @@ export function AppDetailPage({ app, relatedApps }: AppDetailPageProps) {
   return (
     <main className={styles.page}>
       <div className={styles.utilityBar}>
-        <Link className={styles.backLink} href="/">
+        <ReturnToArchiveLink className={styles.backLink} fallbackHref={returnHref}>
           앱 아카이브로 돌아가기
-        </Link>
+        </ReturnToArchiveLink>
         <UpdateHistory />
       </div>
 
@@ -113,9 +119,12 @@ export function AppDetailPage({ app, relatedApps }: AppDetailPageProps) {
             >
               앱 열기
             </a>
-            <Link className={styles.secondaryLink} href="/">
+            <ReturnToArchiveLink
+              className={styles.secondaryLink}
+              fallbackHref={returnHref}
+            >
               다른 앱 찾아보기
-            </Link>
+            </ReturnToArchiveLink>
           </div>
         </div>
       </article>

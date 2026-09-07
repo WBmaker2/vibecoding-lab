@@ -1,55 +1,38 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { AdminAppRecord } from "@/lib/apps/types";
-import {
-  getStaticGallerySyncSummary,
-  isActiveStaticGalleryRun,
-  type StaticGalleryAssetIntegrity,
-  type StaticGalleryBaseline,
-  type StaticGalleryDispatchMarker,
-  type StaticGallerySyncRun
+import { normalizeAppMetadata } from "@/lib/apps/metadata";
+import { filterApps, sortApps } from "@/lib/search/filter-apps";
+import type {
+  StaticGalleryAssetIntegrity,
+  StaticGalleryBaseline
 } from "@/lib/apps/static-gallery-sync-state";
 import {
   buildAdminAppPreviewFromFormData,
   getChangedAdminFieldLabels,
   type RecentAdminChange
 } from "./change-highlights";
+import { AdminBulkActions } from "./admin-bulk-actions";
 import { AppForm } from "./app-form";
+import { AdminAppPreview, type AdminAppDraft } from "./admin-app-preview";
+import {
+  AdminLibraryControls,
+  type AdminListSort,
+  type AdminListStatus
+} from "./admin-library-controls";
+import { AdminLibraryPagination } from "./admin-library-pagination";
 import { AppList } from "./app-list";
-
-const SYNC_REQUEST_MARKER_STORAGE_KEY =
-  "hvc-static-gallery-request-marker";
-
-type StaticGalleryRunScope = "active" | "history" | "request";
-
-function readStoredDispatchMarker(): StaticGalleryDispatchMarker | null {
-  try {
-    const value = JSON.parse(
-      window.sessionStorage.getItem(SYNC_REQUEST_MARKER_STORAGE_KEY) ?? "null"
-    ) as Partial<StaticGalleryDispatchMarker> | null;
-
-    if (
-      !value ||
-      typeof value.id !== "string" ||
-      typeof value.requestedAt !== "string" ||
-      typeof value.leaseExpiresAt !== "string" ||
-      (value.runId !== null && !Number.isSafeInteger(value.runId))
-    ) {
-      return null;
-    }
-
-    return value as StaticGalleryDispatchMarker;
-  } catch {
-    return null;
-  }
-}
+import { useAdminBulkSelection } from "./use-admin-bulk-selection";
+import { useAdminSync } from "./use-admin-sync";
+import { UpdateHistory } from "@/features/archive/update-history";
 
 interface AdminWorkspaceProps {
   assetIntegrity?: StaticGalleryAssetIntegrity;
   apps: AdminAppRecord[];
   baseline: StaticGalleryBaseline;
+  bulkClassificationAction?: (formData: FormData) => void | Promise<void>;
+  bulkTagAction?: (formData: FormData) => void | Promise<void>;
   createAction: (formData: FormData) => void | Promise<void>;
   deleteAction: (formData: FormData) => void | Promise<void>;
   logoutAction: (formData: FormData) => void | Promise<void>;
@@ -62,6 +45,8 @@ export function AdminWorkspace({
   assetIntegrity,
   apps,
   baseline,
+  bulkClassificationAction = async () => {},
+  bulkTagAction = async () => {},
   createAction,
   deleteAction,
   logoutAction,
@@ -69,28 +54,58 @@ export function AdminWorkspace({
   suggestedTags,
   updateAction
 }: AdminWorkspaceProps) {
-  const router = useRouter();
   const [localApps, setLocalApps] = useState(apps);
   const [selectedAppId, setSelectedAppId] = useState<string | null>(null);
+  const [isFormDirty, setIsFormDirty] = useState(false);
+  const [libraryQuery, setLibraryQuery] = useState("");
+  const [librarySubject, setLibrarySubject] = useState("all");
+  const [libraryStatus, setLibraryStatus] = useState<AdminListStatus>("all");
+  const [librarySort, setLibrarySort] = useState<AdminListSort>("updated");
+  const [libraryPage, setLibraryPage] = useState(1);
+  const [saveStatus, setSaveStatus] = useState<string | null>(null);
+  const [draftPreview, setDraftPreview] = useState<AdminAppDraft | null>(null);
   const [recentChange, setRecentChange] = useState<RecentAdminChange | null>(
     null
   );
-  const [syncPending, setSyncPending] = useState(false);
-  const [syncStatus, setSyncStatus] = useState<{
-    kind: "error" | "info" | "success";
-    message: string;
-  } | null>(null);
-  const [syncRun, setSyncRun] = useState<StaticGallerySyncRun | null>(null);
-  const [dispatchMarker, setDispatchMarker] =
-    useState<StaticGalleryDispatchMarker | null>(null);
-  const dispatchMarkerRef = useRef<StaticGalleryDispatchMarker | null>(null);
-  const requestContextGenerationRef = useRef(0);
-  const mountedRef = useRef(true);
-  const refreshedRunIdRef = useRef<number | null>(null);
+  const workbenchRef = useRef<HTMLElement>(null);
+  const {
+    applyTagUpdates,
+    applyClassificationUpdates,
+    clearSelection,
+    selectedAppIds,
+    selectedApps,
+    toggleAppSelection
+  } = useAdminBulkSelection({
+    apps: localApps,
+    setApps: setLocalApps,
+    setRecentChange
+  });
+  const {
+    formatSnapshotDate,
+    getRunStatusLabel,
+    handleStaticGallerySync,
+    syncPending,
+    syncRun,
+    syncStatus,
+    syncSummary,
+    syncTrackingIsActive
+  } = useAdminSync({ apps: localApps, assetIntegrity, baseline });
 
   useEffect(() => {
     setLocalApps(apps);
   }, [apps]);
+
+  useEffect(() => {
+    if (!isFormDirty) return;
+
+    function handleBeforeUnload(event: BeforeUnloadEvent) {
+      event.preventDefault();
+      event.returnValue = "";
+    }
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [isFormDirty]);
 
   const selectedApp = useMemo(
     () => localApps.find((app) => app.id === selectedAppId) ?? null,
@@ -102,329 +117,59 @@ export function AdminWorkspace({
     [localApps]
   );
 
-  const syncSummary = useMemo(
-    () => getStaticGallerySyncSummary(localApps, baseline, assetIntegrity),
-    [assetIntegrity, baseline, localApps]
-  );
+  const pendingAppIds = useMemo(() => {
+    const ids = new Set<string>();
 
-  const syncRunIsActive = isActiveStaticGalleryRun(syncRun);
-  const syncAwaitingRequestedRun = Boolean(dispatchMarker && !syncRun);
-  const syncTrackingIsActive = syncAwaitingRequestedRun || syncRunIsActive;
-
-  useEffect(() => {
-    return () => {
-      mountedRef.current = false;
-    };
-  }, []);
-
-  const trackDispatchMarker = useCallback(
-    (marker: StaticGalleryDispatchMarker | null, persist = true) => {
-      const currentMarkerId = dispatchMarkerRef.current?.id ?? null;
-      const nextMarkerId = marker?.id ?? null;
-
-      if (currentMarkerId !== nextMarkerId) {
-        requestContextGenerationRef.current += 1;
+    for (const app of localApps) {
+      const baselineUpdatedAt = baseline.updatedAtById[app.id];
+      const baselineTimestamp = baselineUpdatedAt
+        ? Date.parse(baselineUpdatedAt)
+        : Number.NaN;
+      if (
+        !Number.isFinite(baselineTimestamp) ||
+        baselineTimestamp !== app.updatedAt.getTime()
+      ) {
+        ids.add(app.id);
       }
-
-      dispatchMarkerRef.current = marker;
-      setDispatchMarker(marker);
-
-      if (!persist) {
-        return;
-      }
-
-      if (marker) {
-        window.sessionStorage.setItem(
-          SYNC_REQUEST_MARKER_STORAGE_KEY,
-          JSON.stringify(marker)
-        );
-      } else {
-        window.sessionStorage.removeItem(SYNC_REQUEST_MARKER_STORAGE_KEY);
-      }
-    },
-    []
-  );
-
-  const expireTrackedRequest = useCallback(
-    (markerId: string) => {
-      if (dispatchMarkerRef.current?.id !== markerId) {
-        return;
-      }
-
-      trackDispatchMarker(null);
-      setSyncRun(null);
-      setSyncPending(false);
-      setSyncStatus({
-        kind: "error",
-        message: "동기화 요청 확인 시간이 만료되었습니다. 다시 시도해 주세요."
-      });
-    },
-    [trackDispatchMarker]
-  );
-
-  const applyLatestRun = useCallback(
-    (
-      run: StaticGallerySyncRun | null,
-      marker: StaticGalleryDispatchMarker | null,
-      refreshOnSuccess = false,
-      scope: StaticGalleryRunScope = marker ? "active" : "history",
-      requestedMarker: StaticGalleryDispatchMarker | null = null
-    ) => {
-      if (!mountedRef.current) {
-        return;
-      }
-
-      if (scope === "history") {
-        trackDispatchMarker(null);
-        setSyncRun(run);
-
-        if (isActiveStaticGalleryRun(run)) {
-          setSyncStatus({
-            kind: "info",
-            message: "최근 동기화 작업이 실행 중입니다."
-          });
-        } else if (run) {
-          setSyncStatus({
-            kind: "info",
-            message: "최근 동기화 실행 기록입니다."
-          });
-        }
-        return;
-      }
-
-      const effectiveMarker =
-        scope === "request" ? marker ?? requestedMarker : marker;
-      trackDispatchMarker(effectiveMarker);
-
-      const requestedRun =
-        scope === "request"
-          ? run
-          : effectiveMarker && effectiveMarker.runId !== null
-          ? run?.id === effectiveMarker.runId
-            ? run
-            : null
-          : effectiveMarker
-            ? null
-            : run;
-
-      if (effectiveMarker && !requestedRun) {
-        setSyncRun(null);
-        setSyncStatus({
-          kind: "info",
-          message: "동기화 요청을 확인하는 중입니다."
-        });
-        return;
-      }
-
-      setSyncRun(requestedRun);
-
-      if (isActiveStaticGalleryRun(requestedRun)) {
-        setSyncStatus({
-          kind: "info",
-          message: "동기화 작업이 실행 중입니다."
-        });
-        return;
-      }
-
-      if (requestedRun?.conclusion === "success") {
-        window.sessionStorage.removeItem(SYNC_REQUEST_MARKER_STORAGE_KEY);
-        setSyncStatus({
-          kind: "success",
-          message: "동기화가 완료되었습니다."
-        });
-
-        if (
-          refreshOnSuccess &&
-          refreshedRunIdRef.current !== requestedRun.id
-        ) {
-          refreshedRunIdRef.current = requestedRun.id;
-          router.refresh();
-        }
-      } else if (requestedRun?.conclusion) {
-        window.sessionStorage.removeItem(SYNC_REQUEST_MARKER_STORAGE_KEY);
-        setSyncStatus({
-          kind: "error",
-          message: "동기화에 실패했습니다. GitHub Actions 실행 결과를 확인해 주세요."
-        });
-      }
-    },
-    [router, trackDispatchMarker]
-  );
-
-  const loadLatestRun = useCallback(
-    async (
-      refreshOnSuccess = false,
-      requestedMarker = dispatchMarkerRef.current
-    ) => {
-      const requestMarkerId = requestedMarker?.id ?? null;
-      const requestContextGeneration = requestContextGenerationRef.current;
-      const requestContextIsCurrent = () =>
-        requestContextGenerationRef.current === requestContextGeneration &&
-        (dispatchMarkerRef.current?.id ?? null) === requestMarkerId;
-
-      if (!requestContextIsCurrent()) {
-        return;
-      }
-
-      try {
-        const statusUrl = requestedMarker
-          ? `/api/admin/sync-static-gallery?request_marker=${encodeURIComponent(requestedMarker.id)}`
-          : "/api/admin/sync-static-gallery";
-        const response = await fetch(statusUrl, {
-          cache: "no-store"
-        });
-        const payload = (await response.json().catch(() => ({}))) as {
-          dispatchMarker?: StaticGalleryDispatchMarker | null;
-          error?: string;
-          requestMarker?: string;
-          run?: StaticGallerySyncRun | null;
-          scope?: StaticGalleryRunScope;
-        };
-
-        if (!requestContextIsCurrent()) {
-          return;
-        }
-
-        if (!response.ok) {
-          throw new Error(payload.error || "동기화 상태를 불러오지 못했습니다.");
-        }
-
-        if (requestedMarker && payload.scope) {
-          if (
-            payload.scope !== "request" ||
-            payload.requestMarker !== requestedMarker.id
-          ) {
-            applyLatestRun(
-              null,
-              requestedMarker,
-              false,
-              "request",
-              requestedMarker
-            );
-            return;
-          }
-
-          applyLatestRun(
-            payload.run ?? null,
-            payload.dispatchMarker ?? requestedMarker,
-            refreshOnSuccess,
-            "request",
-            requestedMarker
-          );
-          return;
-        }
-
-        applyLatestRun(
-          payload.run ?? null,
-          payload.dispatchMarker ?? null,
-          refreshOnSuccess,
-          payload.scope ??
-            (payload.dispatchMarker ? "active" : "history"),
-          requestedMarker
-        );
-      } catch (error) {
-        if (
-          !mountedRef.current ||
-          !requestContextIsCurrent()
-        ) {
-          return;
-        }
-
-        setSyncStatus({
-          kind: "error",
-          message:
-            error instanceof Error
-              ? error.message
-              : "동기화 상태를 불러오지 못했습니다."
-        });
-      }
-    },
-    [applyLatestRun]
-  );
-
-  useEffect(() => {
-    const storedMarker = readStoredDispatchMarker();
-
-    if (storedMarker) {
-      trackDispatchMarker(storedMarker, false);
-      setSyncStatus({
-        kind: "info",
-        message: "동기화 요청을 확인하는 중입니다."
-      });
-      void loadLatestRun(false, storedMarker);
-    } else {
-      void loadLatestRun();
-    }
-  }, [loadLatestRun, trackDispatchMarker]);
-
-  useEffect(() => {
-    if (!syncTrackingIsActive) {
-      return;
     }
 
-    const timer = window.setInterval(() => {
-      void loadLatestRun(true, dispatchMarkerRef.current);
-    }, 5000);
+    return ids;
+  }, [baseline.updatedAtById, localApps]);
 
-    return () => window.clearInterval(timer);
-  }, [loadLatestRun, syncTrackingIsActive]);
+  const librarySubjects = useMemo(() => {
+    const values = new Set(
+      localApps.flatMap((app) => normalizeAppMetadata(app).subjects)
+    );
+    return [...values].sort((left, right) => left.localeCompare(right, "ko"));
+  }, [localApps]);
 
+  const filteredLibraryApps = useMemo(() => {
+    const appsByFields = filterApps(localApps, libraryQuery, [], {
+      subjects: librarySubject === "all" ? [] : [librarySubject]
+    }).filter((app) => {
+      if (libraryStatus === "pending") return pendingAppIds.has(app.id);
+      if (libraryStatus === "synced") return !pendingAppIds.has(app.id);
+      return true;
+    });
+
+    return sortApps(appsByFields, librarySort);
+  }, [libraryQuery, librarySort, libraryStatus, librarySubject, localApps, pendingAppIds]);
+
+  const libraryPageCount = Math.max(1, Math.ceil(filteredLibraryApps.length / 24));
+  const safeLibraryPage = Math.min(libraryPage, libraryPageCount);
+  const visibleLibraryApps = filteredLibraryApps.slice(
+    (safeLibraryPage - 1) * 24,
+    safeLibraryPage * 24
+  );
   useEffect(() => {
-    if (!dispatchMarker || syncRun) {
-      return;
-    }
+    if (!selectedAppId) return;
 
-    const expiresAt = Date.parse(dispatchMarker.leaseExpiresAt);
-    const remaining = Number.isFinite(expiresAt)
-      ? Math.max(0, expiresAt - Date.now())
-      : 0;
-
-    if (remaining === 0) {
-      expireTrackedRequest(dispatchMarker.id);
-      return;
-    }
-
-    const timer = window.setTimeout(() => {
-      expireTrackedRequest(dispatchMarker.id);
-    }, remaining);
-
-    return () => window.clearTimeout(timer);
-  }, [dispatchMarker, expireTrackedRequest, syncRun]);
-
-  function formatSnapshotDate(value: string) {
-    const date = new Date(value);
-    return Number.isNaN(date.getTime())
-      ? "알 수 없음"
-      : date.toLocaleDateString("ko-KR");
-  }
-
-  function getRunStatusLabel(run: StaticGallerySyncRun) {
-    const statusLabels: Record<string, string> = {
-      completed: "완료",
-      in_progress: "실행 중",
-      pending: "보류 중",
-      queued: "대기 중",
-      requested: "요청됨",
-      waiting: "대기 중"
-    };
-    const conclusionLabels: Record<string, string> = {
-      cancelled: "취소됨",
-      failure: "실패",
-      neutral: "중립",
-      success: "성공",
-      skipped: "건너뜀",
-      timed_out: "시간 초과"
-    };
-    const status = run.status
-      ? (statusLabels[run.status] ?? run.status)
-      : "알 수 없음";
-    const conclusion = run.conclusion
-      ? (conclusionLabels[run.conclusion] ?? run.conclusion)
-      : "진행 중";
-
-    return `상태 ${status} · 결과 ${conclusion}`;
-  }
-
+    workbenchRef.current?.scrollIntoView?.({
+      behavior: "smooth",
+      block: "start"
+    });
+    document.getElementById("admin-title")?.focus();
+  }, [selectedAppId]);
   const currentSuggestedTags = useMemo(() => {
     const tags = [...new Set(localApps.flatMap((app) => app.tags))].sort(
       (left, right) => left.localeCompare(right, "ko")
@@ -432,15 +177,58 @@ export function AdminWorkspace({
 
     return tags.length > 0 ? tags : suggestedTags;
   }, [localApps, suggestedTags]);
+  const selectApp = useCallback(
+    (appId: string) => {
+      if (appId === selectedAppId) return;
 
+      if (isFormDirty) {
+        const confirmed = window.confirm(
+          "저장하지 않은 변경 사항이 있습니다. 다른 앱으로 이동하면 입력 내용이 사라집니다. 이동할까요?"
+        );
+        if (!confirmed) return;
+      }
+
+      setIsFormDirty(false);
+      setSelectedAppId(appId);
+      clearSelection();
+      setDraftPreview(null);
+      setSaveStatus(null);
+    },
+    [clearSelection, isFormDirty, selectedAppId]
+  );
+  const startCreate = useCallback(() => {
+    if (isFormDirty) {
+      const confirmed = window.confirm(
+        "저장하지 않은 변경 사항이 있습니다. 신규 등록 화면으로 전환할까요?"
+      );
+      if (!confirmed) return;
+    }
+
+    setIsFormDirty(false);
+    setSelectedAppId(null);
+    clearSelection();
+    setDraftPreview(null);
+    setSaveStatus(null);
+    window.setTimeout(() => {
+      workbenchRef.current?.scrollIntoView?.({
+        behavior: "smooth",
+        block: "start"
+      });
+      document.getElementById("admin-title")?.focus();
+    }, 0);
+  }, [clearSelection, isFormDirty]);
   async function handleCreateAction(formData: FormData) {
     setRecentChange(null);
+    setSaveStatus(null);
     await createAction(formData);
+    setIsFormDirty(false);
+    setSaveStatus("저장했습니다. 공개 페이지에는 아직 반영되지 않았습니다.");
+    setDraftPreview(null);
   }
-
   async function handleUpdateAction(formData: FormData) {
     const previous = selectedApp;
 
+    setSaveStatus(null);
     await updateAction(formData);
 
     if (!previous) {
@@ -457,6 +245,9 @@ export function AdminWorkspace({
       appId: next.id,
       fields: changedFields
     });
+    setIsFormDirty(false);
+    setSaveStatus("저장했습니다. 공개 페이지에는 아직 반영되지 않았습니다.");
+    setDraftPreview(null);
   }
 
   async function handleRemoveTag(appId: string, tag: string) {
@@ -490,85 +281,6 @@ export function AdminWorkspace({
     });
   }
 
-  async function handleStaticGallerySync() {
-    setSyncPending(true);
-    setSyncStatus(null);
-
-    try {
-      const response = await fetch("/api/admin/sync-static-gallery", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify({
-          reason: "admin-sync-button"
-        })
-      });
-      const payload = (await response.json().catch(() => ({}))) as {
-        dispatched?: boolean;
-        dispatchMarker?: StaticGalleryDispatchMarker | null;
-        error?: string;
-        run?: StaticGallerySyncRun | null;
-      };
-
-      if (response.status === 409 && payload.run) {
-        applyLatestRun(
-          payload.run,
-          payload.dispatchMarker ?? null,
-          false,
-          "active"
-        );
-        return;
-      }
-
-      if (response.status === 409 && payload.dispatchMarker) {
-        applyLatestRun(null, payload.dispatchMarker, false, "active");
-        return;
-      }
-
-      if (!response.ok) {
-        throw new Error(
-          payload.error || "동기화 작업을 시작하지 못했습니다."
-        );
-      }
-
-      if (payload.dispatched === false) {
-        setSyncStatus({
-          kind: "success",
-          message: "동기화할 수정 사항이 없습니다"
-        });
-        router.refresh();
-      } else {
-        const marker = payload.dispatchMarker ?? null;
-        trackDispatchMarker(marker);
-        setSyncRun(null);
-        setSyncStatus({
-          kind: "info",
-          message: "동기화 작업을 시작했습니다. 실행 상태를 확인하는 중입니다."
-        });
-        await loadLatestRun(true, marker);
-      }
-    } catch (error) {
-      if (!mountedRef.current) {
-        return;
-      }
-
-      trackDispatchMarker(null);
-      setSyncRun(null);
-      setSyncStatus({
-        kind: "error",
-        message:
-          error instanceof Error
-            ? error.message
-            : "동기화 작업을 시작하지 못했습니다."
-      });
-    } finally {
-      if (mountedRef.current) {
-        setSyncPending(false);
-      }
-    }
-  }
-
   return (
     <main className="page-shell admin-page">
       <header className="admin-page-header">
@@ -585,9 +297,20 @@ export function AdminWorkspace({
           <div className="admin-header-stats" aria-label="관리자 현황">
             <span className="admin-stat-pill">{localApps.length}개 앱</span>
             <span className="admin-stat-pill">{totalTags}개 태그</span>
+            <span className="admin-stat-pill admin-stat-pill-pending">
+              {pendingAppIds.size}개 공개 반영 대기
+            </span>
           </div>
 
           <div className="admin-header-actions">
+            <button
+              className="admin-primary-button"
+              onClick={startCreate}
+              type="button"
+            >
+              새 앱 등록
+            </button>
+            <UpdateHistory />
             <button
               className="admin-secondary-button"
               disabled={
@@ -645,7 +368,10 @@ export function AdminWorkspace({
       </header>
 
       <div className="admin-workspace-grid">
-        <section className="admin-panel admin-workbench-panel">
+        <section
+          className="admin-panel admin-workbench-panel"
+          ref={workbenchRef}
+        >
           <div className="admin-panel-header admin-workbench-header">
             <div>
               <p className="eyebrow">
@@ -675,14 +401,25 @@ export function AdminWorkspace({
                 : "create-mode"
             }
             onCancelEdit={
-              selectedApp ? () => setSelectedAppId(null) : undefined
+              selectedApp ? startCreate : undefined
+            }
+            onDirtyChange={setIsFormDirty}
+            onDraftChange={(draft) =>
+              setDraftPreview((current) => ({ ...current, ...draft }))
             }
             submitLabel={selectedApp ? "수정 저장" : "앱 등록"}
             suggestedTags={currentSuggestedTags}
+            suggestedSubjects={librarySubjects}
           />
+          {saveStatus ? (
+            <p aria-live="polite" className="admin-save-status">
+              {saveStatus}
+            </p>
+          ) : null}
+          {selectedApp ? (
+            <AdminAppPreview app={selectedApp} draft={draftPreview} />
+          ) : null}
         </section>
-      </div>
-
       <section className="admin-panel admin-library-panel">
         <div className="admin-panel-header">
           <h2>등록된 앱 라이브러리</h2>
@@ -692,15 +429,71 @@ export function AdminWorkspace({
           </p>
         </div>
 
+        <AdminLibraryControls
+          onQueryChange={(value) => {
+            setLibraryQuery(value);
+            setLibraryPage(1);
+          }}
+          onSortChange={(value) => {
+            setLibrarySort(value);
+            setLibraryPage(1);
+          }}
+          onStatusChange={(value) => {
+            setLibraryStatus(value);
+            setLibraryPage(1);
+          }}
+          onSubjectChange={(value) => {
+            setLibrarySubject(value);
+            setLibraryPage(1);
+          }}
+          pendingCount={pendingAppIds.size}
+          query={libraryQuery}
+          resultCount={filteredLibraryApps.length}
+          sort={librarySort}
+          status={libraryStatus}
+          subject={librarySubject}
+          subjects={librarySubjects}
+        />
+
+        {selectedApps.length > 0 ? (
+          <AdminBulkActions
+            action={bulkTagAction}
+            classificationAction={bulkClassificationAction}
+            disabled={isFormDirty}
+            onClassificationComplete={applyClassificationUpdates}
+            onClear={clearSelection}
+            onComplete={applyTagUpdates}
+            selectedApps={selectedApps}
+          />
+        ) : null}
+
         <AppList
-          apps={localApps}
+          apps={visibleLibraryApps}
           deleteAction={deleteAction}
+          emptyMessage={
+            localApps.length > 0 ? "조건에 맞는 앱이 없습니다." : undefined
+          }
           onRemoveTag={handleRemoveTag}
-          onSelectApp={setSelectedAppId}
+          onSelectApp={selectApp}
+          onToggleSelection={toggleAppSelection}
+          pendingAppIds={pendingAppIds}
           recentChange={recentChange}
+          selectedAppIds={selectedAppIds}
           selectedAppId={selectedAppId}
         />
+
+        <AdminLibraryPagination
+          currentPage={safeLibraryPage}
+          onNext={() =>
+            setLibraryPage((current) => Math.min(libraryPageCount, current + 1))
+          }
+          onPrevious={() =>
+            setLibraryPage((current) => Math.max(1, current - 1))
+          }
+          totalPages={libraryPageCount}
+        />
       </section>
+      </div>
     </main>
   );
 }

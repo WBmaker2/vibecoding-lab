@@ -23,6 +23,22 @@ export type GradeBand = (typeof GRADE_BANDS)[number];
 export type AppAudience = (typeof APP_AUDIENCES)[number];
 export type AppInteractionType = (typeof INTERACTION_TYPES)[number];
 
+/**
+ * A small, deliberately conservative vocabulary for fields that are used as
+ * filters.  The original free text is still kept on the record, while these
+ * aliases make equivalent labels discoverable together.
+ */
+const SUBJECT_ALIASES: Record<string, string> = {
+  "바른 생활": "바른생활",
+  "바른 생활과": "바른생활",
+  "통합 교과": "통합"
+};
+
+export function normalizeSubjectLabel(value: string): string {
+  const text = value.trim().replace(/\s+/gu, " ");
+  return SUBJECT_ALIASES[text] ?? text;
+}
+
 export interface AppMetadataSource {
   title?: string | null;
   summary?: string | null;
@@ -63,7 +79,9 @@ export function normalizeSubjects(
   subjects: readonly unknown[] | null | undefined,
   legacySubject?: string | null
 ): string[] {
-  const explicit = uniqueText(subjects);
+  const explicit = uniqueText(subjects)
+    .map(normalizeSubjectLabel)
+    .filter((value, index, values) => values.indexOf(value) === index);
   if (explicit.length > 0) return explicit;
 
   if (!legacySubject?.trim()) return [];
@@ -73,6 +91,8 @@ export function normalizeSubjects(
       .split(/[\/·・,|]+/)
       .map((part) => part.replace(/\s+융합$/u, "").trim())
       .filter((part) => part !== "융합")
+  ).map(normalizeSubjectLabel).filter(
+    (value, index, values) => values.indexOf(value) === index
   );
 }
 
@@ -100,7 +120,7 @@ export function normalizeGradeBands(
   const result: GradeBand[] = [];
 
   if (/교사용|교사/.test(compact)) addGradeBand(result, "teacher");
-  if (/중등|고등|중학교|고등학교/.test(compact)) {
+  if (/중등|고등|중학교|고등학교|중학생|고등학생/.test(compact)) {
     addGradeBand(result, "secondary");
   }
 

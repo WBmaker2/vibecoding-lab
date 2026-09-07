@@ -7,6 +7,7 @@ import {
   toAdminAppRecord,
   toPublicAppRecord
 } from "./record-mappers";
+import { normalizeTags as normalizeAppTags } from "./tags";
 import type { AdminAppRecord, AppInput, PublicAppRecord } from "./types";
 
 export { toAdminAppRecord, toPublicAppRecord } from "./record-mappers";
@@ -18,6 +19,7 @@ export interface AppRepository {
   getApp(id: string): Promise<AdminAppRecord | null>;
   createApp(input: AppInput): Promise<AdminAppRecord>;
   updateApp(id: string, input: AppInput): Promise<AdminAppRecord>;
+  updateTags(id: string, tags: string[]): Promise<AdminAppRecord>;
   removeTag(id: string, tag: string): Promise<AdminAppRecord>;
   deleteApp(id: string): Promise<void>;
 }
@@ -160,6 +162,28 @@ class InMemoryAppRepository implements AppRepository {
     const hadApp = memoryStore.apps.some((app) => app.id === id);
     memoryStore.apps = memoryStore.apps.filter((app) => app.id !== id);
     if (hadApp) memoryStore.catalogRevision += 1;
+  }
+
+  async updateTags(id: string, tags: string[]): Promise<AdminAppRecord> {
+    const existing = memoryStore.apps.find((app) => app.id === id);
+    if (!existing) throw new Error("App not found.");
+
+    const nextTags = normalizeAppTags(tags);
+    if (nextTags.length === 0) {
+      throw new Error("앱에는 태그가 최소 1개 필요합니다.");
+    }
+
+    const updated: AdminAppRecord = {
+      ...existing,
+      tags: nextTags,
+      updatedAt: new Date()
+    };
+
+    memoryStore.apps = memoryStore.apps.map((app) =>
+      app.id === id ? updated : app
+    );
+    memoryStore.catalogRevision += 1;
+    return updated;
   }
 
   async removeTag(id: string, tag: string): Promise<AdminAppRecord> {
@@ -306,6 +330,11 @@ class PostgresAppRepository implements AppRepository {
         subject: input.subject ?? null,
         grade: input.grade ?? null,
         memo: input.memo ?? null,
+        subjects: input.subjects ?? [],
+        gradeBands: input.gradeBands ?? [],
+        audience: input.audience ?? null,
+        interactionType: input.interactionType ?? null,
+        learningProcess: input.learningProcess ?? [],
         updatedAt: new Date()
       })
       .where(eq(apps.id, id))
@@ -328,6 +357,24 @@ class PostgresAppRepository implements AppRepository {
     if (result.length > 0) {
       await this.bumpCatalogRevision(db);
     }
+  }
+
+  async updateTags(id: string, tags: string[]): Promise<AdminAppRecord> {
+    const nextTags = normalizeAppTags(tags);
+    if (nextTags.length === 0) {
+      throw new Error("앱에는 태그가 최소 1개 필요합니다.");
+    }
+
+    const db = getDb();
+    const [record] = await db
+      .update(apps)
+      .set({ tags: nextTags, updatedAt: new Date() })
+      .where(eq(apps.id, id))
+      .returning();
+
+    if (!record) throw new Error("App not found.");
+    await this.bumpCatalogRevision(db);
+    return toAdminAppRecord(record);
   }
 
   async removeTag(id: string, tag: string): Promise<AdminAppRecord> {

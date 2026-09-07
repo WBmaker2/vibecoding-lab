@@ -1162,13 +1162,14 @@ describe("AdminWorkspace", () => {
     ).toBeInTheDocument();
   });
 
-  it("stacks the registered app library below the workbench in the admin layout", () => {
+  it("keeps the library before the workbench in the stacked admin layout", () => {
     const gridStyles = getCssBlock(
       readGlobalStyles(),
       "\\.admin-workspace-grid"
     );
 
     expect(gridStyles).toContain("grid-template-columns: 1fr");
+    expect(gridStyles).toContain('grid-template-areas: "library" "workbench"');
   });
 
   it("removes a registered tag from the library card after confirmation", async () => {

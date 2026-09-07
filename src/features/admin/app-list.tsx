@@ -11,10 +11,14 @@ import {
 interface AppListProps {
   apps: AdminAppRecord[];
   deleteAction: (formData: FormData) => void | Promise<void>;
+  emptyMessage?: string;
   onRemoveTag: (appId: string, tag: string) => void | Promise<void>;
   onSelectApp: (appId: string) => void;
+  onToggleSelection?: (appId: string) => void;
   recentChange?: RecentAdminChange | null;
+  selectedAppIds?: ReadonlySet<string>;
   selectedAppId: string | null;
+  pendingAppIds?: ReadonlySet<string>;
 }
 
 function getThumbnailModeLabel(app: AdminAppRecord) {
@@ -30,13 +34,24 @@ function getThumbnailModeLabel(app: AdminAppRecord) {
   }
 }
 
+function formatUpdatedAt(date: Date) {
+  return new Intl.DateTimeFormat("ko-KR", {
+    month: "short",
+    day: "numeric"
+  }).format(date);
+}
+
 export function AppList({
   apps,
   deleteAction,
+  emptyMessage,
   onRemoveTag,
   onSelectApp,
+  onToggleSelection,
   recentChange,
-  selectedAppId
+  selectedAppId,
+  pendingAppIds = new Set(),
+  selectedAppIds = new Set()
 }: AppListProps) {
   const [expandedTagAppIds, setExpandedTagAppIds] = useState<Set<string>>(
     () => new Set()
@@ -87,8 +102,12 @@ export function AppList({
     return (
       <div className="admin-empty-library">
         <p className="eyebrow">Empty Library</p>
-        <h3>아직 등록된 앱이 없습니다.</h3>
-        <p>첫 앱을 등록하면 이곳에서 요약 정보와 편집 상태를 볼 수 있습니다.</p>
+        <h3>{emptyMessage ?? "아직 등록된 앱이 없습니다."}</h3>
+        <p>
+          {emptyMessage
+            ? "검색어나 과목·반영 상태 조건을 바꿔 다른 앱을 찾아보세요."
+            : "첫 앱을 등록하면 이곳에서 요약 정보와 편집 상태를 볼 수 있습니다."}
+        </p>
       </div>
     );
   }
@@ -116,6 +135,17 @@ export function AppList({
             key={app.id}
           >
             <div className="admin-app-card-top">
+              {onToggleSelection ? (
+                <label className="admin-app-select">
+                  <input
+                    aria-label={`${app.title} 일괄 작업 선택`}
+                    checked={selectedAppIds.has(app.id)}
+                    onChange={() => onToggleSelection(app.id)}
+                    type="checkbox"
+                  />
+                  <span>선택</span>
+                </label>
+              ) : null}
               <div>
                 <p className="eyebrow">Registered App</p>
                 <h2>{app.title}</h2>
@@ -150,7 +180,19 @@ export function AppList({
                 ) : null}
                 <form action={deleteAction}>
                   <input name="id" type="hidden" value={app.id} />
-                  <button className="admin-danger-button" type="submit">
+                  <button
+                    className="admin-danger-button"
+                    onClick={(event) => {
+                      if (
+                        !window.confirm(
+                          `정말 '${app.title}' 앱을 삭제할까요? 삭제 후 공개 반영 전까지 되돌릴 수 없습니다.`
+                        )
+                      ) {
+                        event.preventDefault();
+                      }
+                    }}
+                    type="submit"
+                  >
                     삭제
                   </button>
                 </form>
@@ -200,6 +242,18 @@ export function AppList({
                 </span>
               </button>
               <span className="admin-meta-pill">{getThumbnailModeLabel(app)}</span>
+              <span
+                className={
+                  pendingAppIds.has(app.id)
+                    ? "admin-meta-pill admin-meta-pill-pending"
+                    : "admin-meta-pill admin-meta-pill-synced"
+                }
+              >
+                {pendingAppIds.has(app.id) ? "공개 반영 대기" : "공개 반영 완료"}
+              </span>
+              <span className="admin-meta-pill">
+                수정 {formatUpdatedAt(app.updatedAt)}
+              </span>
               {app.subject ? (
                 <span className="admin-meta-pill">과목 {app.subject}</span>
               ) : null}

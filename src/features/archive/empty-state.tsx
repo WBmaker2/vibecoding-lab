@@ -1,19 +1,33 @@
 import Image from "next/image";
 
 interface EmptyStateProps {
+  favoritesView?: boolean;
+  hasFilters?: boolean;
   query: string;
+  recentView?: boolean;
 }
 
-export function EmptyState({ query }: EmptyStateProps) {
+export function EmptyState({
+  favoritesView = false,
+  hasFilters = false,
+  query,
+  recentView = false
+}: EmptyStateProps) {
   return (
     <section className="empty-state" aria-live="polite">
       <div className="empty-state-copy">
         <p className="eyebrow">No Matches</p>
         <h2>조건을 조금 바꾸면 더 잘 찾을 수 있습니다</h2>
         <p>
-          {query
-            ? `"${query}" 대신 더 짧은 검색어를 시도해 보세요.`
-            : "대표 태그를 먼저 누르거나 검색어를 입력해 보세요."}
+          {favoritesView
+            ? "카드의 저장 버튼을 눌러 다음 수업에 다시 쓸 앱을 모아 보세요."
+            : recentView
+              ? "앱 열기 버튼을 누른 앱이 이 기기에 최근 사용 목록으로 쌓입니다."
+              : query
+                ? `"${query}" 대신 더 짧은 검색어를 시도해 보세요.`
+                : hasFilters
+                  ? "조건을 하나만 풀어 보거나 전체 필터를 초기화해 보세요."
+                  : "대표 태그를 먼저 누르거나 검색어를 입력해 보세요."}
         </p>
       </div>
       <Image

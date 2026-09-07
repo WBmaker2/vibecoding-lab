@@ -172,4 +172,29 @@ describe("ArchiveHero", () => {
       screen.getByRole("button", { name: "#시뮬레이션" })
     ).toHaveAttribute("aria-pressed", "false");
   });
+
+  it("keeps every selected non-representative tag visible after collapse", () => {
+    render(
+      <ArchiveHero
+        activeTags={["영어", "읽기", "말하기"]}
+        allTags={[...REPRESENTATIVE_TAGS, "영어", "읽기", "말하기"]}
+        onQueryChange={() => {}}
+        onToggleTag={() => {}}
+        query=""
+        representativeTags={REPRESENTATIVE_TAGS}
+      />
+    );
+
+    const toolbar = screen.getByRole("toolbar", { name: "태그 필터" });
+    expect(toolbar).toHaveTextContent("#읽기");
+    expect(toolbar).toHaveTextContent("#말하기");
+    expect(screen.getByRole("button", { name: "#읽기" })).toHaveAttribute(
+      "aria-pressed",
+      "true"
+    );
+    expect(screen.getByRole("button", { name: "#말하기" })).toHaveAttribute(
+      "aria-pressed",
+      "true"
+    );
+  });
 });
