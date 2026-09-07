@@ -1,4 +1,6 @@
 import {
+  bulkUpdateClassificationAction,
+  bulkUpdateTagsAction,
   createAppAction,
   deleteAppAction,
   logoutAction,
@@ -28,6 +30,8 @@ export function AdminShell({ apps, assetIntegrity, baseline }: AdminShellProps) 
       apps={apps}
       assetIntegrity={assetIntegrity}
       baseline={baseline}
+      bulkClassificationAction={bulkUpdateClassificationAction}
+      bulkTagAction={bulkUpdateTagsAction}
       createAction={createAppAction}
       deleteAction={deleteAppAction}
       logoutAction={logoutAction}

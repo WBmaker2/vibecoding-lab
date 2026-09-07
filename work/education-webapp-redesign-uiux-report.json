@@ -1,0 +1,63 @@
+{
+  "generatedAt": "2026-09-06T22:44:16+00:00",
+  "skillName": "ui-ux-pro-max",
+  "skillFile": "/Users/kimhongnyeon/.codex/skills/ui-ux-pro-max/SKILL.md",
+  "searchScript": "/Users/kimhongnyeon/.codex/skills/ui-ux-pro-max/scripts/search.py",
+  "executionMode": "runtime-cli",
+  "runtimeStatus": "available",
+  "projectRoot": "/Volumes/ External Drive 256G/Dev2/codex/vibecoding-lab",
+  "outputDir": "/Volumes/ External Drive 256G/Dev2/codex/vibecoding-lab",
+  "query": "educational app catalog teacher classroom tools Korean light responsive admin dashboard",
+  "projectName": "Hong Vibe Coding Lab catalog",
+  "command": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "/Users/kimhongnyeon/.codex/skills/ui-ux-pro-max/scripts/search.py",
+    "educational app catalog teacher classroom tools Korean light responsive admin dashboard",
+    "--design-system",
+    "--persist",
+    "--json",
+    "--project-name",
+    "Hong Vibe Coding Lab catalog",
+    "--output-dir",
+    "/Volumes/ External Drive 256G/Dev2/codex/vibecoding-lab"
+  ],
+  "exitCode": 0,
+  "status": "success",
+  "persistence": {
+    "status": "success",
+    "design_system_dir": "/Volumes/ External Drive 256G/Dev2/codex/vibecoding-lab/design-system/hong-vibe-coding-lab-catalog",
+    "master_file": "/Volumes/ External Drive 256G/Dev2/codex/vibecoding-lab/design-system/hong-vibe-coding-lab-catalog/MASTER.md",
+    "created_files": [
+      "/Volumes/ External Drive 256G/Dev2/codex/vibecoding-lab/design-system/hong-vibe-coding-lab-catalog/MASTER.md"
+    ]
+  },
+  "masterFile": "/Volumes/ External Drive 256G/Dev2/codex/vibecoding-lab/design-system/hong-vibe-coding-lab-catalog/MASTER.md",
+  "masterExists": true,
+  "stackSearch": {
+    "command": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/Users/kimhongnyeon/.codex/skills/ui-ux-pro-max/scripts/search.py",
+      "educational app catalog teacher classroom tools Korean light responsive admin dashboard",
+      "--stack",
+      "nextjs",
+      "--json"
+    ],
+    "exitCode": 0,
+    "result": {
+      "domain": "stack",
+      "stack": "nextjs",
+      "query": "educational app catalog teacher classroom tools Korean light responsive admin dashboard",
+      "file": "stacks/nextjs.csv",
+      "count": 0,
+      "results": [],
+      "suggestions": [
+        "response",
+        "responses",
+        "might",
+        "deduplication",
+        "height",
+        "nextresponse"
+      ]
+    }
+  }
+}

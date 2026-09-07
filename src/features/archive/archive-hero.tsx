@@ -5,9 +5,17 @@ import { useState } from "react";
 import { SearchBar } from "./search-bar";
 import { TagFilterBar } from "./tag-filter-bar";
 import { UpdateHistory } from "./update-history";
+import {
+  ArchiveCollections,
+  type ArchiveCollectionPreset
+} from "./archive-collections";
 
 interface ArchiveHeroProps {
+  activeFilterCount?: number;
+  activeCollectionId?: string | null;
   activeTags: string[];
+  onSelectCollection?: (collection: ArchiveCollectionPreset) => void;
+  onOpenFilters?: () => void;
   onQueryChange: (value: string) => void;
   onToggleTag: (tag: string) => void;
   query: string;
@@ -16,7 +24,11 @@ interface ArchiveHeroProps {
 }
 
 export function ArchiveHero({
+  activeFilterCount = 0,
+  activeCollectionId = null,
   activeTags,
+  onSelectCollection,
+  onOpenFilters,
   onQueryChange,
   onToggleTag,
   query,
@@ -27,12 +39,15 @@ export function ArchiveHero({
   const tagPanelId = "archive-tag-panel";
   const representativeTagSet = new Set(representativeTags);
   const collapsedRepresentativeTags = representativeTags.slice(0, 10);
-  const activeTag = activeTags[0];
   const hasAdditionalTags = allTags.some((tag) => !representativeTagSet.has(tag));
-  const collapsedTags =
-    activeTag && !representativeTagSet.has(activeTag)
-      ? [...collapsedRepresentativeTags.slice(0, -1), activeTag]
-      : collapsedRepresentativeTags;
+  const hiddenActiveTags = activeTags.filter(
+    (tag) => !representativeTagSet.has(tag)
+  );
+  const representativeSlotCount = Math.max(0, 10 - hiddenActiveTags.length);
+  const collapsedTags = [
+    ...collapsedRepresentativeTags.slice(0, representativeSlotCount),
+    ...hiddenActiveTags
+  ];
   const visibleTags = isAllTagsOpen ? allTags : collapsedTags;
 
   return (
@@ -64,9 +79,27 @@ export function ArchiveHero({
       <SearchBar
         label="앱 검색"
         onQueryChange={onQueryChange}
-        placeholder="예: 영어, 체육, 과학, 담임, 수업, 업무 등"
+        placeholder="예: 과학 5학년, 영어 단어, 담임 업무"
         query={query}
       />
+
+      {onSelectCollection ? (
+        <ArchiveCollections
+          activeId={activeCollectionId}
+          onSelect={onSelectCollection}
+        />
+      ) : null}
+
+      {onOpenFilters ? (
+        <button
+          aria-label="분류 필터 열기"
+          className="archive-mobile-filter-button gi-pulse"
+          onClick={onOpenFilters}
+          type="button"
+        >
+          필터 {activeFilterCount > 0 ? activeFilterCount : ""}
+        </button>
+      ) : null}
 
       <div className="archive-tag-group">
         <div className="tag-copy-row">

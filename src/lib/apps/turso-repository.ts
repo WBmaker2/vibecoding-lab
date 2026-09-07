@@ -301,6 +301,29 @@ export class TursoAppRepository implements AppRepository {
     }
   }
 
+  async updateTags(id: string, tags: string[]): Promise<AdminAppRecord> {
+    const nextTags = normalizeTags(tags);
+    if (nextTags.length === 0) {
+      throw new Error("앱에는 태그가 최소 1개 필요합니다.");
+    }
+
+    const client = getTursoClient();
+    const result = await client.execute({
+      sql: `
+        UPDATE apps
+        SET tags = ?, updated_at = ?
+        WHERE id = ?
+        RETURNING ${SELECT_COLUMNS}
+      `,
+      args: [JSON.stringify(nextTags), new Date().toISOString(), id]
+    });
+
+    const row = result.rows[0];
+    if (!row) throw new Error("App not found.");
+    await bumpCatalogRevision(client);
+    return toRecord(row as TursoRow);
+  }
+
   async removeTag(id: string, tag: string): Promise<AdminAppRecord> {
     const client = getTursoClient();
     const existing = await this.getApp(id);

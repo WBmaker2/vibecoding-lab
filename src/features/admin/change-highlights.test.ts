@@ -16,6 +16,11 @@ const app: AdminAppRecord = {
   subject: "영어",
   grade: "초등 4학년",
   memo: "기존 메모",
+  subjects: ["영어"],
+  gradeBands: ["3-4"],
+  audience: "student",
+  interactionType: "practice",
+  learningProcess: ["문제 해결"],
   createdAt: new Date("2026-04-05T00:00:00.000Z"),
   updatedAt: new Date("2026-04-05T00:00:00.000Z")
 };
@@ -62,6 +67,30 @@ describe("change-highlights", () => {
       "한 줄 설명",
       "GitHub 링크",
       "학년",
+      "메이커 노트"
+    ]);
+  });
+
+  it("keeps structured metadata in the local preview after saving", () => {
+    const formData = createFormData();
+    formData.set("audience", "teacher");
+    formData.set("interactionType", "simulation");
+    formData.set("learningProcess", "예측, 조작, 비교");
+
+    const updated = buildAdminAppPreviewFromFormData(app, formData);
+
+    expect(updated.audience).toBe("teacher");
+    expect(updated.interactionType).toBe("simulation");
+    expect(updated.subjects).toEqual(["영어"]);
+    expect(updated.gradeBands).toEqual(["3-4", "5-6"]);
+    expect(updated.learningProcess).toEqual(["예측", "조작", "비교"]);
+    expect(getChangedAdminFieldLabels(app, updated)).toEqual([
+      "한 줄 설명",
+      "GitHub 링크",
+      "학년",
+      "사용자",
+      "상호작용 유형",
+      "학습 과정",
       "메이커 노트"
     ]);
   });

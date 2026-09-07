@@ -1,6 +1,9 @@
 "use client";
 
+import type { FormEvent } from "react";
 import type { AdminAppRecord } from "@/lib/apps/types";
+import { GRADE_BANDS, gradeBandsToLegacyText } from "@/lib/apps/metadata";
+import type { AdminAppDraft } from "./admin-app-preview";
 import { TagInput } from "./tag-input";
 import { ThumbnailControls } from "./thumbnail-controls";
 
@@ -8,7 +11,10 @@ interface AppFormProps {
   action: (formData: FormData) => void | Promise<void>;
   initialApp?: AdminAppRecord;
   onCancelEdit?: () => void;
+  onDirtyChange?: (isDirty: boolean) => void;
+  onDraftChange?: (draft: AdminAppDraft) => void;
   suggestedTags?: string[];
+  suggestedSubjects?: string[];
   submitLabel: string;
 }
 
@@ -16,11 +22,64 @@ export function AppForm({
   action,
   initialApp,
   onCancelEdit,
+  onDirtyChange,
+  onDraftChange,
   submitLabel,
-  suggestedTags
+  suggestedTags,
+  suggestedSubjects = []
 }: AppFormProps) {
+  const gradeSuggestions = GRADE_BANDS.map((band) =>
+    gradeBandsToLegacyText([band])
+  ).filter((value): value is string => Boolean(value));
+
+  function handleChange(event: FormEvent<HTMLFormElement>) {
+    const target = event.target;
+    if (
+      target instanceof HTMLElement &&
+      target.classList.contains("admin-tag-suggestion-search")
+    ) {
+      return;
+    }
+
+    onDirtyChange?.(true);
+    if (!onDraftChange) return;
+
+    const formData = new FormData(event.currentTarget);
+    let tags: string[] | undefined;
+    try {
+      const parsed = JSON.parse(String(formData.get("tagsJson") ?? "[]"));
+      tags = Array.isArray(parsed)
+        ? parsed.filter((value): value is string => typeof value === "string")
+        : undefined;
+    } catch {
+      tags = undefined;
+    }
+
+    onDraftChange({
+      audience: String(formData.get("audience") ?? "") as AdminAppDraft["audience"],
+      grade: String(formData.get("grade") ?? ""),
+      interactionType: String(
+        formData.get("interactionType") ?? ""
+      ) as AdminAppDraft["interactionType"],
+      learningProcess: String(formData.get("learningProcess") ?? "")
+        .split(/[\n,]/u)
+        .map((item) => item.trim())
+        .filter(Boolean),
+      subject: String(formData.get("subject") ?? ""),
+      summary: String(formData.get("summary") ?? ""),
+      tags,
+      thumbnailUrl: String(formData.get("thumbnailUrl") ?? "") || null,
+      title: String(formData.get("title") ?? ""),
+      url: String(formData.get("url") ?? "")
+    });
+  }
+
   return (
-    <form action={action} className="admin-app-form">
+    <form
+      action={action}
+      className="admin-app-form"
+      onChangeCapture={handleChange}
+    >
       {initialApp && <input name="id" type="hidden" value={initialApp.id} />}
 
       <section className="admin-form-section">
@@ -35,7 +94,12 @@ export function AppForm({
         <div className="admin-form-grid">
           <label className="admin-field">
             <span>제목</span>
-            <input defaultValue={initialApp?.title} name="title" required />
+            <input
+              defaultValue={initialApp?.title}
+              id="admin-title"
+              name="title"
+              required
+            />
           </label>
 
           <div className="admin-field admin-field-full">
@@ -99,6 +163,10 @@ export function AppForm({
             inputLabelledBy="admin-tags-field-label"
             initialTags={initialApp?.tags}
             name="tagsJson"
+            onTagsChange={(tags) => {
+              onDirtyChange?.(true);
+              onDraftChange?.({ tags });
+            }}
             suggestedTags={suggestedTags}
           />
         </div>
@@ -131,12 +199,32 @@ export function AppForm({
         <div className="admin-form-grid">
           <label className="admin-field">
             <span>과목</span>
-            <input defaultValue={initialApp?.subject} name="subject" />
+            <input
+              autoComplete="off"
+              defaultValue={initialApp?.subject}
+              list="admin-subject-options"
+              name="subject"
+            />
+            <datalist id="admin-subject-options">
+              {suggestedSubjects.map((subject) => (
+                <option key={subject} value={subject} />
+              ))}
+            </datalist>
           </label>
 
           <label className="admin-field">
             <span>학년</span>
-            <input defaultValue={initialApp?.grade} name="grade" />
+            <input
+              autoComplete="off"
+              defaultValue={initialApp?.grade}
+              list="admin-grade-options"
+              name="grade"
+            />
+            <datalist id="admin-grade-options">
+              {gradeSuggestions.map((grade) => (
+                <option key={grade} value={grade} />
+              ))}
+            </datalist>
           </label>
 
           <label className="admin-field">
@@ -195,7 +283,7 @@ export function AppForm({
           </button>
         )}
 
-        <button className="admin-primary-button" type="submit">
+        <button className="admin-primary-button gi-pulse" type="submit">
           {submitLabel}
         </button>
       </div>

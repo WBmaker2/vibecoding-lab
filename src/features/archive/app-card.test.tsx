@@ -1,4 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { vi } from "vitest";
 import type { PublicAppRecord } from "@/lib/apps/types";
 import { AppCard } from "./app-card";
 
@@ -66,5 +67,33 @@ describe("AppCard", () => {
     expect(tagList).toHaveTextContent("+2");
     expect(tagList).not.toHaveTextContent("#초등");
     expect(tagList).not.toHaveTextContent("#타이머");
+  });
+
+  it("keeps the archive query when opening details and exposes a save action", () => {
+    const onToggleFavorite = vi.fn();
+    const onRecordUse = vi.fn();
+    const returnSearch = "?q=%EC%98%81%EC%96%B4&page=2";
+    render(
+      <AppCard
+        app={sampleApp}
+        isFavorite
+        onRecordUse={onRecordUse}
+        onToggleFavorite={onToggleFavorite}
+        returnSearch={returnSearch}
+      />
+    );
+
+    expect(screen.getByRole("link", { name: "Reading Timer 자세히 보기" })).toHaveAttribute(
+      "href",
+      `/apps/reading-timer-b5c444ba-0d76-4bc5-b787-3132985da0d3?return_to=${encodeURIComponent(
+        `/${returnSearch}`
+      )}`
+    );
+    const saveButton = screen.getByRole("button", { name: "Reading Timer 보관함에서 제거" });
+    expect(saveButton).toHaveAttribute("aria-pressed", "true");
+    fireEvent.click(saveButton);
+    expect(onToggleFavorite).toHaveBeenCalledOnce();
+    fireEvent.click(screen.getByRole("link", { name: "Reading Timer 앱 새 창에서 열기" }));
+    expect(onRecordUse).toHaveBeenCalledWith(sampleApp.id);
   });
 });
