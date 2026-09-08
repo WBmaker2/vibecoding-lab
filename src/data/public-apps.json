@@ -66,6 +66,11 @@
       "sha256": "cdd8dfceccb513f924ee68a339a09474e1acb8ce8dcfbe8a0fef79211552dcff"
     },
     {
+      "path": "/app-thumbnails/2488af2f-537a-42ee-87ab-e41b0101877e.png",
+      "size": 105522,
+      "sha256": "4fe8798548af896cda022b549144e09906335d4f942d1b978c58d194eb5319aa"
+    },
+    {
       "path": "/app-thumbnails/25f6d160-3efc-42c7-accd-4f62eb0f7635.png",
       "size": 39188,
       "sha256": "e3235f06fa0c42f2edb40aa94cadae73aee291828d0b7130891879d878234faa"
@@ -104,6 +109,11 @@
       "path": "/app-thumbnails/373e131a-54eb-41a6-852f-aa54431b29c8.png",
       "size": 290076,
       "sha256": "6dede1aa4b1f7c50b3c3ed8c9d87967ad1656a0ede08b6430e10d21d70bc7c91"
+    },
+    {
+      "path": "/app-thumbnails/3757528b-191b-4993-b884-5910db6be265.jpg",
+      "size": 2042138,
+      "sha256": "7a1f62543ff42baaa46ca5beddde1813578dce8bbb8c4b48c6d2058796768ce5"
     },
     {
       "path": "/app-thumbnails/3a72009d-c1ad-48b5-86b4-6eb870143eea.png",
@@ -567,9 +577,73 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-09-01T09:45:55.971Z",
-  "appCount": 114,
+  "generatedAt": "2026-09-08T13:23:26.281Z",
+  "appCount": 116,
   "apps": [
+    {
+      "id": "2488af2f-537a-42ee-87ab-e41b0101877e",
+      "title": "Manhattan Blocks",
+      "summary": "뉴욕의 주요 랜드마크와 지역을 오가며 도시의 공간 구조와 건축적 특징을 입체적으로 탐색하는 인터랙티브 앱입니다.",
+      "url": "https://wbmaker2.github.io/manhattan-blocks/",
+      "githubUrl": "https://github.com/WBmaker2/manhattan-blocks",
+      "tags": [
+        "관찰",
+        "자료 탐색",
+        "시뮬레이션",
+        "도구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/2488af2f-537a-42ee-87ab-e41b0101877e.png",
+      "subject": "공통",
+      "grade": null,
+      "memo": "뉴욕 도시 구조와 랜드마크를 수업 도입이나 지역 탐구 활동에 활용할 수 있으며, Orbit·Walk·Free Flight 모드로 공간을 관찰하고 랜드마크별 맥락을 비교할 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "지역 선택",
+        "공간 관찰",
+        "랜드마크 비교",
+        "탐색 결과 설명"
+      ],
+      "createdAt": "2026-09-08T13:17:26.096Z",
+      "updatedAt": "2026-09-08T13:17:26.096Z"
+    },
+    {
+      "id": "3757528b-191b-4993-b884-5910db6be265",
+      "title": "오비탈 아틀라스",
+      "summary": "학생이 은하에서 태양계로 들어가 태양과 여덟 행성의 모습·궤도·내부 구조를 3D로 관찰하고 비교하는 천문 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/orbital-atlas/",
+      "githubUrl": "https://github.com/WBmaker2/orbital-atlas",
+      "tags": [
+        "과학",
+        "관찰",
+        "시뮬레이션",
+        "탐구"
+      ],
+      "thumbnailMode": "auto",
+      "thumbnailUrl": "/app-thumbnails/3757528b-191b-4993-b884-5910db6be265.jpg",
+      "subject": "과학",
+      "grade": null,
+      "memo": "태양계 수업에서 천체를 선택해 표면 무늬와 기본 정보를 살펴보고 내부 구조를 비교합니다. 재생 속도와 이동 궤적을 조절하며 공전 운동을 관찰하고, 실제 축척과 설명용 모형의 차이를 토의할 수 있습니다. 생성 이미지는 관측 사진이 아니며 궤도와 내부 구조는 교육용 근사 모형입니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "은하 탐색",
+        "천체 선택",
+        "궤도 관찰",
+        "내부 구조 비교"
+      ],
+      "createdAt": "2026-09-08T11:58:05.721Z",
+      "updatedAt": "2026-09-08T11:58:05.721Z"
+    },
     {
       "id": "a04b8a38-d993-48a7-9c10-3f0e669b610c",
       "title": "태양계 탐사대: 사라진 안내판의 비밀",
@@ -4461,5 +4535,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 201
+  "catalogRevision": 203
 }
