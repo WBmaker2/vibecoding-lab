@@ -36,6 +36,11 @@
       "sha256": "925dcc227725a012dc8033381479f61c7b00d50d144b2493436455be932eb910"
     },
     {
+      "path": "/app-thumbnails/11c24d05-89c5-44d5-9ab2-3aff835d0f7e.png",
+      "size": 132615,
+      "sha256": "58a9f99413f7001c628b88286e31fc52679ffaf8e379d4e4389923cb330a095f"
+    },
+    {
       "path": "/app-thumbnails/13db4453-420a-447c-a4e9-67d330852ee5.png",
       "size": 215552,
       "sha256": "4fd15a733575e4b5b2cf9e2be46698afe2a26f658450053298bddb710adef960"
@@ -44,6 +49,11 @@
       "path": "/app-thumbnails/14bd29ae-72e1-487d-8fb4-723c3b9666d1.png",
       "size": 36049,
       "sha256": "9dcbb40bb8dad579518bbf33a2bce892c25ea58f1fd8bbb51126602464547520"
+    },
+    {
+      "path": "/app-thumbnails/16924ed0-0b29-46b4-b704-3846b69a3269.png",
+      "size": 117922,
+      "sha256": "84c0bad05644aeed52d5bfacf46a4f6bd0cf542aaff8e0205686dfa53c4d783a"
     },
     {
       "path": "/app-thumbnails/17df8ba0-fdd5-4627-9a61-3de742cd2325.png",
@@ -104,6 +114,11 @@
       "path": "/app-thumbnails/31d29c7a-8ce6-4ba0-a5aa-e4bb984848b5.png",
       "size": 240303,
       "sha256": "38745dfd8924623ca384c70182324e850dfb24f10291505ad2512a35abbb9dc0"
+    },
+    {
+      "path": "/app-thumbnails/33693835-e636-4405-ab06-3400352020fd.png",
+      "size": 118198,
+      "sha256": "2b0518064ef137737c1d9aff6f8cda12c79990ebebd477a1b38047b460c2949d"
     },
     {
       "path": "/app-thumbnails/373e131a-54eb-41a6-852f-aa54431b29c8.png",
@@ -254,6 +269,11 @@
       "path": "/app-thumbnails/6b801106-2602-42d8-8cd2-d26716433860.png",
       "size": 393199,
       "sha256": "a34bf2435deed9dcf0a690e2eb743725431116e9998c13343b20773f48b84e49"
+    },
+    {
+      "path": "/app-thumbnails/736cd0af-e7f1-44e3-9780-80770b3e8f09.png",
+      "size": 230934,
+      "sha256": "5ad51a1852a73cd78fcce12397ea554c4908a213243a9ce9e0f86a26804513ba"
     },
     {
       "path": "/app-thumbnails/7507c704-bd01-497e-aeb5-1578209b0d6e.png",
@@ -456,6 +476,11 @@
       "sha256": "b549d43deec400c9833494ed5213aa9fb20f3cfd856fa1c3b3551ad751d64dc5"
     },
     {
+      "path": "/app-thumbnails/c0fe301b-95d9-4cf0-92f0-c3e528ba921d.png",
+      "size": 93227,
+      "sha256": "a8f530ac6b34f8efc6f28aa38f746d89e7f681c3dca1e9353f222a8d9cac0527"
+    },
+    {
       "path": "/app-thumbnails/c4135648-1a59-40f4-8fb0-1ae54dba2306.png",
       "size": 91887,
       "sha256": "e733c80b5474806d0149e0722c73f14c226cf72e220f427a60c8d1a246ad662a"
@@ -566,6 +591,16 @@
       "sha256": "c24abecfc5adbb5406e1dd6fe9cb9808f4c58f7f5cf8e4827130035f30ff2005"
     },
     {
+      "path": "/app-thumbnails/fcd91a8f-2d8d-4c85-9dc7-4c0b45fd3e99.webp",
+      "size": 62636,
+      "sha256": "53983616354d4c52d5eec891ea4e1c540053ad7f44114310a10183be96532815"
+    },
+    {
+      "path": "/app-thumbnails/fe87c3d5-f872-415c-9f62-5f613418ec13.png",
+      "size": 343938,
+      "sha256": "14743265c40db6a949d3032f53bfdac23cb21174c91acb87b3ed1de80c0c365f"
+    },
+    {
       "path": "/app-thumbnails/feb7f03f-05fc-4c43-8919-060423577589.png",
       "size": 220286,
       "sha256": "f7f9f575c573bcce6a85848f02f94f57eccd0d5143f8acae5e970b9e21fad3a0"
@@ -577,9 +612,258 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-09-08T13:23:26.281Z",
-  "appCount": 116,
+  "generatedAt": "2026-09-14T04:43:32.274Z",
+  "appCount": 123,
   "apps": [
+    {
+      "id": "c0fe301b-95d9-4cf0-92f0-c3e528ba921d",
+      "title": "한 거리의 300년 · 역사 탐구 연습",
+      "summary": "세 시대의 합성 장면과 목업 사료를 비교하며 관찰·근거·모름·설명 수정을 연습하는 역사 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/street-through-centuries/",
+      "githubUrl": "https://github.com/WBmaker2/street-through-centuries",
+      "tags": [
+        "역사",
+        "관찰",
+        "추론",
+        "탐구",
+        "자료 탐색"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/c0fe301b-95d9-4cf0-92f0-c3e528ba921d.png",
+      "subject": "사회",
+      "grade": "초등 고학년·중등",
+      "memo": "20~30분 수업에서 세 시대 합성 장면의 관찰과 목업 사료의 날짜 경계를 함께 확인합니다. 전문 감수와 교실 파일럿 전 단계입니다.",
+      "subjects": [
+        "사회"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "reference",
+      "learningProcess": [
+        "시점 선택",
+        "장면 관찰",
+        "사료 날짜·범위 확인",
+        "근거 분류",
+        "설명 수정"
+      ],
+      "createdAt": "2026-09-14T04:41:29.373Z",
+      "updatedAt": "2026-09-14T04:41:29.373Z"
+    },
+    {
+      "id": "fe87c3d5-f872-415c-9f62-5f613418ec13",
+      "title": "분자의 건축가",
+      "summary": "고등학생이 12개 분자의 전자영역과 VSEPR 기하를 조립하고 결합 극성·전체 극성을 대칭 벡터로 비교·설명하는 화학 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/molecular-architect/",
+      "githubUrl": "https://github.com/WBmaker2/molecular-architect",
+      "tags": [
+        "과학",
+        "대칭",
+        "시뮬레이션",
+        "탐구",
+        "추론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/fe87c3d5-f872-415c-9f62-5f613418ec13.png",
+      "subject": "과학",
+      "grade": "고등학교",
+      "memo": "고등학교 화학 수업에서 VSEPR 전자영역 기하와 분자 기하를 구분하고, CO₂·H₂O 등 대조 분자의 결합 쌍극자 상쇄 여부를 근거로 전체 극성을 설명하는 50분 탐구 활동에 활용합니다. 12개 검수 목록과 이상화 좌표만 사용하며 정량 쌍극자·전자밀도 계산은 다루지 않습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "전자영역 설정",
+        "구조 적용",
+        "3D 관찰",
+        "극성 근거 선택",
+        "실행 기록"
+      ],
+      "createdAt": "2026-09-13T23:05:58.662Z",
+      "updatedAt": "2026-09-13T23:05:58.662Z"
+    },
+    {
+      "id": "fcd91a8f-2d8d-4c85-9dc7-4c0b45fd3e99",
+      "title": "단면 박물관",
+      "summary": "중·고등학생이 절단 평면의 위치와 방향을 조작하며 3D 입체의 단면 영역과 경계 루프를 예측·비교·설명하는 수학 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/dimension-section-museum/",
+      "githubUrl": "https://github.com/WBmaker2/dimension-section-museum",
+      "tags": [
+        "수학",
+        "도형",
+        "시각화",
+        "시뮬레이션",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/fcd91a8f-2d8d-4c85-9dc7-4c0b45fd3e99.webp",
+      "subject": "수학",
+      "grade": "중학교 심화~고등학교",
+      "memo": "공간도형 수업에서 구·정육면체·원기둥·원뿔·토러스의 단면을 예측하고, 영역 수와 표면 경계 루프 수를 구분해 설명하는 탐구 활동에 활용합니다. 4D 전시는 후속 알고리즘 제안이며 현재 계산 결과에는 포함되지 않습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "평면 조작",
+        "계산",
+        "비교",
+        "설명",
+        "전이"
+      ],
+      "createdAt": "2026-09-13T22:39:28.800Z",
+      "updatedAt": "2026-09-13T22:40:18.607Z"
+    },
+    {
+      "id": "33693835-e636-4405-ab06-3400352020fd",
+      "title": "빛을 설계하는 광학 공방",
+      "summary": "학생이 렌즈와 물체·스크린 조건을 조작하고 상의 위치와 성질을 예측·비교하며 얇은렌즈 원리를 탐구하는 과학 학습 앱입니다.",
+      "url": "https://WBmaker2.github.io/optics-workshop/",
+      "githubUrl": "https://github.com/WBmaker2/optics-workshop",
+      "tags": [
+        "과학",
+        "탐구",
+        "시뮬레이션",
+        "시각화",
+        "실험"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/33693835-e636-4405-ab06-3400352020fd.png",
+      "subject": "과학",
+      "grade": "중학교 심화~고등학교",
+      "memo": "중학교 심화 및 고등학교 물리 수업에서 얇은렌즈식과 기준 광선을 근거로 실상·허상·초점면 경계를 예측하고, 조건을 바꾸어 설명을 수정하는 탐구 활동에 활용합니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명",
+        "적용"
+      ],
+      "createdAt": "2026-09-13T11:09:02.801Z",
+      "updatedAt": "2026-09-13T11:09:02.801Z"
+    },
+    {
+      "id": "16924ed0-0b29-46b4-b704-3846b69a3269",
+      "title": "무너지기 전에 · Structure Lab",
+      "summary": "학생이 2D 트러스를 직접 조립하고 해석하며 구조 안정성과 인장·압축, 하중 경로를 탐구하는 과학 학습 도구입니다.",
+      "url": "https://wbmaker2.github.io/structure-lab/",
+      "githubUrl": "https://github.com/WBmaker2/structure-lab",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "탐구",
+        "추론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/16924ed0-0b29-46b4-b704-3846b69a3269.png",
+      "subject": "과학",
+      "grade": "중학교 심화~고등학교",
+      "memo": "대각재가 없는 사각형과 지붕형 트러스 과제에서 예측–조립–해석–설명 흐름으로 구조 안정성과 하중 경로를 탐구하는 과학·물리 수업에 활용할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조립",
+        "해석",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-09-13T10:55:55.942Z",
+      "updatedAt": "2026-09-13T10:55:55.942Z"
+    },
+    {
+      "id": "11c24d05-89c5-44d5-9ab2-3aff835d0f7e",
+      "title": "지층 역추적 연구소",
+      "summary": "시추 위치를 고르고 관측 자료와 가설을 비교하며 지하 구조를 추론하는 과학 탐구 도구입니다.",
+      "url": "https://wbmaker2.github.io/strata-inverse-lab/",
+      "githubUrl": "https://github.com/WBmaker2/strata-inverse-lab",
+      "tags": [
+        "과학",
+        "탐구",
+        "관찰",
+        "추론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/11c24d05-89c5-44d5-9ab2-3aff835d0f7e.png",
+      "subject": "과학",
+      "grade": "중학교 후반~고등학교",
+      "memo": "기존 코어 관찰부터 가설 비교, 시추 설계, 근거 정리까지 이어지는 탐구 수업에 활용합니다. 관찰과 해석을 구분하고 남은 의문을 기록합니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "관찰",
+        "가설 비교",
+        "시추 설계",
+        "근거 정리"
+      ],
+      "createdAt": "2026-09-11T10:52:30.200Z",
+      "updatedAt": "2026-09-11T10:52:30.200Z"
+    },
+    {
+      "id": "736cd0af-e7f1-44e3-9780-80770b3e8f09",
+      "title": "도시 기후 설계실",
+      "summary": "학생이 도시의 표면과 배수 조건을 바꾸며 물이 고이는 곳을 예측하고 실험 결과를 비교하는 과학 탐구 도구입니다.",
+      "url": "https://wbmaker2.github.io/city-climate-lab/",
+      "githubUrl": "https://github.com/WBmaker2/city-climate-lab",
+      "tags": [
+        "과학",
+        "탐구",
+        "시뮬레이션",
+        "관찰"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/736cd0af-e7f1-44e3-9780-80770b3e8f09.png",
+      "subject": "과학",
+      "grade": "중학교 후반~고등학교 초반",
+      "memo": "세 칸을 예측하고 근거를 기록한 뒤 같은 강우에서 한 조건을 바꾸어 수심과 하류 유출을 비교하는 수업에 활용합니다. 결과를 바탕으로 처음 설명을 수정하고 모델의 한계를 토의할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-09-11T10:51:53.901Z",
+      "updatedAt": "2026-09-11T10:51:53.901Z"
+    },
     {
       "id": "2488af2f-537a-42ee-87ab-e41b0101877e",
       "title": "Manhattan Blocks",
@@ -4535,5 +4819,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 203
+  "catalogRevision": 211
 }
