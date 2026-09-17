@@ -246,6 +246,11 @@
       "sha256": "8de3ad051e8ab77a97cdf649fcdc5a8697b437a07506662dfc8ae2b4457322b2"
     },
     {
+      "path": "/app-thumbnails/65392b85-bffa-4ff5-b857-2fd283a82fb7.png",
+      "size": 101808,
+      "sha256": "9261d3e625db9618160875639173f94ed1675169c2db637ccef2b25fe87542e0"
+    },
+    {
       "path": "/app-thumbnails/6738aefd-9410-4b80-8d95-2549be89e3d4.png",
       "size": 192853,
       "sha256": "e52ed797a04fca846d14e8c74fd5d16b539d1d98d987cc5c426f1a9a68047b0d"
@@ -269,6 +274,11 @@
       "path": "/app-thumbnails/6b801106-2602-42d8-8cd2-d26716433860.png",
       "size": 393199,
       "sha256": "a34bf2435deed9dcf0a690e2eb743725431116e9998c13343b20773f48b84e49"
+    },
+    {
+      "path": "/app-thumbnails/7057e281-7cfb-44be-8e57-9a20f15dc162.png",
+      "size": 107098,
+      "sha256": "a8a0fea5a8b0b5d162b357a239ab62094d4cc3a0f494a5d90cce7bf831377eed"
     },
     {
       "path": "/app-thumbnails/736cd0af-e7f1-44e3-9780-80770b3e8f09.png",
@@ -309,6 +319,11 @@
       "path": "/app-thumbnails/7d8cff7a-3eba-4eb9-9b55-d5fd80118487.png",
       "size": 97754,
       "sha256": "91fa1fba8f24e991cf717d3a27dc07fd742875055f62fd1f41f95f70aa66441e"
+    },
+    {
+      "path": "/app-thumbnails/81b7d109-9d04-4497-b182-d148d40282f4.webp",
+      "size": 53792,
+      "sha256": "73496090f67839309062bad97e3900f78ddbb56acf587c331c9ec1d5569ae7e6"
     },
     {
       "path": "/app-thumbnails/837829ee-abd3-46a7-9554-ec83055bbdf0.png",
@@ -369,6 +384,11 @@
       "path": "/app-thumbnails/9925ecdd-4483-4f9b-bb96-8aed89662621.png",
       "size": 236977,
       "sha256": "94dcb8c367ee7a1e17d383509e64d2683fa017650c8ba832de97e976b1013fbf"
+    },
+    {
+      "path": "/app-thumbnails/995e23fb-6073-4d93-af5a-2fc6ae4d07a4.png",
+      "size": 536102,
+      "sha256": "386836c0a61a6f87e1179778fe6eed3672a1479329a2da5294cbf4aba6e31f21"
     },
     {
       "path": "/app-thumbnails/9a61427f-7760-48ff-8e95-52e7264dd838.png",
@@ -449,6 +469,11 @@
       "path": "/app-thumbnails/b0b0b7d1-9e95-47c2-859e-9fc6c69cf735.png",
       "size": 166357,
       "sha256": "6c73df2d170fa84dc15199d3462b868297c93d3b7b15efc1e9b4e48fb04954a7"
+    },
+    {
+      "path": "/app-thumbnails/b1d55922-4706-49cf-a12d-6df48db4b3f4.png",
+      "size": 84745,
+      "sha256": "900901cb33fdcb2d92d6a3a8142458ecd1a09e56c23d5400f260e3165c306df3"
     },
     {
       "path": "/app-thumbnails/b52fd0e4-768b-4cc1-806c-53deef04f003.png",
@@ -536,6 +561,11 @@
       "sha256": "2a7ca71939f927558d33b5adbb1a9859a6701002935f1f77201c0eb4f00611c1"
     },
     {
+      "path": "/app-thumbnails/d6bf6f64-7ce6-4dae-92c3-2cb6e4654cf2.png",
+      "size": 246432,
+      "sha256": "21eb302fa9fefc406f857fe73c5523d98b1aa5ffb405ece2bcd71baff407b5d7"
+    },
+    {
       "path": "/app-thumbnails/d9e05a77-4d67-4c0e-be07-48b069383791.png",
       "size": 148008,
       "sha256": "2d7e90deaafb8bfd6630a7aeac685e6f613630c7e0ab27a28b4ef9f2105c4142"
@@ -612,9 +642,265 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-09-14T04:43:32.274Z",
-  "appCount": 123,
+  "generatedAt": "2026-09-17T14:08:07.960Z",
+  "appCount": 130,
   "apps": [
+    {
+      "id": "9d867458-613d-4043-9d9c-cca5dbe1db0f",
+      "title": "직물 알고리즘 공방",
+      "summary": "0과 1의 직조 규칙을 실의 위아래 구조로 바꿔 보고 뜀실을 검사하는 학습용 직조 실험실",
+      "url": "https://wbmaker2.github.io/textile-algorithm-studio/",
+      "githubUrl": "https://github.com/WBmaker2/textile-algorithm-studio",
+      "tags": [
+        "미술",
+        "시뮬레이션",
+        "수업",
+        "수학",
+        "융합",
+        "관찰"
+      ],
+      "thumbnailMode": "placeholder",
+      "thumbnailUrl": null,
+      "subject": "수학·미술·정보",
+      "grade": "초등 고학년~고등학교",
+      "memo": "0과 1의 직조 규칙을 실의 위아래 구조로 바꿔 보고 뜀실을 검사한다. 예측→격자 실험→줄무늬·대각 과제→뜀실 검사→규칙 설명과 저장 순서의 25분 활동.",
+      "subjects": [
+        "수학",
+        "미술",
+        "정보"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-17T14:03:28.469Z",
+      "updatedAt": "2026-09-17T14:03:28.469Z"
+    },
+    {
+      "id": "65392b85-bffa-4ff5-b857-2fd283a82fb7",
+      "title": "무늬가 태어나는 실험실",
+      "summary": "두 가상 물질의 반응·확산을 반복해 공간 무늬가 태어나는 과정을 관찰하고, 한 조건만 바꾼 두 실행을 같은 시점에서 비교·기록하는 교실용 실험 앱입니다.",
+      "url": "https://wbmaker2.github.io/reaction-diffusion-lab/",
+      "githubUrl": "https://github.com/WBmaker2/reaction-diffusion-lab",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "탐구",
+        "변인통제",
+        "실험"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/65392b85-bffa-4ff5-b857-2fd283a82fb7.png",
+      "subject": "과학",
+      "grade": "중·고등학생",
+      "memo": "25분 수업 흐름으로 설계했습니다. 3분 예측(작은 얼룩이 퍼져 사라질까) → 5분 기준 조건 관찰(모형시간 0·500·1000·2000·3000) → 7분 공급률 F만 바꾼 두 실행 비교 → 5분 초기 얼룩 위치를 바꿔 검사 → 5분 같아 보임과 측정값의 차이 토의. 계산 결과와 생물 해석을 분리해 안내하므로 모형의 한계를 함께 다루기 좋습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "실행",
+        "조건 바꾸기",
+        "비교",
+        "기록"
+      ],
+      "createdAt": "2026-09-17T12:22:55.025Z",
+      "updatedAt": "2026-09-17T12:22:55.025Z"
+    },
+    {
+      "id": "d6bf6f64-7ce6-4dae-92c3-2cb6e4654cf2",
+      "title": "미지의 문자 해독 연구소",
+      "summary": "사전 없이 반복되는 기호와 장면만으로 가상 언어 규칙을 찾고, 가설을 연결한 뒤 새 문서에서 검사하는 탐구형 웹앱",
+      "url": "https://wbmaker2.github.io/unknown-script-lab/",
+      "githubUrl": "https://github.com/WBmaker2/unknown-script-lab",
+      "tags": [
+        "탐구",
+        "추론",
+        "관찰",
+        "국어",
+        "게임형"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/d6bf6f64-7ce6-4dae-92c3-2cb6e4654cf2.png",
+      "subject": "국어",
+      "grade": "중학교·고등학교",
+      "memo": "문서 보관함에서 장면을 비교하고, 단서 비교로 기호-뜻 가설을 연결한 뒤 추가 조사와 새 문서 시험으로 규칙을 검증하는 25분 탐구 활동입니다.",
+      "subjects": [
+        "국어"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-09-16T00:49:53.744Z",
+      "updatedAt": "2026-09-16T00:49:53.744Z"
+    },
+    {
+      "id": "b1d55922-4706-49cf-a12d-6df48db4b3f4",
+      "title": "보이지 않는 내부 복원소",
+      "summary": "제한된 투영 측정으로 내부 밀도를 예측하고 복원 방식을 비교하는 25분 탐구 실험",
+      "url": "https://wbmaker2.github.io/tomography-reconstruction-lab/",
+      "githubUrl": "https://github.com/WBmaker2/tomography-reconstruction-lab",
+      "tags": [
+        "과학",
+        "수학",
+        "탐구",
+        "관찰",
+        "각도"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/b1d55922-4706-49cf-a12d-6df48db4b3f4.png",
+      "subject": "수학·과학",
+      "grade": "중학교·고등학교",
+      "memo": "25분 수업에서 예측·스캔·복원·비교·공개 순서로 각도 선택과 잔차·오차를 함께 설명하는 탐구 활동에 활용합니다. 가상 표본이며 실제 의료 영상이 아닙니다.",
+      "subjects": [
+        "수학",
+        "과학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "예측",
+        "스캔",
+        "복원",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-09-16T00:10:58.591Z",
+      "updatedAt": "2026-09-16T00:10:58.591Z"
+    },
+    {
+      "id": "81b7d109-9d04-4497-b182-d148d40282f4",
+      "title": "로봇 팔 동작 설계실",
+      "summary": "학생이 관절 각도와 장애물 조건을 조절하며 로봇 팔의 도달 가능성, 여러 자세, 충돌 없는 경로를 비교·기록하는 25분 탐구 활동입니다.",
+      "url": "https://wbmaker2.github.io/robot-arm-motion-lab/",
+      "githubUrl": "https://github.com/WBmaker2/robot-arm-motion-lab",
+      "tags": [
+        "과학",
+        "수학",
+        "시뮬레이션",
+        "탐구",
+        "각도"
+      ],
+      "thumbnailMode": "auto",
+      "thumbnailUrl": "/app-thumbnails/81b7d109-9d04-4497-b182-d148d40282f4.webp",
+      "subject": "수학·과학·정보",
+      "grade": "중학교·고등학교",
+      "memo": "25분 수업에서 학생이 도달 범위를 예측하고 관절 각도로 손끝 위치를 설계한 뒤, 여러 자세와 장애물 경로를 비교·기록하는 탐구 활동에 활용합니다. 2D 평면 보기로도 전체 흐름을 진행할 수 있습니다.",
+      "subjects": [
+        "수학",
+        "과학",
+        "정보"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "관절 조절",
+        "자세 탐색",
+        "경로 검증",
+        "비교·기록"
+      ],
+      "createdAt": "2026-09-15T09:40:37.346Z",
+      "updatedAt": "2026-09-15T09:40:37.346Z"
+    },
+    {
+      "id": "7057e281-7cfb-44be-8e57-9a20f15dc162",
+      "title": "소설의 카메라",
+      "summary": "중·고등 국어 수업에서 원문과 이미지의 차이를 살피고 세 카메라와 근거 핀으로 가능한 해석을 비교하는 읽기 작업대",
+      "url": "https://wbmaker2.github.io/novel-camera/",
+      "githubUrl": "https://github.com/WBmaker2/novel-camera",
+      "tags": [
+        "국어",
+        "추론",
+        "시각화",
+        "형성평가",
+        "토론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/7057e281-7cfb-44be-8e57-9a20f15dc162.png",
+      "subject": "국어·문학",
+      "grade": "중학교·고등학교",
+      "memo": "45~50분 한 차시에서 원문·시각 재구성·근거·공백과 모순·복수 해석을 함께 검토하는 수업용 작업대입니다. 생성 이미지는 원문 근거가 아니라 창작 시각화로 표시합니다.",
+      "subjects": [
+        "국어",
+        "문학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-09-15T07:07:45.885Z",
+      "updatedAt": "2026-09-15T07:07:45.885Z"
+    },
+    {
+      "id": "995e23fb-6073-4d93-af5a-2fc6ae4d07a4",
+      "title": "같은 사건, 다른 장면",
+      "summary": "학생이 세 가상 사건의 시야·제목·장면 순서를 바꾸며 관찰과 추론을 구분하고 추가 출처를 요청하는 미디어 리터러시 앱입니다.",
+      "url": "https://wbmaker2.github.io/visual-argument-lab/",
+      "githubUrl": "https://github.com/WBmaker2/visual-argument-lab",
+      "tags": [
+        "미디어리터러시",
+        "관찰",
+        "추론",
+        "국어",
+        "토론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/995e23fb-6073-4d93-af5a-2fc6ae4d07a4.png",
+      "subject": "국어·사회",
+      "grade": "중학교·고등학교",
+      "memo": "2~3인 모둠에서 가상 장면의 관찰과 해석을 비교하는 활동에 활용합니다. 생성 재구성이며 자유 문장은 자동 채점하지 않습니다. 기록은 새로고침·사건 전환 시 초기화되며, 교과 감수와 실제 학생 파일럿은 아직 수행하지 않았습니다.",
+      "subjects": [
+        "국어",
+        "사회"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "practice",
+      "learningProcess": [
+        "관찰",
+        "재단 비교",
+        "제목·순서 편집",
+        "근거 분류",
+        "출처 요청"
+      ],
+      "createdAt": "2026-09-14T09:12:18.958Z",
+      "updatedAt": "2026-09-14T09:12:18.958Z"
+    },
     {
       "id": "c0fe301b-95d9-4cf0-92f0-c3e528ba921d",
       "title": "한 거리의 300년 · 역사 탐구 연습",
@@ -4819,5 +5105,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 211
+  "catalogRevision": 218
 }
