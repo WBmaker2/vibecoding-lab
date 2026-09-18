@@ -642,9 +642,121 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-09-17T14:08:07.960Z",
-  "appCount": 130,
+  "generatedAt": "2026-09-18T12:53:08.809Z",
+  "appCount": 133,
   "apps": [
+    {
+      "id": "a2e6c9f1-abeb-4d9c-9203-04c52aab23c2",
+      "title": "외계행성 신호 수사대",
+      "summary": "중·고등학생이 별빛 곡선에서 행성 후보를 추정하고 추가 관측을 계획하는 30분 수업용 실험실",
+      "url": "https://wbmaker2.github.io/exoplanet-signal-lab/",
+      "githubUrl": "https://github.com/WBmaker2/exoplanet-signal-lab",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "관찰",
+        "수업",
+        "탐구",
+        "추론"
+      ],
+      "thumbnailMode": "placeholder",
+      "thumbnailUrl": null,
+      "subject": "지구과학·물리·통계",
+      "grade": "중학교~고등학교",
+      "memo": "반복 신호 선택(3분)→후보 모형 적합(7분)→3D 비교(5분)→관측 창 선택(10분)→결론 보고(5분)의 30분 흐름으로 사용",
+      "subjects": [
+        "지구과학",
+        "물리",
+        "통계"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-18T12:46:41.721Z",
+      "updatedAt": "2026-09-18T12:46:41.721Z"
+    },
+    {
+      "id": "891538b6-e56e-4f4d-9b2f-4bcbb63b7530",
+      "title": "정전 없는 섬",
+      "summary": "중·고등학생이 시간별 발전·부하를 kW·kWh로 구분하고 배터리 충·방전과 손실을 계산해 24시간 정전 0에 도전하는 섬 에너지 시뮬레이션",
+      "url": "https://wbmaker2.github.io/island-energy-lab/",
+      "githubUrl": "https://github.com/WBmaker2/island-energy-lab",
+      "tags": [
+        "과학",
+        "관찰",
+        "수학",
+        "시뮬레이션",
+        "융합",
+        "수업"
+      ],
+      "thumbnailMode": "placeholder",
+      "thumbnailUrl": null,
+      "subject": "과학·수학",
+      "grade": "중학교~고등학교",
+      "memo": "50분 한 차시: 도입 5분(단위 예측), 표 읽기 10분, 배터리 설정 10분, 실행·수정 15분, 한계 설명 10분. 모둠별 섬 운영자 역할로 운영한다.",
+      "subjects": [
+        "과학",
+        "수학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-18T12:44:10.948Z",
+      "updatedAt": "2026-09-18T12:44:10.948Z"
+    },
+    {
+      "id": "8e3f5c3d-bbd9-416d-b92f-3de18969ea73",
+      "title": "바이브프롬프트 KR (VibePrompt)",
+      "summary": "AI 코딩 도구(Cursor, Claude, v0 등)를 위한 286개 UI 레이아웃 프롬프트 및 실시간 미리보기 제공 Tailwind CSS 라이브러리",
+      "url": "https://wbmaker2.github.io/vibeprompts-kr/",
+      "githubUrl": "https://github.com/WBmaker2/vibeprompts-kr",
+      "tags": [
+        "코딩",
+        "인공지능",
+        "도구",
+        "자료 탐색",
+        "인터랙티브"
+      ],
+      "thumbnailMode": "placeholder",
+      "thumbnailUrl": null,
+      "subject": "정보",
+      "grade": "중·고등",
+      "memo": "286개 전 카테고리(인증 폼, 요금제, 벤토, 히어로, 대시보드 등) 한국어 번역 및 풀스크린/태블릿/모바일 반응형 iframe 실시간 미리보기 지원",
+      "subjects": [
+        "정보"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "utility",
+      "learningProcess": [
+        "자료 탐색",
+        "프롬프트 분석",
+        "AI 코딩 적용",
+        "웹 배포"
+      ],
+      "createdAt": "2026-09-18T12:31:30.535Z",
+      "updatedAt": "2026-09-18T12:31:30.535Z"
+    },
     {
       "id": "9d867458-613d-4043-9d9c-cca5dbe1db0f",
       "title": "직물 알고리즘 공방",
@@ -5105,5 +5217,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 218
+  "catalogRevision": 221
 }
