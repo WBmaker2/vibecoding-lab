@@ -68,6 +68,9 @@ export function ArchiveHero({
           alt="태그 탐색을 안내하는 Hong 캐릭터"
           className="archive-hero-mascot-image"
           height={2304}
+          onDoubleClick={() => {
+            window.location.href = "/admin/login";
+          }}
           priority
           sizes="(max-width: 720px) 128px, 184px"
           src="/images/mascots/hong-default.png"
