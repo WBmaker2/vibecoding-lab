@@ -642,9 +642,47 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-09-18T12:53:08.809Z",
-  "appCount": 133,
+  "generatedAt": "2026-09-19T01:49:36.852Z",
+  "appCount": 134,
   "apps": [
+    {
+      "id": "90d207b6-22d0-4140-b073-0aa951aa0e8a",
+      "title": "AI의 착각 실험실",
+      "summary": "중·고등학생이 40장으로 작은 이미지 분류기를 학습시키고 새 조건에서 시험하며 배경 편향을 확인하는 25분 수업용 실험실",
+      "url": "https://wbmaker2.github.io/ai-shortcut-lab/",
+      "githubUrl": "https://github.com/WBmaker2/ai-shortcut-lab",
+      "tags": [
+        "수학",
+        "인공지능",
+        "융합",
+        "시뮬레이션",
+        "관찰",
+        "수업"
+      ],
+      "thumbnailMode": "placeholder",
+      "thumbnailUrl": null,
+      "subject": "정보·수학",
+      "grade": "중학교~고등학교",
+      "memo": "예측 3분→학습 자료 선택·분류기 학습→네 집단 시험→균형 개선 재학습→동일 시험 비교의 25분 흐름으로 사용",
+      "subjects": [
+        "정보",
+        "수학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-19T01:22:54.711Z",
+      "updatedAt": "2026-09-19T01:22:54.711Z"
+    },
     {
       "id": "a2e6c9f1-abeb-4d9c-9203-04c52aab23c2",
       "title": "외계행성 신호 수사대",
@@ -5217,5 +5255,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 221
+  "catalogRevision": 222
 }
