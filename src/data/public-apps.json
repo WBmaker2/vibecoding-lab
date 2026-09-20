@@ -642,9 +642,85 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-09-19T01:49:36.852Z",
-  "appCount": 134,
+  "generatedAt": "2026-09-20T00:20:26.202Z",
+  "appCount": 136,
   "apps": [
+    {
+      "id": "5ef17cbc-50b3-4c64-ade4-4309f51a5fe7",
+      "title": "그림 속 시간을 복원하는 연구실",
+      "summary": "중·고등학생이 가상 회화의 어두운 원인을 가설으로 세우고 제한된 예산으로 조사를 골라 근거 있는 보존 결정을 내리는 가상 보존 실험실",
+      "url": "https://wbmaker2.github.io/painting-conservation-lab/",
+      "githubUrl": "https://github.com/WBmaker2/painting-conservation-lab",
+      "tags": [
+        "미술",
+        "관찰",
+        "시뮬레이션",
+        "융합",
+        "과학"
+      ],
+      "thumbnailMode": "auto",
+      "thumbnailUrl": null,
+      "subject": "미술·화학·정보",
+      "grade": "중학교~고등학교",
+      "memo": "30분 흐름 — 5분 가설 2개 제안, 5분 예산 내 조사 선택, 10분 증거-가설 연결, 5분 보존 결정, 5분 불확실성·되돌림 정리. 가상 사례 학습용이며 실제 작품 처리 지침이 아님.",
+      "subjects": [
+        "미술",
+        "화학",
+        "정보"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-19T10:26:36.748Z",
+      "updatedAt": "2026-09-19T10:26:36.748Z"
+    },
+    {
+      "id": "0b2e2788-5d45-4f6d-ad95-1d712dd05b2b",
+      "title": "유전 재조합 설계실",
+      "summary": "중·고등학생이 같은 부모에게서 서로 다른 유전자 조합이 나오는 이유를 배우자·자손 분포 실험으로 탐구하는 유전 시뮬레이션",
+      "url": "https://wbmaker2.github.io/genetic-recombination-lab/",
+      "githubUrl": "https://github.com/WBmaker2/genetic-recombination-lab",
+      "tags": [
+        "과학",
+        "관찰",
+        "수업",
+        "수학",
+        "시뮬레이션",
+        "탐구"
+      ],
+      "thumbnailMode": "placeholder",
+      "thumbnailUrl": null,
+      "subject": "생명과학·수학",
+      "grade": "중학교 심화~고등학교",
+      "memo": "예측 3분→분열 비교 5분→표본 생성 5분→검정교배 추정 7분→기록 5분의 25분 흐름으로 쓰는 검정교배 재조합률 추정 실험실",
+      "subjects": [
+        "생명과학",
+        "수학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-19T07:28:09.665Z",
+      "updatedAt": "2026-09-19T07:28:09.665Z"
+    },
     {
       "id": "90d207b6-22d0-4140-b073-0aa951aa0e8a",
       "title": "AI의 착각 실험실",
@@ -5255,5 +5331,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 222
+  "catalogRevision": 224
 }
