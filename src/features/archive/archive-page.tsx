@@ -56,7 +56,7 @@ export function ArchivePage({ initialApps }: ArchivePageProps) {
   const [gradeBands, setGradeBands] = useState<GradeBand[]>([]);
   const [audience, setAudience] = useState<AppAudience | "all">("all");
   const [interactionTypes, setInteractionTypes] = useState<AppInteractionType[]>([]);
-  const [sort, setSort] = useState<AppSort>("relevance");
+  const [sort, setSort] = useState<AppSort>("created");
   const [page, setPage] = useState(1);
   const [showRecent, setShowRecent] = useState(false);
   const [showFavorites, setShowFavorites] = useState(false);
@@ -212,7 +212,7 @@ export function ArchivePage({ initialApps }: ArchivePageProps) {
       setGradeBands([]);
       setAudience("all");
       setInteractionTypes([]);
-      setSort("relevance");
+      setSort("created");
       setPage(1);
       setShowRecent(false);
       setShowFavorites(false);
@@ -260,7 +260,7 @@ export function ArchivePage({ initialApps }: ArchivePageProps) {
     setInteractionTypes(collection.interactionTypes ?? []);
     setShowRecent(false);
     setShowFavorites(false);
-    setSort("relevance");
+    setSort("created");
     setPage(1);
   }
 

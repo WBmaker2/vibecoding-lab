@@ -71,7 +71,7 @@ export function readArchiveUrlState(
       sortValue &&
       ["relevance", "updated", "title", "created"].includes(sortValue)
         ? sortValue
-        : "relevance"
+        : "created"
   };
 }
 
@@ -85,7 +85,7 @@ export function writeArchiveUrlState(state: ArchiveUrlState) {
   if (state.audience !== "all") params.set("audience", state.audience);
   if (state.recentOnly) params.set("recent", "1");
   if (state.savedOnly) params.set("saved", "1");
-  if (state.sort !== "relevance") params.set("sort", state.sort);
+  if (state.sort !== "created") params.set("sort", state.sort);
   if (state.page > 1) params.set("page", String(state.page));
   const query = params.toString();
   return query ? `?${query}` : "";
