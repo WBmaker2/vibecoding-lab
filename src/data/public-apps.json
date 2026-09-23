@@ -216,6 +216,11 @@
       "sha256": "f1b1e9bde9afe7bb66fa25a2c6f2acd2105c2928879262244c906d970b3851e7"
     },
     {
+      "path": "/app-thumbnails/560118a3-d716-4ad4-804d-1658542a24e9.png",
+      "size": 158337,
+      "sha256": "ecff08ba71fe62b443a1a8d607d68ac9605b9cdd052d12f2d4fc319cc590b6f4"
+    },
+    {
       "path": "/app-thumbnails/56f95ab1-4ad1-45b6-8eac-e5ba6cf543b8.png",
       "size": 128680,
       "sha256": "9dc0726fcaad1936fbe997db65160ef4d7fcee70c71a2c691f77d53070acc6e5"
@@ -576,6 +581,11 @@
       "sha256": "6f5c76136941a88d33b237e02ed5e27f3d5a1474f62b30f024f9cacc37a8ea01"
     },
     {
+      "path": "/app-thumbnails/c8fd8d01-a622-4b4d-9e20-20a530c02b47.png",
+      "size": 333089,
+      "sha256": "f97a506ec3e50b37e77643d8d177c07ffd3c5a796398d5d30a592b9c3e1d34d8"
+    },
+    {
       "path": "/app-thumbnails/ca39ad82-aec4-4011-84a8-56cfaa981631.png",
       "size": 263577,
       "sha256": "41d749ad1d793d20ea1cb64c46ff88ce0167751f3ba7384b35da4327f54c90ba"
@@ -661,6 +671,11 @@
       "sha256": "fb70848c980c6b36d8fdf7e4f9df48df487dbea1c19312b619c3e54a2a5064a8"
     },
     {
+      "path": "/app-thumbnails/f380fccf-e93b-4c52-85d7-f0f03aaf4043.png",
+      "size": 9950,
+      "sha256": "95c5d6457f0fa630cfe05c86a0020f0e0ff8b80133b80f8c6dc1db7a0b806a17"
+    },
+    {
       "path": "/app-thumbnails/f3dcbbf0-6443-43c9-8b3b-dcc60f532c66.png",
       "size": 393199,
       "sha256": "d58a60ca8b7186ebc14f574d4a8dc90b4f373617dc14c6a8b9ed22dacd5bc54a"
@@ -692,9 +707,122 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-09-23T10:59:40.049Z",
-  "appCount": 138,
+  "generatedAt": "2026-09-23T13:17:41.637Z",
+  "appCount": 141,
   "apps": [
+    {
+      "id": "f380fccf-e93b-4c52-85d7-f0f03aaf4043",
+      "title": "넘어지지 않는 팽이 연구소",
+      "summary": "중·고등학생이 기울어진 회전 바퀴의 다음 움직임을 예측하고, 중력 토크와 각운동량 벡터를 보며 세차를 실행·비교·기록하는 물리 시뮬레이션",
+      "url": "https://wbmaker2.github.io/gyroscope-lab/",
+      "githubUrl": "https://github.com/WBmaker2/gyroscope-lab",
+      "tags": [
+        "과학",
+        "수학",
+        "시뮬레이션",
+        "관찰",
+        "실험",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/f380fccf-e93b-4c52-85d7-f0f03aaf4043.png",
+      "subject": "물리·수학",
+      "grade": "중학교~고등학교",
+      "memo": "25분 흐름: 다음 움직임 예측 3분→벡터 켜고 한 단계씩 진행 5분→회전 속도 2배 비교 7분→느린 회전 반례 관찰 5분→같은 힘·다른 운동 이유 기록 5분. 교사가 이끌고 학생이 예측·기록한다.",
+      "subjects": [
+        "물리",
+        "수학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-23T12:26:04.088Z",
+      "updatedAt": "2026-09-23T12:26:04.088Z"
+    },
+    {
+      "id": "560118a3-d716-4ad4-804d-1658542a24e9",
+      "title": "양자 실험 설계실",
+      "summary": "고등학생이 두 경로 진폭 모형에서 개별 검출 사건과 누적 확률분포를 구분하며 간섭무늬를 탐구하는 25분 물리·수학 실험실",
+      "url": "https://wbmaker2.github.io/quantum-experiment-lab/",
+      "githubUrl": "https://github.com/WBmaker2/quantum-experiment-lab",
+      "tags": [
+        "과학",
+        "수학",
+        "시뮬레이션",
+        "관찰",
+        "실험",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/560118a3-d716-4ad4-804d-1658542a24e9.png",
+      "subject": "물리·수학",
+      "grade": "고등학교",
+      "memo": "25분 흐름: 예측 3분→검출 1·100·1000회 누적 비교→위상 변경 관찰→간섭 유지·소실 비교→단일 점과 분포 차이 기록. 고등학교 심화 물리·수학 수업의 확률분포 도입에 사용한다.",
+      "subjects": [
+        "물리",
+        "수학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-23T12:25:51.594Z",
+      "updatedAt": "2026-09-23T12:25:51.594Z"
+    },
+    {
+      "id": "c8fd8d01-a622-4b4d-9e20-20a530c02b47",
+      "title": "상대성 관측소",
+      "summary": "고등학교 물리·수학 학생이 플랫폼 양끝 섬광의 동시성과 빛 도착 순서를 수치와 시공간 도표로 비교하는 30분 특수상대론 탐구 앱",
+      "url": "https://wbmaker2.github.io/relativity-observatory/",
+      "githubUrl": "https://github.com/WBmaker2/relativity-observatory",
+      "tags": [
+        "과학",
+        "수학",
+        "시뮬레이션",
+        "관찰",
+        "생각실험"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/c8fd8d01-a622-4b4d-9e20-20a530c02b47.png",
+      "subject": "물리·수학",
+      "grade": "고등학교",
+      "memo": "플랫폼 양끝 섬광 도착 순서 예측 5분, 사건 좌표와 빛 도착 시간 확인 5분, β를 바꾸며 이동계 좌표·도표 비교 10분, 동시성 수치 확인 5분, 보는 순서와 사건 시간 구분 설명 5분. 전이 과제로 빛꼴 순서 불변을 검사한다.",
+      "subjects": [
+        "물리",
+        "수학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-23T12:25:24.163Z",
+      "updatedAt": "2026-09-23T12:25:24.163Z"
+    },
     {
       "id": "7cdc3225-e941-4b39-bb38-29e828ed77f0",
       "title": "공기 부피 압축 연구소",
@@ -5449,5 +5577,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 238
+  "catalogRevision": 241
 }
