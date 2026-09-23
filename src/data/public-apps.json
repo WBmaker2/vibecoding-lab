@@ -426,6 +426,11 @@
       "sha256": "5a5ae79d5950dda759edaeef4450a6994b73b44413fa587af3aa3476b67c364c"
     },
     {
+      "path": "/app-thumbnails/a37d3171-2110-44c0-ab86-eebcf6ba1198.png",
+      "size": 220346,
+      "sha256": "c05da426dee02e5f924352922544001a47b70a831103f189601bad942fa670ec"
+    },
+    {
       "path": "/app-thumbnails/a453fce0-6a74-4cb2-99aa-0a7d847114da.png",
       "size": 300973,
       "sha256": "474a6cf11652605d16637e8ffae8701297a7f73a75f0c611281d58a01ad04525"
@@ -642,9 +647,77 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-09-20T00:20:26.202Z",
-  "appCount": 136,
+  "generatedAt": "2026-09-23T09:42:03.446Z",
+  "appCount": 138,
   "apps": [
+    {
+      "id": "74736b1a-2e59-49b9-a536-a179373194b3",
+      "title": "Skeleton Play — 카메라 운동 게임",
+      "summary": "랩탑·태블릿·크롬북 카메라 앞에서 몸을 움직여 즐기는 웹 운동 게임 12종. 60초 챌린지로 점수를 겨루며 초등 수업의 몸풀기·쉬는 시간 신체 활동과 영어·수학 연계 학습에 사용.",
+      "url": "https://WBmaker2.github.io/skeleton-games/",
+      "githubUrl": "https://github.com/WBmaker2/skeleton-games",
+      "tags": [
+        "체육",
+        "영어",
+        "수학",
+        "게임",
+        "수업"
+      ],
+      "thumbnailMode": "placeholder",
+      "thumbnailUrl": null,
+      "subject": "체육·영어·수학",
+      "grade": "초등 전학년",
+      "memo": "수업 시작 5분 몸풀기나 쉬는 시간 신체 활동용으로 사용. 카메라 앞 1.5~2.5m에서 시작 시 T자세 3초 보정 후 12종 게임 중 골라 60초씩 플레이.",
+      "subjects": [
+        "체육",
+        "영어",
+        "수학"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "게임 고르기",
+        "몸으로 플레이",
+        "점수 확인",
+        "다시 도전"
+      ],
+      "createdAt": "2026-09-20T06:41:29.818Z",
+      "updatedAt": "2026-09-23T09:38:31.034Z"
+    },
+    {
+      "id": "a37d3171-2110-44c0-ab86-eebcf6ba1198",
+      "title": "Web Design UI Workflow",
+      "summary": "웹 UI 작업에서 디자인 방향부터 재사용 가능한 기준, 접근성, 실제 브라우저 검증까지 한 흐름으로 적용하도록 돕는 Codex 워크플로우 스킬",
+      "url": "https://wbmaker2.github.io/web-design-ui-workflow/",
+      "githubUrl": "https://github.com/WBmaker2/web-design-ui-workflow",
+      "tags": [
+        "코딩",
+        "도구",
+        "리디자인",
+        "인터랙티브"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a37d3171-2110-44c0-ab86-eebcf6ba1198.png",
+      "subject": "공통",
+      "grade": null,
+      "memo": "웹 UI 작업을 시작할 때 문제와 시각 방향을 정하고, 토큰·컴포넌트 기준을 세운 뒤, 접근성과 데스크톱·태블릿·모바일 브라우저 QA까지 순서대로 확인하는 개발 워크플로우 안내에 활용합니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 해결",
+        "피드백",
+        "반복"
+      ],
+      "createdAt": "2026-09-20T06:43:56.641Z",
+      "updatedAt": "2026-09-20T06:43:56.641Z"
+    },
     {
       "id": "5ef17cbc-50b3-4c64-ade4-4309f51a5fe7",
       "title": "그림 속 시간을 복원하는 연구실",
@@ -5331,5 +5404,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 224
+  "catalogRevision": 227
 }
