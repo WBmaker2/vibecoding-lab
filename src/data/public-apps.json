@@ -21,6 +21,11 @@
       "sha256": "c3f4f66b85af9c9e3515d5bbace566d1eb51288acdd96c5a129a66bdbbf92758"
     },
     {
+      "path": "/app-thumbnails/0b2e2788-5d45-4f6d-ad95-1d712dd05b2b.png",
+      "size": 66943,
+      "sha256": "44a5cd6f97fc5cd6471b915eeb4eabdb8f11c5555c2b6d8966ae3e46627b99a0"
+    },
+    {
       "path": "/app-thumbnails/0c78d909-09c7-47d2-ba95-7e9b6e53ad5f.png",
       "size": 35255,
       "sha256": "6ed215228bd89fe801a309b8e78f9ce1df0d8e6826dedea1bc8c8b2e1f3e38c4"
@@ -232,8 +237,8 @@
     },
     {
       "path": "/app-thumbnails/60646b44-ffef-45f9-a774-65df50211a9a.png",
-      "size": 337540,
-      "sha256": "95e7ce380fc07c786529ef6d6532f9e9207e923a43e33fc953b2bbbc1db7a1d0"
+      "size": 272783,
+      "sha256": "a9e1b63fee233d350fdecaaca0466ef8d4984c07e003c9b82292c2af750b57ac"
     },
     {
       "path": "/app-thumbnails/636a7672-622a-4ba7-8f94-a1d61fb1a853.png",
@@ -284,6 +289,11 @@
       "path": "/app-thumbnails/736cd0af-e7f1-44e3-9780-80770b3e8f09.png",
       "size": 230934,
       "sha256": "5ad51a1852a73cd78fcce12397ea554c4908a213243a9ce9e0f86a26804513ba"
+    },
+    {
+      "path": "/app-thumbnails/74736b1a-2e59-49b9-a536-a179373194b3.png",
+      "size": 755108,
+      "sha256": "3019361b9350b4988e8141dea2ec6ec13b295ff92247ca56560de968bc3e4cd6"
     },
     {
       "path": "/app-thumbnails/7507c704-bd01-497e-aeb5-1578209b0d6e.png",
@@ -351,6 +361,11 @@
       "sha256": "983d428d84d221c726acc11e38b8a57d118850525786c394faaaaa799e4921d3"
     },
     {
+      "path": "/app-thumbnails/891538b6-e56e-4f4d-9b2f-4bcbb63b7530.png",
+      "size": 97895,
+      "sha256": "f18973abe977b105addc11c5c6e20feda20ea0d0558c08b9033b05e141535d36"
+    },
+    {
       "path": "/app-thumbnails/8ab915b7-4bf6-4153-bc05-6ae93650758f.png",
       "size": 80635,
       "sha256": "ed173da6b193a6239a3d45e66a8b3d6841794f4da8dc9134d435aa2e7463a7aa"
@@ -369,6 +384,16 @@
       "path": "/app-thumbnails/8dcda375-afc0-4a15-9235-e8df7cad85a6.png",
       "size": 148838,
       "sha256": "4e196882596441170bd6ab0ece405dcd9d2f6fb7ec9f9c2cc52301f2c390ceb2"
+    },
+    {
+      "path": "/app-thumbnails/8e3f5c3d-bbd9-416d-b92f-3de18969ea73.png",
+      "size": 95289,
+      "sha256": "24b0f0bdebee6029e7325815b97318aa833da0f730c38c0b854b1d8cd507b599"
+    },
+    {
+      "path": "/app-thumbnails/90d207b6-22d0-4140-b073-0aa951aa0e8a.png",
+      "size": 45115,
+      "sha256": "e6ab9170d135e41ca2200590550818ea84abab8a326dc32f4dd79522c0c331eb"
     },
     {
       "path": "/app-thumbnails/91fc1ce8-f455-464d-ace8-f2d2b2ed2985.png",
@@ -406,6 +431,11 @@
       "sha256": "28f4b9a94cf8f71c0545d11b4281c87d9b0e2aa4dc0995a507c8846b81ddc454"
     },
     {
+      "path": "/app-thumbnails/9d867458-613d-4043-9d9c-cca5dbe1db0f.png",
+      "size": 67544,
+      "sha256": "1f09d8c5b63d30093705de2e65357ff91310f5743c0e9681138d50fffd4a60fa"
+    },
+    {
       "path": "/app-thumbnails/9e77dba6-7388-4b21-bf2e-b74b9d9e5193.png",
       "size": 75453,
       "sha256": "4cd88ee886110f3622c8392683c0bcba5bb51644c13f8c39c5f290ff910c3e86"
@@ -422,8 +452,13 @@
     },
     {
       "path": "/app-thumbnails/a134be86-a969-4e39-b131-9c61247f4c87.png",
-      "size": 320396,
-      "sha256": "5a5ae79d5950dda759edaeef4450a6994b73b44413fa587af3aa3476b67c364c"
+      "size": 284022,
+      "sha256": "dd50624caa905e1afb306687cb125538fd7e09cc4f16cc4246fb953b64a33f65"
+    },
+    {
+      "path": "/app-thumbnails/a2e6c9f1-abeb-4d9c-9203-04c52aab23c2.png",
+      "size": 81364,
+      "sha256": "f13698aff9dfe7656e13c8abfcd92dd77a8af89466e841ef88cbe4ca1a299d10"
     },
     {
       "path": "/app-thumbnails/a37d3171-2110-44c0-ab86-eebcf6ba1198.png",
@@ -647,9 +682,300 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-09-23T09:42:03.446Z",
+  "generatedAt": "2026-09-23T10:46:28.899Z",
   "appCount": 138,
   "apps": [
+    {
+      "id": "a134be86-a969-4e39-b131-9c61247f4c87",
+      "title": "내 손안의 우주",
+      "summary": "초등학생이 태양계 행성의 크기, 거리, 공전 속도와 자전·공전 개념을 직접 비교하며 탐구하는 과학 웹앱입니다.",
+      "url": "https://wbmaker2.github.io/interactive-solar-system/",
+      "githubUrl": "https://github.com/WBmaker2/interactive-solar-system",
+      "tags": [
+        "과학",
+        "수업",
+        "시뮬레이션"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a134be86-a969-4e39-b131-9c61247f4c87.png",
+      "subject": "과학",
+      "grade": "5~6학년",
+      "memo": "5~6학년 과학 수업에서 태양계 행성의 크기와 태양으로부터의 거리, 공전 속도 차이를 관찰하고 미션 풀이와 자전·공전 개념 정리에 활용할 수 있습니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-04-19T05:35:34.726Z",
+      "updatedAt": "2026-09-23T10:39:13.933Z"
+    },
+    {
+      "id": "60646b44-ffef-45f9-a774-65df50211a9a",
+      "title": "선생님의 영단어 사전",
+      "summary": "교사와 학생이 2022 개정 영어 어휘와 교과서 표현을 학교급별로 검색하고 발음·말하기 점검까지 확인하는 사전입니다.",
+      "url": "https://daddy-s-dictionary.pages.dev/",
+      "githubUrl": "https://github.com/WBmaker2/daddy-s-dictionary.git",
+      "tags": [
+        "영어",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/60646b44-ffef-45f9-a774-65df50211a9a.png",
+      "subject": "영어",
+      "grade": "초등·중등·고등",
+      "memo": "수업 중 어휘 확인, 가정 학습, 발음 듣기와 말하기 점검 활동에 바로 활용할 수 있습니다.",
+      "subjects": [
+        "영어"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "reference",
+      "learningProcess": [
+        "검색",
+        "탐색",
+        "확인"
+      ],
+      "createdAt": "2026-04-19T01:31:31.045Z",
+      "updatedAt": "2026-09-23T10:38:18.505Z"
+    },
+    {
+      "id": "9d867458-613d-4043-9d9c-cca5dbe1db0f",
+      "title": "직물 알고리즘 공방",
+      "summary": "0과 1의 직조 규칙을 실의 위아래 구조로 바꿔 보고 뜀실을 검사하는 학습용 직조 실험실",
+      "url": "https://wbmaker2.github.io/textile-algorithm-studio/",
+      "githubUrl": "https://github.com/WBmaker2/textile-algorithm-studio",
+      "tags": [
+        "미술",
+        "시뮬레이션",
+        "수업",
+        "수학",
+        "융합",
+        "관찰"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/9d867458-613d-4043-9d9c-cca5dbe1db0f.png",
+      "subject": "수학·미술·정보",
+      "grade": "초등 고학년~고등학교",
+      "memo": "0과 1의 직조 규칙을 실의 위아래 구조로 바꿔 보고 뜀실을 검사한다. 예측→격자 실험→줄무늬·대각 과제→뜀실 검사→규칙 설명과 저장 순서의 25분 활동.",
+      "subjects": [
+        "수학",
+        "미술",
+        "정보"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-17T14:03:28.469Z",
+      "updatedAt": "2026-09-23T10:33:40.341Z"
+    },
+    {
+      "id": "8e3f5c3d-bbd9-416d-b92f-3de18969ea73",
+      "title": "바이브프롬프트 KR (VibePrompt)",
+      "summary": "AI 코딩 도구(Cursor, Claude, v0 등)를 위한 286개 UI 레이아웃 프롬프트 및 실시간 미리보기 제공 Tailwind CSS 라이브러리",
+      "url": "https://wbmaker2.github.io/vibeprompts-kr/",
+      "githubUrl": "https://github.com/WBmaker2/vibeprompts-kr",
+      "tags": [
+        "코딩",
+        "인공지능",
+        "도구",
+        "자료 탐색",
+        "인터랙티브"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/8e3f5c3d-bbd9-416d-b92f-3de18969ea73.png",
+      "subject": "정보",
+      "grade": "중·고등",
+      "memo": "286개 전 카테고리(인증 폼, 요금제, 벤토, 히어로, 대시보드 등) 한국어 번역 및 풀스크린/태블릿/모바일 반응형 iframe 실시간 미리보기 지원",
+      "subjects": [
+        "정보"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "utility",
+      "learningProcess": [
+        "자료 탐색",
+        "프롬프트 분석",
+        "AI 코딩 적용",
+        "웹 배포"
+      ],
+      "createdAt": "2026-09-18T12:31:30.535Z",
+      "updatedAt": "2026-09-23T10:32:51.281Z"
+    },
+    {
+      "id": "891538b6-e56e-4f4d-9b2f-4bcbb63b7530",
+      "title": "정전 없는 섬",
+      "summary": "중·고등학생이 시간별 발전·부하를 kW·kWh로 구분하고 배터리 충·방전과 손실을 계산해 24시간 정전 0에 도전하는 섬 에너지 시뮬레이션",
+      "url": "https://wbmaker2.github.io/island-energy-lab/",
+      "githubUrl": "https://github.com/WBmaker2/island-energy-lab",
+      "tags": [
+        "과학",
+        "관찰",
+        "수학",
+        "시뮬레이션",
+        "융합",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/891538b6-e56e-4f4d-9b2f-4bcbb63b7530.png",
+      "subject": "과학·수학",
+      "grade": "중학교~고등학교",
+      "memo": "50분 한 차시: 도입 5분(단위 예측), 표 읽기 10분, 배터리 설정 10분, 실행·수정 15분, 한계 설명 10분. 모둠별 섬 운영자 역할로 운영한다.",
+      "subjects": [
+        "과학",
+        "수학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-18T12:44:10.948Z",
+      "updatedAt": "2026-09-23T10:31:53.329Z"
+    },
+    {
+      "id": "a2e6c9f1-abeb-4d9c-9203-04c52aab23c2",
+      "title": "외계행성 신호 수사대",
+      "summary": "중·고등학생이 별빛 곡선에서 행성 후보를 추정하고 추가 관측을 계획하는 30분 수업용 실험실",
+      "url": "https://wbmaker2.github.io/exoplanet-signal-lab/",
+      "githubUrl": "https://github.com/WBmaker2/exoplanet-signal-lab",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "관찰",
+        "수업",
+        "탐구",
+        "추론"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a2e6c9f1-abeb-4d9c-9203-04c52aab23c2.png",
+      "subject": "지구과학·물리·통계",
+      "grade": "중학교~고등학교",
+      "memo": "반복 신호 선택(3분)→후보 모형 적합(7분)→3D 비교(5분)→관측 창 선택(10분)→결론 보고(5분)의 30분 흐름으로 사용",
+      "subjects": [
+        "지구과학",
+        "물리",
+        "통계"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-18T12:46:41.721Z",
+      "updatedAt": "2026-09-23T10:31:47.650Z"
+    },
+    {
+      "id": "90d207b6-22d0-4140-b073-0aa951aa0e8a",
+      "title": "AI의 착각 실험실",
+      "summary": "중·고등학생이 40장으로 작은 이미지 분류기를 학습시키고 새 조건에서 시험하며 배경 편향을 확인하는 25분 수업용 실험실",
+      "url": "https://wbmaker2.github.io/ai-shortcut-lab/",
+      "githubUrl": "https://github.com/WBmaker2/ai-shortcut-lab",
+      "tags": [
+        "수학",
+        "인공지능",
+        "융합",
+        "시뮬레이션",
+        "관찰",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/90d207b6-22d0-4140-b073-0aa951aa0e8a.png",
+      "subject": "정보·수학",
+      "grade": "중학교~고등학교",
+      "memo": "예측 3분→학습 자료 선택·분류기 학습→네 집단 시험→균형 개선 재학습→동일 시험 비교의 25분 흐름으로 사용",
+      "subjects": [
+        "정보",
+        "수학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-19T01:22:54.711Z",
+      "updatedAt": "2026-09-23T10:31:42.515Z"
+    },
+    {
+      "id": "0b2e2788-5d45-4f6d-ad95-1d712dd05b2b",
+      "title": "유전 재조합 설계실",
+      "summary": "중·고등학생이 같은 부모에게서 서로 다른 유전자 조합이 나오는 이유를 배우자·자손 분포 실험으로 탐구하는 유전 시뮬레이션",
+      "url": "https://wbmaker2.github.io/genetic-recombination-lab/",
+      "githubUrl": "https://github.com/WBmaker2/genetic-recombination-lab",
+      "tags": [
+        "과학",
+        "관찰",
+        "수업",
+        "수학",
+        "시뮬레이션",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/0b2e2788-5d45-4f6d-ad95-1d712dd05b2b.png",
+      "subject": "생명과학·수학",
+      "grade": "중학교 심화~고등학교",
+      "memo": "예측 3분→분열 비교 5분→표본 생성 5분→검정교배 추정 7분→기록 5분의 25분 흐름으로 쓰는 검정교배 재조합률 추정 실험실",
+      "subjects": [
+        "생명과학",
+        "수학"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-09-19T07:28:09.665Z",
+      "updatedAt": "2026-09-23T10:31:05.783Z"
+    },
     {
       "id": "74736b1a-2e59-49b9-a536-a179373194b3",
       "title": "Skeleton Play — 카메라 운동 게임",
@@ -663,8 +989,8 @@
         "게임",
         "수업"
       ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/74736b1a-2e59-49b9-a536-a179373194b3.png",
       "subject": "체육·영어·수학",
       "grade": "초등 전학년",
       "memo": "수업 시작 5분 몸풀기나 쉬는 시간 신체 활동용으로 사용. 카메라 앞 1.5~2.5m에서 시작 시 T자세 3초 보정 후 12종 게임 중 골라 60초씩 플레이.",
@@ -685,7 +1011,7 @@
         "다시 도전"
       ],
       "createdAt": "2026-09-20T06:41:29.818Z",
-      "updatedAt": "2026-09-23T09:38:31.034Z"
+      "updatedAt": "2026-09-23T10:25:09.132Z"
     },
     {
       "id": "a37d3171-2110-44c0-ab86-eebcf6ba1198",
@@ -755,233 +1081,6 @@
       ],
       "createdAt": "2026-09-19T10:26:36.748Z",
       "updatedAt": "2026-09-19T10:26:36.748Z"
-    },
-    {
-      "id": "0b2e2788-5d45-4f6d-ad95-1d712dd05b2b",
-      "title": "유전 재조합 설계실",
-      "summary": "중·고등학생이 같은 부모에게서 서로 다른 유전자 조합이 나오는 이유를 배우자·자손 분포 실험으로 탐구하는 유전 시뮬레이션",
-      "url": "https://wbmaker2.github.io/genetic-recombination-lab/",
-      "githubUrl": "https://github.com/WBmaker2/genetic-recombination-lab",
-      "tags": [
-        "과학",
-        "관찰",
-        "수업",
-        "수학",
-        "시뮬레이션",
-        "탐구"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
-      "subject": "생명과학·수학",
-      "grade": "중학교 심화~고등학교",
-      "memo": "예측 3분→분열 비교 5분→표본 생성 5분→검정교배 추정 7분→기록 5분의 25분 흐름으로 쓰는 검정교배 재조합률 추정 실험실",
-      "subjects": [
-        "생명과학",
-        "수학"
-      ],
-      "gradeBands": [
-        "secondary"
-      ],
-      "audience": "student",
-      "interactionType": "simulation",
-      "learningProcess": [
-        "예측",
-        "조건 설정",
-        "실행·관찰",
-        "근거 기록",
-        "재검증"
-      ],
-      "createdAt": "2026-09-19T07:28:09.665Z",
-      "updatedAt": "2026-09-19T07:28:09.665Z"
-    },
-    {
-      "id": "90d207b6-22d0-4140-b073-0aa951aa0e8a",
-      "title": "AI의 착각 실험실",
-      "summary": "중·고등학생이 40장으로 작은 이미지 분류기를 학습시키고 새 조건에서 시험하며 배경 편향을 확인하는 25분 수업용 실험실",
-      "url": "https://wbmaker2.github.io/ai-shortcut-lab/",
-      "githubUrl": "https://github.com/WBmaker2/ai-shortcut-lab",
-      "tags": [
-        "수학",
-        "인공지능",
-        "융합",
-        "시뮬레이션",
-        "관찰",
-        "수업"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
-      "subject": "정보·수학",
-      "grade": "중학교~고등학교",
-      "memo": "예측 3분→학습 자료 선택·분류기 학습→네 집단 시험→균형 개선 재학습→동일 시험 비교의 25분 흐름으로 사용",
-      "subjects": [
-        "정보",
-        "수학"
-      ],
-      "gradeBands": [
-        "secondary"
-      ],
-      "audience": "student",
-      "interactionType": "simulation",
-      "learningProcess": [
-        "예측",
-        "조건 설정",
-        "실행·관찰",
-        "근거 기록",
-        "재검증"
-      ],
-      "createdAt": "2026-09-19T01:22:54.711Z",
-      "updatedAt": "2026-09-19T01:22:54.711Z"
-    },
-    {
-      "id": "a2e6c9f1-abeb-4d9c-9203-04c52aab23c2",
-      "title": "외계행성 신호 수사대",
-      "summary": "중·고등학생이 별빛 곡선에서 행성 후보를 추정하고 추가 관측을 계획하는 30분 수업용 실험실",
-      "url": "https://wbmaker2.github.io/exoplanet-signal-lab/",
-      "githubUrl": "https://github.com/WBmaker2/exoplanet-signal-lab",
-      "tags": [
-        "과학",
-        "시뮬레이션",
-        "관찰",
-        "수업",
-        "탐구",
-        "추론"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
-      "subject": "지구과학·물리·통계",
-      "grade": "중학교~고등학교",
-      "memo": "반복 신호 선택(3분)→후보 모형 적합(7분)→3D 비교(5분)→관측 창 선택(10분)→결론 보고(5분)의 30분 흐름으로 사용",
-      "subjects": [
-        "지구과학",
-        "물리",
-        "통계"
-      ],
-      "gradeBands": [
-        "secondary"
-      ],
-      "audience": "mixed",
-      "interactionType": "simulation",
-      "learningProcess": [
-        "예측",
-        "조건 설정",
-        "실행·관찰",
-        "근거 기록",
-        "재검증"
-      ],
-      "createdAt": "2026-09-18T12:46:41.721Z",
-      "updatedAt": "2026-09-18T12:46:41.721Z"
-    },
-    {
-      "id": "891538b6-e56e-4f4d-9b2f-4bcbb63b7530",
-      "title": "정전 없는 섬",
-      "summary": "중·고등학생이 시간별 발전·부하를 kW·kWh로 구분하고 배터리 충·방전과 손실을 계산해 24시간 정전 0에 도전하는 섬 에너지 시뮬레이션",
-      "url": "https://wbmaker2.github.io/island-energy-lab/",
-      "githubUrl": "https://github.com/WBmaker2/island-energy-lab",
-      "tags": [
-        "과학",
-        "관찰",
-        "수학",
-        "시뮬레이션",
-        "융합",
-        "수업"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
-      "subject": "과학·수학",
-      "grade": "중학교~고등학교",
-      "memo": "50분 한 차시: 도입 5분(단위 예측), 표 읽기 10분, 배터리 설정 10분, 실행·수정 15분, 한계 설명 10분. 모둠별 섬 운영자 역할로 운영한다.",
-      "subjects": [
-        "과학",
-        "수학"
-      ],
-      "gradeBands": [
-        "secondary"
-      ],
-      "audience": "mixed",
-      "interactionType": "simulation",
-      "learningProcess": [
-        "예측",
-        "조건 설정",
-        "실행·관찰",
-        "근거 기록",
-        "재검증"
-      ],
-      "createdAt": "2026-09-18T12:44:10.948Z",
-      "updatedAt": "2026-09-18T12:44:10.948Z"
-    },
-    {
-      "id": "8e3f5c3d-bbd9-416d-b92f-3de18969ea73",
-      "title": "바이브프롬프트 KR (VibePrompt)",
-      "summary": "AI 코딩 도구(Cursor, Claude, v0 등)를 위한 286개 UI 레이아웃 프롬프트 및 실시간 미리보기 제공 Tailwind CSS 라이브러리",
-      "url": "https://wbmaker2.github.io/vibeprompts-kr/",
-      "githubUrl": "https://github.com/WBmaker2/vibeprompts-kr",
-      "tags": [
-        "코딩",
-        "인공지능",
-        "도구",
-        "자료 탐색",
-        "인터랙티브"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
-      "subject": "정보",
-      "grade": "중·고등",
-      "memo": "286개 전 카테고리(인증 폼, 요금제, 벤토, 히어로, 대시보드 등) 한국어 번역 및 풀스크린/태블릿/모바일 반응형 iframe 실시간 미리보기 지원",
-      "subjects": [
-        "정보"
-      ],
-      "gradeBands": [
-        "secondary"
-      ],
-      "audience": "mixed",
-      "interactionType": "utility",
-      "learningProcess": [
-        "자료 탐색",
-        "프롬프트 분석",
-        "AI 코딩 적용",
-        "웹 배포"
-      ],
-      "createdAt": "2026-09-18T12:31:30.535Z",
-      "updatedAt": "2026-09-18T12:31:30.535Z"
-    },
-    {
-      "id": "9d867458-613d-4043-9d9c-cca5dbe1db0f",
-      "title": "직물 알고리즘 공방",
-      "summary": "0과 1의 직조 규칙을 실의 위아래 구조로 바꿔 보고 뜀실을 검사하는 학습용 직조 실험실",
-      "url": "https://wbmaker2.github.io/textile-algorithm-studio/",
-      "githubUrl": "https://github.com/WBmaker2/textile-algorithm-studio",
-      "tags": [
-        "미술",
-        "시뮬레이션",
-        "수업",
-        "수학",
-        "융합",
-        "관찰"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": null,
-      "subject": "수학·미술·정보",
-      "grade": "초등 고학년~고등학교",
-      "memo": "0과 1의 직조 규칙을 실의 위아래 구조로 바꿔 보고 뜀실을 검사한다. 예측→격자 실험→줄무늬·대각 과제→뜀실 검사→규칙 설명과 저장 순서의 25분 활동.",
-      "subjects": [
-        "수학",
-        "미술",
-        "정보"
-      ],
-      "gradeBands": [
-        "secondary"
-      ],
-      "audience": "student",
-      "interactionType": "simulation",
-      "learningProcess": [
-        "예측",
-        "조건 설정",
-        "실행·관찰",
-        "근거 기록",
-        "재검증"
-      ],
-      "createdAt": "2026-09-17T14:03:28.469Z",
-      "updatedAt": "2026-09-17T14:03:28.469Z"
     },
     {
       "id": "65392b85-bffa-4ff5-b857-2fd283a82fb7",
@@ -5077,37 +5176,6 @@
       "updatedAt": "2026-05-13T00:45:38.586Z"
     },
     {
-      "id": "60646b44-ffef-45f9-a774-65df50211a9a",
-      "title": "선생님의 영단어 사전",
-      "summary": "교사와 학생이 2022 개정 영어 어휘와 교과서 표현을 학교급별로 검색하고 발음·말하기 점검까지 확인하는 사전입니다.",
-      "url": "https://daddy-s-dictionary.pages.dev/",
-      "githubUrl": "https://github.com/WBmaker2/daddy-s-dictionary.git",
-      "tags": [
-        "영어",
-        "수업"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": "/app-thumbnails/60646b44-ffef-45f9-a774-65df50211a9a.png",
-      "subject": "영어",
-      "grade": "초등·중등·고등",
-      "memo": "수업 중 어휘 확인, 가정 학습, 발음 듣기와 말하기 점검 활동에 바로 활용할 수 있습니다.",
-      "subjects": [
-        "영어"
-      ],
-      "gradeBands": [
-        "secondary"
-      ],
-      "audience": "mixed",
-      "interactionType": "reference",
-      "learningProcess": [
-        "검색",
-        "탐색",
-        "확인"
-      ],
-      "createdAt": "2026-04-19T01:31:31.045Z",
-      "updatedAt": "2026-05-08T12:57:57.714Z"
-    },
-    {
       "id": "f1fc0953-7d49-42c5-a0cc-68b0a564e765",
       "title": "뚝딱! 분수 조각 탐험대",
       "summary": "초등 학생이 슬라이더와 도형 모델로 분수를 만들고 비교하며 단위분수와 진분수를 익히는 시각화 학습 앱입니다.",
@@ -5138,39 +5206,6 @@
       ],
       "createdAt": "2026-04-20T10:30:43.570Z",
       "updatedAt": "2026-05-08T12:54:55.664Z"
-    },
-    {
-      "id": "a134be86-a969-4e39-b131-9c61247f4c87",
-      "title": "내 손안의 우주",
-      "summary": "초등학생이 태양계 행성의 크기, 거리, 공전 속도와 자전·공전 개념을 직접 비교하며 탐구하는 과학 웹앱입니다.",
-      "url": "https://wbmaker2.github.io/interactive-solar-system/",
-      "githubUrl": "https://github.com/WBmaker2/interactive-solar-system",
-      "tags": [
-        "과학",
-        "수업",
-        "시뮬레이션"
-      ],
-      "thumbnailMode": "placeholder",
-      "thumbnailUrl": "/app-thumbnails/a134be86-a969-4e39-b131-9c61247f4c87.png",
-      "subject": "과학",
-      "grade": "5~6학년",
-      "memo": "5~6학년 과학 수업에서 태양계 행성의 크기와 태양으로부터의 거리, 공전 속도 차이를 관찰하고 미션 풀이와 자전·공전 개념 정리에 활용할 수 있습니다.",
-      "subjects": [
-        "과학"
-      ],
-      "gradeBands": [
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "simulation",
-      "learningProcess": [
-        "예측",
-        "조작",
-        "비교",
-        "설명"
-      ],
-      "createdAt": "2026-04-19T05:35:34.726Z",
-      "updatedAt": "2026-05-08T12:53:41.945Z"
     },
     {
       "id": "9a942662-4e1c-4ab5-aa65-b8e2a082ec2f",
@@ -5404,5 +5439,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 227
+  "catalogRevision": 236
 }
