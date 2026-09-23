@@ -4,6 +4,12 @@ import { useEffect, useRef, useState } from "react";
 
 export const UPDATE_HISTORY = [
   {
+    date: "2026-09-23",
+    kind: "개선",
+    detail:
+      "공개 앱 목록의 기본 정렬을 최근 등록으로 바꾸고, 수업 조건 필터를 독립 스크롤로 사용할 수 있도록 개선했습니다."
+  },
+  {
     date: "2026-09-07",
     kind: "개선",
     detail:

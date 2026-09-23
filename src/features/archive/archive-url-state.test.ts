@@ -18,6 +18,39 @@ const options: ArchiveFilterOptions = {
 };
 
 describe("archive URL state", () => {
+  it("defaults to newest registrations and only serializes non-default sorting", () => {
+    expect(readArchiveUrlState("", options).sort).toBe("created");
+    expect(readArchiveUrlState("?sort=invalid", options).sort).toBe("created");
+    expect(
+      writeArchiveUrlState({
+        activeTags: [],
+        audience: "all",
+        gradeBands: [],
+        interactionTypes: [],
+        page: 1,
+        query: "",
+        recentOnly: false,
+        savedOnly: false,
+        selectedSubjects: [],
+        sort: "created"
+      })
+    ).toBe("");
+    expect(
+      writeArchiveUrlState({
+        activeTags: [],
+        audience: "all",
+        gradeBands: [],
+        interactionTypes: [],
+        page: 1,
+        query: "",
+        recentOnly: false,
+        savedOnly: false,
+        selectedSubjects: [],
+        sort: "relevance"
+      })
+    ).toBe("?sort=relevance");
+  });
+
   it("writes filters, saved view, sorting, and page into a shareable query", () => {
     expect(
       writeArchiveUrlState({

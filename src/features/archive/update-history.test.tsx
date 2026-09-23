@@ -12,6 +12,10 @@ describe("UpdateHistory", () => {
       name: "Hong's Vibe Coding Lab 업데이트 내역"
     });
 
+    expect(dialog).toHaveTextContent("2026-09-23");
+    expect(dialog).toHaveTextContent(
+      "공개 앱 목록의 기본 정렬을 최근 등록으로 바꾸고, 수업 조건 필터를 독립 스크롤로 사용할 수 있도록 개선했습니다."
+    );
     expect(dialog).toHaveTextContent("2026-04-04");
     expect(dialog).toHaveTextContent("개발");
     expect(dialog).toHaveTextContent(

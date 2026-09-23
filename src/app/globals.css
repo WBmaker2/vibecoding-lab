@@ -524,12 +524,20 @@ select {
   gap: 18px;
   position: sticky;
   top: 18px;
+  max-height: calc(100dvh - 36px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   min-width: 0;
   padding: 20px;
   border: 1px solid var(--panel-border);
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.86);
   box-shadow: 0 16px 36px rgba(17, 24, 39, 0.05);
+}
+
+.archive-filter-panel:focus-visible {
+  outline: 3px solid rgba(61, 96, 162, 0.45);
+  outline-offset: 3px;
 }
 
 .archive-filter-panel-header {
@@ -2297,7 +2305,6 @@ select {
     z-index: 40;
     width: min(360px, calc(100vw - 24px));
     max-height: calc(100dvh - 24px);
-    overflow-y: auto;
     box-shadow: 0 24px 70px rgba(17, 24, 39, 0.22);
   }
 

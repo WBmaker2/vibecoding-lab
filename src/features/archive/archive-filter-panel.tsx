@@ -71,14 +71,15 @@ export function ArchiveFilterPanel({
 
   return (
     <aside
-      aria-label="앱 분류 필터"
+      aria-labelledby="archive-filter-panel-heading"
       className={`archive-filter-panel${isOpen ? " is-open" : ""}`}
       data-open={isOpen}
+      tabIndex={0}
     >
       <div className="archive-filter-panel-header">
         <div>
           <p className="archive-filter-eyebrow">Browse by fit</p>
-          <h2>수업 조건으로 찾기</h2>
+          <h2 id="archive-filter-panel-heading">수업 조건으로 찾기</h2>
         </div>
         <button
           aria-label="필터 패널 닫기"

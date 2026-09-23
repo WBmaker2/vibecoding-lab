@@ -34,6 +34,12 @@ const sampleApps: PublicAppRecord[] = [
 ];
 
 describe("ArchivePage", () => {
+  it("defaults app sorting to newest registrations", () => {
+    render(<ArchivePage initialApps={sampleApps} />);
+
+    expect(screen.getByRole("combobox", { name: "앱 정렬" })).toHaveValue("created");
+  });
+
   it("shows active filter state and clears it from the results bar", () => {
     render(<ArchivePage initialApps={sampleApps} />);
 
@@ -74,5 +80,15 @@ describe("ArchivePage", () => {
     expect(within(activeFilters).getByText("#영어")).toBeInTheDocument();
     expect(within(activeFilters).getByText("#업무경감")).toBeInTheDocument();
     expect(screen.getByText("조건을 조금 바꾸면 더 잘 찾을 수 있습니다")).toBeInTheDocument();
+  });
+
+  it("exposes the class filter panel as a keyboard-scrollable region", () => {
+    render(<ArchivePage initialApps={sampleApps} />);
+
+    const filterPanel = screen.getByRole("complementary", {
+      name: "수업 조건으로 찾기"
+    });
+
+    expect(filterPanel).toHaveAttribute("tabindex", "0");
   });
 });
