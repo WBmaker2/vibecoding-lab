@@ -840,6 +840,15 @@ select {
   gap: 18px;
 }
 
+.archive-results .app-grid {
+  scroll-margin-top: 18px;
+}
+
+.archive-results .app-grid:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
 .app-card {
   display: grid;
   gap: 0;

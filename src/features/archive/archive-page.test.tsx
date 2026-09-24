@@ -1,4 +1,5 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { vi } from "vitest";
 import type { PublicAppRecord } from "@/lib/apps/types";
 import { ArchivePage } from "./archive-page";
 
@@ -33,11 +34,55 @@ const sampleApps: PublicAppRecord[] = [
   }
 ];
 
+const manyApps: PublicAppRecord[] = Array.from({ length: 30 }, (_, index) => ({
+  ...sampleApps[0],
+  id: `page-app-${index + 1}`,
+  title: `Page App ${index + 1}`,
+  createdAt: new Date(Date.UTC(2026, 0, index + 1))
+}));
+
 describe("ArchivePage", () => {
   it("defaults app sorting to newest registrations", () => {
     render(<ArchivePage initialApps={sampleApps} />);
 
     expect(screen.getByRole("combobox", { name: "앱 정렬" })).toHaveValue("created");
+  });
+
+  it("scrolls to the first app after changing pages", async () => {
+    const originalDescriptor = Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "scrollIntoView"
+    );
+    const scrollIntoView = vi.fn();
+    Object.defineProperty(HTMLElement.prototype, "scrollIntoView", {
+      configurable: true,
+      value: scrollIntoView
+    });
+
+    try {
+      render(<ArchivePage initialApps={manyApps} />);
+      fireEvent.click(screen.getByRole("button", { name: "2페이지" }));
+
+      await waitFor(() => {
+        expect(
+          screen.getByRole("region", { name: "앱 목록 2페이지" })
+        ).toHaveFocus();
+        expect(scrollIntoView).toHaveBeenCalledWith({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    } finally {
+      if (originalDescriptor) {
+        Object.defineProperty(
+          HTMLElement.prototype,
+          "scrollIntoView",
+          originalDescriptor
+        );
+      } else {
+        Reflect.deleteProperty(HTMLElement.prototype, "scrollIntoView");
+      }
+    }
   });
 
   it("shows active filter state and clears it from the results bar", () => {

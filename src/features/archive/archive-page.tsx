@@ -64,6 +64,8 @@ export function ArchivePage({ initialApps }: ArchivePageProps) {
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
   const [isUrlReady, setIsUrlReady] = useState(false);
   const hasInteractedRef = useRef(false);
+  const appGridRef = useRef<HTMLDivElement>(null);
+  const shouldScrollToPageRef = useRef(false);
   const appIds = useMemo(() => initialApps.map((app) => app.id), [initialApps]);
   const {
     clearFavorites: clearStoredFavorites,
@@ -198,6 +200,22 @@ export function ArchivePage({ initialApps }: ArchivePageProps) {
     }
   }, [activeTags, audience, gradeBands, interactionTypes, isUrlReady, page, query, recentIds, safePage, selectedSubjects, showFavorites, showRecent, sort]);
 
+  useEffect(() => {
+    if (!shouldScrollToPageRef.current) return;
+    shouldScrollToPageRef.current = false;
+
+    const appGrid = appGridRef.current;
+    if (!appGrid?.scrollIntoView) return;
+
+    const prefersReducedMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+    appGrid.focus({ preventScroll: true });
+    appGrid.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "start"
+    });
+  }, [safePage]);
+
   function markInteracted() {
     hasInteractedRef.current = true;
     setIsUrlReady(true);
@@ -294,6 +312,8 @@ export function ArchivePage({ initialApps }: ArchivePageProps) {
 
   function changePage(value: number) {
     markInteracted();
+    if (value === safePage) return;
+    shouldScrollToPageRef.current = true;
     setPage(value);
   }
 
@@ -412,7 +432,13 @@ export function ArchivePage({ initialApps }: ArchivePageProps) {
           </div>
 
           {visibleApps.length > 0 ? (
-            <div className="app-grid">
+            <div
+              aria-label={`앱 목록 ${safePage}페이지`}
+              className="app-grid"
+              ref={appGridRef}
+              role="region"
+              tabIndex={-1}
+            >
               {visibleApps.map((app) => (
                 <AppCard
                   app={app}

@@ -4,6 +4,12 @@ import { useEffect, useRef, useState } from "react";
 
 export const UPDATE_HISTORY = [
   {
+    date: "2026-09-24",
+    kind: "개선",
+    detail:
+      "페이지를 바꾸면 새 앱 목록의 시작 부분으로 자동 이동하도록 개선했습니다."
+  },
+  {
     date: "2026-09-23",
     kind: "개선",
     detail:
