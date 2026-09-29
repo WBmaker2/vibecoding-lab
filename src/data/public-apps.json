@@ -331,6 +331,11 @@
       "sha256": "6f366bbcb6129c27e4f10849a5bbbf8d3ca5203d6a8a9624ae05cef400b76169"
     },
     {
+      "path": "/app-thumbnails/7b478c1e-ce65-4bbf-9064-4e42720929a4.png",
+      "size": 89294,
+      "sha256": "1b75f2dc101d413b3f973867bd6d483be48e22916ced6ff1fe3e00e99d4c4a19"
+    },
+    {
       "path": "/app-thumbnails/7b66f642-63da-4389-bce4-35e5d708b6d0.png",
       "size": 318264,
       "sha256": "af8d0e74358d6b879d15e8c68ff383618f8b6df0952cbe4b14d12c3df46109c2"
@@ -707,9 +712,41 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-09-23T13:17:41.637Z",
-  "appCount": 141,
+  "generatedAt": "2026-09-29T11:49:29.953Z",
+  "appCount": 142,
   "apps": [
+    {
+      "id": "7b478c1e-ce65-4bbf-9064-4e42720929a4",
+      "title": "마이크로비트 AI 자세 알리미",
+      "summary": "학생이 Teachable Machine 이미지 모델로 자세를 good 또는 bad로 분류하고 결과를 micro:bit에 전송하는 AI·피지컬 컴퓨팅 수업용 앱입니다.",
+      "url": "https://wbmaker2.github.io/microbit-ai-project2/",
+      "githubUrl": "https://github.com/WBmaker2/microbit-ai-project2",
+      "tags": [
+        "과학",
+        "인공지능",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/7b478c1e-ce65-4bbf-9064-4e42720929a4.png",
+      "subject": "과학·정보",
+      "grade": null,
+      "memo": "Teachable Machine에서 good/bad 자세 이미지를 학습한 뒤 웹캠 분류 결과를 micro:bit로 전달하는 AI·피지컬 컴퓨팅 수업에 활용합니다. 학습 이미지와 촬영 환경에 따른 분류 예측이며 의학적 자세 진단은 아닙니다.",
+      "subjects": [
+        "과학",
+        "정보"
+      ],
+      "gradeBands": [],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "모델 주소 입력",
+        "micro:bit USB 연결",
+        "웹캠 시작",
+        "good/bad 분류 결과와 전송값 확인"
+      ],
+      "createdAt": "2026-09-29T11:04:15.804Z",
+      "updatedAt": "2026-09-29T11:04:15.804Z"
+    },
     {
       "id": "f380fccf-e93b-4c52-85d7-f0f03aaf4043",
       "title": "넘어지지 않는 팽이 연구소",
@@ -5577,5 +5614,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 241
+  "catalogRevision": 242
 }
