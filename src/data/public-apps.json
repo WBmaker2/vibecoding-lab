@@ -311,6 +311,11 @@
       "sha256": "5ad51a1852a73cd78fcce12397ea554c4908a213243a9ce9e0f86a26804513ba"
     },
     {
+      "path": "/app-thumbnails/73f0149f-3f28-4128-af24-8ea04d42c2f2.png",
+      "size": 32313,
+      "sha256": "a3247937981ab18828a6a30fcbc0b7733a6cbffad6db7154b539bced7c0342cf"
+    },
+    {
       "path": "/app-thumbnails/74736b1a-2e59-49b9-a536-a179373194b3.png",
       "size": 755108,
       "sha256": "3019361b9350b4988e8141dea2ec6ec13b295ff92247ca56560de968bc3e4cd6"
@@ -722,9 +727,49 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-10-19T10:44:05.836Z",
-  "appCount": 144,
+  "generatedAt": "2026-10-19T11:48:19.505Z",
+  "appCount": 145,
   "apps": [
+    {
+      "id": "73f0149f-3f28-4128-af24-8ea04d42c2f2",
+      "title": "퀴즈 아레나",
+      "summary": "선생님이 성취기준으로 만든 문제로 학급 친구와 1:1 퀴즈 대결을 하고, 끝난 뒤 정답·해설 복습과 반 학습 분석까지 이어지는 초등 학습 아레나입니다.",
+      "url": "https://class-quiz-arena.web.app",
+      "githubUrl": "https://github.com/WBmaker2/class-quiz-arena",
+      "tags": [
+        "퀴즈",
+        "게임",
+        "수학",
+        "형성평가",
+        "인공지능"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/73f0149f-3f28-4128-af24-8ea04d42c2f2.png",
+      "subject": "국어·수학·과학·사회·영어",
+      "grade": "초등 전학년",
+      "memo": "선생님이 성취기준으로 아레나를 만들면 학생이 초대 코드로 입장해 친구와 10문제 1:1 대결을 합니다. 끝난 뒤 문제·정답·해설을 복습하고, 선생님은 어려운 문제와 성취기준 출제율을 확인해 다음 수업을 정합니다.",
+      "subjects": [
+        "국어",
+        "수학",
+        "과학",
+        "사회",
+        "영어"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "mixed",
+      "interactionType": "practice",
+      "learningProcess": [
+        "대결 입장",
+        "문제 풀이",
+        "즉시 정오 확인",
+        "오답·해설 복습",
+        "재도전"
+      ],
+      "createdAt": "2026-10-19T11:45:00.163Z",
+      "updatedAt": "2026-10-19T11:45:00.163Z"
+    },
     {
       "id": "48a35ce8-0bfd-4148-a83c-85b89ba3c52c",
       "title": "판서랩 — 교육용 화이트보드 영상 만들기",
@@ -5699,5 +5744,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 244
+  "catalogRevision": 245
 }
