@@ -186,6 +186,11 @@
       "sha256": "00bc7196a5c04c5f24411cac7a5f76922aaca0b04a5a386b859aa5b396a231ae"
     },
     {
+      "path": "/app-thumbnails/48a35ce8-0bfd-4148-a83c-85b89ba3c52c.png",
+      "size": 166916,
+      "sha256": "fb53191533bc99e907b2a4cdf2dfa175afedfd068a6c02a05c706f7d35aa1296"
+    },
+    {
       "path": "/app-thumbnails/48b67d53-f103-4fc7-9544-59e8a73b2686.png",
       "size": 105430,
       "sha256": "ae58cf36d72ba2e1a91bbd13e7a21cab8274e54c57f0c1323d9b3c19ae3ff6f6"
@@ -717,9 +722,46 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-10-17T03:19:48.813Z",
-  "appCount": 143,
+  "generatedAt": "2026-10-19T10:44:05.836Z",
+  "appCount": 144,
   "apps": [
+    {
+      "id": "48a35ce8-0bfd-4148-a83c-85b89ba3c52c",
+      "title": "판서랩 — 교육용 화이트보드 영상 만들기",
+      "summary": "교사와 학생이 수업 주제를 입력하면 AI가 5단계 스토리보드와 한국어 나레이션을 만들고, 손그림 판서 애니메이션을 영상·자막·학습지·퀴즈로 내보내는 브라우저 기반 수업 영상 제작 앱입니다.",
+      "url": "https://wbmaker2.github.io/edu-whiteboard-clip/",
+      "githubUrl": "https://github.com/WBmaker2/edu-whiteboard-clip",
+      "tags": [
+        "수업",
+        "인공지능",
+        "시각화",
+        "녹음",
+        "도구",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/48a35ce8-0bfd-4148-a83c-85b89ba3c52c.png",
+      "subject": "공통",
+      "grade": "초등·중등·고등",
+      "memo": "수업 주제만 입력하면 5단계 스토리보드와 한국어 나레이션 판서 영상을 만들고, A4 학습지·AI 퀴즈·카드뉴스·발표 모드로 바로 수업에 활용합니다. 예시 프로젝트로 API 키 없이 전체 흐름을 체험할 수 있습니다.",
+      "subjects": [
+        "공통"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "creation",
+      "learningProcess": [
+        "주제 탐색",
+        "설계",
+        "제작",
+        "발표",
+        "평가"
+      ],
+      "createdAt": "2026-10-18T12:44:14.537Z",
+      "updatedAt": "2026-10-18T12:44:14.537Z"
+    },
     {
       "id": "624e768f-411c-4521-90aa-fd4c8fa18be8",
       "title": "별숲 수학마을",
@@ -5657,5 +5699,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 243
+  "catalogRevision": 244
 }
