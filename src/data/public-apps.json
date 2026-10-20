@@ -301,6 +301,11 @@
       "sha256": "a34bf2435deed9dcf0a690e2eb743725431116e9998c13343b20773f48b84e49"
     },
     {
+      "path": "/app-thumbnails/6ef75d1a-2145-4cfa-b1cb-e99b58622e76.png",
+      "size": 150115,
+      "sha256": "81c94c99a6979b293883d1600f954626daa4d553d60e50b5c8d4c0030b6e8a9f"
+    },
+    {
       "path": "/app-thumbnails/7057e281-7cfb-44be-8e57-9a20f15dc162.png",
       "size": 107098,
       "sha256": "a8a0fea5a8b0b5d162b357a239ab62094d4cc3a0f494a5d90cce7bf831377eed"
@@ -727,9 +732,49 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-10-19T11:48:19.505Z",
-  "appCount": 145,
+  "generatedAt": "2026-10-20T10:22:44.769Z",
+  "appCount": 146,
   "apps": [
+    {
+      "id": "6ef75d1a-2145-4cfa-b1cb-e99b58622e76",
+      "title": "M3.1 FLASH / 3D BENCH",
+      "summary": "MiniMax M3.1 Flash가 three.js로 직접 만든 3D 게임 6종(폴리곤 동물원·분자 빌더·타워 디펜스·도형 조립실·탄도 타워·로봇 팔 조립실)을 모은 3D 구현 벤치마크입니다. 각 게임은 단위 테스트와 4시점 자동 화면 판정으로 검증됩니다.",
+      "url": "https://wbmaker2.github.io/m31-flash-3d-bench/",
+      "githubUrl": "https://github.com/WBmaker2/m31-flash-3d-bench",
+      "tags": [
+        "게임",
+        "시뮬레이션",
+        "과학",
+        "수학",
+        "코딩",
+        "인터랙티브"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/6ef75d1a-2145-4cfa-b1cb-e99b58622e76.png",
+      "subject": "정보·수학·과학·물리",
+      "grade": "초등 고학년~고등학교",
+      "memo": "분자 결합각 맞추기·탄도 궤적 예측·로봇 팔 조준 등 3D 물체를 직접 다루며, 결과 화면에서 오차와 별점을 확인하게 하는 수업 보조 자료입니다. 각 게임은 단위 테스트와 4시점 자동 화면 판정을 통과해 검증되었습니다.",
+      "subjects": [
+        "정보",
+        "수학",
+        "과학",
+        "물리"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "practice",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "관찰",
+        "비교",
+        "결과 확인"
+      ],
+      "createdAt": "2026-10-20T10:16:52.652Z",
+      "updatedAt": "2026-10-20T10:16:52.652Z"
+    },
     {
       "id": "73f0149f-3f28-4128-af24-8ea04d42c2f2",
       "title": "퀴즈 아레나",
@@ -5744,5 +5789,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 245
+  "catalogRevision": 246
 }
