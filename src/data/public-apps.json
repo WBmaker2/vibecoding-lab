@@ -141,6 +141,11 @@
       "sha256": "edca2fbdf58f8ad2b4ca974c81ff291225e3cb3a11cb39285d80c7b0fa7f321b"
     },
     {
+      "path": "/app-thumbnails/3c013726-2196-4db8-80b4-1d1ad36dc3fb.png",
+      "size": 264741,
+      "sha256": "b2952f037d412d2a45faee05e7af4265db88cd9fb8d96cb57d69a89787bf1dea"
+    },
+    {
       "path": "/app-thumbnails/3cb419a8-6c37-4e15-9d0d-6b0634be0bc4.png",
       "size": 375215,
       "sha256": "55f4f1d346f350b87fb537b42e1b1f3945374d74866a82e1451dd011bc1e2a45"
@@ -732,9 +737,47 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-10-24T03:27:00.764Z",
-  "appCount": 146,
+  "generatedAt": "2026-10-25T12:07:54.302Z",
+  "appCount": 147,
   "apps": [
+    {
+      "id": "3c013726-2196-4db8-80b4-1d1ad36dc3fb",
+      "title": "우리 학교 게임 포털",
+      "summary": "35종의 다채로운 아케이드 게임과 실시간 순위 명예의 전당을 제공하는 초등학교 교육용 게임 종합 포털입니다.",
+      "url": "https://wbmaker2.github.io/our-school-games-portal/",
+      "githubUrl": "https://github.com/WBmaker2/our-school-games-portal",
+      "tags": [
+        "게임",
+        "게임형",
+        "도구",
+        "체육",
+        "창의활동",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/3c013726-2196-4db8-80b4-1d1ad36dc3fb.png",
+      "subject": "체육·정보·창의적 체험활동",
+      "grade": "초등 전학년",
+      "memo": "쉬는 시간 및 방과 후 학생들의 건전한 여가와 두뇌 회전, 랭킹 도전에 활용하는 포털",
+      "subjects": [
+        "체육",
+        "정보",
+        "창의적 체험활동"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "게임 탐색",
+        "플레이 조작",
+        "기록 달성",
+        "순위 확인"
+      ],
+      "createdAt": "2026-10-25T12:06:05.001Z",
+      "updatedAt": "2026-10-25T12:06:05.001Z"
+    },
     {
       "id": "73f0149f-3f28-4128-af24-8ea04d42c2f2",
       "title": "퀴즈 아레나",
@@ -5789,5 +5832,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 247
+  "catalogRevision": 248
 }
