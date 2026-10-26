@@ -262,8 +262,8 @@
     },
     {
       "path": "/app-thumbnails/624e768f-411c-4521-90aa-fd4c8fa18be8.png",
-      "size": 321982,
-      "sha256": "823094be7645bb6354057f8e0683b778ac5636ef5ef22b74cd46b9b92cff7c36"
+      "size": 444316,
+      "sha256": "7c204539d65ec21026955619f16f8f02ab2be29f81766594e8a0ea34d8f96f42"
     },
     {
       "path": "/app-thumbnails/636a7672-622a-4ba7-8f94-a1d61fb1a853.png",
@@ -737,9 +737,48 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-10-25T12:07:54.302Z",
+  "generatedAt": "2026-10-26T01:45:16.253Z",
   "appCount": 147,
   "apps": [
+    {
+      "id": "624e768f-411c-4521-90aa-fd4c8fa18be8",
+      "title": "별숲 수학마을",
+      "summary": "초등 1~6학년 1·2학기 수학을 별빛 숲 마을에서 배우는 마을형 수학 웹앱. 1·2학년은 큰 그림과 큰 단추로, 3~6학년은 단원 장소를 걸으며 문제를 풉니다.",
+      "url": "https://wbmaker2.github.io/starforest-math-village/",
+      "githubUrl": "https://github.com/WBmaker2/starforest-math-village",
+      "tags": [
+        "수학",
+        "게임",
+        "퀴즈",
+        "저학년",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/624e768f-411c-4521-90aa-fd4c8fa18be8.png",
+      "subject": "수학",
+      "grade": "초등 1~6학년",
+      "memo": "수업 준비 때 학년·학기를 고르고 학급 주소를 복사해 학생에게 건네면, 학생은 가입 없이 마을에서 단원 문제를 풀고 별·씨앗으로 마을을 가꿉니다. 모둠 릴레이 퀴즈쇼와 종이 학습지 인쇄로 마무리합니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "all",
+        "1-2",
+        "3-4",
+        "5-6"
+      ],
+      "audience": "mixed",
+      "interactionType": "practice",
+      "learningProcess": [
+        "개념 확인",
+        "조작 활동",
+        "문제 해결",
+        "단계별 힌트",
+        "별·씨앗 기록"
+      ],
+      "createdAt": "2026-10-17T02:52:46.681Z",
+      "updatedAt": "2026-10-25T22:17:25.668Z"
+    },
     {
       "id": "3c013726-2196-4db8-80b4-1d1ad36dc3fb",
       "title": "우리 학교 게임 포털",
@@ -894,44 +933,6 @@
       ],
       "createdAt": "2026-10-18T12:44:14.537Z",
       "updatedAt": "2026-10-18T12:44:14.537Z"
-    },
-    {
-      "id": "624e768f-411c-4521-90aa-fd4c8fa18be8",
-      "title": "별숲 수학마을",
-      "summary": "초등 1~6학년 2학기 수학을 별빛 숲 마을에서 배우는 마을형 수학 웹앱",
-      "url": "https://wbmaker2.github.io/starforest-math-village/",
-      "githubUrl": "https://github.com/WBmaker2/starforest-math-village",
-      "tags": [
-        "수학",
-        "게임",
-        "퀴즈",
-        "저학년",
-        "수업"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/624e768f-411c-4521-90aa-fd4c8fa18be8.png",
-      "subject": "수학",
-      "grade": "초등 1~6학년",
-      "memo": "수업 도입 체험·개별 차시 풀이·모둠 릴레이 퀴즈쇼·종이 학습지 인쇄로 활용",
-      "subjects": [
-        "수학"
-      ],
-      "gradeBands": [
-        "all",
-        "1-2",
-        "3-4",
-        "5-6"
-      ],
-      "audience": "mixed",
-      "interactionType": "practice",
-      "learningProcess": [
-        "문제 해결",
-        "관찰",
-        "기록",
-        "재검증"
-      ],
-      "createdAt": "2026-10-17T02:52:46.681Z",
-      "updatedAt": "2026-10-17T02:52:46.681Z"
     },
     {
       "id": "7b478c1e-ce65-4bbf-9064-4e42720929a4",
@@ -5832,5 +5833,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 248
+  "catalogRevision": 249
 }
