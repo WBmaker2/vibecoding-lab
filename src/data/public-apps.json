@@ -171,6 +171,11 @@
       "sha256": "885b1eb236a74c15fcad0871d142b1ce525b31b6d69b61552501b753ba9fd932"
     },
     {
+      "path": "/app-thumbnails/412c6b54-75ea-42a3-8c7f-654bd203631d.png",
+      "size": 573131,
+      "sha256": "78bd1a344f3ec5214bbbde0b33ed0f995aade8864938412905bb02875a81c904"
+    },
+    {
       "path": "/app-thumbnails/422f88e0-ac58-42c6-afa4-9d557979eaf8.png",
       "size": 164734,
       "sha256": "375d4600af55215051e73d78a590b645d32c8c4365633342140a3f1f3fe45dfd"
@@ -219,6 +224,11 @@
       "path": "/app-thumbnails/511d5334-1e2c-40ac-8f9b-bc7bc22a1a21.png",
       "size": 40129,
       "sha256": "d74f712525f24f22ae21b0c6710da76b94f91c99c3d14132fd2c64e6d370ecca"
+    },
+    {
+      "path": "/app-thumbnails/526cf233-8d64-4399-ae1a-87886a262e36.png",
+      "size": 534440,
+      "sha256": "ae8a0f28a75ead97384a156d5ae8576b105e1a91a53266ebe44a73e4e055d7e7"
     },
     {
       "path": "/app-thumbnails/5543c36a-42d8-49ba-b2e2-85a2c4f193ea.png",
@@ -349,6 +359,11 @@
       "path": "/app-thumbnails/77669d34-e66c-4f01-a74c-f703447fa17d.png",
       "size": 393199,
       "sha256": "30e66ddb9bb6425b1280ff235bc45efe270fff5da19070a897dd3dbf86500910"
+    },
+    {
+      "path": "/app-thumbnails/78cc55a9-6d63-44e4-9eca-fb94c11e7a51.png",
+      "size": 113973,
+      "sha256": "8a745d7c78bd7ad9122794e8ab7ab275453b6f75be9501256b45ffac1d837bf6"
     },
     {
       "path": "/app-thumbnails/79bce259-c3aa-40f7-892b-f46be5fbe3fc.png",
@@ -656,6 +671,11 @@
       "sha256": "21eb302fa9fefc406f857fe73c5523d98b1aa5ffb405ece2bcd71baff407b5d7"
     },
     {
+      "path": "/app-thumbnails/d76f5236-38db-436f-8e0c-ac894ff2cb0c.png",
+      "size": 563593,
+      "sha256": "d1800ae12c9342cf876b1e41bef88cebd556f575a22446139e95b8da1fa4e9df"
+    },
+    {
       "path": "/app-thumbnails/d9e05a77-4d67-4c0e-be07-48b069383791.png",
       "size": 148008,
       "sha256": "2d7e90deaafb8bfd6630a7aeac685e6f613630c7e0ab27a28b4ef9f2105c4142"
@@ -686,6 +706,11 @@
       "sha256": "11bd3b0d6d2c41d56fe47fe796ccee7eef18bf5d5fd00812d4fca2d18eceb26d"
     },
     {
+      "path": "/app-thumbnails/e97e67e6-d5a5-45af-ba62-be724ad339e2.png",
+      "size": 235184,
+      "sha256": "1df2993b706570a1b96e7ab9511d07e776fb95111ce5003ceeef23466fb8f678"
+    },
+    {
       "path": "/app-thumbnails/ec00c831-5eb4-45ec-be63-a3f7889c39c5.jpg",
       "size": 38400,
       "sha256": "a09ecb176dc3c5fb1d93219f48166796becf136adf7cf27e231d65548d71d108"
@@ -694,6 +719,11 @@
       "path": "/app-thumbnails/f058dc1c-3ee5-4368-ba32-23ed3fcaac37.png",
       "size": 84338,
       "sha256": "0fb470b96a1d6d9b833f87a99e7785a0a9838902c6f5865279ffef972db5f173"
+    },
+    {
+      "path": "/app-thumbnails/f0d2fecf-b354-4a40-a9da-87a357ce84df.png",
+      "size": 245605,
+      "sha256": "fb2d0442bac044b6d7e0d7e399a4afb4951bcf58c721dfecd19fc6b43ab006c7"
     },
     {
       "path": "/app-thumbnails/f1fc0953-7d49-42c5-a0cc-68b0a564e765.png",
@@ -737,9 +767,236 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-10-26T09:29:44.123Z",
-  "appCount": 147,
+  "generatedAt": "2026-10-28T00:30:26.500Z",
+  "appCount": 153,
   "apps": [
+    {
+      "id": "526cf233-8d64-4399-ae1a-87886a262e36",
+      "title": "RayLab — 광학 작업대",
+      "summary": "중2~고2 학생이 광선의 반사·굴절·렌즈·전반사를 직접 배치하며 예측하고 확인하는 2D 광학 시뮬레이션입니다. 8개 예측 도전 과제와 교사용 정답·인쇄용 워크시트를 제공합니다.",
+      "url": "https://wbmaker2.github.io/raylab/",
+      "githubUrl": "https://github.com/WBmaker2/raylab",
+      "tags": [
+        "시뮬레이션",
+        "과학",
+        "관찰",
+        "수업",
+        "실험"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/526cf233-8d64-4399-ae1a-87886a262e36.png",
+      "subject": "물리·과학",
+      "grade": "중2~고2",
+      "memo": "광학 단원에서 학생이 반사·굴절·렌즈·전반사를 먼저 예측하고, 작업대에서 광선과 요소를 직접 움직여 확인한 뒤 도전 과제 해설로 정리하는 수업에 사용합니다. 교사 모드에서 정답·해설과 인쇄용 워크시트를 활용할 수 있습니다.",
+      "subjects": [
+        "물리",
+        "과학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "구성",
+        "실행·관찰",
+        "설명",
+        "확장"
+      ],
+      "createdAt": "2026-10-28T00:24:25.398Z",
+      "updatedAt": "2026-10-28T00:24:25.398Z"
+    },
+    {
+      "id": "78cc55a9-6d63-44e4-9eca-fb94c11e7a51",
+      "title": "WaveWorks — 소리 실험실",
+      "summary": "초3~중3 학생이 파형·배음·화음·리듬을 직접 만들고 소리와 스펙트럼을 비교하며 원리를 익히는 웹 음악·과학 실험실입니다.",
+      "url": "https://wbmaker2.github.io/waveworks/",
+      "githubUrl": "https://github.com/WBmaker2/waveworks",
+      "tags": [
+        "음악",
+        "과학",
+        "소리",
+        "시뮬레이션",
+        "관찰",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/78cc55a9-6d63-44e4-9eca-fb94c11e7a51.png",
+      "subject": "음악·과학",
+      "grade": "초3~중3",
+      "memo": "도전 화면에서 예측을 고른 뒤 파형·배음·화음·리듬 실험실에서 목표 소리를 직접 만들고 스펙트럼과 비교하며 원리를 설명합니다. 교사용 화면에서 수업 최대 음량, 시각 전용 모드, 도전 선택, 진행 기록 초기화를 미리 설정할 수 있습니다.",
+      "subjects": [
+        "음악",
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조작",
+        "듣기·관찰",
+        "비교",
+        "설명",
+        "창작"
+      ],
+      "createdAt": "2026-10-28T00:20:43.694Z",
+      "updatedAt": "2026-10-28T00:20:43.694Z"
+    },
+    {
+      "id": "d76f5236-38db-436f-8e0c-ac894ff2cb0c",
+      "title": "PolyFold — 입체도형 탐구",
+      "summary": "초5~중2 학생이 전개도를 접고 평면으로 잘라 보며 입체도형의 성질과 단면을 예측·관찰·설명하는 3D 수학 탐구 앱입니다.",
+      "url": "https://wbmaker2.github.io/polyfold/",
+      "githubUrl": "https://github.com/WBmaker2/polyfold",
+      "tags": [
+        "수학",
+        "도형",
+        "시뮬레이션",
+        "시각화",
+        "추론",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/d76f5236-38db-436f-8e0c-ac894ff2cb0c.png",
+      "subject": "수학",
+      "grade": "초5~중2",
+      "memo": "전개도와 단면을 먼저 예측한 뒤 3D로 접고 잘라 확인하고, 8개 도전 문제와 해설로 개념을 정리하는 수업에 활용합니다. 교사 도구에서 문제 세트를 고르고 학습지를 인쇄할 수 있습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "5-6",
+        "1-2"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "접기·자르기 조작",
+        "관찰",
+        "근거 설명",
+        "문제 적용"
+      ],
+      "createdAt": "2026-10-27T23:30:04.611Z",
+      "updatedAt": "2026-10-27T23:30:04.611Z"
+    },
+    {
+      "id": "412c6b54-75ea-42a3-8c7f-654bd203631d",
+      "title": "OrbitLab — 지구·달·태양 탐구실",
+      "summary": "초5~중3 학생이 지구의 자전·공전과 자전축 기울기, 달의 위상과 식 현상을 3D로 예측·관찰하는 과학 탐구 앱",
+      "url": "https://wbmaker2.github.io/orbitlab/",
+      "githubUrl": "https://github.com/WBmaker2/orbitlab",
+      "tags": [
+        "과학",
+        "관찰",
+        "시뮬레이션",
+        "탐구",
+        "시각화",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/412c6b54-75ea-42a3-8c7f-654bd203631d.png",
+      "subject": "과학·지구과학",
+      "grade": "초5~중3",
+      "memo": "계절·달의 위상·식 현상 단원에서 학생이 예측을 먼저 제출한 뒤 시간과 시점을 바꾸며 관찰하고, 정답 설명으로 개념을 정리하는 미션 수업에 사용합니다. 교사 모드에서 진행 상황을 확인하고 워크시트를 인쇄할 수 있습니다.",
+      "subjects": [
+        "과학",
+        "지구과학"
+      ],
+      "gradeBands": [
+        "5-6",
+        "3-4"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "시간·시점 조작",
+        "관찰",
+        "설명",
+        "적용"
+      ],
+      "createdAt": "2026-10-27T13:59:31.663Z",
+      "updatedAt": "2026-10-27T13:59:31.663Z"
+    },
+    {
+      "id": "f0d2fecf-b354-4a40-a9da-87a357ce84df",
+      "title": "BlockBot — 블록으로 움직이는 로봇",
+      "summary": "초4~중3 학생이 블록을 조립해 3D 격자 위 로봇을 움직이며 순차·반복·선택 구조와 디버깅을 익히는 코딩 학습 게임입니다.",
+      "url": "https://wbmaker2.github.io/blockbot/",
+      "githubUrl": "https://github.com/WBmaker2/blockbot",
+      "tags": [
+        "수학",
+        "코딩",
+        "게임형",
+        "수업",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/f0d2fecf-b354-4a40-a9da-87a357ce84df.png",
+      "subject": "정보·수학",
+      "grade": "초4~중3",
+      "memo": "한 차시에 도전 1~2개를 골라 경로를 예측한 뒤 블록을 조립하고, 한 단계 실행으로 충돌 지점을 확인하며 다시 풀게 합니다. 선생님 화면에서 도전 선택, 해답·설명 확인, 진행 기록 초기화, 학습지 인쇄를 할 수 있습니다.",
+      "subjects": [
+        "정보",
+        "수학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "예측",
+        "블록 조립",
+        "실행·관찰",
+        "디버깅",
+        "최적화"
+      ],
+      "createdAt": "2026-10-27T12:07:29.432Z",
+      "updatedAt": "2026-10-27T12:07:29.432Z"
+    },
+    {
+      "id": "e97e67e6-d5a5-45af-ba62-be724ad339e2",
+      "title": "CoasterLab — 롤러코스터 에너지 랩",
+      "summary": "중·고등학생이 롤러코스터 트랙을 직접 설계하고 주행시키며 위치에너지, 운동에너지, 마찰, 원운동, G-force를 그래프로 확인하는 물리 시뮬레이션입니다. 5개 미션에서 예측하고 실행한 뒤 그래프를 근거로 설명하고 트랙을 다시 설계합니다.",
+      "url": "https://wbmaker2.github.io/coasterlab/",
+      "githubUrl": "https://github.com/WBmaker2/coasterlab",
+      "tags": [
+        "과학",
+        "관찰",
+        "시뮬레이션",
+        "그래프",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/e97e67e6-d5a5-45af-ba62-be724ad339e2.png",
+      "subject": "물리",
+      "grade": "중2~고2",
+      "memo": "중2~고2 물리 수업에서 트랙을 설계하고 미션별 결과를 예측한 뒤 주행시켜, 에너지·속도·G-force 그래프를 읽고 근거를 설명하는 활동에 사용합니다. 교사용 화면에서 미션 선택, 정답·해설 확인, 진도 초기화, 워크시트 인쇄가 가능합니다.",
+      "subjects": [
+        "물리"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "트랙 설계",
+        "실행·관찰",
+        "그래프 해석",
+        "근거 설명",
+        "재설계"
+      ],
+      "createdAt": "2026-10-27T11:11:49.685Z",
+      "updatedAt": "2026-10-27T11:11:49.685Z"
+    },
     {
       "id": "6ef75d1a-2145-4cfa-b1cb-e99b58622e76",
       "title": "M3.1 FLASH / 3D BENCH",
@@ -5835,5 +6092,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 250
+  "catalogRevision": 256
 }
