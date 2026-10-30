@@ -26,6 +26,11 @@
       "sha256": "44a5cd6f97fc5cd6471b915eeb4eabdb8f11c5555c2b6d8966ae3e46627b99a0"
     },
     {
+      "path": "/app-thumbnails/0bf360eb-afb1-4366-a738-926a08c451c5.png",
+      "size": 297408,
+      "sha256": "f0ba787bdfb89de9302e7acb5e2510552c0c3310f3f252da7c57eb062275bc19"
+    },
+    {
       "path": "/app-thumbnails/0c78d909-09c7-47d2-ba95-7e9b6e53ad5f.png",
       "size": 35255,
       "sha256": "6ed215228bd89fe801a309b8e78f9ce1df0d8e6826dedea1bc8c8b2e1f3e38c4"
@@ -46,6 +51,11 @@
       "sha256": "58a9f99413f7001c628b88286e31fc52679ffaf8e379d4e4389923cb330a095f"
     },
     {
+      "path": "/app-thumbnails/134713bb-192e-4606-9c3a-3de9fb05d90c.jpg",
+      "size": 196563,
+      "sha256": "9735a384854ee914dc17edb527a89d56cc998969b27093ffc54037f8f14d1af8"
+    },
+    {
       "path": "/app-thumbnails/13db4453-420a-447c-a4e9-67d330852ee5.png",
       "size": 215552,
       "sha256": "4fd15a733575e4b5b2cf9e2be46698afe2a26f658450053298bddb710adef960"
@@ -54,6 +64,11 @@
       "path": "/app-thumbnails/14bd29ae-72e1-487d-8fb4-723c3b9666d1.png",
       "size": 36049,
       "sha256": "9dcbb40bb8dad579518bbf33a2bce892c25ea58f1fd8bbb51126602464547520"
+    },
+    {
+      "path": "/app-thumbnails/1665eff2-42b0-420c-871a-31892997b0bc.png",
+      "size": 582257,
+      "sha256": "b1a9102966b72f88532a9769d503a88525fedf2f8648dca26a12c37475496c6c"
     },
     {
       "path": "/app-thumbnails/16924ed0-0b29-46b4-b704-3846b69a3269.png",
@@ -124,6 +139,11 @@
       "path": "/app-thumbnails/33693835-e636-4405-ab06-3400352020fd.png",
       "size": 118198,
       "sha256": "2b0518064ef137737c1d9aff6f8cda12c79990ebebd477a1b38047b460c2949d"
+    },
+    {
+      "path": "/app-thumbnails/344753b7-fbf7-4626-b874-4ca26602775e.png",
+      "size": 300725,
+      "sha256": "c851a2c80cc5728f25b4e0a21523c7976639f3e8933cdfbfc0b2680345bccb16"
     },
     {
       "path": "/app-thumbnails/373e131a-54eb-41a6-852f-aa54431b29c8.png",
@@ -269,6 +289,11 @@
       "path": "/app-thumbnails/60646b44-ffef-45f9-a774-65df50211a9a.png",
       "size": 272783,
       "sha256": "a9e1b63fee233d350fdecaaca0466ef8d4984c07e003c9b82292c2af750b57ac"
+    },
+    {
+      "path": "/app-thumbnails/60a17df9-8c45-4c45-95b9-45059b9c342a.png",
+      "size": 433539,
+      "sha256": "a264a4afa726358a86d4eb1e19fdd40ca7ba4b60cbf9c2c4978b77d9cfb2a7b1"
     },
     {
       "path": "/app-thumbnails/624e768f-411c-4521-90aa-fd4c8fa18be8.png",
@@ -434,6 +459,11 @@
       "path": "/app-thumbnails/8b08bf12-471a-4b2d-8966-1d2628eead80.png",
       "size": 103949,
       "sha256": "1dad4beea769c9c131156f2893c03ffd6814c8cfc574bbb90c50f0ecb9f45022"
+    },
+    {
+      "path": "/app-thumbnails/8bd055b0-ef32-44d5-aa8c-2722cbec141f.png",
+      "size": 104165,
+      "sha256": "30b1c2ffa6c0db535a2011a474875c89b37cc78f7482b73f3dbf00ddfac0a3e0"
     },
     {
       "path": "/app-thumbnails/8ce3212a-1d5a-4987-8a51-bc6ecdb96324.png",
@@ -616,6 +646,11 @@
       "sha256": "b3e0148b44bde4cc762fe0b24fecc8332404dd21aa5b4bd1b2c259016a680467"
     },
     {
+      "path": "/app-thumbnails/c79e9e0d-6387-415b-95af-b80d5020542f.png",
+      "size": 357702,
+      "sha256": "167a1a0bf08b17873270788ec9619030030d13115925ceb8a714e23aa5ff35f5"
+    },
+    {
       "path": "/app-thumbnails/c7de79fb-516a-4167-9d21-ba282a2cf5de.png",
       "size": 81138,
       "sha256": "24af47df218af556ec76a0e22b3929dbfe0f801033db7f5ae43a2cf6ae47d16e"
@@ -767,9 +802,275 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-10-28T00:30:26.500Z",
-  "appCount": 153,
+  "generatedAt": "2026-10-30T04:35:24.250Z",
+  "appCount": 160,
   "apps": [
+    {
+      "id": "8bd055b0-ef32-44d5-aa8c-2722cbec141f",
+      "title": "VoltWorks 전기 회로 작업대",
+      "summary": "중·고등학생이 전지·전구·저항·스위치·전류계·전압계를 작업대에 놓고 직렬·병렬 회로를 만들며 전압·전류·전력과 전구 밝기를 측정하는 교육용 회로 시뮬레이터입니다. 6개 미션과 교사용 정답·학습지를 제공합니다.",
+      "url": "https://wbmaker2.github.io/voltworks/",
+      "githubUrl": "https://github.com/WBmaker2/voltworks",
+      "tags": [
+        "과학",
+        "전기회로",
+        "시뮬레이션",
+        "실험",
+        "측정",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/8bd055b0-ef32-44d5-aa8c-2722cbec141f.png",
+      "subject": "물리·과학",
+      "grade": "초6~고2",
+      "memo": "직렬·병렬 회로, 전류 보존, 계측기 연결, 단락, 전압 분배 미션을 예측→회로 제작→측정→설명 순서로 진행합니다. 교사용 화면에서 정답 공개·진행 초기화·학습지 인쇄를 활용합니다.",
+      "subjects": [
+        "물리",
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6",
+        "1-2"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "회로 구성",
+        "측정",
+        "근거 기록",
+        "설명",
+        "재검증"
+      ],
+      "createdAt": "2026-10-30T04:02:22.314Z",
+      "updatedAt": "2026-10-30T04:02:22.314Z"
+    },
+    {
+      "id": "344753b7-fbf7-4626-b874-4ca26602775e",
+      "title": "TrussLab — 트러스 구조 실험실",
+      "summary": "중3~고2 학생이 격자 위에 트러스를 짓고 하중을 걸어 인장·압축·좌굴·파괴를 직접 확인하는 2D 구조 설계 실험실입니다. 6개 미션과 교사용 정답·활동지를 제공합니다.",
+      "url": "https://wbmaker2.github.io/trusslab/",
+      "githubUrl": "https://github.com/WBmaker2/trusslab",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "탐구",
+        "관찰",
+        "추론",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/344753b7-fbf7-4626-b874-4ca26602775e.png",
+      "subject": "물리·과학",
+      "grade": "중3~고2",
+      "memo": "중3~고2 과학·물리 수업에서 삼각형 안정 미션으로 네모 구조의 불안정을 예측한 뒤, 격자에 대각선을 넣어 안정화하고 하중 시험으로 첫 파괴 부재와 T/C·활용률을 확인합니다. 교사용에서 정답 표시·프리셋·진행 초기화·A4 활동지 인쇄를 활용합니다.",
+      "subjects": [
+        "물리",
+        "과학"
+      ],
+      "gradeBands": [
+        "3-4",
+        "1-2"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "설계",
+        "하중 시험",
+        "근거 읽기",
+        "설명"
+      ],
+      "createdAt": "2026-10-30T02:00:04.532Z",
+      "updatedAt": "2026-10-30T02:00:04.532Z"
+    },
+    {
+      "id": "c79e9e0d-6387-415b-95af-b80d5020542f",
+      "title": "TerraShift — 판구조 시간여행",
+      "summary": "중1~고2 학생이 3D 지구본에서 판 경계를 고르고 0-200Myr 변화를 관찰하며 해구·산맥·화산호의 원인을 탐구하는 지구과학 시뮬레이션",
+      "url": "https://wbmaker2.github.io/terrashift/",
+      "githubUrl": "https://github.com/WBmaker2/terrashift",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "관찰",
+        "탐구",
+        "수업",
+        "실험"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/c79e9e0d-6387-415b-95af-b80d5020542f.png",
+      "subject": "과학",
+      "grade": "중1~고2",
+      "memo": "중1~고2 지구과학 판구조 단원에서 도입 5분+탐구 15분+비교·정리 20분 흐름으로 사용. 미션 예측→관찰→설명 순서와 교사 모드 장면 공유·활동지 인쇄 활용.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "관찰",
+        "비교",
+        "설명"
+      ],
+      "createdAt": "2026-10-29T12:54:33.070Z",
+      "updatedAt": "2026-10-29T12:54:33.070Z"
+    },
+    {
+      "id": "0bf360eb-afb1-4366-a738-926a08c451c5",
+      "title": "나만의 작은 생태계 균형 시뮬레이터",
+      "summary": "초등 5~6학년 과학 '생물과 환경' 단원을 위한 웹앱으로, 생산자·소비자의 먹고 먹히는 관계와 Boids 알고리즘 기반 자율 행동 및 로트카-볼테라 평형을 실시간 시계열 그래프로 탐구합니다.",
+      "url": "https://wbmaker2.github.io/ecosystem-balance-simulator/",
+      "githubUrl": "https://github.com/WBmaker2/ecosystem-balance-simulator",
+      "tags": [
+        "과학",
+        "관찰",
+        "시뮬레이션",
+        "실험",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/0bf360eb-afb1-4366-a738-926a08c451c5.png",
+      "subject": "과학",
+      "grade": "초등 5~6학년",
+      "memo": "초등 5~6학년 과학 '생태계 평형' 차시에서 정적 피라미드 대신 자율 에이전트(Boids)의 먹고 먹히는 상호작용과 환경 변화(가뭄, 포식자 제거)에 따른 로트카-볼테라 평형 파동을 실시간 그래프로 탐구하는 40분 차시 시뮬레이터",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "조건 설정",
+        "관찰·탐구",
+        "데이터 분석",
+        "퀴즈 성찰"
+      ],
+      "createdAt": "2026-10-29T10:26:50.284Z",
+      "updatedAt": "2026-10-29T10:26:50.284Z"
+    },
+    {
+      "id": "60a17df9-8c45-4c45-95b9-45059b9c342a",
+      "title": "ChanceWorks",
+      "summary": "갈튼 보드, 주사위, 동전, 돌림판, 기대값 실험으로 확률과 큰 수의 법칙을 탐구하는 3D 확률 실험실",
+      "url": "https://wbmaker2.github.io/chanceworks/",
+      "githubUrl": "https://github.com/WBmaker2/chanceworks",
+      "tags": [
+        "수학",
+        "시뮬레이션",
+        "관찰",
+        "그래프",
+        "시각화",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/60a17df9-8c45-4c45-95b9-45059b9c342a.png",
+      "subject": "수학",
+      "grade": "초등 5학년~고등 2학년",
+      "memo": "교사 모드에서 미션 진행·정답 보기·워크시트 인쇄를 지원합니다. 브라우저에서 오프라인으로 사용할 수 있습니다.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "secondary",
+        "5-6",
+        "1-2"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "실험",
+        "비교",
+        "설명",
+        "연결"
+      ],
+      "createdAt": "2026-10-29T00:19:18.543Z",
+      "updatedAt": "2026-10-29T00:19:18.543Z"
+    },
+    {
+      "id": "134713bb-192e-4606-9c3a-3de9fb05d90c",
+      "title": "CellScope — 세포 탐구 실험실",
+      "summary": "초5~중3 학생이 동물·식물세포를 3D로 돌리고 절단면으로 잘라 소기관을 관찰하며, 삼투와 세포 분열을 직접 조작해 예측·관찰·설명하는 과학 실험실입니다.",
+      "url": "https://wbmaker2.github.io/cellscope/",
+      "githubUrl": "https://github.com/WBmaker2/cellscope",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "관찰",
+        "실험",
+        "탐구",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/134713bb-192e-4606-9c3a-3de9fb05d90c.jpg",
+      "subject": "과학·생명과학",
+      "grade": "초5~중3",
+      "memo": "세포 구조·삼투·분열 단원에서 동물·식물세포를 비교하고, 삼투와 분열은 실험으로 직접 확인하는 수업에 사용합니다. 미션은 예측→관찰→설명 순서로 진행하며, 교사용 화면에서 정답 확인·진행 초기화·학습지 인쇄를 할 수 있습니다.",
+      "subjects": [
+        "과학",
+        "생명과학"
+      ],
+      "gradeBands": [
+        "5-6",
+        "3-4"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "설명",
+        "정리"
+      ],
+      "createdAt": "2026-10-28T13:04:39.000Z",
+      "updatedAt": "2026-10-28T13:04:39.000Z"
+    },
+    {
+      "id": "1665eff2-42b0-420c-871a-31892997b0bc",
+      "title": "BondForge — 분자 구조 실험실",
+      "summary": "중2~고2 학생이 원자를 놓고 결합을 만들며 VSEPR 분자 기하, 결합 각도, 극성, 구조 이성질체를 예측하고 3D로 확인하는 화학 실험실입니다. 6개 미션과 교사용 정답·워크시트를 제공합니다.",
+      "url": "https://wbmaker2.github.io/bondforge/",
+      "githubUrl": "https://github.com/WBmaker2/bondforge",
+      "tags": [
+        "과학",
+        "각도",
+        "관찰",
+        "시뮬레이션",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/1665eff2-42b0-420c-871a-31892997b0bc.png",
+      "subject": "과학·화학",
+      "grade": "중2~고2",
+      "memo": "미션 카드에서 분자 모양·극성을 먼저 예측한 뒤 3D 제작대로 H₂O·CO₂·C₄H₁₀ 등을 만들고, 점검 카드의 전자 영역·결합 각도·쌍극자 근거를 확인하며 정리하는 20~30분 수업에 사용합니다. 교사 모드에서 정답·해설을 켜고 워크시트를 인쇄해 진행할 수 있습니다.",
+      "subjects": [
+        "과학",
+        "화학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "구조 제작",
+        "3D 관찰",
+        "전자 영역 점검",
+        "비교",
+        "근거 기록"
+      ],
+      "createdAt": "2026-10-28T12:34:26.741Z",
+      "updatedAt": "2026-10-28T12:34:26.741Z"
+    },
     {
       "id": "526cf233-8d64-4399-ae1a-87886a262e36",
       "title": "RayLab — 광학 작업대",
@@ -6092,5 +6393,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 256
+  "catalogRevision": 263
 }
