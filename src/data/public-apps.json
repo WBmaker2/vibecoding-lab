@@ -81,6 +81,11 @@
       "sha256": "ab2fb35f5e93607d69ffd45689871d878517bc03a2f74f6c0039ed06d7398ccc"
     },
     {
+      "path": "/app-thumbnails/1882fca2-1690-442e-97fb-0040cbbbb1b4.png",
+      "size": 117353,
+      "sha256": "375fac2ec9fc2c9870cdb56513bb51623ae81f9d4a71d60c0d1a8504915bc708"
+    },
+    {
       "path": "/app-thumbnails/1c13b710-5da9-4f8d-be49-c7b6af20fedb.png",
       "size": 25089,
       "sha256": "c88f2f209fe6002e318ff3289bfbd86f755f4046cedebc7fb0c7bd3ae5d9e45d"
@@ -426,6 +431,11 @@
       "sha256": "3c251a47488a3c6d0085d90dc1141e4f16869fbcf1a0f26439b09516680bf89f"
     },
     {
+      "path": "/app-thumbnails/84a86c75-df6f-4fa1-8e24-ac23fa0a95fd.png",
+      "size": 162468,
+      "sha256": "a3603131902de39e09d5094bc38b01c8727e06ebecdc899285f8824d27a80b55"
+    },
+    {
       "path": "/app-thumbnails/86c0c19a-c4bf-4ef1-822b-75162b385271.png",
       "size": 99093,
       "sha256": "5a0112b75d672bb55da90c96c35fd94eea92e71fbcc1bdc650db5ac5256c0628"
@@ -564,6 +574,11 @@
       "path": "/app-thumbnails/a569fbf0-1e50-4286-aef8-b0e38ea6aa8d.png",
       "size": 211543,
       "sha256": "904a8f23aebe06393f398a42c07b84206a7daa9257cb1fa0ef82454d9ca5252b"
+    },
+    {
+      "path": "/app-thumbnails/a7e4fca5-6d45-4186-8874-66c2022544d0.png",
+      "size": 73352,
+      "sha256": "2a5fa52380b458dd35f630e87390b640bae0ce3bcf3c72267994731722e7c2a2"
     },
     {
       "path": "/app-thumbnails/a98ac443-f235-42c9-9bca-00a762c83feb.jpg",
@@ -802,9 +817,116 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-10-30T04:35:24.250Z",
-  "appCount": 160,
+  "generatedAt": "2026-10-31T11:55:59.935Z",
+  "appCount": 163,
   "apps": [
+    {
+      "id": "a7e4fca5-6d45-4186-8874-66c2022544d0",
+      "title": "PDF Handout Converter",
+      "summary": "가로 프레젠테이션 PDF를 A4 세로 유인물로 변환하는 웹 도구",
+      "url": "https://wbmaker2.github.io/pdf-handout-converter/",
+      "githubUrl": "https://github.com/WBmaker2/pdf-handout-converter",
+      "tags": [
+        "수학",
+        "도구",
+        "자료 탐색",
+        "시뮬레이션"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/a7e4fca5-6d45-4186-8874-66c2022544d0.png",
+      "subject": "정보·수학",
+      "grade": "전학년",
+      "memo": "수업 자료 PDF를 A4 유인물로 변환할 때 사용. 브라우저에서 바로 실행.",
+      "subjects": [
+        "정보",
+        "수학"
+      ],
+      "gradeBands": [
+        "all"
+      ],
+      "audience": "mixed",
+      "interactionType": "utility",
+      "learningProcess": [
+        "업로드",
+        "배치 선택",
+        "변환",
+        "다운로드"
+      ],
+      "createdAt": "2026-10-31T11:51:53.494Z",
+      "updatedAt": "2026-10-31T11:51:53.494Z"
+    },
+    {
+      "id": "1882fca2-1690-442e-97fb-0040cbbbb1b4",
+      "title": "가상 물리 실험실",
+      "summary": "중2~고2 학생이 포물선·진자/용수철·파동 3종 실험대에서 변수를 바꾸고 예측과 실측을 실시간 그래프로 비교하는 가상 물리 실험실",
+      "url": "https://wbmaker2.github.io/physics-lab/",
+      "githubUrl": "https://github.com/WBmaker2/physics-lab",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "실험",
+        "관찰",
+        "수업",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/1882fca2-1690-442e-97fb-0040cbbbb1b4.png",
+      "subject": "과학",
+      "grade": "중2~고2",
+      "memo": "예측-발사 활동과 도전 카드로 수업하고, 교사모드 학습지를 인쇄해 정리한다",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "근거 기록",
+        "재검증"
+      ],
+      "createdAt": "2026-10-30T14:11:31.176Z",
+      "updatedAt": "2026-10-30T14:11:31.176Z"
+    },
+    {
+      "id": "84a86c75-df6f-4fa1-8e24-ac23fa0a95fd",
+      "title": "Solar System Lab",
+      "summary": "태양-지구-달의 공전·자전·계절·달의 위상·일식과 월식을 3D로 직접 조작하며 탐구하는 과학 시뮬레이션(초5~중3)",
+      "url": "https://wbmaker2.github.io/solar-system-lab/",
+      "githubUrl": "https://github.com/WBmaker2/solar-system-lab",
+      "tags": [
+        "시뮬레이션",
+        "수업",
+        "과학",
+        "관찰"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/84a86c75-df6f-4fa1-8e24-ac23fa0a95fd.png",
+      "subject": "과학",
+      "grade": "초5~중3",
+      "memo": "중등 계절 단원 도입 15분: 기울기 실험실로 계절의 까닭을 예측·확인하고, 보름달 날짜 찾기 퀴즈로 마무리합니다.",
+      "subjects": [
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6",
+        "3-4"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "시간 조작·관찰",
+        "근거 기록",
+        "퀴즈로 확인"
+      ],
+      "createdAt": "2026-10-30T13:18:40.988Z",
+      "updatedAt": "2026-10-30T13:18:40.988Z"
+    },
     {
       "id": "8bd055b0-ef32-44d5-aa8c-2722cbec141f",
       "title": "VoltWorks 전기 회로 작업대",
@@ -6393,5 +6515,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 263
+  "catalogRevision": 266
 }
