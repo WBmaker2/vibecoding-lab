@@ -216,6 +216,11 @@
       "sha256": "a467b691da45c5a60bcce415cb61854c97e146430786fd56a5bd56a5ee09f9c5"
     },
     {
+      "path": "/app-thumbnails/43ad07fb-ffc9-46ca-a16f-7de54f0ae6ba.png",
+      "size": 680348,
+      "sha256": "4dcc93ad3ceda0db7ab3ec63ed4926e1c8abc516439bf2042e393faa6a121928"
+    },
+    {
       "path": "/app-thumbnails/47acd11b-2f45-4029-8813-3add585cd1aa.png",
       "size": 166995,
       "sha256": "00bc7196a5c04c5f24411cac7a5f76922aaca0b04a5a386b859aa5b396a231ae"
@@ -359,6 +364,11 @@
       "path": "/app-thumbnails/736cd0af-e7f1-44e3-9780-80770b3e8f09.png",
       "size": 230934,
       "sha256": "5ad51a1852a73cd78fcce12397ea554c4908a213243a9ce9e0f86a26804513ba"
+    },
+    {
+      "path": "/app-thumbnails/738a1171-fda1-4380-b0e4-014ff8de0c22.png",
+      "size": 105300,
+      "sha256": "34b0f80d71532860353228e23e213e0f6c20e69a580e515cb28f4d4c206bbbf9"
     },
     {
       "path": "/app-thumbnails/73f0149f-3f28-4128-af24-8ea04d42c2f2.png",
@@ -661,6 +671,11 @@
       "sha256": "b3e0148b44bde4cc762fe0b24fecc8332404dd21aa5b4bd1b2c259016a680467"
     },
     {
+      "path": "/app-thumbnails/c508fcee-667e-4831-a8f4-14a2ce718ba8.png",
+      "size": 126494,
+      "sha256": "18d6c485cd86ff509f4adf1d8d8c9a641d64315d878275687ba61cff46bd1518"
+    },
+    {
       "path": "/app-thumbnails/c79e9e0d-6387-415b-95af-b80d5020542f.png",
       "size": 357702,
       "sha256": "167a1a0bf08b17873270788ec9619030030d13115925ceb8a714e23aa5ff35f5"
@@ -699,6 +714,11 @@
       "path": "/app-thumbnails/ce06a047-2112-4d52-b1a5-fb5858636610.png",
       "size": 76684,
       "sha256": "5ed802f3bf838fdaa1f617e789ff1b6f68f4fe8e3626dc5c3c2e9729cce79f22"
+    },
+    {
+      "path": "/app-thumbnails/d0116291-bdc1-4a67-a5db-3b4dfcfc3107.png",
+      "size": 345527,
+      "sha256": "299abd77aa78618daf70c312e5736fc466a72bf7562405df1a64a291c1ffee54"
     },
     {
       "path": "/app-thumbnails/d093f79b-8672-4498-8f39-b65397fff216.png",
@@ -817,9 +837,162 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-10-31T11:55:59.935Z",
-  "appCount": 163,
+  "generatedAt": "2026-11-04T05:05:23.240Z",
+  "appCount": 167,
   "apps": [
+    {
+      "id": "738a1171-fda1-4380-b0e4-014ff8de0c22",
+      "title": "Algo Eco Sim — 알고리즘 & 생태계 시뮬",
+      "summary": "초6~중3 학생이 버블·퀵·머지 정렬과 BFS·DFS·A* 길찾기를 나란히 비교하고, 여우·토끼·풀 생태계의 개체수 변화와 이론 곡선을 함께 관찰하는 정보·과학 도구",
+      "url": "https://wbmaker2.github.io/algo-eco-sim/",
+      "githubUrl": "https://github.com/WBmaker2/algo-eco-sim",
+      "tags": [
+        "과학",
+        "수학",
+        "시뮬레이션",
+        "탐구",
+        "관찰",
+        "융합"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/738a1171-fda1-4380-b0e4-014ff8de0c22.png",
+      "subject": "정보·과학",
+      "grade": "초6~중3",
+      "memo": "정보 수업에서 정렬·길찾기 알고리즘을 나란히 비교하고, 과학 수업에서 여우-토끼-풀 생태계의 개체수 파동과 이론 곡선을 함께 관찰하는 20~30분 활동형 수업에 활용.",
+      "subjects": [
+        "정보",
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6",
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조건 설정",
+        "실행·관찰",
+        "비교·설명",
+        "재검증"
+      ],
+      "createdAt": "2026-11-04T05:01:36.507Z",
+      "updatedAt": "2026-11-04T05:01:36.507Z"
+    },
+    {
+      "id": "c508fcee-667e-4831-a8f4-14a2ce718ba8",
+      "title": "Math Geometry Playground — 3D 수학 도형 놀이터",
+      "summary": "초4~중3 학생이 정육면체·원뿔·구 등 8종 입체를 펼쳐 보며 겉넓이와 부피를 익히고, 단면 자르기와 함수 그래프를 계수 슬라이더로 직접 조작하는 3D 수학 수업 도구",
+      "url": "https://wbmaker2.github.io/math-geometry-playground/",
+      "githubUrl": "https://github.com/WBmaker2/math-geometry-playground",
+      "tags": [
+        "수학",
+        "도형",
+        "시뮬레이션",
+        "시각화",
+        "그래프",
+        "도구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/c508fcee-667e-4831-a8f4-14a2ce718ba8.png",
+      "subject": "수학",
+      "grade": "초4~중3",
+      "memo": "4~9학년 수업에서 정육면체·원뿔·구 등 8종 입체의 전개도·겉넓이·부피와 단면, 함수 그래프를 3D로 직접 조작하며 배우는 도구. 20~30분 수업 활용.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "입체 선택",
+        "전개도 펼치기 관찰",
+        "겉넓이·부피 확인",
+        "단면 예측",
+        "함수 계수 조작",
+        "결과 확인"
+      ],
+      "createdAt": "2026-11-03T22:38:31.872Z",
+      "updatedAt": "2026-11-03T22:38:31.872Z"
+    },
+    {
+      "id": "d0116291-bdc1-4a67-a5db-3b4dfcfc3107",
+      "title": "인체 탐험 3D 아틀라스",
+      "summary": "초5~중3 학생이 피부→근육→골격→장기→신경/혈관 레이어를 벗겨 보며 13개 장기의 기능과 소화·순환·호흡 과정을 3D로 탐험하는 생물 수업 도구",
+      "url": "https://wbmaker2.github.io/human-body-atlas/",
+      "githubUrl": "https://github.com/WBmaker2/human-body-atlas",
+      "tags": [
+        "과학",
+        "관찰",
+        "시뮬레이션",
+        "시각화",
+        "수업",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/d0116291-bdc1-4a67-a5db-3b4dfcfc3107.png",
+      "subject": "생물·과학",
+      "grade": "초5~중3",
+      "memo": "레이어 토글로 인체 구조를 벗겨 보고, 장기 클릭으로 기능·질병 카드를 확인하며, 심장박동·호흡·소화 투어로 순환·호흡·소화 과정을 카메라로 따라가는 생물 수업에 사용합니다.",
+      "subjects": [
+        "생물",
+        "과학"
+      ],
+      "gradeBands": [
+        "5-6",
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "레이어 벗기기",
+        "장기 선택",
+        "애니메이션 관찰",
+        "퀴즈 풀이",
+        "투어 따라가기"
+      ],
+      "createdAt": "2026-11-03T09:30:50.304Z",
+      "updatedAt": "2026-11-03T09:30:50.304Z"
+    },
+    {
+      "id": "43ad07fb-ffc9-46ca-a16f-7de54f0ae6ba",
+      "title": "3D 분자 표본실",
+      "summary": "중2~고1 학생이 3D로 원자를 조립해 분자를 만들고, 상태변화와 화학반응을 관찰하는 화학 시뮬레이션",
+      "url": "https://wbmaker2.github.io/molecule-lab/",
+      "githubUrl": "https://github.com/WBmaker2/molecule-lab",
+      "tags": [
+        "과학",
+        "시뮬레이션",
+        "관찰",
+        "실험",
+        "수업",
+        "탐구"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/43ad07fb-ffc9-46ca-a16f-7de54f0ae6ba.png",
+      "subject": "과학·화학",
+      "grade": "중2~고1",
+      "memo": "목표 분자 조립 10분→상태변화 관찰 10분→퀴즈 정리 5분 흐름에 사용",
+      "subjects": [
+        "과학",
+        "화학"
+      ],
+      "gradeBands": [
+        "1-2"
+      ],
+      "audience": "mixed",
+      "interactionType": "simulation",
+      "learningProcess": [
+        "예측",
+        "조립·관찰",
+        "기록·설명",
+        "확인 문제"
+      ],
+      "createdAt": "2026-11-02T13:08:34.886Z",
+      "updatedAt": "2026-11-02T13:08:34.886Z"
+    },
     {
       "id": "a7e4fca5-6d45-4186-8874-66c2022544d0",
       "title": "PDF Handout Converter",
@@ -6515,5 +6688,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 266
+  "catalogRevision": 270
 }
