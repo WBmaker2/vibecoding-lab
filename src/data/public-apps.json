@@ -207,8 +207,8 @@
     },
     {
       "path": "/app-thumbnails/424c6d52-5aad-4f0e-bfc2-5f06fefcb30e.png",
-      "size": 363794,
-      "sha256": "58384e54cb57dd3fb2290c635920086f71aa0a15b77b7a007c96d41c9347eff9"
+      "size": 186096,
+      "sha256": "5eaf41b8e56456e5fff5a05056e004987f2390149fdca45c25cd085b888abda2"
     },
     {
       "path": "/app-thumbnails/42b8f202-db48-42f6-a8aa-e35192687889.png",
@@ -219,6 +219,11 @@
       "path": "/app-thumbnails/43ad07fb-ffc9-46ca-a16f-7de54f0ae6ba.png",
       "size": 680348,
       "sha256": "4dcc93ad3ceda0db7ab3ec63ed4926e1c8abc516439bf2042e393faa6a121928"
+    },
+    {
+      "path": "/app-thumbnails/4754e9e1-f4d1-471f-8a03-85dc04fe4e3b.png",
+      "size": 77421,
+      "sha256": "0815e5c4ed4e398af62c9334dedf806e3698a86add32977da304f173e6c49eba"
     },
     {
       "path": "/app-thumbnails/47acd11b-2f45-4029-8813-3add585cd1aa.png",
@@ -351,6 +356,11 @@
       "sha256": "a34bf2435deed9dcf0a690e2eb743725431116e9998c13343b20773f48b84e49"
     },
     {
+      "path": "/app-thumbnails/6d4c9bc0-4094-4544-acb2-7d0716f56d52.png",
+      "size": 119846,
+      "sha256": "414f4f2791d0931d4e3dbceef6ae14c8142efe0c03cd957fae472946f3b57918"
+    },
+    {
       "path": "/app-thumbnails/6ef75d1a-2145-4cfa-b1cb-e99b58622e76.png",
       "size": 277363,
       "sha256": "4eed1c8817cdcf4c627accab4d6f80387e4b3b472da75f8cb682b2951055d0cd"
@@ -419,6 +429,11 @@
       "path": "/app-thumbnails/7b66f642-63da-4389-bce4-35e5d708b6d0.png",
       "size": 318264,
       "sha256": "af8d0e74358d6b879d15e8c68ff383618f8b6df0952cbe4b14d12c3df46109c2"
+    },
+    {
+      "path": "/app-thumbnails/7c453a68-7444-41d4-8dce-23dcd22cc24c.png",
+      "size": 135612,
+      "sha256": "093bb021325a7db95b2be024e4857be9359ad3b58d4b2b8a3291d6fd54858b9e"
     },
     {
       "path": "/app-thumbnails/7cdc3225-e941-4b39-bb38-29e828ed77f0.png",
@@ -676,6 +691,11 @@
       "sha256": "18d6c485cd86ff509f4adf1d8d8c9a641d64315d878275687ba61cff46bd1518"
     },
     {
+      "path": "/app-thumbnails/c68de798-7a37-4ebd-b2af-328476e223e2.png",
+      "size": 182320,
+      "sha256": "048249ab9326e538aacaa6e06eef30d2d242690808f4baa99fa5a1c29f0bb4b4"
+    },
+    {
       "path": "/app-thumbnails/c79e9e0d-6387-415b-95af-b80d5020542f.png",
       "size": 357702,
       "sha256": "167a1a0bf08b17873270788ec9619030030d13115925ceb8a714e23aa5ff35f5"
@@ -729,6 +749,11 @@
       "path": "/app-thumbnails/d13ba3a7-be1e-4aab-bc7a-de1df66bd8f3.jpg",
       "size": 207053,
       "sha256": "c61700e2ce81cdcc24f07e1d71e8b5ebfcacebb71e191f4edae6acc7bef6fd4f"
+    },
+    {
+      "path": "/app-thumbnails/d283637c-4817-41d2-ab82-cee5f4dceb2d.png",
+      "size": 309632,
+      "sha256": "d83b83357bc275df3387297b19beb87a309caf48fbe2ccf61203481bbd215a3e"
     },
     {
       "path": "/app-thumbnails/d2caab9f-3456-4df5-b0b4-da7bb141bf9f.png",
@@ -837,9 +862,229 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-11-04T05:05:23.240Z",
-  "appCount": 167,
+  "generatedAt": "2026-11-09T05:42:57.155Z",
+  "appCount": 172,
   "apps": [
+    {
+      "id": "424c6d52-5aad-4f0e-bfc2-5f06fefcb30e",
+      "title": "AI 원어민 단어 퀴즈 쇼",
+      "summary": "초등 3~6학년 영어 단어 세트로 듣기·말하기·받아쓰기·게임 8종 활동을 여는 수업용 퀴즈 앱 (원어민 MP3 발음 우선)",
+      "url": "https://talking-vacab-quiz.vercel.app",
+      "githubUrl": "https://github.com/WBmaker2/talking-vacab-quiz",
+      "tags": [
+        "영어",
+        "수업",
+        "게임",
+        "실시간",
+        "퀴즈"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/424c6d52-5aad-4f0e-bfc2-5f06fefcb30e.png",
+      "subject": "영어",
+      "grade": "초등 3~6학년",
+      "memo": "교사가 단어 세트를 저장·공개하면 학생은 학교·선생님·학년·단원을 선택해 여러 활동으로 이어서 사용할 수 있습니다.",
+      "subjects": [
+        "영어"
+      ],
+      "gradeBands": [
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "듣기",
+        "말하기",
+        "쓰기",
+        "오답 복습"
+      ],
+      "createdAt": "2026-04-12T11:53:18.249Z",
+      "updatedAt": "2026-11-09T05:32:44.313Z"
+    },
+    {
+      "id": "c68de798-7a37-4ebd-b2af-328476e223e2",
+      "title": "루핑루이 3D",
+      "summary": "비행기로 닭을 잡는 것을 피하며 1인·2인·3인들이 동시에 조종하는 3D 비행 게임",
+      "url": "https://wbmaker2.github.io/looping-louie-3D/",
+      "githubUrl": "https://github.com/WBmaker2/looping-louie-3D",
+      "tags": [
+        "게임",
+        "시뮬레이션",
+        "관찰",
+        "협동",
+        "인터랙티브",
+        "게임형"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/c68de798-7a37-4ebd-b2af-328476e223e2.png",
+      "subject": "정보·체육",
+      "grade": "초등 1~6학년",
+      "memo": "1인/2인/3인 동시 플레이로 타이밍과 협동을 연습하는 20~30분 게임 활동에 활용. 닭 잡기 회피와 패들 튕기기 대결로 집중과 손눈 협응을 돕습니다.",
+      "subjects": [
+        "정보",
+        "체육"
+      ],
+      "gradeBands": [
+        "all",
+        "1-2",
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "collaboration",
+      "learningProcess": [
+        "조종",
+        "timing 조절",
+        "패들 타이밍·협력",
+        "승패 관찰"
+      ],
+      "createdAt": "2026-11-09T04:09:27.431Z",
+      "updatedAt": "2026-11-09T04:09:27.431Z"
+    },
+    {
+      "id": "4754e9e1-f4d1-471f-8a03-85dc04fe4e3b",
+      "title": "코딩 교육 게임",
+      "summary": "블록을 조합해 미션을 해결하며 프로그래밍 사고력을 기르는 초·중학생용 코딩 교육 게임",
+      "url": "https://wbmaker2.github.io/coding-education-game/",
+      "githubUrl": "https://github.com/WBmaker2/coding-education-game",
+      "tags": [
+        "코딩",
+        "게임",
+        "시뮬레이션",
+        "융합",
+        "창의활동"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/4754e9e1-f4d1-471f-8a03-85dc04fe4e3b.png",
+      "subject": "정보·수학",
+      "grade": "초등 3~6학년·중학생",
+      "memo": "수업에서 미션을 풀며 블록 코딩과 프로그래밍 사고력을 연습할 때 사용합니다.",
+      "subjects": [
+        "정보",
+        "수학"
+      ],
+      "gradeBands": [
+        "secondary",
+        "3-4",
+        "5-6"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "문제 이해",
+        "블록 조합",
+        "실행·관찰",
+        "오류 수정",
+        "재도전"
+      ],
+      "createdAt": "2026-11-08T12:41:04.149Z",
+      "updatedAt": "2026-11-08T12:41:04.149Z"
+    },
+    {
+      "id": "7c453a68-7444-41d4-8dce-23dcd22cc24c",
+      "title": "Rush Hour 3D",
+      "summary": "6×6 보드에서 노란 경찰차를 오른쪽 출구로 이동하는 러시아위 3D 퍼즐. 26개 퍼즐을 드래그·방향키 이동과 힌트·해법 재생으로 풀며 초급부터 고급까지 난이도가 높아지는 웹앱",
+      "url": "https://wbmaker2.github.io/rush-hour-3d/",
+      "githubUrl": "https://github.com/WBmaker2/rush-hour-3d",
+      "tags": [
+        "게임",
+        "게임형",
+        "수학",
+        "추론",
+        "시뮬레이션",
+        "인터랙티브"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/7c453a68-7444-41d4-8dce-23dcd22cc24c.png",
+      "subject": null,
+      "grade": null,
+      "memo": "6×6 보드에서 노란 경찰차를 오른쪽 출구로 이동하는 러시아위 퍼즐로, 힌트·해법 재생으로 전략을 확인하고 단계별로 도전했습니다.",
+      "subjects": [],
+      "gradeBands": [],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "관찰",
+        "계획",
+        "이동",
+        "힌트 활용",
+        "재도전"
+      ],
+      "createdAt": "2026-11-08T12:27:02.112Z",
+      "updatedAt": "2026-11-08T12:27:02.112Z"
+    },
+    {
+      "id": "d283637c-4817-41d2-ab82-cee5f4dceb2d",
+      "title": "히스토리 타임라인 빌더",
+      "summary": "학생이 역사 사건 카드를 드래그로 시간순 정렬하고 인과관계를 연결하며 역사적 사고력을 기르는 타임라인 구성 도구",
+      "url": "https://wbmaker2.github.io/history-timeline-builder/",
+      "githubUrl": "https://github.com/WBmaker2/history-timeline-builder",
+      "tags": [
+        "역사",
+        "사회",
+        "시뮬레이션",
+        "도구",
+        "탐구",
+        "창의활동"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/d283637c-4817-41d2-ab82-cee5f4dceb2d.png",
+      "subject": "역사",
+      "grade": "중·고등학교",
+      "memo": "역사 수업에서 사건 카드를 시간순으로 정렬하고 인과관계를 연결하는 활동에 활용. 정답 저장 후 학생 답안과 비교 가능.",
+      "subjects": [
+        "역사"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "mixed",
+      "interactionType": "creation",
+      "learningProcess": [
+        "사건 정리",
+        "시간순 정렬",
+        "인과관계 연결",
+        "비교·검증"
+      ],
+      "createdAt": "2026-11-08T12:10:50.227Z",
+      "updatedAt": "2026-11-08T12:10:50.227Z"
+    },
+    {
+      "id": "6d4c9bc0-4094-4544-acb2-7d0716f56d52",
+      "title": "분수 공작소",
+      "summary": "초등 3~4학년 학생이 분수의 의미·크기 비교·같은 분모 덧셈과 뺄셈을 직접 나누고 모으며 배우는 오프라인 웹앱",
+      "url": "https://wbmaker2.github.io/FractionForge/",
+      "githubUrl": "https://github.com/WBmaker2/FractionForge",
+      "tags": [
+        "수학",
+        "분수",
+        "시뮬레이션",
+        "인터랙티브",
+        "관찰",
+        "수업"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/6d4c9bc0-4094-4544-acb2-7d0716f56d52.png",
+      "subject": "수학",
+      "grade": "초등 3~4학년",
+      "memo": "분수 단원 도입·연습 시 활용. 인터넷 없이 파일 하나로 실행되어 학교 컴퓨터·태블릿에서 그대로 사용 가능.",
+      "subjects": [
+        "수학"
+      ],
+      "gradeBands": [
+        "3-4"
+      ],
+      "audience": "student",
+      "interactionType": "practice",
+      "learningProcess": [
+        "직접 나누기",
+        "크기 비교",
+        "덧셈·뺄셈",
+        "오답 복습"
+      ],
+      "createdAt": "2026-11-07T11:57:40.083Z",
+      "updatedAt": "2026-11-07T11:57:40.083Z"
+    },
     {
       "id": "738a1171-fda1-4380-b0e4-014ff8de0c22",
       "title": "Algo Eco Sim — 알고리즘 & 생태계 시뮬",
@@ -5233,41 +5478,6 @@
       "updatedAt": "2026-07-23T09:14:00.818Z"
     },
     {
-      "id": "424c6d52-5aad-4f0e-bfc2-5f06fefcb30e",
-      "title": "AI 원어민 단어 퀴즈 쇼",
-      "summary": "초등 영어 수업에서 단어 세트를 불러와 듣기·말하기·게임 활동을 바로 여는 수업용 퀴즈 앱",
-      "url": "https://talking-vacab-quiz.vercel.app",
-      "githubUrl": "https://github.com/WBmaker2/talking-vacab-quiz",
-      "tags": [
-        "영어",
-        "수업",
-        "게임",
-        "실시간",
-        "퀴즈"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/424c6d52-5aad-4f0e-bfc2-5f06fefcb30e.png",
-      "subject": "영어",
-      "grade": "초등 3~6학년",
-      "memo": "교사가 단어 세트를 저장·공개하면 학생은 학교·선생님·학년·단원을 선택해 여러 활동으로 이어서 사용할 수 있습니다.",
-      "subjects": [
-        "영어"
-      ],
-      "gradeBands": [
-        "3-4",
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "collaboration",
-      "learningProcess": [
-        "의견 제시",
-        "비교",
-        "협의"
-      ],
-      "createdAt": "2026-04-12T11:53:18.249Z",
-      "updatedAt": "2026-07-23T09:12:51.802Z"
-    },
-    {
       "id": "680f7079-9f3a-4b90-ab32-e418cd40aab9",
       "title": "AI 데이터 품질검사소",
       "summary": "초등 5~6학년 학생이 가상 도서 데이터를 점검하며 데이터 품질과 AI 결과 변화를 체험하는 교육용 시뮬레이션",
@@ -6688,5 +6898,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 270
+  "catalogRevision": 276
 }
