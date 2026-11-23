@@ -266,6 +266,11 @@
       "sha256": "ae8a0f28a75ead97384a156d5ae8576b105e1a91a53266ebe44a73e4e055d7e7"
     },
     {
+      "path": "/app-thumbnails/53bf6e90-72c2-4838-9fbb-8c98288b09cc.png",
+      "size": 216690,
+      "sha256": "e5fd99a00ec9428301a2ce2256af00772b7c131a1e379e06381954ad3f567790"
+    },
+    {
       "path": "/app-thumbnails/5543c36a-42d8-49ba-b2e2-85a2c4f193ea.png",
       "size": 96548,
       "sha256": "f1b1e9bde9afe7bb66fa25a2c6f2acd2105c2928879262244c906d970b3851e7"
@@ -892,9 +897,45 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-11-09T12:13:31.604Z",
-  "appCount": 178,
+  "generatedAt": "2026-11-23T02:26:57.137Z",
+  "appCount": 179,
   "apps": [
+    {
+      "id": "53bf6e90-72c2-4838-9fbb-8c98288b09cc",
+      "title": "Edu-Shorts Studio",
+      "summary": "학교·학원 교사가 로그인이나 API 키 없이 교과 단원 주제를 입력해 4단계 수업 대본·장면 타임라인·9:16 세로 수업 쇼츠 영상을 제작할 수 있는 교육용 스튜디오",
+      "url": "https://wbmaker2.github.io/edu-shorts-studio/",
+      "githubUrl": "https://github.com/WBmaker2/edu-shorts-studio",
+      "tags": [
+        "수업",
+        "도구",
+        "시각화",
+        "인공지능",
+        "형성평가"
+      ],
+      "thumbnailMode": "upload",
+      "thumbnailUrl": "/app-thumbnails/53bf6e90-72c2-4838-9fbb-8c98288b09cc.png",
+      "subject": "교과융합",
+      "grade": "초등학교~고등학교",
+      "memo": "수업 도입 1분 호기심 유발, 핵심 개념 정리, 거꾸로 수업 예습·복습 클립 제작에 활용. 로그인 및 외부 API 키 없이 브라우저 내장 엔진으로 4단계 교안 생성, 음성 미리듣기, 9:16 영상 제작을 지원함.",
+      "subjects": [
+        "교과융합"
+      ],
+      "gradeBands": [
+        "secondary"
+      ],
+      "audience": "teacher",
+      "interactionType": "creation",
+      "learningProcess": [
+        "수업 도입 발문",
+        "핵심 개념 정의",
+        "원리·실생활 비유",
+        "확인 퀴즈",
+        "핵심 요약"
+      ],
+      "createdAt": "2026-11-23T02:08:56.394Z",
+      "updatedAt": "2026-11-23T02:08:56.394Z"
+    },
     {
       "id": "c4149563-4f03-4c4d-8bb8-2738af2379fe",
       "title": "전자책 메이커",
@@ -7133,5 +7174,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 282
+  "catalogRevision": 283
 }
