@@ -206,11 +206,6 @@
       "sha256": "375d4600af55215051e73d78a590b645d32c8c4365633342140a3f1f3fe45dfd"
     },
     {
-      "path": "/app-thumbnails/424c6d52-5aad-4f0e-bfc2-5f06fefcb30e.png",
-      "size": 186096,
-      "sha256": "5eaf41b8e56456e5fff5a05056e004987f2390149fdca45c25cd085b888abda2"
-    },
-    {
       "path": "/app-thumbnails/42b8f202-db48-42f6-a8aa-e35192687889.png",
       "size": 134163,
       "sha256": "a467b691da45c5a60bcce415cb61854c97e146430786fd56a5bd56a5ee09f9c5"
@@ -897,13 +892,13 @@
     }
   ],
   "version": 1,
-  "generatedAt": "2026-11-23T02:26:57.137Z",
-  "appCount": 179,
+  "generatedAt": "2026-11-24T06:33:36.529Z",
+  "appCount": 178,
   "apps": [
     {
       "id": "53bf6e90-72c2-4838-9fbb-8c98288b09cc",
       "title": "Edu-Shorts Studio",
-      "summary": "학교·학원 교사가 로그인이나 API 키 없이 교과 단원 주제를 입력해 4단계 수업 대본·장면 타임라인·9:16 세로 수업 쇼츠 영상을 제작할 수 있는 교육용 스튜디오",
+      "summary": "교사가 로그인이나 API 키 없이 교과 단원 주제를 입력해 4단계 수업 대본·장면 타임라인·9:16 세로 수업 쇼츠 영상을 제작할 수 있는 교육용 스튜디오",
       "url": "https://wbmaker2.github.io/edu-shorts-studio/",
       "githubUrl": "https://github.com/WBmaker2/edu-shorts-studio",
       "tags": [
@@ -934,7 +929,7 @@
         "핵심 요약"
       ],
       "createdAt": "2026-11-23T02:08:56.394Z",
-      "updatedAt": "2026-11-23T02:08:56.394Z"
+      "updatedAt": "2026-11-23T03:08:26.415Z"
     },
     {
       "id": "c4149563-4f03-4c4d-8bb8-2738af2379fe",
@@ -1140,42 +1135,6 @@
       ],
       "createdAt": "2026-11-09T10:03:47.573Z",
       "updatedAt": "2026-11-09T10:03:47.573Z"
-    },
-    {
-      "id": "424c6d52-5aad-4f0e-bfc2-5f06fefcb30e",
-      "title": "AI 원어민 단어 퀴즈 쇼",
-      "summary": "초등 3~6학년 영어 단어 세트로 듣기·말하기·받아쓰기·게임 8종 활동을 여는 수업용 퀴즈 앱 (원어민 MP3 발음 우선)",
-      "url": "https://talking-vacab-quiz.vercel.app",
-      "githubUrl": "https://github.com/WBmaker2/talking-vacab-quiz",
-      "tags": [
-        "영어",
-        "수업",
-        "게임",
-        "실시간",
-        "퀴즈"
-      ],
-      "thumbnailMode": "upload",
-      "thumbnailUrl": "/app-thumbnails/424c6d52-5aad-4f0e-bfc2-5f06fefcb30e.png",
-      "subject": "영어",
-      "grade": "초등 3~6학년",
-      "memo": "교사가 단어 세트를 저장·공개하면 학생은 학교·선생님·학년·단원을 선택해 여러 활동으로 이어서 사용할 수 있습니다.",
-      "subjects": [
-        "영어"
-      ],
-      "gradeBands": [
-        "3-4",
-        "5-6"
-      ],
-      "audience": "student",
-      "interactionType": "practice",
-      "learningProcess": [
-        "듣기",
-        "말하기",
-        "쓰기",
-        "오답 복습"
-      ],
-      "createdAt": "2026-04-12T11:53:18.249Z",
-      "updatedAt": "2026-11-09T05:32:44.313Z"
     },
     {
       "id": "c68de798-7a37-4ebd-b2af-328476e223e2",
@@ -7174,5 +7133,5 @@
       "updatedAt": "2026-05-08T12:40:54.204Z"
     }
   ],
-  "catalogRevision": 283
+  "catalogRevision": 285
 }
